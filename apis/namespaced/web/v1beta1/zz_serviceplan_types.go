@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ServicePlanInitParameters struct {
@@ -127,11 +126,11 @@ type ServicePlanParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I1mv2, I2v2, I2mv2, I3v2, I3mv2, I4v2, I4mv2, I5v2, I5mv2, I6v2, P1v2, P2v2, P3v2, P0v3, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, P0v4, P1v4, P2v4, P3v4, P1mv4, P2mv4, P3mv4, P4mv4, P5mv4, S1, S2, S3, SHARED, EP1, EP2, EP3, FC1, WS1, WS2, WS3, and Y1.
 	// +kubebuilder:validation:Optional
@@ -170,8 +169,8 @@ type ServicePlanSpec struct {
 
 // ServicePlanStatus defines the observed state of ServicePlan.
 type ServicePlanStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServicePlanObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServicePlanObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

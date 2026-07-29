@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GalleryApplicationInitParameters struct {
@@ -98,11 +97,11 @@ type GalleryApplicationParameters struct {
 
 	// Reference to a SharedImageGallery in compute to populate galleryId.
 	// +kubebuilder:validation:Optional
-	GalleryIDRef *v1.NamespacedReference `json:"galleryIdRef,omitempty" tf:"-"`
+	GalleryIDRef *v2.NamespacedReference `json:"galleryIdRef,omitempty" tf:"-"`
 
 	// Selector for a SharedImageGallery in compute to populate galleryId.
 	// +kubebuilder:validation:Optional
-	GalleryIDSelector *v1.NamespacedSelector `json:"galleryIdSelector,omitempty" tf:"-"`
+	GalleryIDSelector *v2.NamespacedSelector `json:"galleryIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Gallery Application exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -145,8 +144,8 @@ type GalleryApplicationSpec struct {
 
 // GalleryApplicationStatus defines the observed state of GalleryApplication.
 type GalleryApplicationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GalleryApplicationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GalleryApplicationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

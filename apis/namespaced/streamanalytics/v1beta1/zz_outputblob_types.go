@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputBlobInitParameters struct {
@@ -38,7 +37,7 @@ type OutputBlobInitParameters struct {
 	Serialization *SerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account.
-	StorageAccountKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
+	StorageAccountKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -46,11 +45,11 @@ type OutputBlobInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Container within the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -58,11 +57,11 @@ type OutputBlobInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
@@ -70,11 +69,11 @@ type OutputBlobInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
 	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
@@ -155,11 +154,11 @@ type OutputBlobParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	// +kubebuilder:validation:Optional
@@ -167,7 +166,7 @@ type OutputBlobParameters struct {
 
 	// The Access Key which should be used to connect to this Storage Account.
 	// +kubebuilder:validation:Optional
-	StorageAccountKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
+	StorageAccountKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -176,11 +175,11 @@ type OutputBlobParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Container within the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -189,11 +188,11 @@ type OutputBlobParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
@@ -202,11 +201,11 @@ type OutputBlobParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
 	// +kubebuilder:validation:Optional
@@ -281,8 +280,8 @@ type OutputBlobSpec struct {
 
 // OutputBlobStatus defines the observed state of OutputBlob.
 type OutputBlobStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputBlobObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputBlobObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

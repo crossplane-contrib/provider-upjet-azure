@@ -5,124 +5,124 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MaintenanceAssignmentDedicatedHost) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MaintenanceAssignmentDedicatedHost) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MaintenanceAssignmentDedicatedHost) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MaintenanceAssignmentDedicatedHost) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) SetConditions(c ...xpv1.Condition) {
+func (mg *MaintenanceAssignmentDedicatedHost) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MaintenanceAssignmentDedicatedHost) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MaintenanceAssignmentDedicatedHost) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MaintenanceAssignmentDedicatedHost) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MaintenanceAssignmentVirtualMachine) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MaintenanceAssignmentVirtualMachine) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MaintenanceAssignmentVirtualMachine) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MaintenanceAssignmentVirtualMachine) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) SetConditions(c ...xpv1.Condition) {
+func (mg *MaintenanceAssignmentVirtualMachine) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MaintenanceAssignmentVirtualMachine) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MaintenanceAssignmentVirtualMachine) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MaintenanceAssignmentVirtualMachine) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *MaintenanceConfiguration) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *MaintenanceConfiguration) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *MaintenanceConfiguration) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *MaintenanceConfiguration) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) SetConditions(c ...xpv1.Condition) {
+func (mg *MaintenanceConfiguration) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *MaintenanceConfiguration) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *MaintenanceConfiguration) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *MaintenanceConfiguration) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

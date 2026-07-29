@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessPolicyInitParameters_2 struct {
@@ -32,11 +31,11 @@ type AccessPolicyInitParameters_2 struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
@@ -103,11 +102,11 @@ type AccessPolicyParameters_2 struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -145,8 +144,8 @@ type AccessPolicySpec struct {
 
 // AccessPolicyStatus defines the observed state of AccessPolicy.
 type AccessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccessPolicyObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccessPolicyObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LoadBalancerNatPoolInitParameters struct {
@@ -42,11 +42,11 @@ type LoadBalancerNatPoolInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is TCP Reset enabled for this Load Balancer Rule?
 	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
@@ -125,11 +125,11 @@ type LoadBalancerNatPoolParameters struct {
 
 	// Reference to a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDRef *v1.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
+	LoadbalancerIDRef *v2.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
-	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
+	LoadbalancerIDSelector *v2.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
 	// The transport protocol for the external endpoint. Possible values are All, Tcp and Udp.
 	// +kubebuilder:validation:Optional
@@ -142,11 +142,11 @@ type LoadBalancerNatPoolParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is TCP Reset enabled for this Load Balancer Rule?
 	// +kubebuilder:validation:Optional
@@ -155,8 +155,8 @@ type LoadBalancerNatPoolParameters struct {
 
 // LoadBalancerNatPoolSpec defines the desired state of LoadBalancerNatPool
 type LoadBalancerNatPoolSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LoadBalancerNatPoolParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LoadBalancerNatPoolParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -172,8 +172,8 @@ type LoadBalancerNatPoolSpec struct {
 
 // LoadBalancerNatPoolStatus defines the observed state of LoadBalancerNatPool.
 type LoadBalancerNatPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadBalancerNatPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadBalancerNatPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FunctionAppActiveSlotInitParameters struct {
@@ -28,11 +27,11 @@ type FunctionAppActiveSlotInitParameters struct {
 
 	// Reference to a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDRef *v1.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
+	SlotIDRef *v2.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDSelector *v1.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
+	SlotIDSelector *v2.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionAppActiveSlotObservation struct {
@@ -69,11 +68,11 @@ type FunctionAppActiveSlotParameters struct {
 
 	// Reference to a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDRef *v1.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
+	SlotIDRef *v2.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsFunctionAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDSelector *v1.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
+	SlotIDSelector *v2.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
 }
 
 // FunctionAppActiveSlotSpec defines the desired state of FunctionAppActiveSlot
@@ -95,8 +94,8 @@ type FunctionAppActiveSlotSpec struct {
 
 // FunctionAppActiveSlotStatus defines the observed state of FunctionAppActiveSlot.
 type FunctionAppActiveSlotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionAppActiveSlotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionAppActiveSlotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

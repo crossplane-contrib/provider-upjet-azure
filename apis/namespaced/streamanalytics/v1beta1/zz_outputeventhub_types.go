@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputEventHubInitParameters struct {
@@ -25,11 +24,11 @@ type OutputEventHubInitParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// The column that is used for the Event Hub partition key.
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
@@ -46,14 +45,14 @@ type OutputEventHubInitParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy. Required when authentication_mode is set to ConnectionString.
-	SharedAccessPolicyKeySecretRef *v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required when authentication_mode is set to ConnectionString.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
@@ -105,11 +104,11 @@ type OutputEventHubParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// The column that is used for the Event Hub partition key.
 	// +kubebuilder:validation:Optional
@@ -126,11 +125,11 @@ type OutputEventHubParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	// +kubebuilder:validation:Optional
@@ -143,15 +142,15 @@ type OutputEventHubParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy. Required when authentication_mode is set to ConnectionString.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyKeySecretRef *v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required when authentication_mode is set to ConnectionString.
 	// +kubebuilder:validation:Optional
@@ -230,8 +229,8 @@ type OutputEventHubSpec struct {
 
 // OutputEventHubStatus defines the observed state of OutputEventHub.
 type OutputEventHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputEventHubObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputEventHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

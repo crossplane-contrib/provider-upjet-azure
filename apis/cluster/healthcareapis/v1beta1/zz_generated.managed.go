@@ -5,304 +5,304 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HealthcareDICOMService) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *HealthcareDICOMService) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HealthcareDICOMService) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) GetProviderConfigReference() *xpv1.Reference {
+func (mg *HealthcareDICOMService) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *HealthcareDICOMService) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) SetConditions(c ...xpv1.Condition) {
+func (mg *HealthcareDICOMService) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *HealthcareDICOMService) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HealthcareDICOMService) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *HealthcareDICOMService) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HealthcareDICOMService.
-func (mg *HealthcareDICOMService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *HealthcareDICOMService) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HealthcareFHIRService) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *HealthcareFHIRService) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HealthcareFHIRService) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) GetProviderConfigReference() *xpv1.Reference {
+func (mg *HealthcareFHIRService) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *HealthcareFHIRService) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) SetConditions(c ...xpv1.Condition) {
+func (mg *HealthcareFHIRService) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *HealthcareFHIRService) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HealthcareFHIRService) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *HealthcareFHIRService) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HealthcareFHIRService.
-func (mg *HealthcareFHIRService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *HealthcareFHIRService) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HealthcareMedtechService) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *HealthcareMedtechService) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HealthcareMedtechService) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) GetProviderConfigReference() *xpv1.Reference {
+func (mg *HealthcareMedtechService) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *HealthcareMedtechService) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) SetConditions(c ...xpv1.Condition) {
+func (mg *HealthcareMedtechService) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *HealthcareMedtechService) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HealthcareMedtechService) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *HealthcareMedtechService) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HealthcareMedtechService.
-func (mg *HealthcareMedtechService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *HealthcareMedtechService) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HealthcareMedtechServiceFHIRDestination) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *HealthcareMedtechServiceFHIRDestination) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HealthcareMedtechServiceFHIRDestination) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) GetProviderConfigReference() *xpv1.Reference {
+func (mg *HealthcareMedtechServiceFHIRDestination) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *HealthcareMedtechServiceFHIRDestination) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) SetConditions(c ...xpv1.Condition) {
+func (mg *HealthcareMedtechServiceFHIRDestination) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *HealthcareMedtechServiceFHIRDestination) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HealthcareMedtechServiceFHIRDestination) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *HealthcareMedtechServiceFHIRDestination) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HealthcareMedtechServiceFHIRDestination.
-func (mg *HealthcareMedtechServiceFHIRDestination) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *HealthcareMedtechServiceFHIRDestination) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HealthcareService.
-func (mg *HealthcareService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HealthcareService) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this HealthcareService.
-func (mg *HealthcareService) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *HealthcareService) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this HealthcareService.
-func (mg *HealthcareService) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HealthcareService) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HealthcareService.
-func (mg *HealthcareService) GetProviderConfigReference() *xpv1.Reference {
+func (mg *HealthcareService) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HealthcareService.
-func (mg *HealthcareService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *HealthcareService) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HealthcareService.
-func (mg *HealthcareService) SetConditions(c ...xpv1.Condition) {
+func (mg *HealthcareService) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this HealthcareService.
-func (mg *HealthcareService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *HealthcareService) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this HealthcareService.
-func (mg *HealthcareService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HealthcareService) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HealthcareService.
-func (mg *HealthcareService) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *HealthcareService) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HealthcareService.
-func (mg *HealthcareService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *HealthcareService) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *HealthcareWorkspace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *HealthcareWorkspace) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *HealthcareWorkspace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) GetProviderConfigReference() *xpv1.Reference {
+func (mg *HealthcareWorkspace) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *HealthcareWorkspace) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) SetConditions(c ...xpv1.Condition) {
+func (mg *HealthcareWorkspace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *HealthcareWorkspace) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *HealthcareWorkspace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *HealthcareWorkspace) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this HealthcareWorkspace.
-func (mg *HealthcareWorkspace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *HealthcareWorkspace) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

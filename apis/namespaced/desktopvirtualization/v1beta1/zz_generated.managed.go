@@ -5,204 +5,204 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VirtualDesktopApplicationGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VirtualDesktopApplicationGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VirtualDesktopApplicationGroup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VirtualDesktopApplicationGroup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *VirtualDesktopApplicationGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VirtualDesktopApplicationGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VirtualDesktopApplicationGroup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VirtualDesktopApplicationGroup.
-func (mg *VirtualDesktopApplicationGroup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VirtualDesktopApplicationGroup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VirtualDesktopHostPool) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VirtualDesktopHostPool) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VirtualDesktopHostPool) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VirtualDesktopHostPool) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) SetConditions(c ...xpv1.Condition) {
+func (mg *VirtualDesktopHostPool) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VirtualDesktopHostPool) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VirtualDesktopHostPool) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VirtualDesktopHostPool.
-func (mg *VirtualDesktopHostPool) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VirtualDesktopHostPool) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) SetConditions(c ...xpv1.Condition) {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VirtualDesktopHostPoolRegistrationInfo.
-func (mg *VirtualDesktopHostPoolRegistrationInfo) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VirtualDesktopHostPoolRegistrationInfo) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VirtualDesktopWorkspace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VirtualDesktopWorkspace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VirtualDesktopWorkspace) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VirtualDesktopWorkspace) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) SetConditions(c ...xpv1.Condition) {
+func (mg *VirtualDesktopWorkspace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VirtualDesktopWorkspace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VirtualDesktopWorkspace) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VirtualDesktopWorkspace.
-func (mg *VirtualDesktopWorkspace) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VirtualDesktopWorkspace) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this VirtualDesktopWorkspaceApplicationGroupAssociation.
-func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *VirtualDesktopWorkspaceApplicationGroupAssociation) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

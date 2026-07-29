@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupContainerStorageAccountInitParameters struct {
@@ -22,11 +21,11 @@ type BackupContainerStorageAccountInitParameters struct {
 
 	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameRef *v1.NamespacedReference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+	RecoveryVaultNameRef *v2.NamespacedReference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameSelector *v1.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+	RecoveryVaultNameSelector *v2.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// Name of the resource group where the vault is located. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -34,11 +33,11 @@ type BackupContainerStorageAccountInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account to be registered Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -47,11 +46,11 @@ type BackupContainerStorageAccountInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BackupContainerStorageAccountObservation struct {
@@ -78,11 +77,11 @@ type BackupContainerStorageAccountParameters struct {
 
 	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameRef *v1.NamespacedReference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+	RecoveryVaultNameRef *v2.NamespacedReference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameSelector *v1.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+	RecoveryVaultNameSelector *v2.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// Name of the resource group where the vault is located. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -91,11 +90,11 @@ type BackupContainerStorageAccountParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account to be registered Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -105,11 +104,11 @@ type BackupContainerStorageAccountParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 // BackupContainerStorageAccountSpec defines the desired state of BackupContainerStorageAccount
@@ -131,8 +130,8 @@ type BackupContainerStorageAccountSpec struct {
 
 // BackupContainerStorageAccountStatus defines the observed state of BackupContainerStorageAccount.
 type BackupContainerStorageAccountStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupContainerStorageAccountObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupContainerStorageAccountObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

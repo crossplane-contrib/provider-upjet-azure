@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecretInitParameters struct {
@@ -29,11 +28,11 @@ type SecretInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Key Vault Secret. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -46,7 +45,7 @@ type SecretInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 
 	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
 	ValueWo *string `json:"valueWo,omitempty" tf:"value_wo,omitempty"`
@@ -116,11 +115,11 @@ type SecretParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Key Vault Secret. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -137,7 +136,7 @@ type SecretParameters struct {
 
 	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 
 	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
 	// +kubebuilder:validation:Optional
@@ -167,8 +166,8 @@ type SecretSpec struct {
 
 // SecretStatus defines the observed state of Secret.
 type SecretStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecretObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecretObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

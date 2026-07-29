@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CacheInitParameters struct {
@@ -76,11 +75,11 @@ type FrontdoorRouteInitParameters struct {
 
 	// References to FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorCustomDomainIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorCustomDomainIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdsSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Front Door Origin Group where this Front Door Route should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOriginGroup
@@ -89,11 +88,11 @@ type FrontdoorRouteInitParameters struct {
 
 	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDRef *v1.NamespacedReference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDRef *v2.NamespacedReference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more Front Door Origin resource IDs for this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
@@ -102,11 +101,11 @@ type FrontdoorRouteInitParameters struct {
 
 	// References to FrontdoorOrigin in cdn to populate cdnFrontdoorOriginIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorOriginIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorOriginIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorOriginIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorOrigin in cdn to populate cdnFrontdoorOriginIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorOriginIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorOriginIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorOriginIdsSelector,omitempty" tf:"-"`
 
 	// A directory path on the Front Door Origin that can be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
 	CdnFrontdoorOriginPath *string `json:"cdnFrontdoorOriginPath,omitempty" tf:"cdn_frontdoor_origin_path,omitempty"`
@@ -119,11 +118,11 @@ type FrontdoorRouteInitParameters struct {
 
 	// References to FrontdoorRuleSet in cdn to populate cdnFrontdoorRuleSetIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRuleSetIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorRuleSetIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorRuleSetIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorRuleSetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorRuleSet in cdn to populate cdnFrontdoorRuleSetIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRuleSetIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorRuleSetIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorRuleSetIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorRuleSetIdsSelector,omitempty" tf:"-"`
 
 	// Is this Front Door Route enabled? Possible values are true or false. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -208,11 +207,11 @@ type FrontdoorRouteParameters struct {
 
 	// References to FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorCustomDomainIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorCustomDomainIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdsSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Front Door Endpoint where this Front Door Route should exist. Changing this forces a new Front Door Route to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorEndpoint
@@ -222,11 +221,11 @@ type FrontdoorRouteParameters struct {
 
 	// Reference to a FrontdoorEndpoint in cdn to populate cdnFrontdoorEndpointId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorEndpointIDRef *v1.NamespacedReference `json:"cdnFrontdoorEndpointIdRef,omitempty" tf:"-"`
+	CdnFrontdoorEndpointIDRef *v2.NamespacedReference `json:"cdnFrontdoorEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorEndpoint in cdn to populate cdnFrontdoorEndpointId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorEndpointIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorEndpointIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorEndpointIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorEndpointIdSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Front Door Origin Group where this Front Door Route should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOriginGroup
@@ -236,11 +235,11 @@ type FrontdoorRouteParameters struct {
 
 	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDRef *v1.NamespacedReference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDRef *v2.NamespacedReference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more Front Door Origin resource IDs for this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
@@ -250,11 +249,11 @@ type FrontdoorRouteParameters struct {
 
 	// References to FrontdoorOrigin in cdn to populate cdnFrontdoorOriginIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorOriginIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorOriginIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorOriginIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorOrigin in cdn to populate cdnFrontdoorOriginIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorOriginIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorOriginIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorOriginIdsSelector,omitempty" tf:"-"`
 
 	// A directory path on the Front Door Origin that can be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
 	// +kubebuilder:validation:Optional
@@ -269,11 +268,11 @@ type FrontdoorRouteParameters struct {
 
 	// References to FrontdoorRuleSet in cdn to populate cdnFrontdoorRuleSetIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRuleSetIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorRuleSetIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorRuleSetIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorRuleSetIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorRuleSet in cdn to populate cdnFrontdoorRuleSetIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRuleSetIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorRuleSetIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorRuleSetIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorRuleSetIdsSelector,omitempty" tf:"-"`
 
 	// Is this Front Door Route enabled? Possible values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -320,8 +319,8 @@ type FrontdoorRouteSpec struct {
 
 // FrontdoorRouteStatus defines the observed state of FrontdoorRoute.
 type FrontdoorRouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorRouteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorRouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomHeaderInitParameters struct {
@@ -70,11 +69,11 @@ type TrafficManagerAzureEndpointInitParameters struct {
 
 	// Reference to a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000. Defaults to 1.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -143,11 +142,11 @@ type TrafficManagerAzureEndpointParameters struct {
 
 	// Reference to a TrafficManagerProfile in network to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDRef *v1.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
+	ProfileIDRef *v2.NamespacedReference `json:"profileIdRef,omitempty" tf:"-"`
 
 	// Selector for a TrafficManagerProfile in network to populate profileId.
 	// +kubebuilder:validation:Optional
-	ProfileIDSelector *v1.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
+	ProfileIDSelector *v2.NamespacedSelector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -161,11 +160,11 @@ type TrafficManagerAzureEndpointParameters struct {
 
 	// Reference to a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000. Defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -230,8 +229,8 @@ type TrafficManagerAzureEndpointSpec struct {
 
 // TrafficManagerAzureEndpointStatus defines the observed state of TrafficManagerAzureEndpoint.
 type TrafficManagerAzureEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TrafficManagerAzureEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TrafficManagerAzureEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

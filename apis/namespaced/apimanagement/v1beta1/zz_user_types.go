@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type UserInitParameters struct {
@@ -32,7 +31,7 @@ type UserInitParameters struct {
 	Note *string `json:"note,omitempty" tf:"note,omitempty"`
 
 	// The password associated with this user.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The state of this user. Possible values are active, blocked and pending.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -77,11 +76,11 @@ type UserParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The kind of confirmation email which will be sent to this user. Possible values are invite and signup. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -105,7 +104,7 @@ type UserParameters struct {
 
 	// The password associated with this user.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -114,11 +113,11 @@ type UserParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The state of this user. Possible values are active, blocked and pending.
 	// +kubebuilder:validation:Optional
@@ -144,8 +143,8 @@ type UserSpec struct {
 
 // UserStatus defines the observed state of User.
 type UserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               UserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

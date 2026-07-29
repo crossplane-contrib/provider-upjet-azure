@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EventRelayNamespaceInitParameters struct {
@@ -61,11 +61,11 @@ type EventRelayNamespaceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SKU to use. At this time the only supported value is Standard.
 	// +kubebuilder:validation:Optional
@@ -79,8 +79,8 @@ type EventRelayNamespaceParameters struct {
 
 // EventRelayNamespaceSpec defines the desired state of EventRelayNamespace
 type EventRelayNamespaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EventRelayNamespaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EventRelayNamespaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -96,8 +96,8 @@ type EventRelayNamespaceSpec struct {
 
 // EventRelayNamespaceStatus defines the observed state of EventRelayNamespace.
 type EventRelayNamespaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventRelayNamespaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventRelayNamespaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

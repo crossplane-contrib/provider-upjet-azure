@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CassandraDatacenterInitParameters struct {
@@ -31,11 +31,11 @@ type CassandraDatacenterInitParameters struct {
 
 	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDRef *v1.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDRef *v2.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDSelector *v2.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
 	// Determines the number of p30 disks that are attached to each node.
 	DiskCount *float64 `json:"diskCount,omitempty" tf:"disk_count,omitempty"`
@@ -120,11 +120,11 @@ type CassandraDatacenterParameters struct {
 
 	// Reference to a CassandraCluster in cosmosdb to populate cassandraClusterId.
 	// +kubebuilder:validation:Optional
-	CassandraClusterIDRef *v1.Reference `json:"cassandraClusterIdRef,omitempty" tf:"-"`
+	CassandraClusterIDRef *v2.Reference `json:"cassandraClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a CassandraCluster in cosmosdb to populate cassandraClusterId.
 	// +kubebuilder:validation:Optional
-	CassandraClusterIDSelector *v1.Selector `json:"cassandraClusterIdSelector,omitempty" tf:"-"`
+	CassandraClusterIDSelector *v2.Selector `json:"cassandraClusterIdSelector,omitempty" tf:"-"`
 
 	// The ID of the delegated management subnet for this Cassandra Datacenter. Changing this forces a new Cassandra Datacenter to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -134,11 +134,11 @@ type CassandraDatacenterParameters struct {
 
 	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDRef *v1.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDRef *v2.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
-	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
+	DelegatedManagementSubnetIDSelector *v2.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
 	// Determines the number of p30 disks that are attached to each node.
 	// +kubebuilder:validation:Optional
@@ -167,8 +167,8 @@ type CassandraDatacenterParameters struct {
 
 // CassandraDatacenterSpec defines the desired state of CassandraDatacenter
 type CassandraDatacenterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CassandraDatacenterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CassandraDatacenterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -184,8 +184,8 @@ type CassandraDatacenterSpec struct {
 
 // CassandraDatacenterStatus defines the observed state of CassandraDatacenter.
 type CassandraDatacenterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CassandraDatacenterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CassandraDatacenterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

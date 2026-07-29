@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NamespaceDisasterRecoveryConfigInitParameters struct {
@@ -22,11 +22,11 @@ type NamespaceDisasterRecoveryConfigInitParameters struct {
 
 	// Reference to a NamespaceAuthorizationRule in servicebus to populate aliasAuthorizationRuleId.
 	// +kubebuilder:validation:Optional
-	AliasAuthorizationRuleIDRef *v1.Reference `json:"aliasAuthorizationRuleIdRef,omitempty" tf:"-"`
+	AliasAuthorizationRuleIDRef *v2.Reference `json:"aliasAuthorizationRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a NamespaceAuthorizationRule in servicebus to populate aliasAuthorizationRuleId.
 	// +kubebuilder:validation:Optional
-	AliasAuthorizationRuleIDSelector *v1.Selector `json:"aliasAuthorizationRuleIdSelector,omitempty" tf:"-"`
+	AliasAuthorizationRuleIDSelector *v2.Selector `json:"aliasAuthorizationRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Service Bus Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
@@ -35,11 +35,11 @@ type NamespaceDisasterRecoveryConfigInitParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDRef *v1.Reference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
+	PartnerNamespaceIDRef *v2.Reference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDSelector *v1.Selector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
+	PartnerNamespaceIDSelector *v2.Selector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
 }
 
 type NamespaceDisasterRecoveryConfigObservation struct {
@@ -67,11 +67,11 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// Reference to a NamespaceAuthorizationRule in servicebus to populate aliasAuthorizationRuleId.
 	// +kubebuilder:validation:Optional
-	AliasAuthorizationRuleIDRef *v1.Reference `json:"aliasAuthorizationRuleIdRef,omitempty" tf:"-"`
+	AliasAuthorizationRuleIDRef *v2.Reference `json:"aliasAuthorizationRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a NamespaceAuthorizationRule in servicebus to populate aliasAuthorizationRuleId.
 	// +kubebuilder:validation:Optional
-	AliasAuthorizationRuleIDSelector *v1.Selector `json:"aliasAuthorizationRuleIdSelector,omitempty" tf:"-"`
+	AliasAuthorizationRuleIDSelector *v2.Selector `json:"aliasAuthorizationRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Service Bus Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
@@ -81,11 +81,11 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDRef *v1.Reference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
+	PartnerNamespaceIDRef *v2.Reference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDSelector *v1.Selector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
+	PartnerNamespaceIDSelector *v2.Selector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the primary Service Bus Namespace to replicate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta2.ServiceBusNamespace
@@ -95,17 +95,17 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate primaryNamespaceId.
 	// +kubebuilder:validation:Optional
-	PrimaryNamespaceIDRef *v1.Reference `json:"primaryNamespaceIdRef,omitempty" tf:"-"`
+	PrimaryNamespaceIDRef *v2.Reference `json:"primaryNamespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate primaryNamespaceId.
 	// +kubebuilder:validation:Optional
-	PrimaryNamespaceIDSelector *v1.Selector `json:"primaryNamespaceIdSelector,omitempty" tf:"-"`
+	PrimaryNamespaceIDSelector *v2.Selector `json:"primaryNamespaceIdSelector,omitempty" tf:"-"`
 }
 
 // NamespaceDisasterRecoveryConfigSpec defines the desired state of NamespaceDisasterRecoveryConfig
 type NamespaceDisasterRecoveryConfigSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NamespaceDisasterRecoveryConfigParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NamespaceDisasterRecoveryConfigParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -121,8 +121,8 @@ type NamespaceDisasterRecoveryConfigSpec struct {
 
 // NamespaceDisasterRecoveryConfigStatus defines the observed state of NamespaceDisasterRecoveryConfig.
 type NamespaceDisasterRecoveryConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NamespaceDisasterRecoveryConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NamespaceDisasterRecoveryConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

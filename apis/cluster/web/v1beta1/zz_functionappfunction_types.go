@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FileInitParameters struct {
@@ -69,11 +69,11 @@ type FunctionAppFunctionInitParameters struct {
 
 	// Reference to a LinuxFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDRef *v1.Reference `json:"functionAppIdRef,omitempty" tf:"-"`
+	FunctionAppIDRef *v2.Reference `json:"functionAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDSelector *v1.Selector `json:"functionAppIdSelector,omitempty" tf:"-"`
+	FunctionAppIDSelector *v2.Selector `json:"functionAppIdSelector,omitempty" tf:"-"`
 
 	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
 	// The language the Function is written in.
@@ -174,11 +174,11 @@ type FunctionAppFunctionParameters struct {
 
 	// Reference to a LinuxFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDRef *v1.Reference `json:"functionAppIdRef,omitempty" tf:"-"`
+	FunctionAppIDRef *v2.Reference `json:"functionAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxFunctionApp in web to populate functionAppId.
 	// +kubebuilder:validation:Optional
-	FunctionAppIDSelector *v1.Selector `json:"functionAppIdSelector,omitempty" tf:"-"`
+	FunctionAppIDSelector *v2.Selector `json:"functionAppIdSelector,omitempty" tf:"-"`
 
 	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
 	// The language the Function is written in.
@@ -198,8 +198,8 @@ type FunctionAppFunctionParameters struct {
 
 // FunctionAppFunctionSpec defines the desired state of FunctionAppFunction
 type FunctionAppFunctionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionAppFunctionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionAppFunctionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -215,8 +215,8 @@ type FunctionAppFunctionSpec struct {
 
 // FunctionAppFunctionStatus defines the observed state of FunctionAppFunction.
 type FunctionAppFunctionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionAppFunctionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionAppFunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

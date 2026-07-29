@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIServerAccessProfileInitParameters struct {
@@ -26,11 +26,11 @@ type APIServerAccessProfileInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable virtual network integration for the API Server. Defaults to false.
 	VirtualNetworkIntegrationEnabled *bool `json:"virtualNetworkIntegrationEnabled,omitempty" tf:"virtual_network_integration_enabled,omitempty"`
@@ -64,11 +64,11 @@ type APIServerAccessProfileParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable virtual network integration for the API Server. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -83,11 +83,11 @@ type AciConnectorLinuxInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameRef *v1.Reference `json:"subnetNameRef,omitempty" tf:"-"`
+	SubnetNameRef *v2.Reference `json:"subnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
+	SubnetNameSelector *v2.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 }
 
 type AciConnectorLinuxObservation struct {
@@ -108,11 +108,11 @@ type AciConnectorLinuxParameters struct {
 
 	// Reference to a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameRef *v1.Reference `json:"subnetNameRef,omitempty" tf:"-"`
+	SubnetNameRef *v2.Reference `json:"subnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
+	SubnetNameSelector *v2.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 }
 
 type AdvancedNetworkingInitParameters struct {
@@ -670,11 +670,11 @@ type DefaultNodePoolInitParameters struct {
 
 	// Reference to a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
+	PodSubnetIDRef *v2.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
+	PodSubnetIDSelector *v2.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Proximity Placement Group. Changing this forces a new resource to be created.
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
@@ -711,11 +711,11 @@ type DefaultNodePoolInitParameters struct {
 
 	// Reference to a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
+	VnetSubnetIDRef *v2.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
+	VnetSubnetIDSelector *v2.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the workload runtime used by the node pool. Possible values are KataVmIsolation and OCIContainer.
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
@@ -949,11 +949,11 @@ type DefaultNodePoolParameters struct {
 
 	// Reference to a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
+	PodSubnetIDRef *v2.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
+	PodSubnetIDSelector *v2.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Proximity Placement Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1000,11 +1000,11 @@ type DefaultNodePoolParameters struct {
 
 	// Reference to a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
+	VnetSubnetIDRef *v2.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
+	VnetSubnetIDSelector *v2.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the workload runtime used by the node pool. Possible values are KataVmIsolation and OCIContainer.
 	// +kubebuilder:validation:Optional
@@ -1058,7 +1058,7 @@ type HTTPProxyConfigInitParameters struct {
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 
 	// The base64 encoded alternative CA certificate content in PEM format.
-	TrustedCASecretRef *v1.SecretKeySelector `json:"trustedCaSecretRef,omitempty" tf:"-"`
+	TrustedCASecretRef *v2.SecretKeySelector `json:"trustedCaSecretRef,omitempty" tf:"-"`
 }
 
 type HTTPProxyConfigObservation struct {
@@ -1091,7 +1091,7 @@ type HTTPProxyConfigParameters struct {
 
 	// The base64 encoded alternative CA certificate content in PEM format.
 	// +kubebuilder:validation:Optional
-	TrustedCASecretRef *v1.SecretKeySelector `json:"trustedCaSecretRef,omitempty" tf:"-"`
+	TrustedCASecretRef *v2.SecretKeySelector `json:"trustedCaSecretRef,omitempty" tf:"-"`
 }
 
 type IdentityInitParameters struct {
@@ -1104,11 +1104,11 @@ type IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned or UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -1141,11 +1141,11 @@ type IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned or UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -1188,11 +1188,11 @@ type IngressApplicationGatewayInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IngressApplicationGatewayObservation struct {
@@ -1238,11 +1238,11 @@ type IngressApplicationGatewayParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type KeyManagementServiceInitParameters struct {
@@ -1632,11 +1632,11 @@ type KubernetesClusterInitParameters struct {
 
 	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
+	PrivateDNSZoneIDRef *v2.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+	PrivateDNSZoneIDSelector *v2.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Whether Role Based Access Control for the Kubernetes Cluster should be enabled. Defaults to true. Changing this forces a new resource to be created.
 	RoleBasedAccessControlEnabled *bool `json:"roleBasedAccessControlEnabled,omitempty" tf:"role_based_access_control_enabled,omitempty"`
@@ -2063,11 +2063,11 @@ type KubernetesClusterParameters struct {
 
 	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
+	PrivateDNSZoneIDRef *v2.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+	PrivateDNSZoneIDSelector *v2.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Resource Group where the Managed Kubernetes Cluster should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -2076,11 +2076,11 @@ type KubernetesClusterParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Whether Role Based Access Control for the Kubernetes Cluster should be enabled. Defaults to true. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -3120,7 +3120,7 @@ type ServicePrincipalInitParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret for the Service Principal.
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
 type ServicePrincipalObservation struct {
@@ -3137,7 +3137,7 @@ type ServicePrincipalParameters struct {
 
 	// The Client Secret for the Service Principal.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+	ClientSecretSecretRef v2.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
 type StorageProfileInitParameters struct {
@@ -3619,7 +3619,7 @@ type WebAppRoutingParameters struct {
 type WindowsProfileInitParameters struct {
 
 	// The Admin Password for Windows VMs. Length must be between 14 and 123 characters.
-	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+	AdminPasswordSecretRef v2.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// The Admin Username for Windows VMs. Changing this forces a new resource to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
@@ -3647,7 +3647,7 @@ type WindowsProfileParameters struct {
 
 	// The Admin Password for Windows VMs. Length must be between 14 and 123 characters.
 	// +kubebuilder:validation:Optional
-	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+	AdminPasswordSecretRef v2.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// The Admin Username for Windows VMs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -3693,8 +3693,8 @@ type WorkloadAutoscalerProfileParameters struct {
 
 // KubernetesClusterSpec defines the desired state of KubernetesCluster
 type KubernetesClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     KubernetesClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   KubernetesClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -3710,8 +3710,8 @@ type KubernetesClusterSpec struct {
 
 // KubernetesClusterStatus defines the observed state of KubernetesCluster.
 type KubernetesClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KubernetesClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KubernetesClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

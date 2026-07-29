@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FrontdoorEndpointInitParameters struct {
@@ -52,11 +52,11 @@ type FrontdoorEndpointParameters struct {
 
 	// Reference to a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDRef *v1.Reference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDRef *v2.Reference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDSelector *v1.Selector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDSelector *v2.Selector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// Specifies if this Front Door Endpoint is enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -70,8 +70,8 @@ type FrontdoorEndpointParameters struct {
 
 // FrontdoorEndpointSpec defines the desired state of FrontdoorEndpoint
 type FrontdoorEndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FrontdoorEndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FrontdoorEndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -87,8 +87,8 @@ type FrontdoorEndpointSpec struct {
 
 // FrontdoorEndpointStatus defines the observed state of FrontdoorEndpoint.
 type FrontdoorEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

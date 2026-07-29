@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NamespaceDisasterRecoveryConfigInitParameters struct {
@@ -23,11 +22,11 @@ type NamespaceDisasterRecoveryConfigInitParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDRef *v1.NamespacedReference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
+	PartnerNamespaceIDRef *v2.NamespacedReference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDSelector *v1.NamespacedSelector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
+	PartnerNamespaceIDSelector *v2.NamespacedSelector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
 }
 
 type NamespaceDisasterRecoveryConfigObservation struct {
@@ -54,11 +53,11 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.NamespacedReference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.NamespacedSelector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The ID of the EventHub Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
@@ -68,11 +67,11 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDRef *v1.NamespacedReference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
+	PartnerNamespaceIDRef *v2.NamespacedReference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate partnerNamespaceId.
 	// +kubebuilder:validation:Optional
-	PartnerNamespaceIDSelector *v1.NamespacedSelector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
+	PartnerNamespaceIDSelector *v2.NamespacedSelector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Disaster Recovery Config exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -81,11 +80,11 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // NamespaceDisasterRecoveryConfigSpec defines the desired state of NamespaceDisasterRecoveryConfig
@@ -107,8 +106,8 @@ type NamespaceDisasterRecoveryConfigSpec struct {
 
 // NamespaceDisasterRecoveryConfigStatus defines the observed state of NamespaceDisasterRecoveryConfig.
 type NamespaceDisasterRecoveryConfigStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NamespaceDisasterRecoveryConfigObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NamespaceDisasterRecoveryConfigObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

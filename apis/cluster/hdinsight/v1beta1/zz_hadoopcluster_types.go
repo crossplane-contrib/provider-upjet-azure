@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AmbariInitParameters struct {
@@ -18,7 +18,7 @@ type AmbariInitParameters struct {
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -47,7 +47,7 @@ type AmbariParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -277,7 +277,7 @@ type ExtensionInitParameters struct {
 	// The workspace ID of the log analytics extension.
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
-	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type ExtensionObservation struct {
@@ -294,11 +294,11 @@ type ExtensionParameters struct {
 
 	// The workspace key of the log analytics extension.
 	// +kubebuilder:validation:Required
-	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type GatewayInitParameters struct {
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -314,7 +314,7 @@ type GatewayParameters struct {
 
 	// The password used for the Ambari Portal.
 	// +kubebuilder:validation:Required
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -561,11 +561,11 @@ type HadoopClusterParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A roles block as defined below.
 	// +kubebuilder:validation:Optional
@@ -600,7 +600,7 @@ type HadoopClusterParameters struct {
 type HeadNodeInitParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -616,11 +616,11 @@ type HeadNodeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -658,7 +658,7 @@ type HeadNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -677,11 +677,11 @@ type HeadNodeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -701,7 +701,7 @@ type HiveInitParameters struct {
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -730,7 +730,7 @@ type HiveParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -762,11 +762,11 @@ type IPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IPConfigurationObservation struct {
@@ -813,11 +813,11 @@ type IPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type InstallScriptActionInitParameters struct {
@@ -903,7 +903,7 @@ type MonitorInitParameters struct {
 	// The Operations Management Suite (OMS) workspace ID.
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
-	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type MonitorObservation struct {
@@ -920,7 +920,7 @@ type MonitorParameters struct {
 
 	// The Operations Management Suite (OMS) workspace key.
 	// +kubebuilder:validation:Required
-	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type NetworkInitParameters struct {
@@ -957,7 +957,7 @@ type OozieInitParameters struct {
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -986,7 +986,7 @@ type OozieParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1201,7 +1201,7 @@ type SecurityProfileInitParameters struct {
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	DomainUserPasswordSecretRef v1.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
+	DomainUserPasswordSecretRef v2.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
@@ -1254,7 +1254,7 @@ type SecurityProfileParameters struct {
 
 	// The user password of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
-	DomainUserPasswordSecretRef v1.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
+	DomainUserPasswordSecretRef v2.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1324,7 +1324,7 @@ type StorageAccountInitParameters struct {
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+	StorageAccountKeySecretRef v2.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
@@ -1333,11 +1333,11 @@ type StorageAccountInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
 	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
@@ -1363,7 +1363,7 @@ type StorageAccountParameters struct {
 
 	// The Access Key which should be used to connect to the Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
-	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+	StorageAccountKeySecretRef v2.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
@@ -1373,11 +1373,11 @@ type StorageAccountParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1429,7 +1429,7 @@ type WorkerNodeInitParameters struct {
 	Autoscale []AutoscaleInitParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -1445,11 +1445,11 @@ type WorkerNodeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
@@ -1500,7 +1500,7 @@ type WorkerNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1519,11 +1519,11 @@ type WorkerNodeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	// +kubebuilder:validation:Optional
@@ -1584,7 +1584,7 @@ type WorkerNodeScriptActionsParameters struct {
 type ZookeeperNodeInitParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -1600,11 +1600,11 @@ type ZookeeperNodeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -1642,7 +1642,7 @@ type ZookeeperNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1661,11 +1661,11 @@ type ZookeeperNodeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1721,8 +1721,8 @@ type ZookeeperNodeScriptActionsParameters struct {
 
 // HadoopClusterSpec defines the desired state of HadoopCluster
 type HadoopClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HadoopClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HadoopClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1738,8 +1738,8 @@ type HadoopClusterSpec struct {
 
 // HadoopClusterStatus defines the observed state of HadoopCluster.
 type HadoopClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HadoopClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HadoopClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

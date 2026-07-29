@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FirewallNATRuleCollectionInitParameters struct {
@@ -59,11 +59,11 @@ type FirewallNATRuleCollectionParameters struct {
 
 	// Reference to a Firewall in network to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
-	AzureFirewallNameRef *v1.Reference `json:"azureFirewallNameRef,omitempty" tf:"-"`
+	AzureFirewallNameRef *v2.Reference `json:"azureFirewallNameRef,omitempty" tf:"-"`
 
 	// Selector for a Firewall in network to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
-	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
+	AzureFirewallNameSelector *v2.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
 	// +kubebuilder:validation:Optional
@@ -76,11 +76,11 @@ type FirewallNATRuleCollectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rule blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -99,11 +99,11 @@ type FirewallNATRuleCollectionRuleInitParameters struct {
 
 	// References to PublicIP in network to populate destinationAddresses.
 	// +kubebuilder:validation:Optional
-	DestinationAddressesRefs []v1.Reference `json:"destinationAddressesRefs,omitempty" tf:"-"`
+	DestinationAddressesRefs []v2.Reference `json:"destinationAddressesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of PublicIP in network to populate destinationAddresses.
 	// +kubebuilder:validation:Optional
-	DestinationAddressesSelector *v1.Selector `json:"destinationAddressesSelector,omitempty" tf:"-"`
+	DestinationAddressesSelector *v2.Selector `json:"destinationAddressesSelector,omitempty" tf:"-"`
 
 	// A list of destination ports.
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
@@ -171,11 +171,11 @@ type FirewallNATRuleCollectionRuleParameters struct {
 
 	// References to PublicIP in network to populate destinationAddresses.
 	// +kubebuilder:validation:Optional
-	DestinationAddressesRefs []v1.Reference `json:"destinationAddressesRefs,omitempty" tf:"-"`
+	DestinationAddressesRefs []v2.Reference `json:"destinationAddressesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of PublicIP in network to populate destinationAddresses.
 	// +kubebuilder:validation:Optional
-	DestinationAddressesSelector *v1.Selector `json:"destinationAddressesSelector,omitempty" tf:"-"`
+	DestinationAddressesSelector *v2.Selector `json:"destinationAddressesSelector,omitempty" tf:"-"`
 
 	// A list of destination ports.
 	// +kubebuilder:validation:Optional
@@ -208,8 +208,8 @@ type FirewallNATRuleCollectionRuleParameters struct {
 
 // FirewallNATRuleCollectionSpec defines the desired state of FirewallNATRuleCollection
 type FirewallNATRuleCollectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FirewallNATRuleCollectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FirewallNATRuleCollectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -225,8 +225,8 @@ type FirewallNATRuleCollectionSpec struct {
 
 // FirewallNATRuleCollectionStatus defines the observed state of FirewallNATRuleCollection.
 type FirewallNATRuleCollectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallNATRuleCollectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FirewallNATRuleCollectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

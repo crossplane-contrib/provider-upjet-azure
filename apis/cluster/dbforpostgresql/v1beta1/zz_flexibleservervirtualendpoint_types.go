@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FlexibleServerVirtualEndpointInitParameters struct {
@@ -27,11 +27,11 @@ type FlexibleServerVirtualEndpointInitParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate replicaServerId.
 	// +kubebuilder:validation:Optional
-	ReplicaServerIDRef *v1.Reference `json:"replicaServerIdRef,omitempty" tf:"-"`
+	ReplicaServerIDRef *v2.Reference `json:"replicaServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate replicaServerId.
 	// +kubebuilder:validation:Optional
-	ReplicaServerIDSelector *v1.Selector `json:"replicaServerIdSelector,omitempty" tf:"-"`
+	ReplicaServerIDSelector *v2.Selector `json:"replicaServerIdSelector,omitempty" tf:"-"`
 
 	// The Resource ID of the Source Postgres Flexible Server this should be associated with. Changing this forces a new resource to be created.
 	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
@@ -41,11 +41,11 @@ type FlexibleServerVirtualEndpointInitParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDRef *v1.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
+	SourceServerIDRef *v2.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDSelector *v1.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
+	SourceServerIDSelector *v2.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
 	// The type of Virtual Endpoint. Currently only ReadWrite is supported. Changing this forces a new resource to be created.
 	// The type of Virtual Endpoint
@@ -90,11 +90,11 @@ type FlexibleServerVirtualEndpointParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate replicaServerId.
 	// +kubebuilder:validation:Optional
-	ReplicaServerIDRef *v1.Reference `json:"replicaServerIdRef,omitempty" tf:"-"`
+	ReplicaServerIDRef *v2.Reference `json:"replicaServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate replicaServerId.
 	// +kubebuilder:validation:Optional
-	ReplicaServerIDSelector *v1.Selector `json:"replicaServerIdSelector,omitempty" tf:"-"`
+	ReplicaServerIDSelector *v2.Selector `json:"replicaServerIdSelector,omitempty" tf:"-"`
 
 	// The Resource ID of the Source Postgres Flexible Server this should be associated with. Changing this forces a new resource to be created.
 	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
@@ -105,11 +105,11 @@ type FlexibleServerVirtualEndpointParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDRef *v1.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
+	SourceServerIDRef *v2.Reference `json:"sourceServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate sourceServerId.
 	// +kubebuilder:validation:Optional
-	SourceServerIDSelector *v1.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
+	SourceServerIDSelector *v2.Selector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
 	// The type of Virtual Endpoint. Currently only ReadWrite is supported. Changing this forces a new resource to be created.
 	// The type of Virtual Endpoint
@@ -119,8 +119,8 @@ type FlexibleServerVirtualEndpointParameters struct {
 
 // FlexibleServerVirtualEndpointSpec defines the desired state of FlexibleServerVirtualEndpoint
 type FlexibleServerVirtualEndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FlexibleServerVirtualEndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FlexibleServerVirtualEndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -136,8 +136,8 @@ type FlexibleServerVirtualEndpointSpec struct {
 
 // FlexibleServerVirtualEndpointStatus defines the observed state of FlexibleServerVirtualEndpoint.
 type FlexibleServerVirtualEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerVirtualEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlexibleServerVirtualEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

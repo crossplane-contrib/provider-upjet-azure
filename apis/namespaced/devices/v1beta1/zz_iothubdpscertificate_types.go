@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubDPSCertificateInitParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
-	CertificateContentSecretRef v1.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
+	CertificateContentSecretRef v2.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubDPS
@@ -25,11 +24,11 @@ type IOTHubDPSCertificateInitParameters struct {
 
 	// Reference to a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
-	IOTDPSNameRef *v1.NamespacedReference `json:"iotDpsNameRef,omitempty" tf:"-"`
+	IOTDPSNameRef *v2.NamespacedReference `json:"iotDpsNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
-	IOTDPSNameSelector *v1.NamespacedSelector `json:"iotDpsNameSelector,omitempty" tf:"-"`
+	IOTDPSNameSelector *v2.NamespacedSelector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
 	// Specifies if the certificate is created in verified state. Defaults to false. Changing this forces a new resource to be created.
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
@@ -54,7 +53,7 @@ type IOTHubDPSCertificateParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
 	// +kubebuilder:validation:Optional
-	CertificateContentSecretRef v1.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
+	CertificateContentSecretRef v2.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubDPS
@@ -63,11 +62,11 @@ type IOTHubDPSCertificateParameters struct {
 
 	// Reference to a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
-	IOTDPSNameRef *v1.NamespacedReference `json:"iotDpsNameRef,omitempty" tf:"-"`
+	IOTDPSNameRef *v2.NamespacedReference `json:"iotDpsNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
-	IOTDPSNameSelector *v1.NamespacedSelector `json:"iotDpsNameSelector,omitempty" tf:"-"`
+	IOTDPSNameSelector *v2.NamespacedSelector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
 	// Specifies if the certificate is created in verified state. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -80,11 +79,11 @@ type IOTHubDPSCertificateParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // IOTHubDPSCertificateSpec defines the desired state of IOTHubDPSCertificate
@@ -106,8 +105,8 @@ type IOTHubDPSCertificateSpec struct {
 
 // IOTHubDPSCertificateStatus defines the observed state of IOTHubDPSCertificate.
 type IOTHubDPSCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubDPSCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubDPSCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

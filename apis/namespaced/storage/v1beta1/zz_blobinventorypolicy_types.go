@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlobInventoryPolicyInitParameters struct {
@@ -26,11 +25,11 @@ type BlobInventoryPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BlobInventoryPolicyObservation struct {
@@ -59,11 +58,11 @@ type BlobInventoryPolicyParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type FilterInitParameters struct {
@@ -170,11 +169,11 @@ type RulesInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 }
 
 type RulesObservation struct {
@@ -234,11 +233,11 @@ type RulesParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 }
 
 // BlobInventoryPolicySpec defines the desired state of BlobInventoryPolicy
@@ -260,8 +259,8 @@ type BlobInventoryPolicySpec struct {
 
 // BlobInventoryPolicyStatus defines the observed state of BlobInventoryPolicy.
 type BlobInventoryPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BlobInventoryPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BlobInventoryPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

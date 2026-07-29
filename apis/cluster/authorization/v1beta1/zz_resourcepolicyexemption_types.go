@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ResourcePolicyExemptionInitParameters struct {
@@ -40,11 +40,11 @@ type ResourcePolicyExemptionInitParameters struct {
 
 	// Reference to a ResourcePolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourcePolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
@@ -56,11 +56,11 @@ type ResourcePolicyExemptionInitParameters struct {
 
 	// Reference to a ResourcePolicyAssignment in authorization to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourcePolicyAssignment in authorization to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type ResourcePolicyExemptionObservation struct {
@@ -130,11 +130,11 @@ type ResourcePolicyExemptionParameters struct {
 
 	// Reference to a ResourcePolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourcePolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	// +kubebuilder:validation:Optional
@@ -148,17 +148,17 @@ type ResourcePolicyExemptionParameters struct {
 
 	// Reference to a ResourcePolicyAssignment in authorization to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourcePolicyAssignment in authorization to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // ResourcePolicyExemptionSpec defines the desired state of ResourcePolicyExemption
 type ResourcePolicyExemptionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourcePolicyExemptionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourcePolicyExemptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -174,8 +174,8 @@ type ResourcePolicyExemptionSpec struct {
 
 // ResourcePolicyExemptionStatus defines the observed state of ResourcePolicyExemption.
 type ResourcePolicyExemptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourcePolicyExemptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourcePolicyExemptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

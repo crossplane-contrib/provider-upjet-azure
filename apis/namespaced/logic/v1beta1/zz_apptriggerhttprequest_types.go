@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppTriggerHTTPRequestInitParameters struct {
@@ -57,11 +56,11 @@ type AppTriggerHTTPRequestParameters struct {
 
 	// Reference to a AppWorkflow in logic to populate logicAppId.
 	// +kubebuilder:validation:Optional
-	LogicAppIDRef *v1.NamespacedReference `json:"logicAppIdRef,omitempty" tf:"-"`
+	LogicAppIDRef *v2.NamespacedReference `json:"logicAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppWorkflow in logic to populate logicAppId.
 	// +kubebuilder:validation:Optional
-	LogicAppIDSelector *v1.NamespacedSelector `json:"logicAppIdSelector,omitempty" tf:"-"`
+	LogicAppIDSelector *v2.NamespacedSelector `json:"logicAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the HTTP Method which the request be using. Possible values include DELETE, GET, PATCH, POST or PUT.
 	// +kubebuilder:validation:Optional
@@ -95,8 +94,8 @@ type AppTriggerHTTPRequestSpec struct {
 
 // AppTriggerHTTPRequestStatus defines the observed state of AppTriggerHTTPRequest.
 type AppTriggerHTTPRequestStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppTriggerHTTPRequestObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppTriggerHTTPRequestObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

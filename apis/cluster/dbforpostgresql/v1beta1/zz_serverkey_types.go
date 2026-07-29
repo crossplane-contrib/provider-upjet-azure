@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ServerKeyInitParameters struct {
@@ -22,11 +22,11 @@ type ServerKeyInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the PostgreSQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.Server
@@ -35,11 +35,11 @@ type ServerKeyInitParameters struct {
 
 	// Reference to a Server in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 type ServerKeyObservation struct {
@@ -64,11 +64,11 @@ type ServerKeyParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the PostgreSQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.Server
@@ -78,17 +78,17 @@ type ServerKeyParameters struct {
 
 	// Reference to a Server in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a Server in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 // ServerKeySpec defines the desired state of ServerKey
 type ServerKeySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServerKeyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServerKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -104,8 +104,8 @@ type ServerKeySpec struct {
 
 // ServerKeyStatus defines the observed state of ServerKey.
 type ServerKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServerKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServerKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

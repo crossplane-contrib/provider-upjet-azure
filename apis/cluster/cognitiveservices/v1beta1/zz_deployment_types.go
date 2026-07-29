@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DeploymentInitParameters struct {
@@ -65,11 +65,11 @@ type DeploymentParameters struct {
 
 	// Reference to a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDRef *v1.Reference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
+	CognitiveAccountIDRef *v2.Reference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDSelector *v1.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
+	CognitiveAccountIDSelector *v2.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether dynamic throttling is enabled.
 	// +kubebuilder:validation:Optional
@@ -192,8 +192,8 @@ type SkuParameters struct {
 
 // DeploymentSpec defines the desired state of Deployment
 type DeploymentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DeploymentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DeploymentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -209,8 +209,8 @@ type DeploymentSpec struct {
 
 // DeploymentStatus defines the observed state of Deployment.
 type DeploymentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DeploymentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DeploymentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CriteriaDimensionInitParameters struct {
@@ -90,11 +90,11 @@ type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
 
 	// References to MonitorActionGroup in insights to populate actionGroups.
 	// +kubebuilder:validation:Optional
-	ActionGroupsRefs []v1.Reference `json:"actionGroupsRefs,omitempty" tf:"-"`
+	ActionGroupsRefs []v2.Reference `json:"actionGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate actionGroups.
 	// +kubebuilder:validation:Optional
-	ActionGroupsSelector *v1.Selector `json:"actionGroupsSelector,omitempty" tf:"-"`
+	ActionGroupsSelector *v2.Selector `json:"actionGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies the properties of an alert payload.
 	// +mapType=granular
@@ -127,11 +127,11 @@ type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 
 	// References to MonitorActionGroup in insights to populate actionGroups.
 	// +kubebuilder:validation:Optional
-	ActionGroupsRefs []v1.Reference `json:"actionGroupsRefs,omitempty" tf:"-"`
+	ActionGroupsRefs []v2.Reference `json:"actionGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate actionGroups.
 	// +kubebuilder:validation:Optional
-	ActionGroupsSelector *v1.Selector `json:"actionGroupsSelector,omitempty" tf:"-"`
+	ActionGroupsSelector *v2.Selector `json:"actionGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies the properties of an alert payload.
 	// +kubebuilder:validation:Optional
@@ -242,11 +242,11 @@ type MonitorScheduledQueryRulesAlertV2IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -279,11 +279,11 @@ type MonitorScheduledQueryRulesAlertV2IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -332,11 +332,11 @@ type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 
 	// References to ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.Reference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.Selector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// Severity of the alert. Should be an integer between 0 and 4. Value of 0 is severest.
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
@@ -484,11 +484,11 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the list of resource IDs that this scheduled query rule is scoped to. Changing this forces a new resource to be created. Currently, the API supports exactly 1 resource ID in the scopes list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta1.ApplicationInsights
@@ -498,11 +498,11 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 
 	// References to ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.Reference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.Selector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// Severity of the alert. Should be an integer between 0 and 4. Value of 0 is severest.
 	// +kubebuilder:validation:Optional
@@ -532,8 +532,8 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 
 // MonitorScheduledQueryRulesAlertV2Spec defines the desired state of MonitorScheduledQueryRulesAlertV2
 type MonitorScheduledQueryRulesAlertV2Spec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MonitorScheduledQueryRulesAlertV2Parameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MonitorScheduledQueryRulesAlertV2Parameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -549,8 +549,8 @@ type MonitorScheduledQueryRulesAlertV2Spec struct {
 
 // MonitorScheduledQueryRulesAlertV2Status defines the observed state of MonitorScheduledQueryRulesAlertV2.
 type MonitorScheduledQueryRulesAlertV2Status struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorScheduledQueryRulesAlertV2Observation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorScheduledQueryRulesAlertV2Observation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupPolicyPostgreSQLInitParameters struct {
@@ -70,11 +69,11 @@ type BackupPolicyPostgreSQLParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
@@ -91,11 +90,11 @@ type BackupPolicyPostgreSQLParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultName.
 	// +kubebuilder:validation:Optional
-	VaultNameRef *v1.NamespacedReference `json:"vaultNameRef,omitempty" tf:"-"`
+	VaultNameRef *v2.NamespacedReference `json:"vaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultName.
 	// +kubebuilder:validation:Optional
-	VaultNameSelector *v1.NamespacedSelector `json:"vaultNameSelector,omitempty" tf:"-"`
+	VaultNameSelector *v2.NamespacedSelector `json:"vaultNameSelector,omitempty" tf:"-"`
 }
 
 type BackupPolicyPostgreSQLRetentionRuleCriteriaInitParameters struct {
@@ -237,8 +236,8 @@ type BackupPolicyPostgreSQLSpec struct {
 
 // BackupPolicyPostgreSQLStatus defines the observed state of BackupPolicyPostgreSQL.
 type BackupPolicyPostgreSQLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupPolicyPostgreSQLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupPolicyPostgreSQLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

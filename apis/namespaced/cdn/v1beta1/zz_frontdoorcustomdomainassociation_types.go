@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FrontdoorCustomDomainAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type FrontdoorCustomDomainAssociationInitParameters struct {
 
 	// Reference to a FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIDRef *v1.NamespacedReference `json:"cdnFrontdoorCustomDomainIdRef,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIDRef *v2.NamespacedReference `json:"cdnFrontdoorCustomDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdSelector,omitempty" tf:"-"`
 
 	// One or more IDs of the Front Door Route to which the Front Door Custom Domain is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorRoute
@@ -36,11 +35,11 @@ type FrontdoorCustomDomainAssociationInitParameters struct {
 
 	// References to FrontdoorRoute in cdn to populate cdnFrontdoorRouteIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRouteIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorRouteIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorRouteIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorRouteIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorRoute in cdn to populate cdnFrontdoorRouteIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRouteIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorRouteIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorRouteIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorRouteIdsSelector,omitempty" tf:"-"`
 }
 
 type FrontdoorCustomDomainAssociationObservation struct {
@@ -65,11 +64,11 @@ type FrontdoorCustomDomainAssociationParameters struct {
 
 	// Reference to a FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIDRef *v1.NamespacedReference `json:"cdnFrontdoorCustomDomainIdRef,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIDRef *v2.NamespacedReference `json:"cdnFrontdoorCustomDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorCustomDomainIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorCustomDomainIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorCustomDomainIdSelector,omitempty" tf:"-"`
 
 	// One or more IDs of the Front Door Route to which the Front Door Custom Domain is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorRoute
@@ -79,11 +78,11 @@ type FrontdoorCustomDomainAssociationParameters struct {
 
 	// References to FrontdoorRoute in cdn to populate cdnFrontdoorRouteIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRouteIdsRefs []v1.NamespacedReference `json:"cdnFrontdoorRouteIdsRefs,omitempty" tf:"-"`
+	CdnFrontdoorRouteIdsRefs []v2.NamespacedReference `json:"cdnFrontdoorRouteIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of FrontdoorRoute in cdn to populate cdnFrontdoorRouteIds.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRouteIdsSelector *v1.NamespacedSelector `json:"cdnFrontdoorRouteIdsSelector,omitempty" tf:"-"`
+	CdnFrontdoorRouteIdsSelector *v2.NamespacedSelector `json:"cdnFrontdoorRouteIdsSelector,omitempty" tf:"-"`
 }
 
 // FrontdoorCustomDomainAssociationSpec defines the desired state of FrontdoorCustomDomainAssociation
@@ -105,8 +104,8 @@ type FrontdoorCustomDomainAssociationSpec struct {
 
 // FrontdoorCustomDomainAssociationStatus defines the observed state of FrontdoorCustomDomainAssociation.
 type FrontdoorCustomDomainAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorCustomDomainAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorCustomDomainAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

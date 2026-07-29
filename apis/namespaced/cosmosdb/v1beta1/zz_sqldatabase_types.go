@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLDatabaseAutoscaleSettingsInitParameters struct {
@@ -69,11 +68,11 @@ type SQLDatabaseParameters struct {
 
 	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// An autoscale_settings block as defined below.
 	// +kubebuilder:validation:Optional
@@ -86,11 +85,11 @@ type SQLDatabaseParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The throughput of SQL database (RU/s). Must be set in increments of 100. The minimum value is 400. Do not set when azurerm_cosmosdb_account is configured with EnableServerless capability.
 	// +kubebuilder:validation:Optional
@@ -116,8 +115,8 @@ type SQLDatabaseSpec struct {
 
 // SQLDatabaseStatus defines the observed state of SQLDatabase.
 type SQLDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AIFoundryProjectIdentityInitParameters struct {
@@ -23,11 +23,11 @@ type AIFoundryProjectIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -60,11 +60,11 @@ type AIFoundryProjectIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -80,11 +80,11 @@ type AIFoundryProjectInitParameters struct {
 
 	// Reference to a AIFoundry in machinelearningservices to populate aiServicesHubId.
 	// +kubebuilder:validation:Optional
-	AIServicesHubIDRef *v1.Reference `json:"aiServicesHubIdRef,omitempty" tf:"-"`
+	AIServicesHubIDRef *v2.Reference `json:"aiServicesHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a AIFoundry in machinelearningservices to populate aiServicesHubId.
 	// +kubebuilder:validation:Optional
-	AIServicesHubIDSelector *v1.Selector `json:"aiServicesHubIdSelector,omitempty" tf:"-"`
+	AIServicesHubIDSelector *v2.Selector `json:"aiServicesHubIdSelector,omitempty" tf:"-"`
 
 	// The description of this AI Foundry Project.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -108,11 +108,11 @@ type AIFoundryProjectInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityRef *v1.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityRef *v2.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentitySelector *v2.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the AI Foundry Project.
 	// +mapType=granular
@@ -163,11 +163,11 @@ type AIFoundryProjectParameters struct {
 
 	// Reference to a AIFoundry in machinelearningservices to populate aiServicesHubId.
 	// +kubebuilder:validation:Optional
-	AIServicesHubIDRef *v1.Reference `json:"aiServicesHubIdRef,omitempty" tf:"-"`
+	AIServicesHubIDRef *v2.Reference `json:"aiServicesHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a AIFoundry in machinelearningservices to populate aiServicesHubId.
 	// +kubebuilder:validation:Optional
-	AIServicesHubIDSelector *v1.Selector `json:"aiServicesHubIdSelector,omitempty" tf:"-"`
+	AIServicesHubIDSelector *v2.Selector `json:"aiServicesHubIdSelector,omitempty" tf:"-"`
 
 	// The description of this AI Foundry Project.
 	// +kubebuilder:validation:Optional
@@ -197,11 +197,11 @@ type AIFoundryProjectParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityRef *v1.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityRef *v2.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentitySelector *v2.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the AI Foundry Project.
 	// +kubebuilder:validation:Optional
@@ -211,8 +211,8 @@ type AIFoundryProjectParameters struct {
 
 // AIFoundryProjectSpec defines the desired state of AIFoundryProject
 type AIFoundryProjectSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AIFoundryProjectParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AIFoundryProjectParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -228,8 +228,8 @@ type AIFoundryProjectSpec struct {
 
 // AIFoundryProjectStatus defines the observed state of AIFoundryProject.
 type AIFoundryProjectStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AIFoundryProjectObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AIFoundryProjectObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

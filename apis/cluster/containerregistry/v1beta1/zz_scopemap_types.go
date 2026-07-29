@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ScopeMapInitParameters struct {
@@ -53,11 +53,11 @@ type ScopeMapParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryName.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryNameRef *v1.Reference `json:"containerRegistryNameRef,omitempty" tf:"-"`
+	ContainerRegistryNameRef *v2.Reference `json:"containerRegistryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryName.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
+	ContainerRegistryNameSelector *v2.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
 	// The description of the Container Registry.
 	// +kubebuilder:validation:Optional
@@ -70,17 +70,17 @@ type ScopeMapParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // ScopeMapSpec defines the desired state of ScopeMap
 type ScopeMapSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ScopeMapParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ScopeMapParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -96,8 +96,8 @@ type ScopeMapSpec struct {
 
 // ScopeMapStatus defines the observed state of ScopeMap.
 type ScopeMapStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ScopeMapObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ScopeMapObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

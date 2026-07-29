@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FlexibleServerActiveDirectoryAdministratorInitParameters struct {
@@ -23,11 +22,11 @@ type FlexibleServerActiveDirectoryAdministratorInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityId.
 	// +kubebuilder:validation:Optional
-	IdentityIDRef *v1.NamespacedReference `json:"identityIdRef,omitempty" tf:"-"`
+	IdentityIDRef *v2.NamespacedReference `json:"identityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityId.
 	// +kubebuilder:validation:Optional
-	IdentityIDSelector *v1.NamespacedSelector `json:"identityIdSelector,omitempty" tf:"-"`
+	IdentityIDSelector *v2.NamespacedSelector `json:"identityIdSelector,omitempty" tf:"-"`
 
 	// The login name of the principal to set as the server administrator
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
@@ -70,11 +69,11 @@ type FlexibleServerActiveDirectoryAdministratorParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityId.
 	// +kubebuilder:validation:Optional
-	IdentityIDRef *v1.NamespacedReference `json:"identityIdRef,omitempty" tf:"-"`
+	IdentityIDRef *v2.NamespacedReference `json:"identityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityId.
 	// +kubebuilder:validation:Optional
-	IdentityIDSelector *v1.NamespacedSelector `json:"identityIdSelector,omitempty" tf:"-"`
+	IdentityIDSelector *v2.NamespacedSelector `json:"identityIdSelector,omitempty" tf:"-"`
 
 	// The login name of the principal to set as the server administrator
 	// +kubebuilder:validation:Optional
@@ -92,11 +91,11 @@ type FlexibleServerActiveDirectoryAdministratorParameters struct {
 
 	// Reference to a FlexibleServer in dbformysql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbformysql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The Azure Tenant ID.
 	// +kubebuilder:validation:Optional
@@ -122,8 +121,8 @@ type FlexibleServerActiveDirectoryAdministratorSpec struct {
 
 // FlexibleServerActiveDirectoryAdministratorStatus defines the observed state of FlexibleServerActiveDirectoryAdministrator.
 type FlexibleServerActiveDirectoryAdministratorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FlexibleServerActiveDirectoryAdministratorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FlexibleServerActiveDirectoryAdministratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

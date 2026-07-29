@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NetworkInterfaceNatRuleAssociationInitParameters struct {
@@ -25,11 +25,11 @@ type NetworkInterfaceNatRuleAssociationInitParameters struct {
 
 	// Reference to a LoadBalancerNatRule in network to populate natRuleId.
 	// +kubebuilder:validation:Optional
-	NATRuleIDRef *v1.Reference `json:"natRuleIdRef,omitempty" tf:"-"`
+	NATRuleIDRef *v2.Reference `json:"natRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancerNatRule in network to populate natRuleId.
 	// +kubebuilder:validation:Optional
-	NATRuleIDSelector *v1.Selector `json:"natRuleIdSelector,omitempty" tf:"-"`
+	NATRuleIDSelector *v2.Selector `json:"natRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.NetworkInterface
@@ -38,11 +38,11 @@ type NetworkInterfaceNatRuleAssociationInitParameters struct {
 
 	// Reference to a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceNatRuleAssociationObservation struct {
@@ -72,11 +72,11 @@ type NetworkInterfaceNatRuleAssociationParameters struct {
 
 	// Reference to a LoadBalancerNatRule in network to populate natRuleId.
 	// +kubebuilder:validation:Optional
-	NATRuleIDRef *v1.Reference `json:"natRuleIdRef,omitempty" tf:"-"`
+	NATRuleIDRef *v2.Reference `json:"natRuleIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancerNatRule in network to populate natRuleId.
 	// +kubebuilder:validation:Optional
-	NATRuleIDSelector *v1.Selector `json:"natRuleIdSelector,omitempty" tf:"-"`
+	NATRuleIDSelector *v2.Selector `json:"natRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.NetworkInterface
@@ -86,17 +86,17 @@ type NetworkInterfaceNatRuleAssociationParameters struct {
 
 	// Reference to a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+	NetworkInterfaceIDRef *v2.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a NetworkInterface in network to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+	NetworkInterfaceIDSelector *v2.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 // NetworkInterfaceNatRuleAssociationSpec defines the desired state of NetworkInterfaceNatRuleAssociation
 type NetworkInterfaceNatRuleAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NetworkInterfaceNatRuleAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NetworkInterfaceNatRuleAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -112,8 +112,8 @@ type NetworkInterfaceNatRuleAssociationSpec struct {
 
 // NetworkInterfaceNatRuleAssociationStatus defines the observed state of NetworkInterfaceNatRuleAssociation.
 type NetworkInterfaceNatRuleAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkInterfaceNatRuleAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkInterfaceNatRuleAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

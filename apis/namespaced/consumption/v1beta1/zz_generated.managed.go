@@ -5,124 +5,124 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BudgetManagementGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BudgetManagementGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BudgetManagementGroup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BudgetManagementGroup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *BudgetManagementGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BudgetManagementGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BudgetManagementGroup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BudgetManagementGroup.
-func (mg *BudgetManagementGroup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BudgetManagementGroup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BudgetResourceGroup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BudgetResourceGroup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BudgetResourceGroup) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BudgetResourceGroup) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) SetConditions(c ...xpv1.Condition) {
+func (mg *BudgetResourceGroup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BudgetResourceGroup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BudgetResourceGroup) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BudgetResourceGroup.
-func (mg *BudgetResourceGroup) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BudgetResourceGroup) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BudgetSubscription.
-func (mg *BudgetSubscription) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BudgetSubscription) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BudgetSubscription.
-func (mg *BudgetSubscription) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BudgetSubscription) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BudgetSubscription.
-func (mg *BudgetSubscription) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BudgetSubscription) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BudgetSubscription.
-func (mg *BudgetSubscription) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BudgetSubscription) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BudgetSubscription.
-func (mg *BudgetSubscription) SetConditions(c ...xpv1.Condition) {
+func (mg *BudgetSubscription) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BudgetSubscription.
-func (mg *BudgetSubscription) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BudgetSubscription) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BudgetSubscription.
-func (mg *BudgetSubscription) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BudgetSubscription) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BudgetSubscription.
-func (mg *BudgetSubscription) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BudgetSubscription) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,7 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/pkg/errors"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 )
@@ -30,14 +30,14 @@ func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, err
 		return nil, errors.New("cannot get fully_qualified_domain_name attribute")
 	}
 	conn := map[string][]byte{
-		xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", username, dbName)),
-		xpv1.ResourceCredentialsSecretEndpointKey: []byte(endpoint),
+		xpv2.CredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", username, dbName)),
+		xpv2.CredentialsSecretEndpointKey: []byte(endpoint),
 	}
 
 	// Note(turkenh): include password only if available, might not be available
 	//  depending on the auth type.
 	if password, ok := attr["administrator_login_password"].(string); ok {
-		conn[xpv1.ResourceCredentialsSecretPasswordKey] = []byte(password)
+		conn[xpv2.CredentialsSecretPasswordKey] = []byte(password)
 	}
 
 	return conn, nil

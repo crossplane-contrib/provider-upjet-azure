@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomRuleInitParameters struct {
@@ -208,11 +207,11 @@ type FrontdoorFirewallPolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Web Application Firewall Policy.
 	// +kubebuilder:validation:Optional
@@ -562,8 +561,8 @@ type FrontdoorFirewallPolicySpec struct {
 
 // FrontdoorFirewallPolicyStatus defines the observed state of FrontdoorFirewallPolicy.
 type FrontdoorFirewallPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorFirewallPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorFirewallPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

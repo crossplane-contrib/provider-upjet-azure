@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountCustomerManagedKeyInitParameters struct {
@@ -53,11 +52,11 @@ type AccountIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -90,11 +89,11 @@ type AccountIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -107,7 +106,7 @@ type AccountInitParameters struct {
 	CustomQuestionAnsweringSearchServiceID *string `json:"customQuestionAnsweringSearchServiceId,omitempty" tf:"custom_question_answering_search_service_id,omitempty"`
 
 	// If kind is TextAnalytics this specifies the key of the Search service.
-	CustomQuestionAnsweringSearchServiceKeySecretRef *v1.LocalSecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
+	CustomQuestionAnsweringSearchServiceKeySecretRef *v2.LocalSecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
 
 	// The subdomain name used for Entra ID token-based authentication. This attribute is required when network_acls is specified. This attribute is also required when using the OpenAI service with libraries which assume the Azure OpenAI endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/. This can be specified during creation or added later, but once set changing this forces a new resource to be created.
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
@@ -313,7 +312,7 @@ type AccountParameters struct {
 
 	// If kind is TextAnalytics this specifies the key of the Search service.
 	// +kubebuilder:validation:Optional
-	CustomQuestionAnsweringSearchServiceKeySecretRef *v1.LocalSecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
+	CustomQuestionAnsweringSearchServiceKeySecretRef *v2.LocalSecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
 
 	// The subdomain name used for Entra ID token-based authentication. This attribute is required when network_acls is specified. This attribute is also required when using the OpenAI service with libraries which assume the Azure OpenAI endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/. This can be specified during creation or added later, but once set changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -394,11 +393,11 @@ type AccountParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the SKU Name for this Cognitive Service Account. Possible values are C2, C3, C4, D3, DC0, E0, F0, F1, P0, P1, P2, S, S0, S1, S2, S3, S4, S5 and S6.
 	// +kubebuilder:validation:Optional
@@ -423,11 +422,11 @@ type AccountStorageInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v1.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
+	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v1.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
+	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Full resource id of a Microsoft.Storage resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -436,11 +435,11 @@ type AccountStorageInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type AccountStorageObservation struct {
@@ -462,11 +461,11 @@ type AccountStorageParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v1.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
+	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
 	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v1.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
+	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Full resource id of a Microsoft.Storage resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -476,11 +475,11 @@ type AccountStorageParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkAclsVirtualNetworkRulesInitParameters struct {
@@ -495,11 +494,11 @@ type NetworkAclsVirtualNetworkRulesInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkAclsVirtualNetworkRulesObservation struct {
@@ -525,11 +524,11 @@ type NetworkAclsVirtualNetworkRulesParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInjectionInitParameters struct {
@@ -544,11 +543,11 @@ type NetworkInjectionInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInjectionObservation struct {
@@ -574,11 +573,11 @@ type NetworkInjectionParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // AccountSpec defines the desired state of Account
@@ -600,8 +599,8 @@ type AccountSpec struct {
 
 // AccountStatus defines the observed state of Account.
 type AccountStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

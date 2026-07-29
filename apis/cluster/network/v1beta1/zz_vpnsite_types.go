@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BGPInitParameters struct {
@@ -204,11 +204,11 @@ type VPNSiteInitParameters struct {
 
 	// Reference to a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
+	VirtualWanIDRef *v2.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
+	VirtualWanIDSelector *v2.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
 type VPNSiteObservation struct {
@@ -280,11 +280,11 @@ type VPNSiteParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the VPN Site.
 	// +kubebuilder:validation:Optional
@@ -299,17 +299,17 @@ type VPNSiteParameters struct {
 
 	// Reference to a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
+	VirtualWanIDRef *v2.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
-	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
+	VirtualWanIDSelector *v2.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
 // VPNSiteSpec defines the desired state of VPNSite
 type VPNSiteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPNSiteParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPNSiteParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -325,8 +325,8 @@ type VPNSiteSpec struct {
 
 // VPNSiteStatus defines the observed state of VPNSite.
 type VPNSiteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNSiteObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPNSiteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

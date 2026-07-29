@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AssociationInitParameters struct {
@@ -52,11 +51,11 @@ type DomainInitParameters struct {
 
 	// Reference to a FrontdoorCustomDomain in cdn to populate cdnFrontdoorDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorDomainIDRef *v1.NamespacedReference `json:"cdnFrontdoorDomainIdRef,omitempty" tf:"-"`
+	CdnFrontdoorDomainIDRef *v2.NamespacedReference `json:"cdnFrontdoorDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorCustomDomain in cdn to populate cdnFrontdoorDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorDomainIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorDomainIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorDomainIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorDomainIdSelector,omitempty" tf:"-"`
 }
 
 type DomainObservation struct {
@@ -78,11 +77,11 @@ type DomainParameters struct {
 
 	// Reference to a FrontdoorCustomDomain in cdn to populate cdnFrontdoorDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorDomainIDRef *v1.NamespacedReference `json:"cdnFrontdoorDomainIdRef,omitempty" tf:"-"`
+	CdnFrontdoorDomainIDRef *v2.NamespacedReference `json:"cdnFrontdoorDomainIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorCustomDomain in cdn to populate cdnFrontdoorDomainId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorDomainIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorDomainIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorDomainIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorDomainIdSelector,omitempty" tf:"-"`
 }
 
 type FirewallInitParameters struct {
@@ -97,11 +96,11 @@ type FirewallInitParameters struct {
 
 	// Reference to a FrontdoorFirewallPolicy in cdn to populate cdnFrontdoorFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorFirewallPolicyIDRef *v1.NamespacedReference `json:"cdnFrontdoorFirewallPolicyIdRef,omitempty" tf:"-"`
+	CdnFrontdoorFirewallPolicyIDRef *v2.NamespacedReference `json:"cdnFrontdoorFirewallPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorFirewallPolicy in cdn to populate cdnFrontdoorFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorFirewallPolicyIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorFirewallPolicyIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorFirewallPolicyIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorFirewallPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type FirewallObservation struct {
@@ -127,11 +126,11 @@ type FirewallParameters struct {
 
 	// Reference to a FrontdoorFirewallPolicy in cdn to populate cdnFrontdoorFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorFirewallPolicyIDRef *v1.NamespacedReference `json:"cdnFrontdoorFirewallPolicyIdRef,omitempty" tf:"-"`
+	CdnFrontdoorFirewallPolicyIDRef *v2.NamespacedReference `json:"cdnFrontdoorFirewallPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorFirewallPolicy in cdn to populate cdnFrontdoorFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorFirewallPolicyIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorFirewallPolicyIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorFirewallPolicyIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorFirewallPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type FrontdoorSecurityPolicyInitParameters struct {
@@ -162,11 +161,11 @@ type FrontdoorSecurityPolicyParameters struct {
 
 	// Reference to a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDRef *v1.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDRef *v2.NamespacedReference `json:"cdnFrontdoorProfileIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorProfile in cdn to populate cdnFrontdoorProfileId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorProfileIDSelector *v1.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorProfileIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// A security_policies block as defined below.
 	// +kubebuilder:validation:Optional
@@ -211,8 +210,8 @@ type FrontdoorSecurityPolicySpec struct {
 
 // FrontdoorSecurityPolicyStatus defines the observed state of FrontdoorSecurityPolicy.
 type FrontdoorSecurityPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorSecurityPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorSecurityPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

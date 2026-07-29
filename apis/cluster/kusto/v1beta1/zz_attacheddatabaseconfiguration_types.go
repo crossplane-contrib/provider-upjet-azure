@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AttachedDatabaseConfigurationInitParameters struct {
@@ -20,11 +20,11 @@ type AttachedDatabaseConfigurationInitParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Cluster
@@ -32,11 +32,11 @@ type AttachedDatabaseConfigurationInitParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The Kusto Attached Database Configuration ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Cluster
@@ -45,11 +45,11 @@ type AttachedDatabaseConfigurationInitParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterResourceId.
 	// +kubebuilder:validation:Optional
-	ClusterResourceIDRef *v1.Reference `json:"clusterResourceIdRef,omitempty" tf:"-"`
+	ClusterResourceIDRef *v2.Reference `json:"clusterResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterResourceId.
 	// +kubebuilder:validation:Optional
-	ClusterResourceIDSelector *v1.Selector `json:"clusterResourceIdSelector,omitempty" tf:"-"`
+	ClusterResourceIDSelector *v2.Selector `json:"clusterResourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the database which you would like to attach, use * if you want to follow all current and future databases. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
@@ -63,11 +63,11 @@ type AttachedDatabaseConfigurationInitParameters struct {
 
 	// Reference to a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The default principals modification kind. Valid values are: None (default), Replace and Union. Defaults to None.
 	DefaultPrincipalModificationKind *string `json:"defaultPrincipalModificationKind,omitempty" tf:"default_principal_modification_kind,omitempty"`
@@ -84,11 +84,11 @@ type AttachedDatabaseConfigurationInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sharing block as defined below.
 	Sharing []SharingInitParameters `json:"sharing,omitempty" tf:"sharing,omitempty"`
@@ -144,11 +144,11 @@ type AttachedDatabaseConfigurationParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Cluster
@@ -157,11 +157,11 @@ type AttachedDatabaseConfigurationParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The Kusto Attached Database Configuration ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Cluster
@@ -171,11 +171,11 @@ type AttachedDatabaseConfigurationParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterResourceId.
 	// +kubebuilder:validation:Optional
-	ClusterResourceIDRef *v1.Reference `json:"clusterResourceIdRef,omitempty" tf:"-"`
+	ClusterResourceIDRef *v2.Reference `json:"clusterResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterResourceId.
 	// +kubebuilder:validation:Optional
-	ClusterResourceIDSelector *v1.Selector `json:"clusterResourceIdSelector,omitempty" tf:"-"`
+	ClusterResourceIDSelector *v2.Selector `json:"clusterResourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the database which you would like to attach, use * if you want to follow all current and future databases. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
@@ -192,11 +192,11 @@ type AttachedDatabaseConfigurationParameters struct {
 
 	// Reference to a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The default principals modification kind. Valid values are: None (default), Replace and Union. Defaults to None.
 	// +kubebuilder:validation:Optional
@@ -217,11 +217,11 @@ type AttachedDatabaseConfigurationParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sharing block as defined below.
 	// +kubebuilder:validation:Optional
@@ -343,8 +343,8 @@ type SharingParameters struct {
 
 // AttachedDatabaseConfigurationSpec defines the desired state of AttachedDatabaseConfiguration
 type AttachedDatabaseConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AttachedDatabaseConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AttachedDatabaseConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -360,8 +360,8 @@ type AttachedDatabaseConfigurationSpec struct {
 
 // AttachedDatabaseConfigurationStatus defines the observed state of AttachedDatabaseConfiguration.
 type AttachedDatabaseConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AttachedDatabaseConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AttachedDatabaseConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

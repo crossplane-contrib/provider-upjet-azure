@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BasicAuthInitParameters struct {
 
 	// Specifies the password of git repository basic auth.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the username of git repository basic auth.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -33,7 +32,7 @@ type BasicAuthParameters struct {
 
 	// Specifies the password of git repository basic auth.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the username of git repository basic auth.
 	// +kubebuilder:validation:Optional
@@ -145,10 +144,10 @@ type SSHAuthInitParameters struct {
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// Specifies the Public SSH Key of git repository basic auth.
-	HostKeySecretRef *v1.LocalSecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.LocalSecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the Private SSH Key of git repository basic auth.
-	PrivateKeySecretRef v1.LocalSecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.LocalSecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 
 type SSHAuthObservation struct {
@@ -165,11 +164,11 @@ type SSHAuthParameters struct {
 
 	// Specifies the Public SSH Key of git repository basic auth.
 	// +kubebuilder:validation:Optional
-	HostKeySecretRef *v1.LocalSecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.LocalSecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the Private SSH Key of git repository basic auth.
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef v1.LocalSecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.LocalSecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 
 type SpringCloudCustomizedAcceleratorInitParameters struct {
@@ -254,11 +253,11 @@ type SpringCloudCustomizedAcceleratorParameters struct {
 
 	// Reference to a SpringCloudAccelerator in appplatform to populate springCloudAcceleratorId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAcceleratorIDRef *v1.NamespacedReference `json:"springCloudAcceleratorIdRef,omitempty" tf:"-"`
+	SpringCloudAcceleratorIDRef *v2.NamespacedReference `json:"springCloudAcceleratorIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudAccelerator in appplatform to populate springCloudAcceleratorId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAcceleratorIDSelector *v1.NamespacedSelector `json:"springCloudAcceleratorIdSelector,omitempty" tf:"-"`
+	SpringCloudAcceleratorIDSelector *v2.NamespacedSelector `json:"springCloudAcceleratorIdSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudCustomizedAcceleratorSpec defines the desired state of SpringCloudCustomizedAccelerator
@@ -280,8 +279,8 @@ type SpringCloudCustomizedAcceleratorSpec struct {
 
 // SpringCloudCustomizedAcceleratorStatus defines the observed state of SpringCloudCustomizedAccelerator.
 type SpringCloudCustomizedAcceleratorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudCustomizedAcceleratorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudCustomizedAcceleratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationLoadBalancerSecurityPolicyInitParameters struct {
@@ -30,11 +29,11 @@ type ApplicationLoadBalancerSecurityPolicyInitParameters struct {
 
 	// Reference to a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDRef *v1.NamespacedReference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDRef *v2.NamespacedReference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDSelector *v1.NamespacedSelector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDSelector *v2.NamespacedSelector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type ApplicationLoadBalancerSecurityPolicyObservation struct {
@@ -66,11 +65,11 @@ type ApplicationLoadBalancerSecurityPolicyParameters struct {
 
 	// Reference to a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDRef *v1.NamespacedReference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDRef *v2.NamespacedReference `json:"applicationLoadBalancerIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationLoadBalancer in servicenetworking to populate applicationLoadBalancerId.
 	// +kubebuilder:validation:Optional
-	ApplicationLoadBalancerIDSelector *v1.NamespacedSelector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
+	ApplicationLoadBalancerIDSelector *v2.NamespacedSelector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Application Load Balancer Security Policy should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -89,11 +88,11 @@ type ApplicationLoadBalancerSecurityPolicyParameters struct {
 
 	// Reference to a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDRef *v1.NamespacedReference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDRef *v2.NamespacedReference `json:"webApplicationFirewallPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebApplicationFirewallPolicy in network to populate webApplicationFirewallPolicyId.
 	// +kubebuilder:validation:Optional
-	WebApplicationFirewallPolicyIDSelector *v1.NamespacedSelector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
+	WebApplicationFirewallPolicyIDSelector *v2.NamespacedSelector `json:"webApplicationFirewallPolicyIdSelector,omitempty" tf:"-"`
 }
 
 // ApplicationLoadBalancerSecurityPolicySpec defines the desired state of ApplicationLoadBalancerSecurityPolicy
@@ -115,8 +114,8 @@ type ApplicationLoadBalancerSecurityPolicySpec struct {
 
 // ApplicationLoadBalancerSecurityPolicyStatus defines the observed state of ApplicationLoadBalancerSecurityPolicy.
 type ApplicationLoadBalancerSecurityPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationLoadBalancerSecurityPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationLoadBalancerSecurityPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

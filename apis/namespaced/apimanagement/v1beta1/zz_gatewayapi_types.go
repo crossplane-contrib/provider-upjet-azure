@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GatewayAPIInitParameters struct {
@@ -23,11 +22,11 @@ type GatewayAPIInitParameters struct {
 
 	// Reference to a API in apimanagement to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The Identifier for the API Management Gateway. Changing this forces a new API Management Gateway API to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Gateway
@@ -36,11 +35,11 @@ type GatewayAPIInitParameters struct {
 
 	// Reference to a Gateway in apimanagement to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in apimanagement to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 }
 
 type GatewayAPIObservation struct {
@@ -65,11 +64,11 @@ type GatewayAPIParameters struct {
 
 	// Reference to a API in apimanagement to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The Identifier for the API Management Gateway. Changing this forces a new API Management Gateway API to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Gateway
@@ -79,11 +78,11 @@ type GatewayAPIParameters struct {
 
 	// Reference to a Gateway in apimanagement to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDRef *v1.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
+	GatewayIDRef *v2.NamespacedReference `json:"gatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a Gateway in apimanagement to populate gatewayId.
 	// +kubebuilder:validation:Optional
-	GatewayIDSelector *v1.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
+	GatewayIDSelector *v2.NamespacedSelector `json:"gatewayIdSelector,omitempty" tf:"-"`
 }
 
 // GatewayAPISpec defines the desired state of GatewayAPI
@@ -105,8 +104,8 @@ type GatewayAPISpec struct {
 
 // GatewayAPIStatus defines the observed state of GatewayAPI.
 type GatewayAPIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayAPIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GatewayAPIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualDesktopWorkspaceApplicationGroupAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationInitParameters struct {
 
 	// Reference to a VirtualDesktopApplicationGroup in desktopvirtualization to populate applicationGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationGroupIDRef *v1.NamespacedReference `json:"applicationGroupIdRef,omitempty" tf:"-"`
+	ApplicationGroupIDRef *v2.NamespacedReference `json:"applicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopApplicationGroup in desktopvirtualization to populate applicationGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationGroupIDSelector *v1.NamespacedSelector `json:"applicationGroupIdSelector,omitempty" tf:"-"`
+	ApplicationGroupIDSelector *v2.NamespacedSelector `json:"applicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The resource ID for the Virtual Desktop Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopWorkspace
@@ -36,11 +35,11 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationInitParameters struct {
 
 	// Reference to a VirtualDesktopWorkspace in desktopvirtualization to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopWorkspace in desktopvirtualization to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualDesktopWorkspaceApplicationGroupAssociationObservation struct {
@@ -65,11 +64,11 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationParameters struct {
 
 	// Reference to a VirtualDesktopApplicationGroup in desktopvirtualization to populate applicationGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationGroupIDRef *v1.NamespacedReference `json:"applicationGroupIdRef,omitempty" tf:"-"`
+	ApplicationGroupIDRef *v2.NamespacedReference `json:"applicationGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopApplicationGroup in desktopvirtualization to populate applicationGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationGroupIDSelector *v1.NamespacedSelector `json:"applicationGroupIdSelector,omitempty" tf:"-"`
+	ApplicationGroupIDSelector *v2.NamespacedSelector `json:"applicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The resource ID for the Virtual Desktop Workspace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopWorkspace
@@ -79,11 +78,11 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationParameters struct {
 
 	// Reference to a VirtualDesktopWorkspace in desktopvirtualization to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopWorkspace in desktopvirtualization to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualDesktopWorkspaceApplicationGroupAssociationSpec defines the desired state of VirtualDesktopWorkspaceApplicationGroupAssociation
@@ -105,8 +104,8 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationSpec struct {
 
 // VirtualDesktopWorkspaceApplicationGroupAssociationStatus defines the observed state of VirtualDesktopWorkspaceApplicationGroupAssociation.
 type VirtualDesktopWorkspaceApplicationGroupAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualDesktopWorkspaceApplicationGroupAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualDesktopWorkspaceApplicationGroupAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KeyVaultConnectionStringInitParameters struct {
@@ -192,11 +192,11 @@ type LinkedServiceAzureSQLDatabaseParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service Azure SQL Database.
 	// +kubebuilder:validation:Optional
@@ -238,8 +238,8 @@ type LinkedServiceAzureSQLDatabaseParameters struct {
 
 // LinkedServiceAzureSQLDatabaseSpec defines the desired state of LinkedServiceAzureSQLDatabase
 type LinkedServiceAzureSQLDatabaseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceAzureSQLDatabaseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceAzureSQLDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -255,8 +255,8 @@ type LinkedServiceAzureSQLDatabaseSpec struct {
 
 // LinkedServiceAzureSQLDatabaseStatus defines the observed state of LinkedServiceAzureSQLDatabase.
 type LinkedServiceAzureSQLDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceAzureSQLDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceAzureSQLDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

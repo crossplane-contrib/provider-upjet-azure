@@ -5,924 +5,924 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this AppActiveSlot.
-func (mg *AppActiveSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppActiveSlot) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this AppActiveSlot.
-func (mg *AppActiveSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppActiveSlot) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppActiveSlot.
-func (mg *AppActiveSlot) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *AppActiveSlot) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppActiveSlot.
-func (mg *AppActiveSlot) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *AppActiveSlot) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppActiveSlot.
-func (mg *AppActiveSlot) SetConditions(c ...xpv1.Condition) {
+func (mg *AppActiveSlot) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this AppActiveSlot.
-func (mg *AppActiveSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppActiveSlot) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppActiveSlot.
-func (mg *AppActiveSlot) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *AppActiveSlot) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppActiveSlot.
-func (mg *AppActiveSlot) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *AppActiveSlot) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AppHybridConnection.
-func (mg *AppHybridConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppHybridConnection) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this AppHybridConnection.
-func (mg *AppHybridConnection) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppHybridConnection) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppHybridConnection.
-func (mg *AppHybridConnection) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *AppHybridConnection) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppHybridConnection.
-func (mg *AppHybridConnection) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *AppHybridConnection) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppHybridConnection.
-func (mg *AppHybridConnection) SetConditions(c ...xpv1.Condition) {
+func (mg *AppHybridConnection) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this AppHybridConnection.
-func (mg *AppHybridConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppHybridConnection) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppHybridConnection.
-func (mg *AppHybridConnection) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *AppHybridConnection) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppHybridConnection.
-func (mg *AppHybridConnection) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *AppHybridConnection) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppServiceCertificateBinding) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppServiceCertificateBinding) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *AppServiceCertificateBinding) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *AppServiceCertificateBinding) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) SetConditions(c ...xpv1.Condition) {
+func (mg *AppServiceCertificateBinding) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppServiceCertificateBinding) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *AppServiceCertificateBinding) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppServiceCertificateBinding.
-func (mg *AppServiceCertificateBinding) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *AppServiceCertificateBinding) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppServiceCustomHostNameBinding) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppServiceCustomHostNameBinding) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *AppServiceCustomHostNameBinding) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *AppServiceCustomHostNameBinding) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) SetConditions(c ...xpv1.Condition) {
+func (mg *AppServiceCustomHostNameBinding) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppServiceCustomHostNameBinding) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *AppServiceCustomHostNameBinding) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppServiceCustomHostNameBinding.
-func (mg *AppServiceCustomHostNameBinding) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *AppServiceCustomHostNameBinding) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppServiceManagedCertificate) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppServiceManagedCertificate) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *AppServiceManagedCertificate) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *AppServiceManagedCertificate) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) SetConditions(c ...xpv1.Condition) {
+func (mg *AppServiceManagedCertificate) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppServiceManagedCertificate) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *AppServiceManagedCertificate) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppServiceManagedCertificate.
-func (mg *AppServiceManagedCertificate) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *AppServiceManagedCertificate) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AppServicePlan.
-func (mg *AppServicePlan) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppServicePlan) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this AppServicePlan.
-func (mg *AppServicePlan) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppServicePlan) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppServicePlan.
-func (mg *AppServicePlan) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *AppServicePlan) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppServicePlan.
-func (mg *AppServicePlan) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *AppServicePlan) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppServicePlan.
-func (mg *AppServicePlan) SetConditions(c ...xpv1.Condition) {
+func (mg *AppServicePlan) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this AppServicePlan.
-func (mg *AppServicePlan) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppServicePlan) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppServicePlan.
-func (mg *AppServicePlan) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *AppServicePlan) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppServicePlan.
-func (mg *AppServicePlan) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *AppServicePlan) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FunctionApp.
-func (mg *FunctionApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FunctionApp) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FunctionApp.
-func (mg *FunctionApp) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FunctionApp) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionApp.
-func (mg *FunctionApp) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FunctionApp) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FunctionApp.
-func (mg *FunctionApp) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FunctionApp) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FunctionApp.
-func (mg *FunctionApp) SetConditions(c ...xpv1.Condition) {
+func (mg *FunctionApp) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FunctionApp.
-func (mg *FunctionApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FunctionApp) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionApp.
-func (mg *FunctionApp) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FunctionApp) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FunctionApp.
-func (mg *FunctionApp) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FunctionApp) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FunctionAppActiveSlot) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FunctionAppActiveSlot) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FunctionAppActiveSlot) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FunctionAppActiveSlot) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) SetConditions(c ...xpv1.Condition) {
+func (mg *FunctionAppActiveSlot) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FunctionAppActiveSlot) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FunctionAppActiveSlot) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FunctionAppActiveSlot) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FunctionAppFlexConsumption) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FunctionAppFlexConsumption) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FunctionAppFlexConsumption) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FunctionAppFlexConsumption) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) SetConditions(c ...xpv1.Condition) {
+func (mg *FunctionAppFlexConsumption) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FunctionAppFlexConsumption) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FunctionAppFlexConsumption) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FunctionAppFlexConsumption.
-func (mg *FunctionAppFlexConsumption) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FunctionAppFlexConsumption) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FunctionAppFunction.
-func (mg *FunctionAppFunction) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FunctionAppFunction) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FunctionAppFunction.
-func (mg *FunctionAppFunction) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FunctionAppFunction) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppFunction.
-func (mg *FunctionAppFunction) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FunctionAppFunction) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FunctionAppFunction.
-func (mg *FunctionAppFunction) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FunctionAppFunction) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FunctionAppFunction.
-func (mg *FunctionAppFunction) SetConditions(c ...xpv1.Condition) {
+func (mg *FunctionAppFunction) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FunctionAppFunction.
-func (mg *FunctionAppFunction) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FunctionAppFunction) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppFunction.
-func (mg *FunctionAppFunction) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FunctionAppFunction) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FunctionAppFunction.
-func (mg *FunctionAppFunction) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FunctionAppFunction) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FunctionAppHybridConnection) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FunctionAppHybridConnection) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FunctionAppHybridConnection) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FunctionAppHybridConnection) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) SetConditions(c ...xpv1.Condition) {
+func (mg *FunctionAppHybridConnection) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FunctionAppHybridConnection) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FunctionAppHybridConnection) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FunctionAppHybridConnection) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FunctionAppSlot.
-func (mg *FunctionAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FunctionAppSlot) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FunctionAppSlot.
-func (mg *FunctionAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FunctionAppSlot) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppSlot.
-func (mg *FunctionAppSlot) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FunctionAppSlot) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FunctionAppSlot.
-func (mg *FunctionAppSlot) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FunctionAppSlot) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FunctionAppSlot.
-func (mg *FunctionAppSlot) SetConditions(c ...xpv1.Condition) {
+func (mg *FunctionAppSlot) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FunctionAppSlot.
-func (mg *FunctionAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FunctionAppSlot) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppSlot.
-func (mg *FunctionAppSlot) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FunctionAppSlot) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FunctionAppSlot.
-func (mg *FunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LinuxFunctionApp) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LinuxFunctionApp) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LinuxFunctionApp) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LinuxFunctionApp) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) SetConditions(c ...xpv1.Condition) {
+func (mg *LinuxFunctionApp) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LinuxFunctionApp) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LinuxFunctionApp) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LinuxFunctionApp) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LinuxFunctionAppSlot) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LinuxFunctionAppSlot) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LinuxFunctionAppSlot) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LinuxFunctionAppSlot) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) SetConditions(c ...xpv1.Condition) {
+func (mg *LinuxFunctionAppSlot) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LinuxFunctionAppSlot) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LinuxFunctionAppSlot) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LinuxFunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LinuxWebApp.
-func (mg *LinuxWebApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LinuxWebApp) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LinuxWebApp.
-func (mg *LinuxWebApp) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LinuxWebApp) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxWebApp.
-func (mg *LinuxWebApp) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LinuxWebApp) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LinuxWebApp.
-func (mg *LinuxWebApp) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LinuxWebApp) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LinuxWebApp.
-func (mg *LinuxWebApp) SetConditions(c ...xpv1.Condition) {
+func (mg *LinuxWebApp) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LinuxWebApp.
-func (mg *LinuxWebApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LinuxWebApp) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxWebApp.
-func (mg *LinuxWebApp) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LinuxWebApp) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LinuxWebApp.
-func (mg *LinuxWebApp) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LinuxWebApp) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LinuxWebAppSlot) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LinuxWebAppSlot) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LinuxWebAppSlot) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LinuxWebAppSlot) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) SetConditions(c ...xpv1.Condition) {
+func (mg *LinuxWebAppSlot) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LinuxWebAppSlot) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LinuxWebAppSlot) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LinuxWebAppSlot) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ServicePlan.
-func (mg *ServicePlan) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ServicePlan) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this ServicePlan.
-func (mg *ServicePlan) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ServicePlan) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ServicePlan.
-func (mg *ServicePlan) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *ServicePlan) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ServicePlan.
-func (mg *ServicePlan) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *ServicePlan) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ServicePlan.
-func (mg *ServicePlan) SetConditions(c ...xpv1.Condition) {
+func (mg *ServicePlan) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this ServicePlan.
-func (mg *ServicePlan) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ServicePlan) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ServicePlan.
-func (mg *ServicePlan) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *ServicePlan) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ServicePlan.
-func (mg *ServicePlan) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *ServicePlan) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this SourceControlToken.
-func (mg *SourceControlToken) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *SourceControlToken) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this SourceControlToken.
-func (mg *SourceControlToken) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *SourceControlToken) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SourceControlToken.
-func (mg *SourceControlToken) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *SourceControlToken) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this SourceControlToken.
-func (mg *SourceControlToken) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *SourceControlToken) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this SourceControlToken.
-func (mg *SourceControlToken) SetConditions(c ...xpv1.Condition) {
+func (mg *SourceControlToken) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this SourceControlToken.
-func (mg *SourceControlToken) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *SourceControlToken) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SourceControlToken.
-func (mg *SourceControlToken) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *SourceControlToken) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this SourceControlToken.
-func (mg *SourceControlToken) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *SourceControlToken) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this StaticSite.
-func (mg *StaticSite) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *StaticSite) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this StaticSite.
-func (mg *StaticSite) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *StaticSite) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StaticSite.
-func (mg *StaticSite) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *StaticSite) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this StaticSite.
-func (mg *StaticSite) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *StaticSite) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this StaticSite.
-func (mg *StaticSite) SetConditions(c ...xpv1.Condition) {
+func (mg *StaticSite) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this StaticSite.
-func (mg *StaticSite) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *StaticSite) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StaticSite.
-func (mg *StaticSite) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *StaticSite) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this StaticSite.
-func (mg *StaticSite) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *StaticSite) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WindowsFunctionApp) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WindowsFunctionApp) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *WindowsFunctionApp) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *WindowsFunctionApp) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) SetConditions(c ...xpv1.Condition) {
+func (mg *WindowsFunctionApp) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WindowsFunctionApp) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *WindowsFunctionApp) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *WindowsFunctionApp) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WindowsFunctionAppSlot) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WindowsFunctionAppSlot) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *WindowsFunctionAppSlot) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *WindowsFunctionAppSlot) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) SetConditions(c ...xpv1.Condition) {
+func (mg *WindowsFunctionAppSlot) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WindowsFunctionAppSlot) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *WindowsFunctionAppSlot) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *WindowsFunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WindowsWebApp.
-func (mg *WindowsWebApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WindowsWebApp) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this WindowsWebApp.
-func (mg *WindowsWebApp) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WindowsWebApp) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsWebApp.
-func (mg *WindowsWebApp) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *WindowsWebApp) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WindowsWebApp.
-func (mg *WindowsWebApp) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *WindowsWebApp) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WindowsWebApp.
-func (mg *WindowsWebApp) SetConditions(c ...xpv1.Condition) {
+func (mg *WindowsWebApp) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this WindowsWebApp.
-func (mg *WindowsWebApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WindowsWebApp) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsWebApp.
-func (mg *WindowsWebApp) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *WindowsWebApp) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WindowsWebApp.
-func (mg *WindowsWebApp) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *WindowsWebApp) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *WindowsWebAppSlot) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *WindowsWebAppSlot) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *WindowsWebAppSlot) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *WindowsWebAppSlot) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) SetConditions(c ...xpv1.Condition) {
+func (mg *WindowsWebAppSlot) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *WindowsWebAppSlot) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *WindowsWebAppSlot) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *WindowsWebAppSlot) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

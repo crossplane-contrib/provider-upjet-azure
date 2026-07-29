@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomBGPAddressInitParameters struct {
@@ -54,11 +54,11 @@ type VPNGatewayConnectionInitParameters struct {
 
 	// Reference to a VPNSite in network to populate remoteVpnSiteId.
 	// +kubebuilder:validation:Optional
-	RemoteVPNSiteIDRef *v1.Reference `json:"remoteVpnSiteIdRef,omitempty" tf:"-"`
+	RemoteVPNSiteIDRef *v2.Reference `json:"remoteVpnSiteIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNSite in network to populate remoteVpnSiteId.
 	// +kubebuilder:validation:Optional
-	RemoteVPNSiteIDSelector *v1.Selector `json:"remoteVpnSiteIdSelector,omitempty" tf:"-"`
+	RemoteVPNSiteIDSelector *v2.Selector `json:"remoteVpnSiteIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below. If this is not specified, there will be a default route table created implicitly.
 	Routing *VPNGatewayConnectionRoutingInitParameters `json:"routing,omitempty" tf:"routing,omitempty"`
@@ -108,11 +108,11 @@ type VPNGatewayConnectionParameters struct {
 
 	// Reference to a VPNSite in network to populate remoteVpnSiteId.
 	// +kubebuilder:validation:Optional
-	RemoteVPNSiteIDRef *v1.Reference `json:"remoteVpnSiteIdRef,omitempty" tf:"-"`
+	RemoteVPNSiteIDRef *v2.Reference `json:"remoteVpnSiteIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNSite in network to populate remoteVpnSiteId.
 	// +kubebuilder:validation:Optional
-	RemoteVPNSiteIDSelector *v1.Selector `json:"remoteVpnSiteIdSelector,omitempty" tf:"-"`
+	RemoteVPNSiteIDSelector *v2.Selector `json:"remoteVpnSiteIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below. If this is not specified, there will be a default route table created implicitly.
 	// +kubebuilder:validation:Optional
@@ -130,11 +130,11 @@ type VPNGatewayConnectionParameters struct {
 
 	// Reference to a VPNGateway in network to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+	VPNGatewayIDRef *v2.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a VPNGateway in network to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
-	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+	VPNGatewayIDSelector *v2.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// One or more vpn_link blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -523,8 +523,8 @@ type VPNLinkParameters struct {
 
 // VPNGatewayConnectionSpec defines the desired state of VPNGatewayConnection
 type VPNGatewayConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPNGatewayConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VPNGatewayConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -540,8 +540,8 @@ type VPNGatewayConnectionSpec struct {
 
 // VPNGatewayConnectionStatus defines the observed state of VPNGatewayConnection.
 type VPNGatewayConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNGatewayConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VPNGatewayConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubnetNATGatewayAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type SubnetNATGatewayAssociationInitParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -36,11 +35,11 @@ type SubnetNATGatewayAssociationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetNATGatewayAssociationObservation struct {
@@ -65,11 +64,11 @@ type SubnetNATGatewayAssociationParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.NamespacedReference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.NamespacedSelector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -79,11 +78,11 @@ type SubnetNATGatewayAssociationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // SubnetNATGatewayAssociationSpec defines the desired state of SubnetNATGatewayAssociation
@@ -105,8 +104,8 @@ type SubnetNATGatewayAssociationSpec struct {
 
 // SubnetNATGatewayAssociationStatus defines the observed state of SubnetNATGatewayAssociation.
 type SubnetNATGatewayAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetNATGatewayAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubnetNATGatewayAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

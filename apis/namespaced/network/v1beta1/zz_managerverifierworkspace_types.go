@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagerVerifierWorkspaceInitParameters struct {
@@ -64,11 +63,11 @@ type ManagerVerifierWorkspaceParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.NamespacedReference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.NamespacedReference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.NamespacedSelector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.NamespacedSelector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Manager Verifier Workspace.
 	// +kubebuilder:validation:Optional
@@ -95,8 +94,8 @@ type ManagerVerifierWorkspaceSpec struct {
 
 // ManagerVerifierWorkspaceStatus defines the observed state of ManagerVerifierWorkspace.
 type ManagerVerifierWorkspaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagerVerifierWorkspaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagerVerifierWorkspaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

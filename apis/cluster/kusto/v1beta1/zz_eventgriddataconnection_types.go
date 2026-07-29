@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EventGridDataConnectionInitParameters struct {
@@ -36,11 +36,11 @@ type EventGridDataConnectionInitParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHub
@@ -49,11 +49,11 @@ type EventGridDataConnectionInitParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDRef *v1.Reference `json:"eventhubIdRef,omitempty" tf:"-"`
+	EventHubIDRef *v2.Reference `json:"eventhubIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDSelector *v1.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
+	EventHubIDSelector *v2.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -77,11 +77,11 @@ type EventGridDataConnectionInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -157,11 +157,11 @@ type EventGridDataConnectionParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the data format of the EventHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE.
 	// +kubebuilder:validation:Optional
@@ -174,11 +174,11 @@ type EventGridDataConnectionParameters struct {
 
 	// Reference to a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created. Defaults to Single.
 	// +kubebuilder:validation:Optional
@@ -199,11 +199,11 @@ type EventGridDataConnectionParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHub
@@ -213,11 +213,11 @@ type EventGridDataConnectionParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDRef *v1.Reference `json:"eventhubIdRef,omitempty" tf:"-"`
+	EventHubIDRef *v2.Reference `json:"eventhubIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubId.
 	// +kubebuilder:validation:Optional
-	EventHubIDSelector *v1.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
+	EventHubIDSelector *v2.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -242,11 +242,11 @@ type EventGridDataConnectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// is the first record of every file ignored? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -260,11 +260,11 @@ type EventGridDataConnectionParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
 	// +kubebuilder:validation:Optional
@@ -273,8 +273,8 @@ type EventGridDataConnectionParameters struct {
 
 // EventGridDataConnectionSpec defines the desired state of EventGridDataConnection
 type EventGridDataConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EventGridDataConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EventGridDataConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -290,8 +290,8 @@ type EventGridDataConnectionSpec struct {
 
 // EventGridDataConnectionStatus defines the observed state of EventGridDataConnection.
 type EventGridDataConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EventGridDataConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EventGridDataConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

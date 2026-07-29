@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EnvironmentDaprComponentInitParameters struct {
@@ -94,11 +94,11 @@ type EnvironmentDaprComponentParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// Should the Dapr sidecar to continue initialisation if the component fails to load. Defaults to false
 	// Should the Dapr sidecar to continue initialisation if the component fails to load. Defaults to `false`
@@ -145,7 +145,7 @@ type EnvironmentDaprComponentSecretInitParameters struct {
 
 	// The value for this secret.
 	// The value for this secret.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type EnvironmentDaprComponentSecretObservation struct {
@@ -183,7 +183,7 @@ type EnvironmentDaprComponentSecretParameters struct {
 	// The value for this secret.
 	// The value for this secret.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type MetadataInitParameters struct {
@@ -236,8 +236,8 @@ type MetadataParameters struct {
 
 // EnvironmentDaprComponentSpec defines the desired state of EnvironmentDaprComponent
 type EnvironmentDaprComponentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     EnvironmentDaprComponentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   EnvironmentDaprComponentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -253,8 +253,8 @@ type EnvironmentDaprComponentSpec struct {
 
 // EnvironmentDaprComponentStatus defines the observed state of EnvironmentDaprComponent.
 type EnvironmentDaprComponentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        EnvironmentDaprComponentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               EnvironmentDaprComponentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

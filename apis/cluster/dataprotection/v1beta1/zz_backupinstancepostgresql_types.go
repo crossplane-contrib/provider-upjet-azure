@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupInstancePostgreSQLInitParameters struct {
@@ -22,11 +22,11 @@ type BackupInstancePostgreSQLInitParameters struct {
 
 	// Reference to a BackupPolicyPostgreSQL in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyPostgreSQL in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Secret
@@ -35,11 +35,11 @@ type BackupInstancePostgreSQLInitParameters struct {
 
 	// Reference to a Secret in keyvault to populate databaseCredentialKeyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	DatabaseCredentialKeyVaultSecretIDRef *v1.Reference `json:"databaseCredentialKeyVaultSecretIdRef,omitempty" tf:"-"`
+	DatabaseCredentialKeyVaultSecretIDRef *v2.Reference `json:"databaseCredentialKeyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate databaseCredentialKeyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	DatabaseCredentialKeyVaultSecretIDSelector *v1.Selector `json:"databaseCredentialKeyVaultSecretIdSelector,omitempty" tf:"-"`
+	DatabaseCredentialKeyVaultSecretIDSelector *v2.Selector `json:"databaseCredentialKeyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The ID of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta1.Database
@@ -48,11 +48,11 @@ type BackupInstancePostgreSQLInitParameters struct {
 
 	// Reference to a Database in dbforpostgresql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDRef *v1.Reference `json:"databaseIdRef,omitempty" tf:"-"`
+	DatabaseIDRef *v2.Reference `json:"databaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a Database in dbforpostgresql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
+	DatabaseIDSelector *v2.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// The location of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -92,11 +92,11 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// Reference to a BackupPolicyPostgreSQL in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyPostgreSQL in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Secret
@@ -106,11 +106,11 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// Reference to a Secret in keyvault to populate databaseCredentialKeyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	DatabaseCredentialKeyVaultSecretIDRef *v1.Reference `json:"databaseCredentialKeyVaultSecretIdRef,omitempty" tf:"-"`
+	DatabaseCredentialKeyVaultSecretIDRef *v2.Reference `json:"databaseCredentialKeyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate databaseCredentialKeyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	DatabaseCredentialKeyVaultSecretIDSelector *v1.Selector `json:"databaseCredentialKeyVaultSecretIdSelector,omitempty" tf:"-"`
+	DatabaseCredentialKeyVaultSecretIDSelector *v2.Selector `json:"databaseCredentialKeyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The ID of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta1.Database
@@ -120,11 +120,11 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// Reference to a Database in dbforpostgresql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDRef *v1.Reference `json:"databaseIdRef,omitempty" tf:"-"`
+	DatabaseIDRef *v2.Reference `json:"databaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a Database in dbforpostgresql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
+	DatabaseIDSelector *v2.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// The location of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
@@ -138,17 +138,17 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
+	VaultIDRef *v2.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
+	VaultIDSelector *v2.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
 // BackupInstancePostgreSQLSpec defines the desired state of BackupInstancePostgreSQL
 type BackupInstancePostgreSQLSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupInstancePostgreSQLParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupInstancePostgreSQLParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -164,8 +164,8 @@ type BackupInstancePostgreSQLSpec struct {
 
 // BackupInstancePostgreSQLStatus defines the observed state of BackupInstancePostgreSQL.
 type BackupInstancePostgreSQLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupInstancePostgreSQLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupInstancePostgreSQLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

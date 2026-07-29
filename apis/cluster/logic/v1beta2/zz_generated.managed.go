@@ -5,154 +5,154 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppIntegrationAccountBatchConfiguration) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AppIntegrationAccountBatchConfiguration) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppIntegrationAccountBatchConfiguration) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AppIntegrationAccountBatchConfiguration) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AppIntegrationAccountBatchConfiguration) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) SetConditions(c ...xpv1.Condition) {
+func (mg *AppIntegrationAccountBatchConfiguration) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AppIntegrationAccountBatchConfiguration) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppIntegrationAccountBatchConfiguration) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AppIntegrationAccountBatchConfiguration) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AppIntegrationAccountBatchConfiguration) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppTriggerRecurrence) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AppTriggerRecurrence) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppTriggerRecurrence) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AppTriggerRecurrence) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AppTriggerRecurrence) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) SetConditions(c ...xpv1.Condition) {
+func (mg *AppTriggerRecurrence) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AppTriggerRecurrence) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppTriggerRecurrence) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AppTriggerRecurrence) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AppTriggerRecurrence) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AppWorkflow.
-func (mg *AppWorkflow) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AppWorkflow) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AppWorkflow.
-func (mg *AppWorkflow) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AppWorkflow) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AppWorkflow.
-func (mg *AppWorkflow) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AppWorkflow) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppWorkflow.
-func (mg *AppWorkflow) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AppWorkflow) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AppWorkflow.
-func (mg *AppWorkflow) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AppWorkflow) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AppWorkflow.
-func (mg *AppWorkflow) SetConditions(c ...xpv1.Condition) {
+func (mg *AppWorkflow) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AppWorkflow.
-func (mg *AppWorkflow) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AppWorkflow) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AppWorkflow.
-func (mg *AppWorkflow) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AppWorkflow) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppWorkflow.
-func (mg *AppWorkflow) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AppWorkflow) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AppWorkflow.
-func (mg *AppWorkflow) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AppWorkflow) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

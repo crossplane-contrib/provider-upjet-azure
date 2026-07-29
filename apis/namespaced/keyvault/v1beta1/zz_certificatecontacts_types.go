@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateContactsContactInitParameters struct {
@@ -65,11 +64,11 @@ type CertificateContactsInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 }
 
 type CertificateContactsObservation struct {
@@ -98,11 +97,11 @@ type CertificateContactsParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.NamespacedReference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.NamespacedSelector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 }
 
 // CertificateContactsSpec defines the desired state of CertificateContacts
@@ -124,8 +123,8 @@ type CertificateContactsSpec struct {
 
 // CertificateContactsStatus defines the observed state of CertificateContacts.
 type CertificateContactsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CertificateContactsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CertificateContactsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

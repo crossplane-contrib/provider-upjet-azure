@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLDatabaseExtendedAuditingPolicyInitParameters struct {
@@ -29,7 +28,7 @@ type MSSQLDatabaseExtendedAuditingPolicyInitParameters struct {
 	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
 
 	// The access key to use for the auditing storage account.
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -38,11 +37,11 @@ type MSSQLDatabaseExtendedAuditingPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 type MSSQLDatabaseExtendedAuditingPolicyObservation struct {
@@ -79,11 +78,11 @@ type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 
 	// Reference to a MSSQLDatabase in sql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDRef *v1.NamespacedReference `json:"databaseIdRef,omitempty" tf:"-"`
+	DatabaseIDRef *v2.NamespacedReference `json:"databaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLDatabase in sql to populate databaseId.
 	// +kubebuilder:validation:Optional
-	DatabaseIDSelector *v1.NamespacedSelector `json:"databaseIdSelector,omitempty" tf:"-"`
+	DatabaseIDSelector *v2.NamespacedSelector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -103,7 +102,7 @@ type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 
 	// The access key to use for the auditing storage account.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -113,11 +112,11 @@ type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 // MSSQLDatabaseExtendedAuditingPolicySpec defines the desired state of MSSQLDatabaseExtendedAuditingPolicy
@@ -139,8 +138,8 @@ type MSSQLDatabaseExtendedAuditingPolicySpec struct {
 
 // MSSQLDatabaseExtendedAuditingPolicyStatus defines the observed state of MSSQLDatabaseExtendedAuditingPolicy.
 type MSSQLDatabaseExtendedAuditingPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLDatabaseExtendedAuditingPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLDatabaseExtendedAuditingPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

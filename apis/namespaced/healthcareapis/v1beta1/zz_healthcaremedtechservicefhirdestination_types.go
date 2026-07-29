@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HealthcareMedtechServiceFHIRDestinationInitParameters struct {
@@ -26,11 +25,11 @@ type HealthcareMedtechServiceFHIRDestinationInitParameters struct {
 
 	// Reference to a HealthcareFHIRService in healthcareapis to populate destinationFhirServiceId.
 	// +kubebuilder:validation:Optional
-	DestinationFHIRServiceIDRef *v1.NamespacedReference `json:"destinationFhirServiceIdRef,omitempty" tf:"-"`
+	DestinationFHIRServiceIDRef *v2.NamespacedReference `json:"destinationFhirServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HealthcareFHIRService in healthcareapis to populate destinationFhirServiceId.
 	// +kubebuilder:validation:Optional
-	DestinationFHIRServiceIDSelector *v1.NamespacedSelector `json:"destinationFhirServiceIdSelector,omitempty" tf:"-"`
+	DestinationFHIRServiceIDSelector *v2.NamespacedSelector `json:"destinationFhirServiceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the destination identity resolution type where the Healthcare Med Tech Service Fhir Destination should be created. Possible values are Create, Lookup.
 	DestinationIdentityResolutionType *string `json:"destinationIdentityResolutionType,omitempty" tf:"destination_identity_resolution_type,omitempty"`
@@ -74,11 +73,11 @@ type HealthcareMedtechServiceFHIRDestinationParameters struct {
 
 	// Reference to a HealthcareFHIRService in healthcareapis to populate destinationFhirServiceId.
 	// +kubebuilder:validation:Optional
-	DestinationFHIRServiceIDRef *v1.NamespacedReference `json:"destinationFhirServiceIdRef,omitempty" tf:"-"`
+	DestinationFHIRServiceIDRef *v2.NamespacedReference `json:"destinationFhirServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HealthcareFHIRService in healthcareapis to populate destinationFhirServiceId.
 	// +kubebuilder:validation:Optional
-	DestinationFHIRServiceIDSelector *v1.NamespacedSelector `json:"destinationFhirServiceIdSelector,omitempty" tf:"-"`
+	DestinationFHIRServiceIDSelector *v2.NamespacedSelector `json:"destinationFhirServiceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the destination identity resolution type where the Healthcare Med Tech Service Fhir Destination should be created. Possible values are Create, Lookup.
 	// +kubebuilder:validation:Optional
@@ -96,11 +95,11 @@ type HealthcareMedtechServiceFHIRDestinationParameters struct {
 
 	// Reference to a HealthcareMedtechService in healthcareapis to populate medtechServiceId.
 	// +kubebuilder:validation:Optional
-	MedtechServiceIDRef *v1.NamespacedReference `json:"medtechServiceIdRef,omitempty" tf:"-"`
+	MedtechServiceIDRef *v2.NamespacedReference `json:"medtechServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HealthcareMedtechService in healthcareapis to populate medtechServiceId.
 	// +kubebuilder:validation:Optional
-	MedtechServiceIDSelector *v1.NamespacedSelector `json:"medtechServiceIdSelector,omitempty" tf:"-"`
+	MedtechServiceIDSelector *v2.NamespacedSelector `json:"medtechServiceIdSelector,omitempty" tf:"-"`
 }
 
 // HealthcareMedtechServiceFHIRDestinationSpec defines the desired state of HealthcareMedtechServiceFHIRDestination
@@ -122,8 +121,8 @@ type HealthcareMedtechServiceFHIRDestinationSpec struct {
 
 // HealthcareMedtechServiceFHIRDestinationStatus defines the observed state of HealthcareMedtechServiceFHIRDestination.
 type HealthcareMedtechServiceFHIRDestinationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HealthcareMedtechServiceFHIRDestinationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HealthcareMedtechServiceFHIRDestinationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

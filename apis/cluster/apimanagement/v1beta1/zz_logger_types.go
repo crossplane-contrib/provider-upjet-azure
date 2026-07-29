@@ -10,16 +10,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInsightsInitParameters struct {
 
 	// The connection string of Application Insights.
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The instrumentation key used to push data to Application Insights.
-	InstrumentationKeySecretRef *v1.SecretKeySelector `json:"instrumentationKeySecretRef,omitempty" tf:"-"`
+	InstrumentationKeySecretRef *v2.SecretKeySelector `json:"instrumentationKeySecretRef,omitempty" tf:"-"`
 }
 
 type ApplicationInsightsObservation struct {
@@ -29,17 +29,17 @@ type ApplicationInsightsParameters struct {
 
 	// The connection string of Application Insights.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The instrumentation key used to push data to Application Insights.
 	// +kubebuilder:validation:Optional
-	InstrumentationKeySecretRef *v1.SecretKeySelector `json:"instrumentationKeySecretRef,omitempty" tf:"-"`
+	InstrumentationKeySecretRef *v2.SecretKeySelector `json:"instrumentationKeySecretRef,omitempty" tf:"-"`
 }
 
 type EventHubInitParameters struct {
 
 	// The connection string of an EventHub Namespace.
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The endpoint address of an EventHub Namespace. Required when client_id is set.
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
@@ -67,7 +67,7 @@ type EventHubParameters struct {
 
 	// The connection string of an EventHub Namespace.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The endpoint address of an EventHub Namespace. Required when client_id is set.
 	// +kubebuilder:validation:Optional
@@ -103,11 +103,11 @@ type LoggerInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type LoggerObservation struct {
@@ -146,11 +146,11 @@ type LoggerParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// An application_insights block as documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -175,11 +175,11 @@ type LoggerParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The target resource id which will be linked in the API-Management portal page. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/insights/v1beta1.ApplicationInsights
@@ -189,17 +189,17 @@ type LoggerParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 // LoggerSpec defines the desired state of Logger
 type LoggerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LoggerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LoggerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -215,8 +215,8 @@ type LoggerSpec struct {
 
 // LoggerStatus defines the observed state of Logger.
 type LoggerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoggerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoggerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

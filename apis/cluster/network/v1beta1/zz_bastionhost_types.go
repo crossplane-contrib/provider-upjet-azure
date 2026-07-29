@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BastionHostIPConfigurationInitParameters struct {
@@ -25,11 +25,11 @@ type BastionHostIPConfigurationInitParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -38,11 +38,11 @@ type BastionHostIPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type BastionHostIPConfigurationObservation struct {
@@ -71,11 +71,11 @@ type BastionHostIPConfigurationParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -85,11 +85,11 @@ type BastionHostIPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type BastionHostInitParameters struct {
@@ -231,11 +231,11 @@ type BastionHostParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The number of scale units with which to provision the Bastion Host. Possible values are between 2 and 50. Defaults to 2.
 	// +kubebuilder:validation:Optional
@@ -274,8 +274,8 @@ type BastionHostParameters struct {
 
 // BastionHostSpec defines the desired state of BastionHost
 type BastionHostSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BastionHostParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BastionHostParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -291,8 +291,8 @@ type BastionHostSpec struct {
 
 // BastionHostStatus defines the observed state of BastionHost.
 type BastionHostStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BastionHostObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BastionHostObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

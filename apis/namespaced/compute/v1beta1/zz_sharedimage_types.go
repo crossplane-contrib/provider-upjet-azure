@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentifierInitParameters struct {
@@ -307,11 +306,11 @@ type SharedImageParameters struct {
 
 	// Reference to a SharedImageGallery in compute to populate galleryName.
 	// +kubebuilder:validation:Optional
-	GalleryNameRef *v1.NamespacedReference `json:"galleryNameRef,omitempty" tf:"-"`
+	GalleryNameRef *v2.NamespacedReference `json:"galleryNameRef,omitempty" tf:"-"`
 
 	// Selector for a SharedImageGallery in compute to populate galleryName.
 	// +kubebuilder:validation:Optional
-	GalleryNameSelector *v1.NamespacedSelector `json:"galleryNameSelector,omitempty" tf:"-"`
+	GalleryNameSelector *v2.NamespacedSelector `json:"galleryNameSelector,omitempty" tf:"-"`
 
 	// Specifies if the Shared Image supports hibernation. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -368,11 +367,11 @@ type SharedImageParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies that the Operating System used inside this Image has not been Generalized (for example, sysprep on Windows has not been run). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -411,8 +410,8 @@ type SharedImageSpec struct {
 
 // SharedImageStatus defines the observed state of SharedImage.
 type SharedImageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SharedImageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SharedImageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

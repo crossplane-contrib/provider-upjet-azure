@@ -5,154 +5,154 @@
 
 package v1beta2
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BackupPolicyDisk) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *BackupPolicyDisk) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BackupPolicyDisk) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) GetProviderConfigReference() *xpv1.Reference {
+func (mg *BackupPolicyDisk) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *BackupPolicyDisk) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) SetConditions(c ...xpv1.Condition) {
+func (mg *BackupPolicyDisk) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *BackupPolicyDisk) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BackupPolicyDisk) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *BackupPolicyDisk) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *BackupPolicyDisk) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BackupPolicyPostgreSQL) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *BackupPolicyPostgreSQL) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BackupPolicyPostgreSQL) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetProviderConfigReference() *xpv1.Reference {
+func (mg *BackupPolicyPostgreSQL) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *BackupPolicyPostgreSQL) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetConditions(c ...xpv1.Condition) {
+func (mg *BackupPolicyPostgreSQL) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *BackupPolicyPostgreSQL) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BackupPolicyPostgreSQL) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *BackupPolicyPostgreSQL) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *BackupPolicyPostgreSQL) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BackupVault.
-func (mg *BackupVault) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BackupVault) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this BackupVault.
-func (mg *BackupVault) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *BackupVault) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this BackupVault.
-func (mg *BackupVault) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BackupVault) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupVault.
-func (mg *BackupVault) GetProviderConfigReference() *xpv1.Reference {
+func (mg *BackupVault) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BackupVault.
-func (mg *BackupVault) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *BackupVault) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BackupVault.
-func (mg *BackupVault) SetConditions(c ...xpv1.Condition) {
+func (mg *BackupVault) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this BackupVault.
-func (mg *BackupVault) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *BackupVault) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this BackupVault.
-func (mg *BackupVault) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BackupVault) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupVault.
-func (mg *BackupVault) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *BackupVault) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BackupVault.
-func (mg *BackupVault) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *BackupVault) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

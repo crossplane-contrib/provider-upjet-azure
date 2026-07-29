@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -23,11 +22,11 @@ type ActionInitParameters struct {
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDRef *v1.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
+	ActionGroupIDRef *v2.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDSelector *v1.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+	ActionGroupIDSelector *v2.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +mapType=granular
@@ -54,11 +53,11 @@ type ActionParameters struct {
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDRef *v1.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
+	ActionGroupIDRef *v2.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDSelector *v1.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+	ActionGroupIDSelector *v2.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +kubebuilder:validation:Optional
@@ -108,11 +107,11 @@ type CriteriaInitParameters struct {
 
 	// Reference to a Account in storage to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// A list of specific resources monitored by the activity log alert. It should be within one of the scopes.
 	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
@@ -268,11 +267,11 @@ type CriteriaParameters struct {
 
 	// Reference to a Account in storage to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.NamespacedReference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.NamespacedSelector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// A list of specific resources monitored by the activity log alert. It should be within one of the scopes.
 	// +kubebuilder:validation:Optional
@@ -341,11 +340,11 @@ type MonitorActivityLogAlertInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Scope at which the Activity Log should be applied. A list of strings which could be a resource group , or a subscription, or a resource ID (such as a Storage Account).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -355,11 +354,11 @@ type MonitorActivityLogAlertInitParameters struct {
 
 	// References to ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -434,11 +433,11 @@ type MonitorActivityLogAlertParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Scope at which the Activity Log should be applied. A list of strings which could be a resource group , or a subscription, or a resource ID (such as a Storage Account).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -449,11 +448,11 @@ type MonitorActivityLogAlertParameters struct {
 
 	// References to ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -576,8 +575,8 @@ type MonitorActivityLogAlertSpec struct {
 
 // MonitorActivityLogAlertStatus defines the observed state of MonitorActivityLogAlert.
 type MonitorActivityLogAlertStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorActivityLogAlertObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorActivityLogAlertObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

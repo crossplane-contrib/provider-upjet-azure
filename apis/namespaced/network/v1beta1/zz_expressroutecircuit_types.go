@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExpressRouteCircuitInitParameters struct {
@@ -20,7 +19,7 @@ type ExpressRouteCircuitInitParameters struct {
 	AllowClassicOperations *bool `json:"allowClassicOperations,omitempty" tf:"allow_classic_operations,omitempty"`
 
 	// The authorization key. This can be used to set up an ExpressRoute Circuit with an ExpressRoute Port from another subscription.
-	AuthorizationKeySecretRef *v1.LocalSecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+	AuthorizationKeySecretRef *v2.LocalSecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The bandwidth in Gbps of the circuit being created on the Express Route Port.
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
@@ -102,7 +101,7 @@ type ExpressRouteCircuitParameters struct {
 
 	// The authorization key. This can be used to set up an ExpressRoute Circuit with an ExpressRoute Port from another subscription.
 	// +kubebuilder:validation:Optional
-	AuthorizationKeySecretRef *v1.LocalSecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+	AuthorizationKeySecretRef *v2.LocalSecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The bandwidth in Gbps of the circuit being created on the Express Route Port.
 	// +kubebuilder:validation:Optional
@@ -135,11 +134,11 @@ type ExpressRouteCircuitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the ExpressRoute Service Provider. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -203,8 +202,8 @@ type ExpressRouteCircuitSpec struct {
 
 // ExpressRouteCircuitStatus defines the observed state of ExpressRouteCircuit.
 type ExpressRouteCircuitStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExpressRouteCircuitObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExpressRouteCircuitObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

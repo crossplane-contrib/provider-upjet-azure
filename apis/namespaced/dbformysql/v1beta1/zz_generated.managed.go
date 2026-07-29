@@ -5,204 +5,204 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this FlexibleDatabase.
-func (mg *FlexibleDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FlexibleDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FlexibleDatabase.
-func (mg *FlexibleDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FlexibleDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FlexibleDatabase.
-func (mg *FlexibleDatabase) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FlexibleDatabase) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FlexibleDatabase.
-func (mg *FlexibleDatabase) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FlexibleDatabase) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FlexibleDatabase.
-func (mg *FlexibleDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *FlexibleDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FlexibleDatabase.
-func (mg *FlexibleDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FlexibleDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FlexibleDatabase.
-func (mg *FlexibleDatabase) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FlexibleDatabase) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FlexibleDatabase.
-func (mg *FlexibleDatabase) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FlexibleDatabase) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FlexibleServer.
-func (mg *FlexibleServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FlexibleServer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FlexibleServer.
-func (mg *FlexibleServer) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FlexibleServer) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FlexibleServer.
-func (mg *FlexibleServer) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FlexibleServer) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FlexibleServer.
-func (mg *FlexibleServer) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FlexibleServer) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FlexibleServer.
-func (mg *FlexibleServer) SetConditions(c ...xpv1.Condition) {
+func (mg *FlexibleServer) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FlexibleServer.
-func (mg *FlexibleServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FlexibleServer) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FlexibleServer.
-func (mg *FlexibleServer) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FlexibleServer) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FlexibleServer.
-func (mg *FlexibleServer) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FlexibleServer) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FlexibleServerActiveDirectoryAdministrator) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FlexibleServerActiveDirectoryAdministrator) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FlexibleServerActiveDirectoryAdministrator) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FlexibleServerActiveDirectoryAdministrator) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) SetConditions(c ...xpv1.Condition) {
+func (mg *FlexibleServerActiveDirectoryAdministrator) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FlexibleServerActiveDirectoryAdministrator) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FlexibleServerActiveDirectoryAdministrator) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FlexibleServerActiveDirectoryAdministrator.
-func (mg *FlexibleServerActiveDirectoryAdministrator) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FlexibleServerActiveDirectoryAdministrator) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FlexibleServerConfiguration) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FlexibleServerConfiguration) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FlexibleServerConfiguration) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FlexibleServerConfiguration) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) SetConditions(c ...xpv1.Condition) {
+func (mg *FlexibleServerConfiguration) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FlexibleServerConfiguration) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FlexibleServerConfiguration) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FlexibleServerConfiguration.
-func (mg *FlexibleServerConfiguration) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FlexibleServerConfiguration) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *FlexibleServerFirewallRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *FlexibleServerFirewallRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *FlexibleServerFirewallRule) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *FlexibleServerFirewallRule) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) SetConditions(c ...xpv1.Condition) {
+func (mg *FlexibleServerFirewallRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *FlexibleServerFirewallRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *FlexibleServerFirewallRule) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this FlexibleServerFirewallRule.
-func (mg *FlexibleServerFirewallRule) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *FlexibleServerFirewallRule) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

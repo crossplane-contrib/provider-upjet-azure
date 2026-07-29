@@ -5,364 +5,364 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsDataExportRule) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsDataExportRule) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsDataExportRule) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsDataExportRule) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsDataExportRule) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsDataExportRule) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsDataExportRule) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsDataExportRule.
-func (mg *LogAnalyticsDataExportRule) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsDataExportRule) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsEvent.
-func (mg *LogAnalyticsDataSourceWindowsEvent) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
-func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsLinkedService) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsLinkedService) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsLinkedService) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsLinkedService) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsLinkedService) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsLinkedService) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsLinkedService) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsLinkedService.
-func (mg *LogAnalyticsLinkedService) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsLinkedService) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsLinkedStorageAccount) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsLinkedStorageAccount) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsLinkedStorageAccount) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsLinkedStorageAccount) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsLinkedStorageAccount) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsLinkedStorageAccount) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsLinkedStorageAccount) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsLinkedStorageAccount.
-func (mg *LogAnalyticsLinkedStorageAccount) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsLinkedStorageAccount) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsQueryPack) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsQueryPack) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsQueryPack) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsQueryPack) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsQueryPack) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsQueryPack) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsQueryPack) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsQueryPack.
-func (mg *LogAnalyticsQueryPack) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsQueryPack) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsQueryPackQuery) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsQueryPackQuery) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsQueryPackQuery) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsQueryPackQuery) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsQueryPackQuery) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsQueryPackQuery) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsQueryPackQuery) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsQueryPackQuery.
-func (mg *LogAnalyticsQueryPackQuery) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsQueryPackQuery) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *LogAnalyticsSavedSearch) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *LogAnalyticsSavedSearch) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *LogAnalyticsSavedSearch) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *LogAnalyticsSavedSearch) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) SetConditions(c ...xpv1.Condition) {
+func (mg *LogAnalyticsSavedSearch) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *LogAnalyticsSavedSearch) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *LogAnalyticsSavedSearch) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this LogAnalyticsSavedSearch.
-func (mg *LogAnalyticsSavedSearch) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *LogAnalyticsSavedSearch) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Workspace.
-func (mg *Workspace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Workspace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Workspace.
-func (mg *Workspace) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Workspace) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Workspace.
-func (mg *Workspace) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Workspace) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Workspace.
-func (mg *Workspace) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Workspace) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Workspace.
-func (mg *Workspace) SetConditions(c ...xpv1.Condition) {
+func (mg *Workspace) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Workspace.
-func (mg *Workspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Workspace) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Workspace.
-func (mg *Workspace) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Workspace) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Workspace.
-func (mg *Workspace) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Workspace) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

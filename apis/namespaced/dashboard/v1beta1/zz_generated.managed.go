@@ -5,84 +5,84 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this Grafana.
-func (mg *Grafana) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Grafana) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this Grafana.
-func (mg *Grafana) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Grafana) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Grafana.
-func (mg *Grafana) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *Grafana) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Grafana.
-func (mg *Grafana) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *Grafana) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Grafana.
-func (mg *Grafana) SetConditions(c ...xpv1.Condition) {
+func (mg *Grafana) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this Grafana.
-func (mg *Grafana) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Grafana) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Grafana.
-func (mg *Grafana) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *Grafana) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Grafana.
-func (mg *Grafana) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *Grafana) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *GrafanaManagedPrivateEndpoint) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *GrafanaManagedPrivateEndpoint) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *GrafanaManagedPrivateEndpoint) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *GrafanaManagedPrivateEndpoint) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) SetConditions(c ...xpv1.Condition) {
+func (mg *GrafanaManagedPrivateEndpoint) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *GrafanaManagedPrivateEndpoint) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *GrafanaManagedPrivateEndpoint) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this GrafanaManagedPrivateEndpoint.
-func (mg *GrafanaManagedPrivateEndpoint) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *GrafanaManagedPrivateEndpoint) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

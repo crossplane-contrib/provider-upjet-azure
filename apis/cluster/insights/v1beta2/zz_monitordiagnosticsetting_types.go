@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EnabledLogInitParameters struct {
@@ -157,11 +157,11 @@ type MonitorDiagnosticSettingInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The ID of an existing Resource on which to configure Diagnostic Settings. Changing this forces a new resource to be created.
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
@@ -250,11 +250,11 @@ type MonitorDiagnosticSettingParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The ID of an existing Resource on which to configure Diagnostic Settings. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -284,8 +284,8 @@ type RetentionPolicyParameters struct {
 
 // MonitorDiagnosticSettingSpec defines the desired state of MonitorDiagnosticSetting
 type MonitorDiagnosticSettingSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MonitorDiagnosticSettingParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MonitorDiagnosticSettingParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -301,8 +301,8 @@ type MonitorDiagnosticSettingSpec struct {
 
 // MonitorDiagnosticSettingStatus defines the observed state of MonitorDiagnosticSetting.
 type MonitorDiagnosticSettingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorDiagnosticSettingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorDiagnosticSettingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CreatorInitParameters struct {
@@ -59,11 +59,11 @@ type CreatorParameters struct {
 
 	// Reference to a Account in maps to populate mapsAccountId.
 	// +kubebuilder:validation:Optional
-	MapsAccountIDRef *v1.Reference `json:"mapsAccountIdRef,omitempty" tf:"-"`
+	MapsAccountIDRef *v2.Reference `json:"mapsAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in maps to populate mapsAccountId.
 	// +kubebuilder:validation:Optional
-	MapsAccountIDSelector *v1.Selector `json:"mapsAccountIdSelector,omitempty" tf:"-"`
+	MapsAccountIDSelector *v2.Selector `json:"mapsAccountIdSelector,omitempty" tf:"-"`
 
 	// The storage units to be allocated. Integer values from 1 to 100, inclusive.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,8 @@ type CreatorParameters struct {
 
 // CreatorSpec defines the desired state of Creator
 type CreatorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CreatorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CreatorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -94,8 +94,8 @@ type CreatorSpec struct {
 
 // CreatorStatus defines the observed state of Creator.
 type CreatorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CreatorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CreatorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

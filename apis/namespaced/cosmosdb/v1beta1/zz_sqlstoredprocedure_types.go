@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLStoredProcedureInitParameters struct {
@@ -50,11 +49,11 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The body of the stored procedure.
 	// +kubebuilder:validation:Optional
@@ -67,11 +66,11 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a SQLContainer in cosmosdb to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a SQLContainer in cosmosdb to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Cosmos DB SQL Database to create the stored procedure within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
@@ -80,11 +79,11 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Cosmos DB SQL Database is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -93,11 +92,11 @@ type SQLStoredProcedureParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // SQLStoredProcedureSpec defines the desired state of SQLStoredProcedure
@@ -119,8 +118,8 @@ type SQLStoredProcedureSpec struct {
 
 // SQLStoredProcedureStatus defines the observed state of SQLStoredProcedure.
 type SQLStoredProcedureStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLStoredProcedureObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLStoredProcedureObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

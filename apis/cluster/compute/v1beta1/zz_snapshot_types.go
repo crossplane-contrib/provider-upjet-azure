@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionSettingsDiskEncryptionKeyInitParameters struct {
@@ -136,11 +136,11 @@ type SnapshotInitParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate sourceUri.
 	// +kubebuilder:validation:Optional
-	SourceURIRef *v1.Reference `json:"sourceUriRef,omitempty" tf:"-"`
+	SourceURIRef *v2.Reference `json:"sourceUriRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate sourceUri.
 	// +kubebuilder:validation:Optional
-	SourceURISelector *v1.Selector `json:"sourceUriSelector,omitempty" tf:"-"`
+	SourceURISelector *v2.Selector `json:"sourceUriSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of an storage account. Used with source_uri to allow authorization during import of unmanaged blobs from a different subscription. Changing this forces a new resource to be created.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -240,11 +240,11 @@ type SnapshotParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies a reference to an existing snapshot, when create_option is Copy. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -258,11 +258,11 @@ type SnapshotParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate sourceUri.
 	// +kubebuilder:validation:Optional
-	SourceURIRef *v1.Reference `json:"sourceUriRef,omitempty" tf:"-"`
+	SourceURIRef *v2.Reference `json:"sourceUriRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate sourceUri.
 	// +kubebuilder:validation:Optional
-	SourceURISelector *v1.Selector `json:"sourceUriSelector,omitempty" tf:"-"`
+	SourceURISelector *v2.Selector `json:"sourceUriSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of an storage account. Used with source_uri to allow authorization during import of unmanaged blobs from a different subscription. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -276,8 +276,8 @@ type SnapshotParameters struct {
 
 // SnapshotSpec defines the desired state of Snapshot
 type SnapshotSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SnapshotParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SnapshotParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -293,8 +293,8 @@ type SnapshotSpec struct {
 
 // SnapshotStatus defines the observed state of Snapshot.
 type SnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubCertificateInitParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
-	CertificateContentSecretRef v1.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
+	CertificateContentSecretRef v2.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// Is the certificate verified? Defaults to false.
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
@@ -42,7 +41,7 @@ type IOTHubCertificateParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
 	// +kubebuilder:validation:Optional
-	CertificateContentSecretRef v1.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
+	CertificateContentSecretRef v2.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoTHub that this certificate will be attached to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHub
@@ -51,11 +50,11 @@ type IOTHubCertificateParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.NamespacedReference `json:"iothubNameRef,omitempty" tf:"-"`
+	IOTHubNameRef *v2.NamespacedReference `json:"iothubNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.NamespacedSelector `json:"iothubNameSelector,omitempty" tf:"-"`
+	IOTHubNameSelector *v2.NamespacedSelector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// Is the certificate verified? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -68,11 +67,11 @@ type IOTHubCertificateParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // IOTHubCertificateSpec defines the desired state of IOTHubCertificate
@@ -94,8 +93,8 @@ type IOTHubCertificateSpec struct {
 
 // IOTHubCertificateStatus defines the observed state of IOTHubCertificate.
 type IOTHubCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

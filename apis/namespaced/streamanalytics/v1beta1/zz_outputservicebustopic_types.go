@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputServiceBusTopicInitParameters struct {
@@ -31,11 +30,11 @@ type OutputServiceBusTopicInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	Serialization *OutputServiceBusTopicSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
@@ -46,14 +45,14 @@ type OutputServiceBusTopicInitParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy. Required if authentication_mode is ConnectionString.
-	SharedAccessPolicyKeySecretRef *v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
@@ -64,11 +63,11 @@ type OutputServiceBusTopicInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Topic Output.
 	// +mapType=granular
@@ -80,11 +79,11 @@ type OutputServiceBusTopicInitParameters struct {
 
 	// Reference to a Topic in servicebus to populate topicName.
 	// +kubebuilder:validation:Optional
-	TopicNameRef *v1.NamespacedReference `json:"topicNameRef,omitempty" tf:"-"`
+	TopicNameRef *v2.NamespacedReference `json:"topicNameRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in servicebus to populate topicName.
 	// +kubebuilder:validation:Optional
-	TopicNameSelector *v1.NamespacedSelector `json:"topicNameSelector,omitempty" tf:"-"`
+	TopicNameSelector *v2.NamespacedSelector `json:"topicNameSelector,omitempty" tf:"-"`
 }
 
 type OutputServiceBusTopicObservation struct {
@@ -145,11 +144,11 @@ type OutputServiceBusTopicParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	// +kubebuilder:validation:Optional
@@ -162,15 +161,15 @@ type OutputServiceBusTopicParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceRef *v1.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+	ServiceBusNamespaceRef *v2.NamespacedReference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate servicebusNamespace.
 	// +kubebuilder:validation:Optional
-	ServiceBusNamespaceSelector *v1.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+	ServiceBusNamespaceSelector *v2.NamespacedSelector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy. Required if authentication_mode is ConnectionString.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyKeySecretRef *v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
+	SharedAccessPolicyKeySecretRef *v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
 	// +kubebuilder:validation:Optional
@@ -183,11 +182,11 @@ type OutputServiceBusTopicParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Topic Output.
 	// +kubebuilder:validation:Optional
@@ -201,11 +200,11 @@ type OutputServiceBusTopicParameters struct {
 
 	// Reference to a Topic in servicebus to populate topicName.
 	// +kubebuilder:validation:Optional
-	TopicNameRef *v1.NamespacedReference `json:"topicNameRef,omitempty" tf:"-"`
+	TopicNameRef *v2.NamespacedReference `json:"topicNameRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in servicebus to populate topicName.
 	// +kubebuilder:validation:Optional
-	TopicNameSelector *v1.NamespacedSelector `json:"topicNameSelector,omitempty" tf:"-"`
+	TopicNameSelector *v2.NamespacedSelector `json:"topicNameSelector,omitempty" tf:"-"`
 }
 
 type OutputServiceBusTopicSerializationInitParameters struct {
@@ -276,8 +275,8 @@ type OutputServiceBusTopicSpec struct {
 
 // OutputServiceBusTopicStatus defines the observed state of OutputServiceBusTopic.
 type OutputServiceBusTopicStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputServiceBusTopicObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputServiceBusTopicObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

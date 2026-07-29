@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogAnalyticsLinkedServiceInitParameters struct {
@@ -22,11 +22,11 @@ type LogAnalyticsLinkedServiceInitParameters struct {
 
 	// Reference to a Account in automation to populate readAccessId.
 	// +kubebuilder:validation:Optional
-	ReadAccessIDRef *v1.Reference `json:"readAccessIdRef,omitempty" tf:"-"`
+	ReadAccessIDRef *v2.Reference `json:"readAccessIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate readAccessId.
 	// +kubebuilder:validation:Optional
-	ReadAccessIDSelector *v1.Selector `json:"readAccessIdSelector,omitempty" tf:"-"`
+	ReadAccessIDSelector *v2.Selector `json:"readAccessIdSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Log Analytics Linked Service is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -34,11 +34,11 @@ type LogAnalyticsLinkedServiceInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the writable Resource that will be linked to the workspace. This should be used for linking to a Log Analytics Cluster resource.
 	WriteAccessID *string `json:"writeAccessId,omitempty" tf:"write_access_id,omitempty"`
@@ -75,11 +75,11 @@ type LogAnalyticsLinkedServiceParameters struct {
 
 	// Reference to a Account in automation to populate readAccessId.
 	// +kubebuilder:validation:Optional
-	ReadAccessIDRef *v1.Reference `json:"readAccessIdRef,omitempty" tf:"-"`
+	ReadAccessIDRef *v2.Reference `json:"readAccessIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate readAccessId.
 	// +kubebuilder:validation:Optional
-	ReadAccessIDSelector *v1.Selector `json:"readAccessIdSelector,omitempty" tf:"-"`
+	ReadAccessIDSelector *v2.Selector `json:"readAccessIdSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Log Analytics Linked Service is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -88,11 +88,11 @@ type LogAnalyticsLinkedServiceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Log Analytics Workspace that will contain the Log Analytics Linked Service resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
@@ -102,11 +102,11 @@ type LogAnalyticsLinkedServiceParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the writable Resource that will be linked to the workspace. This should be used for linking to a Log Analytics Cluster resource.
 	// +kubebuilder:validation:Optional
@@ -115,8 +115,8 @@ type LogAnalyticsLinkedServiceParameters struct {
 
 // LogAnalyticsLinkedServiceSpec defines the desired state of LogAnalyticsLinkedService
 type LogAnalyticsLinkedServiceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LogAnalyticsLinkedServiceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LogAnalyticsLinkedServiceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -132,8 +132,8 @@ type LogAnalyticsLinkedServiceSpec struct {
 
 // LogAnalyticsLinkedServiceStatus defines the observed state of LogAnalyticsLinkedService.
 type LogAnalyticsLinkedServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LogAnalyticsLinkedServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LogAnalyticsLinkedServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

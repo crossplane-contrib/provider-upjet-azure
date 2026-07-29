@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NetworkACLInitParameters struct {
@@ -32,11 +31,11 @@ type NetworkACLInitParameters struct {
 
 	// Reference to a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDRef *v1.NamespacedReference `json:"signalrServiceIdRef,omitempty" tf:"-"`
+	SignalrServiceIDRef *v2.NamespacedReference `json:"signalrServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDSelector *v1.NamespacedSelector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
+	SignalrServiceIDSelector *v2.NamespacedSelector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkACLObservation struct {
@@ -79,11 +78,11 @@ type NetworkACLParameters struct {
 
 	// Reference to a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDRef *v1.NamespacedReference `json:"signalrServiceIdRef,omitempty" tf:"-"`
+	SignalrServiceIDRef *v2.NamespacedReference `json:"signalrServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDSelector *v1.NamespacedSelector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
+	SignalrServiceIDSelector *v2.NamespacedSelector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateEndpointInitParameters struct {
@@ -103,11 +102,11 @@ type PrivateEndpointInitParameters struct {
 
 	// Reference to a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type PrivateEndpointObservation struct {
@@ -144,11 +143,11 @@ type PrivateEndpointParameters struct {
 
 	// Reference to a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.NamespacedReference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.NamespacedReference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.NamespacedSelector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type PublicNetworkInitParameters struct {
@@ -205,8 +204,8 @@ type NetworkACLSpec struct {
 
 // NetworkACLStatus defines the observed state of NetworkACL.
 type NetworkACLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NetworkACLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NetworkACLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

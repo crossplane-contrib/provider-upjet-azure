@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AlertContextInitParameters struct {
@@ -287,11 +286,11 @@ type MonitorAlertProcessingRuleActionGroupInitParameters struct {
 
 	// References to MonitorActionGroup in insights to populate addActionGroupIds.
 	// +kubebuilder:validation:Optional
-	AddActionGroupIdsRefs []v1.NamespacedReference `json:"addActionGroupIdsRefs,omitempty" tf:"-"`
+	AddActionGroupIdsRefs []v2.NamespacedReference `json:"addActionGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate addActionGroupIds.
 	// +kubebuilder:validation:Optional
-	AddActionGroupIdsSelector *v1.NamespacedSelector `json:"addActionGroupIdsSelector,omitempty" tf:"-"`
+	AddActionGroupIdsSelector *v2.NamespacedSelector `json:"addActionGroupIdsSelector,omitempty" tf:"-"`
 
 	// A condition block as defined below.
 	Condition *ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
@@ -312,11 +311,11 @@ type MonitorAlertProcessingRuleActionGroupInitParameters struct {
 
 	// References to ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
 	// +mapType=granular
@@ -364,11 +363,11 @@ type MonitorAlertProcessingRuleActionGroupParameters struct {
 
 	// References to MonitorActionGroup in insights to populate addActionGroupIds.
 	// +kubebuilder:validation:Optional
-	AddActionGroupIdsRefs []v1.NamespacedReference `json:"addActionGroupIdsRefs,omitempty" tf:"-"`
+	AddActionGroupIdsRefs []v2.NamespacedReference `json:"addActionGroupIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate addActionGroupIds.
 	// +kubebuilder:validation:Optional
-	AddActionGroupIdsSelector *v1.NamespacedSelector `json:"addActionGroupIdsSelector,omitempty" tf:"-"`
+	AddActionGroupIdsSelector *v2.NamespacedSelector `json:"addActionGroupIdsSelector,omitempty" tf:"-"`
 
 	// A condition block as defined below.
 	// +kubebuilder:validation:Optional
@@ -389,11 +388,11 @@ type MonitorAlertProcessingRuleActionGroupParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A schedule block as defined below.
 	// +kubebuilder:validation:Optional
@@ -407,11 +406,11 @@ type MonitorAlertProcessingRuleActionGroupParameters struct {
 
 	// References to ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ResourceGroup in azure to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
 	// +kubebuilder:validation:Optional
@@ -807,8 +806,8 @@ type MonitorAlertProcessingRuleActionGroupSpec struct {
 
 // MonitorAlertProcessingRuleActionGroupStatus defines the observed state of MonitorAlertProcessingRuleActionGroup.
 type MonitorAlertProcessingRuleActionGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorAlertProcessingRuleActionGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorAlertProcessingRuleActionGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

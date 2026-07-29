@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecurityCenterAssessmentPolicyInitParameters struct {
@@ -116,8 +116,8 @@ type SecurityCenterAssessmentPolicyParameters struct {
 
 // SecurityCenterAssessmentPolicySpec defines the desired state of SecurityCenterAssessmentPolicy
 type SecurityCenterAssessmentPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityCenterAssessmentPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SecurityCenterAssessmentPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -133,8 +133,8 @@ type SecurityCenterAssessmentPolicySpec struct {
 
 // SecurityCenterAssessmentPolicyStatus defines the observed state of SecurityCenterAssessmentPolicy.
 type SecurityCenterAssessmentPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityCenterAssessmentPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecurityCenterAssessmentPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

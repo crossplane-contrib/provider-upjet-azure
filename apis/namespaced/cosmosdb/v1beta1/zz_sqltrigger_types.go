@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLTriggerInitParameters struct {
@@ -58,11 +57,11 @@ type SQLTriggerParameters struct {
 
 	// Reference to a SQLContainer in cosmosdb to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDRef *v1.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
+	ContainerIDRef *v2.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLContainer in cosmosdb to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDSelector *v1.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
+	ContainerIDSelector *v2.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
 	// +kubebuilder:validation:Optional
@@ -92,8 +91,8 @@ type SQLTriggerSpec struct {
 
 // SQLTriggerStatus defines the observed state of SQLTrigger.
 type SQLTriggerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLTriggerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLTriggerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

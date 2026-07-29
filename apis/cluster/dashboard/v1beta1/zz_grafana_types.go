@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AzureMonitorWorkspaceIntegrationsInitParameters struct {
@@ -22,11 +22,11 @@ type AzureMonitorWorkspaceIntegrationsInitParameters struct {
 
 	// Reference to a MonitorWorkspace in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorWorkspace in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type AzureMonitorWorkspaceIntegrationsObservation struct {
@@ -45,11 +45,11 @@ type AzureMonitorWorkspaceIntegrationsParameters struct {
 
 	// Reference to a MonitorWorkspace in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+	ResourceIDRef *v2.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorWorkspace in insights to populate resourceId.
 	// +kubebuilder:validation:Optional
-	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+	ResourceIDSelector *v2.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type GrafanaInitParameters struct {
@@ -194,11 +194,11 @@ type GrafanaParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A smtp block as defined below.
 	// +kubebuilder:validation:Optional
@@ -232,11 +232,11 @@ type IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity. Possible values are SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -269,11 +269,11 @@ type IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity. Possible values are SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -295,7 +295,7 @@ type SMTPInitParameters struct {
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
 	// Password of SMTP authentication.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Whether to use TLS when connecting to SMTP server. Possible values are OpportunisticStartTLS, NoStartTLS, MandatoryStartTLS.
 	StartTLSPolicy *string `json:"startTlsPolicy,omitempty" tf:"start_tls_policy,omitempty"`
@@ -351,7 +351,7 @@ type SMTPParameters struct {
 
 	// Password of SMTP authentication.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Whether to use TLS when connecting to SMTP server. Possible values are OpportunisticStartTLS, NoStartTLS, MandatoryStartTLS.
 	// +kubebuilder:validation:Optional
@@ -368,8 +368,8 @@ type SMTPParameters struct {
 
 // GrafanaSpec defines the desired state of Grafana
 type GrafanaSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GrafanaParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GrafanaParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -385,8 +385,8 @@ type GrafanaSpec struct {
 
 // GrafanaStatus defines the observed state of Grafana.
 type GrafanaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GrafanaObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GrafanaObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

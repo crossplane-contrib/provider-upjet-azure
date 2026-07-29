@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CorsInitParameters struct {
@@ -300,11 +300,11 @@ type ServiceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the client connection timeout. Defaults to 30.
 	// +kubebuilder:validation:Optional
@@ -422,8 +422,8 @@ type UpstreamEndpointParameters struct {
 
 // ServiceSpec defines the desired state of Service
 type ServiceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServiceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ServiceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -439,8 +439,8 @@ type ServiceSpec struct {
 
 // ServiceStatus defines the observed state of Service.
 type ServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

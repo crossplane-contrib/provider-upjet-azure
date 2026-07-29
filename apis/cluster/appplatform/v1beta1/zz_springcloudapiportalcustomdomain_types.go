@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudAPIPortalCustomDomainInitParameters struct {
@@ -25,11 +25,11 @@ type SpringCloudAPIPortalCustomDomainInitParameters struct {
 
 	// Reference to a SpringCloudAPIPortal in appplatform to populate springCloudApiPortalId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAPIPortalIDRef *v1.Reference `json:"springCloudApiPortalIdRef,omitempty" tf:"-"`
+	SpringCloudAPIPortalIDRef *v2.Reference `json:"springCloudApiPortalIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudAPIPortal in appplatform to populate springCloudApiPortalId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAPIPortalIDSelector *v1.Selector `json:"springCloudApiPortalIdSelector,omitempty" tf:"-"`
+	SpringCloudAPIPortalIDSelector *v2.Selector `json:"springCloudApiPortalIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud API Portal Domain.
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
@@ -64,11 +64,11 @@ type SpringCloudAPIPortalCustomDomainParameters struct {
 
 	// Reference to a SpringCloudAPIPortal in appplatform to populate springCloudApiPortalId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAPIPortalIDRef *v1.Reference `json:"springCloudApiPortalIdRef,omitempty" tf:"-"`
+	SpringCloudAPIPortalIDRef *v2.Reference `json:"springCloudApiPortalIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudAPIPortal in appplatform to populate springCloudApiPortalId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAPIPortalIDSelector *v1.Selector `json:"springCloudApiPortalIdSelector,omitempty" tf:"-"`
+	SpringCloudAPIPortalIDSelector *v2.Selector `json:"springCloudApiPortalIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud API Portal Domain.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,8 @@ type SpringCloudAPIPortalCustomDomainParameters struct {
 
 // SpringCloudAPIPortalCustomDomainSpec defines the desired state of SpringCloudAPIPortalCustomDomain
 type SpringCloudAPIPortalCustomDomainSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudAPIPortalCustomDomainParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudAPIPortalCustomDomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -94,8 +94,8 @@ type SpringCloudAPIPortalCustomDomainSpec struct {
 
 // SpringCloudAPIPortalCustomDomainStatus defines the observed state of SpringCloudAPIPortalCustomDomain.
 type SpringCloudAPIPortalCustomDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudAPIPortalCustomDomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudAPIPortalCustomDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StreamInputIOTHubInitParameters struct {
@@ -25,11 +24,11 @@ type StreamInputIOTHubInitParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// The name or the URI of the IoT Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHub
@@ -37,11 +36,11 @@ type StreamInputIOTHubInitParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubNamespace.
 	// +kubebuilder:validation:Optional
-	IOTHubNamespaceRef *v1.NamespacedReference `json:"iothubNamespaceRef,omitempty" tf:"-"`
+	IOTHubNamespaceRef *v2.NamespacedReference `json:"iothubNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubNamespace.
 	// +kubebuilder:validation:Optional
-	IOTHubNamespaceSelector *v1.NamespacedSelector `json:"iothubNamespaceSelector,omitempty" tf:"-"`
+	IOTHubNamespaceSelector *v2.NamespacedSelector `json:"iothubNamespaceSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Input IoTHub. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -52,17 +51,17 @@ type StreamInputIOTHubInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	Serialization *StreamInputIOTHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The shared access policy key for the specified shared access policy. Changing this forces a new resource to be created.
-	SharedAccessPolicyKeySecretRef v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
+	SharedAccessPolicyKeySecretRef v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
@@ -73,11 +72,11 @@ type StreamInputIOTHubInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type StreamInputIOTHubObservation struct {
@@ -123,11 +122,11 @@ type StreamInputIOTHubParameters struct {
 
 	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameRef *v1.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+	EventHubConsumerGroupNameRef *v2.NamespacedReference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
 	// +kubebuilder:validation:Optional
-	EventHubConsumerGroupNameSelector *v1.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// The name or the URI of the IoT Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHub
@@ -136,11 +135,11 @@ type StreamInputIOTHubParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubNamespace.
 	// +kubebuilder:validation:Optional
-	IOTHubNamespaceRef *v1.NamespacedReference `json:"iothubNamespaceRef,omitempty" tf:"-"`
+	IOTHubNamespaceRef *v2.NamespacedReference `json:"iothubNamespaceRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubNamespace.
 	// +kubebuilder:validation:Optional
-	IOTHubNamespaceSelector *v1.NamespacedSelector `json:"iothubNamespaceSelector,omitempty" tf:"-"`
+	IOTHubNamespaceSelector *v2.NamespacedSelector `json:"iothubNamespaceSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Input IoTHub. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -153,11 +152,11 @@ type StreamInputIOTHubParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	// +kubebuilder:validation:Optional
@@ -165,7 +164,7 @@ type StreamInputIOTHubParameters struct {
 
 	// The shared access policy key for the specified shared access policy. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyKeySecretRef v1.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
+	SharedAccessPolicyKeySecretRef v2.LocalSecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	// +kubebuilder:validation:Optional
@@ -178,11 +177,11 @@ type StreamInputIOTHubParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type StreamInputIOTHubSerializationInitParameters struct {
@@ -243,8 +242,8 @@ type StreamInputIOTHubSpec struct {
 
 // StreamInputIOTHubStatus defines the observed state of StreamInputIOTHub.
 type StreamInputIOTHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StreamInputIOTHubObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StreamInputIOTHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

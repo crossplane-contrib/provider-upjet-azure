@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationCredentialsInitParameters struct {
@@ -23,11 +22,11 @@ type AuthenticationCredentialsInitParameters struct {
 
 	// Reference to a Secret in keyvault to populate passwordSecretId.
 	// +kubebuilder:validation:Optional
-	PasswordSecretIDRef *v1.NamespacedReference `json:"passwordSecretIdRef,omitempty" tf:"-"`
+	PasswordSecretIDRef *v2.NamespacedReference `json:"passwordSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate passwordSecretId.
 	// +kubebuilder:validation:Optional
-	PasswordSecretIDSelector *v1.NamespacedSelector `json:"passwordSecretIdSelector,omitempty" tf:"-"`
+	PasswordSecretIDSelector *v2.NamespacedSelector `json:"passwordSecretIdSelector,omitempty" tf:"-"`
 
 	// The URI of the secret containing the username in a Key Vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
@@ -36,11 +35,11 @@ type AuthenticationCredentialsInitParameters struct {
 
 	// Reference to a Secret in keyvault to populate usernameSecretId.
 	// +kubebuilder:validation:Optional
-	UsernameSecretIDRef *v1.NamespacedReference `json:"usernameSecretIdRef,omitempty" tf:"-"`
+	UsernameSecretIDRef *v2.NamespacedReference `json:"usernameSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate usernameSecretId.
 	// +kubebuilder:validation:Optional
-	UsernameSecretIDSelector *v1.NamespacedSelector `json:"usernameSecretIdSelector,omitempty" tf:"-"`
+	UsernameSecretIDSelector *v2.NamespacedSelector `json:"usernameSecretIdSelector,omitempty" tf:"-"`
 }
 
 type AuthenticationCredentialsObservation struct {
@@ -62,11 +61,11 @@ type AuthenticationCredentialsParameters struct {
 
 	// Reference to a Secret in keyvault to populate passwordSecretId.
 	// +kubebuilder:validation:Optional
-	PasswordSecretIDRef *v1.NamespacedReference `json:"passwordSecretIdRef,omitempty" tf:"-"`
+	PasswordSecretIDRef *v2.NamespacedReference `json:"passwordSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate passwordSecretId.
 	// +kubebuilder:validation:Optional
-	PasswordSecretIDSelector *v1.NamespacedSelector `json:"passwordSecretIdSelector,omitempty" tf:"-"`
+	PasswordSecretIDSelector *v2.NamespacedSelector `json:"passwordSecretIdSelector,omitempty" tf:"-"`
 
 	// The URI of the secret containing the username in a Key Vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
@@ -76,11 +75,11 @@ type AuthenticationCredentialsParameters struct {
 
 	// Reference to a Secret in keyvault to populate usernameSecretId.
 	// +kubebuilder:validation:Optional
-	UsernameSecretIDRef *v1.NamespacedReference `json:"usernameSecretIdRef,omitempty" tf:"-"`
+	UsernameSecretIDRef *v2.NamespacedReference `json:"usernameSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate usernameSecretId.
 	// +kubebuilder:validation:Optional
-	UsernameSecretIDSelector *v1.NamespacedSelector `json:"usernameSecretIdSelector,omitempty" tf:"-"`
+	UsernameSecretIDSelector *v2.NamespacedSelector `json:"usernameSecretIdSelector,omitempty" tf:"-"`
 }
 
 type CredentialSetIdentityInitParameters struct {
@@ -152,11 +151,11 @@ type CredentialSetParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDRef *v1.NamespacedReference `json:"containerRegistryIdRef,omitempty" tf:"-"`
+	ContainerRegistryIDRef *v2.NamespacedReference `json:"containerRegistryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDSelector *v1.NamespacedSelector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
+	ContainerRegistryIDSelector *v2.NamespacedSelector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -186,8 +185,8 @@ type CredentialSetSpec struct {
 
 // CredentialSetStatus defines the observed state of CredentialSet.
 type CredentialSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CredentialSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CredentialSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

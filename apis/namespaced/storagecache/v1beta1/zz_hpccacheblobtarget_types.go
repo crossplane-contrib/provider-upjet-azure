@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HPCCacheBlobTargetInitParameters struct {
@@ -25,11 +24,11 @@ type HPCCacheBlobTargetInitParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameRef *v1.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
+	CacheNameRef *v2.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameSelector *v1.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
+	CacheNameSelector *v2.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// The client-facing file path of the HPC Cache Blob Target.
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
@@ -41,11 +40,11 @@ type HPCCacheBlobTargetInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 }
 
 type HPCCacheBlobTargetObservation struct {
@@ -82,11 +81,11 @@ type HPCCacheBlobTargetParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameRef *v1.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
+	CacheNameRef *v2.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameSelector *v1.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
+	CacheNameSelector *v2.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// The client-facing file path of the HPC Cache Blob Target.
 	// +kubebuilder:validation:Optional
@@ -99,11 +98,11 @@ type HPCCacheBlobTargetParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob Target. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -113,11 +112,11 @@ type HPCCacheBlobTargetParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 }
 
 // HPCCacheBlobTargetSpec defines the desired state of HPCCacheBlobTarget
@@ -139,8 +138,8 @@ type HPCCacheBlobTargetSpec struct {
 
 // HPCCacheBlobTargetStatus defines the observed state of HPCCacheBlobTarget.
 type HPCCacheBlobTargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HPCCacheBlobTargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HPCCacheBlobTargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

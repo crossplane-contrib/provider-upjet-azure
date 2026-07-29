@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KubernetesClusterNodePoolInitParameters struct {
@@ -101,11 +101,11 @@ type KubernetesClusterNodePoolInitParameters struct {
 
 	// Reference to a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
+	PodSubnetIDRef *v2.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
+	PodSubnetIDSelector *v2.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
 	// The Priority for Virtual Machines within the Virtual Machine Scale Set that powers this Node Pool. Possible values are Regular and Spot. Defaults to Regular. Changing this forces a new resource to be created.
 	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
@@ -145,11 +145,11 @@ type KubernetesClusterNodePoolInitParameters struct {
 
 	// Reference to a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
+	VnetSubnetIDRef *v2.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
+	VnetSubnetIDSelector *v2.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
 	// A windows_profile block as documented below. Changing this forces a new resource to be created.
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileInitParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
@@ -570,11 +570,11 @@ type KubernetesClusterNodePoolParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDRef *v1.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
+	KubernetesClusterIDRef *v2.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
-	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
+	KubernetesClusterIDSelector *v2.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 
 	// A linux_os_config block as defined below. Changing this requires specifying temporary_name_for_rotation.
 	// +kubebuilder:validation:Optional
@@ -649,11 +649,11 @@ type KubernetesClusterNodePoolParameters struct {
 
 	// Reference to a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
+	PodSubnetIDRef *v2.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
-	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
+	PodSubnetIDSelector *v2.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
 	// The Priority for Virtual Machines within the Virtual Machine Scale Set that powers this Node Pool. Possible values are Regular and Spot. Defaults to Regular. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -704,11 +704,11 @@ type KubernetesClusterNodePoolParameters struct {
 
 	// Reference to a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
+	VnetSubnetIDRef *v2.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
-	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
+	VnetSubnetIDSelector *v2.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
 	// A windows_profile block as documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1142,8 +1142,8 @@ type NodeNetworkProfileAllowedHostPortsParameters struct {
 
 // KubernetesClusterNodePoolSpec defines the desired state of KubernetesClusterNodePool
 type KubernetesClusterNodePoolSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     KubernetesClusterNodePoolParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   KubernetesClusterNodePoolParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1159,8 +1159,8 @@ type KubernetesClusterNodePoolSpec struct {
 
 // KubernetesClusterNodePoolStatus defines the observed state of KubernetesClusterNodePool.
 type KubernetesClusterNodePoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KubernetesClusterNodePoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KubernetesClusterNodePoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

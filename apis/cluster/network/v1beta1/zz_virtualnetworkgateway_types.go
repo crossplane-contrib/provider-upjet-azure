@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomRouteInitParameters struct {
@@ -256,7 +256,7 @@ type RadiusServerInitParameters struct {
 	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
 
 	// The secret that is used to communicate with the Radius Server.
-	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
+	SecretSecretRef v2.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 
 type RadiusServerObservation struct {
@@ -280,7 +280,7 @@ type RadiusServerParameters struct {
 
 	// The secret that is used to communicate with the Radius Server.
 	// +kubebuilder:validation:Required
-	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
+	SecretSecretRef v2.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 
 type RevokedCertificateInitParameters struct {
@@ -366,7 +366,7 @@ type VPNClientConfigurationInitParameters struct {
 	RadiusServerAddress *string `json:"radiusServerAddress,omitempty" tf:"radius_server_address,omitempty"`
 
 	// The secret used by the Radius server.
-	RadiusServerSecretSecretRef *v1.SecretKeySelector `json:"radiusServerSecretSecretRef,omitempty" tf:"-"`
+	RadiusServerSecretSecretRef *v2.SecretKeySelector `json:"radiusServerSecretSecretRef,omitempty" tf:"-"`
 
 	// One or more revoked_certificate blocks which are defined below.
 	RevokedCertificate []RevokedCertificateInitParameters `json:"revokedCertificate,omitempty" tf:"revoked_certificate,omitempty"`
@@ -469,7 +469,7 @@ type VPNClientConfigurationParameters struct {
 
 	// The secret used by the Radius server.
 	// +kubebuilder:validation:Optional
-	RadiusServerSecretSecretRef *v1.SecretKeySelector `json:"radiusServerSecretSecretRef,omitempty" tf:"-"`
+	RadiusServerSecretSecretRef *v2.SecretKeySelector `json:"radiusServerSecretSecretRef,omitempty" tf:"-"`
 
 	// One or more revoked_certificate blocks which are defined below.
 	// +kubebuilder:validation:Optional
@@ -591,11 +591,11 @@ type VirtualNetworkGatewayIPConfigurationInitParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the gateway subnet of a virtual network in which the virtual network gateway will be created. It is mandatory that the associated subnet is named GatewaySubnet. Therefore, each virtual network can contain at most a single Virtual Network Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
@@ -604,11 +604,11 @@ type VirtualNetworkGatewayIPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkGatewayIPConfigurationObservation struct {
@@ -644,11 +644,11 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the gateway subnet of a virtual network in which the virtual network gateway will be created. It is mandatory that the associated subnet is named GatewaySubnet. Therefore, each virtual network can contain at most a single Virtual Network Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
@@ -658,11 +658,11 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkGatewayInitParameters struct {
@@ -904,11 +904,11 @@ type VirtualNetworkGatewayParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Configuration of the size and capacity of the virtual network gateway. Valid options are Basic, Standard, HighPerformance, UltraPerformance, ErGwScale, ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2, VpnGw3, VpnGw4,VpnGw5, VpnGw1AZ, VpnGw2AZ, VpnGw3AZ,VpnGw4AZ and VpnGw5AZ and depend on the type, vpn_type and generation arguments. A PolicyBased gateway only supports the Basic SKU. Further, the UltraPerformance and ErGwScale SKU is only supported by an ExpressRoute gateway.
 	// +kubebuilder:validation:Optional
@@ -938,8 +938,8 @@ type VirtualNetworkGatewayParameters struct {
 
 // VirtualNetworkGatewaySpec defines the desired state of VirtualNetworkGateway
 type VirtualNetworkGatewaySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualNetworkGatewayParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualNetworkGatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -955,8 +955,8 @@ type VirtualNetworkGatewaySpec struct {
 
 // VirtualNetworkGatewayStatus defines the observed state of VirtualNetworkGateway.
 type VirtualNetworkGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualNetworkGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualNetworkGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

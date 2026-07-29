@@ -10,16 +10,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomDomainDeveloperPortalInitParameters struct {
 
 	// The password associated with the certificate provided above.
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the corresponding endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -31,11 +31,11 @@ type CustomDomainDeveloperPortalInitParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management Custom Domain.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
@@ -78,11 +78,11 @@ type CustomDomainDeveloperPortalParameters struct {
 
 	// The password associated with the certificate provided above.
 	// +kubebuilder:validation:Optional
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
 	// +kubebuilder:validation:Optional
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the corresponding endpoint.
 	// +kubebuilder:validation:Optional
@@ -96,11 +96,11 @@ type CustomDomainDeveloperPortalParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management Custom Domain.
 	// +kubebuilder:validation:Optional
@@ -136,10 +136,10 @@ type CustomDomainInitParameters struct {
 type CustomDomainManagementInitParameters struct {
 
 	// The password associated with the certificate provided above.
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the API Proxy Endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -188,11 +188,11 @@ type CustomDomainManagementParameters struct {
 
 	// The password associated with the certificate provided above.
 	// +kubebuilder:validation:Optional
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
 	// +kubebuilder:validation:Optional
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the API Proxy Endpoint.
 	// +kubebuilder:validation:Optional
@@ -249,11 +249,11 @@ type CustomDomainParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDRef *v1.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
+	APIManagementIDRef *v2.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+	APIManagementIDSelector *v2.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// One or more developer_portal blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -279,10 +279,10 @@ type CustomDomainParameters struct {
 type CustomDomainPortalInitParameters struct {
 
 	// The password associated with the certificate provided above.
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the API Proxy Endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -331,11 +331,11 @@ type CustomDomainPortalParameters struct {
 
 	// The password associated with the certificate provided above.
 	// +kubebuilder:validation:Optional
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
 	// +kubebuilder:validation:Optional
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the API Proxy Endpoint.
 	// +kubebuilder:validation:Optional
@@ -361,10 +361,10 @@ type CustomDomainPortalParameters struct {
 type CustomDomainScmInitParameters struct {
 
 	// The password associated with the certificate provided above.
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the API Proxy Endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -413,11 +413,11 @@ type CustomDomainScmParameters struct {
 
 	// The password associated with the certificate provided above.
 	// +kubebuilder:validation:Optional
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
 	// +kubebuilder:validation:Optional
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the API Proxy Endpoint.
 	// +kubebuilder:validation:Optional
@@ -443,10 +443,10 @@ type CustomDomainScmParameters struct {
 type GatewayInitParameters struct {
 
 	// The password associated with the certificate provided above.
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Is the certificate associated with this Hostname the Default SSL Certificate? This is used when an SNI header isn't specified by a client. Defaults to false.
 	DefaultSSLBinding *bool `json:"defaultSslBinding,omitempty" tf:"default_ssl_binding,omitempty"`
@@ -461,11 +461,11 @@ type GatewayInitParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management Custom Domain.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
@@ -511,11 +511,11 @@ type GatewayParameters struct {
 
 	// The password associated with the certificate provided above.
 	// +kubebuilder:validation:Optional
-	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_certificate_id.)
 	// +kubebuilder:validation:Optional
-	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Is the certificate associated with this Hostname the Default SSL Certificate? This is used when an SNI header isn't specified by a client. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -533,11 +533,11 @@ type GatewayParameters struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDRef *v1.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+	KeyVaultCertificateIDRef *v2.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
 	// +kubebuilder:validation:Optional
-	KeyVaultCertificateIDSelector *v1.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
+	KeyVaultCertificateIDSelector *v2.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management Custom Domain.
 	// +kubebuilder:validation:Optional
@@ -554,8 +554,8 @@ type GatewayParameters struct {
 
 // CustomDomainSpec defines the desired state of CustomDomain
 type CustomDomainSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CustomDomainParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CustomDomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -571,8 +571,8 @@ type CustomDomainSpec struct {
 
 // CustomDomainStatus defines the observed state of CustomDomain.
 type CustomDomainStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CustomDomainObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CustomDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

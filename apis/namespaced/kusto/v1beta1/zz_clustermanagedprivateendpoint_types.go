@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterManagedPrivateEndpointInitParameters struct {
@@ -26,11 +25,11 @@ type ClusterManagedPrivateEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDRef *v1.NamespacedReference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
+	PrivateLinkResourceIDRef *v2.NamespacedReference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDSelector *v1.NamespacedSelector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
+	PrivateLinkResourceIDSelector *v2.NamespacedSelector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
 
 	// The region of the resource to which the managed private endpoint is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -39,11 +38,11 @@ type ClusterManagedPrivateEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionRef *v1.NamespacedReference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
+	PrivateLinkResourceRegionRef *v2.NamespacedReference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionSelector *v1.NamespacedSelector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
+	PrivateLinkResourceRegionSelector *v2.NamespacedSelector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
 
 	// The user request message.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
@@ -82,11 +81,11 @@ type ClusterManagedPrivateEndpointParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -100,11 +99,11 @@ type ClusterManagedPrivateEndpointParameters struct {
 
 	// Reference to a Account in storage to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDRef *v1.NamespacedReference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
+	PrivateLinkResourceIDRef *v2.NamespacedReference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate privateLinkResourceId.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceIDSelector *v1.NamespacedSelector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
+	PrivateLinkResourceIDSelector *v2.NamespacedSelector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
 
 	// The region of the resource to which the managed private endpoint is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -114,11 +113,11 @@ type ClusterManagedPrivateEndpointParameters struct {
 
 	// Reference to a Account in storage to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionRef *v1.NamespacedReference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
+	PrivateLinkResourceRegionRef *v2.NamespacedReference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate privateLinkResourceRegion.
 	// +kubebuilder:validation:Optional
-	PrivateLinkResourceRegionSelector *v1.NamespacedSelector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
+	PrivateLinkResourceRegionSelector *v2.NamespacedSelector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
 
 	// The user request message.
 	// +kubebuilder:validation:Optional
@@ -131,11 +130,11 @@ type ClusterManagedPrivateEndpointParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // ClusterManagedPrivateEndpointSpec defines the desired state of ClusterManagedPrivateEndpoint
@@ -157,8 +156,8 @@ type ClusterManagedPrivateEndpointSpec struct {
 
 // ClusterManagedPrivateEndpointStatus defines the observed state of ClusterManagedPrivateEndpoint.
 type ClusterManagedPrivateEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

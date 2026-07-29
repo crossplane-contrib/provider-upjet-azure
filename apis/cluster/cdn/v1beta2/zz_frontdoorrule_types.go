@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionsInitParameters struct {
@@ -1021,11 +1021,11 @@ type FrontdoorRuleParameters struct {
 
 	// Reference to a FrontdoorRuleSet in cdn to populate cdnFrontdoorRuleSetId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRuleSetIDRef *v1.Reference `json:"cdnFrontdoorRuleSetIdRef,omitempty" tf:"-"`
+	CdnFrontdoorRuleSetIDRef *v2.Reference `json:"cdnFrontdoorRuleSetIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorRuleSet in cdn to populate cdnFrontdoorRuleSetId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorRuleSetIDSelector *v1.Selector `json:"cdnFrontdoorRuleSetIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorRuleSetIDSelector *v2.Selector `json:"cdnFrontdoorRuleSetIdSelector,omitempty" tf:"-"`
 
 	// A conditions block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1282,11 +1282,11 @@ type RouteConfigurationOverrideActionInitParameters struct {
 
 	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDRef *v1.Reference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDRef *v2.Reference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDSelector *v2.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// Should the Front Door dynamically compress the content? Possible values include true or false.
 	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
@@ -1343,11 +1343,11 @@ type RouteConfigurationOverrideActionParameters struct {
 
 	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDRef *v1.Reference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDRef *v2.Reference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
 	// +kubebuilder:validation:Optional
-	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
+	CdnFrontdoorOriginGroupIDSelector *v2.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// Should the Front Door dynamically compress the content? Possible values include true or false.
 	// +kubebuilder:validation:Optional
@@ -1543,8 +1543,8 @@ type URLFilenameConditionParameters struct {
 
 // FrontdoorRuleSpec defines the desired state of FrontdoorRule
 type FrontdoorRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FrontdoorRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FrontdoorRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1560,8 +1560,8 @@ type FrontdoorRuleSpec struct {
 
 // FrontdoorRuleStatus defines the observed state of FrontdoorRule.
 type FrontdoorRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

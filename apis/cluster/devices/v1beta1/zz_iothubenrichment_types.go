@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubEnrichmentInitParameters struct {
@@ -21,11 +21,11 @@ type IOTHubEnrichmentInitParameters struct {
 
 	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+	EndpointNamesRefs []v2.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
+	EndpointNamesSelector *v2.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
@@ -33,11 +33,11 @@ type IOTHubEnrichmentInitParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
+	IOTHubNameRef *v2.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
+	IOTHubNameSelector *v2.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// The key of the enrichment. Changing this forces a new resource to be created.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -48,11 +48,11 @@ type IOTHubEnrichmentInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -88,11 +88,11 @@ type IOTHubEnrichmentParameters struct {
 
 	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+	EndpointNamesRefs []v2.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
-	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
+	EndpointNamesSelector *v2.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
@@ -101,11 +101,11 @@ type IOTHubEnrichmentParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
+	IOTHubNameRef *v2.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
+	IOTHubNameSelector *v2.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// The key of the enrichment. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -118,11 +118,11 @@ type IOTHubEnrichmentParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
 	// +kubebuilder:validation:Optional
@@ -131,8 +131,8 @@ type IOTHubEnrichmentParameters struct {
 
 // IOTHubEnrichmentSpec defines the desired state of IOTHubEnrichment
 type IOTHubEnrichmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTHubEnrichmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTHubEnrichmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -148,8 +148,8 @@ type IOTHubEnrichmentSpec struct {
 
 // IOTHubEnrichmentStatus defines the observed state of IOTHubEnrichment.
 type IOTHubEnrichmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubEnrichmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubEnrichmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

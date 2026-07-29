@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomDataSetInitParameters struct {
@@ -104,11 +104,11 @@ type CustomDataSetParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
@@ -149,11 +149,11 @@ type LinkedServiceInitParameters struct {
 
 	// Reference to a LinkedCustomService in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedCustomService in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
@@ -179,11 +179,11 @@ type LinkedServiceParameters struct {
 
 	// Reference to a LinkedCustomService in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a LinkedCustomService in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -193,8 +193,8 @@ type LinkedServiceParameters struct {
 
 // CustomDataSetSpec defines the desired state of CustomDataSet
 type CustomDataSetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CustomDataSetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CustomDataSetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -210,8 +210,8 @@ type CustomDataSetSpec struct {
 
 // CustomDataSetStatus defines the observed state of CustomDataSet.
 type CustomDataSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CustomDataSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CustomDataSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

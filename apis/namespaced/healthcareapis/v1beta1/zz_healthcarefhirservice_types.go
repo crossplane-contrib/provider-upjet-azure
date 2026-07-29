@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HealthcareFHIRServiceAuthenticationInitParameters struct {
@@ -199,11 +198,11 @@ type HealthcareFHIRServiceInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Healthcare FHIR Service.
 	// +mapType=granular
@@ -305,11 +304,11 @@ type HealthcareFHIRServiceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Healthcare FHIR Service.
 	// +kubebuilder:validation:Optional
@@ -324,11 +323,11 @@ type HealthcareFHIRServiceParameters struct {
 
 	// Reference to a HealthcareWorkspace in healthcareapis to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.NamespacedReference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a HealthcareWorkspace in healthcareapis to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.NamespacedSelector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type OciArtifactInitParameters struct {
@@ -389,8 +388,8 @@ type HealthcareFHIRServiceSpec struct {
 
 // HealthcareFHIRServiceStatus defines the observed state of HealthcareFHIRService.
 type HealthcareFHIRServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HealthcareFHIRServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HealthcareFHIRServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

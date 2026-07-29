@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HybridConnectionAuthorizationRuleInitParameters struct {
@@ -59,11 +59,11 @@ type HybridConnectionAuthorizationRuleParameters struct {
 
 	// Reference to a HybridConnection in relay to populate hybridConnectionName.
 	// +kubebuilder:validation:Optional
-	HybridConnectionNameRef *v1.Reference `json:"hybridConnectionNameRef,omitempty" tf:"-"`
+	HybridConnectionNameRef *v2.Reference `json:"hybridConnectionNameRef,omitempty" tf:"-"`
 
 	// Selector for a HybridConnection in relay to populate hybridConnectionName.
 	// +kubebuilder:validation:Optional
-	HybridConnectionNameSelector *v1.Selector `json:"hybridConnectionNameSelector,omitempty" tf:"-"`
+	HybridConnectionNameSelector *v2.Selector `json:"hybridConnectionNameSelector,omitempty" tf:"-"`
 
 	// Grants listen access to this Authorization Rule. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -80,11 +80,11 @@ type HybridConnectionAuthorizationRuleParameters struct {
 
 	// Reference to a EventRelayNamespace in relay to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventRelayNamespace in relay to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Azure Relay Hybrid Connection Authorization Rule should exist. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -93,11 +93,11 @@ type HybridConnectionAuthorizationRuleParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Grants send access to this Authorization Rule. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -106,8 +106,8 @@ type HybridConnectionAuthorizationRuleParameters struct {
 
 // HybridConnectionAuthorizationRuleSpec defines the desired state of HybridConnectionAuthorizationRule
 type HybridConnectionAuthorizationRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HybridConnectionAuthorizationRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HybridConnectionAuthorizationRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -123,8 +123,8 @@ type HybridConnectionAuthorizationRuleSpec struct {
 
 // HybridConnectionAuthorizationRuleStatus defines the observed state of HybridConnectionAuthorizationRule.
 type HybridConnectionAuthorizationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HybridConnectionAuthorizationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HybridConnectionAuthorizationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

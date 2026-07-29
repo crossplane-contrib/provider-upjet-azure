@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppIntegrationAccountBatchConfigurationInitParameters struct {
@@ -26,11 +25,11 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 
 	// Reference to a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameRef *v1.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
+	IntegrationAccountNameRef *v2.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameSelector *v1.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
+	IntegrationAccountNameSelector *v2.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
 	// +mapType=granular
@@ -48,11 +47,11 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type AppIntegrationAccountBatchConfigurationObservation struct {
@@ -94,11 +93,11 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 
 	// Reference to a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameRef *v1.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
+	IntegrationAccountNameRef *v2.NamespacedReference `json:"integrationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a AppIntegrationAccount in logic to populate integrationAccountName.
 	// +kubebuilder:validation:Optional
-	IntegrationAccountNameSelector *v1.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
+	IntegrationAccountNameSelector *v2.NamespacedSelector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
 	// +kubebuilder:validation:Optional
@@ -120,11 +119,11 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type MonthlyInitParameters struct {
@@ -354,8 +353,8 @@ type AppIntegrationAccountBatchConfigurationSpec struct {
 
 // AppIntegrationAccountBatchConfigurationStatus defines the observed state of AppIntegrationAccountBatchConfiguration.
 type AppIntegrationAccountBatchConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppIntegrationAccountBatchConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppIntegrationAccountBatchConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

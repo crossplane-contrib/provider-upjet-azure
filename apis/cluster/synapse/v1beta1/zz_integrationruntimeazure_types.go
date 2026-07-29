@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IntegrationRuntimeAzureInitParameters struct {
@@ -81,11 +81,11 @@ type IntegrationRuntimeAzureParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -94,8 +94,8 @@ type IntegrationRuntimeAzureParameters struct {
 
 // IntegrationRuntimeAzureSpec defines the desired state of IntegrationRuntimeAzure
 type IntegrationRuntimeAzureSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IntegrationRuntimeAzureParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IntegrationRuntimeAzureParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -111,8 +111,8 @@ type IntegrationRuntimeAzureSpec struct {
 
 // IntegrationRuntimeAzureStatus defines the observed state of IntegrationRuntimeAzure.
 type IntegrationRuntimeAzureStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationRuntimeAzureObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationRuntimeAzureObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

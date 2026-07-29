@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NATIPConfigurationInitParameters struct {
@@ -35,11 +34,11 @@ type NATIPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NATIPConfigurationObservation struct {
@@ -86,11 +85,11 @@ type NATIPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateLinkServiceInitParameters struct {
@@ -215,11 +214,11 @@ type PrivateLinkServiceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -251,8 +250,8 @@ type PrivateLinkServiceSpec struct {
 
 // PrivateLinkServiceStatus defines the observed state of PrivateLinkService.
 type PrivateLinkServiceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateLinkServiceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateLinkServiceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

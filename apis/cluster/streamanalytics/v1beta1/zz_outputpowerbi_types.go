@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputPowerBIInitParameters struct {
@@ -31,11 +31,11 @@ type OutputPowerBIInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v1.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
+	StreamAnalyticsJobIDRef *v2.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobIDSelector *v2.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 
 	// The name of the Power BI table under the specified dataset.
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
@@ -96,11 +96,11 @@ type OutputPowerBIParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v1.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
+	StreamAnalyticsJobIDRef *v2.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobIDSelector *v2.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 
 	// The name of the Power BI table under the specified dataset.
 	// +kubebuilder:validation:Optional
@@ -117,8 +117,8 @@ type OutputPowerBIParameters struct {
 
 // OutputPowerBISpec defines the desired state of OutputPowerBI
 type OutputPowerBISpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     OutputPowerBIParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   OutputPowerBIParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type OutputPowerBISpec struct {
 
 // OutputPowerBIStatus defines the observed state of OutputPowerBI.
 type OutputPowerBIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputPowerBIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputPowerBIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

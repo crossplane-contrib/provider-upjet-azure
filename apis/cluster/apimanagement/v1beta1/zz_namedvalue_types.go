@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NamedValueInitParameters struct {
@@ -28,7 +28,7 @@ type NamedValueInitParameters struct {
 	ValueFromKeyVault []ValueFromKeyVaultInitParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
 
 	// The value of this API Management Named Value.
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type NamedValueObservation struct {
@@ -64,11 +64,11 @@ type NamedValueParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The display name of this API Management Named Value.
 	// +kubebuilder:validation:Optional
@@ -81,11 +81,11 @@ type NamedValueParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies whether the API Management Named Value is secret. Valid values are true or false. The default value is false.
 	// +kubebuilder:validation:Optional
@@ -101,7 +101,7 @@ type NamedValueParameters struct {
 
 	// The value of this API Management Named Value.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type ValueFromKeyVaultInitParameters struct {
@@ -135,8 +135,8 @@ type ValueFromKeyVaultParameters struct {
 
 // NamedValueSpec defines the desired state of NamedValue
 type NamedValueSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NamedValueParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NamedValueParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -152,8 +152,8 @@ type NamedValueSpec struct {
 
 // NamedValueStatus defines the observed state of NamedValue.
 type NamedValueStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NamedValueObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NamedValueObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

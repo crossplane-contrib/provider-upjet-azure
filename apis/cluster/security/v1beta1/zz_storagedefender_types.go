@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type StorageDefenderInitParameters struct {
@@ -37,11 +37,11 @@ type StorageDefenderInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageDefenderObservation struct {
@@ -98,17 +98,17 @@ type StorageDefenderParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 // StorageDefenderSpec defines the desired state of StorageDefender
 type StorageDefenderSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     StorageDefenderParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   StorageDefenderParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -124,8 +124,8 @@ type StorageDefenderSpec struct {
 
 // StorageDefenderStatus defines the observed state of StorageDefender.
 type StorageDefenderStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        StorageDefenderObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               StorageDefenderObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

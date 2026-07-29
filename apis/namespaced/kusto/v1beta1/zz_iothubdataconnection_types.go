@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubDataConnectionInitParameters struct {
@@ -22,11 +21,11 @@ type IOTHubDataConnectionInitParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the IotHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubConsumerGroup
@@ -34,11 +33,11 @@ type IOTHubDataConnectionInitParameters struct {
 
 	// Reference to a IOTHubConsumerGroup in devices to populate consumerGroup.
 	// +kubebuilder:validation:Optional
-	ConsumerGroupRef *v1.NamespacedReference `json:"consumerGroupRef,omitempty" tf:"-"`
+	ConsumerGroupRef *v2.NamespacedReference `json:"consumerGroupRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHubConsumerGroup in devices to populate consumerGroup.
 	// +kubebuilder:validation:Optional
-	ConsumerGroupSelector *v1.NamespacedSelector `json:"consumerGroupSelector,omitempty" tf:"-"`
+	ConsumerGroupSelector *v2.NamespacedSelector `json:"consumerGroupSelector,omitempty" tf:"-"`
 
 	// Specifies the data format of the IoTHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE. Changing this forces a new resource to be created.
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
@@ -49,11 +48,11 @@ type IOTHubDataConnectionInitParameters struct {
 
 	// Reference to a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created. Defaults to Single.
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
@@ -69,11 +68,11 @@ type IOTHubDataConnectionInitParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.NamespacedReference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.NamespacedReference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.NamespacedSelector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.NamespacedSelector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -90,11 +89,11 @@ type IOTHubDataConnectionInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the date after which data should be retrieved from IoT Hub. When defined, the data connection retrieves existing events created since the specified retrieval start date. It can only retrieve events retained by the IoT Hub, based on its retention period. The value should be in RFC3339 format (e.g., 2023-06-26T12:00:00Z).
 	RetrievalStartDate *string `json:"retrievalStartDate,omitempty" tf:"retrieval_start_date,omitempty"`
@@ -105,11 +104,11 @@ type IOTHubDataConnectionInitParameters struct {
 
 	// Reference to a IOTHubSharedAccessPolicy in devices to populate sharedAccessPolicyName.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyNameRef *v1.NamespacedReference `json:"sharedAccessPolicyNameRef,omitempty" tf:"-"`
+	SharedAccessPolicyNameRef *v2.NamespacedReference `json:"sharedAccessPolicyNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHubSharedAccessPolicy in devices to populate sharedAccessPolicyName.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyNameSelector *v1.NamespacedSelector `json:"sharedAccessPolicyNameSelector,omitempty" tf:"-"`
+	SharedAccessPolicyNameSelector *v2.NamespacedSelector `json:"sharedAccessPolicyNameSelector,omitempty" tf:"-"`
 
 	// Specifies the target table name used for the message ingestion. Table must exist before resource is created. Changing this forces a new resource to be created.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -173,11 +172,11 @@ type IOTHubDataConnectionParameters struct {
 
 	// Reference to a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the IotHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubConsumerGroup
@@ -186,11 +185,11 @@ type IOTHubDataConnectionParameters struct {
 
 	// Reference to a IOTHubConsumerGroup in devices to populate consumerGroup.
 	// +kubebuilder:validation:Optional
-	ConsumerGroupRef *v1.NamespacedReference `json:"consumerGroupRef,omitempty" tf:"-"`
+	ConsumerGroupRef *v2.NamespacedReference `json:"consumerGroupRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHubConsumerGroup in devices to populate consumerGroup.
 	// +kubebuilder:validation:Optional
-	ConsumerGroupSelector *v1.NamespacedSelector `json:"consumerGroupSelector,omitempty" tf:"-"`
+	ConsumerGroupSelector *v2.NamespacedSelector `json:"consumerGroupSelector,omitempty" tf:"-"`
 
 	// Specifies the data format of the IoTHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -203,11 +202,11 @@ type IOTHubDataConnectionParameters struct {
 
 	// Reference to a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created. Defaults to Single.
 	// +kubebuilder:validation:Optional
@@ -226,11 +225,11 @@ type IOTHubDataConnectionParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.NamespacedReference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.NamespacedReference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.NamespacedSelector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.NamespacedSelector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -251,11 +250,11 @@ type IOTHubDataConnectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the date after which data should be retrieved from IoT Hub. When defined, the data connection retrieves existing events created since the specified retrieval start date. It can only retrieve events retained by the IoT Hub, based on its retention period. The value should be in RFC3339 format (e.g., 2023-06-26T12:00:00Z).
 	// +kubebuilder:validation:Optional
@@ -268,11 +267,11 @@ type IOTHubDataConnectionParameters struct {
 
 	// Reference to a IOTHubSharedAccessPolicy in devices to populate sharedAccessPolicyName.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyNameRef *v1.NamespacedReference `json:"sharedAccessPolicyNameRef,omitempty" tf:"-"`
+	SharedAccessPolicyNameRef *v2.NamespacedReference `json:"sharedAccessPolicyNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHubSharedAccessPolicy in devices to populate sharedAccessPolicyName.
 	// +kubebuilder:validation:Optional
-	SharedAccessPolicyNameSelector *v1.NamespacedSelector `json:"sharedAccessPolicyNameSelector,omitempty" tf:"-"`
+	SharedAccessPolicyNameSelector *v2.NamespacedSelector `json:"sharedAccessPolicyNameSelector,omitempty" tf:"-"`
 
 	// Specifies the target table name used for the message ingestion. Table must exist before resource is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -298,8 +297,8 @@ type IOTHubDataConnectionSpec struct {
 
 // IOTHubDataConnectionStatus defines the observed state of IOTHubDataConnection.
 type IOTHubDataConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubDataConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubDataConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

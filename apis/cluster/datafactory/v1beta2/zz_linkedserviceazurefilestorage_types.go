@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LinkedServiceAzureFileStorageInitParameters struct {
@@ -23,7 +23,7 @@ type LinkedServiceAzureFileStorageInitParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string.
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -45,7 +45,7 @@ type LinkedServiceAzureFileStorageInitParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The password to log in the server.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The user ID to log in the server.
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
@@ -131,7 +131,7 @@ type LinkedServiceAzureFileStorageParameters struct {
 
 	// The connection string.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.Factory
@@ -141,11 +141,11 @@ type LinkedServiceAzureFileStorageParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -174,7 +174,7 @@ type LinkedServiceAzureFileStorageParameters struct {
 
 	// The password to log in the server.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The user ID to log in the server.
 	// +kubebuilder:validation:Optional
@@ -183,8 +183,8 @@ type LinkedServiceAzureFileStorageParameters struct {
 
 // LinkedServiceAzureFileStorageSpec defines the desired state of LinkedServiceAzureFileStorage
 type LinkedServiceAzureFileStorageSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceAzureFileStorageParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceAzureFileStorageParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -200,8 +200,8 @@ type LinkedServiceAzureFileStorageSpec struct {
 
 // LinkedServiceAzureFileStorageStatus defines the observed state of LinkedServiceAzureFileStorage.
 type LinkedServiceAzureFileStorageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceAzureFileStorageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceAzureFileStorageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

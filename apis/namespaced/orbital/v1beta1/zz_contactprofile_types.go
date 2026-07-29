@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ChannelsInitParameters struct {
@@ -110,11 +109,11 @@ type ContactProfileInitParameters struct {
 
 	// Reference to a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDRef *v1.NamespacedReference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDRef *v2.NamespacedReference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDSelector *v1.NamespacedSelector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDSelector *v2.NamespacedSelector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -189,11 +188,11 @@ type ContactProfileParameters struct {
 
 	// Reference to a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDRef *v1.NamespacedReference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDRef *v2.NamespacedReference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDSelector *v1.NamespacedSelector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDSelector *v2.NamespacedSelector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the contact profile exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -202,11 +201,11 @@ type ContactProfileParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -331,8 +330,8 @@ type ContactProfileSpec struct {
 
 // ContactProfileStatus defines the observed state of ContactProfile.
 type ContactProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContactProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContactProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

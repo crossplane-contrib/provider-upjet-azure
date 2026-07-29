@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DiagnosticStorageAccountInitParameters struct {
 
 	// Connection String of the Diagnostic Storage Account.
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// Resource ID of the Diagnostic Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -25,11 +25,11 @@ type DiagnosticStorageAccountInitParameters struct {
 
 	// Reference to a Account in storage to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type DiagnosticStorageAccountObservation struct {
@@ -42,7 +42,7 @@ type DiagnosticStorageAccountParameters struct {
 
 	// Connection String of the Diagnostic Storage Account.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// Resource ID of the Diagnostic Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -52,11 +52,11 @@ type DiagnosticStorageAccountParameters struct {
 
 	// Reference to a Account in storage to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type IOTHubDeviceUpdateInstanceInitParameters struct {
@@ -74,11 +74,11 @@ type IOTHubDeviceUpdateInstanceInitParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.Reference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
 	// +mapType=granular
@@ -117,11 +117,11 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 
 	// Reference to a IOTHubDeviceUpdateAccount in deviceupdate to populate deviceUpdateAccountId.
 	// +kubebuilder:validation:Optional
-	DeviceUpdateAccountIDRef *v1.Reference `json:"deviceUpdateAccountIdRef,omitempty" tf:"-"`
+	DeviceUpdateAccountIDRef *v2.Reference `json:"deviceUpdateAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHubDeviceUpdateAccount in deviceupdate to populate deviceUpdateAccountId.
 	// +kubebuilder:validation:Optional
-	DeviceUpdateAccountIDSelector *v1.Selector `json:"deviceUpdateAccountIdSelector,omitempty" tf:"-"`
+	DeviceUpdateAccountIDSelector *v2.Selector `json:"deviceUpdateAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether the diagnostic log collection is enabled. Possible values are true and false. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -139,11 +139,11 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.Reference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
 	// +kubebuilder:validation:Optional
@@ -153,8 +153,8 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 
 // IOTHubDeviceUpdateInstanceSpec defines the desired state of IOTHubDeviceUpdateInstance
 type IOTHubDeviceUpdateInstanceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTHubDeviceUpdateInstanceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTHubDeviceUpdateInstanceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -170,8 +170,8 @@ type IOTHubDeviceUpdateInstanceSpec struct {
 
 // IOTHubDeviceUpdateInstanceStatus defines the observed state of IOTHubDeviceUpdateInstance.
 type IOTHubDeviceUpdateInstanceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubDeviceUpdateInstanceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubDeviceUpdateInstanceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

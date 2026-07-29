@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppTriggerCustomInitParameters struct {
@@ -49,11 +48,11 @@ type AppTriggerCustomParameters struct {
 
 	// Reference to a AppWorkflow in logic to populate logicAppId.
 	// +kubebuilder:validation:Optional
-	LogicAppIDRef *v1.NamespacedReference `json:"logicAppIdRef,omitempty" tf:"-"`
+	LogicAppIDRef *v2.NamespacedReference `json:"logicAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppWorkflow in logic to populate logicAppId.
 	// +kubebuilder:validation:Optional
-	LogicAppIDSelector *v1.NamespacedSelector `json:"logicAppIdSelector,omitempty" tf:"-"`
+	LogicAppIDSelector *v2.NamespacedSelector `json:"logicAppIdSelector,omitempty" tf:"-"`
 }
 
 // AppTriggerCustomSpec defines the desired state of AppTriggerCustom
@@ -75,8 +74,8 @@ type AppTriggerCustomSpec struct {
 
 // AppTriggerCustomStatus defines the observed state of AppTriggerCustom.
 type AppTriggerCustomStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppTriggerCustomObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppTriggerCustomObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

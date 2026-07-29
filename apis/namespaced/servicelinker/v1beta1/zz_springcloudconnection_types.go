@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthenticationInitParameters struct {
 
 	// Service principal certificate for servicePrincipal auth. Should be specified when type is set to servicePrincipalCertificate.
-	CertificateSecretRef *v1.LocalSecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.LocalSecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
@@ -29,7 +28,7 @@ type AuthenticationInitParameters struct {
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// Password or account key for secret auth. secret and name should be either both specified or both not specified when type is set to secret.
-	SecretSecretRef *v1.LocalSecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
+	SecretSecretRef *v2.LocalSecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
@@ -60,7 +59,7 @@ type AuthenticationParameters struct {
 
 	// Service principal certificate for servicePrincipal auth. Should be specified when type is set to servicePrincipalCertificate.
 	// +kubebuilder:validation:Optional
-	CertificateSecretRef *v1.LocalSecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+	CertificateSecretRef *v2.LocalSecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
 	// +kubebuilder:validation:Optional
@@ -76,7 +75,7 @@ type AuthenticationParameters struct {
 
 	// Password or account key for secret auth. secret and name should be either both specified or both not specified when type is set to secret.
 	// +kubebuilder:validation:Optional
-	SecretSecretRef *v1.LocalSecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
+	SecretSecretRef *v2.LocalSecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
 	// +kubebuilder:validation:Optional
@@ -127,11 +126,11 @@ type SpringCloudConnectionInitParameters struct {
 
 	// Reference to a SpringCloudJavaDeployment in appplatform to populate springCloudId.
 	// +kubebuilder:validation:Optional
-	SpringCloudIDRef *v1.NamespacedReference `json:"springCloudIdRef,omitempty" tf:"-"`
+	SpringCloudIDRef *v2.NamespacedReference `json:"springCloudIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudJavaDeployment in appplatform to populate springCloudId.
 	// +kubebuilder:validation:Optional
-	SpringCloudIDSelector *v1.NamespacedSelector `json:"springCloudIdSelector,omitempty" tf:"-"`
+	SpringCloudIDSelector *v2.NamespacedSelector `json:"springCloudIdSelector,omitempty" tf:"-"`
 
 	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
@@ -140,11 +139,11 @@ type SpringCloudConnectionInitParameters struct {
 
 	// Reference to a SQLDatabase in cosmosdb to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLDatabase in cosmosdb to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
 	VnetSolution *string `json:"vnetSolution,omitempty" tf:"vnet_solution,omitempty"`
@@ -203,11 +202,11 @@ type SpringCloudConnectionParameters struct {
 
 	// Reference to a SpringCloudJavaDeployment in appplatform to populate springCloudId.
 	// +kubebuilder:validation:Optional
-	SpringCloudIDRef *v1.NamespacedReference `json:"springCloudIdRef,omitempty" tf:"-"`
+	SpringCloudIDRef *v2.NamespacedReference `json:"springCloudIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudJavaDeployment in appplatform to populate springCloudId.
 	// +kubebuilder:validation:Optional
-	SpringCloudIDSelector *v1.NamespacedSelector `json:"springCloudIdSelector,omitempty" tf:"-"`
+	SpringCloudIDSelector *v2.NamespacedSelector `json:"springCloudIdSelector,omitempty" tf:"-"`
 
 	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
@@ -217,11 +216,11 @@ type SpringCloudConnectionParameters struct {
 
 	// Reference to a SQLDatabase in cosmosdb to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLDatabase in cosmosdb to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
 	// +kubebuilder:validation:Optional
@@ -247,8 +246,8 @@ type SpringCloudConnectionSpec struct {
 
 // SpringCloudConnectionStatus defines the observed state of SpringCloudConnection.
 type SpringCloudConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

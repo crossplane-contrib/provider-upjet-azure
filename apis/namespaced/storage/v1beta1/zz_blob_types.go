@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlobInitParameters struct {
@@ -56,11 +55,11 @@ type BlobInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The ID of the storage container in which this blob should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -69,11 +68,11 @@ type BlobInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -81,11 +80,11 @@ type BlobInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
 	// The type of the storage blob to be created. Possible values are Append, Block or Page. Changing this forces a new resource to be created.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -200,11 +199,11 @@ type BlobParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.NamespacedReference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.NamespacedSelector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The ID of the storage container in which this blob should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -214,11 +213,11 @@ type BlobParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -227,11 +226,11 @@ type BlobParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.NamespacedReference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.NamespacedSelector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
 	// The type of the storage blob to be created. Possible values are Append, Block or Page. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -257,8 +256,8 @@ type BlobSpec struct {
 
 // BlobStatus defines the observed state of Blob.
 type BlobStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BlobObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BlobObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

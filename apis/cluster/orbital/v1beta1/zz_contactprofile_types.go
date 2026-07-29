@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ChannelsInitParameters struct {
@@ -109,11 +109,11 @@ type ContactProfileInitParameters struct {
 
 	// Reference to a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDRef *v1.Reference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDRef *v2.Reference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDSelector *v1.Selector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDSelector *v2.Selector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -188,11 +188,11 @@ type ContactProfileParameters struct {
 
 	// Reference to a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDRef *v1.Reference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDRef *v2.Reference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate networkConfigurationSubnetId.
 	// +kubebuilder:validation:Optional
-	NetworkConfigurationSubnetIDSelector *v1.Selector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
+	NetworkConfigurationSubnetIDSelector *v2.Selector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the contact profile exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -201,11 +201,11 @@ type ContactProfileParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -313,8 +313,8 @@ type LinksParameters struct {
 
 // ContactProfileSpec defines the desired state of ContactProfile
 type ContactProfileSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContactProfileParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ContactProfileParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -330,8 +330,8 @@ type ContactProfileSpec struct {
 
 // ContactProfileStatus defines the observed state of ContactProfile.
 type ContactProfileStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContactProfileObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContactProfileObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

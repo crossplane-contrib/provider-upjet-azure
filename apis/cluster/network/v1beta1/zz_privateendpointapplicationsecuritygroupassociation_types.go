@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateEndpointApplicationSecurityGroupAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type PrivateEndpointApplicationSecurityGroupAssociationInitParameters struct {
 
 	// Reference to a ApplicationSecurityGroup in network to populate applicationSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationSecurityGroupIDRef *v1.Reference `json:"applicationSecurityGroupIdRef,omitempty" tf:"-"`
+	ApplicationSecurityGroupIDRef *v2.Reference `json:"applicationSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationSecurityGroup in network to populate applicationSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationSecurityGroupIDSelector *v1.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
+	ApplicationSecurityGroupIDSelector *v2.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The id of private endpoint to associate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.PrivateEndpoint
@@ -35,11 +35,11 @@ type PrivateEndpointApplicationSecurityGroupAssociationInitParameters struct {
 
 	// Reference to a PrivateEndpoint in network to populate privateEndpointId.
 	// +kubebuilder:validation:Optional
-	PrivateEndpointIDRef *v1.Reference `json:"privateEndpointIdRef,omitempty" tf:"-"`
+	PrivateEndpointIDRef *v2.Reference `json:"privateEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateEndpoint in network to populate privateEndpointId.
 	// +kubebuilder:validation:Optional
-	PrivateEndpointIDSelector *v1.Selector `json:"privateEndpointIdSelector,omitempty" tf:"-"`
+	PrivateEndpointIDSelector *v2.Selector `json:"privateEndpointIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateEndpointApplicationSecurityGroupAssociationObservation struct {
@@ -63,11 +63,11 @@ type PrivateEndpointApplicationSecurityGroupAssociationParameters struct {
 
 	// Reference to a ApplicationSecurityGroup in network to populate applicationSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationSecurityGroupIDRef *v1.Reference `json:"applicationSecurityGroupIdRef,omitempty" tf:"-"`
+	ApplicationSecurityGroupIDRef *v2.Reference `json:"applicationSecurityGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationSecurityGroup in network to populate applicationSecurityGroupId.
 	// +kubebuilder:validation:Optional
-	ApplicationSecurityGroupIDSelector *v1.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
+	ApplicationSecurityGroupIDSelector *v2.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The id of private endpoint to associate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.PrivateEndpoint
@@ -77,17 +77,17 @@ type PrivateEndpointApplicationSecurityGroupAssociationParameters struct {
 
 	// Reference to a PrivateEndpoint in network to populate privateEndpointId.
 	// +kubebuilder:validation:Optional
-	PrivateEndpointIDRef *v1.Reference `json:"privateEndpointIdRef,omitempty" tf:"-"`
+	PrivateEndpointIDRef *v2.Reference `json:"privateEndpointIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateEndpoint in network to populate privateEndpointId.
 	// +kubebuilder:validation:Optional
-	PrivateEndpointIDSelector *v1.Selector `json:"privateEndpointIdSelector,omitempty" tf:"-"`
+	PrivateEndpointIDSelector *v2.Selector `json:"privateEndpointIdSelector,omitempty" tf:"-"`
 }
 
 // PrivateEndpointApplicationSecurityGroupAssociationSpec defines the desired state of PrivateEndpointApplicationSecurityGroupAssociation
 type PrivateEndpointApplicationSecurityGroupAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateEndpointApplicationSecurityGroupAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PrivateEndpointApplicationSecurityGroupAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -103,8 +103,8 @@ type PrivateEndpointApplicationSecurityGroupAssociationSpec struct {
 
 // PrivateEndpointApplicationSecurityGroupAssociationStatus defines the observed state of PrivateEndpointApplicationSecurityGroupAssociation.
 type PrivateEndpointApplicationSecurityGroupAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateEndpointApplicationSecurityGroupAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateEndpointApplicationSecurityGroupAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

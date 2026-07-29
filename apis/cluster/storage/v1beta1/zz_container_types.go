@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerInitParameters struct {
@@ -35,11 +35,11 @@ type ContainerInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The name of the Storage Account where the Container should be created. This property is deprecated in favour of storage_account_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -47,11 +47,11 @@ type ContainerInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }
 
 type ContainerObservation struct {
@@ -118,11 +118,11 @@ type ContainerParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The name of the Storage Account where the Container should be created. This property is deprecated in favour of storage_account_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -131,17 +131,17 @@ type ContainerParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageAccountNameRef *v2.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }
 
 // ContainerSpec defines the desired state of Container
 type ContainerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContainerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ContainerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -157,8 +157,8 @@ type ContainerSpec struct {
 
 // ContainerStatus defines the observed state of Container.
 type ContainerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

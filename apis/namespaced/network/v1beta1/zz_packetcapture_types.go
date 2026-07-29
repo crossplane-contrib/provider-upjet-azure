@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PacketCaptureFilterInitParameters struct {
@@ -110,11 +109,11 @@ type PacketCaptureParameters struct {
 
 	// Reference to a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
-	NetworkWatcherNameRef *v1.NamespacedReference `json:"networkWatcherNameRef,omitempty" tf:"-"`
+	NetworkWatcherNameRef *v2.NamespacedReference `json:"networkWatcherNameRef,omitempty" tf:"-"`
 
 	// Selector for a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
-	NetworkWatcherNameSelector *v1.NamespacedSelector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
+	NetworkWatcherNameSelector *v2.NamespacedSelector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -122,11 +121,11 @@ type PacketCaptureParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	StorageLocation *StorageLocationParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
@@ -144,11 +143,11 @@ type StorageLocationInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageLocationObservation struct {
@@ -171,11 +170,11 @@ type StorageLocationParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 // PacketCaptureSpec defines the desired state of PacketCapture
@@ -197,8 +196,8 @@ type PacketCaptureSpec struct {
 
 // PacketCaptureStatus defines the observed state of PacketCapture.
 type PacketCaptureStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PacketCaptureObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PacketCaptureObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

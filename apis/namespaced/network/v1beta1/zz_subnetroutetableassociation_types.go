@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubnetRouteTableAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type SubnetRouteTableAssociationInitParameters struct {
 
 	// Reference to a RouteTable in network to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in network to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -36,11 +35,11 @@ type SubnetRouteTableAssociationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetRouteTableAssociationObservation struct {
@@ -65,11 +64,11 @@ type SubnetRouteTableAssociationParameters struct {
 
 	// Reference to a RouteTable in network to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDRef *v1.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
+	RouteTableIDRef *v2.NamespacedReference `json:"routeTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in network to populate routeTableId.
 	// +kubebuilder:validation:Optional
-	RouteTableIDSelector *v1.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
+	RouteTableIDSelector *v2.NamespacedSelector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -79,11 +78,11 @@ type SubnetRouteTableAssociationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // SubnetRouteTableAssociationSpec defines the desired state of SubnetRouteTableAssociation
@@ -105,8 +104,8 @@ type SubnetRouteTableAssociationSpec struct {
 
 // SubnetRouteTableAssociationStatus defines the observed state of SubnetRouteTableAssociation.
 type SubnetRouteTableAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetRouteTableAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubnetRouteTableAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExpressRouteCircuitConnectionInitParameters struct {
@@ -22,7 +22,7 @@ type ExpressRouteCircuitConnectionInitParameters struct {
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
 	// The authorization key which is associated with the Express Route Circuit Connection.
-	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+	AuthorizationKeySecretRef *v2.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.ExpressRouteCircuitPeering
@@ -31,11 +31,11 @@ type ExpressRouteCircuitConnectionInitParameters struct {
 
 	// Reference to a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
-	PeerPeeringIDRef *v1.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
+	PeerPeeringIDRef *v2.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
-	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
+	PeerPeeringIDSelector *v2.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 }
 
 type ExpressRouteCircuitConnectionObservation struct {
@@ -68,7 +68,7 @@ type ExpressRouteCircuitConnectionParameters struct {
 
 	// The authorization key which is associated with the Express Route Circuit Connection.
 	// +kubebuilder:validation:Optional
-	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+	AuthorizationKeySecretRef *v2.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.ExpressRouteCircuitPeering
@@ -78,11 +78,11 @@ type ExpressRouteCircuitConnectionParameters struct {
 
 	// Reference to a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
-	PeerPeeringIDRef *v1.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
+	PeerPeeringIDRef *v2.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
-	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
+	PeerPeeringIDSelector *v2.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Express Route Circuit Private Peering that this Express Route Circuit Connection connects with. Changing this forces a new Express Route Circuit Connection to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.ExpressRouteCircuitPeering
@@ -92,17 +92,17 @@ type ExpressRouteCircuitConnectionParameters struct {
 
 	// Reference to a ExpressRouteCircuitPeering in network to populate peeringId.
 	// +kubebuilder:validation:Optional
-	PeeringIDRef *v1.Reference `json:"peeringIdRef,omitempty" tf:"-"`
+	PeeringIDRef *v2.Reference `json:"peeringIdRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteCircuitPeering in network to populate peeringId.
 	// +kubebuilder:validation:Optional
-	PeeringIDSelector *v1.Selector `json:"peeringIdSelector,omitempty" tf:"-"`
+	PeeringIDSelector *v2.Selector `json:"peeringIdSelector,omitempty" tf:"-"`
 }
 
 // ExpressRouteCircuitConnectionSpec defines the desired state of ExpressRouteCircuitConnection
 type ExpressRouteCircuitConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ExpressRouteCircuitConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ExpressRouteCircuitConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type ExpressRouteCircuitConnectionSpec struct {
 
 // ExpressRouteCircuitConnectionStatus defines the observed state of ExpressRouteCircuitConnection.
 type ExpressRouteCircuitConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExpressRouteCircuitConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExpressRouteCircuitConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

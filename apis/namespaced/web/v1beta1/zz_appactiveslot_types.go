@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppActiveSlotInitParameters struct {
@@ -28,11 +27,11 @@ type AppActiveSlotInitParameters struct {
 
 	// Reference to a WindowsWebAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDRef *v1.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
+	SlotIDRef *v2.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsWebAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDSelector *v1.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
+	SlotIDSelector *v2.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
 }
 
 type AppActiveSlotObservation struct {
@@ -69,11 +68,11 @@ type AppActiveSlotParameters struct {
 
 	// Reference to a WindowsWebAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDRef *v1.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
+	SlotIDRef *v2.NamespacedReference `json:"slotIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsWebAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
-	SlotIDSelector *v1.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
+	SlotIDSelector *v2.NamespacedSelector `json:"slotIdSelector,omitempty" tf:"-"`
 }
 
 // AppActiveSlotSpec defines the desired state of AppActiveSlot
@@ -95,8 +94,8 @@ type AppActiveSlotSpec struct {
 
 // AppActiveSlotStatus defines the observed state of AppActiveSlot.
 type AppActiveSlotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppActiveSlotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppActiveSlotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

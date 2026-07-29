@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MatchCriterionInitParameters struct {
@@ -134,11 +133,11 @@ type RouteMapParameters struct {
 
 	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDRef *v1.NamespacedReference `json:"virtualHubIdRef,omitempty" tf:"-"`
+	VirtualHubIDRef *v2.NamespacedReference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDSelector *v1.NamespacedSelector `json:"virtualHubIdSelector,omitempty" tf:"-"`
+	VirtualHubIDSelector *v2.NamespacedSelector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 type RouteMapRuleInitParameters struct {
@@ -238,8 +237,8 @@ type RouteMapSpec struct {
 
 // RouteMapStatus defines the observed state of RouteMap.
 type RouteMapStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteMapObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RouteMapObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APISchemaInitParameters struct {
@@ -64,11 +64,11 @@ type APISchemaParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API within the API Management Service where this API Schema should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.API
@@ -77,11 +77,11 @@ type APISchemaParameters struct {
 
 	// Reference to a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameRef *v1.Reference `json:"apiNameRef,omitempty" tf:"-"`
+	APINameRef *v2.Reference `json:"apiNameRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameSelector *v1.Selector `json:"apiNameSelector,omitempty" tf:"-"`
+	APINameSelector *v2.Selector `json:"apiNameSelector,omitempty" tf:"-"`
 
 	// Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only.
 	// +kubebuilder:validation:Optional
@@ -102,11 +102,11 @@ type APISchemaParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The JSON escaped string defining the document representing the Schema.
 	// +kubebuilder:validation:Optional
@@ -115,8 +115,8 @@ type APISchemaParameters struct {
 
 // APISchemaSpec defines the desired state of APISchema
 type APISchemaSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     APISchemaParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   APISchemaParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -132,8 +132,8 @@ type APISchemaSpec struct {
 
 // APISchemaStatus defines the observed state of APISchema.
 type APISchemaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APISchemaObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APISchemaObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationGatewayInitParameters struct {
@@ -351,11 +351,11 @@ type ApplicationGatewayParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 WAF and Standard SKUs.
 	// +kubebuilder:validation:Optional
@@ -411,7 +411,7 @@ type ApplicationGatewayParameters struct {
 type AuthenticationCertificateInitParameters struct {
 
 	// The contents of the Authentication Certificate which should be used.
-	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
+	DataSecretRef v2.SecretKeySelector `json:"dataSecretRef" tf:"-"`
 
 	// The Name of the Authentication Certificate to use.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -430,7 +430,7 @@ type AuthenticationCertificateParameters struct {
 
 	// The contents of the Authentication Certificate which should be used.
 	// +kubebuilder:validation:Optional
-	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
+	DataSecretRef v2.SecretKeySelector `json:"dataSecretRef" tf:"-"`
 
 	// The Name of the Authentication Certificate to use.
 	// +kubebuilder:validation:Optional
@@ -1019,11 +1019,11 @@ type FrontendIPConfigurationInitParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
@@ -1032,11 +1032,11 @@ type FrontendIPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type FrontendIPConfigurationObservation struct {
@@ -1101,11 +1101,11 @@ type FrontendIPConfigurationParameters struct {
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
@@ -1115,11 +1115,11 @@ type FrontendIPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type FrontendPortInitParameters struct {
@@ -1170,11 +1170,11 @@ type GatewayIPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type GatewayIPConfigurationObservation struct {
@@ -1212,11 +1212,11 @@ type GatewayIPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type GlobalInitParameters struct {
@@ -1438,11 +1438,11 @@ type IPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IPConfigurationObservation struct {
@@ -1489,11 +1489,11 @@ type IPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IdentityInitParameters struct {
@@ -2361,7 +2361,7 @@ type RoutingRuleParameters struct {
 type SSLCertificateInitParameters struct {
 
 	// The base64-encoded PFX certificate data. Required if key_vault_secret_id is not set.
-	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+	DataSecretRef *v2.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
@@ -2370,7 +2370,7 @@ type SSLCertificateInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Password for the pfx file specified in data. Required if data is set.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
 type SSLCertificateObservation struct {
@@ -2392,7 +2392,7 @@ type SSLCertificateParameters struct {
 
 	// The base64-encoded PFX certificate data. Required if key_vault_secret_id is not set.
 	// +kubebuilder:validation:Optional
-	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+	DataSecretRef *v2.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	// +kubebuilder:validation:Optional
@@ -2404,7 +2404,7 @@ type SSLCertificateParameters struct {
 
 	// Password for the pfx file specified in data. Required if data is set.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
 type SSLPolicyInitParameters struct {
@@ -2639,7 +2639,7 @@ type SkuParameters struct {
 type TrustedClientCertificateInitParameters struct {
 
 	// The base-64 encoded certificate.
-	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
+	DataSecretRef v2.SecretKeySelector `json:"dataSecretRef" tf:"-"`
 
 	// The name of the Trusted Client Certificate that is unique within this Application Gateway.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -2658,7 +2658,7 @@ type TrustedClientCertificateParameters struct {
 
 	// The base-64 encoded certificate.
 	// +kubebuilder:validation:Optional
-	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
+	DataSecretRef v2.SecretKeySelector `json:"dataSecretRef" tf:"-"`
 
 	// The name of the Trusted Client Certificate that is unique within this Application Gateway.
 	// +kubebuilder:validation:Optional
@@ -2668,7 +2668,7 @@ type TrustedClientCertificateParameters struct {
 type TrustedRootCertificateInitParameters struct {
 
 	// The contents of the Trusted Root Certificate which should be used. Required if key_vault_secret_id is not set.
-	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+	DataSecretRef *v2.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
@@ -2693,7 +2693,7 @@ type TrustedRootCertificateParameters struct {
 
 	// The contents of the Trusted Root Certificate which should be used. Required if key_vault_secret_id is not set.
 	// +kubebuilder:validation:Optional
-	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+	DataSecretRef *v2.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Secret ID of the (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
 	// +kubebuilder:validation:Optional
@@ -2938,8 +2938,8 @@ type WafConfigurationParameters struct {
 
 // ApplicationGatewaySpec defines the desired state of ApplicationGateway
 type ApplicationGatewaySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ApplicationGatewayParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ApplicationGatewayParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2955,8 +2955,8 @@ type ApplicationGatewaySpec struct {
 
 // ApplicationGatewayStatus defines the observed state of ApplicationGateway.
 type ApplicationGatewayStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationGatewayObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationGatewayObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

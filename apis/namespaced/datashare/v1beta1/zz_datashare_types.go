@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataShareInitParameters struct {
@@ -60,11 +59,11 @@ type DataShareParameters struct {
 
 	// Reference to a Account in datashare to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.NamespacedReference `json:"accountIdRef,omitempty" tf:"-"`
+	AccountIDRef *v2.NamespacedReference `json:"accountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in datashare to populate accountId.
 	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
+	AccountIDSelector *v2.NamespacedSelector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The Data Share's description.
 	// +kubebuilder:validation:Optional
@@ -141,8 +140,8 @@ type DataShareSpec struct {
 
 // DataShareStatus defines the observed state of DataShare.
 type DataShareStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataShareObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataShareObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

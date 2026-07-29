@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthorizationInitParameters struct {
@@ -126,11 +126,11 @@ type BackendParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// A circuit_breaker_rule block as documented below.
 	// +kubebuilder:validation:Optional
@@ -159,11 +159,11 @@ type BackendParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The management URI of the backend host in an external system. This URI can be the ARM Resource ID of Logic Apps, Function Apps or API Apps, or the management endpoint of a Service Fabric cluster.
 	// +kubebuilder:validation:Optional
@@ -189,7 +189,7 @@ type BackendParameters struct {
 type BackendProxyInitParameters struct {
 
 	// The password to connect to the proxy server.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the proxy server.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -211,7 +211,7 @@ type BackendProxyParameters struct {
 
 	// The password to connect to the proxy server.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the proxy server.
 	// +kubebuilder:validation:Optional
@@ -549,8 +549,8 @@ type TLSParameters struct {
 
 // BackendSpec defines the desired state of Backend
 type BackendSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackendParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackendParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -566,8 +566,8 @@ type BackendSpec struct {
 
 // BackendStatus defines the observed state of Backend.
 type BackendStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackendObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackendObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

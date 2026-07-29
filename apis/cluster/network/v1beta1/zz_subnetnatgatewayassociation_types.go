@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubnetNATGatewayAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type SubnetNATGatewayAssociationInitParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -35,11 +35,11 @@ type SubnetNATGatewayAssociationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetNATGatewayAssociationObservation struct {
@@ -64,11 +64,11 @@ type SubnetNATGatewayAssociationParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -78,17 +78,17 @@ type SubnetNATGatewayAssociationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // SubnetNATGatewayAssociationSpec defines the desired state of SubnetNATGatewayAssociation
 type SubnetNATGatewayAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubnetNATGatewayAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SubnetNATGatewayAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -104,8 +104,8 @@ type SubnetNATGatewayAssociationSpec struct {
 
 // SubnetNATGatewayAssociationStatus defines the observed state of SubnetNATGatewayAssociation.
 type SubnetNATGatewayAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetNATGatewayAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubnetNATGatewayAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NATGatewayPublicIPPrefixAssociationInitParameters struct {
@@ -22,11 +22,11 @@ type NATGatewayPublicIPPrefixAssociationInitParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Public IP Prefix which this NAT Gateway should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIPPrefix
@@ -35,11 +35,11 @@ type NATGatewayPublicIPPrefixAssociationInitParameters struct {
 
 	// Reference to a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
-	PublicIPPrefixIDRef *v1.Reference `json:"publicIpPrefixIdRef,omitempty" tf:"-"`
+	PublicIPPrefixIDRef *v2.Reference `json:"publicIpPrefixIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
-	PublicIPPrefixIDSelector *v1.Selector `json:"publicIpPrefixIdSelector,omitempty" tf:"-"`
+	PublicIPPrefixIDSelector *v2.Selector `json:"publicIpPrefixIdSelector,omitempty" tf:"-"`
 }
 
 type NATGatewayPublicIPPrefixAssociationObservation struct {
@@ -62,11 +62,11 @@ type NATGatewayPublicIPPrefixAssociationParameters struct {
 
 	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
+	NATGatewayIDRef *v2.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
 	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
-	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+	NATGatewayIDSelector *v2.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Public IP Prefix which this NAT Gateway should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIPPrefix
@@ -76,17 +76,17 @@ type NATGatewayPublicIPPrefixAssociationParameters struct {
 
 	// Reference to a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
-	PublicIPPrefixIDRef *v1.Reference `json:"publicIpPrefixIdRef,omitempty" tf:"-"`
+	PublicIPPrefixIDRef *v2.Reference `json:"publicIpPrefixIdRef,omitempty" tf:"-"`
 
 	// Selector for a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
-	PublicIPPrefixIDSelector *v1.Selector `json:"publicIpPrefixIdSelector,omitempty" tf:"-"`
+	PublicIPPrefixIDSelector *v2.Selector `json:"publicIpPrefixIdSelector,omitempty" tf:"-"`
 }
 
 // NATGatewayPublicIPPrefixAssociationSpec defines the desired state of NATGatewayPublicIPPrefixAssociation
 type NATGatewayPublicIPPrefixAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NATGatewayPublicIPPrefixAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NATGatewayPublicIPPrefixAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -102,8 +102,8 @@ type NATGatewayPublicIPPrefixAssociationSpec struct {
 
 // NATGatewayPublicIPPrefixAssociationStatus defines the observed state of NATGatewayPublicIPPrefixAssociation.
 type NATGatewayPublicIPPrefixAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NATGatewayPublicIPPrefixAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NATGatewayPublicIPPrefixAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

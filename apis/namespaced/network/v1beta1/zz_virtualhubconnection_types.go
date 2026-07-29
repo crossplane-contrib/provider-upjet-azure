@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RoutingPropagatedRouteTableInitParameters struct {
@@ -100,11 +99,11 @@ type VirtualHubConnectionInitParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDRef *v1.NamespacedReference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDRef *v2.NamespacedReference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDSelector *v1.NamespacedSelector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDSelector *v2.NamespacedSelector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below.
 	Routing *VirtualHubConnectionRoutingInitParameters `json:"routing,omitempty" tf:"routing,omitempty"`
@@ -142,11 +141,11 @@ type VirtualHubConnectionParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDRef *v1.NamespacedReference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDRef *v2.NamespacedReference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDSelector *v1.NamespacedSelector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDSelector *v2.NamespacedSelector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below.
 	// +kubebuilder:validation:Optional
@@ -160,11 +159,11 @@ type VirtualHubConnectionParameters struct {
 
 	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDRef *v1.NamespacedReference `json:"virtualHubIdRef,omitempty" tf:"-"`
+	VirtualHubIDRef *v2.NamespacedReference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
-	VirtualHubIDSelector *v1.NamespacedSelector `json:"virtualHubIdSelector,omitempty" tf:"-"`
+	VirtualHubIDSelector *v2.NamespacedSelector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubConnectionRoutingInitParameters struct {
@@ -176,11 +175,11 @@ type VirtualHubConnectionRoutingInitParameters struct {
 
 	// Reference to a VirtualHubRouteTable in network to populate associatedRouteTableId.
 	// +kubebuilder:validation:Optional
-	AssociatedRouteTableIDRef *v1.NamespacedReference `json:"associatedRouteTableIdRef,omitempty" tf:"-"`
+	AssociatedRouteTableIDRef *v2.NamespacedReference `json:"associatedRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHubRouteTable in network to populate associatedRouteTableId.
 	// +kubebuilder:validation:Optional
-	AssociatedRouteTableIDSelector *v1.NamespacedSelector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
+	AssociatedRouteTableIDSelector *v2.NamespacedSelector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
 	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
@@ -235,11 +234,11 @@ type VirtualHubConnectionRoutingParameters struct {
 
 	// Reference to a VirtualHubRouteTable in network to populate associatedRouteTableId.
 	// +kubebuilder:validation:Optional
-	AssociatedRouteTableIDRef *v1.NamespacedReference `json:"associatedRouteTableIdRef,omitempty" tf:"-"`
+	AssociatedRouteTableIDRef *v2.NamespacedReference `json:"associatedRouteTableIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualHubRouteTable in network to populate associatedRouteTableId.
 	// +kubebuilder:validation:Optional
-	AssociatedRouteTableIDSelector *v1.NamespacedSelector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
+	AssociatedRouteTableIDSelector *v2.NamespacedSelector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
 	// +kubebuilder:validation:Optional
@@ -285,8 +284,8 @@ type VirtualHubConnectionSpec struct {
 
 // VirtualHubConnectionStatus defines the observed state of VirtualHubConnection.
 type VirtualHubConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualHubConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualHubConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

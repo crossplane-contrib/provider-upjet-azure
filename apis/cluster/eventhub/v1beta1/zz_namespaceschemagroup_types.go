@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NamespaceSchemaGroupInitParameters struct {
@@ -47,11 +47,11 @@ type NamespaceSchemaGroupParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+	NamespaceIDRef *v2.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
+	NamespaceIDSelector *v2.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -64,8 +64,8 @@ type NamespaceSchemaGroupParameters struct {
 
 // NamespaceSchemaGroupSpec defines the desired state of NamespaceSchemaGroup
 type NamespaceSchemaGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NamespaceSchemaGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NamespaceSchemaGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -81,8 +81,8 @@ type NamespaceSchemaGroupSpec struct {
 
 // NamespaceSchemaGroupStatus defines the observed state of NamespaceSchemaGroup.
 type NamespaceSchemaGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NamespaceSchemaGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NamespaceSchemaGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

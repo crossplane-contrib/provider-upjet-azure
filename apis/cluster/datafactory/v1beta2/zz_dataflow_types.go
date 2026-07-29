@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataFlowInitParameters struct {
@@ -87,11 +87,11 @@ type DataFlowParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Data Flow.
 	// +kubebuilder:validation:Optional
@@ -130,11 +130,11 @@ type DataSetInitParameters struct {
 
 	// Reference to a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
@@ -160,11 +160,11 @@ type DataSetParameters struct {
 
 	// Reference to a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -397,11 +397,11 @@ type SourceDataSetInitParameters struct {
 
 	// Reference to a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
@@ -427,11 +427,11 @@ type SourceDataSetParameters struct {
 
 	// Reference to a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.Reference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a DataSetJSON in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -823,8 +823,8 @@ type TransformationParameters struct {
 
 // DataFlowSpec defines the desired state of DataFlow
 type DataFlowSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DataFlowParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DataFlowParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -840,8 +840,8 @@ type DataFlowSpec struct {
 
 // DataFlowStatus defines the observed state of DataFlow.
 type DataFlowStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataFlowObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataFlowObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

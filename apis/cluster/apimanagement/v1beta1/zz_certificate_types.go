@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CertificateInitParameters_2 struct {
 
 	// The base-64 encoded certificate data, which must be a PFX file.
-	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+	DataSecretRef *v2.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
 	KeyVaultIdentityClientID *string `json:"keyVaultIdentityClientId,omitempty" tf:"key_vault_identity_client_id,omitempty"`
@@ -28,14 +28,14 @@ type CertificateInitParameters_2 struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDRef *v1.Reference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
+	KeyVaultSecretIDRef *v2.Reference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDSelector *v1.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
+	KeyVaultSecretIDSelector *v2.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The password used for this certificate.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
 type CertificateObservation_2 struct {
@@ -74,15 +74,15 @@ type CertificateParameters_2 struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The base-64 encoded certificate data, which must be a PFX file.
 	// +kubebuilder:validation:Optional
-	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+	DataSecretRef *v2.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
 	// +kubebuilder:validation:Optional
@@ -96,15 +96,15 @@ type CertificateParameters_2 struct {
 
 	// Reference to a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDRef *v1.Reference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
+	KeyVaultSecretIDRef *v2.Reference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDSelector *v1.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
+	KeyVaultSecretIDSelector *v2.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The password used for this certificate.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -113,17 +113,17 @@ type CertificateParameters_2 struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // CertificateSpec defines the desired state of Certificate
 type CertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CertificateParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CertificateParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -139,8 +139,8 @@ type CertificateSpec struct {
 
 // CertificateStatus defines the observed state of Certificate.
 type CertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CertificateObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CertificateObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

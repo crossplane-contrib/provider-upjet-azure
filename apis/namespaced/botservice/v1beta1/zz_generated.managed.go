@@ -5,404 +5,404 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this BotChannelAlexa.
-func (mg *BotChannelAlexa) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelAlexa) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelAlexa.
-func (mg *BotChannelAlexa) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelAlexa) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelAlexa.
-func (mg *BotChannelAlexa) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelAlexa) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelAlexa.
-func (mg *BotChannelAlexa) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelAlexa) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelAlexa.
-func (mg *BotChannelAlexa) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelAlexa) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelAlexa.
-func (mg *BotChannelAlexa) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelAlexa) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelAlexa.
-func (mg *BotChannelAlexa) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelAlexa) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelAlexa.
-func (mg *BotChannelAlexa) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelAlexa) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelDirectLine) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelDirectLine) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelDirectLine) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelDirectLine) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelDirectLine) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelDirectLine) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelDirectLine) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelDirectLine.
-func (mg *BotChannelDirectLine) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelDirectLine) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotChannelLine.
-func (mg *BotChannelLine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelLine) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelLine.
-func (mg *BotChannelLine) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelLine) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelLine.
-func (mg *BotChannelLine) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelLine) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelLine.
-func (mg *BotChannelLine) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelLine) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelLine.
-func (mg *BotChannelLine) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelLine) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelLine.
-func (mg *BotChannelLine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelLine) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelLine.
-func (mg *BotChannelLine) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelLine) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelLine.
-func (mg *BotChannelLine) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelLine) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelMSTeams) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelMSTeams) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelMSTeams) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelMSTeams) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelMSTeams) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelMSTeams) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelMSTeams) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelMSTeams.
-func (mg *BotChannelMSTeams) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelMSTeams) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotChannelSMS.
-func (mg *BotChannelSMS) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelSMS) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelSMS.
-func (mg *BotChannelSMS) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelSMS) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelSMS.
-func (mg *BotChannelSMS) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelSMS) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelSMS.
-func (mg *BotChannelSMS) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelSMS) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelSMS.
-func (mg *BotChannelSMS) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelSMS) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelSMS.
-func (mg *BotChannelSMS) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelSMS) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelSMS.
-func (mg *BotChannelSMS) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelSMS) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelSMS.
-func (mg *BotChannelSMS) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelSMS) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotChannelSlack.
-func (mg *BotChannelSlack) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelSlack) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelSlack.
-func (mg *BotChannelSlack) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelSlack) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelSlack.
-func (mg *BotChannelSlack) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelSlack) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelSlack.
-func (mg *BotChannelSlack) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelSlack) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelSlack.
-func (mg *BotChannelSlack) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelSlack) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelSlack.
-func (mg *BotChannelSlack) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelSlack) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelSlack.
-func (mg *BotChannelSlack) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelSlack) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelSlack.
-func (mg *BotChannelSlack) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelSlack) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotChannelWebChat.
-func (mg *BotChannelWebChat) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelWebChat) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelWebChat.
-func (mg *BotChannelWebChat) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelWebChat) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelWebChat.
-func (mg *BotChannelWebChat) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelWebChat) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelWebChat.
-func (mg *BotChannelWebChat) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelWebChat) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelWebChat.
-func (mg *BotChannelWebChat) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelWebChat) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelWebChat.
-func (mg *BotChannelWebChat) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelWebChat) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelWebChat.
-func (mg *BotChannelWebChat) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelWebChat) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelWebChat.
-func (mg *BotChannelWebChat) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelWebChat) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotChannelsRegistration) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotChannelsRegistration) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotChannelsRegistration) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotChannelsRegistration) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) SetConditions(c ...xpv1.Condition) {
+func (mg *BotChannelsRegistration) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotChannelsRegistration) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotChannelsRegistration) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotChannelsRegistration.
-func (mg *BotChannelsRegistration) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotChannelsRegistration) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotConnection.
-func (mg *BotConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotConnection) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotConnection.
-func (mg *BotConnection) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotConnection) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotConnection.
-func (mg *BotConnection) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotConnection) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotConnection.
-func (mg *BotConnection) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotConnection) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotConnection.
-func (mg *BotConnection) SetConditions(c ...xpv1.Condition) {
+func (mg *BotConnection) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotConnection.
-func (mg *BotConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotConnection) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotConnection.
-func (mg *BotConnection) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotConnection) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotConnection.
-func (mg *BotConnection) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotConnection) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this BotWebApp.
-func (mg *BotWebApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *BotWebApp) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetManagementPolicies of this BotWebApp.
-func (mg *BotWebApp) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *BotWebApp) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BotWebApp.
-func (mg *BotWebApp) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+func (mg *BotWebApp) GetProviderConfigReference() *xpv2.ProviderConfigReference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this BotWebApp.
-func (mg *BotWebApp) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+func (mg *BotWebApp) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this BotWebApp.
-func (mg *BotWebApp) SetConditions(c ...xpv1.Condition) {
+func (mg *BotWebApp) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetManagementPolicies of this BotWebApp.
-func (mg *BotWebApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *BotWebApp) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BotWebApp.
-func (mg *BotWebApp) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+func (mg *BotWebApp) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this BotWebApp.
-func (mg *BotWebApp) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+func (mg *BotWebApp) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

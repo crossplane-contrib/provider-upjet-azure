@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type TriggerCustomEventInitParameters struct {
@@ -36,11 +35,11 @@ type TriggerCustomEventInitParameters struct {
 
 	// Reference to a Topic in eventgrid to populate eventgridTopicId.
 	// +kubebuilder:validation:Optional
-	EventGridTopicIDRef *v1.NamespacedReference `json:"eventgridTopicIdRef,omitempty" tf:"-"`
+	EventGridTopicIDRef *v2.NamespacedReference `json:"eventgridTopicIdRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in eventgrid to populate eventgridTopicId.
 	// +kubebuilder:validation:Optional
-	EventGridTopicIDSelector *v1.NamespacedSelector `json:"eventgridTopicIdSelector,omitempty" tf:"-"`
+	EventGridTopicIDSelector *v2.NamespacedSelector `json:"eventgridTopicIdSelector,omitempty" tf:"-"`
 
 	// List of events that will fire this trigger. At least one event must be specified.
 	// +listType=set
@@ -117,11 +116,11 @@ type TriggerCustomEventParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Custom Event Trigger.
 	// +kubebuilder:validation:Optional
@@ -135,11 +134,11 @@ type TriggerCustomEventParameters struct {
 
 	// Reference to a Topic in eventgrid to populate eventgridTopicId.
 	// +kubebuilder:validation:Optional
-	EventGridTopicIDRef *v1.NamespacedReference `json:"eventgridTopicIdRef,omitempty" tf:"-"`
+	EventGridTopicIDRef *v2.NamespacedReference `json:"eventgridTopicIdRef,omitempty" tf:"-"`
 
 	// Selector for a Topic in eventgrid to populate eventgridTopicId.
 	// +kubebuilder:validation:Optional
-	EventGridTopicIDSelector *v1.NamespacedSelector `json:"eventgridTopicIdSelector,omitempty" tf:"-"`
+	EventGridTopicIDSelector *v2.NamespacedSelector `json:"eventgridTopicIdSelector,omitempty" tf:"-"`
 
 	// List of events that will fire this trigger. At least one event must be specified.
 	// +kubebuilder:validation:Optional
@@ -167,11 +166,11 @@ type TriggerCustomEventPipelineInitParameters struct {
 
 	// Reference to a Pipeline in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Pipeline in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
 	// +mapType=granular
@@ -197,11 +196,11 @@ type TriggerCustomEventPipelineParameters struct {
 
 	// Reference to a Pipeline in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameRef *v1.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
+	NameRef *v2.NamespacedReference `json:"nameRef,omitempty" tf:"-"`
 
 	// Selector for a Pipeline in datafactory to populate name.
 	// +kubebuilder:validation:Optional
-	NameSelector *v1.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
+	NameSelector *v2.NamespacedSelector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
 	// +kubebuilder:validation:Optional
@@ -228,8 +227,8 @@ type TriggerCustomEventSpec struct {
 
 // TriggerCustomEventStatus defines the observed state of TriggerCustomEvent.
 type TriggerCustomEventStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        TriggerCustomEventObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               TriggerCustomEventObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

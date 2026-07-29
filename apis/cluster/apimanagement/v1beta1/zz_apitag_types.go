@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APITagInitParameters struct {
@@ -35,17 +35,17 @@ type APITagParameters struct {
 
 	// Reference to a API in apimanagement to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+	APIIDRef *v2.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiId.
 	// +kubebuilder:validation:Optional
-	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 }
 
 // APITagSpec defines the desired state of APITag
 type APITagSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     APITagParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   APITagParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -61,8 +61,8 @@ type APITagSpec struct {
 
 // APITagStatus defines the observed state of APITag.
 type APITagStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APITagObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APITagObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

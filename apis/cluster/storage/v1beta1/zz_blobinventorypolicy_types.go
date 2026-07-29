@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BlobInventoryPolicyInitParameters struct {
@@ -25,11 +25,11 @@ type BlobInventoryPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BlobInventoryPolicyObservation struct {
@@ -58,11 +58,11 @@ type BlobInventoryPolicyParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type FilterInitParameters struct {
@@ -169,11 +169,11 @@ type RulesInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 }
 
 type RulesObservation struct {
@@ -233,17 +233,17 @@ type RulesParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameRef *v1.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
+	StorageContainerNameRef *v2.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
-	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+	StorageContainerNameSelector *v2.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 }
 
 // BlobInventoryPolicySpec defines the desired state of BlobInventoryPolicy
 type BlobInventoryPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BlobInventoryPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BlobInventoryPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -259,8 +259,8 @@ type BlobInventoryPolicySpec struct {
 
 // BlobInventoryPolicyStatus defines the observed state of BlobInventoryPolicy.
 type BlobInventoryPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BlobInventoryPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BlobInventoryPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

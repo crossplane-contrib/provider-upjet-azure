@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionClassicCertificateInitParameters struct {
@@ -61,11 +61,11 @@ type ConnectionClassicCertificateParameters struct {
 
 	// Reference to a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameRef *v1.Reference `json:"automationAccountNameRef,omitempty" tf:"-"`
+	AutomationAccountNameRef *v2.Reference `json:"automationAccountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in automation to populate automationAccountName.
 	// +kubebuilder:validation:Optional
-	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
+	AutomationAccountNameSelector *v2.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the certificate asset.
 	// +kubebuilder:validation:Optional
@@ -82,11 +82,11 @@ type ConnectionClassicCertificateParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The id of subscription.
 	// +kubebuilder:validation:Optional
@@ -99,8 +99,8 @@ type ConnectionClassicCertificateParameters struct {
 
 // ConnectionClassicCertificateSpec defines the desired state of ConnectionClassicCertificate
 type ConnectionClassicCertificateSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConnectionClassicCertificateParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConnectionClassicCertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -116,8 +116,8 @@ type ConnectionClassicCertificateSpec struct {
 
 // ConnectionClassicCertificateStatus defines the observed state of ConnectionClassicCertificate.
 type ConnectionClassicCertificateStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectionClassicCertificateObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectionClassicCertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

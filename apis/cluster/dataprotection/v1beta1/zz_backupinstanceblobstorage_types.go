@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupInstanceBlobStorageInitParameters struct {
@@ -22,11 +22,11 @@ type BackupInstanceBlobStorageInitParameters struct {
 
 	// Reference to a BackupPolicyBlobStorage in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyBlobStorage in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -41,11 +41,11 @@ type BackupInstanceBlobStorageInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BackupInstanceBlobStorageObservation struct {
@@ -82,11 +82,11 @@ type BackupInstanceBlobStorageParameters struct {
 
 	// Reference to a BackupPolicyBlobStorage in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyBlobStorage in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	// +kubebuilder:validation:Optional
@@ -104,11 +104,11 @@ type BackupInstanceBlobStorageParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Backup Vault within which the Backup Instance Blob Storage should exist. Changing this forces a new Backup Instance Blob Storage to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupVault
@@ -118,17 +118,17 @@ type BackupInstanceBlobStorageParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
+	VaultIDRef *v2.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
+	VaultIDSelector *v2.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
 // BackupInstanceBlobStorageSpec defines the desired state of BackupInstanceBlobStorage
 type BackupInstanceBlobStorageSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupInstanceBlobStorageParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupInstanceBlobStorageParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -144,8 +144,8 @@ type BackupInstanceBlobStorageSpec struct {
 
 // BackupInstanceBlobStorageStatus defines the observed state of BackupInstanceBlobStorage.
 type BackupInstanceBlobStorageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupInstanceBlobStorageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupInstanceBlobStorageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

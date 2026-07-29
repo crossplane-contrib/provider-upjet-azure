@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LinkedServiceAzureSearchInitParameters struct {
@@ -39,11 +39,11 @@ type LinkedServiceAzureSearchInitParameters struct {
 
 	// Reference to a Service in search to populate searchServiceKey.
 	// +kubebuilder:validation:Optional
-	SearchServiceKeyRef *v1.Reference `json:"searchServiceKeyRef,omitempty" tf:"-"`
+	SearchServiceKeyRef *v2.Reference `json:"searchServiceKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Service in search to populate searchServiceKey.
 	// +kubebuilder:validation:Optional
-	SearchServiceKeySelector *v1.Selector `json:"searchServiceKeySelector,omitempty" tf:"-"`
+	SearchServiceKeySelector *v2.Selector `json:"searchServiceKeySelector,omitempty" tf:"-"`
 
 	// The URL of the Search Service endpoint (e.g. https://{searchServiceName}.search.windows.net).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -103,11 +103,11 @@ type LinkedServiceAzureSearchParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -130,11 +130,11 @@ type LinkedServiceAzureSearchParameters struct {
 
 	// Reference to a Service in search to populate searchServiceKey.
 	// +kubebuilder:validation:Optional
-	SearchServiceKeyRef *v1.Reference `json:"searchServiceKeyRef,omitempty" tf:"-"`
+	SearchServiceKeyRef *v2.Reference `json:"searchServiceKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Service in search to populate searchServiceKey.
 	// +kubebuilder:validation:Optional
-	SearchServiceKeySelector *v1.Selector `json:"searchServiceKeySelector,omitempty" tf:"-"`
+	SearchServiceKeySelector *v2.Selector `json:"searchServiceKeySelector,omitempty" tf:"-"`
 
 	// The URL of the Search Service endpoint (e.g. https://{searchServiceName}.search.windows.net).
 	// +kubebuilder:validation:Optional
@@ -143,8 +143,8 @@ type LinkedServiceAzureSearchParameters struct {
 
 // LinkedServiceAzureSearchSpec defines the desired state of LinkedServiceAzureSearch
 type LinkedServiceAzureSearchSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceAzureSearchParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceAzureSearchParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -160,8 +160,8 @@ type LinkedServiceAzureSearchSpec struct {
 
 // LinkedServiceAzureSearchStatus defines the observed state of LinkedServiceAzureSearch.
 type LinkedServiceAzureSearchStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceAzureSearchObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceAzureSearchObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

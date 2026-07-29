@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OverridesSelectorsInitParameters struct {
@@ -132,11 +132,11 @@ type ResourcePolicyAssignmentInitParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -305,11 +305,11 @@ type ResourcePolicyAssignmentParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
 	// +kubebuilder:validation:Optional
@@ -390,8 +390,8 @@ type ResourcePolicyAssignmentResourceSelectorsSelectorsParameters struct {
 
 // ResourcePolicyAssignmentSpec defines the desired state of ResourcePolicyAssignment
 type ResourcePolicyAssignmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourcePolicyAssignmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourcePolicyAssignmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -407,8 +407,8 @@ type ResourcePolicyAssignmentSpec struct {
 
 // ResourcePolicyAssignmentStatus defines the observed state of ResourcePolicyAssignment.
 type ResourcePolicyAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourcePolicyAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourcePolicyAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KeyInitParameters struct {
@@ -22,11 +22,11 @@ type KeyInitParameters struct {
 
 	// Reference to a Configuration in appconfiguration to populate configurationStoreId.
 	// +kubebuilder:validation:Optional
-	ConfigurationStoreIDRef *v1.Reference `json:"configurationStoreIdRef,omitempty" tf:"-"`
+	ConfigurationStoreIDRef *v2.Reference `json:"configurationStoreIdRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in appconfiguration to populate configurationStoreId.
 	// +kubebuilder:validation:Optional
-	ConfigurationStoreIDSelector *v1.Selector `json:"configurationStoreIdSelector,omitempty" tf:"-"`
+	ConfigurationStoreIDSelector *v2.Selector `json:"configurationStoreIdSelector,omitempty" tf:"-"`
 
 	// The content type of the App Configuration Key. This should only be set when type is set to kv.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
@@ -60,11 +60,11 @@ type KeyInitParameters struct {
 
 	// Reference to a Secret in keyvault to populate vaultKeyReference.
 	// +kubebuilder:validation:Optional
-	VaultKeyReferenceRef *v1.Reference `json:"vaultKeyReferenceRef,omitempty" tf:"-"`
+	VaultKeyReferenceRef *v2.Reference `json:"vaultKeyReferenceRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate vaultKeyReference.
 	// +kubebuilder:validation:Optional
-	VaultKeyReferenceSelector *v1.Selector `json:"vaultKeyReferenceSelector,omitempty" tf:"-"`
+	VaultKeyReferenceSelector *v2.Selector `json:"vaultKeyReferenceSelector,omitempty" tf:"-"`
 }
 
 type KeyObservation struct {
@@ -114,11 +114,11 @@ type KeyParameters struct {
 
 	// Reference to a Configuration in appconfiguration to populate configurationStoreId.
 	// +kubebuilder:validation:Optional
-	ConfigurationStoreIDRef *v1.Reference `json:"configurationStoreIdRef,omitempty" tf:"-"`
+	ConfigurationStoreIDRef *v2.Reference `json:"configurationStoreIdRef,omitempty" tf:"-"`
 
 	// Selector for a Configuration in appconfiguration to populate configurationStoreId.
 	// +kubebuilder:validation:Optional
-	ConfigurationStoreIDSelector *v1.Selector `json:"configurationStoreIdSelector,omitempty" tf:"-"`
+	ConfigurationStoreIDSelector *v2.Selector `json:"configurationStoreIdSelector,omitempty" tf:"-"`
 
 	// The content type of the App Configuration Key. This should only be set when type is set to kv.
 	// +kubebuilder:validation:Optional
@@ -161,17 +161,17 @@ type KeyParameters struct {
 
 	// Reference to a Secret in keyvault to populate vaultKeyReference.
 	// +kubebuilder:validation:Optional
-	VaultKeyReferenceRef *v1.Reference `json:"vaultKeyReferenceRef,omitempty" tf:"-"`
+	VaultKeyReferenceRef *v2.Reference `json:"vaultKeyReferenceRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate vaultKeyReference.
 	// +kubebuilder:validation:Optional
-	VaultKeyReferenceSelector *v1.Selector `json:"vaultKeyReferenceSelector,omitempty" tf:"-"`
+	VaultKeyReferenceSelector *v2.Selector `json:"vaultKeyReferenceSelector,omitempty" tf:"-"`
 }
 
 // KeySpec defines the desired state of Key
 type KeySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     KeyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   KeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -187,8 +187,8 @@ type KeySpec struct {
 
 // KeyStatus defines the observed state of Key.
 type KeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

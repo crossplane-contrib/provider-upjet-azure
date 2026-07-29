@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConfigurationInitParameters struct {
@@ -144,11 +143,11 @@ type PolicyVirtualMachineConfigurationAssignmentParameters struct {
 
 	// Reference to a WindowsVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.NamespacedReference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.NamespacedReference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a WindowsVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.NamespacedSelector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.NamespacedSelector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 // PolicyVirtualMachineConfigurationAssignmentSpec defines the desired state of PolicyVirtualMachineConfigurationAssignment
@@ -170,8 +169,8 @@ type PolicyVirtualMachineConfigurationAssignmentSpec struct {
 
 // PolicyVirtualMachineConfigurationAssignmentStatus defines the observed state of PolicyVirtualMachineConfigurationAssignment.
 type PolicyVirtualMachineConfigurationAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyVirtualMachineConfigurationAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyVirtualMachineConfigurationAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

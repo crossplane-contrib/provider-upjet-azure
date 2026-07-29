@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WebPubsubNetworkACLInitParameters struct {
@@ -31,11 +31,11 @@ type WebPubsubNetworkACLInitParameters struct {
 
 	// Reference to a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDRef *v1.Reference `json:"webPubsubIdRef,omitempty" tf:"-"`
+	WebPubsubIDRef *v2.Reference `json:"webPubsubIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDSelector *v1.Selector `json:"webPubsubIdSelector,omitempty" tf:"-"`
+	WebPubsubIDSelector *v2.Selector `json:"webPubsubIdSelector,omitempty" tf:"-"`
 }
 
 type WebPubsubNetworkACLObservation struct {
@@ -78,11 +78,11 @@ type WebPubsubNetworkACLParameters struct {
 
 	// Reference to a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDRef *v1.Reference `json:"webPubsubIdRef,omitempty" tf:"-"`
+	WebPubsubIDRef *v2.Reference `json:"webPubsubIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDSelector *v1.Selector `json:"webPubsubIdSelector,omitempty" tf:"-"`
+	WebPubsubIDSelector *v2.Selector `json:"webPubsubIdSelector,omitempty" tf:"-"`
 }
 
 type WebPubsubNetworkACLPrivateEndpointInitParameters struct {
@@ -102,11 +102,11 @@ type WebPubsubNetworkACLPrivateEndpointInitParameters struct {
 
 	// Reference to a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type WebPubsubNetworkACLPrivateEndpointObservation struct {
@@ -143,11 +143,11 @@ type WebPubsubNetworkACLPrivateEndpointParameters struct {
 
 	// Reference to a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+	IDRef *v2.Reference `json:"idRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateEndpoint in network to populate id.
 	// +kubebuilder:validation:Optional
-	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+	IDSelector *v2.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type WebPubsubNetworkACLPublicNetworkInitParameters struct {
@@ -187,8 +187,8 @@ type WebPubsubNetworkACLPublicNetworkParameters struct {
 
 // WebPubsubNetworkACLSpec defines the desired state of WebPubsubNetworkACL
 type WebPubsubNetworkACLSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WebPubsubNetworkACLParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WebPubsubNetworkACLParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -204,8 +204,8 @@ type WebPubsubNetworkACLSpec struct {
 
 // WebPubsubNetworkACLStatus defines the observed state of WebPubsubNetworkACL.
 type WebPubsubNetworkACLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebPubsubNetworkACLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebPubsubNetworkACLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

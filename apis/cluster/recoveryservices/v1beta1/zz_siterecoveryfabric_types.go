@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SiteRecoveryFabricInitParameters struct {
@@ -47,11 +47,11 @@ type SiteRecoveryFabricParameters struct {
 
 	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameRef *v1.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+	RecoveryVaultNameRef *v2.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
 	// +kubebuilder:validation:Optional
-	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+	RecoveryVaultNameSelector *v2.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -60,17 +60,17 @@ type SiteRecoveryFabricParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // SiteRecoveryFabricSpec defines the desired state of SiteRecoveryFabric
 type SiteRecoveryFabricSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SiteRecoveryFabricParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SiteRecoveryFabricParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -86,8 +86,8 @@ type SiteRecoveryFabricSpec struct {
 
 // SiteRecoveryFabricStatus defines the observed state of SiteRecoveryFabric.
 type SiteRecoveryFabricStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SiteRecoveryFabricObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SiteRecoveryFabricObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

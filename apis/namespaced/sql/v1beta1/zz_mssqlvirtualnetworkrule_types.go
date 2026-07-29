@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLVirtualNetworkRuleInitParameters struct {
@@ -26,11 +25,11 @@ type MSSQLVirtualNetworkRuleInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type MSSQLVirtualNetworkRuleObservation struct {
@@ -62,11 +61,11 @@ type MSSQLVirtualNetworkRuleParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet from which the SQL server will accept communications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -76,11 +75,11 @@ type MSSQLVirtualNetworkRuleParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLVirtualNetworkRuleSpec defines the desired state of MSSQLVirtualNetworkRule
@@ -102,8 +101,8 @@ type MSSQLVirtualNetworkRuleSpec struct {
 
 // MSSQLVirtualNetworkRuleStatus defines the observed state of MSSQLVirtualNetworkRule.
 type MSSQLVirtualNetworkRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLVirtualNetworkRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLVirtualNetworkRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

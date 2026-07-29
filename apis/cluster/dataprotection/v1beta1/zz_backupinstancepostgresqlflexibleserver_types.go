@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BackupInstancePostgreSQLFlexibleServerInitParameters struct {
@@ -22,11 +22,11 @@ type BackupInstancePostgreSQLFlexibleServerInitParameters struct {
 
 	// Reference to a BackupPolicyPostgreSQLFlexibleServer in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyPostgreSQLFlexibleServer in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The location of the source database. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -38,11 +38,11 @@ type BackupInstancePostgreSQLFlexibleServerInitParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 type BackupInstancePostgreSQLFlexibleServerObservation struct {
@@ -76,11 +76,11 @@ type BackupInstancePostgreSQLFlexibleServerParameters struct {
 
 	// Reference to a BackupPolicyPostgreSQLFlexibleServer in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+	BackupPolicyIDRef *v2.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupPolicyPostgreSQLFlexibleServer in dataprotection to populate backupPolicyId.
 	// +kubebuilder:validation:Optional
-	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The location of the source database. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -94,11 +94,11 @@ type BackupInstancePostgreSQLFlexibleServerParameters struct {
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbforpostgresql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Backup Vault within which the PostgreSQL Flexible Server Backup Instance should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupVault
@@ -108,17 +108,17 @@ type BackupInstancePostgreSQLFlexibleServerParameters struct {
 
 	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
+	VaultIDRef *v2.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
-	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
+	VaultIDSelector *v2.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
 // BackupInstancePostgreSQLFlexibleServerSpec defines the desired state of BackupInstancePostgreSQLFlexibleServer
 type BackupInstancePostgreSQLFlexibleServerSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BackupInstancePostgreSQLFlexibleServerParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BackupInstancePostgreSQLFlexibleServerParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type BackupInstancePostgreSQLFlexibleServerSpec struct {
 
 // BackupInstancePostgreSQLFlexibleServerStatus defines the observed state of BackupInstancePostgreSQLFlexibleServer.
 type BackupInstancePostgreSQLFlexibleServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BackupInstancePostgreSQLFlexibleServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BackupInstancePostgreSQLFlexibleServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

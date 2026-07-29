@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SnapshotInitParameters struct {
@@ -49,11 +49,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -66,11 +66,11 @@ type SnapshotParameters struct {
 
 	// Reference to a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
-	PoolNameRef *v1.Reference `json:"poolNameRef,omitempty" tf:"-"`
+	PoolNameRef *v2.Reference `json:"poolNameRef,omitempty" tf:"-"`
 
 	// Selector for a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
-	PoolNameSelector *v1.Selector `json:"poolNameSelector,omitempty" tf:"-"`
+	PoolNameSelector *v2.Selector `json:"poolNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group where the NetApp Snapshot should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -79,11 +79,11 @@ type SnapshotParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/netapp/v1beta2.Volume
@@ -92,17 +92,17 @@ type SnapshotParameters struct {
 
 	// Reference to a Volume in netapp to populate volumeName.
 	// +kubebuilder:validation:Optional
-	VolumeNameRef *v1.Reference `json:"volumeNameRef,omitempty" tf:"-"`
+	VolumeNameRef *v2.Reference `json:"volumeNameRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in netapp to populate volumeName.
 	// +kubebuilder:validation:Optional
-	VolumeNameSelector *v1.Selector `json:"volumeNameSelector,omitempty" tf:"-"`
+	VolumeNameSelector *v2.Selector `json:"volumeNameSelector,omitempty" tf:"-"`
 }
 
 // SnapshotSpec defines the desired state of Snapshot
 type SnapshotSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SnapshotParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SnapshotParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -118,8 +118,8 @@ type SnapshotSpec struct {
 
 // SnapshotStatus defines the observed state of Snapshot.
 type SnapshotStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SnapshotObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SnapshotObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

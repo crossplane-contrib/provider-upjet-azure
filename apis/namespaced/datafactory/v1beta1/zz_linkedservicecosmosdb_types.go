@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LinkedServiceCosmosDBInitParameters struct {
@@ -20,7 +19,7 @@ type LinkedServiceCosmosDBInitParameters struct {
 	AccountEndpoint *string `json:"accountEndpoint,omitempty" tf:"account_endpoint,omitempty"`
 
 	// The account key of the Azure Cosmos DB account. Required if connection_string is unspecified.
-	AccountKeySecretRef *v1.LocalSecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
+	AccountKeySecretRef *v2.LocalSecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +mapType=granular
@@ -30,7 +29,7 @@ type LinkedServiceCosmosDBInitParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string. Required if account_endpoint, account_key, and database are unspecified.
-	ConnectionStringSecretRef *v1.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of the database. Required if connection_string is unspecified.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
@@ -86,7 +85,7 @@ type LinkedServiceCosmosDBParameters struct {
 
 	// The account key of the Azure Cosmos DB account. Required if connection_string is unspecified.
 	// +kubebuilder:validation:Optional
-	AccountKeySecretRef *v1.LocalSecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
+	AccountKeySecretRef *v2.LocalSecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -99,7 +98,7 @@ type LinkedServiceCosmosDBParameters struct {
 
 	// The connection string. Required if account_endpoint, account_key, and database are unspecified.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef *v1.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Factory
@@ -109,11 +108,11 @@ type LinkedServiceCosmosDBParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The name of the database. Required if connection_string is unspecified.
 	// +kubebuilder:validation:Optional
@@ -152,8 +151,8 @@ type LinkedServiceCosmosDBSpec struct {
 
 // LinkedServiceCosmosDBStatus defines the observed state of LinkedServiceCosmosDB.
 type LinkedServiceCosmosDBStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceCosmosDBObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceCosmosDBObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

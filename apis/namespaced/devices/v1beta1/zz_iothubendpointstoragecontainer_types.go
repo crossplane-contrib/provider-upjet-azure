@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubEndpointStorageContainerInitParameters struct {
@@ -23,7 +22,7 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
 
 	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
-	ConnectionStringSecretRef *v1.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of storage container in the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -31,11 +30,11 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 
 	// Reference to a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// Encoding that is used to serialize messages to blobs. Supported values are Avro, AvroDeflate and JSON. Default value is Avro. Changing this forces a new resource to be created.
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
@@ -58,11 +57,11 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subscription ID for the endpoint.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
@@ -119,7 +118,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 
 	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef *v1.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of storage container in the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -128,11 +127,11 @@ type IOTHubEndpointStorageContainerParameters struct {
 
 	// Reference to a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
+	ContainerNameRef *v2.NamespacedReference `json:"containerNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
+	ContainerNameSelector *v2.NamespacedSelector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// Encoding that is used to serialize messages to blobs. Supported values are Avro, AvroDeflate and JSON. Default value is Avro. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -154,11 +153,11 @@ type IOTHubEndpointStorageContainerParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.NamespacedReference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.NamespacedReference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.NamespacedSelector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.NamespacedSelector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// ID of the User Managed Identity used to authenticate against the storage endpoint.
 	// +kubebuilder:validation:Optional
@@ -175,11 +174,11 @@ type IOTHubEndpointStorageContainerParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subscription ID for the endpoint.
 	// +kubebuilder:validation:Optional
@@ -205,8 +204,8 @@ type IOTHubEndpointStorageContainerSpec struct {
 
 // IOTHubEndpointStorageContainerStatus defines the observed state of IOTHubEndpointStorageContainer.
 type IOTHubEndpointStorageContainerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubEndpointStorageContainerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubEndpointStorageContainerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

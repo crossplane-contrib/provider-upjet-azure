@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RoleAssignmentInitParameters struct {
@@ -44,11 +43,11 @@ type RoleAssignmentInitParameters struct {
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The name of a built-in Role. Changing this forces a new resource to be created.
 	RoleDefinitionName *string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty"`
@@ -137,11 +136,11 @@ type RoleAssignmentParameters struct {
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The name of a built-in Role. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -175,8 +174,8 @@ type RoleAssignmentSpec struct {
 
 // RoleAssignmentStatus defines the observed state of RoleAssignment.
 type RoleAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RoleAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RoleAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationNetworkRuleSetInitParameters struct {
@@ -32,11 +31,11 @@ type ApplicationNetworkRuleSetInitParameters struct {
 
 	// Reference to a Application in iotcentral to populate iotcentralApplicationId.
 	// +kubebuilder:validation:Optional
-	IotcentralApplicationIDRef *v1.NamespacedReference `json:"iotcentralApplicationIdRef,omitempty" tf:"-"`
+	IotcentralApplicationIDRef *v2.NamespacedReference `json:"iotcentralApplicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in iotcentral to populate iotcentralApplicationId.
 	// +kubebuilder:validation:Optional
-	IotcentralApplicationIDSelector *v1.NamespacedSelector `json:"iotcentralApplicationIdSelector,omitempty" tf:"-"`
+	IotcentralApplicationIDSelector *v2.NamespacedSelector `json:"iotcentralApplicationIdSelector,omitempty" tf:"-"`
 }
 
 type ApplicationNetworkRuleSetObservation struct {
@@ -79,11 +78,11 @@ type ApplicationNetworkRuleSetParameters struct {
 
 	// Reference to a Application in iotcentral to populate iotcentralApplicationId.
 	// +kubebuilder:validation:Optional
-	IotcentralApplicationIDRef *v1.NamespacedReference `json:"iotcentralApplicationIdRef,omitempty" tf:"-"`
+	IotcentralApplicationIDRef *v2.NamespacedReference `json:"iotcentralApplicationIdRef,omitempty" tf:"-"`
 
 	// Selector for a Application in iotcentral to populate iotcentralApplicationId.
 	// +kubebuilder:validation:Optional
-	IotcentralApplicationIDSelector *v1.NamespacedSelector `json:"iotcentralApplicationIdSelector,omitempty" tf:"-"`
+	IotcentralApplicationIDSelector *v2.NamespacedSelector `json:"iotcentralApplicationIdSelector,omitempty" tf:"-"`
 }
 
 type IPRuleInitParameters struct {
@@ -134,8 +133,8 @@ type ApplicationNetworkRuleSetSpec struct {
 
 // ApplicationNetworkRuleSetStatus defines the observed state of ApplicationNetworkRuleSet.
 type ApplicationNetworkRuleSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationNetworkRuleSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationNetworkRuleSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

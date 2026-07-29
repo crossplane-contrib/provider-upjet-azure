@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -175,7 +174,7 @@ type HTTPLogsAzureBlobStorageInitParameters struct {
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
-	SASURLSecretRef v1.LocalSecretKeySelector `json:"sasurlSecretRef" tf:"-"`
+	SASURLSecretRef v2.LocalSecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
 type HTTPLogsAzureBlobStorageObservation struct {
@@ -192,7 +191,7 @@ type HTTPLogsAzureBlobStorageParameters struct {
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
 	// +kubebuilder:validation:Optional
-	SASURLSecretRef v1.LocalSecretKeySelector `json:"sasurlSecretRef" tf:"-"`
+	SASURLSecretRef v2.LocalSecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
 type HTTPLogsInitParameters struct {
@@ -236,7 +235,7 @@ type LinuxWebAppAuthSettingsActiveDirectoryInitParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
@@ -273,7 +272,7 @@ type LinuxWebAppAuthSettingsActiveDirectoryParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
@@ -289,7 +288,7 @@ type LinuxWebAppAuthSettingsFacebookInitParameters struct {
 
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
-	AppSecretSecretRef *v1.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+	AppSecretSecretRef *v2.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
@@ -325,7 +324,7 @@ type LinuxWebAppAuthSettingsFacebookParameters struct {
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	AppSecretSecretRef *v1.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+	AppSecretSecretRef *v2.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
@@ -346,7 +345,7 @@ type LinuxWebAppAuthSettingsGithubInitParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
@@ -382,7 +381,7 @@ type LinuxWebAppAuthSettingsGithubParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
@@ -403,7 +402,7 @@ type LinuxWebAppAuthSettingsGoogleInitParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
@@ -439,7 +438,7 @@ type LinuxWebAppAuthSettingsGoogleParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
@@ -518,7 +517,7 @@ type LinuxWebAppAuthSettingsMicrosoftInitParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
@@ -554,7 +553,7 @@ type LinuxWebAppAuthSettingsMicrosoftParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
@@ -706,7 +705,7 @@ type LinuxWebAppAuthSettingsTwitterInitParameters struct {
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
-	ConsumerSecretSecretRef *v1.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+	ConsumerSecretSecretRef *v2.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
@@ -734,7 +733,7 @@ type LinuxWebAppAuthSettingsTwitterParameters struct {
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ConsumerSecretSecretRef *v1.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+	ConsumerSecretSecretRef *v2.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
@@ -1766,7 +1765,7 @@ type LinuxWebAppBackupInitParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
-	StorageAccountURLSecretRef v1.LocalSecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
+	StorageAccountURLSecretRef v2.LocalSecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
 type LinuxWebAppBackupObservation struct {
@@ -1802,7 +1801,7 @@ type LinuxWebAppBackupParameters struct {
 	// The SAS URL to the container.
 	// The SAS URL to the container.
 	// +kubebuilder:validation:Optional
-	StorageAccountURLSecretRef v1.LocalSecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
+	StorageAccountURLSecretRef v2.LocalSecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
 type LinuxWebAppBackupScheduleInitParameters struct {
@@ -1894,7 +1893,7 @@ type LinuxWebAppConnectionStringInitParameters struct {
 
 	// The connection string value.
 	// The connection string value.
-	ValueSecretRef v1.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type LinuxWebAppConnectionStringObservation struct {
@@ -1923,7 +1922,7 @@ type LinuxWebAppConnectionStringParameters struct {
 	// The connection string value.
 	// The connection string value.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef v1.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type LinuxWebAppIdentityInitParameters struct {
@@ -2026,11 +2025,11 @@ type LinuxWebAppInitParameters struct {
 
 	// Reference to a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDRef *v1.NamespacedReference `json:"servicePlanIdRef,omitempty" tf:"-"`
+	ServicePlanIDRef *v2.NamespacedReference `json:"servicePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDSelector *v1.NamespacedSelector `json:"servicePlanIdSelector,omitempty" tf:"-"`
+	ServicePlanIDSelector *v2.NamespacedSelector `json:"servicePlanIdSelector,omitempty" tf:"-"`
 
 	// A site_config block as defined below.
 	SiteConfig *LinuxWebAppSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
@@ -2055,11 +2054,11 @@ type LinuxWebAppInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
 	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
@@ -2266,11 +2265,11 @@ type LinuxWebAppParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Service Plan that this Linux App Service will be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.ServicePlan
@@ -2280,11 +2279,11 @@ type LinuxWebAppParameters struct {
 
 	// Reference to a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDRef *v1.NamespacedReference `json:"servicePlanIdRef,omitempty" tf:"-"`
+	ServicePlanIDRef *v2.NamespacedReference `json:"servicePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDSelector *v1.NamespacedSelector `json:"servicePlanIdSelector,omitempty" tf:"-"`
+	ServicePlanIDSelector *v2.NamespacedSelector `json:"servicePlanIdSelector,omitempty" tf:"-"`
 
 	// A site_config block as defined below.
 	// +kubebuilder:validation:Optional
@@ -2315,11 +2314,11 @@ type LinuxWebAppParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -2341,7 +2340,7 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
 
 	// The User Name to use for authentication against the registry to pull the image.
-	DockerRegistryPasswordSecretRef *v1.LocalSecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
+	DockerRegistryPasswordSecretRef *v2.LocalSecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
 	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
@@ -2424,7 +2423,7 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 
 	// The User Name to use for authentication against the registry to pull the image.
 	// +kubebuilder:validation:Optional
-	DockerRegistryPasswordSecretRef *v1.LocalSecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
+	DockerRegistryPasswordSecretRef *v2.LocalSecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
 	// +kubebuilder:validation:Optional
@@ -2595,11 +2594,11 @@ type LinuxWebAppSiteConfigIPRestrictionInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type LinuxWebAppSiteConfigIPRestrictionObservation struct {
@@ -2681,11 +2680,11 @@ type LinuxWebAppSiteConfigIPRestrictionParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type LinuxWebAppSiteConfigInitParameters struct {
@@ -3109,11 +3108,11 @@ type LinuxWebAppSiteConfigScmIPRestrictionInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type LinuxWebAppSiteConfigScmIPRestrictionObservation struct {
@@ -3195,11 +3194,11 @@ type LinuxWebAppSiteConfigScmIPRestrictionParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type LinuxWebAppSiteCredentialInitParameters struct {
@@ -3249,7 +3248,7 @@ type LinuxWebAppStickySettingsParameters struct {
 type LinuxWebAppStorageAccountInitParameters struct {
 
 	// The Access key for the storage account.
-	AccessKeySecretRef v1.LocalSecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+	AccessKeySecretRef v2.LocalSecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -3289,7 +3288,7 @@ type LinuxWebAppStorageAccountParameters struct {
 
 	// The Access key for the storage account.
 	// +kubebuilder:validation:Optional
-	AccessKeySecretRef v1.LocalSecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+	AccessKeySecretRef v2.LocalSecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.
 	// +kubebuilder:validation:Optional
@@ -3615,8 +3614,8 @@ type LinuxWebAppSpec struct {
 
 // LinuxWebAppStatus defines the observed state of LinuxWebApp.
 type LinuxWebAppStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinuxWebAppObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinuxWebAppObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

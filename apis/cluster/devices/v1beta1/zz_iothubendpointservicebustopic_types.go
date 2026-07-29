@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubEndpointServiceBusTopicInitParameters struct {
@@ -19,7 +19,7 @@ type IOTHubEndpointServiceBusTopicInitParameters struct {
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// URI of the Service Bus endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
@@ -36,11 +36,11 @@ type IOTHubEndpointServiceBusTopicInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subscription ID for the endpoint.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
@@ -81,7 +81,7 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 
 	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// URI of the Service Bus endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	// +kubebuilder:validation:Optional
@@ -99,11 +99,11 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+	IOTHubIDRef *v2.Reference `json:"iothubIdRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
-	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
+	IOTHubIDSelector *v2.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// ID of the User Managed Identity used to authenticate against the Service Bus Topic endpoint.
 	// +kubebuilder:validation:Optional
@@ -116,11 +116,11 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subscription ID for the endpoint.
 	// +kubebuilder:validation:Optional
@@ -129,8 +129,8 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 
 // IOTHubEndpointServiceBusTopicSpec defines the desired state of IOTHubEndpointServiceBusTopic
 type IOTHubEndpointServiceBusTopicSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTHubEndpointServiceBusTopicParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTHubEndpointServiceBusTopicParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -146,8 +146,8 @@ type IOTHubEndpointServiceBusTopicSpec struct {
 
 // IOTHubEndpointServiceBusTopicStatus defines the observed state of IOTHubEndpointServiceBusTopic.
 type IOTHubEndpointServiceBusTopicStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubEndpointServiceBusTopicObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubEndpointServiceBusTopicObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

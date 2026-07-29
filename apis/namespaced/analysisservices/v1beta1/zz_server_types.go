@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IPv4FirewallRuleInitParameters struct {
@@ -60,7 +59,7 @@ type ServerInitParameters struct {
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
 	// URI and SAS token for a blob container to store backups.
-	BackupBlobContainerURISecretRef *v1.LocalSecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
+	BackupBlobContainerURISecretRef *v2.LocalSecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
 
 	// One or more ipv4_firewall_rule block(s) as defined below.
 	IPv4FirewallRule []IPv4FirewallRuleInitParameters `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty"`
@@ -83,11 +82,11 @@ type ServerInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// SKU for the Analysis Services Server. Possible values are: D1, B1, B2, S0, S1, S2, S4, S8, S9, S8v2 and S9v2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -144,7 +143,7 @@ type ServerParameters struct {
 
 	// URI and SAS token for a blob container to store backups.
 	// +kubebuilder:validation:Optional
-	BackupBlobContainerURISecretRef *v1.LocalSecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
+	BackupBlobContainerURISecretRef *v2.LocalSecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
 
 	// One or more ipv4_firewall_rule block(s) as defined below.
 	// +kubebuilder:validation:Optional
@@ -173,11 +172,11 @@ type ServerParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// SKU for the Analysis Services Server. Possible values are: D1, B1, B2, S0, S1, S2, S4, S8, S9, S8v2 and S9v2.
 	// +kubebuilder:validation:Optional
@@ -208,8 +207,8 @@ type ServerSpec struct {
 
 // ServerStatus defines the observed state of Server.
 type ServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CompositeIndexInitParameters struct {
@@ -171,11 +171,11 @@ type GremlinGraphParameters struct {
 
 	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The time to live of Analytical Storage for this Cosmos DB Gremlin Graph. Possible values are between -1 to 2147483647 not including 0. If present and the value is set to -1, it means never expire.
 	// +kubebuilder:validation:Optional
@@ -196,11 +196,11 @@ type GremlinGraphParameters struct {
 
 	// Reference to a GremlinDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a GremlinDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
 	// +kubebuilder:validation:Optional
@@ -225,11 +225,11 @@ type GremlinGraphParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional
@@ -390,8 +390,8 @@ type UniqueKeyParameters struct {
 
 // GremlinGraphSpec defines the desired state of GremlinGraph
 type GremlinGraphSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     GremlinGraphParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   GremlinGraphParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -407,8 +407,8 @@ type GremlinGraphSpec struct {
 
 // GremlinGraphStatus defines the observed state of GremlinGraph.
 type GremlinGraphStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GremlinGraphObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GremlinGraphObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

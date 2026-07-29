@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BotChannelSMSInitParameters struct {
@@ -26,7 +25,7 @@ type BotChannelSMSInitParameters struct {
 	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId,omitempty" tf:"sms_channel_account_security_id,omitempty"`
 
 	// The authorization token for the SMS Channel.
-	SMSChannelAuthTokenSecretRef v1.LocalSecretKeySelector `json:"smsChannelAuthTokenSecretRef" tf:"-"`
+	SMSChannelAuthTokenSecretRef v2.LocalSecretKeySelector `json:"smsChannelAuthTokenSecretRef" tf:"-"`
 }
 
 type BotChannelSMSObservation struct {
@@ -60,11 +59,11 @@ type BotChannelSMSParameters struct {
 
 	// Reference to a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameRef *v1.NamespacedReference `json:"botNameRef,omitempty" tf:"-"`
+	BotNameRef *v2.NamespacedReference `json:"botNameRef,omitempty" tf:"-"`
 
 	// Selector for a BotChannelsRegistration in botservice to populate botName.
 	// +kubebuilder:validation:Optional
-	BotNameSelector *v1.NamespacedSelector `json:"botNameSelector,omitempty" tf:"-"`
+	BotNameSelector *v2.NamespacedSelector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -81,11 +80,11 @@ type BotChannelSMSParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The account security identifier (SID) for the SMS Channel.
 	// +kubebuilder:validation:Optional
@@ -93,7 +92,7 @@ type BotChannelSMSParameters struct {
 
 	// The authorization token for the SMS Channel.
 	// +kubebuilder:validation:Optional
-	SMSChannelAuthTokenSecretRef v1.LocalSecretKeySelector `json:"smsChannelAuthTokenSecretRef" tf:"-"`
+	SMSChannelAuthTokenSecretRef v2.LocalSecretKeySelector `json:"smsChannelAuthTokenSecretRef" tf:"-"`
 }
 
 // BotChannelSMSSpec defines the desired state of BotChannelSMS
@@ -115,8 +114,8 @@ type BotChannelSMSSpec struct {
 
 // BotChannelSMSStatus defines the observed state of BotChannelSMS.
 type BotChannelSMSStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BotChannelSMSObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BotChannelSMSObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

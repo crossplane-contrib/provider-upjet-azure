@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActivationRulesInitParameters struct {
@@ -957,11 +956,11 @@ type RoleManagementPolicyInitParameters struct {
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
 	// The scope of the role to which this policy will apply
@@ -971,11 +970,11 @@ type RoleManagementPolicyInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 type RoleManagementPolicyObservation struct {
@@ -1047,11 +1046,11 @@ type RoleManagementPolicyParameters struct {
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDRef *v1.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+	RoleDefinitionIDRef *v2.NamespacedReference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a RoleDefinition in authorization to populate roleDefinitionId.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionIDSelector *v1.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
+	RoleDefinitionIDSelector *v2.NamespacedSelector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
 	// The scope of the role to which this policy will apply
@@ -1062,11 +1061,11 @@ type RoleManagementPolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeRef *v1.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
+	ScopeRef *v2.NamespacedReference `json:"scopeRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate scope.
 	// +kubebuilder:validation:Optional
-	ScopeSelector *v1.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
+	ScopeSelector *v2.NamespacedSelector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 // RoleManagementPolicySpec defines the desired state of RoleManagementPolicy
@@ -1088,8 +1087,8 @@ type RoleManagementPolicySpec struct {
 
 // RoleManagementPolicyStatus defines the observed state of RoleManagementPolicy.
 type RoleManagementPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RoleManagementPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RoleManagementPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

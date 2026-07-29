@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationRuleCollectionInitParameters struct {
@@ -242,11 +241,11 @@ type FirewallPolicyRuleCollectionGroupParameters struct {
 
 	// Reference to a FirewallPolicy in network to populate firewallPolicyId.
 	// +kubebuilder:validation:Optional
-	FirewallPolicyIDRef *v1.NamespacedReference `json:"firewallPolicyIdRef,omitempty" tf:"-"`
+	FirewallPolicyIDRef *v2.NamespacedReference `json:"firewallPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a FirewallPolicy in network to populate firewallPolicyId.
 	// +kubebuilder:validation:Optional
-	FirewallPolicyIDSelector *v1.NamespacedSelector `json:"firewallPolicyIdSelector,omitempty" tf:"-"`
+	FirewallPolicyIDSelector *v2.NamespacedSelector `json:"firewallPolicyIdSelector,omitempty" tf:"-"`
 
 	// One or more nat_rule_collection blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -644,8 +643,8 @@ type FirewallPolicyRuleCollectionGroupSpec struct {
 
 // FirewallPolicyRuleCollectionGroupStatus defines the observed state of FirewallPolicyRuleCollectionGroup.
 type FirewallPolicyRuleCollectionGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallPolicyRuleCollectionGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FirewallPolicyRuleCollectionGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GalleryImageReferenceInitParameters struct {
@@ -114,11 +114,11 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// Reference to a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameRef *v1.Reference `json:"labNameRef,omitempty" tf:"-"`
+	LabNameRef *v2.Reference `json:"labNameRef,omitempty" tf:"-"`
 
 	// Selector for a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
+	LabNameSelector *v2.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// The name of a Subnet within the Dev Test Virtual Network where this machine should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
@@ -126,11 +126,11 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// Reference to a Subnet in network to populate labSubnetName.
 	// +kubebuilder:validation:Optional
-	LabSubnetNameRef *v1.Reference `json:"labSubnetNameRef,omitempty" tf:"-"`
+	LabSubnetNameRef *v2.Reference `json:"labSubnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate labSubnetName.
 	// +kubebuilder:validation:Optional
-	LabSubnetNameSelector *v1.Selector `json:"labSubnetNameSelector,omitempty" tf:"-"`
+	LabSubnetNameSelector *v2.Selector `json:"labSubnetNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Dev Test Virtual Network where this Virtual Machine should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.VirtualNetwork
@@ -139,11 +139,11 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// Reference to a VirtualNetwork in devtestlab to populate labVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	LabVirtualNetworkIDRef *v1.Reference `json:"labVirtualNetworkIdRef,omitempty" tf:"-"`
+	LabVirtualNetworkIDRef *v2.Reference `json:"labVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in devtestlab to populate labVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	LabVirtualNetworkIDSelector *v1.Selector `json:"labVirtualNetworkIdSelector,omitempty" tf:"-"`
+	LabVirtualNetworkIDSelector *v2.Selector `json:"labVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the Dev Test Lab exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -155,7 +155,7 @@ type LinuxVirtualMachineInitParameters struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// The Password associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -163,11 +163,11 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SSH Key associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
 	SSHKey *string `json:"sshKey,omitempty" tf:"ssh_key,omitempty"`
@@ -272,11 +272,11 @@ type LinuxVirtualMachineParameters struct {
 
 	// Reference to a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameRef *v1.Reference `json:"labNameRef,omitempty" tf:"-"`
+	LabNameRef *v2.Reference `json:"labNameRef,omitempty" tf:"-"`
 
 	// Selector for a Lab in devtestlab to populate labName.
 	// +kubebuilder:validation:Optional
-	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
+	LabNameSelector *v2.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// The name of a Subnet within the Dev Test Virtual Network where this machine should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
@@ -285,11 +285,11 @@ type LinuxVirtualMachineParameters struct {
 
 	// Reference to a Subnet in network to populate labSubnetName.
 	// +kubebuilder:validation:Optional
-	LabSubnetNameRef *v1.Reference `json:"labSubnetNameRef,omitempty" tf:"-"`
+	LabSubnetNameRef *v2.Reference `json:"labSubnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate labSubnetName.
 	// +kubebuilder:validation:Optional
-	LabSubnetNameSelector *v1.Selector `json:"labSubnetNameSelector,omitempty" tf:"-"`
+	LabSubnetNameSelector *v2.Selector `json:"labSubnetNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Dev Test Virtual Network where this Virtual Machine should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1.VirtualNetwork
@@ -299,11 +299,11 @@ type LinuxVirtualMachineParameters struct {
 
 	// Reference to a VirtualNetwork in devtestlab to populate labVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	LabVirtualNetworkIDRef *v1.Reference `json:"labVirtualNetworkIdRef,omitempty" tf:"-"`
+	LabVirtualNetworkIDRef *v2.Reference `json:"labVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in devtestlab to populate labVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	LabVirtualNetworkIDSelector *v1.Selector `json:"labVirtualNetworkIdSelector,omitempty" tf:"-"`
+	LabVirtualNetworkIDSelector *v2.Selector `json:"labVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the Dev Test Lab exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -319,7 +319,7 @@ type LinuxVirtualMachineParameters struct {
 
 	// The Password associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -328,11 +328,11 @@ type LinuxVirtualMachineParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SSH Key associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -358,8 +358,8 @@ type LinuxVirtualMachineParameters struct {
 
 // LinuxVirtualMachineSpec defines the desired state of LinuxVirtualMachine
 type LinuxVirtualMachineSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinuxVirtualMachineParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinuxVirtualMachineParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -375,8 +375,8 @@ type LinuxVirtualMachineSpec struct {
 
 // LinuxVirtualMachineStatus defines the observed state of LinuxVirtualMachine.
 type LinuxVirtualMachineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinuxVirtualMachineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinuxVirtualMachineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RouteInitParameters_2 struct {
@@ -67,11 +67,11 @@ type RouteParameters_2 struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the route table within which create the route. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.RouteTable
@@ -80,17 +80,17 @@ type RouteParameters_2 struct {
 
 	// Reference to a RouteTable in network to populate routeTableName.
 	// +kubebuilder:validation:Optional
-	RouteTableNameRef *v1.Reference `json:"routeTableNameRef,omitempty" tf:"-"`
+	RouteTableNameRef *v2.Reference `json:"routeTableNameRef,omitempty" tf:"-"`
 
 	// Selector for a RouteTable in network to populate routeTableName.
 	// +kubebuilder:validation:Optional
-	RouteTableNameSelector *v1.Selector `json:"routeTableNameSelector,omitempty" tf:"-"`
+	RouteTableNameSelector *v2.Selector `json:"routeTableNameSelector,omitempty" tf:"-"`
 }
 
 // RouteSpec defines the desired state of Route
 type RouteSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RouteParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RouteParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -106,8 +106,8 @@ type RouteSpec struct {
 
 // RouteStatus defines the observed state of Route.
 type RouteStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RouteObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

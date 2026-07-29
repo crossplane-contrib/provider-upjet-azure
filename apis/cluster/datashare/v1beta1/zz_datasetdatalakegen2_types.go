@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataSetDataLakeGen2InitParameters struct {
@@ -24,11 +24,11 @@ type DataSetDataLakeGen2InitParameters struct {
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate fileSystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameRef *v1.Reference `json:"fileSystemNameRef,omitempty" tf:"-"`
+	FileSystemNameRef *v2.Reference `json:"fileSystemNameRef,omitempty" tf:"-"`
 
 	// Selector for a DataLakeGen2FileSystem in storage to populate fileSystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameSelector *v1.Selector `json:"fileSystemNameSelector,omitempty" tf:"-"`
+	FileSystemNameSelector *v2.Selector `json:"fileSystemNameSelector,omitempty" tf:"-"`
 
 	// The folder path in the data lake file system to be shared with the receiver. Conflicts with file_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
@@ -40,11 +40,11 @@ type DataSetDataLakeGen2InitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type DataSetDataLakeGen2Observation struct {
@@ -84,11 +84,11 @@ type DataSetDataLakeGen2Parameters struct {
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate fileSystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameRef *v1.Reference `json:"fileSystemNameRef,omitempty" tf:"-"`
+	FileSystemNameRef *v2.Reference `json:"fileSystemNameRef,omitempty" tf:"-"`
 
 	// Selector for a DataLakeGen2FileSystem in storage to populate fileSystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameSelector *v1.Selector `json:"fileSystemNameSelector,omitempty" tf:"-"`
+	FileSystemNameSelector *v2.Selector `json:"fileSystemNameSelector,omitempty" tf:"-"`
 
 	// The folder path in the data lake file system to be shared with the receiver. Conflicts with file_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	// +kubebuilder:validation:Optional
@@ -102,11 +102,11 @@ type DataSetDataLakeGen2Parameters struct {
 
 	// Reference to a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
-	ShareIDRef *v1.Reference `json:"shareIdRef,omitempty" tf:"-"`
+	ShareIDRef *v2.Reference `json:"shareIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
-	ShareIDSelector *v1.Selector `json:"shareIdSelector,omitempty" tf:"-"`
+	ShareIDSelector *v2.Selector `json:"shareIdSelector,omitempty" tf:"-"`
 
 	// The resource id of the storage account of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -116,17 +116,17 @@ type DataSetDataLakeGen2Parameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 // DataSetDataLakeGen2Spec defines the desired state of DataSetDataLakeGen2
 type DataSetDataLakeGen2Spec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     DataSetDataLakeGen2Parameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   DataSetDataLakeGen2Parameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -142,8 +142,8 @@ type DataSetDataLakeGen2Spec struct {
 
 // DataSetDataLakeGen2Status defines the observed state of DataSetDataLakeGen2.
 type DataSetDataLakeGen2Status struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataSetDataLakeGen2Observation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataSetDataLakeGen2Observation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

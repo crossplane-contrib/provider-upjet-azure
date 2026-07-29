@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConnectionMonitorInitParameters struct {
@@ -32,11 +32,11 @@ type ConnectionMonitorInitParameters struct {
 
 	// References to Workspace in operationalinsights to populate outputWorkspaceResourceIds.
 	// +kubebuilder:validation:Optional
-	OutputWorkspaceResourceIdsRefs []v1.Reference `json:"outputWorkspaceResourceIdsRefs,omitempty" tf:"-"`
+	OutputWorkspaceResourceIdsRefs []v2.Reference `json:"outputWorkspaceResourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Workspace in operationalinsights to populate outputWorkspaceResourceIds.
 	// +kubebuilder:validation:Optional
-	OutputWorkspaceResourceIdsSelector *v1.Selector `json:"outputWorkspaceResourceIdsSelector,omitempty" tf:"-"`
+	OutputWorkspaceResourceIdsSelector *v2.Selector `json:"outputWorkspaceResourceIdsSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Connection Monitor.
 	// +mapType=granular
@@ -99,11 +99,11 @@ type ConnectionMonitorParameters struct {
 
 	// Reference to a Watcher in network to populate networkWatcherId.
 	// +kubebuilder:validation:Optional
-	NetworkWatcherIDRef *v1.Reference `json:"networkWatcherIdRef,omitempty" tf:"-"`
+	NetworkWatcherIDRef *v2.Reference `json:"networkWatcherIdRef,omitempty" tf:"-"`
 
 	// Selector for a Watcher in network to populate networkWatcherId.
 	// +kubebuilder:validation:Optional
-	NetworkWatcherIDSelector *v1.Selector `json:"networkWatcherIdSelector,omitempty" tf:"-"`
+	NetworkWatcherIDSelector *v2.Selector `json:"networkWatcherIdSelector,omitempty" tf:"-"`
 
 	// The description of the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
@@ -118,11 +118,11 @@ type ConnectionMonitorParameters struct {
 
 	// References to Workspace in operationalinsights to populate outputWorkspaceResourceIds.
 	// +kubebuilder:validation:Optional
-	OutputWorkspaceResourceIdsRefs []v1.Reference `json:"outputWorkspaceResourceIdsRefs,omitempty" tf:"-"`
+	OutputWorkspaceResourceIdsRefs []v2.Reference `json:"outputWorkspaceResourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Workspace in operationalinsights to populate outputWorkspaceResourceIds.
 	// +kubebuilder:validation:Optional
-	OutputWorkspaceResourceIdsSelector *v1.Selector `json:"outputWorkspaceResourceIdsSelector,omitempty" tf:"-"`
+	OutputWorkspaceResourceIdsSelector *v2.Selector `json:"outputWorkspaceResourceIdsSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
@@ -638,8 +638,8 @@ type TestGroupParameters struct {
 
 // ConnectionMonitorSpec defines the desired state of ConnectionMonitor
 type ConnectionMonitorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConnectionMonitorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConnectionMonitorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -655,8 +655,8 @@ type ConnectionMonitorSpec struct {
 
 // ConnectionMonitorStatus defines the observed state of ConnectionMonitor.
 type ConnectionMonitorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConnectionMonitorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConnectionMonitorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

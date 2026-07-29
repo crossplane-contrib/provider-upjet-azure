@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LinkedServiceAzureTableStorageInitParameters struct {
@@ -24,7 +23,7 @@ type LinkedServiceAzureTableStorageInitParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string to an Azure Storage Account.
-	ConnectionStringSecretRef v1.LocalSecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.LocalSecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -76,7 +75,7 @@ type LinkedServiceAzureTableStorageParameters struct {
 
 	// The connection string to an Azure Storage Account.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef v1.LocalSecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.LocalSecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Factory
@@ -86,11 +85,11 @@ type LinkedServiceAzureTableStorageParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -125,8 +124,8 @@ type LinkedServiceAzureTableStorageSpec struct {
 
 // LinkedServiceAzureTableStorageStatus defines the observed state of LinkedServiceAzureTableStorage.
 type LinkedServiceAzureTableStorageStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceAzureTableStorageObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceAzureTableStorageObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

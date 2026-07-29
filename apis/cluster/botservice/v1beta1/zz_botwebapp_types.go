@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BotWebAppInitParameters struct {
 
 	// The Application Insights API Key to associate with the Web App Bot.
-	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
+	DeveloperAppInsightsAPIKeySecretRef *v2.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Web App Bot.
 	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
@@ -37,7 +37,7 @@ type BotWebAppInitParameters struct {
 	LuisAppIds []*string `json:"luisAppIds,omitempty" tf:"luis_app_ids,omitempty"`
 
 	// The LUIS key to associate with the Web App Bot.
-	LuisKeySecretRef *v1.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
+	LuisKeySecretRef *v2.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
 
 	// The Microsoft Application ID for the Web App Bot. Changing this forces a new resource to be created.
 	MicrosoftAppID *string `json:"microsoftAppId,omitempty" tf:"microsoft_app_id,omitempty"`
@@ -109,7 +109,7 @@ type BotWebAppParameters struct {
 
 	// The Application Insights API Key to associate with the Web App Bot.
 	// +kubebuilder:validation:Optional
-	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
+	DeveloperAppInsightsAPIKeySecretRef *v2.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Web App Bot.
 	// +kubebuilder:validation:Optional
@@ -137,7 +137,7 @@ type BotWebAppParameters struct {
 
 	// The LUIS key to associate with the Web App Bot.
 	// +kubebuilder:validation:Optional
-	LuisKeySecretRef *v1.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
+	LuisKeySecretRef *v2.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
 
 	// The Microsoft Application ID for the Web App Bot. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -162,11 +162,11 @@ type BotWebAppParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Web App Bot. Valid values include F0 or S1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -180,8 +180,8 @@ type BotWebAppParameters struct {
 
 // BotWebAppSpec defines the desired state of BotWebApp
 type BotWebAppSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BotWebAppParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BotWebAppParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -197,8 +197,8 @@ type BotWebAppSpec struct {
 
 // BotWebAppStatus defines the observed state of BotWebApp.
 type BotWebAppStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BotWebAppObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BotWebAppObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

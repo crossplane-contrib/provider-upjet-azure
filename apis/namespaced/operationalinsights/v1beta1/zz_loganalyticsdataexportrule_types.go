@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LogAnalyticsDataExportRuleInitParameters struct {
@@ -23,11 +22,11 @@ type LogAnalyticsDataExportRuleInitParameters struct {
 
 	// Reference to a Account in storage to populate destinationResourceId.
 	// +kubebuilder:validation:Optional
-	DestinationResourceIDRef *v1.NamespacedReference `json:"destinationResourceIdRef,omitempty" tf:"-"`
+	DestinationResourceIDRef *v2.NamespacedReference `json:"destinationResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate destinationResourceId.
 	// +kubebuilder:validation:Optional
-	DestinationResourceIDSelector *v1.NamespacedSelector `json:"destinationResourceIdSelector,omitempty" tf:"-"`
+	DestinationResourceIDSelector *v2.NamespacedSelector `json:"destinationResourceIdSelector,omitempty" tf:"-"`
 
 	// Is this Log Analytics Data Export Rule enabled? Possible values include true or false. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -38,11 +37,11 @@ type LogAnalyticsDataExportRuleInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of table names to export to the destination resource, for example: ["Heartbeat", "SecurityEvent"].
 	// +listType=set
@@ -84,11 +83,11 @@ type LogAnalyticsDataExportRuleParameters struct {
 
 	// Reference to a Account in storage to populate destinationResourceId.
 	// +kubebuilder:validation:Optional
-	DestinationResourceIDRef *v1.NamespacedReference `json:"destinationResourceIdRef,omitempty" tf:"-"`
+	DestinationResourceIDRef *v2.NamespacedReference `json:"destinationResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate destinationResourceId.
 	// +kubebuilder:validation:Optional
-	DestinationResourceIDSelector *v1.NamespacedSelector `json:"destinationResourceIdSelector,omitempty" tf:"-"`
+	DestinationResourceIDSelector *v2.NamespacedSelector `json:"destinationResourceIdSelector,omitempty" tf:"-"`
 
 	// Is this Log Analytics Data Export Rule enabled? Possible values include true or false. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -101,11 +100,11 @@ type LogAnalyticsDataExportRuleParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of table names to export to the destination resource, for example: ["Heartbeat", "SecurityEvent"].
 	// +kubebuilder:validation:Optional
@@ -120,11 +119,11 @@ type LogAnalyticsDataExportRuleParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDRef *v1.NamespacedReference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+	WorkspaceResourceIDRef *v2.NamespacedReference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceResourceIDSelector *v1.NamespacedSelector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+	WorkspaceResourceIDSelector *v2.NamespacedSelector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 // LogAnalyticsDataExportRuleSpec defines the desired state of LogAnalyticsDataExportRule
@@ -146,8 +145,8 @@ type LogAnalyticsDataExportRuleSpec struct {
 
 // LogAnalyticsDataExportRuleStatus defines the observed state of LogAnalyticsDataExportRule.
 type LogAnalyticsDataExportRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LogAnalyticsDataExportRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LogAnalyticsDataExportRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

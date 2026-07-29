@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudJavaDeploymentInitParameters struct {
@@ -89,11 +88,11 @@ type SpringCloudJavaDeploymentParameters struct {
 
 	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDRef *v1.NamespacedReference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+	SpringCloudAppIDRef *v2.NamespacedReference `json:"springCloudAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDSelector *v1.NamespacedSelector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+	SpringCloudAppIDSelector *v2.NamespacedSelector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudJavaDeploymentQuotaInitParameters struct {
@@ -144,8 +143,8 @@ type SpringCloudJavaDeploymentSpec struct {
 
 // SpringCloudJavaDeploymentStatus defines the observed state of SpringCloudJavaDeployment.
 type SpringCloudJavaDeploymentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudJavaDeploymentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudJavaDeploymentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

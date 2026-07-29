@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLPoolWorkloadGroupInitParameters struct {
@@ -96,11 +95,11 @@ type SQLPoolWorkloadGroupParameters struct {
 
 	// Reference to a SQLPool in synapse to populate sqlPoolId.
 	// +kubebuilder:validation:Optional
-	SQLPoolIDRef *v1.NamespacedReference `json:"sqlPoolIdRef,omitempty" tf:"-"`
+	SQLPoolIDRef *v2.NamespacedReference `json:"sqlPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLPool in synapse to populate sqlPoolId.
 	// +kubebuilder:validation:Optional
-	SQLPoolIDSelector *v1.NamespacedSelector `json:"sqlPoolIdSelector,omitempty" tf:"-"`
+	SQLPoolIDSelector *v2.NamespacedSelector `json:"sqlPoolIdSelector,omitempty" tf:"-"`
 }
 
 // SQLPoolWorkloadGroupSpec defines the desired state of SQLPoolWorkloadGroup
@@ -122,8 +121,8 @@ type SQLPoolWorkloadGroupSpec struct {
 
 // SQLPoolWorkloadGroupStatus defines the observed state of SQLPoolWorkloadGroup.
 type SQLPoolWorkloadGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLPoolWorkloadGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLPoolWorkloadGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

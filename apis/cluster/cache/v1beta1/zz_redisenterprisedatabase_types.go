@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RedisEnterpriseDatabaseInitParameters struct {
@@ -114,11 +114,11 @@ type RedisEnterpriseDatabaseParameters struct {
 
 	// Reference to a RedisEnterpriseCluster in cache to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+	ClusterIDRef *v2.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisEnterpriseCluster in cache to populate clusterId.
 	// +kubebuilder:validation:Optional
-	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+	ClusterIDSelector *v2.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// Clustering policy Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
 	// +kubebuilder:validation:Optional
@@ -148,8 +148,8 @@ type RedisEnterpriseDatabaseParameters struct {
 
 // RedisEnterpriseDatabaseSpec defines the desired state of RedisEnterpriseDatabase
 type RedisEnterpriseDatabaseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedisEnterpriseDatabaseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RedisEnterpriseDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -165,8 +165,8 @@ type RedisEnterpriseDatabaseSpec struct {
 
 // RedisEnterpriseDatabaseStatus defines the observed state of RedisEnterpriseDatabase.
 type RedisEnterpriseDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisEnterpriseDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedisEnterpriseDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

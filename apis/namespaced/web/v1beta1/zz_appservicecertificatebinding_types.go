@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AppServiceCertificateBindingInitParameters struct {
@@ -23,11 +22,11 @@ type AppServiceCertificateBindingInitParameters struct {
 
 	// Reference to a AppServiceManagedCertificate in web to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDRef *v1.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
+	CertificateIDRef *v2.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServiceManagedCertificate in web to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDSelector *v1.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
+	CertificateIDSelector *v2.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Custom Domain/Hostname Binding. Changing this forces a new App Service Certificate Binding to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.AppServiceCustomHostNameBinding
@@ -36,11 +35,11 @@ type AppServiceCertificateBindingInitParameters struct {
 
 	// Reference to a AppServiceCustomHostNameBinding in web to populate hostnameBindingId.
 	// +kubebuilder:validation:Optional
-	HostNameBindingIDRef *v1.NamespacedReference `json:"hostnameBindingIdRef,omitempty" tf:"-"`
+	HostNameBindingIDRef *v2.NamespacedReference `json:"hostnameBindingIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServiceCustomHostNameBinding in web to populate hostnameBindingId.
 	// +kubebuilder:validation:Optional
-	HostNameBindingIDSelector *v1.NamespacedSelector `json:"hostnameBindingIdSelector,omitempty" tf:"-"`
+	HostNameBindingIDSelector *v2.NamespacedSelector `json:"hostnameBindingIdSelector,omitempty" tf:"-"`
 
 	// The type of certificate binding. Allowed values are IpBasedEnabled or SniEnabled. Changing this forces a new App Service Certificate Binding to be created.
 	SSLState *string `json:"sslState,omitempty" tf:"ssl_state,omitempty"`
@@ -80,11 +79,11 @@ type AppServiceCertificateBindingParameters struct {
 
 	// Reference to a AppServiceManagedCertificate in web to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDRef *v1.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
+	CertificateIDRef *v2.NamespacedReference `json:"certificateIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServiceManagedCertificate in web to populate certificateId.
 	// +kubebuilder:validation:Optional
-	CertificateIDSelector *v1.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
+	CertificateIDSelector *v2.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Custom Domain/Hostname Binding. Changing this forces a new App Service Certificate Binding to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.AppServiceCustomHostNameBinding
@@ -94,11 +93,11 @@ type AppServiceCertificateBindingParameters struct {
 
 	// Reference to a AppServiceCustomHostNameBinding in web to populate hostnameBindingId.
 	// +kubebuilder:validation:Optional
-	HostNameBindingIDRef *v1.NamespacedReference `json:"hostnameBindingIdRef,omitempty" tf:"-"`
+	HostNameBindingIDRef *v2.NamespacedReference `json:"hostnameBindingIdRef,omitempty" tf:"-"`
 
 	// Selector for a AppServiceCustomHostNameBinding in web to populate hostnameBindingId.
 	// +kubebuilder:validation:Optional
-	HostNameBindingIDSelector *v1.NamespacedSelector `json:"hostnameBindingIdSelector,omitempty" tf:"-"`
+	HostNameBindingIDSelector *v2.NamespacedSelector `json:"hostnameBindingIdSelector,omitempty" tf:"-"`
 
 	// The type of certificate binding. Allowed values are IpBasedEnabled or SniEnabled. Changing this forces a new App Service Certificate Binding to be created.
 	// +kubebuilder:validation:Optional
@@ -124,8 +123,8 @@ type AppServiceCertificateBindingSpec struct {
 
 // AppServiceCertificateBindingStatus defines the observed state of AppServiceCertificateBinding.
 type AppServiceCertificateBindingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AppServiceCertificateBindingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AppServiceCertificateBindingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

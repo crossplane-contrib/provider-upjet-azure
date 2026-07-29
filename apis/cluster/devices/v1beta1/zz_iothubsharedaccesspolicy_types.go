@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IOTHubSharedAccessPolicyInitParameters struct {
@@ -65,11 +65,11 @@ type IOTHubSharedAccessPolicyParameters struct {
 
 	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
+	IOTHubNameRef *v2.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
 	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
+	IOTHubNameSelector *v2.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// Adds RegistryRead permission to this Shared Access Account. It allows read access to the identity registry.
 	// +kubebuilder:validation:Optional
@@ -86,11 +86,11 @@ type IOTHubSharedAccessPolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Adds ServiceConnect permission to this Shared Access Account. It allows sending and receiving on the cloud-side endpoints.
 	// +kubebuilder:validation:Optional
@@ -99,8 +99,8 @@ type IOTHubSharedAccessPolicyParameters struct {
 
 // IOTHubSharedAccessPolicySpec defines the desired state of IOTHubSharedAccessPolicy
 type IOTHubSharedAccessPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTHubSharedAccessPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTHubSharedAccessPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -116,8 +116,8 @@ type IOTHubSharedAccessPolicySpec struct {
 
 // IOTHubSharedAccessPolicyStatus defines the observed state of IOTHubSharedAccessPolicy.
 type IOTHubSharedAccessPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubSharedAccessPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubSharedAccessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

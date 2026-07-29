@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NotificationRecipientUserInitParameters struct {
@@ -23,11 +22,11 @@ type NotificationRecipientUserInitParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDRef *v1.NamespacedReference `json:"apiManagementIdRef,omitempty" tf:"-"`
+	APIManagementIDRef *v2.NamespacedReference `json:"apiManagementIdRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDSelector *v1.NamespacedSelector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+	APIManagementIDSelector *v2.NamespacedSelector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
@@ -38,11 +37,11 @@ type NotificationRecipientUserInitParameters struct {
 
 	// Reference to a User in apimanagement to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDRef *v1.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
+	UserIDRef *v2.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
 
 	// Selector for a User in apimanagement to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDSelector *v1.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v2.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 }
 
 type NotificationRecipientUserObservation struct {
@@ -70,11 +69,11 @@ type NotificationRecipientUserParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDRef *v1.NamespacedReference `json:"apiManagementIdRef,omitempty" tf:"-"`
+	APIManagementIDRef *v2.NamespacedReference `json:"apiManagementIdRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDSelector *v1.NamespacedSelector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+	APIManagementIDSelector *v2.NamespacedSelector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
 	// +kubebuilder:validation:Optional
@@ -87,11 +86,11 @@ type NotificationRecipientUserParameters struct {
 
 	// Reference to a User in apimanagement to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDRef *v1.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
+	UserIDRef *v2.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
 
 	// Selector for a User in apimanagement to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDSelector *v1.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v2.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 }
 
 // NotificationRecipientUserSpec defines the desired state of NotificationRecipientUser
@@ -113,8 +112,8 @@ type NotificationRecipientUserSpec struct {
 
 // NotificationRecipientUserStatus defines the observed state of NotificationRecipientUser.
 type NotificationRecipientUserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NotificationRecipientUserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NotificationRecipientUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -23,11 +22,11 @@ type ActionInitParameters struct {
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDRef *v1.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
+	ActionGroupIDRef *v2.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDSelector *v1.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+	ActionGroupIDSelector *v2.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies the properties of an action group object.
 	// +mapType=granular
@@ -54,11 +53,11 @@ type ActionParameters struct {
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDRef *v1.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
+	ActionGroupIDRef *v2.NamespacedReference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDSelector *v1.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+	ActionGroupIDSelector *v2.NamespacedSelector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies the properties of an action group object.
 	// +kubebuilder:validation:Optional
@@ -103,11 +102,11 @@ type MonitorAlertPrometheusRuleGroupInitParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The description of the Alert Management Prometheus Rule Group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -131,11 +130,11 @@ type MonitorAlertPrometheusRuleGroupInitParameters struct {
 
 	// References to MonitorWorkspace in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorWorkspace in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Alert Management Prometheus Rule Group.
 	// +mapType=granular
@@ -185,11 +184,11 @@ type MonitorAlertPrometheusRuleGroupParameters struct {
 
 	// Reference to a KubernetesCluster in containerservice to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameRef *v1.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
+	ClusterNameRef *v2.NamespacedReference `json:"clusterNameRef,omitempty" tf:"-"`
 
 	// Selector for a KubernetesCluster in containerservice to populate clusterName.
 	// +kubebuilder:validation:Optional
-	ClusterNameSelector *v1.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
+	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The description of the Alert Management Prometheus Rule Group.
 	// +kubebuilder:validation:Optional
@@ -210,11 +209,11 @@ type MonitorAlertPrometheusRuleGroupParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rule blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -232,11 +231,11 @@ type MonitorAlertPrometheusRuleGroupParameters struct {
 
 	// References to MonitorWorkspace in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.NamespacedReference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorWorkspace in insights to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.NamespacedSelector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Alert Management Prometheus Rule Group.
 	// +kubebuilder:validation:Optional
@@ -378,8 +377,8 @@ type MonitorAlertPrometheusRuleGroupSpec struct {
 
 // MonitorAlertPrometheusRuleGroupStatus defines the observed state of MonitorAlertPrometheusRuleGroup.
 type MonitorAlertPrometheusRuleGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorAlertPrometheusRuleGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorAlertPrometheusRuleGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

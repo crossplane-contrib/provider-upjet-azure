@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AzureDevopsRepoInitParameters struct {
@@ -105,11 +104,11 @@ type CustomerManagedKeyInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVersionlessId.
 	// +kubebuilder:validation:Optional
-	KeyVersionlessIDRef *v1.NamespacedReference `json:"keyVersionlessIdRef,omitempty" tf:"-"`
+	KeyVersionlessIDRef *v2.NamespacedReference `json:"keyVersionlessIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVersionlessId.
 	// +kubebuilder:validation:Optional
-	KeyVersionlessIDSelector *v1.NamespacedSelector `json:"keyVersionlessIdSelector,omitempty" tf:"-"`
+	KeyVersionlessIDSelector *v2.NamespacedSelector `json:"keyVersionlessIdSelector,omitempty" tf:"-"`
 
 	// The User Assigned Identity ID to be used for accessing the Customer Managed Key for encryption.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
@@ -141,11 +140,11 @@ type CustomerManagedKeyParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVersionlessId.
 	// +kubebuilder:validation:Optional
-	KeyVersionlessIDRef *v1.NamespacedReference `json:"keyVersionlessIdRef,omitempty" tf:"-"`
+	KeyVersionlessIDRef *v2.NamespacedReference `json:"keyVersionlessIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVersionlessId.
 	// +kubebuilder:validation:Optional
-	KeyVersionlessIDSelector *v1.NamespacedSelector `json:"keyVersionlessIdSelector,omitempty" tf:"-"`
+	KeyVersionlessIDSelector *v2.NamespacedSelector `json:"keyVersionlessIdSelector,omitempty" tf:"-"`
 
 	// The User Assigned Identity ID to be used for accessing the Customer Managed Key for encryption.
 	// +kubebuilder:validation:Optional
@@ -274,11 +273,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a Subnet in network to populate computeSubnetId.
 	// +kubebuilder:validation:Optional
-	ComputeSubnetIDRef *v1.NamespacedReference `json:"computeSubnetIdRef,omitempty" tf:"-"`
+	ComputeSubnetIDRef *v2.NamespacedReference `json:"computeSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate computeSubnetId.
 	// +kubebuilder:validation:Optional
-	ComputeSubnetIDSelector *v1.NamespacedSelector `json:"computeSubnetIdSelector,omitempty" tf:"-"`
+	ComputeSubnetIDSelector *v2.NamespacedSelector `json:"computeSubnetIdSelector,omitempty" tf:"-"`
 
 	// A customer_managed_key block as defined below.
 	CustomerManagedKey *CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
@@ -304,11 +303,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameRef *v1.NamespacedReference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
+	ManagedResourceGroupNameRef *v2.NamespacedReference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameSelector *v1.NamespacedSelector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+	ManagedResourceGroupNameSelector *v2.NamespacedSelector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is Virtual Network enabled for all computes in this workspace? Changing this forces a new resource to be created.
 	ManagedVirtualNetworkEnabled *bool `json:"managedVirtualNetworkEnabled,omitempty" tf:"managed_virtual_network_enabled,omitempty"`
@@ -323,7 +322,7 @@ type WorkspaceInitParameters struct {
 	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
 
 	// The Password associated with the sql_administrator_login for the SQL administrator. If this is not provided customer_managed_key must be provided.
-	SQLAdministratorLoginPasswordSecretRef *v1.LocalSecretKeySelector `json:"sqlAdministratorLoginPasswordSecretRef,omitempty" tf:"-"`
+	SQLAdministratorLoginPasswordSecretRef *v2.LocalSecretKeySelector `json:"sqlAdministratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
 	// Are pipelines (running as workspace's system assigned identity) allowed to access SQL pools?
 	SQLIdentityControlEnabled *bool `json:"sqlIdentityControlEnabled,omitempty" tf:"sql_identity_control_enabled,omitempty"`
@@ -335,11 +334,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate storageDataLakeGen2FilesystemId.
 	// +kubebuilder:validation:Optional
-	StorageDataLakeGen2FileSystemIDRef *v1.NamespacedReference `json:"storageDataLakeGen2FilesystemIdRef,omitempty" tf:"-"`
+	StorageDataLakeGen2FileSystemIDRef *v2.NamespacedReference `json:"storageDataLakeGen2FilesystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataLakeGen2FileSystem in storage to populate storageDataLakeGen2FilesystemId.
 	// +kubebuilder:validation:Optional
-	StorageDataLakeGen2FileSystemIDSelector *v1.NamespacedSelector `json:"storageDataLakeGen2FilesystemIdSelector,omitempty" tf:"-"`
+	StorageDataLakeGen2FileSystemIDSelector *v2.NamespacedSelector `json:"storageDataLakeGen2FilesystemIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Synapse Workspace.
 	// +mapType=granular
@@ -429,11 +428,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a Subnet in network to populate computeSubnetId.
 	// +kubebuilder:validation:Optional
-	ComputeSubnetIDRef *v1.NamespacedReference `json:"computeSubnetIdRef,omitempty" tf:"-"`
+	ComputeSubnetIDRef *v2.NamespacedReference `json:"computeSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate computeSubnetId.
 	// +kubebuilder:validation:Optional
-	ComputeSubnetIDSelector *v1.NamespacedSelector `json:"computeSubnetIdSelector,omitempty" tf:"-"`
+	ComputeSubnetIDSelector *v2.NamespacedSelector `json:"computeSubnetIdSelector,omitempty" tf:"-"`
 
 	// A customer_managed_key block as defined below.
 	// +kubebuilder:validation:Optional
@@ -466,11 +465,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameRef *v1.NamespacedReference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
+	ManagedResourceGroupNameRef *v2.NamespacedReference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
-	ManagedResourceGroupNameSelector *v1.NamespacedSelector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+	ManagedResourceGroupNameSelector *v2.NamespacedSelector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is Virtual Network enabled for all computes in this workspace? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -491,11 +490,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided customer_managed_key must be provided.
 	// +kubebuilder:validation:Optional
@@ -503,7 +502,7 @@ type WorkspaceParameters struct {
 
 	// The Password associated with the sql_administrator_login for the SQL administrator. If this is not provided customer_managed_key must be provided.
 	// +kubebuilder:validation:Optional
-	SQLAdministratorLoginPasswordSecretRef *v1.LocalSecretKeySelector `json:"sqlAdministratorLoginPasswordSecretRef,omitempty" tf:"-"`
+	SQLAdministratorLoginPasswordSecretRef *v2.LocalSecretKeySelector `json:"sqlAdministratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
 	// Are pipelines (running as workspace's system assigned identity) allowed to access SQL pools?
 	// +kubebuilder:validation:Optional
@@ -517,11 +516,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate storageDataLakeGen2FilesystemId.
 	// +kubebuilder:validation:Optional
-	StorageDataLakeGen2FileSystemIDRef *v1.NamespacedReference `json:"storageDataLakeGen2FilesystemIdRef,omitempty" tf:"-"`
+	StorageDataLakeGen2FileSystemIDRef *v2.NamespacedReference `json:"storageDataLakeGen2FilesystemIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataLakeGen2FileSystem in storage to populate storageDataLakeGen2FilesystemId.
 	// +kubebuilder:validation:Optional
-	StorageDataLakeGen2FileSystemIDSelector *v1.NamespacedSelector `json:"storageDataLakeGen2FilesystemIdSelector,omitempty" tf:"-"`
+	StorageDataLakeGen2FileSystemIDSelector *v2.NamespacedSelector `json:"storageDataLakeGen2FilesystemIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Synapse Workspace.
 	// +kubebuilder:validation:Optional
@@ -548,8 +547,8 @@ type WorkspaceSpec struct {
 
 // WorkspaceStatus defines the observed state of Workspace.
 type WorkspaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

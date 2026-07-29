@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerConnectedRegistryInitParameters struct {
@@ -28,11 +28,11 @@ type ContainerConnectedRegistryInitParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDRef *v1.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
+	ContainerRegistryIDRef *v2.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
+	ContainerRegistryIDSelector *v2.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
 	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error. Defaults to None.
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
@@ -59,11 +59,11 @@ type ContainerConnectedRegistryInitParameters struct {
 
 	// Reference to a Token in containerregistry to populate syncTokenId.
 	// +kubebuilder:validation:Optional
-	SyncTokenIDRef *v1.Reference `json:"syncTokenIdRef,omitempty" tf:"-"`
+	SyncTokenIDRef *v2.Reference `json:"syncTokenIdRef,omitempty" tf:"-"`
 
 	// Selector for a Token in containerregistry to populate syncTokenId.
 	// +kubebuilder:validation:Optional
-	SyncTokenIDSelector *v1.Selector `json:"syncTokenIdSelector,omitempty" tf:"-"`
+	SyncTokenIDSelector *v2.Selector `json:"syncTokenIdSelector,omitempty" tf:"-"`
 
 	// The time window (in form of ISO8601) during which sync is enabled for each schedule occurrence. Allowed range is from PT3H to P7D.
 	SyncWindow *string `json:"syncWindow,omitempty" tf:"sync_window,omitempty"`
@@ -126,11 +126,11 @@ type ContainerConnectedRegistryParameters struct {
 
 	// Reference to a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDRef *v1.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
+	ContainerRegistryIDRef *v2.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
+	ContainerRegistryIDSelector *v2.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
 	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error. Defaults to None.
 	// +kubebuilder:validation:Optional
@@ -164,11 +164,11 @@ type ContainerConnectedRegistryParameters struct {
 
 	// Reference to a Token in containerregistry to populate syncTokenId.
 	// +kubebuilder:validation:Optional
-	SyncTokenIDRef *v1.Reference `json:"syncTokenIdRef,omitempty" tf:"-"`
+	SyncTokenIDRef *v2.Reference `json:"syncTokenIdRef,omitempty" tf:"-"`
 
 	// Selector for a Token in containerregistry to populate syncTokenId.
 	// +kubebuilder:validation:Optional
-	SyncTokenIDSelector *v1.Selector `json:"syncTokenIdSelector,omitempty" tf:"-"`
+	SyncTokenIDSelector *v2.Selector `json:"syncTokenIdSelector,omitempty" tf:"-"`
 
 	// The time window (in form of ISO8601) during which sync is enabled for each schedule occurrence. Allowed range is from PT3H to P7D.
 	// +kubebuilder:validation:Optional
@@ -226,8 +226,8 @@ type NotificationParameters struct {
 
 // ContainerConnectedRegistrySpec defines the desired state of ContainerConnectedRegistry
 type ContainerConnectedRegistrySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContainerConnectedRegistryParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ContainerConnectedRegistryParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -243,8 +243,8 @@ type ContainerConnectedRegistrySpec struct {
 
 // ContainerConnectedRegistryStatus defines the observed state of ContainerConnectedRegistry.
 type ContainerConnectedRegistryStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerConnectedRegistryObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerConnectedRegistryObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LinkedServiceMySQLInitParameters struct {
@@ -94,11 +94,11 @@ type LinkedServiceMySQLParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service MySQL.
 	// +kubebuilder:validation:Optional
@@ -120,8 +120,8 @@ type LinkedServiceMySQLParameters struct {
 
 // LinkedServiceMySQLSpec defines the desired state of LinkedServiceMySQL
 type LinkedServiceMySQLSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceMySQLParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceMySQLParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -137,8 +137,8 @@ type LinkedServiceMySQLSpec struct {
 
 // LinkedServiceMySQLStatus defines the observed state of LinkedServiceMySQL.
 type LinkedServiceMySQLStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceMySQLObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceMySQLObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QueueInitParameters struct {
@@ -180,11 +179,11 @@ type QueueParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDRef *v1.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
+	NamespaceIDRef *v2.NamespacedReference `json:"namespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDSelector *v1.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
+	NamespaceIDSelector *v2.NamespacedSelector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Boolean flag which controls whether to enable the queue to be partitioned across multiple message brokers. Changing this forces a new resource to be created. Defaults to false for Basic and Standard.
 	// +kubebuilder:validation:Optional
@@ -222,8 +221,8 @@ type QueueSpec struct {
 
 // QueueStatus defines the observed state of Queue.
 type QueueStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QueueObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QueueObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

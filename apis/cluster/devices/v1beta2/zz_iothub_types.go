@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudToDeviceInitParameters struct {
@@ -184,7 +184,7 @@ type FileUploadInitParameters struct {
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The connection string for the Azure Storage account to which files are uploaded.
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The name of the root container where the files should be uploaded to. The container need not exist but should be creatable using the connection_string specified.
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
@@ -243,7 +243,7 @@ type FileUploadParameters struct {
 
 	// The connection string for the Azure Storage account to which files are uploaded.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The name of the root container where the files should be uploaded to. The container need not exist but should be creatable using the connection_string specified.
 	// +kubebuilder:validation:Optional
@@ -445,11 +445,11 @@ type IOTHubParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
@@ -647,8 +647,8 @@ type SkuParameters struct {
 
 // IOTHubSpec defines the desired state of IOTHub
 type IOTHubSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IOTHubParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IOTHubParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -664,8 +664,8 @@ type IOTHubSpec struct {
 
 // IOTHubStatus defines the observed state of IOTHub.
 type IOTHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTHubObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

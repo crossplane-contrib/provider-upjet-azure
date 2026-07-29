@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MaintenanceAssignmentDedicatedHostInitParameters struct {
@@ -23,11 +22,11 @@ type MaintenanceAssignmentDedicatedHostInitParameters struct {
 
 	// Reference to a DedicatedHost in compute to populate dedicatedHostId.
 	// +kubebuilder:validation:Optional
-	DedicatedHostIDRef *v1.NamespacedReference `json:"dedicatedHostIdRef,omitempty" tf:"-"`
+	DedicatedHostIDRef *v2.NamespacedReference `json:"dedicatedHostIdRef,omitempty" tf:"-"`
 
 	// Selector for a DedicatedHost in compute to populate dedicatedHostId.
 	// +kubebuilder:validation:Optional
-	DedicatedHostIDSelector *v1.NamespacedSelector `json:"dedicatedHostIdSelector,omitempty" tf:"-"`
+	DedicatedHostIDSelector *v2.NamespacedSelector `json:"dedicatedHostIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -39,11 +38,11 @@ type MaintenanceAssignmentDedicatedHostInitParameters struct {
 
 	// Reference to a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDRef *v1.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
+	MaintenanceConfigurationIDRef *v2.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDSelector *v1.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
+	MaintenanceConfigurationIDSelector *v2.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceAssignmentDedicatedHostObservation struct {
@@ -71,11 +70,11 @@ type MaintenanceAssignmentDedicatedHostParameters struct {
 
 	// Reference to a DedicatedHost in compute to populate dedicatedHostId.
 	// +kubebuilder:validation:Optional
-	DedicatedHostIDRef *v1.NamespacedReference `json:"dedicatedHostIdRef,omitempty" tf:"-"`
+	DedicatedHostIDRef *v2.NamespacedReference `json:"dedicatedHostIdRef,omitempty" tf:"-"`
 
 	// Selector for a DedicatedHost in compute to populate dedicatedHostId.
 	// +kubebuilder:validation:Optional
-	DedicatedHostIDSelector *v1.NamespacedSelector `json:"dedicatedHostIdSelector,omitempty" tf:"-"`
+	DedicatedHostIDSelector *v2.NamespacedSelector `json:"dedicatedHostIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -89,11 +88,11 @@ type MaintenanceAssignmentDedicatedHostParameters struct {
 
 	// Reference to a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDRef *v1.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
+	MaintenanceConfigurationIDRef *v2.NamespacedReference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
 
 	// Selector for a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
 	// +kubebuilder:validation:Optional
-	MaintenanceConfigurationIDSelector *v1.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
+	MaintenanceConfigurationIDSelector *v2.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
 }
 
 // MaintenanceAssignmentDedicatedHostSpec defines the desired state of MaintenanceAssignmentDedicatedHost
@@ -115,8 +114,8 @@ type MaintenanceAssignmentDedicatedHostSpec struct {
 
 // MaintenanceAssignmentDedicatedHostStatus defines the observed state of MaintenanceAssignmentDedicatedHost.
 type MaintenanceAssignmentDedicatedHostStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MaintenanceAssignmentDedicatedHostObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MaintenanceAssignmentDedicatedHostObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

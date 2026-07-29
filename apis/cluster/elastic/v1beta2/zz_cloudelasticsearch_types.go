@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CloudElasticsearchInitParameters struct {
@@ -106,11 +106,11 @@ type CloudElasticsearchParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the SKU for this Elasticsearch. Changing this forces a new Elasticsearch to be created.
 	// +kubebuilder:validation:Optional
@@ -212,8 +212,8 @@ type LogsParameters struct {
 
 // CloudElasticsearchSpec defines the desired state of CloudElasticsearch
 type CloudElasticsearchSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     CloudElasticsearchParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   CloudElasticsearchParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -229,8 +229,8 @@ type CloudElasticsearchSpec struct {
 
 // CloudElasticsearchStatus defines the observed state of CloudElasticsearch.
 type CloudElasticsearchStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        CloudElasticsearchObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               CloudElasticsearchObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

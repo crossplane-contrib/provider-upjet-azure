@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomerManagedKeyInitParameters struct {
@@ -22,11 +22,11 @@ type CustomerManagedKeyInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the User Assigned Identity that has access to the Key Vault Key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -35,11 +35,11 @@ type CustomerManagedKeyInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type CustomerManagedKeyObservation struct {
@@ -61,11 +61,11 @@ type CustomerManagedKeyParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the User Assigned Identity that has access to the Key Vault Key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -75,11 +75,11 @@ type CustomerManagedKeyParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type DefaultDatabaseInitParameters struct {
@@ -187,11 +187,11 @@ type ManagedRedisIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Managed Redis instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -224,11 +224,11 @@ type ManagedRedisIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Managed Redis instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -333,11 +333,11 @@ type ManagedRedisParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The features and specification of the Managed Redis instance to deploy. Possible values are Balanced_B0, Balanced_B1, Balanced_B10, Balanced_B100, Balanced_B1000, Balanced_B150, Balanced_B20, Balanced_B250, Balanced_B3, Balanced_B350, Balanced_B5, Balanced_B50, Balanced_B500, Balanced_B700, ComputeOptimized_X10, ComputeOptimized_X100, ComputeOptimized_X150, ComputeOptimized_X20, ComputeOptimized_X250, ComputeOptimized_X3, ComputeOptimized_X350, ComputeOptimized_X5, ComputeOptimized_X50, ComputeOptimized_X500, ComputeOptimized_X700, FlashOptimized_A1000, FlashOptimized_A1500, FlashOptimized_A2000, FlashOptimized_A250, FlashOptimized_A4500, FlashOptimized_A500, FlashOptimized_A700, MemoryOptimized_M10, MemoryOptimized_M100, MemoryOptimized_M1000, MemoryOptimized_M150, MemoryOptimized_M1500, MemoryOptimized_M20, MemoryOptimized_M2000, MemoryOptimized_M250, MemoryOptimized_M350, MemoryOptimized_M50, MemoryOptimized_M500 and MemoryOptimized_M700. Balanced_B3 SKU or higher is required for geo-replication.
 	// +kubebuilder:validation:Optional
@@ -383,8 +383,8 @@ type ModuleParameters struct {
 
 // ManagedRedisSpec defines the desired state of ManagedRedis
 type ManagedRedisSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagedRedisParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagedRedisParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -400,8 +400,8 @@ type ManagedRedisSpec struct {
 
 // ManagedRedisStatus defines the observed state of ManagedRedis.
 type ManagedRedisStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedRedisObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedRedisObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

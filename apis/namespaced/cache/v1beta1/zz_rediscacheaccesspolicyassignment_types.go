@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RedisCacheAccessPolicyAssignmentInitParameters struct {
@@ -66,11 +65,11 @@ type RedisCacheAccessPolicyAssignmentParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDRef *v1.NamespacedReference `json:"redisCacheIdRef,omitempty" tf:"-"`
+	RedisCacheIDRef *v2.NamespacedReference `json:"redisCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisCacheId.
 	// +kubebuilder:validation:Optional
-	RedisCacheIDSelector *v1.NamespacedSelector `json:"redisCacheIdSelector,omitempty" tf:"-"`
+	RedisCacheIDSelector *v2.NamespacedSelector `json:"redisCacheIdSelector,omitempty" tf:"-"`
 }
 
 // RedisCacheAccessPolicyAssignmentSpec defines the desired state of RedisCacheAccessPolicyAssignment
@@ -92,8 +91,8 @@ type RedisCacheAccessPolicyAssignmentSpec struct {
 
 // RedisCacheAccessPolicyAssignmentStatus defines the observed state of RedisCacheAccessPolicyAssignment.
 type RedisCacheAccessPolicyAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisCacheAccessPolicyAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedisCacheAccessPolicyAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

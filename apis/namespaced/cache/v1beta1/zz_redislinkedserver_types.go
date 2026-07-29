@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RedisLinkedServerInitParameters struct {
@@ -23,11 +22,11 @@ type RedisLinkedServerInitParameters struct {
 
 	// Reference to a RedisCache in cache to populate linkedRedisCacheId.
 	// +kubebuilder:validation:Optional
-	LinkedRedisCacheIDRef *v1.NamespacedReference `json:"linkedRedisCacheIdRef,omitempty" tf:"-"`
+	LinkedRedisCacheIDRef *v2.NamespacedReference `json:"linkedRedisCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate linkedRedisCacheId.
 	// +kubebuilder:validation:Optional
-	LinkedRedisCacheIDSelector *v1.NamespacedSelector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
+	LinkedRedisCacheIDSelector *v2.NamespacedSelector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
 
 	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
 	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
@@ -73,11 +72,11 @@ type RedisLinkedServerParameters struct {
 
 	// Reference to a RedisCache in cache to populate linkedRedisCacheId.
 	// +kubebuilder:validation:Optional
-	LinkedRedisCacheIDRef *v1.NamespacedReference `json:"linkedRedisCacheIdRef,omitempty" tf:"-"`
+	LinkedRedisCacheIDRef *v2.NamespacedReference `json:"linkedRedisCacheIdRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate linkedRedisCacheId.
 	// +kubebuilder:validation:Optional
-	LinkedRedisCacheIDSelector *v1.NamespacedSelector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
+	LinkedRedisCacheIDSelector *v2.NamespacedSelector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
 
 	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
 	// +kubebuilder:validation:Optional
@@ -90,11 +89,11 @@ type RedisLinkedServerParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created. Possible values are Primary and Secondary.
 	// +kubebuilder:validation:Optional
@@ -107,11 +106,11 @@ type RedisLinkedServerParameters struct {
 
 	// Reference to a RedisCache in cache to populate targetRedisCacheName.
 	// +kubebuilder:validation:Optional
-	TargetRedisCacheNameRef *v1.NamespacedReference `json:"targetRedisCacheNameRef,omitempty" tf:"-"`
+	TargetRedisCacheNameRef *v2.NamespacedReference `json:"targetRedisCacheNameRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate targetRedisCacheName.
 	// +kubebuilder:validation:Optional
-	TargetRedisCacheNameSelector *v1.NamespacedSelector `json:"targetRedisCacheNameSelector,omitempty" tf:"-"`
+	TargetRedisCacheNameSelector *v2.NamespacedSelector `json:"targetRedisCacheNameSelector,omitempty" tf:"-"`
 }
 
 // RedisLinkedServerSpec defines the desired state of RedisLinkedServer
@@ -133,8 +132,8 @@ type RedisLinkedServerSpec struct {
 
 // RedisLinkedServerStatus defines the observed state of RedisLinkedServer.
 type RedisLinkedServerStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisLinkedServerObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedisLinkedServerObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

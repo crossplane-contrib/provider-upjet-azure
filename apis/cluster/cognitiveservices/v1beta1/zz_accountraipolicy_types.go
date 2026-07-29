@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountRaiPolicyInitParameters struct {
@@ -65,11 +65,11 @@ type AccountRaiPolicyParameters struct {
 
 	// Reference to a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDRef *v1.Reference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
+	CognitiveAccountIDRef *v2.Reference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cognitiveservices to populate cognitiveAccountId.
 	// +kubebuilder:validation:Optional
-	CognitiveAccountIDSelector *v1.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
+	CognitiveAccountIDSelector *v2.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
 
 	// A content_filter block as defined below.
 	// +kubebuilder:validation:Optional
@@ -146,8 +146,8 @@ type ContentFilterParameters struct {
 
 // AccountRaiPolicySpec defines the desired state of AccountRaiPolicy
 type AccountRaiPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccountRaiPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccountRaiPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -163,8 +163,8 @@ type AccountRaiPolicySpec struct {
 
 // AccountRaiPolicyStatus defines the observed state of AccountRaiPolicy.
 type AccountRaiPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountRaiPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountRaiPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

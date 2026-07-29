@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SQLFunctionInitParameters struct {
@@ -46,11 +45,11 @@ type SQLFunctionParameters struct {
 
 	// Reference to a SQLContainer in cosmosdb to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDRef *v1.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
+	ContainerIDRef *v2.NamespacedReference `json:"containerIdRef,omitempty" tf:"-"`
 
 	// Selector for a SQLContainer in cosmosdb to populate containerId.
 	// +kubebuilder:validation:Optional
-	ContainerIDSelector *v1.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
+	ContainerIDSelector *v2.NamespacedSelector `json:"containerIdSelector,omitempty" tf:"-"`
 }
 
 // SQLFunctionSpec defines the desired state of SQLFunction
@@ -72,8 +71,8 @@ type SQLFunctionSpec struct {
 
 // SQLFunctionStatus defines the observed state of SQLFunction.
 type SQLFunctionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SQLFunctionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SQLFunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

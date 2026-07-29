@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RouteServerBGPConnectionInitParameters struct {
@@ -56,11 +55,11 @@ type RouteServerBGPConnectionParameters struct {
 
 	// Reference to a RouteServer in network to populate routeServerId.
 	// +kubebuilder:validation:Optional
-	RouteServerIDRef *v1.NamespacedReference `json:"routeServerIdRef,omitempty" tf:"-"`
+	RouteServerIDRef *v2.NamespacedReference `json:"routeServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a RouteServer in network to populate routeServerId.
 	// +kubebuilder:validation:Optional
-	RouteServerIDSelector *v1.NamespacedSelector `json:"routeServerIdSelector,omitempty" tf:"-"`
+	RouteServerIDSelector *v2.NamespacedSelector `json:"routeServerIdSelector,omitempty" tf:"-"`
 }
 
 // RouteServerBGPConnectionSpec defines the desired state of RouteServerBGPConnection
@@ -82,8 +81,8 @@ type RouteServerBGPConnectionSpec struct {
 
 // RouteServerBGPConnectionStatus defines the observed state of RouteServerBGPConnection.
 type RouteServerBGPConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RouteServerBGPConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RouteServerBGPConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

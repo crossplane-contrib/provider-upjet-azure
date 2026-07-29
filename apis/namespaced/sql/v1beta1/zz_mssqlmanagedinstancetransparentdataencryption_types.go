@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLManagedInstanceTransparentDataEncryptionInitParameters struct {
@@ -26,11 +25,11 @@ type MSSQLManagedInstanceTransparentDataEncryptionInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the MSSQL encryption protector
 	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
@@ -68,11 +67,11 @@ type MSSQLManagedInstanceTransparentDataEncryptionParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the MSSQL encryption protector
 	// +kubebuilder:validation:Optional
@@ -86,11 +85,11 @@ type MSSQLManagedInstanceTransparentDataEncryptionParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDRef *v1.NamespacedReference `json:"managedInstanceIdRef,omitempty" tf:"-"`
+	ManagedInstanceIDRef *v2.NamespacedReference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDSelector *v1.NamespacedSelector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
+	ManagedInstanceIDSelector *v2.NamespacedSelector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLManagedInstanceTransparentDataEncryptionSpec defines the desired state of MSSQLManagedInstanceTransparentDataEncryption
@@ -112,8 +111,8 @@ type MSSQLManagedInstanceTransparentDataEncryptionSpec struct {
 
 // MSSQLManagedInstanceTransparentDataEncryptionStatus defines the observed state of MSSQLManagedInstanceTransparentDataEncryption.
 type MSSQLManagedInstanceTransparentDataEncryptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLManagedInstanceTransparentDataEncryptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLManagedInstanceTransparentDataEncryptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

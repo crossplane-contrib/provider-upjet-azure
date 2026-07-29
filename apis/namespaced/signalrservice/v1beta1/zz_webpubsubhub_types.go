@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AuthInitParameters struct {
@@ -23,11 +22,11 @@ type AuthInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate managedIdentityId.
 	// +kubebuilder:validation:Optional
-	ManagedIdentityIDRef *v1.NamespacedReference `json:"managedIdentityIdRef,omitempty" tf:"-"`
+	ManagedIdentityIDRef *v2.NamespacedReference `json:"managedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate managedIdentityId.
 	// +kubebuilder:validation:Optional
-	ManagedIdentityIDSelector *v1.NamespacedSelector `json:"managedIdentityIdSelector,omitempty" tf:"-"`
+	ManagedIdentityIDSelector *v2.NamespacedSelector `json:"managedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type AuthObservation struct {
@@ -46,11 +45,11 @@ type AuthParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate managedIdentityId.
 	// +kubebuilder:validation:Optional
-	ManagedIdentityIDRef *v1.NamespacedReference `json:"managedIdentityIdRef,omitempty" tf:"-"`
+	ManagedIdentityIDRef *v2.NamespacedReference `json:"managedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate managedIdentityId.
 	// +kubebuilder:validation:Optional
-	ManagedIdentityIDSelector *v1.NamespacedSelector `json:"managedIdentityIdSelector,omitempty" tf:"-"`
+	ManagedIdentityIDSelector *v2.NamespacedSelector `json:"managedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type EventHandlerInitParameters struct {
@@ -113,11 +112,11 @@ type EventListenerInitParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the event hub namespace name to receive the events.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
@@ -125,11 +124,11 @@ type EventListenerInitParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameRef *v1.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
+	EventHubNamespaceNameRef *v2.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameSelector *v1.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
+	EventHubNamespaceNameSelector *v2.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the list of system events. Supported values are connected and disconnected.
 	SystemEventNameFilter []*string `json:"systemEventNameFilter,omitempty" tf:"system_event_name_filter,omitempty"`
@@ -162,11 +161,11 @@ type EventListenerParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.NamespacedReference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.NamespacedSelector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the event hub namespace name to receive the events.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHubNamespace
@@ -175,11 +174,11 @@ type EventListenerParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameRef *v1.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
+	EventHubNamespaceNameRef *v2.NamespacedReference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate eventhubNamespaceName.
 	// +kubebuilder:validation:Optional
-	EventHubNamespaceNameSelector *v1.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
+	EventHubNamespaceNameSelector *v2.NamespacedSelector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the list of system events. Supported values are connected and disconnected.
 	// +kubebuilder:validation:Optional
@@ -212,11 +211,11 @@ type WebPubsubHubInitParameters struct {
 
 	// Reference to a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDRef *v1.NamespacedReference `json:"webPubsubIdRef,omitempty" tf:"-"`
+	WebPubsubIDRef *v2.NamespacedReference `json:"webPubsubIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDSelector *v1.NamespacedSelector `json:"webPubsubIdSelector,omitempty" tf:"-"`
+	WebPubsubIDSelector *v2.NamespacedSelector `json:"webPubsubIdSelector,omitempty" tf:"-"`
 }
 
 type WebPubsubHubObservation struct {
@@ -268,11 +267,11 @@ type WebPubsubHubParameters struct {
 
 	// Reference to a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDRef *v1.NamespacedReference `json:"webPubsubIdRef,omitempty" tf:"-"`
+	WebPubsubIDRef *v2.NamespacedReference `json:"webPubsubIdRef,omitempty" tf:"-"`
 
 	// Selector for a WebPubsub in signalrservice to populate webPubsubId.
 	// +kubebuilder:validation:Optional
-	WebPubsubIDSelector *v1.NamespacedSelector `json:"webPubsubIdSelector,omitempty" tf:"-"`
+	WebPubsubIDSelector *v2.NamespacedSelector `json:"webPubsubIdSelector,omitempty" tf:"-"`
 }
 
 // WebPubsubHubSpec defines the desired state of WebPubsubHub
@@ -294,8 +293,8 @@ type WebPubsubHubSpec struct {
 
 // WebPubsubHubStatus defines the observed state of WebPubsubHub.
 type WebPubsubHubStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebPubsubHubObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebPubsubHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

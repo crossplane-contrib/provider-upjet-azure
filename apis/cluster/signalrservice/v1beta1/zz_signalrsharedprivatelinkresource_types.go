@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SignalrSharedPrivateLinkResourceInitParameters struct {
@@ -28,11 +28,11 @@ type SignalrSharedPrivateLinkResourceInitParameters struct {
 
 	// Reference to a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDRef *v1.Reference `json:"signalrServiceIdRef,omitempty" tf:"-"`
+	SignalrServiceIDRef *v2.Reference `json:"signalrServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDSelector *v1.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
+	SignalrServiceIDSelector *v2.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
 
 	// The sub resource name which the Signalr Private Endpoint can connect to. Possible values are sites, vault. Changing this forces a new resource to be created.
 	SubResourceName *string `json:"subResourceName,omitempty" tf:"sub_resource_name,omitempty"`
@@ -44,11 +44,11 @@ type SignalrSharedPrivateLinkResourceInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type SignalrSharedPrivateLinkResourceObservation struct {
@@ -93,11 +93,11 @@ type SignalrSharedPrivateLinkResourceParameters struct {
 
 	// Reference to a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDRef *v1.Reference `json:"signalrServiceIdRef,omitempty" tf:"-"`
+	SignalrServiceIDRef *v2.Reference `json:"signalrServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Service in signalrservice to populate signalrServiceId.
 	// +kubebuilder:validation:Optional
-	SignalrServiceIDSelector *v1.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
+	SignalrServiceIDSelector *v2.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
 
 	// The sub resource name which the Signalr Private Endpoint can connect to. Possible values are sites, vault. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -111,17 +111,17 @@ type SignalrSharedPrivateLinkResourceParameters struct {
 
 	// Reference to a Vault in keyvault to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 // SignalrSharedPrivateLinkResourceSpec defines the desired state of SignalrSharedPrivateLinkResource
 type SignalrSharedPrivateLinkResourceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SignalrSharedPrivateLinkResourceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SignalrSharedPrivateLinkResourceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -137,8 +137,8 @@ type SignalrSharedPrivateLinkResourceSpec struct {
 
 // SignalrSharedPrivateLinkResourceStatus defines the observed state of SignalrSharedPrivateLinkResource.
 type SignalrSharedPrivateLinkResourceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SignalrSharedPrivateLinkResourceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SignalrSharedPrivateLinkResourceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

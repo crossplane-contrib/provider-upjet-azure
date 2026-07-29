@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CustomHTTPSConfigurationInitParameters struct {
@@ -28,11 +28,11 @@ type CustomHTTPSConfigurationInitParameters struct {
 
 	// Reference to a Key in keyvault to populate azureKeyVaultCertificateVaultId.
 	// +kubebuilder:validation:Optional
-	AzureKeyVaultCertificateVaultIDRef *v1.Reference `json:"azureKeyVaultCertificateVaultIdRef,omitempty" tf:"-"`
+	AzureKeyVaultCertificateVaultIDRef *v2.Reference `json:"azureKeyVaultCertificateVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate azureKeyVaultCertificateVaultId.
 	// +kubebuilder:validation:Optional
-	AzureKeyVaultCertificateVaultIDSelector *v1.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
+	AzureKeyVaultCertificateVaultIDSelector *v2.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
 
 	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
 	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
@@ -78,11 +78,11 @@ type CustomHTTPSConfigurationParameters struct {
 
 	// Reference to a Key in keyvault to populate azureKeyVaultCertificateVaultId.
 	// +kubebuilder:validation:Optional
-	AzureKeyVaultCertificateVaultIDRef *v1.Reference `json:"azureKeyVaultCertificateVaultIdRef,omitempty" tf:"-"`
+	AzureKeyVaultCertificateVaultIDRef *v2.Reference `json:"azureKeyVaultCertificateVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate azureKeyVaultCertificateVaultId.
 	// +kubebuilder:validation:Optional
-	AzureKeyVaultCertificateVaultIDSelector *v1.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
+	AzureKeyVaultCertificateVaultIDSelector *v2.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
 
 	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
 	// +kubebuilder:validation:Optional
@@ -133,8 +133,8 @@ type FrontdoorCustomHTTPSConfigurationParameters struct {
 
 // FrontdoorCustomHTTPSConfigurationSpec defines the desired state of FrontdoorCustomHTTPSConfiguration
 type FrontdoorCustomHTTPSConfigurationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FrontdoorCustomHTTPSConfigurationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FrontdoorCustomHTTPSConfigurationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -150,8 +150,8 @@ type FrontdoorCustomHTTPSConfigurationSpec struct {
 
 // FrontdoorCustomHTTPSConfigurationStatus defines the observed state of FrontdoorCustomHTTPSConfiguration.
 type FrontdoorCustomHTTPSConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorCustomHTTPSConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorCustomHTTPSConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

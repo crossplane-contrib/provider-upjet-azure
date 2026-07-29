@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionIncidentInitParameters struct {
@@ -200,11 +200,11 @@ type SentinelAutomationRuleInitParameters struct {
 
 	// Reference to a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The UUID which should be used for this Sentinel Automation Rule. Changing this forces a new Sentinel Automation Rule to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -299,11 +299,11 @@ type SentinelAutomationRuleParameters struct {
 
 	// Reference to a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SentinelLogAnalyticsWorkspaceOnboarding in securityinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The UUID which should be used for this Sentinel Automation Rule. Changing this forces a new Sentinel Automation Rule to be created.
 	// +kubebuilder:validation:Optional
@@ -324,8 +324,8 @@ type SentinelAutomationRuleParameters struct {
 
 // SentinelAutomationRuleSpec defines the desired state of SentinelAutomationRule
 type SentinelAutomationRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SentinelAutomationRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SentinelAutomationRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -341,8 +341,8 @@ type SentinelAutomationRuleSpec struct {
 
 // SentinelAutomationRuleStatus defines the observed state of SentinelAutomationRule.
 type SentinelAutomationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SentinelAutomationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SentinelAutomationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

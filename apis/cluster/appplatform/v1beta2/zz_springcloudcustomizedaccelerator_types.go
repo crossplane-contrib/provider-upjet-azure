@@ -10,13 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BasicAuthInitParameters struct {
 
 	// Specifies the password of git repository basic auth.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the username of git repository basic auth.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -32,7 +32,7 @@ type BasicAuthParameters struct {
 
 	// Specifies the password of git repository basic auth.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the username of git repository basic auth.
 	// +kubebuilder:validation:Optional
@@ -144,10 +144,10 @@ type SSHAuthInitParameters struct {
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// Specifies the Public SSH Key of git repository basic auth.
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the Private SSH Key of git repository basic auth.
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 
 type SSHAuthObservation struct {
@@ -164,11 +164,11 @@ type SSHAuthParameters struct {
 
 	// Specifies the Public SSH Key of git repository basic auth.
 	// +kubebuilder:validation:Optional
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+	HostKeySecretRef *v2.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the Private SSH Key of git repository basic auth.
 	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+	PrivateKeySecretRef v2.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 
 type SpringCloudCustomizedAcceleratorInitParameters struct {
@@ -253,17 +253,17 @@ type SpringCloudCustomizedAcceleratorParameters struct {
 
 	// Reference to a SpringCloudAccelerator in appplatform to populate springCloudAcceleratorId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAcceleratorIDRef *v1.Reference `json:"springCloudAcceleratorIdRef,omitempty" tf:"-"`
+	SpringCloudAcceleratorIDRef *v2.Reference `json:"springCloudAcceleratorIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudAccelerator in appplatform to populate springCloudAcceleratorId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAcceleratorIDSelector *v1.Selector `json:"springCloudAcceleratorIdSelector,omitempty" tf:"-"`
+	SpringCloudAcceleratorIDSelector *v2.Selector `json:"springCloudAcceleratorIdSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudCustomizedAcceleratorSpec defines the desired state of SpringCloudCustomizedAccelerator
 type SpringCloudCustomizedAcceleratorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudCustomizedAcceleratorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudCustomizedAcceleratorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -279,8 +279,8 @@ type SpringCloudCustomizedAcceleratorSpec struct {
 
 // SpringCloudCustomizedAcceleratorStatus defines the observed state of SpringCloudCustomizedAccelerator.
 type SpringCloudCustomizedAcceleratorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudCustomizedAcceleratorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudCustomizedAcceleratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

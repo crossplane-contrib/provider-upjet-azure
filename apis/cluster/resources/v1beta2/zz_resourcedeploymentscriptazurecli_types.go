@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerInitParameters struct {
@@ -38,7 +38,7 @@ type EnvironmentVariableInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the value of the secure environment variable.
-	SecureValueSecretRef *v1.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
+	SecureValueSecretRef *v2.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
 
 	// Specifies the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -61,7 +61,7 @@ type EnvironmentVariableParameters struct {
 
 	// Specifies the value of the secure environment variable.
 	// +kubebuilder:validation:Optional
-	SecureValueSecretRef *v1.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
+	SecureValueSecretRef *v2.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
 
 	// Specifies the value of the environment variable.
 	// +kubebuilder:validation:Optional
@@ -78,11 +78,11 @@ type IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Type of the managed identity. The only possible value is UserAssigned. Changing this forces a new resource to be created.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -109,11 +109,11 @@ type IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Type of the managed identity. The only possible value is UserAssigned. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -155,11 +155,11 @@ type ResourceDeploymentScriptAzureCliInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. The time duration should be between 1 hour and 26 hours (inclusive) and should be specified in ISO 8601 format. Changing this forces a new Resource Deployment Script to be created.
 	RetentionInterval *string `json:"retentionInterval,omitempty" tf:"retention_interval,omitempty"`
@@ -290,11 +290,11 @@ type ResourceDeploymentScriptAzureCliParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. The time duration should be between 1 hour and 26 hours (inclusive) and should be specified in ISO 8601 format. Changing this forces a new Resource Deployment Script to be created.
 	// +kubebuilder:validation:Optional
@@ -329,7 +329,7 @@ type ResourceDeploymentScriptAzureCliParameters struct {
 type StorageAccountInitParameters struct {
 
 	// Specifies the storage account access key.
-	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
+	KeySecretRef v2.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Specifies the storage account name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -345,7 +345,7 @@ type StorageAccountParameters struct {
 
 	// Specifies the storage account access key.
 	// +kubebuilder:validation:Optional
-	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
+	KeySecretRef v2.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Specifies the storage account name.
 	// +kubebuilder:validation:Optional
@@ -354,8 +354,8 @@ type StorageAccountParameters struct {
 
 // ResourceDeploymentScriptAzureCliSpec defines the desired state of ResourceDeploymentScriptAzureCli
 type ResourceDeploymentScriptAzureCliSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourceDeploymentScriptAzureCliParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ResourceDeploymentScriptAzureCliParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -371,8 +371,8 @@ type ResourceDeploymentScriptAzureCliSpec struct {
 
 // ResourceDeploymentScriptAzureCliStatus defines the observed state of ResourceDeploymentScriptAzureCli.
 type ResourceDeploymentScriptAzureCliStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceDeploymentScriptAzureCliObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ResourceDeploymentScriptAzureCliObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

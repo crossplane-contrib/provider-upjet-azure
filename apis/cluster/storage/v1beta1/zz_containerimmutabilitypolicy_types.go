@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerImmutabilityPolicyInitParameters struct {
@@ -73,17 +73,17 @@ type ContainerImmutabilityPolicyParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerResourceManagerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerResourceManagerIDRef *v1.Reference `json:"storageContainerResourceManagerIdRef,omitempty" tf:"-"`
+	StorageContainerResourceManagerIDRef *v2.Reference `json:"storageContainerResourceManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerResourceManagerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerResourceManagerIDSelector *v1.Selector `json:"storageContainerResourceManagerIdSelector,omitempty" tf:"-"`
+	StorageContainerResourceManagerIDSelector *v2.Selector `json:"storageContainerResourceManagerIdSelector,omitempty" tf:"-"`
 }
 
 // ContainerImmutabilityPolicySpec defines the desired state of ContainerImmutabilityPolicy
 type ContainerImmutabilityPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContainerImmutabilityPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ContainerImmutabilityPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -99,8 +99,8 @@ type ContainerImmutabilityPolicySpec struct {
 
 // ContainerImmutabilityPolicyStatus defines the observed state of ContainerImmutabilityPolicy.
 type ContainerImmutabilityPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerImmutabilityPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerImmutabilityPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

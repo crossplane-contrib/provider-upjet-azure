@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KeyVaultPrivateKeyContentBase64InitParameters struct {
@@ -109,16 +109,16 @@ type LinkedServiceSFTPInitParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Password to log on to the SFTP Server for Basic Authentication.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The Base64 encoded private key content in OpenSSH format used to log on to the SFTP server.
-	PrivateKeyContentBase64SecretRef *v1.SecretKeySelector `json:"privateKeyContentBase64SecretRef,omitempty" tf:"-"`
+	PrivateKeyContentBase64SecretRef *v2.SecretKeySelector `json:"privateKeyContentBase64SecretRef,omitempty" tf:"-"`
 
 	// The passphrase for the private key if the key is encrypted.
-	PrivateKeyPassphraseSecretRef *v1.SecretKeySelector `json:"privateKeyPassphraseSecretRef,omitempty" tf:"-"`
+	PrivateKeyPassphraseSecretRef *v2.SecretKeySelector `json:"privateKeyPassphraseSecretRef,omitempty" tf:"-"`
 
 	// The absolute path to the private key file that the self-hosted integration runtime can access.
 	PrivateKeyPath *string `json:"privateKeyPath,omitempty" tf:"private_key_path,omitempty"`
@@ -238,11 +238,11 @@ type LinkedServiceSFTPParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -279,7 +279,7 @@ type LinkedServiceSFTPParameters struct {
 
 	// Password to log on to the SFTP Server for Basic Authentication.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
 	// +kubebuilder:validation:Optional
@@ -287,11 +287,11 @@ type LinkedServiceSFTPParameters struct {
 
 	// The Base64 encoded private key content in OpenSSH format used to log on to the SFTP server.
 	// +kubebuilder:validation:Optional
-	PrivateKeyContentBase64SecretRef *v1.SecretKeySelector `json:"privateKeyContentBase64SecretRef,omitempty" tf:"-"`
+	PrivateKeyContentBase64SecretRef *v2.SecretKeySelector `json:"privateKeyContentBase64SecretRef,omitempty" tf:"-"`
 
 	// The passphrase for the private key if the key is encrypted.
 	// +kubebuilder:validation:Optional
-	PrivateKeyPassphraseSecretRef *v1.SecretKeySelector `json:"privateKeyPassphraseSecretRef,omitempty" tf:"-"`
+	PrivateKeyPassphraseSecretRef *v2.SecretKeySelector `json:"privateKeyPassphraseSecretRef,omitempty" tf:"-"`
 
 	// The absolute path to the private key file that the self-hosted integration runtime can access.
 	// +kubebuilder:validation:Optional
@@ -308,8 +308,8 @@ type LinkedServiceSFTPParameters struct {
 
 // LinkedServiceSFTPSpec defines the desired state of LinkedServiceSFTP
 type LinkedServiceSFTPSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceSFTPParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceSFTPParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -325,8 +325,8 @@ type LinkedServiceSFTPSpec struct {
 
 // LinkedServiceSFTPStatus defines the observed state of LinkedServiceSFTP.
 type LinkedServiceSFTPStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceSFTPObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceSFTPObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SentinelLogAnalyticsWorkspaceOnboardingInitParameters struct {
@@ -25,11 +25,11 @@ type SentinelLogAnalyticsWorkspaceOnboardingInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type SentinelLogAnalyticsWorkspaceOnboardingObservation struct {
@@ -58,17 +58,17 @@ type SentinelLogAnalyticsWorkspaceOnboardingParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // SentinelLogAnalyticsWorkspaceOnboardingSpec defines the desired state of SentinelLogAnalyticsWorkspaceOnboarding
 type SentinelLogAnalyticsWorkspaceOnboardingSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SentinelLogAnalyticsWorkspaceOnboardingParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SentinelLogAnalyticsWorkspaceOnboardingParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -84,8 +84,8 @@ type SentinelLogAnalyticsWorkspaceOnboardingSpec struct {
 
 // SentinelLogAnalyticsWorkspaceOnboardingStatus defines the observed state of SentinelLogAnalyticsWorkspaceOnboarding.
 type SentinelLogAnalyticsWorkspaceOnboardingStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SentinelLogAnalyticsWorkspaceOnboardingObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SentinelLogAnalyticsWorkspaceOnboardingObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

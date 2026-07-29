@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PolicyFragmentInitParameters struct {
@@ -59,11 +59,11 @@ type PolicyFragmentParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDRef *v1.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
+	APIManagementIDRef *v2.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementId.
 	// +kubebuilder:validation:Optional
-	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+	APIManagementIDSelector *v2.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The description for the Policy Fragment.
 	// +kubebuilder:validation:Optional
@@ -84,8 +84,8 @@ type PolicyFragmentParameters struct {
 
 // PolicyFragmentSpec defines the desired state of PolicyFragment
 type PolicyFragmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     PolicyFragmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   PolicyFragmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,8 +101,8 @@ type PolicyFragmentSpec struct {
 
 // PolicyFragmentStatus defines the observed state of PolicyFragment.
 type PolicyFragmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PolicyFragmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PolicyFragmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

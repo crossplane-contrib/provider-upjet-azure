@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLManagedInstanceActiveDirectoryAdministratorInitParameters struct {
@@ -67,11 +67,11 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 
 	// Reference to a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
+	ManagedInstanceIDRef *v2.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
-	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
+	ManagedInstanceIDSelector *v2.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
 	// The Object ID of the principal to set as the Managed Instance Administrator.
 	// +kubebuilder:validation:Optional
@@ -84,8 +84,8 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 
 // MSSQLManagedInstanceActiveDirectoryAdministratorSpec defines the desired state of MSSQLManagedInstanceActiveDirectoryAdministrator
 type MSSQLManagedInstanceActiveDirectoryAdministratorSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLManagedInstanceActiveDirectoryAdministratorParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MSSQLManagedInstanceActiveDirectoryAdministratorParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,8 +101,8 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorSpec struct {
 
 // MSSQLManagedInstanceActiveDirectoryAdministratorStatus defines the observed state of MSSQLManagedInstanceActiveDirectoryAdministrator.
 type MSSQLManagedInstanceActiveDirectoryAdministratorStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLManagedInstanceActiveDirectoryAdministratorObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLManagedInstanceActiveDirectoryAdministratorObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

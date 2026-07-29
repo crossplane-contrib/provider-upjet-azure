@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RedisEnterpriseClusterInitParameters struct {
@@ -79,11 +79,11 @@ type RedisEnterpriseClusterParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The sku_name is comprised of two segments separated by a hyphen (e.g. Enterprise_E10-2). The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E5, Enterprise_E10, Enterprise_E20, Enterprise_E50, Enterprise_E100, Enterprise_E200, Enterprise_E400, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are (2, 4, 6, ...). Possible values for EnterpriseFlash SKUs are (3, 9, 15, ...). Changing this forces a new Redis Enterprise Cluster to be created.
 	// +kubebuilder:validation:Optional
@@ -102,8 +102,8 @@ type RedisEnterpriseClusterParameters struct {
 
 // RedisEnterpriseClusterSpec defines the desired state of RedisEnterpriseCluster
 type RedisEnterpriseClusterSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     RedisEnterpriseClusterParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   RedisEnterpriseClusterParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -119,8 +119,8 @@ type RedisEnterpriseClusterSpec struct {
 
 // RedisEnterpriseClusterStatus defines the observed state of RedisEnterpriseCluster.
 type RedisEnterpriseClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisEnterpriseClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedisEnterpriseClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

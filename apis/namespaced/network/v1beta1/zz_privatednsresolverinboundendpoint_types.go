@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IPConfigurationsInitParameters struct {
@@ -29,11 +28,11 @@ type IPConfigurationsInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IPConfigurationsObservation struct {
@@ -66,11 +65,11 @@ type IPConfigurationsParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSResolverInboundEndpointInitParameters struct {
@@ -123,11 +122,11 @@ type PrivateDNSResolverInboundEndpointParameters struct {
 
 	// Reference to a PrivateDNSResolver in network to populate privateDnsResolverId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSResolverIDRef *v1.NamespacedReference `json:"privateDnsResolverIdRef,omitempty" tf:"-"`
+	PrivateDNSResolverIDRef *v2.NamespacedReference `json:"privateDnsResolverIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSResolver in network to populate privateDnsResolverId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSResolverIDSelector *v1.NamespacedSelector `json:"privateDnsResolverIdSelector,omitempty" tf:"-"`
+	PrivateDNSResolverIDSelector *v2.NamespacedSelector `json:"privateDnsResolverIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver Inbound Endpoint.
 	// +kubebuilder:validation:Optional
@@ -154,8 +153,8 @@ type PrivateDNSResolverInboundEndpointSpec struct {
 
 // PrivateDNSResolverInboundEndpointStatus defines the observed state of PrivateDNSResolverInboundEndpoint.
 type PrivateDNSResolverInboundEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSResolverInboundEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSResolverInboundEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

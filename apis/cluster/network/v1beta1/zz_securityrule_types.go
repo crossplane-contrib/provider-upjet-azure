@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SecurityRuleInitParameters_2 struct {
@@ -174,11 +174,11 @@ type SecurityRuleParameters_2 struct {
 
 	// Reference to a SecurityGroup in network to populate networkSecurityGroupName.
 	// +kubebuilder:validation:Optional
-	NetworkSecurityGroupNameRef *v1.Reference `json:"networkSecurityGroupNameRef,omitempty" tf:"-"`
+	NetworkSecurityGroupNameRef *v2.Reference `json:"networkSecurityGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a SecurityGroup in network to populate networkSecurityGroupName.
 	// +kubebuilder:validation:Optional
-	NetworkSecurityGroupNameSelector *v1.Selector `json:"networkSecurityGroupNameSelector,omitempty" tf:"-"`
+	NetworkSecurityGroupNameSelector *v2.Selector `json:"networkSecurityGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.
 	// +kubebuilder:validation:Optional
@@ -195,11 +195,11 @@ type SecurityRuleParameters_2 struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// CIDR or source IP range or * to match any IP. Tags such as VirtualNetwork, AzureLoadBalancer and Internet can also be used.
 	// +kubebuilder:validation:Optional
@@ -227,8 +227,8 @@ type SecurityRuleParameters_2 struct {
 
 // SecurityRuleSpec defines the desired state of SecurityRule
 type SecurityRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityRuleParameters_2 `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SecurityRuleParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -244,8 +244,8 @@ type SecurityRuleSpec struct {
 
 // SecurityRuleStatus defines the observed state of SecurityRule.
 type SecurityRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityRuleObservation_2 `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SecurityRuleObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

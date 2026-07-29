@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataLakeGen2PathAceInitParameters struct {
@@ -74,11 +73,11 @@ type DataLakeGen2PathInitParameters struct {
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate filesystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameRef *v1.NamespacedReference `json:"filesystemNameRef,omitempty" tf:"-"`
+	FileSystemNameRef *v2.NamespacedReference `json:"filesystemNameRef,omitempty" tf:"-"`
 
 	// Selector for a DataLakeGen2FileSystem in storage to populate filesystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameSelector *v1.NamespacedSelector `json:"filesystemNameSelector,omitempty" tf:"-"`
+	FileSystemNameSelector *v2.NamespacedSelector `json:"filesystemNameSelector,omitempty" tf:"-"`
 
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group. Possible values also include $superuser.
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
@@ -99,11 +98,11 @@ type DataLakeGen2PathInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type DataLakeGen2PathObservation struct {
@@ -146,11 +145,11 @@ type DataLakeGen2PathParameters struct {
 
 	// Reference to a DataLakeGen2FileSystem in storage to populate filesystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameRef *v1.NamespacedReference `json:"filesystemNameRef,omitempty" tf:"-"`
+	FileSystemNameRef *v2.NamespacedReference `json:"filesystemNameRef,omitempty" tf:"-"`
 
 	// Selector for a DataLakeGen2FileSystem in storage to populate filesystemName.
 	// +kubebuilder:validation:Optional
-	FileSystemNameSelector *v1.NamespacedSelector `json:"filesystemNameSelector,omitempty" tf:"-"`
+	FileSystemNameSelector *v2.NamespacedSelector `json:"filesystemNameSelector,omitempty" tf:"-"`
 
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group. Possible values also include $superuser.
 	// +kubebuilder:validation:Optional
@@ -176,11 +175,11 @@ type DataLakeGen2PathParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 // DataLakeGen2PathSpec defines the desired state of DataLakeGen2Path
@@ -202,8 +201,8 @@ type DataLakeGen2PathSpec struct {
 
 // DataLakeGen2PathStatus defines the observed state of DataLakeGen2Path.
 type DataLakeGen2PathStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataLakeGen2PathObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataLakeGen2PathObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

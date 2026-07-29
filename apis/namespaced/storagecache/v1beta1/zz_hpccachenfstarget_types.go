@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HPCCacheNFSTargetInitParameters struct {
@@ -22,11 +21,11 @@ type HPCCacheNFSTargetInitParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameRef *v1.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
+	CacheNameRef *v2.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameSelector *v1.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
+	CacheNameSelector *v2.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	NamespaceJunction []NamespaceJunctionInitParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
@@ -80,11 +79,11 @@ type HPCCacheNFSTargetParameters struct {
 
 	// Reference to a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameRef *v1.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
+	CacheNameRef *v2.NamespacedReference `json:"cacheNameRef,omitempty" tf:"-"`
 
 	// Selector for a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
-	CacheNameSelector *v1.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
+	CacheNameSelector *v2.NamespacedSelector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	// +kubebuilder:validation:Optional
@@ -97,11 +96,11 @@ type HPCCacheNFSTargetParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -188,8 +187,8 @@ type HPCCacheNFSTargetSpec struct {
 
 // HPCCacheNFSTargetStatus defines the observed state of HPCCacheNFSTarget.
 type HPCCacheNFSTargetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HPCCacheNFSTargetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HPCCacheNFSTargetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

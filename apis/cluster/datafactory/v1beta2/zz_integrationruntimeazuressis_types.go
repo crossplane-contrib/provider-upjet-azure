@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CatalogInfoInitParameters struct {
@@ -19,7 +19,7 @@ type CatalogInfoInitParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// Administrator login password for the SQL Server.
-	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorPasswordSecretRef *v2.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The dual standby Azure-SSIS Integration Runtime pair with SSISDB failover.
 	DualStandbyPairName *string `json:"dualStandbyPairName,omitempty" tf:"dual_standby_pair_name,omitempty"`
@@ -60,7 +60,7 @@ type CatalogInfoParameters struct {
 
 	// Administrator login password for the SQL Server.
 	// +kubebuilder:validation:Optional
-	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+	AdministratorPasswordSecretRef *v2.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The dual standby Azure-SSIS Integration Runtime pair with SSISDB failover.
 	// +kubebuilder:validation:Optional
@@ -85,7 +85,7 @@ type CommandKeyInitParameters struct {
 	KeyVaultPassword *KeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// The password for the target device.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The target computer or domain name.
 	TargetName *string `json:"targetName,omitempty" tf:"target_name,omitempty"`
@@ -114,7 +114,7 @@ type CommandKeyParameters struct {
 
 	// The password for the target device.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The target computer or domain name.
 	// +kubebuilder:validation:Optional
@@ -131,7 +131,7 @@ type ComponentInitParameters struct {
 	KeyVaultLicense *KeyVaultLicenseInitParameters `json:"keyVaultLicense,omitempty" tf:"key_vault_license,omitempty"`
 
 	// The license used for the Component.
-	LicenseSecretRef *v1.SecretKeySelector `json:"licenseSecretRef,omitempty" tf:"-"`
+	LicenseSecretRef *v2.SecretKeySelector `json:"licenseSecretRef,omitempty" tf:"-"`
 
 	// Name of the package store.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -154,7 +154,7 @@ type ComponentParameters struct {
 
 	// The license used for the Component.
 	// +kubebuilder:validation:Optional
-	LicenseSecretRef *v1.SecretKeySelector `json:"licenseSecretRef,omitempty" tf:"-"`
+	LicenseSecretRef *v2.SecretKeySelector `json:"licenseSecretRef,omitempty" tf:"-"`
 
 	// Name of the package store.
 	// +kubebuilder:validation:Optional
@@ -196,7 +196,7 @@ type CustomSetupScriptInitParameters struct {
 	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
 
 	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
-	SASTokenSecretRef v1.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
+	SASTokenSecretRef v2.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
 }
 
 type CustomSetupScriptObservation struct {
@@ -213,7 +213,7 @@ type CustomSetupScriptParameters struct {
 
 	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	// +kubebuilder:validation:Optional
-	SASTokenSecretRef v1.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
+	SASTokenSecretRef v2.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
 }
 
 type ExpressCustomSetupInitParameters struct {
@@ -277,11 +277,11 @@ type ExpressVnetIntegrationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type ExpressVnetIntegrationObservation struct {
@@ -300,11 +300,11 @@ type ExpressVnetIntegrationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IntegrationRuntimeAzureSSISInitParameters struct {
@@ -447,11 +447,11 @@ type IntegrationRuntimeAzureSSISParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// Integration runtime description.
 	// +kubebuilder:validation:Optional
@@ -729,11 +729,11 @@ type VnetIntegrationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Name of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -741,11 +741,11 @@ type VnetIntegrationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameRef *v1.Reference `json:"subnetNameRef,omitempty" tf:"-"`
+	SubnetNameRef *v2.Reference `json:"subnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
+	SubnetNameSelector *v2.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 
 	// ID of the virtual network to which the nodes of the Azure-SSIS Integration Runtime will be added.
 	VnetID *string `json:"vnetId,omitempty" tf:"vnet_id,omitempty"`
@@ -780,11 +780,11 @@ type VnetIntegrationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Name of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
@@ -793,11 +793,11 @@ type VnetIntegrationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameRef *v1.Reference `json:"subnetNameRef,omitempty" tf:"-"`
+	SubnetNameRef *v2.Reference `json:"subnetNameRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
-	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
+	SubnetNameSelector *v2.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 
 	// ID of the virtual network to which the nodes of the Azure-SSIS Integration Runtime will be added.
 	// +kubebuilder:validation:Optional
@@ -806,8 +806,8 @@ type VnetIntegrationParameters struct {
 
 // IntegrationRuntimeAzureSSISSpec defines the desired state of IntegrationRuntimeAzureSSIS
 type IntegrationRuntimeAzureSSISSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     IntegrationRuntimeAzureSSISParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   IntegrationRuntimeAzureSSISParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -823,8 +823,8 @@ type IntegrationRuntimeAzureSSISSpec struct {
 
 // IntegrationRuntimeAzureSSISStatus defines the observed state of IntegrationRuntimeAzureSSIS.
 type IntegrationRuntimeAzureSSISStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IntegrationRuntimeAzureSSISObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IntegrationRuntimeAzureSSISObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualDesktopHostPoolRegistrationInfoInitParameters struct {
@@ -25,11 +25,11 @@ type VirtualDesktopHostPoolRegistrationInfoInitParameters struct {
 
 	// Reference to a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDRef *v1.Reference `json:"hostpoolIdRef,omitempty" tf:"-"`
+	HostpoolIDRef *v2.Reference `json:"hostpoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDSelector *v1.Selector `json:"hostpoolIdSelector,omitempty" tf:"-"`
+	HostpoolIDSelector *v2.Selector `json:"hostpoolIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualDesktopHostPoolRegistrationInfoObservation struct {
@@ -58,17 +58,17 @@ type VirtualDesktopHostPoolRegistrationInfoParameters struct {
 
 	// Reference to a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDRef *v1.Reference `json:"hostpoolIdRef,omitempty" tf:"-"`
+	HostpoolIDRef *v2.Reference `json:"hostpoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
 	// +kubebuilder:validation:Optional
-	HostpoolIDSelector *v1.Selector `json:"hostpoolIdSelector,omitempty" tf:"-"`
+	HostpoolIDSelector *v2.Selector `json:"hostpoolIdSelector,omitempty" tf:"-"`
 }
 
 // VirtualDesktopHostPoolRegistrationInfoSpec defines the desired state of VirtualDesktopHostPoolRegistrationInfo
 type VirtualDesktopHostPoolRegistrationInfoSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualDesktopHostPoolRegistrationInfoParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualDesktopHostPoolRegistrationInfoParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -84,8 +84,8 @@ type VirtualDesktopHostPoolRegistrationInfoSpec struct {
 
 // VirtualDesktopHostPoolRegistrationInfoStatus defines the observed state of VirtualDesktopHostPoolRegistrationInfo.
 type VirtualDesktopHostPoolRegistrationInfoStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualDesktopHostPoolRegistrationInfoObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualDesktopHostPoolRegistrationInfoObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

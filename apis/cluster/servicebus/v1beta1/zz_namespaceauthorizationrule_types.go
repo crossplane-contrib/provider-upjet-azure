@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type NamespaceAuthorizationRuleInitParameters struct {
@@ -61,11 +61,11 @@ type NamespaceAuthorizationRuleParameters struct {
 
 	// Reference to a ServiceBusNamespace in servicebus to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+	NamespaceIDRef *v2.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServiceBusNamespace in servicebus to populate namespaceId.
 	// +kubebuilder:validation:Optional
-	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
+	NamespaceIDSelector *v2.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Grants send access to this Authorization Rule. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -74,8 +74,8 @@ type NamespaceAuthorizationRuleParameters struct {
 
 // NamespaceAuthorizationRuleSpec defines the desired state of NamespaceAuthorizationRule
 type NamespaceAuthorizationRuleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     NamespaceAuthorizationRuleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   NamespaceAuthorizationRuleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -91,8 +91,8 @@ type NamespaceAuthorizationRuleSpec struct {
 
 // NamespaceAuthorizationRuleStatus defines the observed state of NamespaceAuthorizationRule.
 type NamespaceAuthorizationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        NamespaceAuthorizationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               NamespaceAuthorizationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

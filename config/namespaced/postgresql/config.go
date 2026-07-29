@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"strconv"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
@@ -30,10 +30,10 @@ func Configure(p *config.Provider) {
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			return map[string][]byte{
-				xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
-				xpv1.ResourceCredentialsSecretPasswordKey: []byte(attr["administrator_login_password"].(string)),
-				xpv1.ResourceCredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
-				xpv1.ResourceCredentialsSecretPortKey:     []byte(strconv.Itoa(postgresqlServerPort)),
+				xpv2.CredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
+				xpv2.CredentialsSecretPasswordKey: []byte(attr["administrator_login_password"].(string)),
+				xpv2.CredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
+				xpv2.CredentialsSecretPortKey:     []byte(strconv.Itoa(postgresqlServerPort)),
 			}, nil
 		}
 	})
@@ -94,16 +94,16 @@ func Configure(p *config.Provider) {
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			conn := map[string][]byte{
-				xpv1.ResourceCredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
-				xpv1.ResourceCredentialsSecretPortKey:     []byte(strconv.Itoa(postgresqlServerPort)),
+				xpv2.CredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
+				xpv2.CredentialsSecretPortKey:     []byte(strconv.Itoa(postgresqlServerPort)),
 			}
 			// administrator_login is optional and may not be available depending on the auth type.
 			if _, ok := attr["administrator_login"].(string); ok {
-				conn[xpv1.ResourceCredentialsSecretUserKey] = []byte(fmt.Sprintf("%s@%s", attr["administrator_login"].(string), attr["name"].(string)))
+				conn[xpv2.CredentialsSecretUserKey] = []byte(fmt.Sprintf("%s@%s", attr["administrator_login"].(string), attr["name"].(string)))
 			}
 			// administrator_password is optional and may not be available depending on the auth type.
 			if _, ok := attr["administrator_password"].(string); ok {
-				conn[xpv1.ResourceCredentialsSecretPasswordKey] = []byte(attr["administrator_password"].(string))
+				conn[xpv2.CredentialsSecretPasswordKey] = []byte(attr["administrator_password"].(string))
 			}
 			return conn, nil
 		}

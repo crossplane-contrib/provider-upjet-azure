@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WebhookInitParameters struct {
@@ -33,11 +32,11 @@ type WebhookInitParameters struct {
 
 	// Reference to a Registry in containerregistry to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameRef *v1.NamespacedReference `json:"registryNameRef,omitempty" tf:"-"`
+	RegistryNameRef *v2.NamespacedReference `json:"registryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameSelector *v1.NamespacedSelector `json:"registryNameSelector,omitempty" tf:"-"`
+	RegistryNameSelector *v2.NamespacedSelector `json:"registryNameSelector,omitempty" tf:"-"`
 
 	// Specifies the scope of repositories that can trigger an event. For example, foo:* means events for all tags under repository foo. foo:bar means events for 'foo:bar' only. foo is equivalent to foo:latest. Empty means all events. Defaults to "".
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
@@ -112,11 +111,11 @@ type WebhookParameters struct {
 
 	// Reference to a Registry in containerregistry to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameRef *v1.NamespacedReference `json:"registryNameRef,omitempty" tf:"-"`
+	RegistryNameRef *v2.NamespacedReference `json:"registryNameRef,omitempty" tf:"-"`
 
 	// Selector for a Registry in containerregistry to populate registryName.
 	// +kubebuilder:validation:Optional
-	RegistryNameSelector *v1.NamespacedSelector `json:"registryNameSelector,omitempty" tf:"-"`
+	RegistryNameSelector *v2.NamespacedSelector `json:"registryNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the Container Registry Webhook. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -125,11 +124,11 @@ type WebhookParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the scope of repositories that can trigger an event. For example, foo:* means events for all tags under repository foo. foo:bar means events for 'foo:bar' only. foo is equivalent to foo:latest. Empty means all events. Defaults to "".
 	// +kubebuilder:validation:Optional
@@ -168,8 +167,8 @@ type WebhookSpec struct {
 
 // WebhookStatus defines the observed state of Webhook.
 type WebhookStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WebhookObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WebhookObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AutomaticInstanceRepairInitParameters struct {
@@ -99,7 +99,7 @@ type ExtensionInitParameters struct {
 	ProtectedSettingsFromKeyVault *ProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
 	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
-	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+	ProtectedSettingsSecretRef *v2.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// An ordered list of Extension names which this should be provisioned after.
 	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
@@ -174,7 +174,7 @@ type ExtensionParameters struct {
 
 	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
 	// +kubebuilder:validation:Optional
-	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+	ProtectedSettingsSecretRef *v2.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// An ordered list of Extension names which this should be provisioned after.
 	// +kubebuilder:validation:Optional
@@ -231,11 +231,11 @@ type IPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the version of the image used to create the virtual machines.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -317,11 +317,11 @@ type IPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the version of the image used to create the virtual machines.
 	// +kubebuilder:validation:Optional
@@ -626,7 +626,7 @@ type LinuxVirtualMachineScaleSetInitParameters struct {
 	AdditionalCapabilities *LinuxVirtualMachineScaleSetAdditionalCapabilitiesInitParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
-	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// One or more admin_ssh_key blocks as defined below.
 	AdminSSHKey []LinuxVirtualMachineScaleSetAdminSSHKeyInitParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
@@ -650,7 +650,7 @@ type LinuxVirtualMachineScaleSetInitParameters struct {
 	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine Scale Set.
-	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+	CustomDataSecretRef *v2.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// One or more data_disk blocks as defined below.
 	DataDisk []LinuxVirtualMachineScaleSetDataDiskInitParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
@@ -1042,7 +1042,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+	AdminPasswordSecretRef *v2.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// One or more admin_ssh_key blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -1074,7 +1074,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
-	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+	CustomDataSecretRef *v2.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// One or more data_disk blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -1187,11 +1187,11 @@ type LinuxVirtualMachineScaleSetParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A rolling_upgrade_policy block as defined below. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1790,8 +1790,8 @@ type SpotRestoreParameters struct {
 
 // LinuxVirtualMachineScaleSetSpec defines the desired state of LinuxVirtualMachineScaleSet
 type LinuxVirtualMachineScaleSetSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinuxVirtualMachineScaleSetParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinuxVirtualMachineScaleSetParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -1807,8 +1807,8 @@ type LinuxVirtualMachineScaleSetSpec struct {
 
 // LinuxVirtualMachineScaleSetStatus defines the observed state of LinuxVirtualMachineScaleSet.
 type LinuxVirtualMachineScaleSetStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinuxVirtualMachineScaleSetObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinuxVirtualMachineScaleSetObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

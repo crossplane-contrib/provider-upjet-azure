@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MongoUserDefinitionInitParameters struct {
@@ -22,17 +22,17 @@ type MongoUserDefinitionInitParameters struct {
 
 	// Reference to a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDRef *v1.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDRef *v2.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDSelector *v1.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDSelector *v2.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
 
 	// A list of Mongo Roles that are inherited to the Mongo User Definition.
 	InheritedRoleNames []*string `json:"inheritedRoleNames,omitempty" tf:"inherited_role_names,omitempty"`
 
 	// The password for the Mongo User Definition.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type MongoUserDefinitionObservation struct {
@@ -57,11 +57,11 @@ type MongoUserDefinitionParameters struct {
 
 	// Reference to a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDRef *v1.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDRef *v2.Reference `json:"cosmosMongoDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MongoDatabase in cosmosdb to populate cosmosMongoDatabaseId.
 	// +kubebuilder:validation:Optional
-	CosmosMongoDatabaseIDSelector *v1.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
+	CosmosMongoDatabaseIDSelector *v2.Selector `json:"cosmosMongoDatabaseIdSelector,omitempty" tf:"-"`
 
 	// A list of Mongo Roles that are inherited to the Mongo User Definition.
 	// +kubebuilder:validation:Optional
@@ -69,13 +69,13 @@ type MongoUserDefinitionParameters struct {
 
 	// The password for the Mongo User Definition.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 // MongoUserDefinitionSpec defines the desired state of MongoUserDefinition
 type MongoUserDefinitionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MongoUserDefinitionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MongoUserDefinitionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -91,8 +91,8 @@ type MongoUserDefinitionSpec struct {
 
 // MongoUserDefinitionStatus defines the observed state of MongoUserDefinition.
 type MongoUserDefinitionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MongoUserDefinitionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MongoUserDefinitionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

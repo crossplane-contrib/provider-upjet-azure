@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagementGroupSubscriptionAssociationInitParameters struct {
@@ -23,11 +22,11 @@ type ManagementGroupSubscriptionAssociationInitParameters struct {
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDRef *v1.NamespacedReference `json:"managementGroupIdRef,omitempty" tf:"-"`
+	ManagementGroupIDRef *v2.NamespacedReference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDSelector *v1.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+	ManagementGroupIDSelector *v2.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subscription to be associated with the Management Group. Changing this forces a new Management to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.Subscription
@@ -36,11 +35,11 @@ type ManagementGroupSubscriptionAssociationInitParameters struct {
 
 	// Reference to a Subscription in azure to populate subscriptionId.
 	// +kubebuilder:validation:Optional
-	SubscriptionIDRef *v1.NamespacedReference `json:"subscriptionIdRef,omitempty" tf:"-"`
+	SubscriptionIDRef *v2.NamespacedReference `json:"subscriptionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subscription in azure to populate subscriptionId.
 	// +kubebuilder:validation:Optional
-	SubscriptionIDSelector *v1.NamespacedSelector `json:"subscriptionIdSelector,omitempty" tf:"-"`
+	SubscriptionIDSelector *v2.NamespacedSelector `json:"subscriptionIdSelector,omitempty" tf:"-"`
 }
 
 type ManagementGroupSubscriptionAssociationObservation struct {
@@ -65,11 +64,11 @@ type ManagementGroupSubscriptionAssociationParameters struct {
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDRef *v1.NamespacedReference `json:"managementGroupIdRef,omitempty" tf:"-"`
+	ManagementGroupIDRef *v2.NamespacedReference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDSelector *v1.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+	ManagementGroupIDSelector *v2.NamespacedSelector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subscription to be associated with the Management Group. Changing this forces a new Management to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.Subscription
@@ -79,11 +78,11 @@ type ManagementGroupSubscriptionAssociationParameters struct {
 
 	// Reference to a Subscription in azure to populate subscriptionId.
 	// +kubebuilder:validation:Optional
-	SubscriptionIDRef *v1.NamespacedReference `json:"subscriptionIdRef,omitempty" tf:"-"`
+	SubscriptionIDRef *v2.NamespacedReference `json:"subscriptionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subscription in azure to populate subscriptionId.
 	// +kubebuilder:validation:Optional
-	SubscriptionIDSelector *v1.NamespacedSelector `json:"subscriptionIdSelector,omitempty" tf:"-"`
+	SubscriptionIDSelector *v2.NamespacedSelector `json:"subscriptionIdSelector,omitempty" tf:"-"`
 }
 
 // ManagementGroupSubscriptionAssociationSpec defines the desired state of ManagementGroupSubscriptionAssociation
@@ -105,8 +104,8 @@ type ManagementGroupSubscriptionAssociationSpec struct {
 
 // ManagementGroupSubscriptionAssociationStatus defines the observed state of ManagementGroupSubscriptionAssociation.
 type ManagementGroupSubscriptionAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagementGroupSubscriptionAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagementGroupSubscriptionAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

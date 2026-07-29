@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AdditionalWorkspaceInitParameters struct {
@@ -73,11 +72,11 @@ type IOTSecuritySolutionInitParameters struct {
 
 	// References to IOTHub in devices to populate iothubIds.
 	// +kubebuilder:validation:Optional
-	IOTHubIdsRefs []v1.NamespacedReference `json:"iothubIdsRefs,omitempty" tf:"-"`
+	IOTHubIdsRefs []v2.NamespacedReference `json:"iothubIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IOTHub in devices to populate iothubIds.
 	// +kubebuilder:validation:Optional
-	IOTHubIdsSelector *v1.NamespacedSelector `json:"iothubIdsSelector,omitempty" tf:"-"`
+	IOTHubIdsSelector *v2.NamespacedSelector `json:"iothubIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -195,11 +194,11 @@ type IOTSecuritySolutionParameters struct {
 
 	// References to IOTHub in devices to populate iothubIds.
 	// +kubebuilder:validation:Optional
-	IOTHubIdsRefs []v1.NamespacedReference `json:"iothubIdsRefs,omitempty" tf:"-"`
+	IOTHubIdsRefs []v2.NamespacedReference `json:"iothubIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of IOTHub in devices to populate iothubIds.
 	// +kubebuilder:validation:Optional
-	IOTHubIdsSelector *v1.NamespacedSelector `json:"iothubIdsSelector,omitempty" tf:"-"`
+	IOTHubIdsSelector *v2.NamespacedSelector `json:"iothubIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -237,11 +236,11 @@ type IOTSecuritySolutionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -437,8 +436,8 @@ type IOTSecuritySolutionSpec struct {
 
 // IOTSecuritySolutionStatus defines the observed state of IOTSecuritySolution.
 type IOTSecuritySolutionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        IOTSecuritySolutionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               IOTSecuritySolutionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

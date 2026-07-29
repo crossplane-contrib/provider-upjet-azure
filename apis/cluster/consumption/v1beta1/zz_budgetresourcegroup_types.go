@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BudgetResourceGroupFilterInitParameters struct {
@@ -66,11 +66,11 @@ type BudgetResourceGroupInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDRef *v1.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+	ResourceGroupIDRef *v2.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+	ResourceGroupIDSelector *v2.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
 	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of BillingAnnual, BillingMonth, BillingQuarter, Annually, Monthly and Quarterly. Defaults to Monthly. Changing this forces a new resource to be created.
 	TimeGrain *string `json:"timeGrain,omitempty" tf:"time_grain,omitempty"`
@@ -91,11 +91,11 @@ type BudgetResourceGroupNotificationInitParameters struct {
 
 	// References to MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsRefs []v1.Reference `json:"contactGroupsRefs,omitempty" tf:"-"`
+	ContactGroupsRefs []v2.Reference `json:"contactGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsSelector *v1.Selector `json:"contactGroupsSelector,omitempty" tf:"-"`
+	ContactGroupsSelector *v2.Selector `json:"contactGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies a list of contact roles to send the budget notification to when the threshold is exceeded.
 	ContactRoles []*string `json:"contactRoles,omitempty" tf:"contact_roles,omitempty"`
@@ -151,11 +151,11 @@ type BudgetResourceGroupNotificationParameters struct {
 
 	// References to MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsRefs []v1.Reference `json:"contactGroupsRefs,omitempty" tf:"-"`
+	ContactGroupsRefs []v2.Reference `json:"contactGroupsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate contactGroups.
 	// +kubebuilder:validation:Optional
-	ContactGroupsSelector *v1.Selector `json:"contactGroupsSelector,omitempty" tf:"-"`
+	ContactGroupsSelector *v2.Selector `json:"contactGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies a list of contact roles to send the budget notification to when the threshold is exceeded.
 	// +kubebuilder:validation:Optional
@@ -238,11 +238,11 @@ type BudgetResourceGroupParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDRef *v1.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+	ResourceGroupIDRef *v2.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
-	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+	ResourceGroupIDSelector *v2.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
 	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of BillingAnnual, BillingMonth, BillingQuarter, Annually, Monthly and Quarterly. Defaults to Monthly. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -297,11 +297,11 @@ type FilterDimensionInitParameters struct {
 
 	// References to MonitorActionGroup in insights to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.Reference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type FilterDimensionObservation struct {
@@ -334,11 +334,11 @@ type FilterDimensionParameters struct {
 
 	// References to MonitorActionGroup in insights to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+	ValuesRefs []v2.Reference `json:"valuesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate values.
 	// +kubebuilder:validation:Optional
-	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
+	ValuesSelector *v2.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type FilterTagInitParameters struct {
@@ -382,8 +382,8 @@ type FilterTagParameters struct {
 
 // BudgetResourceGroupSpec defines the desired state of BudgetResourceGroup
 type BudgetResourceGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     BudgetResourceGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   BudgetResourceGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -399,8 +399,8 @@ type BudgetResourceGroupSpec struct {
 
 // BudgetResourceGroupStatus defines the observed state of BudgetResourceGroup.
 type BudgetResourceGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        BudgetResourceGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               BudgetResourceGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MongoCollectionAutoscaleSettingsInitParameters struct {
@@ -128,11 +127,11 @@ type MongoCollectionParameters struct {
 
 	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The default time to live of Analytical Storage for this Mongo Collection. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
 	// +kubebuilder:validation:Optional
@@ -149,11 +148,11 @@ type MongoCollectionParameters struct {
 
 	// Reference to a MongoDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.NamespacedReference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a MongoDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.NamespacedSelector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The default Time To Live in seconds. If the value is -1, items are not automatically expired.
 	// +kubebuilder:validation:Optional
@@ -170,11 +169,11 @@ type MongoCollectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the key to partition on for sharding. There must not be any other unique index keys. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -219,8 +218,8 @@ type MongoCollectionSpec struct {
 
 // MongoCollectionStatus defines the observed state of MongoCollection.
 type MongoCollectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MongoCollectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MongoCollectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

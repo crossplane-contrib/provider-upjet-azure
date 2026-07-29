@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type IdentityInitParameters struct {
@@ -24,11 +23,11 @@ type IdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this SQL Database. Possible value is UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -55,11 +54,11 @@ type IdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this SQL Database. Possible value is UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -72,7 +71,7 @@ type ImportInitParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// Specifies the password of the SQL administrator.
-	AdministratorLoginPasswordSecretRef v1.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
+	AdministratorLoginPasswordSecretRef v2.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
 
 	// Specifies the type of authentication used to access the server. Valid values are SQL or ADPassword.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
@@ -81,7 +80,7 @@ type ImportInitParameters struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Specifies the access key for the storage account.
-	StorageKeySecretRef v1.LocalSecretKeySelector `json:"storageKeySecretRef" tf:"-"`
+	StorageKeySecretRef v2.LocalSecretKeySelector `json:"storageKeySecretRef" tf:"-"`
 
 	// Specifies the type of access key for the storage account. Valid values are StorageAccessKey or SharedAccessKey.
 	StorageKeyType *string `json:"storageKeyType,omitempty" tf:"storage_key_type,omitempty"`
@@ -116,7 +115,7 @@ type ImportParameters struct {
 
 	// Specifies the password of the SQL administrator.
 	// +kubebuilder:validation:Optional
-	AdministratorLoginPasswordSecretRef v1.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
+	AdministratorLoginPasswordSecretRef v2.LocalSecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
 
 	// Specifies the type of authentication used to access the server. Valid values are SQL or ADPassword.
 	// +kubebuilder:validation:Optional
@@ -128,7 +127,7 @@ type ImportParameters struct {
 
 	// Specifies the access key for the storage account.
 	// +kubebuilder:validation:Optional
-	StorageKeySecretRef v1.LocalSecretKeySelector `json:"storageKeySecretRef" tf:"-"`
+	StorageKeySecretRef v2.LocalSecretKeySelector `json:"storageKeySecretRef" tf:"-"`
 
 	// Specifies the type of access key for the storage account. Valid values are StorageAccessKey or SharedAccessKey.
 	// +kubebuilder:validation:Optional
@@ -216,11 +215,11 @@ type MSSQLDatabaseInitParameters struct {
 
 	// Reference to a MSSQLDatabase in sql to populate creationSourceDatabaseId.
 	// +kubebuilder:validation:Optional
-	CreationSourceDatabaseIDRef *v1.NamespacedReference `json:"creationSourceDatabaseIdRef,omitempty" tf:"-"`
+	CreationSourceDatabaseIDRef *v2.NamespacedReference `json:"creationSourceDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLDatabase in sql to populate creationSourceDatabaseId.
 	// +kubebuilder:validation:Optional
-	CreationSourceDatabaseIDSelector *v1.NamespacedSelector `json:"creationSourceDatabaseIdSelector,omitempty" tf:"-"`
+	CreationSourceDatabaseIDSelector *v2.NamespacedSelector `json:"creationSourceDatabaseIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the elastic pool containing this database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLElasticPool
@@ -229,11 +228,11 @@ type MSSQLDatabaseInitParameters struct {
 
 	// Reference to a MSSQLElasticPool in sql to populate elasticPoolId.
 	// +kubebuilder:validation:Optional
-	ElasticPoolIDRef *v1.NamespacedReference `json:"elasticPoolIdRef,omitempty" tf:"-"`
+	ElasticPoolIDRef *v2.NamespacedReference `json:"elasticPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLElasticPool in sql to populate elasticPoolId.
 	// +kubebuilder:validation:Optional
-	ElasticPoolIDSelector *v1.NamespacedSelector `json:"elasticPoolIdSelector,omitempty" tf:"-"`
+	ElasticPoolIDSelector *v2.NamespacedSelector `json:"elasticPoolIdSelector,omitempty" tf:"-"`
 
 	// Specifies the type of enclave to be used by the elastic pool. When enclave_type is not specified (e.g., the default) enclaves are not enabled on the database. Once enabled (e.g., by specifying Default or VBS) removing the enclave_type field from the configuration file will force the creation of a new resource. Possible values are Default or VBS.
 	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
@@ -321,11 +320,11 @@ type MSSQLDatabaseInitParameters struct {
 
 	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDRef *v1.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDRef *v2.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDSelector *v1.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDSelector *v2.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones. This property is only settable for Premium and Business Critical databases.
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
@@ -462,11 +461,11 @@ type MSSQLDatabaseParameters struct {
 
 	// Reference to a MSSQLDatabase in sql to populate creationSourceDatabaseId.
 	// +kubebuilder:validation:Optional
-	CreationSourceDatabaseIDRef *v1.NamespacedReference `json:"creationSourceDatabaseIdRef,omitempty" tf:"-"`
+	CreationSourceDatabaseIDRef *v2.NamespacedReference `json:"creationSourceDatabaseIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLDatabase in sql to populate creationSourceDatabaseId.
 	// +kubebuilder:validation:Optional
-	CreationSourceDatabaseIDSelector *v1.NamespacedSelector `json:"creationSourceDatabaseIdSelector,omitempty" tf:"-"`
+	CreationSourceDatabaseIDSelector *v2.NamespacedSelector `json:"creationSourceDatabaseIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the elastic pool containing this database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLElasticPool
@@ -476,11 +475,11 @@ type MSSQLDatabaseParameters struct {
 
 	// Reference to a MSSQLElasticPool in sql to populate elasticPoolId.
 	// +kubebuilder:validation:Optional
-	ElasticPoolIDRef *v1.NamespacedReference `json:"elasticPoolIdRef,omitempty" tf:"-"`
+	ElasticPoolIDRef *v2.NamespacedReference `json:"elasticPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLElasticPool in sql to populate elasticPoolId.
 	// +kubebuilder:validation:Optional
-	ElasticPoolIDSelector *v1.NamespacedSelector `json:"elasticPoolIdSelector,omitempty" tf:"-"`
+	ElasticPoolIDSelector *v2.NamespacedSelector `json:"elasticPoolIdSelector,omitempty" tf:"-"`
 
 	// Specifies the type of enclave to be used by the elastic pool. When enclave_type is not specified (e.g., the default) enclaves are not enabled on the database. Once enabled (e.g., by specifying Default or VBS) removing the enclave_type field from the configuration file will force the creation of a new resource. Possible values are Default or VBS.
 	// +kubebuilder:validation:Optional
@@ -566,11 +565,11 @@ type MSSQLDatabaseParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// A short_term_retention_policy block as defined below.
 	// +kubebuilder:validation:Optional
@@ -609,11 +608,11 @@ type MSSQLDatabaseParameters struct {
 
 	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDRef *v1.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDRef *v2.NamespacedReference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	TransparentDataEncryptionKeyVaultKeyIDSelector *v1.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
+	TransparentDataEncryptionKeyVaultKeyIDSelector *v2.NamespacedSelector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones. This property is only settable for Premium and Business Critical databases.
 	// +kubebuilder:validation:Optional
@@ -669,7 +668,7 @@ type ThreatDetectionPolicyInitParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the identifier key of the Threat Detection audit storage account. Required if state is Enabled.
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
@@ -724,7 +723,7 @@ type ThreatDetectionPolicyParameters struct {
 
 	// Specifies the identifier key of the Threat Detection audit storage account. Required if state is Enabled.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
 	// +kubebuilder:validation:Optional
@@ -750,8 +749,8 @@ type MSSQLDatabaseSpec struct {
 
 // MSSQLDatabaseStatus defines the observed state of MSSQLDatabase.
 type MSSQLDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

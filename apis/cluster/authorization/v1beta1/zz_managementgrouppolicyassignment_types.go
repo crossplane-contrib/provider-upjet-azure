@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagementGroupPolicyAssignmentIdentityInitParameters struct {
@@ -90,11 +90,11 @@ type ManagementGroupPolicyAssignmentInitParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	ResourceSelectors []ManagementGroupPolicyAssignmentResourceSelectorsInitParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
@@ -272,11 +272,11 @@ type ManagementGroupPolicyAssignmentParameters struct {
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+	ManagementGroupIDRef *v2.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
-	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+	ManagementGroupIDSelector *v2.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
 	// A JSON mapping of any Metadata for this Policy.
 	// +kubebuilder:validation:Optional
@@ -306,11 +306,11 @@ type ManagementGroupPolicyAssignmentParameters struct {
 
 	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+	PolicyDefinitionIDRef *v2.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
 	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
-	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+	PolicyDefinitionIDSelector *v2.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	// +kubebuilder:validation:Optional
@@ -387,8 +387,8 @@ type ManagementGroupPolicyAssignmentResourceSelectorsSelectorsParameters struct 
 
 // ManagementGroupPolicyAssignmentSpec defines the desired state of ManagementGroupPolicyAssignment
 type ManagementGroupPolicyAssignmentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagementGroupPolicyAssignmentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagementGroupPolicyAssignmentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -404,8 +404,8 @@ type ManagementGroupPolicyAssignmentSpec struct {
 
 // ManagementGroupPolicyAssignmentStatus defines the observed state of ManagementGroupPolicyAssignment.
 type ManagementGroupPolicyAssignmentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagementGroupPolicyAssignmentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagementGroupPolicyAssignmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

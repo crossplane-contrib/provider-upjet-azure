@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AlwaysReadyInitParameters struct {
@@ -54,7 +54,7 @@ type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryInitParameters struct 
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
@@ -91,7 +91,7 @@ type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
@@ -107,7 +107,7 @@ type FunctionAppFlexConsumptionAuthSettingsFacebookInitParameters struct {
 
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
-	AppSecretSecretRef *v1.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+	AppSecretSecretRef *v2.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
@@ -143,7 +143,7 @@ type FunctionAppFlexConsumptionAuthSettingsFacebookParameters struct {
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	AppSecretSecretRef *v1.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+	AppSecretSecretRef *v2.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
@@ -164,7 +164,7 @@ type FunctionAppFlexConsumptionAuthSettingsGithubInitParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
@@ -200,7 +200,7 @@ type FunctionAppFlexConsumptionAuthSettingsGithubParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
@@ -221,7 +221,7 @@ type FunctionAppFlexConsumptionAuthSettingsGoogleInitParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
@@ -257,7 +257,7 @@ type FunctionAppFlexConsumptionAuthSettingsGoogleParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
@@ -336,7 +336,7 @@ type FunctionAppFlexConsumptionAuthSettingsMicrosoftInitParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
@@ -372,7 +372,7 @@ type FunctionAppFlexConsumptionAuthSettingsMicrosoftParameters struct {
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
@@ -524,7 +524,7 @@ type FunctionAppFlexConsumptionAuthSettingsTwitterInitParameters struct {
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
-	ConsumerSecretSecretRef *v1.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+	ConsumerSecretSecretRef *v2.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
@@ -552,7 +552,7 @@ type FunctionAppFlexConsumptionAuthSettingsTwitterParameters struct {
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	ConsumerSecretSecretRef *v1.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+	ConsumerSecretSecretRef *v2.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
@@ -1581,7 +1581,7 @@ type FunctionAppFlexConsumptionConnectionStringInitParameters struct {
 
 	// The connection string value.
 	// The connection string value.
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type FunctionAppFlexConsumptionConnectionStringObservation struct {
@@ -1610,7 +1610,7 @@ type FunctionAppFlexConsumptionConnectionStringParameters struct {
 	// The connection string value.
 	// The connection string value.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type FunctionAppFlexConsumptionIdentityInitParameters struct {
@@ -1623,11 +1623,11 @@ type FunctionAppFlexConsumptionIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -1660,11 +1660,11 @@ type FunctionAppFlexConsumptionIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -1742,11 +1742,11 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// Reference to a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDRef *v1.Reference `json:"servicePlanIdRef,omitempty" tf:"-"`
+	ServicePlanIDRef *v2.Reference `json:"servicePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDSelector *v1.Selector `json:"servicePlanIdSelector,omitempty" tf:"-"`
+	ServicePlanIDSelector *v2.Selector `json:"servicePlanIdSelector,omitempty" tf:"-"`
 
 	// A site_config block as defined below.
 	SiteConfig *FunctionAppFlexConsumptionSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
@@ -1761,11 +1761,11 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccessKey.
 	// +kubebuilder:validation:Optional
-	StorageAccessKeyRef *v1.Reference `json:"storageAccessKeyRef,omitempty" tf:"-"`
+	StorageAccessKeyRef *v2.Reference `json:"storageAccessKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccessKey.
 	// +kubebuilder:validation:Optional
-	StorageAccessKeySelector *v1.Selector `json:"storageAccessKeySelector,omitempty" tf:"-"`
+	StorageAccessKeySelector *v2.Selector `json:"storageAccessKeySelector,omitempty" tf:"-"`
 
 	// The authentication type which will be used to access the backend storage account for the Function App. Possible values are StorageAccountConnectionString, SystemAssignedIdentity, and UserAssignedIdentity.
 	StorageAuthenticationType *string `json:"storageAuthenticationType,omitempty" tf:"storage_authentication_type,omitempty"`
@@ -1778,11 +1778,11 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageContainerEndpointRef *v1.Reference `json:"storageContainerEndpointRef,omitempty" tf:"-"`
+	StorageContainerEndpointRef *v2.Reference `json:"storageContainerEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageContainerEndpointSelector *v1.Selector `json:"storageContainerEndpointSelector,omitempty" tf:"-"`
+	StorageContainerEndpointSelector *v2.Selector `json:"storageContainerEndpointSelector,omitempty" tf:"-"`
 
 	// The storage container type used for the Function App. The current supported type is blobContainer.
 	// The type of the storage container where the function app's code is hosted. Only `blobContainer` is supported currently.
@@ -1795,11 +1795,11 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate storageUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	StorageUserAssignedIdentityIDRef *v1.Reference `json:"storageUserAssignedIdentityIdRef,omitempty" tf:"-"`
+	StorageUserAssignedIdentityIDRef *v2.Reference `json:"storageUserAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate storageUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	StorageUserAssignedIdentityIDSelector *v1.Selector `json:"storageUserAssignedIdentityIdSelector,omitempty" tf:"-"`
+	StorageUserAssignedIdentityIDSelector *v2.Selector `json:"storageUserAssignedIdentityIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Linux Function App.
 	// +mapType=granular
@@ -1812,11 +1812,11 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2038,11 +2038,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Runtime of the Linux Function App. Possible values are node, dotnet-isolated, powershell, python, java and custom.
 	// +kubebuilder:validation:Optional
@@ -2061,11 +2061,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// Reference to a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDRef *v1.Reference `json:"servicePlanIdRef,omitempty" tf:"-"`
+	ServicePlanIDRef *v2.Reference `json:"servicePlanIdRef,omitempty" tf:"-"`
 
 	// Selector for a ServicePlan in web to populate servicePlanId.
 	// +kubebuilder:validation:Optional
-	ServicePlanIDSelector *v1.Selector `json:"servicePlanIdSelector,omitempty" tf:"-"`
+	ServicePlanIDSelector *v2.Selector `json:"servicePlanIdSelector,omitempty" tf:"-"`
 
 	// A site_config block as defined below.
 	// +kubebuilder:validation:Optional
@@ -2083,11 +2083,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// Reference to a Account in storage to populate storageAccessKey.
 	// +kubebuilder:validation:Optional
-	StorageAccessKeyRef *v1.Reference `json:"storageAccessKeyRef,omitempty" tf:"-"`
+	StorageAccessKeyRef *v2.Reference `json:"storageAccessKeyRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccessKey.
 	// +kubebuilder:validation:Optional
-	StorageAccessKeySelector *v1.Selector `json:"storageAccessKeySelector,omitempty" tf:"-"`
+	StorageAccessKeySelector *v2.Selector `json:"storageAccessKeySelector,omitempty" tf:"-"`
 
 	// The authentication type which will be used to access the backend storage account for the Function App. Possible values are StorageAccountConnectionString, SystemAssignedIdentity, and UserAssignedIdentity.
 	// +kubebuilder:validation:Optional
@@ -2102,11 +2102,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageContainerEndpointRef *v1.Reference `json:"storageContainerEndpointRef,omitempty" tf:"-"`
+	StorageContainerEndpointRef *v2.Reference `json:"storageContainerEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageContainerEndpointSelector *v1.Selector `json:"storageContainerEndpointSelector,omitempty" tf:"-"`
+	StorageContainerEndpointSelector *v2.Selector `json:"storageContainerEndpointSelector,omitempty" tf:"-"`
 
 	// The storage container type used for the Function App. The current supported type is blobContainer.
 	// The type of the storage container where the function app's code is hosted. Only `blobContainer` is supported currently.
@@ -2121,11 +2121,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate storageUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	StorageUserAssignedIdentityIDRef *v1.Reference `json:"storageUserAssignedIdentityIdRef,omitempty" tf:"-"`
+	StorageUserAssignedIdentityIDRef *v2.Reference `json:"storageUserAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate storageUserAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	StorageUserAssignedIdentityIDSelector *v1.Selector `json:"storageUserAssignedIdentityIdSelector,omitempty" tf:"-"`
+	StorageUserAssignedIdentityIDSelector *v2.Selector `json:"storageUserAssignedIdentityIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Linux Function App.
 	// +kubebuilder:validation:Optional
@@ -2140,11 +2140,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -2315,11 +2315,11 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionAppFlexConsumptionSiteConfigIPRestrictionObservation struct {
@@ -2401,11 +2401,11 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
@@ -2422,11 +2422,11 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 
 	// Reference to a API in apimanagement to populate apiManagementApiId.
 	// +kubebuilder:validation:Optional
-	APIManagementAPIIDRef *v1.Reference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
+	APIManagementAPIIDRef *v2.Reference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiManagementApiId.
 	// +kubebuilder:validation:Optional
-	APIManagementAPIIDSelector *v1.Selector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
+	APIManagementAPIIDSelector *v2.Selector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
 
 	// The App command line to launch.
 	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
@@ -2437,11 +2437,11 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 
 	// The Connection String for linking the Linux Function App to Application Insights.
 	// The Connection String for linking the Linux Function App to Application Insights.
-	ApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+	ApplicationInsightsConnectionStringSecretRef *v2.SecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
 	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
-	ApplicationInsightsKeySecretRef *v1.SecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
+	ApplicationInsightsKeySecretRef *v2.SecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
 
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
@@ -2451,11 +2451,11 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDRef *v1.Reference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
+	ContainerRegistryManagedIdentityClientIDRef *v2.Reference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDSelector *v1.Selector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
+	ContainerRegistryManagedIdentityClientIDSelector *v2.Selector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
 
 	// Should connections for Azure Container Registry use Managed Identity.
 	// Should connections for Azure Container Registry use Managed Identity.
@@ -2675,11 +2675,11 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// Reference to a API in apimanagement to populate apiManagementApiId.
 	// +kubebuilder:validation:Optional
-	APIManagementAPIIDRef *v1.Reference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
+	APIManagementAPIIDRef *v2.Reference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiManagementApiId.
 	// +kubebuilder:validation:Optional
-	APIManagementAPIIDSelector *v1.Selector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
+	APIManagementAPIIDSelector *v2.Selector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
 
 	// The App command line to launch.
 	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
@@ -2693,12 +2693,12 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 	// The Connection String for linking the Linux Function App to Application Insights.
 	// The Connection String for linking the Linux Function App to Application Insights.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+	ApplicationInsightsConnectionStringSecretRef *v2.SecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
 	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsKeySecretRef *v1.SecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
+	ApplicationInsightsKeySecretRef *v2.SecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
 
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
@@ -2709,11 +2709,11 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDRef *v1.Reference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
+	ContainerRegistryManagedIdentityClientIDRef *v2.Reference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
 	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDSelector *v1.Selector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
+	ContainerRegistryManagedIdentityClientIDSelector *v2.Selector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
 
 	// Should connections for Azure Container Registry use Managed Identity.
 	// Should connections for Azure Container Registry use Managed Identity.
@@ -2911,11 +2911,11 @@ type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionInitParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionObservation struct {
@@ -2997,11 +2997,11 @@ type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionParameters struct {
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionAppFlexConsumptionSiteCredentialInitParameters struct {
@@ -3050,8 +3050,8 @@ type FunctionAppFlexConsumptionStickySettingsParameters struct {
 
 // FunctionAppFlexConsumptionSpec defines the desired state of FunctionAppFlexConsumption
 type FunctionAppFlexConsumptionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionAppFlexConsumptionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionAppFlexConsumptionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -3067,8 +3067,8 @@ type FunctionAppFlexConsumptionSpec struct {
 
 // FunctionAppFlexConsumptionStatus defines the observed state of FunctionAppFlexConsumption.
 type FunctionAppFlexConsumptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionAppFlexConsumptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionAppFlexConsumptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputFunctionInitParameters struct {
 
 	// The API key for the Function.
-	APIKeySecretRef v1.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
+	APIKeySecretRef v2.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
 	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
@@ -32,11 +31,11 @@ type OutputFunctionInitParameters struct {
 
 	// Reference to a FunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
-	FunctionAppRef *v1.NamespacedReference `json:"functionAppRef,omitempty" tf:"-"`
+	FunctionAppRef *v2.NamespacedReference `json:"functionAppRef,omitempty" tf:"-"`
 
 	// Selector for a FunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
-	FunctionAppSelector *v1.NamespacedSelector `json:"functionAppSelector,omitempty" tf:"-"`
+	FunctionAppSelector *v2.NamespacedSelector `json:"functionAppSelector,omitempty" tf:"-"`
 
 	// The name of the function in the Function App.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
@@ -47,11 +46,11 @@ type OutputFunctionInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type OutputFunctionObservation struct {
@@ -82,7 +81,7 @@ type OutputFunctionParameters struct {
 
 	// The API key for the Function.
 	// +kubebuilder:validation:Optional
-	APIKeySecretRef v1.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
+	APIKeySecretRef v2.LocalSecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
 	// +kubebuilder:validation:Optional
@@ -100,11 +99,11 @@ type OutputFunctionParameters struct {
 
 	// Reference to a FunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
-	FunctionAppRef *v1.NamespacedReference `json:"functionAppRef,omitempty" tf:"-"`
+	FunctionAppRef *v2.NamespacedReference `json:"functionAppRef,omitempty" tf:"-"`
 
 	// Selector for a FunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
-	FunctionAppSelector *v1.NamespacedSelector `json:"functionAppSelector,omitempty" tf:"-"`
+	FunctionAppSelector *v2.NamespacedSelector `json:"functionAppSelector,omitempty" tf:"-"`
 
 	// The name of the function in the Function App.
 	// +kubebuilder:validation:Optional
@@ -117,11 +116,11 @@ type OutputFunctionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
@@ -130,11 +129,11 @@ type OutputFunctionParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 // OutputFunctionSpec defines the desired state of OutputFunction
@@ -156,8 +155,8 @@ type OutputFunctionSpec struct {
 
 // OutputFunctionStatus defines the observed state of OutputFunction.
 type OutputFunctionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputFunctionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputFunctionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudActiveDeploymentInitParameters struct {
@@ -21,11 +21,11 @@ type SpringCloudActiveDeploymentInitParameters struct {
 
 	// Reference to a SpringCloudJavaDeployment in appplatform to populate deploymentName.
 	// +kubebuilder:validation:Optional
-	DeploymentNameRef *v1.Reference `json:"deploymentNameRef,omitempty" tf:"-"`
+	DeploymentNameRef *v2.Reference `json:"deploymentNameRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudJavaDeployment in appplatform to populate deploymentName.
 	// +kubebuilder:validation:Optional
-	DeploymentNameSelector *v1.Selector `json:"deploymentNameSelector,omitempty" tf:"-"`
+	DeploymentNameSelector *v2.Selector `json:"deploymentNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the Spring Cloud Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta2.SpringCloudApp
@@ -34,11 +34,11 @@ type SpringCloudActiveDeploymentInitParameters struct {
 
 	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+	SpringCloudAppIDRef *v2.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+	SpringCloudAppIDSelector *v2.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudActiveDeploymentObservation struct {
@@ -62,11 +62,11 @@ type SpringCloudActiveDeploymentParameters struct {
 
 	// Reference to a SpringCloudJavaDeployment in appplatform to populate deploymentName.
 	// +kubebuilder:validation:Optional
-	DeploymentNameRef *v1.Reference `json:"deploymentNameRef,omitempty" tf:"-"`
+	DeploymentNameRef *v2.Reference `json:"deploymentNameRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudJavaDeployment in appplatform to populate deploymentName.
 	// +kubebuilder:validation:Optional
-	DeploymentNameSelector *v1.Selector `json:"deploymentNameSelector,omitempty" tf:"-"`
+	DeploymentNameSelector *v2.Selector `json:"deploymentNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the Spring Cloud Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta2.SpringCloudApp
@@ -76,17 +76,17 @@ type SpringCloudActiveDeploymentParameters struct {
 
 	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+	SpringCloudAppIDRef *v2.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+	SpringCloudAppIDSelector *v2.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudActiveDeploymentSpec defines the desired state of SpringCloudActiveDeployment
 type SpringCloudActiveDeploymentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudActiveDeploymentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudActiveDeploymentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -102,8 +102,8 @@ type SpringCloudActiveDeploymentSpec struct {
 
 // SpringCloudActiveDeploymentStatus defines the observed state of SpringCloudActiveDeployment.
 type SpringCloudActiveDeploymentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudActiveDeploymentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudActiveDeploymentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

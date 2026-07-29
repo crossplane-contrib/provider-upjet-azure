@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QuotaInitParameters struct {
@@ -127,17 +127,17 @@ type SpringCloudBuildDeploymentParameters struct {
 
 	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+	SpringCloudAppIDRef *v2.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+	SpringCloudAppIDSelector *v2.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudBuildDeploymentSpec defines the desired state of SpringCloudBuildDeployment
 type SpringCloudBuildDeploymentSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudBuildDeploymentParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudBuildDeploymentParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -153,8 +153,8 @@ type SpringCloudBuildDeploymentSpec struct {
 
 // SpringCloudBuildDeploymentStatus defines the observed state of SpringCloudBuildDeployment.
 type SpringCloudBuildDeploymentStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudBuildDeploymentObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudBuildDeploymentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,14 +10,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type BasicAuthenticationInitParameters struct {
 
 	// The password associated with the username, which can be used to authenticate to the OData endpoint.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username which can be used to authenticate to the OData endpoint.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -33,7 +32,7 @@ type BasicAuthenticationParameters struct {
 
 	// The password associated with the username, which can be used to authenticate to the OData endpoint.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username which can be used to authenticate to the OData endpoint.
 	// +kubebuilder:validation:Optional
@@ -121,11 +120,11 @@ type LinkedServiceODataParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.NamespacedReference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.NamespacedSelector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service OData.
 	// +kubebuilder:validation:Optional
@@ -164,8 +163,8 @@ type LinkedServiceODataSpec struct {
 
 // LinkedServiceODataStatus defines the observed state of LinkedServiceOData.
 type LinkedServiceODataStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceODataObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceODataObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

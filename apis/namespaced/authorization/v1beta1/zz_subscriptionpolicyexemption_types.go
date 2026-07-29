@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SubscriptionPolicyExemptionInitParameters struct {
@@ -38,11 +37,11 @@ type SubscriptionPolicyExemptionInitParameters struct {
 
 	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
@@ -111,11 +110,11 @@ type SubscriptionPolicyExemptionParameters struct {
 
 	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDRef *v1.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+	PolicyAssignmentIDRef *v2.NamespacedReference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
 	// +kubebuilder:validation:Optional
-	PolicyAssignmentIDSelector *v1.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+	PolicyAssignmentIDSelector *v2.NamespacedSelector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	// +kubebuilder:validation:Optional
@@ -145,8 +144,8 @@ type SubscriptionPolicyExemptionSpec struct {
 
 // SubscriptionPolicyExemptionStatus defines the observed state of SubscriptionPolicyExemption.
 type SubscriptionPolicyExemptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubscriptionPolicyExemptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubscriptionPolicyExemptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

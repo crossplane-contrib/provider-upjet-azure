@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type KafkaClusterComponentVersionInitParameters struct {
@@ -117,7 +116,7 @@ type KafkaClusterExtensionInitParameters struct {
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The workspace key of the log analytics extension.
-	PrimaryKeySecretRef v1.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type KafkaClusterExtensionObservation struct {
@@ -134,13 +133,13 @@ type KafkaClusterExtensionParameters struct {
 
 	// The workspace key of the log analytics extension.
 	// +kubebuilder:validation:Optional
-	PrimaryKeySecretRef v1.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type KafkaClusterGatewayInitParameters struct {
 
 	// The password used for the Ambari Portal.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -156,7 +155,7 @@ type KafkaClusterGatewayParameters struct {
 
 	// The password used for the Ambari Portal.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -233,7 +232,7 @@ type KafkaClusterMetastoresAmbariInitParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -262,7 +261,7 @@ type KafkaClusterMetastoresAmbariParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -279,7 +278,7 @@ type KafkaClusterMetastoresHiveInitParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -308,7 +307,7 @@ type KafkaClusterMetastoresHiveParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -349,7 +348,7 @@ type KafkaClusterMetastoresOozieInitParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -378,7 +377,7 @@ type KafkaClusterMetastoresOozieParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -410,7 +409,7 @@ type KafkaClusterMonitorInitParameters struct {
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The Operations Management Suite (OMS) workspace key.
-	PrimaryKeySecretRef v1.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type KafkaClusterMonitorObservation struct {
@@ -427,7 +426,7 @@ type KafkaClusterMonitorParameters struct {
 
 	// The Operations Management Suite (OMS) workspace key.
 	// +kubebuilder:validation:Optional
-	PrimaryKeySecretRef v1.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
+	PrimaryKeySecretRef v2.LocalSecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
 type KafkaClusterNetworkInitParameters struct {
@@ -595,11 +594,11 @@ type KafkaClusterParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A rest_proxy block as defined below.
 	// +kubebuilder:validation:Optional
@@ -656,11 +655,11 @@ type KafkaClusterPrivateLinkConfigurationIPConfigurationInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type KafkaClusterPrivateLinkConfigurationIPConfigurationObservation struct {
@@ -707,11 +706,11 @@ type KafkaClusterPrivateLinkConfigurationIPConfigurationParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type KafkaClusterPrivateLinkConfigurationInitParameters struct {
@@ -756,7 +755,7 @@ type KafkaClusterPrivateLinkConfigurationParameters struct {
 type KafkaClusterRolesHeadNodeInitParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -772,11 +771,11 @@ type KafkaClusterRolesHeadNodeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -814,7 +813,7 @@ type KafkaClusterRolesHeadNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -833,11 +832,11 @@ type KafkaClusterRolesHeadNodeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -946,7 +945,7 @@ type KafkaClusterRolesWorkerNodeInitParameters struct {
 	NumberOfDisksPerNode *float64 `json:"numberOfDisksPerNode,omitempty" tf:"number_of_disks_per_node,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -962,11 +961,11 @@ type KafkaClusterRolesWorkerNodeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
@@ -1017,7 +1016,7 @@ type KafkaClusterRolesWorkerNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1036,11 +1035,11 @@ type KafkaClusterRolesWorkerNodeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	// +kubebuilder:validation:Optional
@@ -1101,7 +1100,7 @@ type KafkaClusterRolesWorkerNodeScriptActionsParameters struct {
 type KafkaClusterRolesZookeeperNodeInitParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -1117,11 +1116,11 @@ type KafkaClusterRolesZookeeperNodeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -1159,7 +1158,7 @@ type KafkaClusterRolesZookeeperNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1178,11 +1177,11 @@ type KafkaClusterRolesZookeeperNodeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1249,7 +1248,7 @@ type KafkaClusterSecurityProfileInitParameters struct {
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The user password of the Azure Active Directory Domain. Changing this forces a new resource to be created.
-	DomainUserPasswordSecretRef v1.LocalSecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
+	DomainUserPasswordSecretRef v2.LocalSecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
@@ -1302,7 +1301,7 @@ type KafkaClusterSecurityProfileParameters struct {
 
 	// The user password of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	DomainUserPasswordSecretRef v1.LocalSecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
+	DomainUserPasswordSecretRef v2.LocalSecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1373,7 +1372,7 @@ type KafkaClusterStorageAccountInitParameters struct {
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// The Access Key which should be used to connect to the Storage Account. Changing this forces a new resource to be created.
-	StorageAccountKeySecretRef v1.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+	StorageAccountKeySecretRef v2.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -1382,11 +1381,11 @@ type KafkaClusterStorageAccountInitParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
 	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
@@ -1412,7 +1411,7 @@ type KafkaClusterStorageAccountParameters struct {
 
 	// The Access Key which should be used to connect to the Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	StorageAccountKeySecretRef v1.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+	StorageAccountKeySecretRef v2.LocalSecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
@@ -1422,11 +1421,11 @@ type KafkaClusterStorageAccountParameters struct {
 
 	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDRef *v1.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
+	StorageContainerIDRef *v2.NamespacedReference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
-	StorageContainerIDSelector *v1.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
+	StorageContainerIDSelector *v2.NamespacedSelector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1436,7 +1435,7 @@ type KafkaClusterStorageAccountParameters struct {
 type KafkaManagementNodeInitParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -1452,11 +1451,11 @@ type KafkaManagementNodeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5, Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5, Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5, Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5, Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5, Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
@@ -1491,7 +1490,7 @@ type KafkaManagementNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1510,11 +1509,11 @@ type KafkaManagementNodeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_D2ads_V5, Standard_D4ads_V5, Standard_D8ads_V5, Standard_D16ads_V5, Standard_D32ads_V5, Standard_D48ads_V5, Standard_D64ads_V5, Standard_D96ads_V5, Standard_E2ads_V5, Standard_E4ads_V5, Standard_E8ads_V5, Standard_E16ads_V5, Standard_E20ads_V5, Standard_E32ads_V5, Standard_E48ads_V5, Standard_E64ads_V5, Standard_E96ads_V5, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1612,8 +1611,8 @@ type KafkaClusterSpec struct {
 
 // KafkaClusterStatus defines the observed state of KafkaCluster.
 type KafkaClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        KafkaClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               KafkaClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

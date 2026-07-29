@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIInitParameters struct {
@@ -163,11 +162,11 @@ type APIParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// Type of API. Possible values are graphql, http, soap, and websocket. Defaults to http.
 	// +kubebuilder:validation:Optional
@@ -217,11 +216,11 @@ type APIParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Revision which used for this API. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -509,8 +508,8 @@ type APISpec struct {
 
 // APIStatus defines the observed state of API.
 type APIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

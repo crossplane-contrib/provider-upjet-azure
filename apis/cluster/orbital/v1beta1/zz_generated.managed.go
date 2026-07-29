@@ -5,104 +5,104 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ContactProfile.
-func (mg *ContactProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ContactProfile) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ContactProfile.
-func (mg *ContactProfile) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ContactProfile) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ContactProfile.
-func (mg *ContactProfile) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ContactProfile) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ContactProfile.
-func (mg *ContactProfile) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ContactProfile) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ContactProfile.
-func (mg *ContactProfile) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ContactProfile) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ContactProfile.
-func (mg *ContactProfile) SetConditions(c ...xpv1.Condition) {
+func (mg *ContactProfile) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ContactProfile.
-func (mg *ContactProfile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ContactProfile) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ContactProfile.
-func (mg *ContactProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ContactProfile) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ContactProfile.
-func (mg *ContactProfile) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ContactProfile) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ContactProfile.
-func (mg *ContactProfile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ContactProfile) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this Spacecraft.
-func (mg *Spacecraft) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *Spacecraft) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this Spacecraft.
-func (mg *Spacecraft) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *Spacecraft) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this Spacecraft.
-func (mg *Spacecraft) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *Spacecraft) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Spacecraft.
-func (mg *Spacecraft) GetProviderConfigReference() *xpv1.Reference {
+func (mg *Spacecraft) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this Spacecraft.
-func (mg *Spacecraft) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *Spacecraft) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this Spacecraft.
-func (mg *Spacecraft) SetConditions(c ...xpv1.Condition) {
+func (mg *Spacecraft) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this Spacecraft.
-func (mg *Spacecraft) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *Spacecraft) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this Spacecraft.
-func (mg *Spacecraft) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *Spacecraft) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Spacecraft.
-func (mg *Spacecraft) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *Spacecraft) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this Spacecraft.
-func (mg *Spacecraft) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *Spacecraft) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

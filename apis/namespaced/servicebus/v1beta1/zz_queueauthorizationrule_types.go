@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type QueueAuthorizationRuleInitParameters struct {
@@ -62,11 +61,11 @@ type QueueAuthorizationRuleParameters struct {
 
 	// Reference to a Queue in servicebus to populate queueId.
 	// +kubebuilder:validation:Optional
-	QueueIDRef *v1.NamespacedReference `json:"queueIdRef,omitempty" tf:"-"`
+	QueueIDRef *v2.NamespacedReference `json:"queueIdRef,omitempty" tf:"-"`
 
 	// Selector for a Queue in servicebus to populate queueId.
 	// +kubebuilder:validation:Optional
-	QueueIDSelector *v1.NamespacedSelector `json:"queueIdSelector,omitempty" tf:"-"`
+	QueueIDSelector *v2.NamespacedSelector `json:"queueIdSelector,omitempty" tf:"-"`
 
 	// Does this Authorization Rule have Send permissions to the ServiceBus Queue? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -92,8 +91,8 @@ type QueueAuthorizationRuleSpec struct {
 
 // QueueAuthorizationRuleStatus defines the observed state of QueueAuthorizationRule.
 type QueueAuthorizationRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        QueueAuthorizationRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               QueueAuthorizationRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

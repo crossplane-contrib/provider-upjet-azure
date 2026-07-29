@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceExtendedAuditingPolicyInitParameters struct {
@@ -26,7 +25,7 @@ type WorkspaceExtendedAuditingPolicyInitParameters struct {
 	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
 
 	// The access key to use for the auditing storage account.
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -35,11 +34,11 @@ type WorkspaceExtendedAuditingPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceExtendedAuditingPolicyObservation struct {
@@ -79,7 +78,7 @@ type WorkspaceExtendedAuditingPolicyParameters struct {
 
 	// The access key to use for the auditing storage account.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
@@ -89,11 +88,11 @@ type WorkspaceExtendedAuditingPolicyParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.NamespacedReference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.NamespacedSelector `json:"storageEndpointSelector,omitempty" tf:"-"`
 
 	// The ID of the Synapse workspace to set the extended auditing policy. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/synapse/v1beta1.Workspace
@@ -103,11 +102,11 @@ type WorkspaceExtendedAuditingPolicyParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.NamespacedReference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.NamespacedSelector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 }
 
 // WorkspaceExtendedAuditingPolicySpec defines the desired state of WorkspaceExtendedAuditingPolicy
@@ -129,8 +128,8 @@ type WorkspaceExtendedAuditingPolicySpec struct {
 
 // WorkspaceExtendedAuditingPolicyStatus defines the observed state of WorkspaceExtendedAuditingPolicy.
 type WorkspaceExtendedAuditingPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceExtendedAuditingPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceExtendedAuditingPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

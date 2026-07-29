@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type GroupUserInitParameters struct {
@@ -44,11 +43,11 @@ type GroupUserParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The Name of the API Management Group within the API Management Service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Group
@@ -57,11 +56,11 @@ type GroupUserParameters struct {
 
 	// Reference to a Group in apimanagement to populate groupName.
 	// +kubebuilder:validation:Optional
-	GroupNameRef *v1.NamespacedReference `json:"groupNameRef,omitempty" tf:"-"`
+	GroupNameRef *v2.NamespacedReference `json:"groupNameRef,omitempty" tf:"-"`
 
 	// Selector for a Group in apimanagement to populate groupName.
 	// +kubebuilder:validation:Optional
-	GroupNameSelector *v1.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
+	GroupNameSelector *v2.NamespacedSelector `json:"groupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -70,11 +69,11 @@ type GroupUserParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management User which should be assigned to this API Management Group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.User
@@ -83,11 +82,11 @@ type GroupUserParameters struct {
 
 	// Reference to a User in apimanagement to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDRef *v1.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
+	UserIDRef *v2.NamespacedReference `json:"userIdRef,omitempty" tf:"-"`
 
 	// Selector for a User in apimanagement to populate userId.
 	// +kubebuilder:validation:Optional
-	UserIDSelector *v1.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
+	UserIDSelector *v2.NamespacedSelector `json:"userIdSelector,omitempty" tf:"-"`
 }
 
 // GroupUserSpec defines the desired state of GroupUser
@@ -109,8 +108,8 @@ type GroupUserSpec struct {
 
 // GroupUserStatus defines the observed state of GroupUser.
 type GroupUserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        GroupUserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               GroupUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

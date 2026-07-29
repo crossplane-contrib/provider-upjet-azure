@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FunctionJavascriptUdaInitParameters struct {
@@ -31,11 +31,11 @@ type FunctionJavascriptUdaInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v1.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
+	StreamAnalyticsJobIDRef *v2.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobIDSelector *v2.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionJavascriptUdaObservation struct {
@@ -78,11 +78,11 @@ type FunctionJavascriptUdaParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v1.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
+	StreamAnalyticsJobIDRef *v2.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobIDSelector *v2.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
 
 type InputInitParameters struct {
@@ -135,8 +135,8 @@ type OutputParameters struct {
 
 // FunctionJavascriptUdaSpec defines the desired state of FunctionJavascriptUda
 type FunctionJavascriptUdaSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     FunctionJavascriptUdaParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   FunctionJavascriptUdaParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -152,8 +152,8 @@ type FunctionJavascriptUdaSpec struct {
 
 // FunctionJavascriptUdaStatus defines the observed state of FunctionJavascriptUda.
 type FunctionJavascriptUdaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionJavascriptUdaObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionJavascriptUdaObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

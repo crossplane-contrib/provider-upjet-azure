@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type PrivateDNSResolverOutboundEndpointInitParameters struct {
@@ -26,11 +25,11 @@ type PrivateDNSResolverOutboundEndpointInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver Outbound Endpoint.
 	// +mapType=granular
@@ -70,11 +69,11 @@ type PrivateDNSResolverOutboundEndpointParameters struct {
 
 	// Reference to a PrivateDNSResolver in network to populate privateDnsResolverId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSResolverIDRef *v1.NamespacedReference `json:"privateDnsResolverIdRef,omitempty" tf:"-"`
+	PrivateDNSResolverIDRef *v2.NamespacedReference `json:"privateDnsResolverIdRef,omitempty" tf:"-"`
 
 	// Selector for a PrivateDNSResolver in network to populate privateDnsResolverId.
 	// +kubebuilder:validation:Optional
-	PrivateDNSResolverIDSelector *v1.NamespacedSelector `json:"privateDnsResolverIdSelector,omitempty" tf:"-"`
+	PrivateDNSResolverIDSelector *v2.NamespacedSelector `json:"privateDnsResolverIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet that is linked to the Private DNS Resolver Outbound Endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
@@ -84,11 +83,11 @@ type PrivateDNSResolverOutboundEndpointParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver Outbound Endpoint.
 	// +kubebuilder:validation:Optional
@@ -115,8 +114,8 @@ type PrivateDNSResolverOutboundEndpointSpec struct {
 
 // PrivateDNSResolverOutboundEndpointStatus defines the observed state of PrivateDNSResolverOutboundEndpoint.
 type PrivateDNSResolverOutboundEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSResolverOutboundEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               PrivateDNSResolverOutboundEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

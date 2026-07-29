@@ -5,204 +5,204 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this AutonomousDatabase.
-func (mg *AutonomousDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AutonomousDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AutonomousDatabase.
-func (mg *AutonomousDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AutonomousDatabase) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AutonomousDatabase.
-func (mg *AutonomousDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AutonomousDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AutonomousDatabase.
-func (mg *AutonomousDatabase) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AutonomousDatabase) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AutonomousDatabase.
-func (mg *AutonomousDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AutonomousDatabase) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AutonomousDatabase.
-func (mg *AutonomousDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *AutonomousDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AutonomousDatabase.
-func (mg *AutonomousDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AutonomousDatabase) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AutonomousDatabase.
-func (mg *AutonomousDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AutonomousDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AutonomousDatabase.
-func (mg *AutonomousDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AutonomousDatabase) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AutonomousDatabase.
-func (mg *AutonomousDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AutonomousDatabase) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AutonomousDatabaseBackup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AutonomousDatabaseBackup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AutonomousDatabaseBackup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AutonomousDatabaseBackup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AutonomousDatabaseBackup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) SetConditions(c ...xpv1.Condition) {
+func (mg *AutonomousDatabaseBackup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AutonomousDatabaseBackup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AutonomousDatabaseBackup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AutonomousDatabaseBackup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AutonomousDatabaseBackup.
-func (mg *AutonomousDatabaseBackup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AutonomousDatabaseBackup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AutonomousDatabaseCloneFromBackup) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AutonomousDatabaseCloneFromBackup) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AutonomousDatabaseCloneFromBackup) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AutonomousDatabaseCloneFromBackup) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AutonomousDatabaseCloneFromBackup) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) SetConditions(c ...xpv1.Condition) {
+func (mg *AutonomousDatabaseCloneFromBackup) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AutonomousDatabaseCloneFromBackup) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AutonomousDatabaseCloneFromBackup) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AutonomousDatabaseCloneFromBackup) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AutonomousDatabaseCloneFromBackup.
-func (mg *AutonomousDatabaseCloneFromBackup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AutonomousDatabaseCloneFromBackup) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *AutonomousDatabaseCloneFromDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *AutonomousDatabaseCloneFromDatabase) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *AutonomousDatabaseCloneFromDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) GetProviderConfigReference() *xpv1.Reference {
+func (mg *AutonomousDatabaseCloneFromDatabase) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *AutonomousDatabaseCloneFromDatabase) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *AutonomousDatabaseCloneFromDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *AutonomousDatabaseCloneFromDatabase) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *AutonomousDatabaseCloneFromDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *AutonomousDatabaseCloneFromDatabase) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this AutonomousDatabaseCloneFromDatabase.
-func (mg *AutonomousDatabaseCloneFromDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *AutonomousDatabaseCloneFromDatabase) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

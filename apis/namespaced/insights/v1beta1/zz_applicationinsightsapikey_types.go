@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInsightsAPIKeyInitParameters struct {
@@ -23,11 +22,11 @@ type ApplicationInsightsAPIKeyInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Application Insights API key. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -71,11 +70,11 @@ type ApplicationInsightsAPIKeyParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.NamespacedReference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Application Insights API key. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -111,8 +110,8 @@ type ApplicationInsightsAPIKeySpec struct {
 
 // ApplicationInsightsAPIKeyStatus defines the observed state of ApplicationInsightsAPIKey.
 type ApplicationInsightsAPIKeyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationInsightsAPIKeyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationInsightsAPIKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

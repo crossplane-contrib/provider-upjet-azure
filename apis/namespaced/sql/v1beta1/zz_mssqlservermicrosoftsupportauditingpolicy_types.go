@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLServerMicrosoftSupportAuditingPolicyInitParameters struct {
@@ -23,11 +22,11 @@ type MSSQLServerMicrosoftSupportAuditingPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate blobStorageEndpoint.
 	// +kubebuilder:validation:Optional
-	BlobStorageEndpointRef *v1.NamespacedReference `json:"blobStorageEndpointRef,omitempty" tf:"-"`
+	BlobStorageEndpointRef *v2.NamespacedReference `json:"blobStorageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate blobStorageEndpoint.
 	// +kubebuilder:validation:Optional
-	BlobStorageEndpointSelector *v1.NamespacedSelector `json:"blobStorageEndpointSelector,omitempty" tf:"-"`
+	BlobStorageEndpointSelector *v2.NamespacedSelector `json:"blobStorageEndpointSelector,omitempty" tf:"-"`
 
 	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -36,10 +35,10 @@ type MSSQLServerMicrosoftSupportAuditingPolicyInitParameters struct {
 	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
 
 	// The access key to use for the auditing storage account.
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the Subscription containing the Storage Account.
-	StorageAccountSubscriptionIDSecretRef *v1.LocalSecretKeySelector `json:"storageAccountSubscriptionIdSecretRef,omitempty" tf:"-"`
+	StorageAccountSubscriptionIDSecretRef *v2.LocalSecretKeySelector `json:"storageAccountSubscriptionIdSecretRef,omitempty" tf:"-"`
 }
 
 type MSSQLServerMicrosoftSupportAuditingPolicyObservation struct {
@@ -70,11 +69,11 @@ type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {
 
 	// Reference to a Account in storage to populate blobStorageEndpoint.
 	// +kubebuilder:validation:Optional
-	BlobStorageEndpointRef *v1.NamespacedReference `json:"blobStorageEndpointRef,omitempty" tf:"-"`
+	BlobStorageEndpointRef *v2.NamespacedReference `json:"blobStorageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate blobStorageEndpoint.
 	// +kubebuilder:validation:Optional
-	BlobStorageEndpointSelector *v1.NamespacedSelector `json:"blobStorageEndpointSelector,omitempty" tf:"-"`
+	BlobStorageEndpointSelector *v2.NamespacedSelector `json:"blobStorageEndpointSelector,omitempty" tf:"-"`
 
 	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -92,19 +91,19 @@ type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The access key to use for the auditing storage account.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.LocalSecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the Subscription containing the Storage Account.
 	// +kubebuilder:validation:Optional
-	StorageAccountSubscriptionIDSecretRef *v1.LocalSecretKeySelector `json:"storageAccountSubscriptionIdSecretRef,omitempty" tf:"-"`
+	StorageAccountSubscriptionIDSecretRef *v2.LocalSecretKeySelector `json:"storageAccountSubscriptionIdSecretRef,omitempty" tf:"-"`
 }
 
 // MSSQLServerMicrosoftSupportAuditingPolicySpec defines the desired state of MSSQLServerMicrosoftSupportAuditingPolicy
@@ -126,8 +125,8 @@ type MSSQLServerMicrosoftSupportAuditingPolicySpec struct {
 
 // MSSQLServerMicrosoftSupportAuditingPolicyStatus defines the observed state of MSSQLServerMicrosoftSupportAuditingPolicy.
 type MSSQLServerMicrosoftSupportAuditingPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerMicrosoftSupportAuditingPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLServerMicrosoftSupportAuditingPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

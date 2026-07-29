@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ExpressRouteCircuitAuthorizationInitParameters struct {
@@ -41,11 +40,11 @@ type ExpressRouteCircuitAuthorizationParameters struct {
 
 	// Reference to a ExpressRouteCircuit in network to populate expressRouteCircuitName.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitNameRef *v1.NamespacedReference `json:"expressRouteCircuitNameRef,omitempty" tf:"-"`
+	ExpressRouteCircuitNameRef *v2.NamespacedReference `json:"expressRouteCircuitNameRef,omitempty" tf:"-"`
 
 	// Selector for a ExpressRouteCircuit in network to populate expressRouteCircuitName.
 	// +kubebuilder:validation:Optional
-	ExpressRouteCircuitNameSelector *v1.NamespacedSelector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
+	ExpressRouteCircuitNameSelector *v2.NamespacedSelector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -54,11 +53,11 @@ type ExpressRouteCircuitAuthorizationParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // ExpressRouteCircuitAuthorizationSpec defines the desired state of ExpressRouteCircuitAuthorization
@@ -80,8 +79,8 @@ type ExpressRouteCircuitAuthorizationSpec struct {
 
 // ExpressRouteCircuitAuthorizationStatus defines the observed state of ExpressRouteCircuitAuthorization.
 type ExpressRouteCircuitAuthorizationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ExpressRouteCircuitAuthorizationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ExpressRouteCircuitAuthorizationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

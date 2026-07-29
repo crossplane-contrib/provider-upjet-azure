@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type InboundNATRulePortMappingInitParameters struct {
@@ -48,11 +47,11 @@ type LoadBalancerBackendAddressPoolAddressInitParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v1.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+	VirtualNetworkIDRef *v2.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v1.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
+	VirtualNetworkIDSelector *v2.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerBackendAddressPoolAddressObservation struct {
@@ -92,11 +91,11 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 
 	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDRef *v1.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+	BackendAddressPoolIDRef *v2.NamespacedReference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
-	BackendAddressPoolIDSelector *v1.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+	BackendAddressPoolIDSelector *v2.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Static IP Address which should be allocated to this Backend Address Pool.
 	// +kubebuilder:validation:Optional
@@ -110,11 +109,11 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v1.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+	VirtualNetworkIDRef *v2.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v1.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
+	VirtualNetworkIDSelector *v2.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 // LoadBalancerBackendAddressPoolAddressSpec defines the desired state of LoadBalancerBackendAddressPoolAddress
@@ -136,8 +135,8 @@ type LoadBalancerBackendAddressPoolAddressSpec struct {
 
 // LoadBalancerBackendAddressPoolAddressStatus defines the observed state of LoadBalancerBackendAddressPoolAddress.
 type LoadBalancerBackendAddressPoolAddressStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LoadBalancerBackendAddressPoolAddressObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LoadBalancerBackendAddressPoolAddressObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type OutputSynapseInitParameters struct {
@@ -20,7 +19,7 @@ type OutputSynapseInitParameters struct {
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The password that will be used to connect to the Azure SQL database.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
@@ -35,11 +34,11 @@ type OutputSynapseInitParameters struct {
 
 	// Reference to a Workspace in synapse to populate user.
 	// +kubebuilder:validation:Optional
-	UserRef *v1.NamespacedReference `json:"userRef,omitempty" tf:"-"`
+	UserRef *v2.NamespacedReference `json:"userRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate user.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
 }
 
 type OutputSynapseObservation struct {
@@ -74,7 +73,7 @@ type OutputSynapseParameters struct {
 
 	// The password that will be used to connect to the Azure SQL database.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -83,11 +82,11 @@ type OutputSynapseParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -100,11 +99,11 @@ type OutputSynapseParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+	StreamAnalyticsJobNameRef *v2.NamespacedReference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobNameSelector *v2.NamespacedSelector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -118,11 +117,11 @@ type OutputSynapseParameters struct {
 
 	// Reference to a Workspace in synapse to populate user.
 	// +kubebuilder:validation:Optional
-	UserRef *v1.NamespacedReference `json:"userRef,omitempty" tf:"-"`
+	UserRef *v2.NamespacedReference `json:"userRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate user.
 	// +kubebuilder:validation:Optional
-	UserSelector *v1.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
+	UserSelector *v2.NamespacedSelector `json:"userSelector,omitempty" tf:"-"`
 }
 
 // OutputSynapseSpec defines the desired state of OutputSynapse
@@ -144,8 +143,8 @@ type OutputSynapseSpec struct {
 
 // OutputSynapseStatus defines the observed state of OutputSynapse.
 type OutputSynapseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        OutputSynapseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               OutputSynapseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

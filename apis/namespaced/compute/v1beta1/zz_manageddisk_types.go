@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DiskEncryptionKeyInitParameters struct {
@@ -182,11 +181,11 @@ type ManagedDiskInitParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDRef *v1.NamespacedReference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+	SourceResourceIDRef *v2.NamespacedReference `json:"sourceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDSelector *v1.NamespacedSelector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
+	SourceResourceIDSelector *v2.NamespacedSelector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// URI to a valid VHD file to be used when create_option is Import or ImportSecure. Changing this forces a new resource to be created.
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
@@ -420,11 +419,11 @@ type ManagedDiskParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Disk Encryption Set which should be used to Encrypt this OS Disk when the Virtual Machine is a Confidential VM. Conflicts with disk_encryption_set_id. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -442,11 +441,11 @@ type ManagedDiskParameters struct {
 
 	// Reference to a ManagedDisk in compute to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDRef *v1.NamespacedReference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+	SourceResourceIDRef *v2.NamespacedReference `json:"sourceResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ManagedDisk in compute to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
-	SourceResourceIDSelector *v1.NamespacedSelector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
+	SourceResourceIDSelector *v2.NamespacedSelector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// URI to a valid VHD file to be used when create_option is Import or ImportSecure. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -501,8 +500,8 @@ type ManagedDiskSpec struct {
 
 // ManagedDiskStatus defines the observed state of ManagedDisk.
 type ManagedDiskStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedDiskObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedDiskObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

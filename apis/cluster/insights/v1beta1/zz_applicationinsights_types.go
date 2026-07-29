@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInsightsInitParameters struct {
@@ -65,11 +65,11 @@ type ApplicationInsightsInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type ApplicationInsightsObservation struct {
@@ -184,11 +184,11 @@ type ApplicationInsightsParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the retention period in days. Possible values are 30, 60, 90, 120, 180, 270, 365, 550 or 730. Defaults to 90.
 	// +kubebuilder:validation:Optional
@@ -211,17 +211,17 @@ type ApplicationInsightsParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+	WorkspaceIDRef *v2.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	WorkspaceIDSelector *v2.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // ApplicationInsightsSpec defines the desired state of ApplicationInsights
 type ApplicationInsightsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ApplicationInsightsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ApplicationInsightsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -237,8 +237,8 @@ type ApplicationInsightsSpec struct {
 
 // ApplicationInsightsStatus defines the observed state of ApplicationInsights.
 type ApplicationInsightsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ApplicationInsightsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ApplicationInsightsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

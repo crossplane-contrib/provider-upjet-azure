@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudDevToolPortalInitParameters struct {
@@ -35,11 +34,11 @@ type SpringCloudDevToolPortalInitParameters struct {
 
 	// Reference to a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDRef *v1.NamespacedReference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
+	SpringCloudServiceIDRef *v2.NamespacedReference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDSelector *v1.NamespacedSelector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
+	SpringCloudServiceIDSelector *v2.NamespacedSelector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A sso block as defined below.
 	Sso *SpringCloudDevToolPortalSsoInitParameters `json:"sso,omitempty" tf:"sso,omitempty"`
@@ -95,11 +94,11 @@ type SpringCloudDevToolPortalParameters struct {
 
 	// Reference to a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDRef *v1.NamespacedReference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
+	SpringCloudServiceIDRef *v2.NamespacedReference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudService in appplatform to populate springCloudServiceId.
 	// +kubebuilder:validation:Optional
-	SpringCloudServiceIDSelector *v1.NamespacedSelector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
+	SpringCloudServiceIDSelector *v2.NamespacedSelector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A sso block as defined below.
 	// +kubebuilder:validation:Optional
@@ -177,8 +176,8 @@ type SpringCloudDevToolPortalSpec struct {
 
 // SpringCloudDevToolPortalStatus defines the observed state of SpringCloudDevToolPortal.
 type SpringCloudDevToolPortalStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudDevToolPortalObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudDevToolPortalObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

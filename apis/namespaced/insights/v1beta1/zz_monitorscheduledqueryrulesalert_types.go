@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MonitorScheduledQueryRulesAlertActionInitParameters struct {
@@ -24,11 +23,11 @@ type MonitorScheduledQueryRulesAlertActionInitParameters struct {
 
 	// References to MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
-	ActionGroupRefs []v1.NamespacedReference `json:"actionGroupRefs,omitempty" tf:"-"`
+	ActionGroupRefs []v2.NamespacedReference `json:"actionGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
-	ActionGroupSelector *v1.NamespacedSelector `json:"actionGroupSelector,omitempty" tf:"-"`
+	ActionGroupSelector *v2.NamespacedSelector `json:"actionGroupSelector,omitempty" tf:"-"`
 
 	// Custom payload to be sent for all webhook payloads in alerting action.
 	CustomWebhookPayload *string `json:"customWebhookPayload,omitempty" tf:"custom_webhook_payload,omitempty"`
@@ -61,11 +60,11 @@ type MonitorScheduledQueryRulesAlertActionParameters struct {
 
 	// References to MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
-	ActionGroupRefs []v1.NamespacedReference `json:"actionGroupRefs,omitempty" tf:"-"`
+	ActionGroupRefs []v2.NamespacedReference `json:"actionGroupRefs,omitempty" tf:"-"`
 
 	// Selector for a list of MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
-	ActionGroupSelector *v1.NamespacedSelector `json:"actionGroupSelector,omitempty" tf:"-"`
+	ActionGroupSelector *v2.NamespacedSelector `json:"actionGroupSelector,omitempty" tf:"-"`
 
 	// Custom payload to be sent for all webhook payloads in alerting action.
 	// +kubebuilder:validation:Optional
@@ -89,11 +88,11 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 
 	// References to ApplicationInsights in insights to populate authorizedResourceIds.
 	// +kubebuilder:validation:Optional
-	AuthorizedResourceIdsRefs []v1.NamespacedReference `json:"authorizedResourceIdsRefs,omitempty" tf:"-"`
+	AuthorizedResourceIdsRefs []v2.NamespacedReference `json:"authorizedResourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ApplicationInsights in insights to populate authorizedResourceIds.
 	// +kubebuilder:validation:Optional
-	AuthorizedResourceIdsSelector *v1.NamespacedSelector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
+	AuthorizedResourceIdsSelector *v2.NamespacedSelector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
 	// -> Note: auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
@@ -106,11 +105,11 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDRef *v1.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
+	DataSourceIDRef *v2.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDSelector *v1.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
+	DataSourceIDSelector *v2.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
 
 	// The description of the scheduled query rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -139,11 +138,11 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Severity of the alert. Possible values include: 0, 1, 2, 3, or 4.
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
@@ -237,11 +236,11 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// References to ApplicationInsights in insights to populate authorizedResourceIds.
 	// +kubebuilder:validation:Optional
-	AuthorizedResourceIdsRefs []v1.NamespacedReference `json:"authorizedResourceIdsRefs,omitempty" tf:"-"`
+	AuthorizedResourceIdsRefs []v2.NamespacedReference `json:"authorizedResourceIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of ApplicationInsights in insights to populate authorizedResourceIds.
 	// +kubebuilder:validation:Optional
-	AuthorizedResourceIdsSelector *v1.NamespacedSelector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
+	AuthorizedResourceIdsSelector *v2.NamespacedSelector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
 	// -> Note: auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
@@ -256,11 +255,11 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDRef *v1.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
+	DataSourceIDRef *v2.NamespacedReference `json:"dataSourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate dataSourceId.
 	// +kubebuilder:validation:Optional
-	DataSourceIDSelector *v1.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
+	DataSourceIDSelector *v2.NamespacedSelector `json:"dataSourceIdSelector,omitempty" tf:"-"`
 
 	// The description of the scheduled query rule.
 	// +kubebuilder:validation:Optional
@@ -297,11 +296,11 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Severity of the alert. Possible values include: 0, 1, 2, 3, or 4.
 	// +kubebuilder:validation:Optional
@@ -432,8 +431,8 @@ type MonitorScheduledQueryRulesAlertSpec struct {
 
 // MonitorScheduledQueryRulesAlertStatus defines the observed state of MonitorScheduledQueryRulesAlert.
 type MonitorScheduledQueryRulesAlertStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorScheduledQueryRulesAlertObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorScheduledQueryRulesAlertObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

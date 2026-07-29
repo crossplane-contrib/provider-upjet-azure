@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SentinelAlertRuleMachineLearningBehaviorAnalyticsInitParameters struct {
@@ -28,11 +28,11 @@ type SentinelAlertRuleMachineLearningBehaviorAnalyticsInitParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this SentinelMachine Learning Behavior Analytics Alert Rule. Changing this forces a new Sentinel Machine Learning Behavior Analytics Alert Rule to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -74,11 +74,11 @@ type SentinelAlertRuleMachineLearningBehaviorAnalyticsParameters struct {
 
 	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDRef *v2.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this SentinelMachine Learning Behavior Analytics Alert Rule. Changing this forces a new Sentinel Machine Learning Behavior Analytics Alert Rule to be created.
 	// +kubebuilder:validation:Optional
@@ -87,8 +87,8 @@ type SentinelAlertRuleMachineLearningBehaviorAnalyticsParameters struct {
 
 // SentinelAlertRuleMachineLearningBehaviorAnalyticsSpec defines the desired state of SentinelAlertRuleMachineLearningBehaviorAnalytics
 type SentinelAlertRuleMachineLearningBehaviorAnalyticsSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SentinelAlertRuleMachineLearningBehaviorAnalyticsParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SentinelAlertRuleMachineLearningBehaviorAnalyticsParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -104,8 +104,8 @@ type SentinelAlertRuleMachineLearningBehaviorAnalyticsSpec struct {
 
 // SentinelAlertRuleMachineLearningBehaviorAnalyticsStatus defines the observed state of SentinelAlertRuleMachineLearningBehaviorAnalytics.
 type SentinelAlertRuleMachineLearningBehaviorAnalyticsStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SentinelAlertRuleMachineLearningBehaviorAnalyticsObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SentinelAlertRuleMachineLearningBehaviorAnalyticsObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

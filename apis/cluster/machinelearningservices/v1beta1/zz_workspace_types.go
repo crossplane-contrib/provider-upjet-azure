@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type EncryptionInitParameters struct {
@@ -22,11 +22,11 @@ type EncryptionInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the keyVault where the customer owned encryption key is present.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Vault
@@ -35,11 +35,11 @@ type EncryptionInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The Key Vault URI to access the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -48,11 +48,11 @@ type EncryptionInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionObservation struct {
@@ -77,11 +77,11 @@ type EncryptionParameters struct {
 
 	// Reference to a Key in keyvault to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+	KeyIDRef *v2.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyId.
 	// +kubebuilder:validation:Optional
-	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+	KeyIDSelector *v2.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the keyVault where the customer owned encryption key is present.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta1.Vault
@@ -91,11 +91,11 @@ type EncryptionParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The Key Vault URI to access the encryption key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -105,11 +105,11 @@ type EncryptionParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type FeatureStoreInitParameters struct {
@@ -192,11 +192,11 @@ type ServerlessComputeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type ServerlessComputeObservation struct {
@@ -222,11 +222,11 @@ type ServerlessComputeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceIdentityInitParameters struct {
@@ -239,11 +239,11 @@ type WorkspaceIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -276,11 +276,11 @@ type WorkspaceIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
@@ -296,11 +296,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The ID of the container registry associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
@@ -333,11 +333,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The type of the Workspace. Possible values are Default, FeatureStore. Defaults to Default
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
@@ -355,11 +355,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityRef *v1.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityRef *v2.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentitySelector *v2.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// Enable public access when this Machine Learning Workspace is behind VNet. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -383,11 +383,11 @@ type WorkspaceInitParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -489,11 +489,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+	ApplicationInsightsIDRef *v2.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
 
 	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
 	// +kubebuilder:validation:Optional
-	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+	ApplicationInsightsIDSelector *v2.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The ID of the container registry associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -535,11 +535,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The type of the Workspace. Possible values are Default, FeatureStore. Defaults to Default
 	// +kubebuilder:validation:Optional
@@ -561,11 +561,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentityRef *v1.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentityRef *v2.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
 	// +kubebuilder:validation:Optional
-	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
+	PrimaryUserAssignedIdentitySelector *v2.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// Enable public access when this Machine Learning Workspace is behind VNet. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -578,11 +578,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serverless_compute block as defined below.
 	// +kubebuilder:validation:Optional
@@ -608,11 +608,11 @@ type WorkspaceParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -626,8 +626,8 @@ type WorkspaceParameters struct {
 
 // WorkspaceSpec defines the desired state of Workspace
 type WorkspaceSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -643,8 +643,8 @@ type WorkspaceSpec struct {
 
 // WorkspaceStatus defines the observed state of Workspace.
 type WorkspaceStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

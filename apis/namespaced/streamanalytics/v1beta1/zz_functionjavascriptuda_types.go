@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FunctionJavascriptUdaInitParameters struct {
@@ -32,11 +31,11 @@ type FunctionJavascriptUdaInitParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v1.NamespacedReference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
+	StreamAnalyticsJobIDRef *v2.NamespacedReference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v1.NamespacedSelector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobIDSelector *v2.NamespacedSelector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionJavascriptUdaObservation struct {
@@ -79,11 +78,11 @@ type FunctionJavascriptUdaParameters struct {
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v1.NamespacedReference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
+	StreamAnalyticsJobIDRef *v2.NamespacedReference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
 	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v1.NamespacedSelector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
+	StreamAnalyticsJobIDSelector *v2.NamespacedSelector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
 
 type InputInitParameters struct {
@@ -153,8 +152,8 @@ type FunctionJavascriptUdaSpec struct {
 
 // FunctionJavascriptUdaStatus defines the observed state of FunctionJavascriptUda.
 type FunctionJavascriptUdaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FunctionJavascriptUdaObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FunctionJavascriptUdaObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

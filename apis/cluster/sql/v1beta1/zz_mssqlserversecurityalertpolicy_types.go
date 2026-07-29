@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLServerSecurityAlertPolicyInitParameters struct {
@@ -33,7 +33,7 @@ type MSSQLServerSecurityAlertPolicyInitParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the primary access key of the Threat Detection audit logs blob storage endpoint.
-	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint that will hold all Threat Detection audit logs (e.g., https://example.blob.core.windows.net).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -42,11 +42,11 @@ type MSSQLServerSecurityAlertPolicyInitParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 type MSSQLServerSecurityAlertPolicyObservation struct {
@@ -104,11 +104,11 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the number of days to keep the Threat Detection audit logs. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -121,11 +121,11 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
-	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+	ServerNameRef *v2.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
-	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+	ServerNameSelector *v2.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the state of the policy. Possible values are Disabled or Enabled.
 	// +kubebuilder:validation:Optional
@@ -133,7 +133,7 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Specifies the primary access key of the Threat Detection audit logs blob storage endpoint.
 	// +kubebuilder:validation:Optional
-	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+	StorageAccountAccessKeySecretRef *v2.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint that will hold all Threat Detection audit logs (e.g., https://example.blob.core.windows.net).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -143,17 +143,17 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Reference to a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+	StorageEndpointRef *v2.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageEndpoint.
 	// +kubebuilder:validation:Optional
-	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
+	StorageEndpointSelector *v2.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 // MSSQLServerSecurityAlertPolicySpec defines the desired state of MSSQLServerSecurityAlertPolicy
 type MSSQLServerSecurityAlertPolicySpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MSSQLServerSecurityAlertPolicyParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MSSQLServerSecurityAlertPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -169,8 +169,8 @@ type MSSQLServerSecurityAlertPolicySpec struct {
 
 // MSSQLServerSecurityAlertPolicyStatus defines the observed state of MSSQLServerSecurityAlertPolicy.
 type MSSQLServerSecurityAlertPolicyStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerSecurityAlertPolicyObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLServerSecurityAlertPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ConsumerGroupInitParameters struct {
@@ -46,11 +46,11 @@ type ConsumerGroupParameters struct {
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v2.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v2.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the grandparent EventHub Namespace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHubNamespace
@@ -59,11 +59,11 @@ type ConsumerGroupParameters struct {
 
 	// Reference to a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+	NamespaceNameRef *v2.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
-	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
+	NamespaceNameSelector *v2.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the EventHub Consumer Group's grandparent Namespace exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -72,11 +72,11 @@ type ConsumerGroupParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the user metadata.
 	// +kubebuilder:validation:Optional
@@ -85,8 +85,8 @@ type ConsumerGroupParameters struct {
 
 // ConsumerGroupSpec defines the desired state of ConsumerGroup
 type ConsumerGroupSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ConsumerGroupParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ConsumerGroupParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -102,8 +102,8 @@ type ConsumerGroupSpec struct {
 
 // ConsumerGroupStatus defines the observed state of ConsumerGroup.
 type ConsumerGroupStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ConsumerGroupObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ConsumerGroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

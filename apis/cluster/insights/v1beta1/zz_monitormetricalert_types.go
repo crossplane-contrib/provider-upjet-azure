@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ApplicationInsightsWebTestLocationAvailabilityCriteriaInitParameters struct {
@@ -248,11 +248,11 @@ type MonitorMetricAlertActionInitParameters struct {
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
+	ActionGroupIDRef *v2.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+	ActionGroupIDSelector *v2.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +mapType=granular
@@ -279,11 +279,11 @@ type MonitorMetricAlertActionParameters struct {
 
 	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
+	ActionGroupIDRef *v2.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
 	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
-	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+	ActionGroupIDSelector *v2.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +kubebuilder:validation:Optional
@@ -404,11 +404,11 @@ type MonitorMetricAlertInitParameters struct {
 
 	// References to Account in storage to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.Reference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Account in storage to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.Selector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// The severity of this Metric Alert. Possible values are 0, 1, 2, 3 and 4. Defaults to 3.
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
@@ -525,11 +525,11 @@ type MonitorMetricAlertParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A set of strings of resource IDs at which the metric criteria should be applied.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Account
@@ -540,11 +540,11 @@ type MonitorMetricAlertParameters struct {
 
 	// References to Account in storage to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+	ScopesRefs []v2.Reference `json:"scopesRefs,omitempty" tf:"-"`
 
 	// Selector for a list of Account in storage to populate scopes.
 	// +kubebuilder:validation:Optional
-	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+	ScopesSelector *v2.Selector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// The severity of this Metric Alert. Possible values are 0, 1, 2, 3 and 4. Defaults to 3.
 	// +kubebuilder:validation:Optional
@@ -572,8 +572,8 @@ type MonitorMetricAlertParameters struct {
 
 // MonitorMetricAlertSpec defines the desired state of MonitorMetricAlert
 type MonitorMetricAlertSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     MonitorMetricAlertParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   MonitorMetricAlertParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -589,8 +589,8 @@ type MonitorMetricAlertSpec struct {
 
 // MonitorMetricAlertStatus defines the observed state of MonitorMetricAlert.
 type MonitorMetricAlertStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MonitorMetricAlertObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MonitorMetricAlertObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

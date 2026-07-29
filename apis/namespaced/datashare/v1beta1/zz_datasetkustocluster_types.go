@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type DataSetKustoClusterInitParameters struct {
@@ -23,11 +22,11 @@ type DataSetKustoClusterInitParameters struct {
 
 	// Reference to a Cluster in kusto to populate kustoClusterId.
 	// +kubebuilder:validation:Optional
-	KustoClusterIDRef *v1.NamespacedReference `json:"kustoClusterIdRef,omitempty" tf:"-"`
+	KustoClusterIDRef *v2.NamespacedReference `json:"kustoClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate kustoClusterId.
 	// +kubebuilder:validation:Optional
-	KustoClusterIDSelector *v1.NamespacedSelector `json:"kustoClusterIdSelector,omitempty" tf:"-"`
+	KustoClusterIDSelector *v2.NamespacedSelector `json:"kustoClusterIdSelector,omitempty" tf:"-"`
 }
 
 type DataSetKustoClusterObservation struct {
@@ -58,11 +57,11 @@ type DataSetKustoClusterParameters struct {
 
 	// Reference to a Cluster in kusto to populate kustoClusterId.
 	// +kubebuilder:validation:Optional
-	KustoClusterIDRef *v1.NamespacedReference `json:"kustoClusterIdRef,omitempty" tf:"-"`
+	KustoClusterIDRef *v2.NamespacedReference `json:"kustoClusterIdRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate kustoClusterId.
 	// +kubebuilder:validation:Optional
-	KustoClusterIDSelector *v1.NamespacedSelector `json:"kustoClusterIdSelector,omitempty" tf:"-"`
+	KustoClusterIDSelector *v2.NamespacedSelector `json:"kustoClusterIdSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Data Share where this Data Share Kusto Cluster Dataset should be created. Changing this forces a new Data Share Kusto Cluster Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datashare/v1beta1.DataShare
@@ -72,11 +71,11 @@ type DataSetKustoClusterParameters struct {
 
 	// Reference to a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
-	ShareIDRef *v1.NamespacedReference `json:"shareIdRef,omitempty" tf:"-"`
+	ShareIDRef *v2.NamespacedReference `json:"shareIdRef,omitempty" tf:"-"`
 
 	// Selector for a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
-	ShareIDSelector *v1.NamespacedSelector `json:"shareIdSelector,omitempty" tf:"-"`
+	ShareIDSelector *v2.NamespacedSelector `json:"shareIdSelector,omitempty" tf:"-"`
 }
 
 // DataSetKustoClusterSpec defines the desired state of DataSetKustoCluster
@@ -98,8 +97,8 @@ type DataSetKustoClusterSpec struct {
 
 // DataSetKustoClusterStatus defines the observed state of DataSetKustoCluster.
 type DataSetKustoClusterStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        DataSetKustoClusterObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               DataSetKustoClusterObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

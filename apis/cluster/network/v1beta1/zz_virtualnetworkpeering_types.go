@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type VirtualNetworkPeeringInitParameters struct {
@@ -43,11 +43,11 @@ type VirtualNetworkPeeringInitParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDRef *v1.Reference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDRef *v2.Reference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDSelector *v1.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDSelector *v2.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// A mapping of key values pairs that can be used to sync network routes from the remote virtual network to the local virtual network. See the trigger example for an example on how to set it up.
 	// +mapType=granular
@@ -138,11 +138,11 @@ type VirtualNetworkPeeringParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDRef *v1.Reference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDRef *v2.Reference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate remoteVirtualNetworkId.
 	// +kubebuilder:validation:Optional
-	RemoteVirtualNetworkIDSelector *v1.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
+	RemoteVirtualNetworkIDSelector *v2.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the virtual network peering. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
@@ -151,11 +151,11 @@ type VirtualNetworkPeeringParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of key values pairs that can be used to sync network routes from the remote virtual network to the local virtual network. See the trigger example for an example on how to set it up.
 	// +kubebuilder:validation:Optional
@@ -173,17 +173,17 @@ type VirtualNetworkPeeringParameters struct {
 
 	// Reference to a VirtualNetwork in network to populate virtualNetworkName.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkNameRef *v1.Reference `json:"virtualNetworkNameRef,omitempty" tf:"-"`
+	VirtualNetworkNameRef *v2.Reference `json:"virtualNetworkNameRef,omitempty" tf:"-"`
 
 	// Selector for a VirtualNetwork in network to populate virtualNetworkName.
 	// +kubebuilder:validation:Optional
-	VirtualNetworkNameSelector *v1.Selector `json:"virtualNetworkNameSelector,omitempty" tf:"-"`
+	VirtualNetworkNameSelector *v2.Selector `json:"virtualNetworkNameSelector,omitempty" tf:"-"`
 }
 
 // VirtualNetworkPeeringSpec defines the desired state of VirtualNetworkPeering
 type VirtualNetworkPeeringSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualNetworkPeeringParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualNetworkPeeringParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -199,8 +199,8 @@ type VirtualNetworkPeeringSpec struct {
 
 // VirtualNetworkPeeringStatus defines the observed state of VirtualNetworkPeering.
 type VirtualNetworkPeeringStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualNetworkPeeringObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualNetworkPeeringObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

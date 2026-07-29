@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ProductAPIInitParameters struct {
@@ -44,11 +43,11 @@ type ProductAPIParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The Name of the API Management API within the API Management Service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
@@ -57,11 +56,11 @@ type ProductAPIParameters struct {
 
 	// Reference to a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameRef *v1.NamespacedReference `json:"apiNameRef,omitempty" tf:"-"`
+	APINameRef *v2.NamespacedReference `json:"apiNameRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameSelector *v1.NamespacedSelector `json:"apiNameSelector,omitempty" tf:"-"`
+	APINameSelector *v2.NamespacedSelector `json:"apiNameSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management Product within the API Management Service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Product
@@ -70,11 +69,11 @@ type ProductAPIParameters struct {
 
 	// Reference to a Product in apimanagement to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDRef *v1.NamespacedReference `json:"productIdRef,omitempty" tf:"-"`
+	ProductIDRef *v2.NamespacedReference `json:"productIdRef,omitempty" tf:"-"`
 
 	// Selector for a Product in apimanagement to populate productId.
 	// +kubebuilder:validation:Optional
-	ProductIDSelector *v1.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
+	ProductIDSelector *v2.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -83,11 +82,11 @@ type ProductAPIParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 // ProductAPISpec defines the desired state of ProductAPI
@@ -109,8 +108,8 @@ type ProductAPISpec struct {
 
 // ProductAPIStatus defines the observed state of ProductAPI.
 type ProductAPIStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProductAPIObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProductAPIObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

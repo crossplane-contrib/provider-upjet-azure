@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FederatedIdentityCredentialInitParameters struct {
@@ -28,11 +27,11 @@ type FederatedIdentityCredentialInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the subject for this Federated Identity Credential.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
@@ -44,11 +43,11 @@ type FederatedIdentityCredentialInitParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type FederatedIdentityCredentialObservation struct {
@@ -93,11 +92,11 @@ type FederatedIdentityCredentialParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate parentId.
 	// +kubebuilder:validation:Optional
-	ParentIDRef *v1.NamespacedReference `json:"parentIdRef,omitempty" tf:"-"`
+	ParentIDRef *v2.NamespacedReference `json:"parentIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate parentId.
 	// +kubebuilder:validation:Optional
-	ParentIDSelector *v1.NamespacedSelector `json:"parentIdSelector,omitempty" tf:"-"`
+	ParentIDSelector *v2.NamespacedSelector `json:"parentIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of this Federated Identity Credential. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -106,11 +105,11 @@ type FederatedIdentityCredentialParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the subject for this Federated Identity Credential.
 	// +kubebuilder:validation:Optional
@@ -124,11 +123,11 @@ type FederatedIdentityCredentialParameters struct {
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v1.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+	UserAssignedIdentityIDRef *v2.NamespacedReference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
 
 	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v1.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+	UserAssignedIdentityIDSelector *v2.NamespacedSelector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 // FederatedIdentityCredentialSpec defines the desired state of FederatedIdentityCredential
@@ -150,8 +149,8 @@ type FederatedIdentityCredentialSpec struct {
 
 // FederatedIdentityCredentialStatus defines the observed state of FederatedIdentityCredential.
 type FederatedIdentityCredentialStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FederatedIdentityCredentialObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FederatedIdentityCredentialObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagedPrivateEndpointInitParameters struct {
@@ -22,11 +22,11 @@ type ManagedPrivateEndpointInitParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// Fully qualified domain names. Changing this forces a new resource to be created.
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
@@ -44,11 +44,11 @@ type ManagedPrivateEndpointInitParameters struct {
 
 	// Reference to a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type ManagedPrivateEndpointObservation struct {
@@ -82,11 +82,11 @@ type ManagedPrivateEndpointParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// Fully qualified domain names. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -108,17 +108,17 @@ type ManagedPrivateEndpointParameters struct {
 
 	// Reference to a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 // ManagedPrivateEndpointSpec defines the desired state of ManagedPrivateEndpoint
 type ManagedPrivateEndpointSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ManagedPrivateEndpointParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ManagedPrivateEndpointParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,8 +134,8 @@ type ManagedPrivateEndpointSpec struct {
 
 // ManagedPrivateEndpointStatus defines the observed state of ManagedPrivateEndpoint.
 type ManagedPrivateEndpointStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagedPrivateEndpointObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

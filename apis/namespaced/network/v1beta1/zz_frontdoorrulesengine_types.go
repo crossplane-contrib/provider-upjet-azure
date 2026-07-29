@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ActionInitParameters struct {
@@ -86,11 +85,11 @@ type FrontdoorRulesEngineParameters struct {
 
 	// Reference to a FrontDoor in network to populate frontdoorName.
 	// +kubebuilder:validation:Optional
-	FrontdoorNameRef *v1.NamespacedReference `json:"frontdoorNameRef,omitempty" tf:"-"`
+	FrontdoorNameRef *v2.NamespacedReference `json:"frontdoorNameRef,omitempty" tf:"-"`
 
 	// Selector for a FrontDoor in network to populate frontdoorName.
 	// +kubebuilder:validation:Optional
-	FrontdoorNameSelector *v1.NamespacedSelector `json:"frontdoorNameSelector,omitempty" tf:"-"`
+	FrontdoorNameSelector *v2.NamespacedSelector `json:"frontdoorNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -99,11 +98,11 @@ type FrontdoorRulesEngineParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A rule block as defined below.
 	// +kubebuilder:validation:Optional
@@ -325,8 +324,8 @@ type FrontdoorRulesEngineSpec struct {
 
 // FrontdoorRulesEngineStatus defines the observed state of FrontdoorRulesEngine.
 type FrontdoorRulesEngineStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FrontdoorRulesEngineObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FrontdoorRulesEngineObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

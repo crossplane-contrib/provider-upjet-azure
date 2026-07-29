@@ -5,204 +5,204 @@
 
 package v1beta1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ApplicationLoadBalancer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ApplicationLoadBalancer) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ApplicationLoadBalancer) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ApplicationLoadBalancer) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ApplicationLoadBalancer) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) SetConditions(c ...xpv1.Condition) {
+func (mg *ApplicationLoadBalancer) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ApplicationLoadBalancer) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ApplicationLoadBalancer) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ApplicationLoadBalancer) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ApplicationLoadBalancer.
-func (mg *ApplicationLoadBalancer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ApplicationLoadBalancer) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ApplicationLoadBalancerFrontend) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ApplicationLoadBalancerFrontend) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ApplicationLoadBalancerFrontend) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ApplicationLoadBalancerFrontend) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ApplicationLoadBalancerFrontend) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) SetConditions(c ...xpv1.Condition) {
+func (mg *ApplicationLoadBalancerFrontend) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ApplicationLoadBalancerFrontend) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ApplicationLoadBalancerFrontend) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ApplicationLoadBalancerFrontend) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ApplicationLoadBalancerFrontend.
-func (mg *ApplicationLoadBalancerFrontend) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ApplicationLoadBalancerFrontend) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ApplicationLoadBalancerSecurityPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ApplicationLoadBalancerSecurityPolicy) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ApplicationLoadBalancerSecurityPolicy) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ApplicationLoadBalancerSecurityPolicy) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ApplicationLoadBalancerSecurityPolicy) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) SetConditions(c ...xpv1.Condition) {
+func (mg *ApplicationLoadBalancerSecurityPolicy) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ApplicationLoadBalancerSecurityPolicy) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ApplicationLoadBalancerSecurityPolicy) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ApplicationLoadBalancerSecurityPolicy) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ApplicationLoadBalancerSecurityPolicy.
-func (mg *ApplicationLoadBalancerSecurityPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ApplicationLoadBalancerSecurityPolicy) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
 // GetCondition of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ApplicationLoadBalancerSubnetAssociation) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ApplicationLoadBalancerSubnetAssociation) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ApplicationLoadBalancerSubnetAssociation) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ApplicationLoadBalancerSubnetAssociation) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ApplicationLoadBalancerSubnetAssociation) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) SetConditions(c ...xpv1.Condition) {
+func (mg *ApplicationLoadBalancerSubnetAssociation) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ApplicationLoadBalancerSubnetAssociation) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ApplicationLoadBalancerSubnetAssociation) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ApplicationLoadBalancerSubnetAssociation) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ApplicationLoadBalancerSubnetAssociation.
-func (mg *ApplicationLoadBalancerSubnetAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ApplicationLoadBalancerSubnetAssociation) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagerRoutingConfigurationInitParameters struct {
@@ -52,11 +51,11 @@ type ManagerRoutingConfigurationParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.NamespacedReference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.NamespacedReference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.NamespacedSelector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.NamespacedSelector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// The route table usage mode for the Network Manager Routing Configuration. Possible values are ManagedOnly and UseExisting. Defaults to ManagedOnly.
 	// +kubebuilder:validation:Optional
@@ -82,8 +81,8 @@ type ManagerRoutingConfigurationSpec struct {
 
 // ManagerRoutingConfigurationStatus defines the observed state of ManagerRoutingConfiguration.
 type ManagerRoutingConfigurationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagerRoutingConfigurationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagerRoutingConfigurationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

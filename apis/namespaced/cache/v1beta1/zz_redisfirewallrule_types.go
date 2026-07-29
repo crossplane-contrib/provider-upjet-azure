@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type RedisFirewallRuleInitParameters struct {
@@ -54,11 +53,11 @@ type RedisFirewallRuleParameters struct {
 
 	// Reference to a RedisCache in cache to populate redisCacheName.
 	// +kubebuilder:validation:Optional
-	RedisCacheNameRef *v1.NamespacedReference `json:"redisCacheNameRef,omitempty" tf:"-"`
+	RedisCacheNameRef *v2.NamespacedReference `json:"redisCacheNameRef,omitempty" tf:"-"`
 
 	// Selector for a RedisCache in cache to populate redisCacheName.
 	// +kubebuilder:validation:Optional
-	RedisCacheNameSelector *v1.NamespacedSelector `json:"redisCacheNameSelector,omitempty" tf:"-"`
+	RedisCacheNameSelector *v2.NamespacedSelector `json:"redisCacheNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which this Redis Cache exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
@@ -67,11 +66,11 @@ type RedisFirewallRuleParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The lowest IP address included in the range
 	// +kubebuilder:validation:Optional
@@ -97,8 +96,8 @@ type RedisFirewallRuleSpec struct {
 
 // RedisFirewallRuleStatus defines the observed state of RedisFirewallRule.
 type RedisFirewallRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        RedisFirewallRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               RedisFirewallRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

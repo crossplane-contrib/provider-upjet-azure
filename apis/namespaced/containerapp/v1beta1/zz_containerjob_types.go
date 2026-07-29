@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ContainerEnvInitParameters struct {
@@ -72,11 +71,11 @@ type ContainerJobIdentityInitParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -109,11 +108,11 @@ type ContainerJobIdentityParameters struct {
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v1.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
 	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v1.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// The type of identity used for the Container App Job. Possible values are SystemAssigned, UserAssigned and None.
 	// +kubebuilder:validation:Optional
@@ -129,11 +128,11 @@ type ContainerJobInitParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// A event_trigger_config block as defined below. Changing this forces a new resource to be created.
 	EventTriggerConfig *EventTriggerConfigInitParameters `json:"eventTriggerConfig,omitempty" tf:"event_trigger_config,omitempty"`
@@ -238,11 +237,11 @@ type ContainerJobParameters struct {
 
 	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDRef *v1.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDRef *v2.NamespacedReference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
 	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
-	ContainerAppEnvironmentIDSelector *v1.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+	ContainerAppEnvironmentIDSelector *v2.NamespacedSelector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 
 	// A event_trigger_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -279,11 +278,11 @@ type ContainerJobParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A schedule_trigger_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -382,11 +381,11 @@ type ContainerJobSecretInitParameters struct {
 
 	// Reference to a Secret in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDRef *v1.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
+	KeyVaultSecretIDRef *v2.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDSelector *v1.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
+	KeyVaultSecretIDSelector *v2.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The secret name.
 	// The secret name.
@@ -394,7 +393,7 @@ type ContainerJobSecretInitParameters struct {
 
 	// The value for this secret.
 	// The value for this secret.
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type ContainerJobSecretObservation struct {
@@ -428,11 +427,11 @@ type ContainerJobSecretParameters struct {
 
 	// Reference to a Secret in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDRef *v1.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
+	KeyVaultSecretIDRef *v2.NamespacedReference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
 
 	// Selector for a Secret in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretIDSelector *v1.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
+	KeyVaultSecretIDSelector *v2.NamespacedSelector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The secret name.
 	// The secret name.
@@ -442,7 +441,7 @@ type ContainerJobSecretParameters struct {
 	// The value for this secret.
 	// The value for this secret.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef *v1.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+	ValueSecretRef *v2.LocalSecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type ContainerJobTemplateInitParameters struct {
@@ -1703,8 +1702,8 @@ type ContainerJobSpec struct {
 
 // ContainerJobStatus defines the observed state of ContainerJob.
 type ContainerJobStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerJobObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ContainerJobObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

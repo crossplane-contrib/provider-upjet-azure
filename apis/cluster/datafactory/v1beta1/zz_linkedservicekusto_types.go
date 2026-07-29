@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type LinkedServiceKustoInitParameters struct {
@@ -34,11 +34,11 @@ type LinkedServiceKustoInitParameters struct {
 
 	// Reference to a Database in kusto to populate kustoDatabaseName.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseNameRef *v1.Reference `json:"kustoDatabaseNameRef,omitempty" tf:"-"`
+	KustoDatabaseNameRef *v2.Reference `json:"kustoDatabaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate kustoDatabaseName.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseNameSelector *v1.Selector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
+	KustoDatabaseNameSelector *v2.Selector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
 
 	// The URI of the Kusto Cluster endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
@@ -47,11 +47,11 @@ type LinkedServiceKustoInitParameters struct {
 
 	// Reference to a Cluster in kusto to populate kustoEndpoint.
 	// +kubebuilder:validation:Optional
-	KustoEndpointRef *v1.Reference `json:"kustoEndpointRef,omitempty" tf:"-"`
+	KustoEndpointRef *v2.Reference `json:"kustoEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate kustoEndpoint.
 	// +kubebuilder:validation:Optional
-	KustoEndpointSelector *v1.Selector `json:"kustoEndpointSelector,omitempty" tf:"-"`
+	KustoEndpointSelector *v2.Selector `json:"kustoEndpointSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
@@ -61,7 +61,7 @@ type LinkedServiceKustoInitParameters struct {
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 
 	// The service principal key in which to authenticate against the Kusto Database.
-	ServicePrincipalKeySecretRef *v1.SecretKeySelector `json:"servicePrincipalKeySecretRef,omitempty" tf:"-"`
+	ServicePrincipalKeySecretRef *v2.SecretKeySelector `json:"servicePrincipalKeySecretRef,omitempty" tf:"-"`
 
 	// The service principal tenant id or name in which to authenticate against the Kusto Database.
 	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
@@ -130,11 +130,11 @@ type LinkedServiceKustoParameters struct {
 
 	// Reference to a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+	DataFactoryIDRef *v2.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
 
 	// Selector for a Factory in datafactory to populate dataFactoryId.
 	// +kubebuilder:validation:Optional
-	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+	DataFactoryIDSelector *v2.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -151,11 +151,11 @@ type LinkedServiceKustoParameters struct {
 
 	// Reference to a Database in kusto to populate kustoDatabaseName.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseNameRef *v1.Reference `json:"kustoDatabaseNameRef,omitempty" tf:"-"`
+	KustoDatabaseNameRef *v2.Reference `json:"kustoDatabaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a Database in kusto to populate kustoDatabaseName.
 	// +kubebuilder:validation:Optional
-	KustoDatabaseNameSelector *v1.Selector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
+	KustoDatabaseNameSelector *v2.Selector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
 
 	// The URI of the Kusto Cluster endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
@@ -165,11 +165,11 @@ type LinkedServiceKustoParameters struct {
 
 	// Reference to a Cluster in kusto to populate kustoEndpoint.
 	// +kubebuilder:validation:Optional
-	KustoEndpointRef *v1.Reference `json:"kustoEndpointRef,omitempty" tf:"-"`
+	KustoEndpointRef *v2.Reference `json:"kustoEndpointRef,omitempty" tf:"-"`
 
 	// Selector for a Cluster in kusto to populate kustoEndpoint.
 	// +kubebuilder:validation:Optional
-	KustoEndpointSelector *v1.Selector `json:"kustoEndpointSelector,omitempty" tf:"-"`
+	KustoEndpointSelector *v2.Selector `json:"kustoEndpointSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -182,7 +182,7 @@ type LinkedServiceKustoParameters struct {
 
 	// The service principal key in which to authenticate against the Kusto Database.
 	// +kubebuilder:validation:Optional
-	ServicePrincipalKeySecretRef *v1.SecretKeySelector `json:"servicePrincipalKeySecretRef,omitempty" tf:"-"`
+	ServicePrincipalKeySecretRef *v2.SecretKeySelector `json:"servicePrincipalKeySecretRef,omitempty" tf:"-"`
 
 	// The service principal tenant id or name in which to authenticate against the Kusto Database.
 	// +kubebuilder:validation:Optional
@@ -195,8 +195,8 @@ type LinkedServiceKustoParameters struct {
 
 // LinkedServiceKustoSpec defines the desired state of LinkedServiceKusto
 type LinkedServiceKustoSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     LinkedServiceKustoParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   LinkedServiceKustoParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -212,8 +212,8 @@ type LinkedServiceKustoSpec struct {
 
 // LinkedServiceKustoStatus defines the observed state of LinkedServiceKusto.
 type LinkedServiceKustoStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        LinkedServiceKustoObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               LinkedServiceKustoObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

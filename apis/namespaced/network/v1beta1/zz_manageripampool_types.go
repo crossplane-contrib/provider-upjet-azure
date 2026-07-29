@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ManagerIpamPoolInitParameters struct {
@@ -34,11 +33,11 @@ type ManagerIpamPoolInitParameters struct {
 
 	// Reference to a ManagerIpamPool in network to populate parentPoolName.
 	// +kubebuilder:validation:Optional
-	ParentPoolNameRef *v1.NamespacedReference `json:"parentPoolNameRef,omitempty" tf:"-"`
+	ParentPoolNameRef *v2.NamespacedReference `json:"parentPoolNameRef,omitempty" tf:"-"`
 
 	// Selector for a ManagerIpamPool in network to populate parentPoolName.
 	// +kubebuilder:validation:Optional
-	ParentPoolNameSelector *v1.NamespacedSelector `json:"parentPoolNameSelector,omitempty" tf:"-"`
+	ParentPoolNameSelector *v2.NamespacedSelector `json:"parentPoolNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Manager IPAM Pool.
 	// +mapType=granular
@@ -99,11 +98,11 @@ type ManagerIpamPoolParameters struct {
 
 	// Reference to a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDRef *v1.NamespacedReference `json:"networkManagerIdRef,omitempty" tf:"-"`
+	NetworkManagerIDRef *v2.NamespacedReference `json:"networkManagerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Manager in network to populate networkManagerId.
 	// +kubebuilder:validation:Optional
-	NetworkManagerIDSelector *v1.NamespacedSelector `json:"networkManagerIdSelector,omitempty" tf:"-"`
+	NetworkManagerIDSelector *v2.NamespacedSelector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// The name of the parent IPAM Pool. Changing this forces a new Network Manager IPAM Pool to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.ManagerIpamPool
@@ -112,11 +111,11 @@ type ManagerIpamPoolParameters struct {
 
 	// Reference to a ManagerIpamPool in network to populate parentPoolName.
 	// +kubebuilder:validation:Optional
-	ParentPoolNameRef *v1.NamespacedReference `json:"parentPoolNameRef,omitempty" tf:"-"`
+	ParentPoolNameRef *v2.NamespacedReference `json:"parentPoolNameRef,omitempty" tf:"-"`
 
 	// Selector for a ManagerIpamPool in network to populate parentPoolName.
 	// +kubebuilder:validation:Optional
-	ParentPoolNameSelector *v1.NamespacedSelector `json:"parentPoolNameSelector,omitempty" tf:"-"`
+	ParentPoolNameSelector *v2.NamespacedSelector `json:"parentPoolNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Manager IPAM Pool.
 	// +kubebuilder:validation:Optional
@@ -143,8 +142,8 @@ type ManagerIpamPoolSpec struct {
 
 // ManagerIpamPoolStatus defines the observed state of ManagerIpamPool.
 type ManagerIpamPoolStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ManagerIpamPoolObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ManagerIpamPoolObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

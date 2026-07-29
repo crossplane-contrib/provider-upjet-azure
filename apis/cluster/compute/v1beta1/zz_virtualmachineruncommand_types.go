@@ -10,16 +10,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ErrorBlobManagedIdentityInitParameters struct {
 
 	// The client ID of the managed identity.
-	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// The object ID of the managed identity.
-	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
+	ObjectIDSecretRef *v2.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type ErrorBlobManagedIdentityObservation struct {
@@ -29,11 +29,11 @@ type ErrorBlobManagedIdentityParameters struct {
 
 	// The client ID of the managed identity.
 	// +kubebuilder:validation:Optional
-	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// The object ID of the managed identity.
 	// +kubebuilder:validation:Optional
-	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
+	ObjectIDSecretRef *v2.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type InstanceViewInitParameters struct {
@@ -61,10 +61,10 @@ type InstanceViewParameters struct {
 type OutputBlobManagedIdentityInitParameters struct {
 
 	// The client ID of the managed identity.
-	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// The object ID of the managed identity.
-	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
+	ObjectIDSecretRef *v2.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type OutputBlobManagedIdentityObservation struct {
@@ -74,11 +74,11 @@ type OutputBlobManagedIdentityParameters struct {
 
 	// The client ID of the managed identity.
 	// +kubebuilder:validation:Optional
-	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// The object ID of the managed identity.
 	// +kubebuilder:validation:Optional
-	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
+	ObjectIDSecretRef *v2.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type ParameterInitParameters struct {
@@ -113,10 +113,10 @@ type ParameterParameters struct {
 type ProtectedParameterInitParameters struct {
 
 	// The run parameter name.
-	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
+	NameSecretRef v2.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The run parameter value.
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type ProtectedParameterObservation struct {
@@ -126,20 +126,20 @@ type ProtectedParameterParameters struct {
 
 	// The run parameter name.
 	// +kubebuilder:validation:Required
-	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
+	NameSecretRef v2.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The run parameter value.
 	// +kubebuilder:validation:Required
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type ScriptURIManagedIdentityInitParameters struct {
 
 	// The client ID of the managed identity.
-	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// The object ID of the managed identity.
-	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
+	ObjectIDSecretRef *v2.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type ScriptURIManagedIdentityObservation struct {
@@ -149,11 +149,11 @@ type ScriptURIManagedIdentityParameters struct {
 
 	// The client ID of the managed identity.
 	// +kubebuilder:validation:Optional
-	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+	ClientIDSecretRef *v2.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
 
 	// The object ID of the managed identity.
 	// +kubebuilder:validation:Optional
-	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
+	ObjectIDSecretRef *v2.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type VirtualMachineRunCommandInitParameters struct {
@@ -168,11 +168,11 @@ type VirtualMachineRunCommandInitParameters struct {
 
 	// Reference to a Blob in storage to populate errorBlobUri.
 	// +kubebuilder:validation:Optional
-	ErrorBlobURIRef *v1.Reference `json:"errorBlobUriRef,omitempty" tf:"-"`
+	ErrorBlobURIRef *v2.Reference `json:"errorBlobUriRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate errorBlobUri.
 	// +kubebuilder:validation:Optional
-	ErrorBlobURISelector *v1.Selector `json:"errorBlobUriSelector,omitempty" tf:"-"`
+	ErrorBlobURISelector *v2.Selector `json:"errorBlobUriSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Virtual Machine Run Command should exist. Changing this forces a new Virtual Machine Run Command to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -187,11 +187,11 @@ type VirtualMachineRunCommandInitParameters struct {
 
 	// Reference to a Blob in storage to populate outputBlobUri.
 	// +kubebuilder:validation:Optional
-	OutputBlobURIRef *v1.Reference `json:"outputBlobUriRef,omitempty" tf:"-"`
+	OutputBlobURIRef *v2.Reference `json:"outputBlobUriRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate outputBlobUri.
 	// +kubebuilder:validation:Optional
-	OutputBlobURISelector *v1.Selector `json:"outputBlobUriSelector,omitempty" tf:"-"`
+	OutputBlobURISelector *v2.Selector `json:"outputBlobUriSelector,omitempty" tf:"-"`
 
 	// A list of parameter blocks as defined below. The parameters used by the script.
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
@@ -200,7 +200,7 @@ type VirtualMachineRunCommandInitParameters struct {
 	ProtectedParameter []ProtectedParameterInitParameters `json:"protectedParameter,omitempty" tf:"protected_parameter,omitempty"`
 
 	// Specifies the user account password on the VM when executing the Virtual Machine Run Command.
-	RunAsPasswordSecretRef *v1.SecretKeySelector `json:"runAsPasswordSecretRef,omitempty" tf:"-"`
+	RunAsPasswordSecretRef *v2.SecretKeySelector `json:"runAsPasswordSecretRef,omitempty" tf:"-"`
 
 	// Specifies the user account on the VM when executing the Virtual Machine Run Command.
 	RunAsUser *string `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
@@ -269,11 +269,11 @@ type VirtualMachineRunCommandParameters struct {
 
 	// Reference to a Blob in storage to populate errorBlobUri.
 	// +kubebuilder:validation:Optional
-	ErrorBlobURIRef *v1.Reference `json:"errorBlobUriRef,omitempty" tf:"-"`
+	ErrorBlobURIRef *v2.Reference `json:"errorBlobUriRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate errorBlobUri.
 	// +kubebuilder:validation:Optional
-	ErrorBlobURISelector *v1.Selector `json:"errorBlobUriSelector,omitempty" tf:"-"`
+	ErrorBlobURISelector *v2.Selector `json:"errorBlobUriSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Virtual Machine Run Command should exist. Changing this forces a new Virtual Machine Run Command to be created.
 	// +kubebuilder:validation:Optional
@@ -291,11 +291,11 @@ type VirtualMachineRunCommandParameters struct {
 
 	// Reference to a Blob in storage to populate outputBlobUri.
 	// +kubebuilder:validation:Optional
-	OutputBlobURIRef *v1.Reference `json:"outputBlobUriRef,omitempty" tf:"-"`
+	OutputBlobURIRef *v2.Reference `json:"outputBlobUriRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate outputBlobUri.
 	// +kubebuilder:validation:Optional
-	OutputBlobURISelector *v1.Selector `json:"outputBlobUriSelector,omitempty" tf:"-"`
+	OutputBlobURISelector *v2.Selector `json:"outputBlobUriSelector,omitempty" tf:"-"`
 
 	// A list of parameter blocks as defined below. The parameters used by the script.
 	// +kubebuilder:validation:Optional
@@ -307,7 +307,7 @@ type VirtualMachineRunCommandParameters struct {
 
 	// Specifies the user account password on the VM when executing the Virtual Machine Run Command.
 	// +kubebuilder:validation:Optional
-	RunAsPasswordSecretRef *v1.SecretKeySelector `json:"runAsPasswordSecretRef,omitempty" tf:"-"`
+	RunAsPasswordSecretRef *v2.SecretKeySelector `json:"runAsPasswordSecretRef,omitempty" tf:"-"`
 
 	// Specifies the user account on the VM when executing the Virtual Machine Run Command.
 	// +kubebuilder:validation:Optional
@@ -330,11 +330,11 @@ type VirtualMachineRunCommandParameters struct {
 
 	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+	VirtualMachineIDRef *v2.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
 
 	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
 	// +kubebuilder:validation:Optional
-	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+	VirtualMachineIDSelector *v2.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualMachineRunCommandSourceInitParameters struct {
@@ -351,11 +351,11 @@ type VirtualMachineRunCommandSourceInitParameters struct {
 
 	// Reference to a Blob in storage to populate scriptUri.
 	// +kubebuilder:validation:Optional
-	ScriptURIRef *v1.Reference `json:"scriptUriRef,omitempty" tf:"-"`
+	ScriptURIRef *v2.Reference `json:"scriptUriRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate scriptUri.
 	// +kubebuilder:validation:Optional
-	ScriptURISelector *v1.Selector `json:"scriptUriSelector,omitempty" tf:"-"`
+	ScriptURISelector *v2.Selector `json:"scriptUriSelector,omitempty" tf:"-"`
 }
 
 type VirtualMachineRunCommandSourceObservation struct {
@@ -388,17 +388,17 @@ type VirtualMachineRunCommandSourceParameters struct {
 
 	// Reference to a Blob in storage to populate scriptUri.
 	// +kubebuilder:validation:Optional
-	ScriptURIRef *v1.Reference `json:"scriptUriRef,omitempty" tf:"-"`
+	ScriptURIRef *v2.Reference `json:"scriptUriRef,omitempty" tf:"-"`
 
 	// Selector for a Blob in storage to populate scriptUri.
 	// +kubebuilder:validation:Optional
-	ScriptURISelector *v1.Selector `json:"scriptUriSelector,omitempty" tf:"-"`
+	ScriptURISelector *v2.Selector `json:"scriptUriSelector,omitempty" tf:"-"`
 }
 
 // VirtualMachineRunCommandSpec defines the desired state of VirtualMachineRunCommand
 type VirtualMachineRunCommandSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualMachineRunCommandParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   VirtualMachineRunCommandParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -414,8 +414,8 @@ type VirtualMachineRunCommandSpec struct {
 
 // VirtualMachineRunCommandStatus defines the observed state of VirtualMachineRunCommand.
 type VirtualMachineRunCommandStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualMachineRunCommandObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VirtualMachineRunCommandObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

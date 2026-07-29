@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type WorkspaceAADAdminInitParameters struct {
@@ -61,11 +61,11 @@ type WorkspaceAADAdminParameters struct {
 
 	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+	SynapseWorkspaceIDRef *v2.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
 	// +kubebuilder:validation:Optional
-	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+	SynapseWorkspaceIDSelector *v2.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
 	// +kubebuilder:validation:Optional
@@ -74,8 +74,8 @@ type WorkspaceAADAdminParameters struct {
 
 // WorkspaceAADAdminSpec defines the desired state of WorkspaceAADAdmin
 type WorkspaceAADAdminSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceAADAdminParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   WorkspaceAADAdminParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -91,8 +91,8 @@ type WorkspaceAADAdminSpec struct {
 
 // WorkspaceAADAdminStatus defines the observed state of WorkspaceAADAdmin.
 type WorkspaceAADAdminStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceAADAdminObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               WorkspaceAADAdminObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

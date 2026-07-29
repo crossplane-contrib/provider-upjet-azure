@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type APIDiagnosticInitParameters struct {
@@ -23,11 +22,11 @@ type APIDiagnosticInitParameters struct {
 
 	// Reference to a Logger in apimanagement to populate apiManagementLoggerId.
 	// +kubebuilder:validation:Optional
-	APIManagementLoggerIDRef *v1.NamespacedReference `json:"apiManagementLoggerIdRef,omitempty" tf:"-"`
+	APIManagementLoggerIDRef *v2.NamespacedReference `json:"apiManagementLoggerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Logger in apimanagement to populate apiManagementLoggerId.
 	// +kubebuilder:validation:Optional
-	APIManagementLoggerIDSelector *v1.NamespacedSelector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
+	APIManagementLoggerIDSelector *v2.NamespacedSelector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
 
 	// Always log errors. Send telemetry if there is an erroneous condition, regardless of sampling settings.
 	AlwaysLogErrors *bool `json:"alwaysLogErrors,omitempty" tf:"always_log_errors,omitempty"`
@@ -118,11 +117,11 @@ type APIDiagnosticParameters struct {
 
 	// Reference to a Logger in apimanagement to populate apiManagementLoggerId.
 	// +kubebuilder:validation:Optional
-	APIManagementLoggerIDRef *v1.NamespacedReference `json:"apiManagementLoggerIdRef,omitempty" tf:"-"`
+	APIManagementLoggerIDRef *v2.NamespacedReference `json:"apiManagementLoggerIdRef,omitempty" tf:"-"`
 
 	// Selector for a Logger in apimanagement to populate apiManagementLoggerId.
 	// +kubebuilder:validation:Optional
-	APIManagementLoggerIDSelector *v1.NamespacedSelector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
+	APIManagementLoggerIDSelector *v2.NamespacedSelector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
 
 	// The name of the API Management Service instance. Changing this forces a new API Management Service API Diagnostics Logs to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
@@ -131,11 +130,11 @@ type APIDiagnosticParameters struct {
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameRef *v1.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
+	APIManagementNameRef *v2.NamespacedReference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
-	APIManagementNameSelector *v1.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API on which to configure the Diagnostics Logs. Changing this forces a new API Management Service API Diagnostics Logs to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
@@ -144,11 +143,11 @@ type APIDiagnosticParameters struct {
 
 	// Reference to a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameRef *v1.NamespacedReference `json:"apiNameRef,omitempty" tf:"-"`
+	APINameRef *v2.NamespacedReference `json:"apiNameRef,omitempty" tf:"-"`
 
 	// Selector for a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
-	APINameSelector *v1.NamespacedSelector `json:"apiNameSelector,omitempty" tf:"-"`
+	APINameSelector *v2.NamespacedSelector `json:"apiNameSelector,omitempty" tf:"-"`
 
 	// Always log errors. Send telemetry if there is an erroneous condition, regardless of sampling settings.
 	// +kubebuilder:validation:Optional
@@ -189,11 +188,11 @@ type APIDiagnosticParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Sampling (%). For high traffic APIs, please read this documentation to understand performance implications and log sampling. Valid values are between 0.0 and 100.0.
 	// +kubebuilder:validation:Optional
@@ -739,8 +738,8 @@ type APIDiagnosticSpec struct {
 
 // APIDiagnosticStatus defines the observed state of APIDiagnostic.
 type APIDiagnosticStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        APIDiagnosticObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               APIDiagnosticObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

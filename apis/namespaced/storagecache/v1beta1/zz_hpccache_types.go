@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccessRuleInitParameters struct {
@@ -109,7 +108,7 @@ type BindInitParameters struct {
 	Dn *string `json:"dn,omitempty" tf:"dn,omitempty"`
 
 	// The password of the Active Directory domain administrator.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type BindObservation struct {
@@ -126,7 +125,7 @@ type BindParameters struct {
 
 	// The password of the Active Directory domain administrator.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type DNSInitParameters struct {
@@ -195,7 +194,7 @@ type DirectoryActiveDirectoryInitParameters struct {
 	DomainNetbiosName *string `json:"domainNetbiosName,omitempty" tf:"domain_netbios_name,omitempty"`
 
 	// The password of the Active Directory domain administrator.
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username of the Active Directory domain administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -246,7 +245,7 @@ type DirectoryActiveDirectoryParameters struct {
 
 	// The password of the Active Directory domain administrator.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username of the Active Directory domain administrator.
 	// +kubebuilder:validation:Optional
@@ -399,11 +398,11 @@ type HPCCacheInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the HPC Cache.
 	// +mapType=granular
@@ -525,11 +524,11 @@ type HPCCacheParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of HPC Cache to use. Possible values are (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly) - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -543,11 +542,11 @@ type HPCCacheParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the HPC Cache.
 	// +kubebuilder:validation:Optional
@@ -612,8 +611,8 @@ type HPCCacheSpec struct {
 
 // HPCCacheStatus defines the observed state of HPCCache.
 type HPCCacheStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HPCCacheObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HPCCacheObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

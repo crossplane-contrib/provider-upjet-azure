@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type MSSQLServerTransparentDataEncryptionInitParameters struct {
@@ -26,11 +25,11 @@ type MSSQLServerTransparentDataEncryptionInitParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the MSSQL encryption protector
 	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
@@ -68,11 +67,11 @@ type MSSQLServerTransparentDataEncryptionParameters struct {
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+	KeyVaultKeyIDRef *v2.NamespacedReference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
 
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+	KeyVaultKeyIDSelector *v2.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the MSSQL encryption protector
 	// +kubebuilder:validation:Optional
@@ -86,11 +85,11 @@ type MSSQLServerTransparentDataEncryptionParameters struct {
 
 	// Reference to a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDRef *v1.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
+	ServerIDRef *v2.NamespacedReference `json:"serverIdRef,omitempty" tf:"-"`
 
 	// Selector for a MSSQLServer in sql to populate serverId.
 	// +kubebuilder:validation:Optional
-	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
+	ServerIDSelector *v2.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 // MSSQLServerTransparentDataEncryptionSpec defines the desired state of MSSQLServerTransparentDataEncryption
@@ -112,8 +111,8 @@ type MSSQLServerTransparentDataEncryptionSpec struct {
 
 // MSSQLServerTransparentDataEncryptionStatus defines the observed state of MSSQLServerTransparentDataEncryption.
 type MSSQLServerTransparentDataEncryptionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        MSSQLServerTransparentDataEncryptionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               MSSQLServerTransparentDataEncryptionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

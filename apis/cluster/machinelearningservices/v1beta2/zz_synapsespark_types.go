@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SynapseSparkIdentityInitParameters struct {
@@ -72,11 +72,11 @@ type SynapseSparkInitParameters struct {
 
 	// Reference to a SparkPool in synapse to populate synapseSparkPoolId.
 	// +kubebuilder:validation:Optional
-	SynapseSparkPoolIDRef *v1.Reference `json:"synapseSparkPoolIdRef,omitempty" tf:"-"`
+	SynapseSparkPoolIDRef *v2.Reference `json:"synapseSparkPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a SparkPool in synapse to populate synapseSparkPoolId.
 	// +kubebuilder:validation:Optional
-	SynapseSparkPoolIDSelector *v1.Selector `json:"synapseSparkPoolIdSelector,omitempty" tf:"-"`
+	SynapseSparkPoolIDSelector *v2.Selector `json:"synapseSparkPoolIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
 	// +mapType=granular
@@ -137,11 +137,11 @@ type SynapseSparkParameters struct {
 
 	// Reference to a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDRef *v1.Reference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDRef *v2.Reference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
-	MachineLearningWorkspaceIDSelector *v1.Selector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
+	MachineLearningWorkspaceIDSelector *v2.Selector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the linked Synapse Spark Pool. Changing this forces a new Machine Learning Synapse Spark to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/synapse/v1beta2.SparkPool
@@ -151,11 +151,11 @@ type SynapseSparkParameters struct {
 
 	// Reference to a SparkPool in synapse to populate synapseSparkPoolId.
 	// +kubebuilder:validation:Optional
-	SynapseSparkPoolIDRef *v1.Reference `json:"synapseSparkPoolIdRef,omitempty" tf:"-"`
+	SynapseSparkPoolIDRef *v2.Reference `json:"synapseSparkPoolIdRef,omitempty" tf:"-"`
 
 	// Selector for a SparkPool in synapse to populate synapseSparkPoolId.
 	// +kubebuilder:validation:Optional
-	SynapseSparkPoolIDSelector *v1.Selector `json:"synapseSparkPoolIdSelector,omitempty" tf:"-"`
+	SynapseSparkPoolIDSelector *v2.Selector `json:"synapseSparkPoolIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
 	// +kubebuilder:validation:Optional
@@ -165,8 +165,8 @@ type SynapseSparkParameters struct {
 
 // SynapseSparkSpec defines the desired state of SynapseSpark
 type SynapseSparkSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SynapseSparkParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SynapseSparkParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -182,8 +182,8 @@ type SynapseSparkSpec struct {
 
 // SynapseSparkStatus defines the observed state of SynapseSpark.
 type SynapseSparkStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SynapseSparkObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SynapseSparkObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

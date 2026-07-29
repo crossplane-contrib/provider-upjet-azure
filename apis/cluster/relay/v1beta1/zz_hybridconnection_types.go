@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type HybridConnectionInitParameters struct {
@@ -24,11 +24,11 @@ type HybridConnectionInitParameters struct {
 
 	// Reference to a EventRelayNamespace in relay to populate relayNamespaceName.
 	// +kubebuilder:validation:Optional
-	RelayNamespaceNameRef *v1.Reference `json:"relayNamespaceNameRef,omitempty" tf:"-"`
+	RelayNamespaceNameRef *v2.Reference `json:"relayNamespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventRelayNamespace in relay to populate relayNamespaceName.
 	// +kubebuilder:validation:Optional
-	RelayNamespaceNameSelector *v1.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
+	RelayNamespaceNameSelector *v2.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
 
 	// Specify if client authorization is needed for this hybrid connection. Changing this forces a new resource to be created. Defaults to true.
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
@@ -39,11 +39,11 @@ type HybridConnectionInitParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
 	UserMetadata *string `json:"userMetadata,omitempty" tf:"user_metadata,omitempty"`
@@ -83,11 +83,11 @@ type HybridConnectionParameters struct {
 
 	// Reference to a EventRelayNamespace in relay to populate relayNamespaceName.
 	// +kubebuilder:validation:Optional
-	RelayNamespaceNameRef *v1.Reference `json:"relayNamespaceNameRef,omitempty" tf:"-"`
+	RelayNamespaceNameRef *v2.Reference `json:"relayNamespaceNameRef,omitempty" tf:"-"`
 
 	// Selector for a EventRelayNamespace in relay to populate relayNamespaceName.
 	// +kubebuilder:validation:Optional
-	RelayNamespaceNameSelector *v1.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
+	RelayNamespaceNameSelector *v2.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
 
 	// Specify if client authorization is needed for this hybrid connection. Changing this forces a new resource to be created. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -100,11 +100,11 @@ type HybridConnectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
 	// +kubebuilder:validation:Optional
@@ -113,8 +113,8 @@ type HybridConnectionParameters struct {
 
 // HybridConnectionSpec defines the desired state of HybridConnection
 type HybridConnectionSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     HybridConnectionParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   HybridConnectionParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -130,8 +130,8 @@ type HybridConnectionSpec struct {
 
 // HybridConnectionStatus defines the observed state of HybridConnection.
 type HybridConnectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        HybridConnectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               HybridConnectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type SpringCloudAppMySQLAssociationInitParameters struct {
@@ -21,11 +21,11 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 
 	// Reference to a FlexibleDatabase in dbformysql to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleDatabase in dbformysql to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
@@ -34,14 +34,14 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 
 	// Reference to a FlexibleServer in dbformysql to populate mysqlServerId.
 	// +kubebuilder:validation:Optional
-	MySQLServerIDRef *v1.Reference `json:"mysqlServerIdRef,omitempty" tf:"-"`
+	MySQLServerIDRef *v2.Reference `json:"mysqlServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbformysql to populate mysqlServerId.
 	// +kubebuilder:validation:Optional
-	MySQLServerIDSelector *v1.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
+	MySQLServerIDSelector *v2.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the password which should be used when connecting to the MySQL Database from the Spring Cloud App.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
@@ -50,11 +50,11 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 
 	// Reference to a FlexibleServer in dbformysql to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.Reference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbformysql to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudAppMySQLAssociationObservation struct {
@@ -84,11 +84,11 @@ type SpringCloudAppMySQLAssociationParameters struct {
 
 	// Reference to a FlexibleDatabase in dbformysql to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+	DatabaseNameRef *v2.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleDatabase in dbformysql to populate databaseName.
 	// +kubebuilder:validation:Optional
-	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
@@ -98,15 +98,15 @@ type SpringCloudAppMySQLAssociationParameters struct {
 
 	// Reference to a FlexibleServer in dbformysql to populate mysqlServerId.
 	// +kubebuilder:validation:Optional
-	MySQLServerIDRef *v1.Reference `json:"mysqlServerIdRef,omitempty" tf:"-"`
+	MySQLServerIDRef *v2.Reference `json:"mysqlServerIdRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbformysql to populate mysqlServerId.
 	// +kubebuilder:validation:Optional
-	MySQLServerIDSelector *v1.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
+	MySQLServerIDSelector *v2.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the password which should be used when connecting to the MySQL Database from the Spring Cloud App.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the ID of the Spring Cloud Application where this Association is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/appplatform/v1beta2.SpringCloudApp
@@ -116,11 +116,11 @@ type SpringCloudAppMySQLAssociationParameters struct {
 
 	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+	SpringCloudAppIDRef *v2.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
 
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
-	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+	SpringCloudAppIDSelector *v2.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
@@ -130,17 +130,17 @@ type SpringCloudAppMySQLAssociationParameters struct {
 
 	// Reference to a FlexibleServer in dbformysql to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
+	UsernameRef *v2.Reference `json:"usernameRef,omitempty" tf:"-"`
 
 	// Selector for a FlexibleServer in dbformysql to populate username.
 	// +kubebuilder:validation:Optional
-	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
+	UsernameSelector *v2.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 // SpringCloudAppMySQLAssociationSpec defines the desired state of SpringCloudAppMySQLAssociation
 type SpringCloudAppMySQLAssociationSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     SpringCloudAppMySQLAssociationParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   SpringCloudAppMySQLAssociationParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -156,8 +156,8 @@ type SpringCloudAppMySQLAssociationSpec struct {
 
 // SpringCloudAppMySQLAssociationStatus defines the observed state of SpringCloudAppMySQLAssociation.
 type SpringCloudAppMySQLAssociationStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SpringCloudAppMySQLAssociationObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SpringCloudAppMySQLAssociationObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

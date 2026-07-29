@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AccountLocalUserInitParameters struct {
@@ -85,11 +85,11 @@ type AccountLocalUserParameters struct {
 
 	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
 	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type PermissionScopeInitParameters struct {
@@ -103,11 +103,11 @@ type PermissionScopeInitParameters struct {
 
 	// Reference to a Container in storage to populate resourceName.
 	// +kubebuilder:validation:Optional
-	ResourceNameRef *v1.Reference `json:"resourceNameRef,omitempty" tf:"-"`
+	ResourceNameRef *v2.Reference `json:"resourceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate resourceName.
 	// +kubebuilder:validation:Optional
-	ResourceNameSelector *v1.Selector `json:"resourceNameSelector,omitempty" tf:"-"`
+	ResourceNameSelector *v2.Selector `json:"resourceNameSelector,omitempty" tf:"-"`
 
 	// The storage service used by this Storage Account Local User. Possible values are blob and file.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
@@ -138,11 +138,11 @@ type PermissionScopeParameters struct {
 
 	// Reference to a Container in storage to populate resourceName.
 	// +kubebuilder:validation:Optional
-	ResourceNameRef *v1.Reference `json:"resourceNameRef,omitempty" tf:"-"`
+	ResourceNameRef *v2.Reference `json:"resourceNameRef,omitempty" tf:"-"`
 
 	// Selector for a Container in storage to populate resourceName.
 	// +kubebuilder:validation:Optional
-	ResourceNameSelector *v1.Selector `json:"resourceNameSelector,omitempty" tf:"-"`
+	ResourceNameSelector *v2.Selector `json:"resourceNameSelector,omitempty" tf:"-"`
 
 	// The storage service used by this Storage Account Local User. Possible values are blob and file.
 	// +kubebuilder:validation:Optional
@@ -239,8 +239,8 @@ type SSHAuthorizedKeyParameters struct {
 
 // AccountLocalUserSpec defines the desired state of AccountLocalUser
 type AccountLocalUserSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccountLocalUserParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   AccountLocalUserParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -256,8 +256,8 @@ type AccountLocalUserSpec struct {
 
 // AccountLocalUserStatus defines the observed state of AccountLocalUser.
 type AccountLocalUserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccountLocalUserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               AccountLocalUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

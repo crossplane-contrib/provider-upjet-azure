@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type FirewallApplicationRuleCollectionInitParameters struct {
@@ -60,11 +59,11 @@ type FirewallApplicationRuleCollectionParameters struct {
 
 	// Reference to a Firewall in network to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
-	AzureFirewallNameRef *v1.NamespacedReference `json:"azureFirewallNameRef,omitempty" tf:"-"`
+	AzureFirewallNameRef *v2.NamespacedReference `json:"azureFirewallNameRef,omitempty" tf:"-"`
 
 	// Selector for a Firewall in network to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
-	AzureFirewallNameSelector *v1.NamespacedSelector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
+	AzureFirewallNameSelector *v2.NamespacedSelector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
 	// +kubebuilder:validation:Optional
@@ -77,11 +76,11 @@ type FirewallApplicationRuleCollectionParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rule blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -215,8 +214,8 @@ type FirewallApplicationRuleCollectionSpec struct {
 
 // FirewallApplicationRuleCollectionStatus defines the observed state of FirewallApplicationRuleCollection.
 type FirewallApplicationRuleCollectionStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        FirewallApplicationRuleCollectionObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               FirewallApplicationRuleCollectionObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

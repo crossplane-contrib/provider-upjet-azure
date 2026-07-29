@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CoolAccessInitParameters struct {
@@ -138,11 +137,11 @@ type DataProtectionReplicationInitParameters struct {
 
 	// Reference to a Volume in netapp to populate remoteVolumeResourceId.
 	// +kubebuilder:validation:Optional
-	RemoteVolumeResourceIDRef *v1.NamespacedReference `json:"remoteVolumeResourceIdRef,omitempty" tf:"-"`
+	RemoteVolumeResourceIDRef *v2.NamespacedReference `json:"remoteVolumeResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in netapp to populate remoteVolumeResourceId.
 	// +kubebuilder:validation:Optional
-	RemoteVolumeResourceIDSelector *v1.NamespacedSelector `json:"remoteVolumeResourceIdSelector,omitempty" tf:"-"`
+	RemoteVolumeResourceIDSelector *v2.NamespacedSelector `json:"remoteVolumeResourceIdSelector,omitempty" tf:"-"`
 
 	// Replication frequency, supported values are '10minutes', 'hourly', 'daily', values are case sensitive.
 	ReplicationFrequency *string `json:"replicationFrequency,omitempty" tf:"replication_frequency,omitempty"`
@@ -181,11 +180,11 @@ type DataProtectionReplicationParameters struct {
 
 	// Reference to a Volume in netapp to populate remoteVolumeResourceId.
 	// +kubebuilder:validation:Optional
-	RemoteVolumeResourceIDRef *v1.NamespacedReference `json:"remoteVolumeResourceIdRef,omitempty" tf:"-"`
+	RemoteVolumeResourceIDRef *v2.NamespacedReference `json:"remoteVolumeResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Volume in netapp to populate remoteVolumeResourceId.
 	// +kubebuilder:validation:Optional
-	RemoteVolumeResourceIDSelector *v1.NamespacedSelector `json:"remoteVolumeResourceIdSelector,omitempty" tf:"-"`
+	RemoteVolumeResourceIDSelector *v2.NamespacedSelector `json:"remoteVolumeResourceIdSelector,omitempty" tf:"-"`
 
 	// Replication frequency, supported values are '10minutes', 'hourly', 'daily', values are case sensitive.
 	// +kubebuilder:validation:Optional
@@ -201,11 +200,11 @@ type DataProtectionSnapshotPolicyInitParameters struct {
 
 	// Reference to a SnapshotPolicy in netapp to populate snapshotPolicyId.
 	// +kubebuilder:validation:Optional
-	SnapshotPolicyIDRef *v1.NamespacedReference `json:"snapshotPolicyIdRef,omitempty" tf:"-"`
+	SnapshotPolicyIDRef *v2.NamespacedReference `json:"snapshotPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a SnapshotPolicy in netapp to populate snapshotPolicyId.
 	// +kubebuilder:validation:Optional
-	SnapshotPolicyIDSelector *v1.NamespacedSelector `json:"snapshotPolicyIdSelector,omitempty" tf:"-"`
+	SnapshotPolicyIDSelector *v2.NamespacedSelector `json:"snapshotPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type DataProtectionSnapshotPolicyObservation struct {
@@ -224,11 +223,11 @@ type DataProtectionSnapshotPolicyParameters struct {
 
 	// Reference to a SnapshotPolicy in netapp to populate snapshotPolicyId.
 	// +kubebuilder:validation:Optional
-	SnapshotPolicyIDRef *v1.NamespacedReference `json:"snapshotPolicyIdRef,omitempty" tf:"-"`
+	SnapshotPolicyIDRef *v2.NamespacedReference `json:"snapshotPolicyIdRef,omitempty" tf:"-"`
 
 	// Selector for a SnapshotPolicy in netapp to populate snapshotPolicyId.
 	// +kubebuilder:validation:Optional
-	SnapshotPolicyIDSelector *v1.NamespacedSelector `json:"snapshotPolicyIdSelector,omitempty" tf:"-"`
+	SnapshotPolicyIDSelector *v2.NamespacedSelector `json:"snapshotPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type ExportPolicyRuleInitParameters struct {
@@ -389,11 +388,11 @@ type VolumeInitParameters struct {
 
 	// Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
-	CreateFromSnapshotResourceIDRef *v1.NamespacedReference `json:"createFromSnapshotResourceIdRef,omitempty" tf:"-"`
+	CreateFromSnapshotResourceIDRef *v2.NamespacedReference `json:"createFromSnapshotResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Snapshot in netapp to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
-	CreateFromSnapshotResourceIDSelector *v1.NamespacedSelector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
+	CreateFromSnapshotResourceIDSelector *v2.NamespacedSelector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
 
 	// A data_protection_advanced_ransomware block as defined below.
 	DataProtectionAdvancedRansomware *DataProtectionAdvancedRansomwareInitParameters `json:"dataProtectionAdvancedRansomware,omitempty" tf:"data_protection_advanced_ransomware,omitempty"`
@@ -469,11 +468,11 @@ type VolumeInitParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -617,11 +616,11 @@ type VolumeParameters struct {
 
 	// Reference to a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameRef *v1.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
+	AccountNameRef *v2.NamespacedReference `json:"accountNameRef,omitempty" tf:"-"`
 
 	// Selector for a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
-	AccountNameSelector *v1.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
+	AccountNameSelector *v2.NamespacedSelector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// Is the NetApp Volume enabled for Azure VMware Solution (AVS) datastore purpose. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -639,11 +638,11 @@ type VolumeParameters struct {
 
 	// Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
-	CreateFromSnapshotResourceIDRef *v1.NamespacedReference `json:"createFromSnapshotResourceIdRef,omitempty" tf:"-"`
+	CreateFromSnapshotResourceIDRef *v2.NamespacedReference `json:"createFromSnapshotResourceIdRef,omitempty" tf:"-"`
 
 	// Selector for a Snapshot in netapp to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
-	CreateFromSnapshotResourceIDSelector *v1.NamespacedSelector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
+	CreateFromSnapshotResourceIDSelector *v2.NamespacedSelector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
 
 	// A data_protection_advanced_ransomware block as defined below.
 	// +kubebuilder:validation:Optional
@@ -698,11 +697,11 @@ type VolumeParameters struct {
 
 	// Reference to a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
-	PoolNameRef *v1.NamespacedReference `json:"poolNameRef,omitempty" tf:"-"`
+	PoolNameRef *v2.NamespacedReference `json:"poolNameRef,omitempty" tf:"-"`
 
 	// Selector for a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
-	PoolNameSelector *v1.NamespacedSelector `json:"poolNameSelector,omitempty" tf:"-"`
+	PoolNameSelector *v2.NamespacedSelector `json:"poolNameSelector,omitempty" tf:"-"`
 
 	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Protocol conversion between NFSv3 and NFSv4.1 and vice-versa is supported without recreating the volume, however export policy rules must be updated accordingly to avoid configuration drift (e.g., when converting from NFSv3 to NFSv4.1, set nfsv3_enabled = false and nfsv41_enabled = true in export policy rules). Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
 	// +kubebuilder:validation:Optional
@@ -716,11 +715,11 @@ type VolumeParameters struct {
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+	ResourceGroupNameRef *v2.NamespacedReference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
 	// Enable access based enumeration setting for SMB/Dual Protocol volume. When enabled, users who do not have permission to access a shared folder or file underneath it, do not see that shared resource displayed in their environment.
@@ -766,11 +765,11 @@ type VolumeParameters struct {
 
 	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -809,8 +808,8 @@ type VolumeSpec struct {
 
 // VolumeStatus defines the observed state of Volume.
 type VolumeStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        VolumeObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               VolumeObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

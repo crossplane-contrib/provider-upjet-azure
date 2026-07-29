@@ -14,8 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 	upjetmetrics "github.com/crossplane/upjet/v2/pkg/metrics"
 	"github.com/crossplane/upjet/v2/pkg/terraform"
 	tfazureclient "github.com/hashicorp/terraform-provider-azurerm/xpprovider"
@@ -66,10 +66,10 @@ const (
 )
 
 var (
-	credentialsSourceUserAssignedManagedIdentity   xpv1.CredentialsSource = "UserAssignedManagedIdentity"
-	credentialsSourceSystemAssignedManagedIdentity xpv1.CredentialsSource = "SystemAssignedManagedIdentity"
-	credentialsSourceOIDCTokenFile                 xpv1.CredentialsSource = "OIDCTokenFile"
-	credentialsSourceUpbound                       xpv1.CredentialsSource = "Upbound"
+	credentialsSourceUserAssignedManagedIdentity   xpv2.CredentialsSource = "UserAssignedManagedIdentity"
+	credentialsSourceSystemAssignedManagedIdentity xpv2.CredentialsSource = "SystemAssignedManagedIdentity"
+	credentialsSourceOIDCTokenFile                 xpv2.CredentialsSource = "OIDCTokenFile"
+	credentialsSourceUpbound                       xpv2.CredentialsSource = "Upbound"
 
 	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
 

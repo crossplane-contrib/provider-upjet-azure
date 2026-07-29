@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CorrelationFilterInitParameters struct {
@@ -180,11 +179,11 @@ type SubscriptionRuleParameters struct {
 
 	// Reference to a Subscription in servicebus to populate subscriptionId.
 	// +kubebuilder:validation:Optional
-	SubscriptionIDRef *v1.NamespacedReference `json:"subscriptionIdRef,omitempty" tf:"-"`
+	SubscriptionIDRef *v2.NamespacedReference `json:"subscriptionIdRef,omitempty" tf:"-"`
 
 	// Selector for a Subscription in servicebus to populate subscriptionId.
 	// +kubebuilder:validation:Optional
-	SubscriptionIDSelector *v1.NamespacedSelector `json:"subscriptionIdSelector,omitempty" tf:"-"`
+	SubscriptionIDSelector *v2.NamespacedSelector `json:"subscriptionIdSelector,omitempty" tf:"-"`
 }
 
 // SubscriptionRuleSpec defines the desired state of SubscriptionRule
@@ -206,8 +205,8 @@ type SubscriptionRuleSpec struct {
 
 // SubscriptionRuleStatus defines the observed state of SubscriptionRule.
 type SubscriptionRuleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubscriptionRuleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               SubscriptionRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
