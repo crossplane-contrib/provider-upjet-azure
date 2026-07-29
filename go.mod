@@ -206,6 +206,6 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.7.2 // indirect
 )
 
-replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20260714074402-5b8806cd3e9a
+replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20260728060042-0dd7cff8a83c
 
 replace github.com/Azure/azure-sdk-for-go => github.com/Azure/azure-sdk-for-go v66.0.0+incompatible // v68.0.0+incompatible which crossplane-runtime >= v2.3.0 pulls in has breaking API changes which the terraform provider does not consume
