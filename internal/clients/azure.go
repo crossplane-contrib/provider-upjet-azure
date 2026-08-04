@@ -8,6 +8,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"os"
 	"strings"
 	"sync/atomic"
 
@@ -61,8 +62,15 @@ const (
 	keyStorageUseAzureAD                      = "storage_use_azuread"
 	keyPostgreSQLFlexibleServer               = "postgresql_flexible_server"
 	keyPSQLRestartServerOnConfigurationChange = "restart_server_on_configuration_value_change"
-	// Default OidcTokenFilePath
+	// Default OidcTokenFilePath, used only if AZURE_FEDERATED_TOKEN_FILE is
+	// not set and no explicit oidcTokenFilePath is configured. The azure
+	// workload identity webhook owns this path and has changed it before
+	// (see https://github.com/Azure/azure-workload-identity/releases/tag/v1.6.0),
+	// so AZURE_FEDERATED_TOKEN_FILE is the source of truth whenever available.
 	defaultOidcTokenFilePath = "/var/run/secrets/azure/tokens/azure-identity-token"
+	// envAzureFederatedTokenFile is set by the azure workload identity
+	// webhook to the current projected token path.
+	envAzureFederatedTokenFile = "AZURE_FEDERATED_TOKEN_FILE"
 )
 
 var (
@@ -260,8 +268,14 @@ func oidcAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup)
 	if pcSpec.ClientID == nil || len(*pcSpec.ClientID) == 0 {
 		return errors.New(errClientIDNotSet)
 	}
-	// OIDC Token File Path defaults to a projected-volume path mounted in the pod running in the AKS cluster, when workload identity is enabled on the pod.
+	// OIDC Token File Path: an explicit oidcTokenFilePath always wins. Otherwise
+	// prefer AZURE_FEDERATED_TOKEN_FILE, which the azure workload identity webhook
+	// sets to wherever it actually projected the token, falling back to the
+	// historical hardcoded default only if that env var isn't set.
 	ps.Configuration[keyOidcTokenFilePath] = defaultOidcTokenFilePath
+	if tokenFile := os.Getenv(envAzureFederatedTokenFile); tokenFile != "" {
+		ps.Configuration[keyOidcTokenFilePath] = tokenFile
+	}
 	if pcSpec.OidcTokenFilePath != nil {
 		ps.Configuration[keyOidcTokenFilePath] = *pcSpec.OidcTokenFilePath
 	}
