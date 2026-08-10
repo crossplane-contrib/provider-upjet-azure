@@ -61,12 +61,13 @@ spec:
                 properties:
                   certificateBindingType:
                     description: |-
-                      The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+                      The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
                       The Binding type. Possible values include `Disabled` and `SniEnabled`.
                     type: string
                   containerAppEnvironmentCertificateId:
                     description: The ID of the Container App Environment Certificate
-                      to use. Changing this forces a new resource to be created.
+                      to use. Removing this value (switching to an Azure Managed certificate)
+                      forces a new resource to be created.
                     type: string
                   containerAppEnvironmentCertificateIdRef:
                     description: Reference to a EnvironmentCertificate in containerapp
@@ -253,12 +254,13 @@ spec:
                 properties:
                   certificateBindingType:
                     description: |-
-                      The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+                      The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
                       The Binding type. Possible values include `Disabled` and `SniEnabled`.
                     type: string
                   containerAppEnvironmentCertificateId:
                     description: The ID of the Container App Environment Certificate
-                      to use. Changing this forces a new resource to be created.
+                      to use. Removing this value (switching to an Azure Managed certificate)
+                      forces a new resource to be created.
                     type: string
                   containerAppEnvironmentCertificateIdRef:
                     description: Reference to a EnvironmentCertificate in containerapp
@@ -408,12 +410,13 @@ spec:
                 properties:
                   certificateBindingType:
                     description: |-
-                      The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+                      The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
                       The Binding type. Possible values include `Disabled` and `SniEnabled`.
                     type: string
                   containerAppEnvironmentCertificateId:
                     description: The ID of the Container App Environment Certificate
-                      to use. Changing this forces a new resource to be created.
+                      to use. Removing this value (switching to an Azure Managed certificate)
+                      forces a new resource to be created.
                     type: string
                   containerAppEnvironmentManagedCertificateId:
                     description: The ID of the Container App Environment Managed Certificate

@@ -15,11 +15,11 @@ import (
 
 type CustomDomainInitParameters_2 struct {
 
-	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
 	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
 
-	// The ID of the Container App Environment Certificate to use. Changing this forces a new resource to be created.
+	// The ID of the Container App Environment Certificate to use. Removing this value (switching to an Azure Managed certificate) forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1.EnvironmentCertificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerAppEnvironmentCertificateID *string `json:"containerAppEnvironmentCertificateId,omitempty" tf:"container_app_environment_certificate_id,omitempty"`
@@ -35,11 +35,11 @@ type CustomDomainInitParameters_2 struct {
 
 type CustomDomainObservation_2 struct {
 
-	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
 	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
 
-	// The ID of the Container App Environment Certificate to use. Changing this forces a new resource to be created.
+	// The ID of the Container App Environment Certificate to use. Removing this value (switching to an Azure Managed certificate) forces a new resource to be created.
 	ContainerAppEnvironmentCertificateID *string `json:"containerAppEnvironmentCertificateId,omitempty" tf:"container_app_environment_certificate_id,omitempty"`
 
 	// The ID of the Container App Environment Managed Certificate to use.
@@ -53,12 +53,12 @@ type CustomDomainObservation_2 struct {
 
 type CustomDomainParameters_2 struct {
 
-	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id. Changing this forces a new resource to be created.
+	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
 	// +kubebuilder:validation:Optional
 	CertificateBindingType *string `json:"certificateBindingType,omitempty" tf:"certificate_binding_type,omitempty"`
 
-	// The ID of the Container App Environment Certificate to use. Changing this forces a new resource to be created.
+	// The ID of the Container App Environment Certificate to use. Removing this value (switching to an Azure Managed certificate) forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1.EnvironmentCertificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
