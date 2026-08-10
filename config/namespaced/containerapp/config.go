@@ -32,6 +32,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_container_app_custom_domain", func(r *config.Resource) {
 		r.ShortGroup = group
 		r.Kind = "CustomDomain"
+		// The scraped upstream documentation still marks these fields as
+		// immutable. The Terraform provider fork updates the certificate in
+		// place, and only clearing it forces a new resource to be created.
+		// https://github.com/upbound/terraform-provider-azurerm/pull/6
+		r.MetaResource.ArgumentDocs["certificate_binding_type"] = "- (Optional) The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id."
+		r.MetaResource.ArgumentDocs["container_app_environment_certificate_id"] = "- (Optional) The ID of the Container App Environment Certificate to use. Removing this value (switching to an Azure Managed certificate) forces a new resource to be created."
 	})
 
 	p.AddResourceConfigurator("azurerm_container_app_environment_certificate", func(r *config.Resource) {
