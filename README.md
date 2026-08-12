@@ -45,6 +45,97 @@ If you'd like to learn how to use Upjet, see [Usage Guide](https://github.com/cr
 Follow the Upjet guide
 for [adding new resources](https://github.com/crossplane/upjet/blob/main/docs/adding-new-resource.md).
 
+### Build instructions
+
+This repository contains the whole provider-family-azure. It can be built monolithic or seperated providers for each subpackage (e.g. provider-azure-containerservice) can be created:
+```
+export SUBPACKAGES=containerservice
+```
+
+Please note: Binaries built can't be installed directly. They must be packaged according to crossplane's requirements.
+Cross-compilation (e.g. build on Apple Silicon for Linux) is possible through setting the BUILD_PLATFORMS accordingly:
+
+```
+export BUILD_PLATFORMS=linux_amd64
+```
+
+Binaries are created via the build target in Makefile:
+
+```
+SUBPACKAGES=containerservice PLATFORMS=linux_amd64 make build
+```
+
+### Packaging
+
+Once you've created the binaries you can package them in crossplane's xpkg format, upload them to a container registry and update the provider reference in your crossplane configuration to use the updated version.
+
+The xpkg is created and uploaded through the crossplane-cli.
+
+As first step we create a crossplane.yaml file with the package definition and copy the crds in scope for the subpackage over.
+
+```
+STAGING=$(mktemp -d)
+mkdir -p $STAGING/package
+
+cat > $STAGING/package/crossplane.yaml << 'EOF'
+  apiVersion: meta.pkg.crossplane.io/v1
+  kind: Provider
+  metadata:
+    name: provider-azure-containerservice
+    labels:
+      pkg.crossplane.io/provider-family: provider-family-azure
+  spec:
+    capabilities:
+    - SafeStart
+    crossplane:
+      version: ">=v1.12.1-0"
+    dependsOn:
+      - provider: xpkg.upbound.io/upbound/provider-family-azure
+        version: ">=v2.0.0"
+EOF
+
+cp _output/package/crds/containerservice.azure.* $STAGING/package/
+```
+
+As next step we build a docker runtime image with the provider binary from build step embedded (Note: we use next as version tag):
+
+```
+docker build --platform linux/amd64 \
+    -t provider-azure-containerservice:next -f - . << 'DOCKERFILE'
+  FROM build-30968d6a/provider-azure-amd64:latest
+  COPY _output/bin/linux_amd64/containerservice /usr/local/bin/provider
+DOCKERFILE
+```
+
+Afterwards we create the xpkg that combines the runtime image with the package definition (Note: we use next as version tag):
+
+```
+crossplane xpkg build \
+    --package-root=$STAGING/package \
+    --embed-runtime-image=provider-azure-containerservice:next \
+    -o provider-azure-containerservice-next.xpkg
+```
+
+Finally we can push the xpkg to a registry:
+
+```
+crossplane xpkg push \
+<MYCR>/provider-azure-containerservice:next \
+-f provider-azure-containerservice-next.xpkg
+```
+
+The new version with tag next can then be referenced from the provider definition in crossplane (Note: if you're re-using a tag, you should set packagePullPolicy: Always, so always a fresh version is pulled from the upstream registry):
+
+```
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: upbound-provider-azure-containerservice
+spec:
+  package: <MYCR>/provider-azure-containerservice:next
+  packagePullPolicy: Always
+```
+
 ## Getting help
 
 For filing bugs, suggesting improvements, or requesting new resources or features, please
