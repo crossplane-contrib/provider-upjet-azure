@@ -4,7 +4,7 @@
 
 module github.com/upbound/provider-azure/v2
 
-go 1.26.6
+go 1.27.0
 
 tool golang.org/x/tools/cmd/goimports
 
@@ -28,11 +28,6 @@ require (
 	k8s.io/utils v0.0.0-20260707023825-cf1189d6abe3
 	sigs.k8s.io/controller-runtime v0.24.1
 	sigs.k8s.io/controller-tools v0.20.1
-)
-
-require (
-	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
-	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 )
 
 require (
@@ -159,6 +154,8 @@ require (
 	github.com/tmccombs/hcl2json v0.3.3 // indirect
 	github.com/upbound/uptest v0.12.1-0.20260728095952-c230a8044006 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
+	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
+	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/wI2L/jsondiff v0.7.1 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/xhit/go-str2duration/v2 v2.1.0 // indirect
