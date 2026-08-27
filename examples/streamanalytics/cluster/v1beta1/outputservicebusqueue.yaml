@@ -99,7 +99,7 @@ metadata:
 spec:
   forProvider:
     maxMessageSizeInKilobytes: 1024
-    enablePartitioning: false
+    partitioningEnabled: false
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

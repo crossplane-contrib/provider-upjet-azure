@@ -156,7 +156,7 @@ spec:
     geoRedundantBackupEnabled: false
     version: "11"
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     # due to: https://github.com/Azure/azure-rest-api-specs/issues/9571
     infrastructureEncryptionEnabled: false
   writeConnectionSecretToRef:

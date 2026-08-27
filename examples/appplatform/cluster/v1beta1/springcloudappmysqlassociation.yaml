@@ -31,7 +31,7 @@ spec:
 ---
 
 apiVersion: dbformysql.azure.upbound.io/v1beta1
-kind: Server
+kind: FlexibleServer
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
@@ -42,7 +42,7 @@ metadata:
 spec:
   forProvider:
     administratorLogin: mysqladminun
-    administratorLoginPasswordSecretRef:
+    administratorPasswordSecretRef:
       key: example-key
       name: example-secret
       namespace: upbound-system
@@ -51,9 +51,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: B_Gen5_2
-    sslEnforcementEnabled: true
-    sslMinimalTlsVersionEnforced: TLS1_2
-    storageMb: 5120
     version: "5.7"
 
 ---

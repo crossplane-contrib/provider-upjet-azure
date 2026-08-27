@@ -42,12 +42,12 @@ spec:
     defaultRetentionDuration: P7D
     retentionRule:
       - criteria:
-          - absoluteCriteria: FirstOfDay
+          absoluteCriteria: FirstOfDay
         duration: P7D
         name: Daily
         priority: 25
       - criteria:
-          - absoluteCriteria: FirstOfWeek
+          absoluteCriteria: FirstOfWeek
         duration: P7D
         name: Weekly
         priority: 20
@@ -68,7 +68,7 @@ spec:
   forProvider:
     datastoreType: VaultStore
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     redundancy: LocallyRedundant
     resourceGroupNameSelector:

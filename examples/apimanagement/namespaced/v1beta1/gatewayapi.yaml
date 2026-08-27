@@ -40,8 +40,8 @@ spec:
         testing.upbound.io/example-name: example
     displayName: Example API
     import:
-      - contentFormat: swagger-link-json
-        contentValue: http://conferenceapi.azurewebsites.net/?format=json
+      contentFormat: swagger-link-json
+      contentValue: http://conferenceapi.azurewebsites.net/?format=json
     path: example
     protocols:
       - https
@@ -95,7 +95,7 @@ spec:
         testing.upbound.io/example-name: example
     description: Example API Management gateway
     locationData:
-      - city: example city
-        district: example district
-        name: example name
-        region: example region
+      city: example city
+      district: example district
+      name: example name
+      region: example region

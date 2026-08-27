@@ -55,8 +55,8 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: secondary
     readWriteEndpointFailoverPolicy:
-      - graceMinutes: 80
-        mode: Automatic
+      graceMinutes: 80
+      mode: Automatic
     serverIdSelector:
       matchLabels:
         testing.upbound.io/example-name: primary

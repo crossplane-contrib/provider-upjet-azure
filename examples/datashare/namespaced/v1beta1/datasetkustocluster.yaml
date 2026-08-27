@@ -25,8 +25,8 @@ spec:
     resourceGroupNameRef:
       name: example-rg-datashare
     sku:
-      - capacity: 1
-        name: Dev(No SLA)_Standard_D11_v2
+      capacity: 1
+      name: Dev(No SLA)_Standard_D11_v2
 ---
 apiVersion: datashare.azure.m.upbound.io/v1beta1
 kind: DataShare

@@ -72,7 +72,7 @@ metadata:
 spec:
   forProvider:
     consistencyPolicy:
-      - consistencyLevel: BoundedStaleness
+      consistencyLevel: BoundedStaleness
     geoLocation:
       - failoverPriority: 0
         location: West Europe

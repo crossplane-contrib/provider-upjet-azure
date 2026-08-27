@@ -47,12 +47,12 @@ spec:
   forProvider:
     location: West Europe
     radius:
-      - server:
-          - address: 10.105.1.1
-            score: 15
-            secretSecretRef:
-              key: example-key
-              name: example-secret
+      server:
+        - address: 10.105.1.1
+          score: 15
+          secretSecretRef:
+            key: example-key
+            name: example-secret
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: vpnconfigupolgroup-rg

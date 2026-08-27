@@ -157,7 +157,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    disableBgpRoutePropagation: false
+    bgpRoutePropagationEnabled: true
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

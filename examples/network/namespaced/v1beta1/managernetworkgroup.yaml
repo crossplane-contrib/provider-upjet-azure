@@ -34,8 +34,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: rgmanagernetworkgroup
     scope:
-      - subscriptionIds:
-          - ${data.azurerm_client_config.current.subscription_resource_id}
+      subscriptionIds:
+        - ${data.azurerm_client_config.current.subscription_resource_id}
     scopeAccesses:
       - Connectivity
       - SecurityAdmin

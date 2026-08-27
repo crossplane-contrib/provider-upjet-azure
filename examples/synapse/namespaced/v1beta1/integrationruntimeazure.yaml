@@ -78,7 +78,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: South Africa North
     resourceGroupNameSelector:
       matchLabels:

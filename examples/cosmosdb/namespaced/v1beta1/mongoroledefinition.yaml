@@ -28,9 +28,9 @@ spec:
       - name: EnableMongo
       - name: EnableMongoRoleBasedAccessControl
     consistencyPolicy:
-      - consistencyLevel: Strong
-        maxIntervalInSeconds: 300
-        maxStalenessPrefix: 100000
+      consistencyLevel: Strong
+      maxIntervalInSeconds: 300
+      maxStalenessPrefix: 100000
     geoLocation:
       - failoverPriority: 0
         location: West Europe

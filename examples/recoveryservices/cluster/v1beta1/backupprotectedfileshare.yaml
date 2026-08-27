@@ -126,6 +126,4 @@ metadata:
 spec:
   forProvider:
     quota: 1
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: sampleuser001
+    storageAccountName: sampleuser001

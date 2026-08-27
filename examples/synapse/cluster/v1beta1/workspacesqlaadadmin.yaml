@@ -13,6 +13,7 @@ metadata:
   name: wssqlaadadminexample
 spec:
   forProvider:
+    objectId: ${data.azurerm_client_config.current.object_id}
     login: AzureAD Admin
     synapseWorkspaceIdSelector:
       matchLabels:
@@ -78,8 +79,8 @@ metadata:
     testing.upbound.io/example-name: wssqlaadadmin-key
   name: wssqlaadadmin-key
 spec:
-  name: workspace-encryption-key
   forProvider:
+    name: workspace-encryption-key
     keyOpts:
     - unwrapKey
     - wrapKey

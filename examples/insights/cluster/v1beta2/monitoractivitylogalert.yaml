@@ -12,6 +12,7 @@ metadata:
   name: main
 spec:
   forProvider:
+    location: West Europe
     action:
     - actionGroupIdSelector:
         matchLabels:

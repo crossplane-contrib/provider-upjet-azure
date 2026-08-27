@@ -71,5 +71,5 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-      - capacity: 1
-        name: Standard_S1
+      capacity: 1
+      name: Standard_S1

@@ -41,17 +41,17 @@ spec:
     networkInterfaceIdsRefs:
       - name: example
     osDisk:
-      - caching: ReadWrite
-        storageAccountType: Standard_LRS
+      caching: ReadWrite
+      storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     size: Standard_F2
     sourceImageReference:
-      - offer: UbuntuServer
-        publisher: Canonical
-        sku: 16.04-LTS
-        version: latest
+      offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+      version: latest
 ---
 apiVersion: compute.azure.m.upbound.io/v1beta1
 kind: ManagedDisk

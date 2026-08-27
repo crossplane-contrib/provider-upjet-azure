@@ -79,7 +79,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: North Central US
     resourceGroupNameSelector:
       matchLabels:

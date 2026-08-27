@@ -31,8 +31,7 @@ spec:
     functionAppIdSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotlfa
-    siteConfig:
-      - {}
+    siteConfig: {}
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotacc
@@ -56,8 +55,7 @@ spec:
     servicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslot-sp
-    siteConfig:
-      - {}
+    siteConfig: {}
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotacc

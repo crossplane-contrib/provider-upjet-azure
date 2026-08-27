@@ -44,15 +44,15 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-      - relativeName: example-profile-qwerty
-        ttl: 100
+      relativeName: example-profile-qwerty
+      ttl: 100
     monitorConfig:
-      - intervalInSeconds: 30
-        path: /
-        port: 80
-        protocol: HTTP
-        timeoutInSeconds: 9
-        toleratedNumberOfFailures: 3
+      intervalInSeconds: 30
+      path: /
+      port: 80
+      protocol: HTTP
+      timeoutInSeconds: 9
+      toleratedNumberOfFailures: 3
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: externalendpoint-rg-label

@@ -66,12 +66,12 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-      - relativeName: nested-profile-qwerty
-        ttl: 30
+      relativeName: nested-profile-qwerty
+      ttl: 30
     monitorConfig:
-      - path: /
-        port: 443
-        protocol: HTTP
+      path: /
+      port: 443
+      protocol: HTTP
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: nested-rg-label
@@ -89,15 +89,15 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-      - relativeName: parent-profile-werty
-        ttl: 100
+      relativeName: parent-profile-werty
+      ttl: 100
     monitorConfig:
-      - intervalInSeconds: 30
-        path: /
-        port: 80
-        protocol: HTTP
-        timeoutInSeconds: 9
-        toleratedNumberOfFailures: 3
+      intervalInSeconds: 30
+      path: /
+      port: 80
+      protocol: HTTP
+      timeoutInSeconds: 9
+      toleratedNumberOfFailures: 3
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: nested-rg-label

@@ -68,34 +68,34 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: custom-domain-example
     certificatePolicy:
-      - issuerParameters:
-          - name: Self
+        issuerParameters:
+          name: Self
         keyProperties:
-          - exportable: true
-            keySize: 4096
-            keyType: RSA
-            reuseKey: true
+          exportable: true
+          keySize: 4096
+          keyType: RSA
+          reuseKey: true
         secretProperties:
-          - contentType: application/x-pkcs12
+          contentType: application/x-pkcs12
         lifetimeAction:
           - action:
-              - actionType: AutoRenew
+              actionType: AutoRenew
             trigger:
-              - daysBeforeExpiry: 30
+              daysBeforeExpiry: 30
         x509CertificateProperties:
-          - keyUsage:
-              - cRLSign
-              - dataEncipherment
-              - digitalSignature
-              - keyAgreement
-              - keyCertSign
-              - keyEncipherment
-            subjectAlternativeNames:
-              - dnsNames:
-                  - api.example.com
-                  - portal.example.com
-            subject: CN=api.example.com
-            validityInMonths: 12
+          keyUsage:
+            - cRLSign
+            - dataEncipherment
+            - digitalSignature
+            - keyAgreement
+            - keyCertSign
+            - keyEncipherment
+          subjectAlternativeNames:
+            dnsNames:
+              - api.example.com
+              - portal.example.com
+          subject: CN=api.example.com
+          validityInMonths: 12
 ---
 apiVersion: keyvault.azure.m.upbound.io/v1beta1
 kind: AccessPolicy
@@ -161,7 +161,7 @@ spec:
     # jq '.items[] | select(.status.atProvider.identity != null) | .status.atProvider.identity[] |
     # select(.type == "SystemAssigned") | .principalId'
     # example: objectId: 00000000-0000-0000-0000-000000000000
-    objectId: # set-me
+    objectId: 00000000-0000-0000-0000-000000000000
     secretPermissions:
       - Get
       - List
@@ -189,7 +189,7 @@ spec:
     skuName: Developer_1
     # https://github.com/hashicorp/terraform-provider-azurerm/issues/18323
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup

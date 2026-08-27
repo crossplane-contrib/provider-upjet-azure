@@ -149,6 +149,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    sparkVersion: "3.5"
     nodeCount: 3
     nodeSize: Small
     nodeSizeFamily: MemoryOptimized

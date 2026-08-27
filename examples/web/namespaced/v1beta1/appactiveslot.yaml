@@ -66,8 +66,7 @@ spec:
     servicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    siteConfig:
-      - {}
+    siteConfig: {}
 ---
 apiVersion: web.azure.m.upbound.io/v1beta1
 kind: WindowsWebAppSlot
@@ -83,5 +82,4 @@ spec:
     appServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    siteConfig:
-      - {}
+    siteConfig: {}

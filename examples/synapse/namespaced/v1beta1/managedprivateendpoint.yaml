@@ -118,7 +118,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: Qatar Central
     managedVirtualNetworkEnabled: true
     resourceGroupNameSelector:

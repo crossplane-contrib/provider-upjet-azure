@@ -15,7 +15,7 @@ spec:
   forProvider:
     location: West Europe
     source:
-      - script: echo 'hello world'
+      script: echo 'hello world'
     virtualMachineIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -37,24 +37,24 @@ spec:
     adminUsername: adminuser
     disablePasswordAuthentication: false
     identity:
-      - identityIds:
-          - ${azurerm_user_assigned_identity.example.id}
-        type: SystemAssigned, UserAssigned
+      identityIds:
+        - ${azurerm_user_assigned_identity.example.id}
+      type: SystemAssigned, UserAssigned
     location: West Europe
     networkInterfaceIdsRefs:
       - name: example
     osDisk:
-      - caching: ReadWrite
-        storageAccountType: Premium_LRS
+      caching: ReadWrite
+      storageAccountType: Premium_LRS
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     size: Standard_B2s
     sourceImageReference:
-      - offer: 0001-com-ubuntu-server-jammy
-        publisher: Canonical
-        sku: 22_04-lts
-        version: latest
+      offer: 0001-com-ubuntu-server-jammy
+      publisher: Canonical
+      sku: 22_04-lts
+      version: latest
 ---
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: NetworkInterface

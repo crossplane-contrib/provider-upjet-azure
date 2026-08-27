@@ -65,9 +65,6 @@ spec:
     clusteringPolicy: EnterpriseCluster
     evictionPolicy: NoEviction
     port: 10000
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 
 ---
 

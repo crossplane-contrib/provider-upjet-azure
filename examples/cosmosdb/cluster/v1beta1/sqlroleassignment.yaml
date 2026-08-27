@@ -64,7 +64,6 @@ metadata:
     meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
     upjet.upbound.io/manual-intervention: "This resource is dependency of SQLRoleAssignment. This resource is skipping because parent resource was skipped."
   labels:
-  labels:
     testing.upbound.io/example-name: example
   name: upbound-example
 spec:

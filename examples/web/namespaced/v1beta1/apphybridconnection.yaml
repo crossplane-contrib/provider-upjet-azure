@@ -107,5 +107,4 @@ spec:
     servicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: apphybridconn-sp
-    siteConfig:
-      - {}
+    siteConfig: {}

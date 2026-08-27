@@ -56,8 +56,6 @@ spec:
       name: example-fw-rg
     tags:
       environment: Production
-  providerConfigRef:
-    name: default
 ---
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: Firewall

@@ -63,7 +63,7 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-    - enableHostEncryption: false
+    - hostEncryptionEnabled: false
       name: default
       nodeCount: 1
       vmSize: Standard_D2_v2

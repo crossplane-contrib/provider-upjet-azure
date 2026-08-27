@@ -31,15 +31,15 @@ metadata:
 spec:
   forProvider:
     cache:
-      - compressionEnabled: true
-        contentTypesToCompress:
-          - text/html
-          - text/javascript
-          - text/xml
-        queryStringCachingBehavior: IgnoreSpecifiedQueryStrings
-        queryStrings:
-          - account
-          - settings
+      compressionEnabled: true
+      contentTypesToCompress:
+        - text/html
+        - text/javascript
+        - text/xml
+      queryStringCachingBehavior: IgnoreSpecifiedQueryStrings
+      queryStrings:
+        - account
+        - settings
     cdnFrontdoorCustomDomainIdsRefs:
       - name: contoso
       - name: fabrikam
@@ -80,8 +80,8 @@ spec:
         testing.upbound.io/example-name: example
     hostName: contoso.contoso.com
     tls:
-      - certificateType: ManagedCertificate
-        minimumTlsVersion: TLS12
+      certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
 ---
 apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorCustomDomain
@@ -102,8 +102,8 @@ spec:
         testing.upbound.io/example-name: example
     hostName: contoso.fabrikam.com
     tls:
-      - certificateType: ManagedCertificate
-        minimumTlsVersion: TLS12
+      certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
 ---
 apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorOrigin
@@ -143,14 +143,14 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     healthProbe:
-      - intervalInSeconds: 240
-        path: /healthProbe
-        protocol: Https
-        requestType: HEAD
+      intervalInSeconds: 240
+      path: /healthProbe
+      protocol: Https
+      requestType: HEAD
     loadBalancing:
-      - additionalLatencyInMilliseconds: 0
-        sampleSize: 16
-        successfulSamplesRequired: 3
+      additionalLatencyInMilliseconds: 0
+      sampleSize: 16
+      successfulSamplesRequired: 3
     restoreTrafficTimeToHealedOrNewEndpointInMinutes: 10
     sessionAffinityEnabled: true
 ---

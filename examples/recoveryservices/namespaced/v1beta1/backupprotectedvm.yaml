@@ -38,8 +38,8 @@ metadata:
 spec:
   forProvider:
     backup:
-      - frequency: Daily
-        time: "23:00"
+      frequency: Daily
+      time: "23:00"
     recoveryVaultNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -47,7 +47,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     retentionDaily:
-      - count: 10
+      count: 10
 ---
 apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
 kind: Vault

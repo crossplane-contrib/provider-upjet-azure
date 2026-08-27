@@ -41,7 +41,7 @@ metadata:
 spec:
   forProvider:
     collation: SQL_Latin1_General_CP1_CI_AS
-    maxSizeGb: "200"
+    maxSizeGb: 200
     serverIdSelector:
       matchLabels:
         testing.upbound.io/example-name: primary

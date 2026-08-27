@@ -39,9 +39,9 @@ spec:
     family: P
     location: West Europe
     redisConfiguration:
-      - maxmemoryDelta: 2
-        maxmemoryPolicy: allkeys-lru
-        maxmemoryReserved: 2
+      maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -63,9 +63,6 @@ spec:
     clusteringPolicy: EnterpriseCluster
     evictionPolicy: NoEviction
     port: 10000
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 ---
 apiVersion: cache.azure.m.upbound.io/v1beta1
 kind: RedisEnterpriseCluster

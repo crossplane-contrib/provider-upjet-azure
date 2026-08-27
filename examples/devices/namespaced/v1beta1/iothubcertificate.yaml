@@ -67,8 +67,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-      - capacity: 1
-        name: B1
+      capacity: 1
+      name: B1
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
