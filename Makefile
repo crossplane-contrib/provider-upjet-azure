@@ -83,6 +83,7 @@ UPTEST_VERSION = v2.2.0
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
 CRDDIFF_VERSION = v0.12.1
+KUBECTL_VALIDATE_VERSION ?= v0.0.4
 CROSSPLANE_VERSION = 2.3.4
 CROSSPLANE_CLI_VERSION = v2.3.4
 
@@ -333,7 +334,46 @@ go.lint.analysiskey:
 print-subpackages:
 	@echo $(SUBPACKAGES)
 
-.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir go.lint.analysiskey-interval go.lint.analysiskey run crds.clean $(TERRAFORM_PROVIDER_SCHEMA) print-subpackages
+KUBECTL_VALIDATE := $(TOOLS_HOST_DIR)/kubectl-validate-$(KUBECTL_VALIDATE_VERSION)
+
+$(KUBECTL_VALIDATE):
+	@$(INFO) installing kubectl-validate $(KUBECTL_VALIDATE_VERSION)
+	@mkdir -p $(TOOLS_HOST_DIR)
+	@GOBIN=$(abspath $(TOOLS_HOST_DIR)) go install sigs.k8s.io/kubectl-validate@$(KUBECTL_VALIDATE_VERSION)
+	@mv $(TOOLS_HOST_DIR)/kubectl-validate $@
+	@$(OK) installed kubectl-validate $(KUBECTL_VALIDATE_VERSION)
+
+# example-lint validates example manifests against CRD schemas using kubectl-validate.
+# Key implementation details:
+#   - Operates on a tmpdir copy so source files are never mutated.
+#   - Replaces uptest template variables (e.g. ${Rand.RFC1123Subdomain}) with a valid
+#     placeholder; kubectl-validate rejects those tokens as malformed field values.
+#   - Filters out non-Azure YAML files by matching only the apiVersion: line against
+#     azure.*upbound.io, which covers both the family (azure.upbound.io) and monolith
+#     (azure.m.upbound.io) variants. Anchoring prevents false positives from description
+#     fields or comments that mention other providers.
+#   - Captures absolute paths for the binary and CRDs before cd-ing into tmpdir, and runs
+#     kubectl-validate from there so error output shows short relative paths.
+#   - Iterates one API group directory at a time so failures are reported per group.
+example-lint: $(KUBECTL_VALIDATE)
+	@$(INFO) linting example manifests; \
+	failed=0; \
+	tmpdir=$$(mktemp -d); \
+	crdsdir=$$(pwd)/package/crds; \
+	kv=$$(realpath "$(KUBECTL_VALIDATE)"); \
+	cp -r examples/. "$$tmpdir/"; \
+	find "$$tmpdir" -name "*.yaml" | xargs perl -pi -e 's/\$$\{Rand\.[^}]*\}/uptest/g'; \
+	find "$$tmpdir" -name "*.yaml" | while read f; do grep -q '^apiVersion:.*azure.*upbound\.io' "$$f" || rm -f "$$f"; done; \
+	for dir in examples/*/; do \
+		group=$$(basename "$$dir"); \
+		[ -d "$$tmpdir/$$group" ] || continue; \
+		$(INFO) linting $$dir; \
+		(cd "$$tmpdir" && "$$kv" "$$group" --local-crds "$$crdsdir") && $(OK) linted $$dir || { $(WARN) failed to lint $$dir; failed=1; }; \
+	done; \
+	rm -rf "$$tmpdir"; \
+	[ "$$failed" -eq 0 ] && $(OK) linted example manifests || $(FAIL)
+
+.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir go.lint.analysiskey-interval go.lint.analysiskey run crds.clean $(TERRAFORM_PROVIDER_SCHEMA) print-subpackages example-lint
 
 build.init: kustomize-crds
 
