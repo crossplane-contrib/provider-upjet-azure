@@ -14,6 +14,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    location: West Europe
     botNameSelector:
       matchLabels:
         testing.upbound.io/example-name: bot-channels-registration-label

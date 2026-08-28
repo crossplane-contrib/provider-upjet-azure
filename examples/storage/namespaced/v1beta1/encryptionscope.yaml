@@ -9,6 +9,5 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    name: microsoftmanaged
     source: Microsoft.Storage
     storageAccountId: /subscriptions/.../resourceGroups/example-resources111/providers/Microsoft.Storage/storageAccounts/examplestoracc111

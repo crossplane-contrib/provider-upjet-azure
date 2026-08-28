@@ -10,6 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    name: example
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -53,6 +54,7 @@ metadata:
   name: generated
 spec:
   forProvider:
+    name: generated
     keyOpts:
     - decrypt
     - encrypt
@@ -99,6 +101,7 @@ metadata:
   name: example-upbound-pem-cert
 spec:
   forProvider:
+    name: example-upbound-pem-cert
     certificate:
     - contentsSecretRef:
         key: cert.pem # https://docs.microsoft.com/en-us/answers/questions/258583/import-certificate-api-for-azure-key-vault.html
@@ -122,10 +125,10 @@ spec:
       secretProperties:
       - contentType: application/x-pem-file
       lifetimeAction:
-      - action:
-        - actionType: AutoRenew
-        trigger:
-        - daysBeforeExpiry: 30
+        - action:
+            - actionType: AutoRenew
+          trigger:
+            - daysBeforeExpiry: 30
       x509CertificateProperties:
       - extendedKeyUsage:
         - "1.3.6.1.5.5.7.3.1"

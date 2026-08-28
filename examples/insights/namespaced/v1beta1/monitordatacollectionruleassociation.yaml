@@ -41,18 +41,18 @@ spec:
     networkInterfaceIdsRefs:
       - name: mdcraexample
     osDisk:
-      - caching: ReadWrite
-        name: myosdisk-example
-        storageAccountType: Standard_LRS
+      caching: ReadWrite
+      name: myosdisk-example
+      storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     size: Standard_B2s
     sourceImageReference:
-      - offer: UbuntuServer
-        publisher: Canonical
-        sku: 16.04-LTS
-        version: latest
+      offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+      version: latest
 ---
 apiVersion: insights.azure.m.upbound.io/v1beta1
 kind: MonitorDataCollectionEndpoint
@@ -87,8 +87,8 @@ spec:
         streams:
           - Microsoft-InsightsMetrics
     destinations:
-      - azureMonitorMetrics:
-          - name: example-destination-metrics
+      azureMonitorMetrics:
+        name: example-destination-metrics
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

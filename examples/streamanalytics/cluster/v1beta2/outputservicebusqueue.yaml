@@ -102,7 +102,7 @@ metadata:
   name: queueexample
 spec:
   forProvider:
-    enablePartitioning: false
+    partitioningEnabled: false
     maxMessageSizeInKilobytes: 1024
     namespaceIdSelector:
       matchLabels:

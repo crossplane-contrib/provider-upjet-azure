@@ -38,13 +38,13 @@ spec:
   forProvider:
     redisVersion: "6"
     capacity: 1
-    enableNonSslPort: false
+    nonSslPortEnabled: false
     family: P
     location: East US
     redisConfiguration:
-      - maxmemoryDelta: 2
-        maxmemoryPolicy: allkeys-lru
-        maxmemoryReserved: 2
+      maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-primary
@@ -67,9 +67,9 @@ spec:
     family: P
     location: West US
     redisConfiguration:
-      - maxmemoryDelta: 2
-        maxmemoryPolicy: allkeys-lru
-        maxmemoryReserved: 2
+      maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-secondary

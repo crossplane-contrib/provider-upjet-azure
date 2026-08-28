@@ -79,9 +79,9 @@ spec:
     delegation:
       - name: Microsoft.Network.dnsResolvers
         serviceDelegation:
-          - actions:
-              - Microsoft.Network/virtualNetworks/subnets/join/action
-            name: Microsoft.Network/dnsResolvers
+          actions:
+            - Microsoft.Network/virtualNetworks/subnets/join/action
+          name: Microsoft.Network/dnsResolvers
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

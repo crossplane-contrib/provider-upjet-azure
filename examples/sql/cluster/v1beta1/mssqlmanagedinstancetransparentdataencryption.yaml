@@ -165,7 +165,7 @@ metadata:
   name: example-mssqlmi-tde
 spec:
   forProvider:
-    disableBgpRoutePropagation: false
+    bgpRoutePropagationEnabled: true
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

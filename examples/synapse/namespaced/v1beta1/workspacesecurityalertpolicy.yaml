@@ -82,7 +82,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: UK South
     resourceGroupNameSelector:
       matchLabels:

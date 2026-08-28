@@ -125,8 +125,7 @@ spec:
     servicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: funcapphybrconn-sp
-    siteConfig:
-      - {}
+    siteConfig: {}
     storageAccountAccessKeySecretRef:
       key: example-key
       name: example-name

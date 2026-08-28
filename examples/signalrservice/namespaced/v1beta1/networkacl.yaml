@@ -97,7 +97,7 @@ spec:
   forProvider:
     addressPrefixes:
       - 10.5.2.0/24
-    enforcePrivateLinkEndpointNetworkPolicies: true
+    privateEndpointNetworkPolicies: Enabled
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rg-signalrservice

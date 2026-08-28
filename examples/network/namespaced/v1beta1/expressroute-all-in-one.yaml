@@ -27,8 +27,8 @@ spec:
       name: example-expressroute-rg
     serviceProviderName: Equinix
     sku:
-      - family: MeteredData
-        tier: Standard
+      family: MeteredData
+      tier: Standard
     tags:
       environment: Production
 ---
@@ -56,14 +56,14 @@ spec:
     expressRouteCircuitNameRef:
       name: example-circuit
     ipv6:
-      - microsoftPeering:
-          - advertisedPublicPrefixes:
-              - 2002:db01::/126
-        primaryPeerAddressPrefix: 2002:db01::/126
-        secondaryPeerAddressPrefix: 2003:db01::/126
+      microsoftPeering:
+        advertisedPublicPrefixes:
+          - 2002:db01::/126
+      primaryPeerAddressPrefix: 2002:db01::/126
+      secondaryPeerAddressPrefix: 2003:db01::/126
     microsoftPeeringConfig:
-      - advertisedPublicPrefixes:
-          - 123.2.0.0/24
+      advertisedPublicPrefixes:
+        - 123.2.0.0/24
     peerAsn: 100
     primaryPeerAddressPrefix: 123.0.0.0/30
     resourceGroupNameRef:

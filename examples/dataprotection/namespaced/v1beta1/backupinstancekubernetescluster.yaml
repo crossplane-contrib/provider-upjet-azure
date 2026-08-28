@@ -101,15 +101,15 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-      - enableHostEncryption: false
-        name: default
-        nodeCount: 1
-        vmSize: Standard_DS2_v2
-        upgradeSettings:
-          - maxSurge: '10%'
+      hostEncryptionEnabled: false
+      name: default
+      nodeCount: 1
+      vmSize: Standard_DS2_v2
+      upgradeSettings:
+        maxSurge: '10%'
     dnsPrefix: dns
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: North Europe
     resourceGroupNameSelector:
       matchLabels:

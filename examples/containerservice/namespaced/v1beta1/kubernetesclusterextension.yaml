@@ -26,14 +26,14 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-      - name: default
-        nodeCount: 1
-        vmSize: Standard_D2_v2
-        upgradeSettings:
-          - maxSurge: '10%'
+      name: default
+      nodeCount: 1
+      vmSize: Standard_D2_v2
+      upgradeSettings:
+        maxSurge: '10%'
     dnsPrefix: exampleaks1
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: North Europe
     resourceGroupNameSelector:
       matchLabels:

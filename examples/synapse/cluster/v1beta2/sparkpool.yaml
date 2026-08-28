@@ -12,6 +12,7 @@ metadata:
   name: sparkpool
 spec:
   forProvider:
+    sparkVersion: "3.5"
     autoPause:
       delayInMinutes: 15
     autoScale:

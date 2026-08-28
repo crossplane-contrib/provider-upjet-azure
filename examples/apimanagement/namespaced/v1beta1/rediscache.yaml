@@ -40,12 +40,11 @@ spec:
   forProvider:
     redisVersion: "6"
     capacity: 1
-    enableNonSslPort: false
+    nonSslPortEnabled: false
     family: C
     location: West Europe
     minimumTlsVersion: "1.2"
-    redisConfiguration:
-      - {}
+    redisConfiguration: {}
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -51,10 +51,10 @@ spec:
   forProvider:
     location: West Europe
     privateServiceConnection:
-      - isManualConnection: false
-        name: example-privateserviceconnection
-        # ID of the PrivateLinkService below
-        privateConnectionResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/loadbalancerrg/providers/Microsoft.Network/privateLinkServices/example
+      isManualConnection: false
+      name: example-privateserviceconnection
+      # ID of the PrivateLinkService below
+      privateConnectionResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/loadbalancerrg/providers/Microsoft.Network/privateLinkServices/example
     resourceGroupNameRef:
       name: loadbalancerrg
     subnetIdRef:
@@ -91,9 +91,6 @@ spec:
       name: loadbalancerrg
     addressSpace:
       - "10.0.0.0/16"
-    dnsServers:
-      - "10.0.0.4"
-      - "10.0.0.5"
 ---
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: Subnet
@@ -105,7 +102,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    enforcePrivateLinkServiceNetworkPolicies: true
+    privateLinkServiceNetworkPoliciesEnabled: true
     resourceGroupNameRef:
       name: loadbalancerrg
     virtualNetworkNameRef:
@@ -123,7 +120,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    enforcePrivateLinkEndpointNetworkPolicies: true
+    privateEndpointNetworkPolicies: Enabled
     resourceGroupNameRef:
       name: loadbalancerrg
     virtualNetworkNameRef:

@@ -61,5 +61,5 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-iothub
     sku:
-      - capacity: 1
-        name: S1
+      capacity: 1
+      name: S1

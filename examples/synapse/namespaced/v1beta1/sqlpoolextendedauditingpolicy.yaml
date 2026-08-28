@@ -29,6 +29,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    storageAccountType: Standard_LRS
     createMode: Default
     skuName: DW100c
     synapseWorkspaceIdSelector:
@@ -95,7 +96,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: West US 2
     resourceGroupNameSelector:
       matchLabels:

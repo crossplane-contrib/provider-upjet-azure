@@ -63,11 +63,11 @@ spec:
     accessPolicyObjectIds:
       - d949679c-f7ed-4e18-a8ac-0f5560ed3fdc
     authentication:
-      - audience: https://tfexfhir.fhir.azurehealthcareapis.com
-        authority: https://login.microsoftonline.com/b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
+      audience: https://tfexfhir.fhir.azurehealthcareapis.com
+      authority: https://login.microsoftonline.com/b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
     configurationExportStorageAccountName: hmsfdex
     cors:
-      - allowedHeaders:
+        allowedHeaders:
           - '*'
         allowedMethods:
           - GET
@@ -79,7 +79,7 @@ spec:
         credentialsAllowed: true
         maxAgeInSeconds: 3600
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     kind: fhir-R4
     location: East US
     resourceGroupNameSelector:
@@ -179,7 +179,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: east us
     workspaceIdSelector:
       matchLabels:

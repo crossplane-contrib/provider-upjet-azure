@@ -38,7 +38,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -61,8 +61,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: linkedservicekusto-rg
     sku:
-      - capacity: 2
-        name: Standard_D13_v2
+      capacity: 2
+      name: Standard_D13_v2
 ---
 apiVersion: kusto.azure.m.upbound.io/v1beta1
 kind: Database

@@ -18,6 +18,7 @@ spec:
     family: C
     location: West Europe
     minimumTlsVersion: "1.2"
+    redisVersion: "6"
     redisConfiguration: {}
     resourceGroupNameSelector:
       matchLabels:

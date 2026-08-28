@@ -48,9 +48,6 @@ spec:
   forProvider:
     addressSpace:
       - 10.0.0.0/16
-    dnsServers:
-      - 10.0.0.4
-      - 10.0.0.5
     location: West Europe
     resourceGroupNameRef:
       name: loadbalancerrg
@@ -67,7 +64,7 @@ spec:
   forProvider:
     addressPrefixes:
       - 10.0.1.0/24
-    enforcePrivateLinkServiceNetworkPolicies: true
+    privateLinkServiceNetworkPoliciesEnabled: true
     resourceGroupNameRef:
       name: loadbalancerrg
     virtualNetworkNameRef:
@@ -85,7 +82,7 @@ spec:
   forProvider:
     addressPrefixes:
       - 10.0.2.0/24
-    enforcePrivateLinkEndpointNetworkPolicies: true
+    privateEndpointNetworkPolicies: Enabled
     resourceGroupNameRef:
       name: loadbalancerrg
     virtualNetworkNameRef:

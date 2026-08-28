@@ -36,7 +36,6 @@ metadata:
   name: bibsexample
 spec:
   forProvider:
-    retentionDuration: P30D
     vaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

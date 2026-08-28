@@ -164,7 +164,7 @@ spec:
     # jq '.items[] | select(.status.atProvider.identity != null) | .status.atProvider.identity[] |
     # select(.type == "SystemAssigned") | .principalId'
     # example: objectId: 00000000-0000-0000-0000-000000000000
-    objectId: # set-me
+    objectId: 00000000-0000-0000-0000-000000000000
     secretPermissions:
       - Get
       - List

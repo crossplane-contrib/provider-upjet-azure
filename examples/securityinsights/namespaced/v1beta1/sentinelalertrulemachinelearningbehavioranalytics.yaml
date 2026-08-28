@@ -32,8 +32,8 @@ spec:
   forProvider:
     location: West Europe
     plan:
-      - product: OMSGallery/SecurityInsights
-        publisher: Microsoft
+      product: OMSGallery/SecurityInsights
+      publisher: Microsoft
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: sentmlanalytics-rg

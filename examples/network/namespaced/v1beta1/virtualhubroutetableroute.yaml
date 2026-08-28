@@ -128,8 +128,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: virthubrtableroute-vn
     routing:
-      - associatedRouteTableIdRef:
-          name: virthubrtableroute-vhrtable
+      associatedRouteTableIdRef:
+        name: virthubrtableroute-vhrtable
     virtualHubIdSelector:
       matchLabels:
         testing.upbound.io/example-name: virthubrttable-vh

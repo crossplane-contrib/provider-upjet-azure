@@ -31,7 +31,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: westus
     policyDefinitionIdSelector:
       matchLabels:

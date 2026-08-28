@@ -19,6 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: wssqlaadadmin-ws
     tenantId: ${data.azurerm_client_config.current.tenant_id}
+    objectId: ${data.azurerm_client_config.current.object_id}
 ---
 apiVersion: keyvault.azure.m.upbound.io/v1beta1
 kind: Vault
@@ -74,8 +75,8 @@ metadata:
   name: wssqlaadadmin-key
   namespace: upbound-system
 spec:
-  name: workspace-encryption-key
   forProvider:
+    name: workspace-encryption-key
     keyOpts:
       - unwrapKey
       - wrapKey
@@ -149,7 +150,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

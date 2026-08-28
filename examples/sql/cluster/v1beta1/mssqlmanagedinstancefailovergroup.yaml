@@ -130,7 +130,7 @@ metadata:
   name: example-failover
 spec:
   forProvider:
-    disableBgpRoutePropagation: false
+    bgpRoutePropagationEnabled: true
     location: North Europe
     resourceGroupNameRef:
       name: example-sql-rg-failover

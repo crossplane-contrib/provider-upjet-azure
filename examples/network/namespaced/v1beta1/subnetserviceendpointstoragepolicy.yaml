@@ -18,8 +18,8 @@ spec:
       - description: definition1
         name: name1
         serviceResources:
-          -
-          -
+          - <resource-id-1>
+          - <resource-id-2>
         # Resource id 2 Account
     location: West Europe
     resourceGroupNameSelector:

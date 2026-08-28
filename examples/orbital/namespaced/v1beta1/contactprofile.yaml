@@ -65,12 +65,12 @@ spec:
     delegation:
       - name: orbitalgateway
         serviceDelegation:
-          - actions:
-              - Microsoft.Network/publicIPAddresses/join/action
-              - Microsoft.Network/virtualNetworks/subnets/join/action
-              - Microsoft.Network/virtualNetworks/read
-              - Microsoft.Network/publicIPAddresses/read
-            name: Microsoft.Orbital/orbitalGateways
+          actions:
+            - Microsoft.Network/publicIPAddresses/join/action
+            - Microsoft.Network/virtualNetworks/subnets/join/action
+            - Microsoft.Network/virtualNetworks/read
+            - Microsoft.Network/publicIPAddresses/read
+          name: Microsoft.Orbital/orbitalGateways
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: contactprofile-rg

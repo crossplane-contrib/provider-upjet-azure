@@ -53,8 +53,8 @@ spec:
           - Http
           - Https
         forwardingConfiguration:
-          - backendPoolName: exampleBackendBing
-            forwardingProtocol: MatchRequest
+          backendPoolName: exampleBackendBing
+          forwardingProtocol: MatchRequest
         frontendEndpoints:
           - exampleFrontendEndpoint1
         name: exampleRoutingRule1

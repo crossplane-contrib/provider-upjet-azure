@@ -9,7 +9,8 @@ metadata:
   namespace: upbound-system
 type: Opaque
 data:
-  creds: <base64-encoded service principal credentials document>
+  # <base64-encoded service principal credentials document>
+  creds: dXB0ZXN0
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ProviderConfig

@@ -13,6 +13,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    location: West Europe
     action:
       - actionGroupIdSelector:
           matchLabels:

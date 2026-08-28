@@ -36,7 +36,7 @@ spec:
   forProvider:
     redisVersion: "4"
     capacity: 1
-    enableNonSslPort: true
+    nonSslPortEnabled: true
     family: C
     location: West Europe
     resourceGroupNameSelector:

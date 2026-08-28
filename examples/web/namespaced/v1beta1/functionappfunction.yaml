@@ -63,8 +63,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: funcappfunction-sp
     siteConfig:
-      - applicationStack:
-          - pythonVersion: "3.9"
+      applicationStack:
+        pythonVersion: "3.9"
     storageAccountAccessKeySecretRef:
       key: example-key
       name: example-name

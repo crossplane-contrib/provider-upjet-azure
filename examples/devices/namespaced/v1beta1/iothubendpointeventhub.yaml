@@ -106,8 +106,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-iothub-endpoint
     sku:
-      - capacity: 1
-        name: B1
+      capacity: 1
+      name: B1
     tags:
       purpose: example
 ---

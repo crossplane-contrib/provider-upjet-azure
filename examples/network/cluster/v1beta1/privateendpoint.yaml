@@ -50,9 +50,6 @@ spec:
       name: loadbalancerrg
     addressSpace:
       - "10.0.0.0/16"
-    dnsServers:
-      - "10.0.0.4"
-      - "10.0.0.5"
 
 ---
 apiVersion: network.azure.upbound.io/v1beta1
@@ -64,7 +61,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
-    enforcePrivateLinkServiceNetworkPolicies: true
+    privateLinkServiceNetworkPoliciesEnabled: true
     resourceGroupNameRef:
       name: loadbalancerrg
     virtualNetworkNameRef:
@@ -82,7 +79,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
-    enforcePrivateLinkEndpointNetworkPolicies: true
+    privateEndpointNetworkPolicies: Enabled
     resourceGroupNameRef:
       name: loadbalancerrg
     virtualNetworkNameRef:

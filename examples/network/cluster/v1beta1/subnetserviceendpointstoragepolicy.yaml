@@ -17,8 +17,8 @@ spec:
     - description: definition1
       name: name1
       serviceResources:
-      - # Resource id 1 Resource Group
-      - # Resource id 2 Account
+      - <Resource id 1 Resource Group>
+      - <Resource id 2 Account>
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
