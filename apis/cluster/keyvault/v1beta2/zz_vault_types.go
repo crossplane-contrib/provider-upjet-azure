@@ -155,7 +155,7 @@ type VaultInitParameters struct {
 	// Is Purge Protection enabled for this Key Vault?
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions. Defaults to false.
 	RbacAuthorizationEnabled *bool `json:"rbacAuthorizationEnabled,omitempty" tf:"rbac_authorization_enabled,omitempty"`
 
 	// The Name of the SKU used for this Key Vault. Possible values are standard and premium.
@@ -205,7 +205,7 @@ type VaultObservation struct {
 	// Is Purge Protection enabled for this Key Vault?
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions. Defaults to false.
 	RbacAuthorizationEnabled *bool `json:"rbacAuthorizationEnabled,omitempty" tf:"rbac_authorization_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created.
@@ -264,7 +264,7 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Optional
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions. Defaults to false.
 	// +kubebuilder:validation:Optional
 	RbacAuthorizationEnabled *bool `json:"rbacAuthorizationEnabled,omitempty" tf:"rbac_authorization_enabled,omitempty"`
 

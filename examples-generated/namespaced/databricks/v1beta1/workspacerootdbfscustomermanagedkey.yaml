@@ -55,6 +55,7 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: true
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -18,11 +18,17 @@ type ApplicationInsightsInitParameters struct {
 	// The connection string of Application Insights.
 	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
+	// The Client Id of the User Assigned Identity, or SystemAssigned to use the System Assigned Identity, that has the "Monitoring Metrics Publisher" role on the target Application Insights resource. Requires connection_string to be set. Cannot be used with instrumentation_key.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
 	// The instrumentation key used to push data to Application Insights.
 	InstrumentationKeySecretRef *v2.SecretKeySelector `json:"instrumentationKeySecretRef,omitempty" tf:"-"`
 }
 
 type ApplicationInsightsObservation struct {
+
+	// The Client Id of the User Assigned Identity, or SystemAssigned to use the System Assigned Identity, that has the "Monitoring Metrics Publisher" role on the target Application Insights resource. Requires connection_string to be set. Cannot be used with instrumentation_key.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 }
 
 type ApplicationInsightsParameters struct {
@@ -30,6 +36,10 @@ type ApplicationInsightsParameters struct {
 	// The connection string of Application Insights.
 	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
+	// The Client Id of the User Assigned Identity, or SystemAssigned to use the System Assigned Identity, that has the "Monitoring Metrics Publisher" role on the target Application Insights resource. Requires connection_string to be set. Cannot be used with instrumentation_key.
+	// +kubebuilder:validation:Optional
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
 	// The instrumentation key used to push data to Application Insights.
 	// +kubebuilder:validation:Optional
@@ -116,7 +126,7 @@ type LoggerObservation struct {
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
 	// An application_insights block as documented below. Changing this forces a new resource to be created.
-	ApplicationInsights *ApplicationInsightsParameters `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
+	ApplicationInsights *ApplicationInsightsObservation `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
 
 	// Specifies whether records should be buffered in the Logger prior to publishing. Defaults to true.
 	Buffered *bool `json:"buffered,omitempty" tf:"buffered,omitempty"`

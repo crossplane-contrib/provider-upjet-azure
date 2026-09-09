@@ -529,6 +529,13 @@ spec:
                           description: Is this the Primary IP Configuration? Possible
                             values are true and false. Defaults to false.
                           type: boolean
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: A mapping of tags to assign to the Network
+                            Interface created by this Network Interface Configuration.
+                          type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   osDisk:
@@ -1608,6 +1615,13 @@ spec:
                           description: Is this the Primary IP Configuration? Possible
                             values are true and false. Defaults to false.
                           type: boolean
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: A mapping of tags to assign to the Network
+                            Interface created by this Network Interface Configuration.
+                          type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   osDisk:
@@ -2573,6 +2587,13 @@ spec:
                           description: Is this the Primary IP Configuration? Possible
                             values are true and false. Defaults to false.
                           type: boolean
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: A mapping of tags to assign to the Network
+                            Interface created by this Network Interface Configuration.
+                          type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   osDisk:

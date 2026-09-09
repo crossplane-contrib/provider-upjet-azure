@@ -38329,6 +38329,11 @@ func (in *PrivateEndpointInitParameters) DeepCopyInto(out *PrivateEndpointInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.EdgeZone != nil {
+		in, out := &in.EdgeZone, &out.EdgeZone
+		*out = new(string)
+		**out = **in
+	}
 	if in.IPConfiguration != nil {
 		in, out := &in.IPConfiguration, &out.IPConfiguration
 		*out = make([]PrivateEndpointIPConfigurationInitParameters, len(*in))
@@ -38496,6 +38501,11 @@ func (in *PrivateEndpointObservation) DeepCopyInto(out *PrivateEndpointObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.EdgeZone != nil {
+		in, out := &in.EdgeZone, &out.EdgeZone
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -38580,6 +38590,11 @@ func (in *PrivateEndpointParameters) DeepCopyInto(out *PrivateEndpointParameters
 	*out = *in
 	if in.CustomNetworkInterfaceName != nil {
 		in, out := &in.CustomNetworkInterfaceName, &out.CustomNetworkInterfaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.EdgeZone != nil {
+		in, out := &in.EdgeZone, &out.EdgeZone
 		*out = new(string)
 		**out = **in
 	}
