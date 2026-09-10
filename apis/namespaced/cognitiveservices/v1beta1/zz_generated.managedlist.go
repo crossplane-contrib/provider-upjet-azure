@@ -25,6 +25,15 @@ func (l *AccountList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this AccountProjectList.
+func (l *AccountProjectList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this AccountRaiBlocklistList.
 func (l *AccountRaiBlocklistList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

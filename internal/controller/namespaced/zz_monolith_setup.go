@@ -152,6 +152,7 @@ import (
 	profile "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/v2/internal/controller/namespaced/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/account"
+	accountproject "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountproject"
 	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraiblocklist"
 	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraipolicy"
 	aiservices "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/aiservices"
@@ -926,6 +927,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
+		accountproject.Setup,
 		accountraiblocklist.Setup,
 		accountraipolicy.Setup,
 		aiservices.Setup,
@@ -1706,6 +1708,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.SetupGated,
 		appservicecertificateorder.SetupGated,
 		accountcognitiveservices.SetupGated,
+		accountproject.SetupGated,
 		accountraiblocklist.SetupGated,
 		accountraipolicy.SetupGated,
 		aiservices.SetupGated,
@@ -2485,6 +2488,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		profile.SetupWebhookWithManager,
 		appservicecertificateorder.SetupWebhookWithManager,
 		accountcognitiveservices.SetupWebhookWithManager,
+		accountproject.SetupWebhookWithManager,
 		accountraiblocklist.SetupWebhookWithManager,
 		accountraipolicy.SetupWebhookWithManager,
 		aiservices.SetupWebhookWithManager,

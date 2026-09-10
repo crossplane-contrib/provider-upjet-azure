@@ -118,6 +118,7 @@
 "azurerm_cdn_frontdoor_security_policy",
 "azurerm_cdn_profile",
 "azurerm_cognitive_account",
+"azurerm_cognitive_account_project",
 "azurerm_cognitive_account_rai_blocklist",
 "azurerm_cognitive_account_rai_policy",
 "azurerm_cognitive_deployment",

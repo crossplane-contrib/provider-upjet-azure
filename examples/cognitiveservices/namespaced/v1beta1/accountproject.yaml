@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: AccountProject
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Example cognitive services project
+    displayName: Example Project
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    tags:
+      Environment: test
+
+---
+
+# Cognitive Account Projects can only be created under a Cognitive Account
+# that has project_management_enabled = true, kind = "AIServices", a managed
+# identity configured, and a custom_subdomain_name specified.
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountproject
+  namespace: upbound-system
+spec:
+  forProvider:
+    customSubdomainName: uptest-${Rand.RFC1123Subdomain}
+    identity:
+      type: SystemAssigned
+    kind: AIServices
+    location: West Europe
+    projectManagementEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountproject
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
