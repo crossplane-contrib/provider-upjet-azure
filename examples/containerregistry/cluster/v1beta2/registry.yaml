@@ -7,7 +7,9 @@ kind: Registry
 metadata:
   annotations:
     meta.upbound.io/example-id: containerregistry/v1beta2/registry
-  name: upbound
+  labels:
+    testing.upbound.io/example-name: registry
+  name: crossplanecontribuptest
 spec:
   forProvider:
     adminEnabled: false
@@ -17,6 +19,21 @@ spec:
       tags: {}
       zoneRedundancyEnabled: true
     location: West Europe
-    resourceGroupNameRef:
-      name: example-containerreg
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: registry
     sku: Premium
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta2/registry
+  labels:
+    testing.upbound.io/example-name: registry
+  name: uptest-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

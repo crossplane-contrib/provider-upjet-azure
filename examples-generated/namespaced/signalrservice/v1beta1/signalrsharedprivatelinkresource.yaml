@@ -36,6 +36,7 @@ metadata:
 spec:
   forProvider:
     location: east us
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

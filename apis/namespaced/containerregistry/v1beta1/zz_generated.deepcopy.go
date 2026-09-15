@@ -2102,6 +2102,11 @@ func (in *RegistryInitParameters) DeepCopyInto(out *RegistryInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AzureadAuthenticationAsArmPolicyEnabled != nil {
+		in, out := &in.AzureadAuthenticationAsArmPolicyEnabled, &out.AzureadAuthenticationAsArmPolicyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DataEndpointEnabled != nil {
 		in, out := &in.DataEndpointEnabled, &out.DataEndpointEnabled
 		*out = new(bool)
@@ -2134,6 +2139,11 @@ func (in *RegistryInitParameters) DeepCopyInto(out *RegistryInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkRuleBypassForTasksEnabled != nil {
+		in, out := &in.NetworkRuleBypassForTasksEnabled, &out.NetworkRuleBypassForTasksEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NetworkRuleBypassOption != nil {
 		in, out := &in.NetworkRuleBypassOption, &out.NetworkRuleBypassOption
 		*out = new(string)
@@ -2157,6 +2167,11 @@ func (in *RegistryInitParameters) DeepCopyInto(out *RegistryInitParameters) {
 	if in.RetentionPolicyInDays != nil {
 		in, out := &in.RetentionPolicyInDays, &out.RetentionPolicyInDays
 		*out = new(float64)
+		**out = **in
+	}
+	if in.RoleAssignmentMode != nil {
+		in, out := &in.RoleAssignmentMode, &out.RoleAssignmentMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.Sku != nil {
@@ -2252,6 +2267,11 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AzureadAuthenticationAsArmPolicyEnabled != nil {
+		in, out := &in.AzureadAuthenticationAsArmPolicyEnabled, &out.AzureadAuthenticationAsArmPolicyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DataEndpointEnabled != nil {
 		in, out := &in.DataEndpointEnabled, &out.DataEndpointEnabled
 		*out = new(bool)
@@ -2305,6 +2325,11 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkRuleBypassForTasksEnabled != nil {
+		in, out := &in.NetworkRuleBypassForTasksEnabled, &out.NetworkRuleBypassForTasksEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NetworkRuleBypassOption != nil {
 		in, out := &in.NetworkRuleBypassOption, &out.NetworkRuleBypassOption
 		*out = new(string)
@@ -2333,6 +2358,11 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 	if in.RetentionPolicyInDays != nil {
 		in, out := &in.RetentionPolicyInDays, &out.RetentionPolicyInDays
 		*out = new(float64)
+		**out = **in
+	}
+	if in.RoleAssignmentMode != nil {
+		in, out := &in.RoleAssignmentMode, &out.RoleAssignmentMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.Sku != nil {
@@ -2391,6 +2421,11 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AzureadAuthenticationAsArmPolicyEnabled != nil {
+		in, out := &in.AzureadAuthenticationAsArmPolicyEnabled, &out.AzureadAuthenticationAsArmPolicyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DataEndpointEnabled != nil {
 		in, out := &in.DataEndpointEnabled, &out.DataEndpointEnabled
 		*out = new(bool)
@@ -2421,6 +2456,11 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkRuleBypassForTasksEnabled != nil {
+		in, out := &in.NetworkRuleBypassForTasksEnabled, &out.NetworkRuleBypassForTasksEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NetworkRuleBypassOption != nil {
@@ -2461,6 +2501,11 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 	if in.RetentionPolicyInDays != nil {
 		in, out := &in.RetentionPolicyInDays, &out.RetentionPolicyInDays
 		*out = new(float64)
+		**out = **in
+	}
+	if in.RoleAssignmentMode != nil {
+		in, out := &in.RoleAssignmentMode, &out.RoleAssignmentMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.Sku != nil {

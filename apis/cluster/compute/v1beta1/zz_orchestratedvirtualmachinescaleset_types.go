@@ -903,6 +903,10 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceInitParameters struct {
 
 	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// A mapping of tags to assign to the Network Interface created by this Network Interface Configuration.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation struct {
@@ -933,6 +937,10 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation struct {
 
 	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// A mapping of tags to assign to the Network Interface created by this Network Interface Configuration.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceParameters struct {
@@ -972,6 +980,11 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceParameters struct {
 	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// A mapping of tags to assign to the Network Interface created by this Network Interface Configuration.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetObservation struct {
@@ -1648,7 +1661,6 @@ type SkuProfileInitParameters struct {
 	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice, Prioritized, and CapacityOptimized.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
-	// Specifies the VM sizes for the virtual machine scale set.
 	// +listType=set
 	VMSizes []*string `json:"vmSizes,omitempty" tf:"vm_sizes,omitempty"`
 
@@ -1661,7 +1673,6 @@ type SkuProfileObservation struct {
 	// Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated. Possible values are LowestPrice, Prioritized, and CapacityOptimized.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
-	// Specifies the VM sizes for the virtual machine scale set.
 	// +listType=set
 	VMSizes []*string `json:"vmSizes,omitempty" tf:"vm_sizes,omitempty"`
 
@@ -1675,7 +1686,6 @@ type SkuProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationStrategy *string `json:"allocationStrategy" tf:"allocation_strategy,omitempty"`
 
-	// Specifies the VM sizes for the virtual machine scale set.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VMSizes []*string `json:"vmSizes,omitempty" tf:"vm_sizes,omitempty"`

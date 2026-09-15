@@ -238,6 +238,9 @@ type RegistryInitParameters struct {
 	// Whether to allow anonymous (unauthenticated) pull access to this Container Registry. This is only supported on resources with the Standard or Premium SKU.
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
+	// Whether to use Azure Resource Manager audience token for this Container Registry? Defaults to true.
+	AzureadAuthenticationAsArmPolicyEnabled *bool `json:"azureadAuthenticationAsArmPolicyEnabled,omitempty" tf:"azuread_authentication_as_arm_policy_enabled,omitempty"`
+
 	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
 
@@ -256,6 +259,9 @@ type RegistryInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Whether to allow Container Registry Tasks to access a network-restricted Container Registry? Defaults to false.
+	NetworkRuleBypassForTasksEnabled *bool `json:"networkRuleBypassForTasksEnabled,omitempty" tf:"network_rule_bypass_for_tasks_enabled,omitempty"`
+
 	// Whether to allow trusted Azure services to access a network-restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
@@ -270,6 +276,9 @@ type RegistryInitParameters struct {
 
 	// The number of days to retain and untagged manifest after which it gets purged.
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
+
+	// The role assignment mode of this Container Registry. Possible values are AbacRepositoryPermissions and LegacyRegistryPermissions. Defaults to LegacyRegistryPermissions.
+	RoleAssignmentMode *string `json:"roleAssignmentMode,omitempty" tf:"role_assignment_mode,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -295,6 +304,9 @@ type RegistryObservation struct {
 
 	// Whether to allow anonymous (unauthenticated) pull access to this Container Registry. This is only supported on resources with the Standard or Premium SKU.
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
+
+	// Whether to use Azure Resource Manager audience token for this Container Registry? Defaults to true.
+	AzureadAuthenticationAsArmPolicyEnabled *bool `json:"azureadAuthenticationAsArmPolicyEnabled,omitempty" tf:"azuread_authentication_as_arm_policy_enabled,omitempty"`
 
 	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
@@ -324,6 +336,9 @@ type RegistryObservation struct {
 	// The URL that can be used to log into the container registry.
 	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
 
+	// Whether to allow Container Registry Tasks to access a network-restricted Container Registry? Defaults to false.
+	NetworkRuleBypassForTasksEnabled *bool `json:"networkRuleBypassForTasksEnabled,omitempty" tf:"network_rule_bypass_for_tasks_enabled,omitempty"`
+
 	// Whether to allow trusted Azure services to access a network-restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
@@ -341,6 +356,9 @@ type RegistryObservation struct {
 
 	// The number of days to retain and untagged manifest after which it gets purged.
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
+
+	// The role assignment mode of this Container Registry. Possible values are AbacRepositoryPermissions and LegacyRegistryPermissions. Defaults to LegacyRegistryPermissions.
+	RoleAssignmentMode *string `json:"roleAssignmentMode,omitempty" tf:"role_assignment_mode,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -366,6 +384,10 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
+	// Whether to use Azure Resource Manager audience token for this Container Registry? Defaults to true.
+	// +kubebuilder:validation:Optional
+	AzureadAuthenticationAsArmPolicyEnabled *bool `json:"azureadAuthenticationAsArmPolicyEnabled,omitempty" tf:"azuread_authentication_as_arm_policy_enabled,omitempty"`
+
 	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
 	// +kubebuilder:validation:Optional
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
@@ -389,6 +411,10 @@ type RegistryParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether to allow Container Registry Tasks to access a network-restricted Container Registry? Defaults to false.
+	// +kubebuilder:validation:Optional
+	NetworkRuleBypassForTasksEnabled *bool `json:"networkRuleBypassForTasksEnabled,omitempty" tf:"network_rule_bypass_for_tasks_enabled,omitempty"`
 
 	// Whether to allow trusted Azure services to access a network-restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
 	// +kubebuilder:validation:Optional
@@ -422,6 +448,10 @@ type RegistryParameters struct {
 	// The number of days to retain and untagged manifest after which it gets purged.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
+
+	// The role assignment mode of this Container Registry. Possible values are AbacRepositoryPermissions and LegacyRegistryPermissions. Defaults to LegacyRegistryPermissions.
+	// +kubebuilder:validation:Optional
+	RoleAssignmentMode *string `json:"roleAssignmentMode,omitempty" tf:"role_assignment_mode,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	// +kubebuilder:validation:Optional

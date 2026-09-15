@@ -161,6 +161,13 @@ spec:
                         - key
                         - name
                         type: object
+                      identityClientId:
+                        description: The Client Id of the User Assigned Identity,
+                          or SystemAssigned to use the System Assigned Identity, that
+                          has the "Monitoring Metrics Publisher" role on the target
+                          Application Insights resource. Requires connection_string
+                          to be set. Cannot be used with instrumentation_key.
+                        type: string
                       instrumentationKeySecretRef:
                         description: The instrumentation key used to push data to
                           Application Insights.
@@ -415,6 +422,13 @@ spec:
                         - key
                         - name
                         type: object
+                      identityClientId:
+                        description: The Client Id of the User Assigned Identity,
+                          or SystemAssigned to use the System Assigned Identity, that
+                          has the "Monitoring Metrics Publisher" role on the target
+                          Application Insights resource. Requires connection_string
+                          to be set. Cannot be used with instrumentation_key.
+                        type: string
                       instrumentationKeySecretRef:
                         description: The instrumentation key used to push data to
                           Application Insights.
@@ -625,31 +639,13 @@ spec:
                     description: An application_insights block as documented below.
                       Changing this forces a new resource to be created.
                     properties:
-                      connectionStringSecretRef:
-                        description: The connection string of Application Insights.
-                        properties:
-                          key:
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        type: object
-                      instrumentationKeySecretRef:
-                        description: The instrumentation key used to push data to
-                          Application Insights.
-                        properties:
-                          key:
-                            type: string
-                          name:
-                            description: Name of the secret.
-                            type: string
-                        required:
-                        - key
-                        - name
-                        type: object
+                      identityClientId:
+                        description: The Client Id of the User Assigned Identity,
+                          or SystemAssigned to use the System Assigned Identity, that
+                          has the "Monitoring Metrics Publisher" role on the target
+                          Application Insights resource. Requires connection_string
+                          to be set. Cannot be used with instrumentation_key.
+                        type: string
                     type: object
                   buffered:
                     description: Specifies whether records should be buffered in the

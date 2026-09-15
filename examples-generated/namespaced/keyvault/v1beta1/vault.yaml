@@ -16,6 +16,7 @@ spec:
     enabledForDiskEncryption: true
     location: West Europe
     purgeProtectionEnabled: false
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

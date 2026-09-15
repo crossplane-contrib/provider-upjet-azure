@@ -659,6 +659,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -759,6 +760,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -2093,6 +2095,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -3178,6 +3181,7 @@ resources:
             api_management_name: '- (Required) The name of the API Management Service. Changing this forces a new resource to be created.'
             application_insights: '- (Optional) An application_insights block as documented below. Changing this forces a new resource to be created.'
             application_insights.connection_string: '- (Optional) The connection string of Application Insights.'
+            application_insights.identity_client_id: '- (Optional) The Client Id of the User Assigned Identity, or SystemAssigned to use the System Assigned Identity, that has the "Monitoring Metrics Publisher" role on the target Application Insights resource. Requires connection_string to be set. Cannot be used with instrumentation_key.'
             application_insights.instrumentation_key: '- (Optional) The instrumentation key used to push data to Application Insights.'
             buffered: '- (Optional) Specifies whether records should be buffered in the Logger prior to publishing. Defaults to true.'
             description: '- (Optional) A description of this Logger.'
@@ -4362,6 +4366,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "exampleKVt123",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -4633,6 +4638,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.test.location}",
                       "name": "kv",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.test.name}",
                       "sku_name": "premium",
                       "soft_delete_retention_days": 7,
@@ -12515,6 +12521,304 @@ resources:
             user_managed_https.tls_version: '- (Optional) The minimum TLS protocol version that is used for HTTPS. Possible values are TLS10 (representing TLS 1.0/1.1), TLS12 (representing TLS 1.2) and None (representing no minimums). Defaults to TLS12.'
         importStatements:
             - terraform import azurerm_cdn_endpoint_custom_domain.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customDomains/domain1
+    azurerm_cdn_frontdoor_batch_rule_set:
+        subCategory: CDN
+        description: Manages a Front Door (standard/premium) Batch Rule Set.
+        name: azurerm_cdn_frontdoor_batch_rule_set
+        title: azurerm_cdn_frontdoor_batch_rule_set
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "cdn_frontdoor_profile_id": "${azurerm_cdn_frontdoor_profile.example.id}",
+                  "name": "examplebatchruleset",
+                  "rule": [
+                    {
+                      "actions": [
+                        {
+                          "route_configuration_override": [
+                            {
+                              "caching": [
+                                {
+                                  "behaviour": "OverrideIfOriginMissing",
+                                  "compression_enabled": true,
+                                  "duration": "365.23:59:59",
+                                  "query_string_behaviour": "IncludeSpecifiedQueryStrings",
+                                  "query_string_parameters": [
+                                    "foo",
+                                    "clientIp={client_ip}"
+                                  ]
+                                }
+                              ],
+                              "origin_group": [
+                                {
+                                  "cdn_frontdoor_origin_group_id": "${azurerm_cdn_frontdoor_origin_group.example.id}",
+                                  "forwarding_protocol": "HttpsOnly"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "behaviour_on_match": "Continue",
+                      "conditions": [
+                        {
+                          "device_type": [
+                            {
+                              "operator": "Equal",
+                              "values": [
+                                "Mobile"
+                              ]
+                            }
+                          ],
+                          "host_name": [
+                            {
+                              "operator": "Equal",
+                              "transforms": [
+                                "Lowercase",
+                                "Trim"
+                              ],
+                              "values": [
+                                "www.contoso.com",
+                                "images.contoso.com",
+                                "video.contoso.com"
+                              ]
+                            }
+                          ],
+                          "post_argument": [
+                            {
+                              "name": "customerName",
+                              "operator": "BeginsWith",
+                              "transforms": [
+                                "Uppercase"
+                              ],
+                              "values": [
+                                "J",
+                                "K"
+                              ]
+                            }
+                          ],
+                          "request_filename": [
+                            {
+                              "operator": "Equal",
+                              "transforms": [
+                                "Lowercase",
+                                "RemoveNulls",
+                                "Trim"
+                              ],
+                              "values": [
+                                "media.mp4"
+                              ]
+                            }
+                          ],
+                          "request_method": [
+                            {
+                              "operator": "Equal",
+                              "values": [
+                                "DELETE"
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "name": "examplebatchrule",
+                      "order": 1
+                    }
+                  ]
+                }
+              references:
+                cdn_frontdoor_profile_id: azurerm_cdn_frontdoor_profile.example.id
+                rule.actions.route_configuration_override.origin_group.cdn_frontdoor_origin_group_id: azurerm_cdn_frontdoor_origin_group.example.id
+              dependencies:
+                azurerm_cdn_frontdoor_endpoint.example: |-
+                    {
+                      "cdn_frontdoor_profile_id": "${azurerm_cdn_frontdoor_profile.example.id}",
+                      "name": "example-endpoint",
+                      "tags": {
+                        "endpoint": "contoso.com"
+                      }
+                    }
+                azurerm_cdn_frontdoor_origin.example: |-
+                    {
+                      "cdn_frontdoor_origin_group_id": "${azurerm_cdn_frontdoor_origin_group.example.id}",
+                      "certificate_name_check_enabled": false,
+                      "enabled": true,
+                      "host_name": "${azurerm_cdn_frontdoor_endpoint.example.host_name}",
+                      "http_port": 80,
+                      "https_port": 443,
+                      "name": "example-origin",
+                      "origin_host_header": "contoso.com",
+                      "priority": 1,
+                      "weight": 500
+                    }
+                azurerm_cdn_frontdoor_origin_group.example: |-
+                    {
+                      "cdn_frontdoor_profile_id": "${azurerm_cdn_frontdoor_profile.example.id}",
+                      "health_probe": [
+                        {
+                          "interval_in_seconds": 240,
+                          "path": "/healthProbe",
+                          "protocol": "Https",
+                          "request_type": "GET"
+                        }
+                      ],
+                      "load_balancing": [
+                        {
+                          "additional_latency_in_milliseconds": 0,
+                          "sample_size": 16,
+                          "successful_samples_required": 3
+                        }
+                      ],
+                      "name": "example-originGroup",
+                      "restore_traffic_time_to_healed_or_new_endpoint_in_minutes": 10,
+                      "session_affinity_enabled": true
+                    }
+                azurerm_cdn_frontdoor_profile.example: |-
+                    {
+                      "name": "example-profile",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "Premium_AzureFrontDoor"
+                    }
+                azurerm_cdn_frontdoor_route.example: |-
+                    {
+                      "cdn_frontdoor_endpoint_id": "${azurerm_cdn_frontdoor_endpoint.example.id}",
+                      "cdn_frontdoor_origin_group_id": "${azurerm_cdn_frontdoor_origin_group.example.id}",
+                      "cdn_frontdoor_origin_ids": [
+                        "${azurerm_cdn_frontdoor_origin.example.id}"
+                      ],
+                      "cdn_frontdoor_rule_set_ids": [
+                        "${azurerm_cdn_frontdoor_batch_rule_set.example.id}"
+                      ],
+                      "name": "example-cdn-frontdoor-route",
+                      "patterns_to_match": [
+                        "/*"
+                      ],
+                      "supported_protocols": [
+                        "Http",
+                        "Https"
+                      ]
+                    }
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-cdn-frontdoor"
+                    }
+        argumentDocs:
+            10.client_port: '- (Optional) One or more client_port blocks as defined below.'
+            10.device_type: '- (Optional) One or more device_type blocks as defined below.'
+            10.host_name: '- (Optional) One or more host_name blocks as defined below.'
+            10.http_version: '- (Optional) One or more http_version blocks as defined below.'
+            10.post_argument: '- (Optional) One or more post_argument blocks as defined below.'
+            10.query_string: '- (Optional) One or more query_string blocks as defined below.'
+            10.remote_address: '- (Optional) One or more remote_address blocks as defined below.'
+            10.request_body: '- (Optional) One or more request_body blocks as defined below.'
+            10.request_cookies: '- (Optional) One or more request_cookies blocks as defined below.'
+            10.request_file_extension: '- (Optional) One or more request_file_extension blocks as defined below.'
+            10.request_filename: '- (Optional) One or more request_filename blocks as defined below.'
+            10.request_header: '- (Optional) One or more request_header blocks as defined below.'
+            10.request_method: '- (Optional) One or more request_method blocks as defined below.'
+            10.request_path: '- (Optional) One or more request_path blocks as defined below.'
+            10.request_scheme: '- (Optional) One or more request_scheme blocks as defined below.'
+            10.request_url: '- (Optional) One or more request_url blocks as defined below.'
+            10.server_port: '- (Optional) One or more server_port blocks as defined below.'
+            10.socket_address: '- (Optional) One or more socket_address blocks as defined below.'
+            10.ssl_protocol: '- (Optional) One or more ssl_protocol blocks as defined below.'
+            Microsoft.Cdn: '- 2025-12-01'
+            actions.modify_request_header: '- (Optional) One or more modify_request_header blocks as defined below.'
+            actions.modify_response_header: '- (Optional) One or more modify_response_header blocks as defined below.'
+            actions.route_configuration_override: '- (Optional) A route_configuration_override block as defined below.'
+            actions.url_redirect: '- (Optional) A url_redirect block as defined below.'
+            actions.url_rewrite: '- (Optional) A url_rewrite block as defined below.'
+            caching.behaviour: '- (Required) Controls how Front Door handles cache behaviour for the response. Possible values are HonorOrigin, OverrideAlways, OverrideIfOriginMissing, and Disabled.'
+            cdn_frontdoor_profile_id: '- (Required) The resource ID of the Front Door Profile where this Front Door Batch Rule Set should be created. Changing this forces a new resource to be created.'
+            client_port.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            client_port.values: '- (Optional) One or more values representing the client port to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            device_type.operator: '- (Required) A condition operator. Possible values are Equal and NotEqual.'
+            device_type.values: '- (Required) The device type to match. Possible values are Mobile and Desktop.'
+            host_name.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            host_name.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            host_name.values: '- (Optional) A list of one or more values representing the request hostname to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            http_version.operator: '- (Required) A condition operator. Possible values are Equal and NotEqual.'
+            http_version.values: '- (Required) A list of one or more HTTP versions to match. Possible values are 2.0, 1.1, 1.0, and 0.9.'
+            id: '- The ID of the Front Door Batch Rule Set.'
+            modify_request_header.header_name: '- (Required) The name of the header to modify.'
+            modify_request_header.header_value: '- (Optional) The value to append or overwrite.'
+            modify_request_header.operator: '- (Required) The action to take on header_name. Possible values are Append, Overwrite, and Delete.'
+            modify_response_header.header_name: '- (Required) The name of the header to modify.'
+            modify_response_header.header_value: '- (Optional) The value to append or overwrite.'
+            modify_response_header.operator: '- (Required) The action to take on header_name. Possible values are Append, Overwrite, and Delete.'
+            name: '- (Required) The name which should be used for this Front Door Batch Rule Set. Changing this forces a new resource to be created.'
+            origin_group.cdn_frontdoor_origin_group_id: '- (Required) The Front Door Origin Group resource ID that the request should be routed to.'
+            origin_group.forwarding_protocol: '- (Required) The forwarding protocol the request is redirected as. Possible values are MatchRequest, HttpOnly, and HttpsOnly.'
+            post_argument.name: '- (Required) A string value representing the name of the POST argument.'
+            post_argument.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            post_argument.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            post_argument.values: '- (Optional) One or more values representing the POST argument value to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            query_string.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            query_string.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            query_string.values: '- (Optional) One or more values representing the query string value to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            remote_address.operator: '- (Required) The type of remote address to match. Possible values are GeoMatch, IPMatch, NotGeoMatch, and NotIPMatch.'
+            remote_address.values: '- (Required) A list of CIDR ranges or country codes. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_body.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            request_body.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            request_body.values: '- (Optional) One or more values representing the request body text to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_cookies.name: '- (Required) The name of the cookie.'
+            request_cookies.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            request_cookies.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            request_cookies.values: '- (Optional) One or more values representing the cookie value to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_file_extension.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            request_file_extension.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            request_file_extension.values: '- (Optional) One or more values representing the request file extension to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_filename.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            request_filename.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            request_filename.values: '- (Optional) One or more values representing the request file name to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_header.name: '- (Required) The name of the request header.'
+            request_header.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            request_header.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            request_header.values: '- (Optional) One or more values representing the request header value to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_method.operator: '- (Required) A condition operator. Possible values are Equal and NotEqual.'
+            request_method.values: '- (Required) A list of one or more HTTP methods. Possible values are GET, POST, PUT, DELETE, HEAD, OPTIONS, and TRACE. A maximum of 7 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_path.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, Wildcard, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, NotRegEx, and NotWildcard.'
+            request_path.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            request_path.values: '- (Optional) One or more values representing the request path to match. Do not include the leading slash (/). A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            request_scheme.operator: '- (Required) A condition operator. Possible values are Equal and NotEqual.'
+            request_scheme.values: '- (Required) The request protocol to match. Possible values are HTTP and HTTPS.'
+            request_url.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            request_url.transforms: '- (Optional) A list of condition transforms. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode, and UrlEncode. A maximum of 4 transforms may be defined.'
+            request_url.values: '- (Optional) One or more values representing the request URL to match. A maximum of 25 values may be defined. If multiple values are specified, they are evaluated using OR logic.'
+            route_configuration_override.caching: '- (Required) A caching block as defined below.'
+            route_configuration_override.compression_enabled: '- (Optional) Whether compression is enabled. Defaults to false.'
+            route_configuration_override.duration: '- (Optional) When behaviour is set to OverrideAlways or OverrideIfOriginMissing, this field specifies the cache duration to use and is required. The maximum allowed value is 365.23:59:59. If the desired maximum cache duration is less than 1 day, specify it in the HH:MM:SS format, for example 23:59:59.'
+            route_configuration_override.origin_group: '- (Optional) An origin_group block as defined below.'
+            route_configuration_override.query_string_behaviour: '- (Optional) Controls how query strings contribute to the cache key. Possible values are IgnoreQueryString, UseQueryString, IgnoreSpecifiedQueryStrings, and IncludeSpecifiedQueryStrings.'
+            route_configuration_override.query_string_parameters: '- (Optional) A list of query string parameter names. A maximum of 100 parameters may be defined.'
+            rule: '- (Required) One or more rule blocks as defined below. The configured blocks represent the complete set of rules managed for this Front Door Batch Rule Set. The final rule ordering is determined by each block''s order value. A maximum of 100 rule blocks may be defined.'
+            rule.actions: '- (Required) An actions block as defined below.'
+            rule.behaviour_on_match: '- (Optional) The behaviour on a condition match. Possible values are Continue and Stop. Defaults to Continue.'
+            rule.conditions: '- (Optional) A conditions block as defined below.'
+            rule.name: '- (Required) The name which should be used for this Front Door Batch Rule.'
+            rule.order: '- (Required) The order in which this rule will be applied for the Front Door Endpoint. Rules with a lesser order value are applied before rules with a greater order value. Possible values are 0 or greater.'
+            server_port.operator: '- (Required) A condition operator. Possible values are Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, RegEx, NotAny, NotEqual, NotContains, NotBeginsWith, NotEndsWith, NotLessThan, NotLessThanOrEqual, NotGreaterThan, NotGreaterThanOrEqual, and NotRegEx.'
+            server_port.values: '- (Optional) A list of one or more values representing the server port to match. Possible values are 80 and 443. If multiple values are specified, they are evaluated using OR logic.'
+            socket_address.operator: '- (Required) The type of match. Possible values are IPMatch and NotIPMatch.'
+            socket_address.values: '- (Required) One or more IP address ranges. A maximum of 25 values may be defined. If multiple IP address ranges are specified, they are evaluated using OR logic.'
+            ssl_protocol.operator: '- (Required) A condition operator. Possible values are Equal and NotEqual.'
+            ssl_protocol.values: '- (Required) A list of one or more SSL protocol values. Possible values are TLSv1, TLSv1.1, and TLSv1.2.'
+            timeouts.create: '- (Defaults to 4 hours) Used when creating the Front Door Batch Rule Set.'
+            timeouts.delete: '- (Defaults to 6 hours) Used when deleting the Front Door Batch Rule Set.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Front Door Batch Rule Set.'
+            timeouts.update: '- (Defaults to 4 hours) Used when updating the Front Door Batch Rule Set.'
+            url_redirect.destination_fragment: '- (Optional) The fragment to use in the redirect. The value must be a string between 1 and 1024 characters in length and must not start with #. Leave this unset to preserve the incoming fragment.'
+            url_redirect.destination_host_name: '- (Optional) The host name you want the request to be redirected to. The value must be a string between 1 and 2048 characters in length. Leave this unset to preserve the incoming host.'
+            url_redirect.destination_path: '- (Optional) The path to use in the redirect. The value must be a string and include the leading /. Leave this unset to preserve the incoming path.'
+            url_redirect.query_string: '- (Optional) The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={<action_server_variable>} format and must not include the leading ?. Leave this unset to preserve the incoming query string. The maximum allowed length for this field is 2048 characters.'
+            url_redirect.redirect_protocol: '- (Optional) The protocol the request is redirected as. Possible values are MatchRequest, Http, and Https. Defaults to MatchRequest.'
+            url_redirect.redirect_type: '- (Required) The response type to return to the requestor. Possible values are Moved, Found, TemporaryRedirect, and PermanentRedirect.'
+            url_rewrite.destination_path: '- (Required) The destination path to use in the rewrite.'
+            url_rewrite.preserve_unmatched_path_enabled: '- (Optional) Whether to append the remaining path after the source pattern to the new destination path. Defaults to false.'
+            url_rewrite.source_pattern: '- (Required) The source pattern in the URL path to replace.'
+        importStatements:
+            - terraform import azurerm_cdn_frontdoor_batch_rule_set.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1
     azurerm_cdn_frontdoor_custom_domain:
         subCategory: CDN
         description: Manages a Front Door (standard/premium) Custom Domain.
@@ -12629,7 +12933,7 @@ resources:
                       "name": "example-resource-group"
                     }
         argumentDocs:
-            Microsoft.Cdn: '- 2025-04-15'
+            Microsoft.Cdn: '- 2025-12-01'
             cdn_frontdoor_profile_id: '- (Required) The ID of the Front Door Profile. Changing this forces a new resource to be created.'
             cipher_suite.custom_ciphers: '- (Optional) A custom_ciphers block as defined below.'
             cipher_suite.type: '- (Required) The cipher suite set type. Possible values are Customized, TLS12_2022, and TLS12_2023.'
@@ -12771,7 +13075,7 @@ resources:
                       "name": "example-cdn-frontdoor"
                     }
         argumentDocs:
-            Microsoft.Cdn: '- 2025-04-15'
+            Microsoft.Cdn: '- 2025-12-01'
             cdn_frontdoor_custom_domain_id: '- (Required) The ID of the Front Door Custom Domain that should be managed by the association resource. Changing this forces a new association resource to be created.'
             cdn_frontdoor_route_ids: '- (Required) One or more IDs of the Front Door Route to which the Front Door Custom Domain is associated with.'
             id: '- The ID of the Front Door Custom Domain Association.'
@@ -12811,6 +13115,7 @@ resources:
                       "name": "example-cdn-frontdoor"
                     }
         argumentDocs:
+            Microsoft.Cdn: '- 2025-12-01'
             cdn_frontdoor_profile_id: '- (Required) The ID of the Front Door Profile within which this Front Door Endpoint should exist. Changing this forces a new Front Door Endpoint to be created.'
             enabled: '- (Optional) Specifies if this Front Door Endpoint is enabled? Defaults to true.'
             host_name: '- The host name of the Front Door Endpoint, in the format {endpointName}.{dnsZone} (for example, contoso.azureedge.net).'
@@ -13240,7 +13545,7 @@ resources:
                       "resource_group_name": "${azurerm_resource_group.example.name}"
                     }
         argumentDocs:
-            Microsoft.Cdn: '- 2024-02-01'
+            Microsoft.Cdn: '- 2025-12-01'
             cdn_frontdoor_origin_group_id: '- (Required) The ID of the Front Door Origin Group within which this Front Door Origin should exist. Changing this forces a new Front Door Origin to be created.'
             certificate_name_check_enabled: '- (Required) Specifies whether certificate name checks are enabled for this origin.'
             enabled: '- (Optional) Should the origin be enabled? Possible values are true or false. Defaults to true.'
@@ -13373,7 +13678,7 @@ resources:
                       "resource_group_name": "${azurerm_resource_group.example.name}"
                     }
         argumentDocs:
-            Microsoft.Cdn: '- 2024-02-01'
+            Microsoft.Cdn: '- 2025-12-01'
             id: '- The ID of this Front Door Profile.'
             identity: '- (Optional) An identity block as defined below.'
             identity.identity_ids: '- (Optional) - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.'
@@ -13747,7 +14052,7 @@ resources:
             '{variable}': '- Include the entire server variable. For example, if the client IP address is 111.222.333.444 then the {client_ip} token would evaluate to 111.222.333.444.'
             CIDR.IPv4: 'example: 5.5.5.64/26 matches any requests that arrive from addresses 5.5.5.64 through 5.5.5.127.'
             CIDR.IPv6: 'example: 1:2:3:/48 matches any requests that arrive from addresses 1:2:3:0:0:0:0:0 through 1:2:3:ffff:ffff:ffff:ffff:ffff.'
-            Microsoft.Cdn: '- 2024-09-01'
+            Microsoft.Cdn: '- 2025-12-01'
             OR.IPv4: 'example: if you add two IP addresses 1.2.3.4 and 10.20.30.40, the condition is matched for any requests that arrive from either address 1.2.3.4 or 10.20.30.40.'
             OR.IPv6: 'example: if you add two IP addresses 1:2:3:4:5:6:7:8 and 10:20:30:40:50:60:70:80, the condition is matched for any requests that arrive from either address 1:2:3:4:5:6:7:8 or 10:20:30:40:50:60:70:80.'
             actions: '- (Required) An actions block as defined below.'
@@ -13907,7 +14212,7 @@ resources:
                       "name": "example-cdn-frontdoor"
                     }
         argumentDocs:
-            Microsoft.Cdn: '- 2024-02-01'
+            Microsoft.Cdn: '- 2025-12-01'
             cdn_frontdoor_profile_id: '- (Required) The ID of the Front Door Profile. Changing this forces a new Front Door Rule Set to be created.'
             id: '- The ID of the Front Door Rule Set.'
             name: '- (Required) The name which should be used for this Front Door Rule Set. Changing this forces a new Front Door Rule Set to be created.'
@@ -13982,6 +14287,7 @@ resources:
                           ]
                         }
                       ],
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "soft_delete_retention_days": 7,
@@ -14117,7 +14423,7 @@ resources:
                       "name": "example-cdn-frontdoor"
                     }
         argumentDocs:
-            Microsoft.Cdn: '- 2024-02-01'
+            Microsoft.Cdn: '- 2025-12-01'
             association.domain: '- (Required) One or more domain blocks as defined below.'
             association.domain.patterns_to_match: '- (Required) The list of paths to match for this firewall policy. The only possible value is /*. Changing this forces a new resource to be created.'
             cdn_frontdoor_profile_id: '- (Required) The Front Door Profile Resource Id that is linked to this Front Door Security Policy. Changing this forces a new resource to be created.'
@@ -14538,6 +14844,357 @@ resources:
             virtual_network_rules.subnet_id: '- (Required) The ID of the subnet which should be able to access this Cognitive Account.'
         importStatements:
             - terraform import azurerm_cognitive_account.account1 /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1
+    azurerm_cognitive_account_connection_account_key:
+        subCategory: Cognitive Services
+        description: Manages a Cognitive Services (Microsoft Foundry) Account Connection with Account Key authentication.
+        name: azurerm_cognitive_account_connection_account_key
+        title: azurerm_cognitive_account_connection_account_key
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "account_key": "${azurerm_storage_account.example.primary_access_key}",
+                  "category": "AzureStorageAccount",
+                  "cognitive_account_id": "${azurerm_cognitive_account.example.id}",
+                  "metadata": {
+                    "ApiType": "Azure",
+                    "Location": "${azurerm_storage_account.example.location}",
+                    "ResourceId": "${azurerm_storage_account.example.id}"
+                  },
+                  "name": "example-connection",
+                  "target": "${azurerm_storage_account.example.primary_blob_endpoint}"
+                }
+              references:
+                account_key: azurerm_storage_account.example.primary_access_key
+                cognitive_account_id: azurerm_cognitive_account.example.id
+                target: azurerm_storage_account.example.primary_blob_endpoint
+              dependencies:
+                azurerm_cognitive_account.example: |-
+                    {
+                      "custom_subdomain_name": "exampleaiservices",
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "AIServices",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-aiservices",
+                      "project_management_enabled": true,
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+                azurerm_storage_account.example: |-
+                    {
+                      "account_replication_type": "LRS",
+                      "account_tier": "Standard",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "examplestorageacct",
+                      "resource_group_name": "${azurerm_resource_group.example.name}"
+                    }
+        argumentDocs:
+            Microsoft.CognitiveServices: '- 2026-03-01'
+            account_key: '- (Required) The account key used for authentication.'
+            category: '- (Required) The category of the connection. The only possible value is AzureStorageAccount. Changing this forces a new resource to be created.'
+            cognitive_account_id: '- (Required) The ID of the Cognitive Services Account. Changing this forces a new resource to be created.'
+            id: '- The ID of the Cognitive Services Account Connection.'
+            metadata: '- (Required) A mapping of metadata key-value pairs for the connection.'
+            name: '- (Required) The name of the Cognitive Services Account Connection. Changing this forces a new resource to be created.'
+            target: '- (Required) The target endpoint or resource for the connection.'
+            timeouts.create: '- (Defaults to 30 minutes) Used when creating the Cognitive Services Account Connection.'
+            timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Cognitive Services Account Connection.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Cognitive Services Account Connection.'
+            timeouts.update: '- (Defaults to 30 minutes) Used when updating the Cognitive Services Account Connection.'
+        importStatements:
+            - terraform import azurerm_cognitive_account_connection_account_key.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+    azurerm_cognitive_account_connection_account_managed_identity:
+        subCategory: Cognitive Services
+        description: Manages a Cognitive Services (Microsoft Foundry) Account Connection with Account Managed Identity authentication.
+        name: azurerm_cognitive_account_connection_account_managed_identity
+        title: azurerm_cognitive_account_connection_account_managed_identity
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "category": "AzureKeyVault",
+                  "cognitive_account_id": "${azurerm_cognitive_account.example.id}",
+                  "metadata": {
+                    "ApiType": "Azure",
+                    "Location": "${azurerm_key_vault.example.location}",
+                    "ResourceId": "${azurerm_key_vault.example.id}"
+                  },
+                  "name": "example-connection",
+                  "target": "${azurerm_key_vault.example.vault_uri}"
+                }
+              references:
+                cognitive_account_id: azurerm_cognitive_account.example.id
+                target: azurerm_key_vault.example.vault_uri
+              dependencies:
+                azurerm_cognitive_account.example: |-
+                    {
+                      "custom_subdomain_name": "exampleaiservices",
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "AIServices",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-aiservices",
+                      "project_management_enabled": true,
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_key_vault.example: |-
+                    {
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "examplekeyvaultacct",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "standard",
+                      "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
+                    }
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+        argumentDocs:
+            Microsoft.CognitiveServices: '- 2026-03-01'
+            category: '- (Required) The category of the connection. Possible values are AIServices, AzureKeyVault, AzureOpenAI, and AzureStorageAccount. Changing this forces a new resource to be created.'
+            cognitive_account_id: '- (Required) The ID of the Cognitive Services Account. Changing this forces a new resource to be created.'
+            id: '- The ID of the Cognitive Services Account Connection.'
+            metadata: '- (Required) A mapping of metadata key-value pairs for the connection.'
+            name: '- (Required) The name of the Cognitive Services Account Connection. Changing this forces a new resource to be created.'
+            target: '- (Required) The target endpoint or resource for the connection.'
+            timeouts.create: '- (Defaults to 30 minutes) Used when creating the Cognitive Services Account Connection.'
+            timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Cognitive Services Account Connection.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Cognitive Services Account Connection.'
+            timeouts.update: '- (Defaults to 30 minutes) Used when updating the Cognitive Services Account Connection.'
+        importStatements:
+            - terraform import azurerm_cognitive_account_connection_account_managed_identity.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+    azurerm_cognitive_account_connection_api_key:
+        subCategory: Cognitive Services
+        description: Manages a Cognitive Services (Microsoft Foundry) Account Connection with API Key authentication.
+        name: azurerm_cognitive_account_connection_api_key
+        title: azurerm_cognitive_account_connection_api_key
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "api_key": "${azurerm_cognitive_account.openai.primary_access_key}",
+                  "category": "AzureOpenAI",
+                  "cognitive_account_id": "${azurerm_cognitive_account.example.id}",
+                  "metadata": {
+                    "ApiType": "Azure",
+                    "Location": "${azurerm_cognitive_account.openai.location}",
+                    "ResourceId": "${azurerm_cognitive_account.openai.id}"
+                  },
+                  "name": "example-connection",
+                  "target": "${azurerm_cognitive_account.openai.endpoint}"
+                }
+              references:
+                api_key: azurerm_cognitive_account.openai.primary_access_key
+                cognitive_account_id: azurerm_cognitive_account.example.id
+                target: azurerm_cognitive_account.openai.endpoint
+              dependencies:
+                azurerm_cognitive_account.example: |-
+                    {
+                      "custom_subdomain_name": "exampleaiservices",
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "AIServices",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-aiservices",
+                      "project_management_enabled": true,
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_cognitive_account.openai: |-
+                    {
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "OpenAI",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-openai",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+        argumentDocs:
+            Microsoft.CognitiveServices: '- 2026-03-01'
+            api_key: '- (Required) The API key for authentication. This field is sensitive.'
+            category: '- (Required) The category of the connection. Possible values are AIServices, ApiKey, ApiManagement, AppConfig, AppInsights, AzureOpenAI, BingLLMSearch, CognitiveSearch, CognitiveService, GroundingWithBingSearch, GroundingWithCustomSearch, ModelGateway, OpenAI, Pinecone, Serp, and Serverless. Changing this forces a new resource to be created.'
+            cognitive_account_id: '- (Required) The ID of the Cognitive Services Account. Changing this forces a new resource to be created.'
+            id: '- The ID of the Cognitive Services Account Connection.'
+            metadata: '- (Optional) A mapping of metadata key-value pairs for the connection.'
+            name: '- (Required) The name of the Cognitive Services Account Connection. Changing this forces a new resource to be created.'
+            target: '- (Optional) The target endpoint or resource for the connection.'
+            timeouts.create: '- (Defaults to 30 minutes) Used when creating the Cognitive Services Account Connection.'
+            timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Cognitive Services Account Connection.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Cognitive Services Account Connection.'
+            timeouts.update: '- (Defaults to 30 minutes) Used when updating the Cognitive Services Account Connection.'
+        importStatements:
+            - terraform import azurerm_cognitive_account_connection_api_key.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+    azurerm_cognitive_account_connection_custom_keys:
+        subCategory: Cognitive Services
+        description: Manages a Cognitive Services (Microsoft Foundry) Account Connection with Custom Keys authentication.
+        name: azurerm_cognitive_account_connection_custom_keys
+        title: azurerm_cognitive_account_connection_custom_keys
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "category": "CustomKeys",
+                  "cognitive_account_id": "${azurerm_cognitive_account.example.id}",
+                  "custom_keys": {
+                    "primaryKey": "${azurerm_cognitive_account.openai.primary_access_key}",
+                    "secondaryKey": "${azurerm_cognitive_account.openai.secondary_access_key}"
+                  },
+                  "metadata": {
+                    "ApiType": "Azure",
+                    "Location": "${azurerm_cognitive_account.openai.location}",
+                    "ResourceId": "${azurerm_cognitive_account.openai.id}"
+                  },
+                  "name": "example-connection",
+                  "target": "${azurerm_cognitive_account.openai.endpoint}"
+                }
+              references:
+                cognitive_account_id: azurerm_cognitive_account.example.id
+                target: azurerm_cognitive_account.openai.endpoint
+              dependencies:
+                azurerm_cognitive_account.example: |-
+                    {
+                      "custom_subdomain_name": "exampleaiservices",
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "AIServices",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-aiservices",
+                      "project_management_enabled": true,
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_cognitive_account.openai: |-
+                    {
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "OpenAI",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-openai",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+        argumentDocs:
+            Microsoft.CognitiveServices: '- 2026-03-01'
+            category: '- (Required) The category of the connection. Possible values are CustomKeys, RemoteA2A, and RemoteTool. Changing this forces a new resource to be created.'
+            cognitive_account_id: '- (Required) The ID of the Cognitive Services Account. Changing this forces a new resource to be created.'
+            custom_keys: '- (Required) A mapping of custom keys for authentication. All values in this map are sensitive.'
+            id: '- The ID of the Cognitive Services Account Connection.'
+            metadata: '- (Optional) A mapping of metadata key-value pairs for the connection.'
+            name: '- (Required) The name of the Cognitive Services Account Connection. Changing this forces a new resource to be created.'
+            target: '- (Required) The target endpoint or resource for the connection.'
+            timeouts.create: '- (Defaults to 30 minutes) Used when creating the Cognitive Services Account Connection.'
+            timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Cognitive Services Account Connection.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Cognitive Services Account Connection.'
+            timeouts.update: '- (Defaults to 30 minutes) Used when updating the Cognitive Services Account Connection.'
+        importStatements:
+            - terraform import azurerm_cognitive_account_connection_custom_keys.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+    azurerm_cognitive_account_connection_entra_id:
+        subCategory: Cognitive Services
+        description: Manages a Cognitive Services (Microsoft Foundry) Account Connection with Entra ID authentication.
+        name: azurerm_cognitive_account_connection_entra_id
+        title: azurerm_cognitive_account_connection_entra_id
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "category": "AzureOpenAI",
+                  "cognitive_account_id": "${azurerm_cognitive_account.example.id}",
+                  "metadata": {
+                    "ApiType": "Azure",
+                    "Location": "${azurerm_cognitive_account.openai.location}",
+                    "ResourceId": "${azurerm_cognitive_account.openai.id}"
+                  },
+                  "name": "example-connection",
+                  "target": "${azurerm_cognitive_account.openai.endpoint}"
+                }
+              references:
+                cognitive_account_id: azurerm_cognitive_account.example.id
+                target: azurerm_cognitive_account.openai.endpoint
+              dependencies:
+                azurerm_cognitive_account.example: |-
+                    {
+                      "custom_subdomain_name": "exampleaiservices",
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "AIServices",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-aiservices",
+                      "project_management_enabled": true,
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_cognitive_account.openai: |-
+                    {
+                      "identity": [
+                        {
+                          "type": "SystemAssigned"
+                        }
+                      ],
+                      "kind": "OpenAI",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-openai",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "sku_name": "S0"
+                    }
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+        argumentDocs:
+            Microsoft.CognitiveServices: '- 2026-03-01'
+            category: '- (Required) The category of the connection. Possible values are AIServices, ApiManagement, AppConfig, AzureOpenAI, AzureStorageAccount, CognitiveSearch, CognitiveService, CosmosDb, Databricks, ManagedOnlineEndpoint, MicrosoftFabric, and Sharepoint. Changing this forces a new resource to be created.'
+            cognitive_account_id: '- (Required) The ID of the Cognitive Services Account. Changing this forces a new resource to be created.'
+            id: '- The ID of the Cognitive Services Account Connection.'
+            metadata: '- (Optional) A mapping of metadata key-value pairs for the connection.'
+            name: '- (Required) The name of the Cognitive Services Account Connection. Changing this forces a new resource to be created.'
+            target: '- (Required) The target endpoint or resource for the connection.'
+            timeouts.create: '- (Defaults to 30 minutes) Used when creating the Cognitive Services Account Connection.'
+            timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Cognitive Services Account Connection.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Cognitive Services Account Connection.'
+            timeouts.update: '- (Defaults to 30 minutes) Used when updating the Cognitive Services Account Connection.'
+        importStatements:
+            - terraform import azurerm_cognitive_account_connection_entra_id.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
     azurerm_cognitive_account_customer_managed_key:
         subCategory: Cognitive Services
         description: Manages a Customer Managed Key for a Cognitive Services Account.
@@ -14646,6 +15303,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-vault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -15884,9 +16542,9 @@ resources:
                     }
                 azurerm_key_vault.example: |-
                     {
-                      "enable_rbac_authorization": true,
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-keyvault",
+                      "rbac_authorization_enabled": true,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -16817,17 +17475,20 @@ resources:
             encryption.key_vault_key_id: '- (Required) The ID of the Key Vault Key.'
             georeplications: '- (Optional) One or more georeplications blocks as documented below.'
             georeplications.anonymous_pull_enabled: '- (Optional) Whether to allow anonymous (unauthenticated) pull access to this Container Registry. This is only supported on resources with the Standard or Premium SKU.'
+            georeplications.azuread_authentication_as_arm_policy_enabled: '- (Optional) Whether to use Azure Resource Manager audience token for this Container Registry? Defaults to true.'
             georeplications.data_endpoint_enabled: '- (Optional) Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.'
             georeplications.encryption: '- (Optional) An encryption block as documented below.'
             georeplications.export_policy_enabled: '- (Optional) Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.'
             georeplications.identity: '- (Optional) An identity block as defined below.'
             georeplications.location: '- (Required) A location where the container registry should be geo-replicated.'
+            georeplications.network_rule_bypass_for_tasks_enabled: '- (Optional) Whether to allow Container Registry Tasks to access a network-restricted Container Registry? Defaults to false.'
             georeplications.network_rule_bypass_option: '- (Optional) Whether to allow trusted Azure services to access a network-restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.'
             georeplications.network_rule_set: '- (Optional) A network_rule_set block as documented below.'
             georeplications.public_network_access_enabled: '- (Optional) Whether public network access is allowed for the container registry. Defaults to true.'
             georeplications.quarantine_policy_enabled: '- (Optional) Boolean value that indicates whether quarantine policy is enabled.'
             georeplications.regional_endpoint_enabled: '- (Optional) Whether regional endpoint is enabled for this Container Registry?'
             georeplications.retention_policy_in_days: '- (Optional) The number of days to retain and untagged manifest after which it gets purged.'
+            georeplications.role_assignment_mode: '- (Optional) The role assignment mode of this Container Registry. Possible values are AbacRepositoryPermissions and LegacyRegistryPermissions. Defaults to LegacyRegistryPermissions.'
             georeplications.tags: '- (Optional) A mapping of tags to assign to this replication location.'
             georeplications.trust_policy_enabled: '- (Optional) Boolean value that indicated whether trust policy is enabled. Defaults to false.'
             georeplications.zone_redundancy_enabled: '- (Optional) Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.'
@@ -17032,6 +17693,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -19613,6 +20275,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "soft_delete_retention_days": 7,
@@ -19848,6 +20511,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-key-vault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -21575,6 +22239,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -21619,6 +22284,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -22221,6 +22887,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -22691,6 +23358,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -22831,6 +23499,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -22923,6 +23592,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -24135,6 +24805,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "soft_delete_retention_days": 7,
@@ -25169,6 +25840,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-key-vault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -26083,6 +26755,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "soft_delete_retention_days": 7,
@@ -28205,6 +28878,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "des-example-keyvault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -28298,6 +28972,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "des-example-keyvault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -29485,6 +30160,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -30862,6 +31538,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -30958,6 +31635,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -38744,6 +39422,7 @@ resources:
                   "location": "${azurerm_resource_group.example.location}",
                   "name": "examplekeyvault",
                   "purge_protection_enabled": false,
+                  "rbac_authorization_enabled": false,
                   "resource_group_name": "${azurerm_resource_group.example.name}",
                   "sku_name": "standard",
                   "soft_delete_retention_days": 7,
@@ -38762,6 +39441,7 @@ resources:
                       "name": "example-resources"
                     }
         argumentDocs:
+            Microsoft.KeyVault: '- 2026-02-01'
             access_policy: '- (Optional) A list of access_policy objects (up to 1024) describing access policies, as described below.'
             access_policy.application_id: '- (Optional) The object ID of an Application in Azure Active Directory.'
             access_policy.certificate_permissions: '- (Optional) List of certificate permissions, must be one or more from the following: Backup, Create, Delete, DeleteIssuers, Get, GetIssuers, Import, List, ListIssuers, ManageContacts, ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.'
@@ -38783,7 +39463,7 @@ resources:
             network_acls.virtual_network_subnet_ids: '- (Optional) One or more Subnet IDs which should be able to access this Key Vault.'
             public_network_access_enabled: '- (Optional) Whether public network access is allowed for this Key Vault. Defaults to true.'
             purge_protection_enabled: '- (Optional) Is Purge Protection enabled for this Key Vault?'
-            rbac_authorization_enabled: '- (Optional) Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.'
+            rbac_authorization_enabled: '- (Optional) Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions. Defaults to false.'
             resource_group_name: '- (Required) The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created.'
             sku_name: '- (Required) The Name of the SKU used for this Key Vault. Possible values are standard and premium.'
             soft_delete_retention_days: '- (Optional) The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 (the default) days.'
@@ -38824,6 +39504,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -38855,6 +39536,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -38865,6 +39547,7 @@ resources:
                       "name": "example-resources"
                     }
         argumentDocs:
+            Microsoft.KeyVault: '- 2026-02-01'
             application_id: '- (Optional) The object ID of an Application in Azure Active Directory. Changing this forces a new resource to be created.'
             certificate_permissions: '- (Optional) List of certificate permissions, must be one or more from the following: Backup, Create, Delete, DeleteIssuers, Get, GetIssuers, Import, List, ListIssuers, ManageContacts, ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.'
             id: '- Key Vault Access Policy ID.'
@@ -38954,6 +39637,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -39086,6 +39770,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -39184,6 +39869,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -39244,6 +39930,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -39331,6 +40018,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "soft_delete_retention_days": 7,
@@ -39690,6 +40378,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "keyvaultname",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -39748,6 +40437,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "keyvaultname",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -39829,6 +40519,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-keyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.example.tenant_id}"
@@ -39907,6 +40598,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "soft_delete_retention_days": 7,
@@ -39938,6 +40630,202 @@ resources:
             versionless_id: '- The Base ID of the Key Vault Secret.'
         importStatements:
             - terraform import azurerm_key_vault_secret.example "https://example-keyvault.vault.azure.net/secrets/example/fdf067c93bbb4b22bff4d8b7a9a56217"
+    azurerm_kubernetes_automatic_cluster:
+        subCategory: Container
+        description: Manages a managed Kubernetes Automatic Cluster (a special SKU of AKS / Azure Kubernetes Service)
+        name: azurerm_kubernetes_automatic_cluster
+        title: azurerm_kubernetes_automatic_cluster
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "identity": [
+                    {
+                      "type": "SystemAssigned"
+                    }
+                  ],
+                  "location": "${azurerm_resource_group.example.location}",
+                  "name": "example-aks1",
+                  "resource_group_name": "${azurerm_resource_group.example.name}",
+                  "tags": {
+                    "Environment": "Production"
+                  }
+                }
+              references:
+                location: azurerm_resource_group.example.location
+                resource_group_name: azurerm_resource_group.example.name
+              dependencies:
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+            - name: example
+              manifest: |-
+                {
+                  "api_server_access": [
+                    {
+                      "subnet_id": "${azurerm_subnet.api.id}"
+                    }
+                  ],
+                  "hosted_system": [
+                    {
+                      "node_subnet_id": "${azurerm_subnet.node.id}",
+                      "system_node_subnet_id": "${azurerm_subnet.systemnode.id}"
+                    }
+                  ],
+                  "identity": [
+                    {
+                      "identity_ids": [
+                        "${azurerm_user_assigned_identity.example.id}"
+                      ],
+                      "type": "UserAssigned"
+                    }
+                  ],
+                  "location": "${azurerm_resource_group.example.location}",
+                  "name": "example-aks",
+                  "resource_group_name": "${azurerm_resource_group.example.name}"
+                }
+              references:
+                api_server_access.subnet_id: azurerm_subnet.api.id
+                hosted_system.node_subnet_id: azurerm_subnet.node.id
+                hosted_system.system_node_subnet_id: azurerm_subnet.systemnode.id
+                identity.identity_ids: azurerm_user_assigned_identity.example.id
+                location: azurerm_resource_group.example.location
+                resource_group_name: azurerm_resource_group.example.name
+              dependencies:
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+                azurerm_role_assignment.network: |-
+                    {
+                      "principal_id": "${azurerm_user_assigned_identity.example.principal_id}",
+                      "role_definition_name": "Network Contributor",
+                      "scope": "${azurerm_virtual_network.example.id}"
+                    }
+                azurerm_subnet.api: |-
+                    {
+                      "address_prefixes": [
+                        "10.1.1.0/24"
+                      ],
+                      "delegation": [
+                        {
+                          "name": "aks-delegation",
+                          "service_delegation": [
+                            {
+                              "actions": [
+                                "Microsoft.Network/virtualNetworks/subnets/join/action"
+                              ],
+                              "name": "Microsoft.ContainerService/managedClusters"
+                            }
+                          ]
+                        }
+                      ],
+                      "name": "example-api-subnet",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "virtual_network_name": "${azurerm_virtual_network.example.name}"
+                    }
+                azurerm_subnet.node: |-
+                    {
+                      "address_prefixes": [
+                        "10.1.0.0/24"
+                      ],
+                      "name": "example-node-subnet",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "virtual_network_name": "${azurerm_virtual_network.example.name}"
+                    }
+                azurerm_subnet.systemnode: |-
+                    {
+                      "address_prefixes": [
+                        "10.1.2.0/24"
+                      ],
+                      "lifecycle": [
+                        {
+                          "ignore_changes": [
+                            "${delegation}"
+                          ]
+                        }
+                      ],
+                      "name": "example-systemnode-subnet",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "virtual_network_name": "${azurerm_virtual_network.example.name}"
+                    }
+                azurerm_user_assigned_identity.example: |-
+                    {
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example_identity",
+                      "resource_group_name": "${azurerm_resource_group.example.name}"
+                    }
+                azurerm_virtual_network.example: |-
+                    {
+                      "address_space": [
+                        "10.1.0.0/16"
+                      ],
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example-vnet",
+                      "resource_group_name": "${azurerm_resource_group.example.name}"
+                    }
+        argumentDocs:
+            Microsoft.ContainerService: '- 2026-04-01'
+            api_server_access: '- (Optional) An api_server_access block as defined below.'
+            api_server_access.authorized_ip_ranges: '- (Optional) Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].'
+            api_server_access.subnet_id: '- (Optional) The ID of the Subnet where the API server endpoint is delegated to. Is required for bring your own networking.'
+            certificate_authority.certificate_chain_object_name: '- (Required) The certificate chain object name in Azure Key Vault.'
+            certificate_authority.certificate_object_name: '- (Required) The intermediate certificate object name in Azure Key Vault.'
+            certificate_authority.key_object_name: '- (Required) The intermediate certificate private key object name in Azure Key Vault.'
+            certificate_authority.key_vault_id: '- (Required) The resource ID of the Key Vault.'
+            certificate_authority.root_certificate_object_name: '- (Required) The root certificate object name in Azure Key Vault.'
+            current_kubernetes_version: '- The current version running on the Azure Kubernetes Managed Cluster.'
+            fully_qualified_domain_name: '- The FQDN of the Azure Kubernetes Managed Cluster.'
+            hosted_system: '- (Optional) A hosted_system block as defined below.'
+            hosted_system.node_subnet_id: '- (Required) The ID of the Subnet where the user nodes are hosted. Is required for bring your own networking'
+            hosted_system.system_node_subnet_id: '- (Required) The ID of the Subnet where the system nodes are hosted. Changing this forces a new resource to be created. Is required for bring your own networking'
+            id: '- The Kubernetes Managed Cluster ID.'
+            identity: '- (Required) An identity block as defined below.'
+            identity.identity_ids: '- (Optional) Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.'
+            identity.principal_id: '- The Principal ID associated with this Managed Service Identity.'
+            identity.tenant_id: '- The Tenant ID associated with this Managed Service Identity.'
+            identity.type: '- (Required) Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned or UserAssigned.  UserAssigned is required for bring your own networking'
+            kube_config: '- A kube_config block as defined below.'
+            kube_config.client_certificate: '- Base64 encoded public certificate used by clients to authenticate to the Kubernetes cluster.'
+            kube_config.client_key: '- Base64 encoded private key used by clients to authenticate to the Kubernetes cluster.'
+            kube_config.cluster_ca_certificate: '- Base64 encoded public CA certificate used as the root of trust for the Kubernetes cluster.'
+            kube_config.host: '- The Kubernetes cluster server host.'
+            kube_config.password: '- A password or token used to authenticate to the Kubernetes cluster.'
+            kube_config.username: '- A username used to authenticate to the Kubernetes cluster.'
+            kube_config_raw: '- Raw Kubernetes config to be used by kubectl and other compatible tools.'
+            location: '- (Required) The location where the Managed Kubernetes Cluster should be created. Changing this forces a new resource to be created.'
+            name: '- (Required) The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.'
+            node_resource_group_id: '- The ID of the Resource Group containing the resources for this Managed Kubernetes Cluster.'
+            oidc_issuer_url: '- The OIDC issuer URL that is associated with the cluster.'
+            portal_fully_qualified_domain_name: '- The FQDN for the Azure Portal resources when private link has been enabled, which is only resolvable inside the Virtual Network used by the Kubernetes Cluster.'
+            private_cluster: '- (Optional) A private_cluster block as defined below.'
+            private_cluster.private_dns_zone_id: '- (Optional) The ID of the Private DNS Zone which should be used for this Kubernetes Cluster. Possible values are System, None or the ID of a Private DNS Zone. Defaults to System. Changing this forces a new resource to be created.'
+            private_cluster.public_fully_qualified_domain_name_enabled: '- (Optional) Provisions a Public FQDN for the private cluster. Defaults to false.'
+            private_fully_qualified_domain_name: '- The FQDN for the Kubernetes Cluster when private link has been enabled, which is only resolvable inside the Virtual Network used by the Kubernetes Cluster.'
+            resource_group_name: '- (Required) Specifies the Resource Group where the Managed Kubernetes Cluster should exist. Changing this forces a new resource to be created.'
+            service_mesh: '- (Optional) A service_mesh block as defined below.'
+            service_mesh.certificate_authority: '- (Optional) A certificate_authority block as defined below. This configuration allows you to bring your own root certificate and keys for Istio CA in the Istio-based service mesh add-on for Azure Kubernetes Service.'
+            service_mesh.external_ingress_gateway_enabled: '- (Optional) Enables Istio External Ingress Gateway. Defaults to false.'
+            service_mesh.internal_ingress_gateway_enabled: '- (Optional) Enables Istio Internal Ingress Gateway. Defaults to false.'
+            service_mesh.proxy_redirect_mechanism: '- (Optional) The mechanism used to redirect application traffic to the Istio sidecar proxy. Possible values are CNIChaining and InitContainers. Defaults to InitContainers.'
+            service_mesh.revisions: '- (Required) Specify 1 or 2 Istio control plane revisions for managing minor upgrades using the canary upgrade process. For example, create the resource with revisions set to ["asm-1-27"]. To start the canary upgrade, change revisions to ["asm-1-27", "asm-1-28"]. To roll back the canary upgrade, revert to ["asm-1-27"]. To confirm the upgrade, change to ["asm-1-28"].'
+            tags: '- (Optional) A mapping of tags to assign to the resource.'
+            timeouts.create: '- (Defaults to 90 minutes) Used when creating the Kubernetes Cluster.'
+            timeouts.delete: '- (Defaults to 90 minutes) Used when deleting the Kubernetes Cluster.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Kubernetes Cluster.'
+            timeouts.update: '- (Defaults to 90 minutes) Used when updating the Kubernetes Cluster.'
+            web_app_routing_identity.client_id: '- The Client ID of the user-defined Managed Identity used for Web App Routing.'
+            web_app_routing_identity.object_id: '- The Object ID of the user-defined Managed Identity used for Web App Routing'
+            web_app_routing_identity.user_assigned_identity_id: '- The ID of the User Assigned Identity used for Web App Routing.'
+            web_app_routing_ingress: '- (Optional) A web_app_routing_ingress block as defined below.'
+            web_app_routing_ingress.default_nginx_controller: '- (Optional) Specifies the ingress type for the default NginxIngressController custom resource. The allowed values are Internal, External and AnnotationControlled. At least one of default_nginx_controller or istio_enabled must be specified.'
+            web_app_routing_ingress.dns_zone_ids: '- (Optional) Resource IDs of the DNS zones to be associated with the Application Routing add-on. Public and private DNS zones can be in different resource groups, but all public DNS zones must be in the same resource group and all private DNS zones must be in the same resource group.'
+            web_app_routing_ingress.istio_enabled: '- (Optional) Enables Istio as a Gateway API implementation. Defaults to false. At least one of default_nginx_controller or istio_enabled must be specified.'
+        importStatements:
+            - terraform import azurerm_kubernetes_automatic_cluster.cluster1 /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ContainerService/managedClusters/cluster1
     azurerm_kubernetes_cluster:
         subCategory: Container
         description: Manages a managed Kubernetes Cluster (also known as AKS / Azure Kubernetes Service)
@@ -40675,6 +41563,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "example-value",
                       "soft_delete_retention_days": "example-value",
@@ -41376,6 +42265,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -43805,10 +44695,10 @@ resources:
                       "resource_group_name": "${azurerm_resource_group.example.name}"
                     }
         argumentDocs:
-            Microsoft.Compute: '- 2024-11-01'
+            Microsoft.Compute: '- 2025-04-01'
             UltraSSD_LRS.disk_encryption_set_id: '- (Optional) The ID of the Disk Encryption Set which should be used to encrypt this Data Disk. Changing this forces a new resource to be created.'
-            UltraSSD_LRS.ultra_ssd_disk_iops_read_write: '- (Optional) Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
-            UltraSSD_LRS.ultra_ssd_disk_mbps_read_write: '- (Optional) Specifies the bandwidth in MB per second for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
+            UltraSSD_LRS.disk_iops_read_write: '- (Optional) Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
+            UltraSSD_LRS.disk_mbps_read_write: '- (Optional) Specifies the bandwidth in MB per second for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
             UltraSSD_LRS.write_accelerator_enabled: '- (Optional) Should Write Accelerator be enabled for this Data Disk? Defaults to false.'
             additional_capabilities: '- (Optional) An additional_capabilities block as defined below.'
             additional_capabilities.ultra_ssd_enabled: '- (Optional) Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine Scale Set? Possible values are true or false. Defaults to false. Changing this forces a new resource to be created.'
@@ -44816,6 +45706,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "keyvaultkeyexample",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tags": {
@@ -45541,6 +46432,65 @@ resources:
             workspace_id: '- (Required) The object ID of the Log Analytics Workspace that contains the table. Changing this forces a new resource to be created.'
         importStatements:
             - terraform import azurerm_log_analytics_workspace_table_custom_log.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1/tables/table1
+    azurerm_log_analytics_workspace_table_microsoft:
+        subCategory: Log Analytics
+        description: Manages a Microsoft Table in a Log Analytics (formally Operational Insights) Workspace.
+        name: azurerm_log_analytics_workspace_table_microsoft
+        title: azurerm_log_analytics_workspace_table_microsoft
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "name": "AppCenterError",
+                  "workspace_id": "${azurerm_log_analytics_workspace.example.id}"
+                }
+              references:
+                workspace_id: azurerm_log_analytics_workspace.example.id
+              dependencies:
+                azurerm_log_analytics_workspace.example: |-
+                    {
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "example",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "retention_in_days": 30
+                    }
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+        argumentDocs:
+            Microsoft.OperationalInsights: '- 2022-10-01'
+            column: '- (Optional) One or more column blocks as defined below.'
+            column.description: '- (Optional) The description of the column.'
+            column.display_by_default: '- (Optional) Whether the column defaults to being displayed. Defaults to true.'
+            column.display_name: '- (Optional) The display name of the column.'
+            column.hidden: '- (Optional) Whether the column is hidden. Defaults to false.'
+            column.name: '- (Required) The name which should be used for this column.'
+            column.type: '- (Required) The column data type. Possible values are string, int, long, real, boolean, dateTime, guid, dynamic.'
+            description: '- (Optional) A description of the table.'
+            display_name: '- (Optional) The display name of the table.'
+            id: '- The ID of the Log Analytics Workspace Table Microsoft.'
+            labels: '- (Optional) Specifies a list of table labels.'
+            name: '- (Required) The name which should be used for this Log Analytics Workspace Table Microsoft. Possible values are Alert, AppCenterError, ComputerGroup, InsightsMetrics, Operation and Usage. Changing this forces a new Log Analytics Workspace Table Microsoft to be created.'
+            retention_in_days: '- (Optional) The table retention in days, between 4 and 730.'
+            solutions: '- The list of solutions associated with this table.'
+            standard_column: '- A standard_column block as defined below.'
+            standard_column.description: '- The description of the column.'
+            standard_column.display_by_default: '- Whether the column defaults to being displayed. Defaults to true.'
+            standard_column.display_name: '- The display name of the column.'
+            standard_column.hidden: '- Is the column hidden? Defaults to false.'
+            standard_column.name: '- The name of the column.'
+            standard_column.type: '-  The type of the column.'
+            standard_column.type_hint: '- The type hint of the column.'
+            timeouts.create: '- (Defaults to 5 minutes) Used when creating the Log Analytics Workspace Table Microsoft.'
+            timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Log Analytics Workspace Table Microsoft.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Log Analytics Workspace Table Microsoft.'
+            timeouts.update: '- (Defaults to 5 minutes) Used when updating the Log Analytics Workspace Table Microsoft.'
+            total_retention_in_days: '- (Optional) The table total retention in days, between 4 and 4383.'
+            workspace_id: '- (Required) The ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Workspace Table Microsoft to be created.'
+        importStatements:
+            - terraform import azurerm_log_analytics_workspace_table_microsoft.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1/tables/table1
     azurerm_logic_app_action_custom:
         subCategory: Logic App
         description: Manages a Custom Action within a Logic App Workflow
@@ -46288,8 +47238,9 @@ resources:
             site_credential: '- A site_credential block as defined below, which contains the site-level credentials used to publish to this App Service.'
             site_credential.password: '- The password associated with the username, which can be used to publish to this App Service.'
             site_credential.username: '- The username which can be used to publish to this App Service.'
-            storage_account_access_key: '- (Required) The access key which will be used to access the backend storage account for the Logic App.'
-            storage_account_name: '- (Required) The backend storage account name which will be used by this Logic App (e.g. for Stateful workflows data). Changing this forces a new resource to be created.'
+            storage_account_access_key: '- (Optional) The access key which will be used to access the backend storage account for the Logic App. Required when storage_account_name is specified. Conflicts with storage_key_vault_secret_id.'
+            storage_account_name: '- (Optional) The backend storage account name which will be used by this Logic App (e.g. for Stateful workflows data). Exactly one of storage_account_name or storage_key_vault_secret_id must be specified.'
+            storage_key_vault_secret_id: '- (Optional) The Key Vault Secret ID, optionally including version, that contains the connection string to the backend storage account for the Logic App. Exactly one of storage_account_name or storage_key_vault_secret_id must be specified.'
             timeouts.create: '- (Defaults to 30 minutes) Used when creating the Logic App'
             timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Logic App'
             timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Logic App'
@@ -46534,6 +47485,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-kv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -46660,6 +47612,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-kv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -46771,6 +47724,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -46854,6 +47808,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -46941,6 +47896,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47032,6 +47988,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-kv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47167,6 +48124,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-kv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47287,6 +48245,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47346,6 +48305,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47453,6 +48413,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-keyvalut",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47646,6 +48607,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47723,6 +48685,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -47814,6 +48777,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "workspaceexamplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -48978,6 +49942,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -51979,6 +52944,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
                       "purge_protection_enabled": false,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -52877,6 +53843,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "mssqltdeexample",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -55068,6 +56035,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
                       "purge_protection_enabled": false,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -55403,6 +56371,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "mssqltdeexample",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -55992,6 +56961,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
                       "purge_protection_enabled": false,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -57174,6 +58144,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "anfcmkakv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "00000000-0000-0000-0000-000000000000"
@@ -58137,6 +59108,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-cert-kv",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -58146,6 +59118,7 @@ resources:
                     {
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-creds-kv",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -59257,6 +60230,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "${var.prefix}kv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -62961,6 +63935,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -64373,7 +65348,7 @@ resources:
                       "name": "example-resources"
                     }
         argumentDocs:
-            Microsoft.Compute: '- 2024-11-01'
+            Microsoft.Compute: '- 2025-04-01'
             additional_capabilities: '- (Optional) An additional_capabilities block as defined below.'
             additional_capabilities.ultra_ssd_enabled: '- (Optional) Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine Scale Set? Defaults to false. Changing this forces a new resource to be created.'
             additional_unattend_content.content: '- (Required) The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.'
@@ -64454,6 +65429,7 @@ resources:
             network_interface.name: '- (Required) The Name which should be used for this Network Interface. Changing this forces a new resource to be created.'
             network_interface.network_security_group_id: '- (Optional) The ID of a Network Security Group which should be assigned to this Network Interface.'
             network_interface.primary: '- (Optional) Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.'
+            network_interface.tags: '- (Optional) A mapping of tags to assign to the Network Interface created by this Network Interface Configuration.'
             os_disk: '- (Optional) An os_disk block as defined below.'
             os_disk.caching: '- (Required) The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly, and ReadWrite.'
             os_disk.diff_disk_settings: '- (Optional) A diff_disk_settings block as defined above. Changing this forces a new resource to be created.'
@@ -67110,6 +68086,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -68490,6 +69467,7 @@ resources:
             custom_dns_configs.fqdn: '- The fully qualified domain name to the private_endpoint.'
             custom_dns_configs.ip_addresses: '- A list of all IP Addresses that map to the private_endpoint fqdn.'
             custom_network_interface_name: '- (Optional) The custom name of the network interface attached to the private endpoint. Changing this forces a new resource to be created.'
+            edge_zone: '- (Optional) Specifies the Edge Zone within the Azure Region where this Private Endpoint should exist. Changing this forces a new resource to be created.'
             id: '- The ID of the Private Endpoint.'
             ip_configuration: '- (Optional) One or more ip_configuration blocks as defined below. This allows a static IP address to be set for this Private Endpoint, otherwise an address is dynamically allocated from the Subnet.'
             ip_configuration.member_name: '- (Optional) Specifies the member name this IP address applies to. If it is not specified, it will use the value of subresource_name. Changing this forces a new resource to be created.'
@@ -74397,6 +75375,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-key-vault",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -75313,6 +76292,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-keyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -75412,6 +76392,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example-keyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -75609,6 +76590,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -77967,6 +78949,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "keyvaultcertexample",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -79409,13 +80392,13 @@ resources:
                     }
                 azurerm_key_vault.DeploymentKeyVault: |-
                     {
-                      "enable_rbac_authorization": true,
                       "enabled_for_deployment": true,
                       "enabled_for_disk_encryption": true,
                       "enabled_for_template_deployment": true,
                       "location": "${data.azurerm_resource_group.example.location}",
                       "name": "hci-examplekv",
                       "public_network_access_enabled": true,
+                      "rbac_authorization_enabled": true,
                       "resource_group_name": "${data.azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 30,
@@ -80615,6 +81598,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekv",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -81026,6 +82010,104 @@ resources:
             timeouts.update: '- (Defaults to 30 minutes) Used when updating the Storage Account Static Website.'
         importStatements:
             - terraform import azurerm_storage_account_static_website.mysite /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myresourcegroup/providers/Microsoft.Storage/storageAccounts/myaccount
+    azurerm_storage_account_table_properties:
+        subCategory: Storage
+        description: Manages the Table Properties of an Azure Storage Account.
+        name: azurerm_storage_account_table_properties
+        title: azurerm_storage_account_table_properties
+        examples:
+            - name: example
+              manifest: |-
+                {
+                  "cors_rule": [
+                    {
+                      "allowed_headers": [
+                        "x-tempo-*"
+                      ],
+                      "allowed_methods": [
+                        "GET",
+                        "PUT"
+                      ],
+                      "allowed_origins": [
+                        "http://www.example.com"
+                      ],
+                      "exposed_headers": [
+                        "x-tempo-*"
+                      ],
+                      "max_age_in_seconds": "500"
+                    }
+                  ],
+                  "hour_metrics": [
+                    {
+                      "retention_policy_days": 7,
+                      "version": "1.0"
+                    }
+                  ],
+                  "logging": [
+                    {
+                      "delete": true,
+                      "read": true,
+                      "retention_policy_days": 7,
+                      "version": "1.0",
+                      "write": true
+                    }
+                  ],
+                  "minute_metrics": [
+                    {
+                      "retention_policy_days": 7,
+                      "version": "1.0"
+                    }
+                  ],
+                  "storage_account_id": "${azurerm_storage_account.example.id}"
+                }
+              references:
+                storage_account_id: azurerm_storage_account.example.id
+              dependencies:
+                azurerm_resource_group.example: |-
+                    {
+                      "location": "West Europe",
+                      "name": "example-resources"
+                    }
+                azurerm_storage_account.example: |-
+                    {
+                      "account_replication_type": "GRS",
+                      "account_tier": "Standard",
+                      "location": "${azurerm_resource_group.example.location}",
+                      "name": "storageaccountname",
+                      "resource_group_name": "${azurerm_resource_group.example.name}",
+                      "tags": {
+                        "environment": "staging"
+                      }
+                    }
+        argumentDocs:
+            cors_rule: '- (Optional) A cors_rule block as defined below.'
+            cors_rule.allowed_headers: '- (Required) A list of headers that are allowed to be a part of the cross-origin request.'
+            cors_rule.allowed_methods: '- (Required) A list of HTTP methods that are allowed to be executed by the origin. Valid options are DELETE, GET, HEAD, MERGE, POST, OPTIONS or PUT.'
+            cors_rule.allowed_origins: '- (Required) A list of origin domains that will be allowed by CORS.'
+            cors_rule.exposed_headers: '- (Required) A list of response headers that are exposed to CORS clients.'
+            cors_rule.max_age_in_seconds: '- (Required) The number of seconds the client should cache a preflight response.'
+            hour_metrics: '- (Optional) A hour_metrics block as defined below.'
+            hour_metrics.include_apis: '- (Optional) Indicates whether metrics should generate summary statistics for called API operations.'
+            hour_metrics.retention_policy_days: '- (Optional) Specifies the number of days that logs will be retained.'
+            hour_metrics.version: '- (Required) The version of storage analytics to configure.'
+            id: '- The ID of the Storage Account Table Properties resource.'
+            logging: '- (Optional) A logging block as defined below.'
+            logging.delete: '- (Required) Indicates whether all delete requests should be logged.'
+            logging.read: '- (Required) Indicates whether all read requests should be logged.'
+            logging.retention_policy_days: '- (Optional) Specifies the number of days that logs will be retained.'
+            logging.version: '- (Required) The version of storage analytics to configure.'
+            logging.write: '- (Required) Indicates whether all write requests should be logged.'
+            minute_metrics: '- (Optional) A minute_metrics block as defined below.'
+            minute_metrics.include_apis: '- (Optional) Indicates whether metrics should generate summary statistics for called API operations.'
+            minute_metrics.retention_policy_days: '- (Optional) Specifies the number of days that logs will be retained.'
+            minute_metrics.version: '- (Required) The version of storage analytics to configure.'
+            storage_account_id: '- (Required) The ID of the Storage Account to set Table Properties on. Changing this forces a new resource to be created.'
+            timeouts.create: '- (Defaults to 30 minutes) Used when creating the Storage Account Table Properties.'
+            timeouts.delete: '- (Defaults to 30 minutes) Used when deleting the Storage Account Table Properties.'
+            timeouts.read: '- (Defaults to 5 minutes) Used when retrieving the Storage Account Table Properties.'
+            timeouts.update: '- (Defaults to 30 minutes) Used when updating the Storage Account Table Properties.'
+        importStatements:
+            - terraform import azurerm_storage_account_table_properties.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myresourcegroup/providers/Microsoft.Storage/storageAccounts/myaccount
     azurerm_storage_blob:
         subCategory: Storage
         description: Manages a Blob within a Storage Container.
@@ -86158,6 +87240,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -86313,6 +87396,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -86494,6 +87578,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -86707,6 +87792,7 @@ resources:
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "example",
                       "purge_protection_enabled": true,
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -91047,7 +92133,7 @@ resources:
                       "name": "test"
                     }
         argumentDocs:
-            Microsoft.Compute: '- 2024-11-01'
+            Microsoft.Compute: '- 2025-04-01'
             additional_unattend_config.component: '- (Required) Specifies the name of the component to configure with the added content. The only allowable value is Microsoft-Windows-Shell-Setup.'
             additional_unattend_config.content: '- (Required) Specifies the base-64 encoded XML formatted content that is added to the unattend.xml file for the specified path and component.'
             additional_unattend_config.pass: '- (Required) Specifies the name of the pass that the content applies to. The only allowable value is oobeSystem.'
@@ -91224,7 +92310,7 @@ resources:
                       "name": "example"
                     }
         argumentDocs:
-            Microsoft.Compute: '- 2024-11-01, 2024-03-01'
+            Microsoft.Compute: '- 2025-04-01, 2024-03-01'
             auto_upgrade_minor_version: '- (Optional) Should the latest version of the Extension be used at Deployment Time, if one is available? This won''t auto-update the extension on existing installation. Defaults to true.'
             automatic_upgrade_enabled: '- (Optional) Should the Extension be automatically updated whenever the Publisher releases a new version of this VM Extension?'
             failure_suppression_enabled: '- (Optional) Should failures from the extension be suppressed? Possible values are true or false. Defaults to false.'
@@ -93810,6 +94896,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -93909,6 +94996,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "premium",
                       "tenant_id": "${data.azurerm_client_config.current.tenant_id}"
@@ -94227,6 +95315,7 @@ resources:
                       ],
                       "location": "${azurerm_resource_group.example.location}",
                       "name": "examplekeyvault",
+                      "rbac_authorization_enabled": false,
                       "resource_group_name": "${azurerm_resource_group.example.name}",
                       "sku_name": "standard",
                       "soft_delete_retention_days": 7,
@@ -95193,10 +96282,10 @@ resources:
                       "resource_group_name": "${azurerm_resource_group.example.name}"
                     }
         argumentDocs:
-            Microsoft.Compute: '- 2024-11-01'
+            Microsoft.Compute: '- 2025-04-01'
             UltraSSD_LRS.disk_encryption_set_id: '- (Optional) The ID of the Disk Encryption Set which should be used to encrypt this Data Disk. Changing this forces a new resource to be created.'
-            UltraSSD_LRS.ultra_ssd_disk_iops_read_write: '- (Optional) Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
-            UltraSSD_LRS.ultra_ssd_disk_mbps_read_write: '- (Optional) Specifies the bandwidth in MB per second for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
+            UltraSSD_LRS.disk_iops_read_write: '- (Optional) Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
+            UltraSSD_LRS.disk_mbps_read_write: '- (Optional) Specifies the bandwidth in MB per second for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.'
             UltraSSD_LRS.write_accelerator_enabled: '- (Optional) Should Write Accelerator be enabled for this Data Disk? Defaults to false.'
             additional_capabilities: '- (Optional) An additional_capabilities block as defined below.'
             additional_capabilities.ultra_ssd_enabled: '- (Optional) Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine Scale Set? Possible values are true or false. Defaults to false. Changing this forces a new resource to be created.'

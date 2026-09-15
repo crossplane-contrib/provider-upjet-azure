@@ -150,6 +150,7 @@ spec:
                   rbacAuthorizationEnabled:
                     description: Boolean flag to specify whether Azure Key Vault uses
                       Role Based Access Control (RBAC) for authorization of data actions.
+                      Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -338,6 +339,7 @@ spec:
                   rbacAuthorizationEnabled:
                     description: Boolean flag to specify whether Azure Key Vault uses
                       Role Based Access Control (RBAC) for authorization of data actions.
+                      Defaults to false.
                     type: boolean
                   skuName:
                     description: The Name of the SKU used for this Key Vault. Possible
@@ -595,6 +597,7 @@ spec:
                   rbacAuthorizationEnabled:
                     description: Boolean flag to specify whether Azure Key Vault uses
                       Role Based Access Control (RBAC) for authorization of data actions.
+                      Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -818,6 +821,7 @@ spec:
                   rbacAuthorizationEnabled:
                     description: Boolean flag to specify whether Azure Key Vault uses
                       Role Based Access Control (RBAC) for authorization of data actions.
+                      Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -1004,6 +1008,7 @@ spec:
                   rbacAuthorizationEnabled:
                     description: Boolean flag to specify whether Azure Key Vault uses
                       Role Based Access Control (RBAC) for authorization of data actions.
+                      Defaults to false.
                     type: boolean
                   skuName:
                     description: The Name of the SKU used for this Key Vault. Possible
@@ -1259,6 +1264,7 @@ spec:
                   rbacAuthorizationEnabled:
                     description: Boolean flag to specify whether Azure Key Vault uses
                       Role Based Access Control (RBAC) for authorization of data actions.
+                      Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create

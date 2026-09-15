@@ -903,6 +903,10 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceInitParameters struct {
 
 	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// A mapping of tags to assign to the Network Interface created by this Network Interface Configuration.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation struct {
@@ -933,6 +937,10 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation struct {
 
 	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// A mapping of tags to assign to the Network Interface created by this Network Interface Configuration.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceParameters struct {
@@ -972,6 +980,11 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceParameters struct {
 	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// A mapping of tags to assign to the Network Interface created by this Network Interface Configuration.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetObservation struct {
