@@ -76,10 +76,10 @@ github.com/crossplane/crossplane-runtime/v2 v2.5.0-rc.0.0.20260908074656-9b2fb6b
 github.com/crossplane/crossplane-runtime/v2 v2.5.0-rc.0.0.20260908074656-9b2fb6b1d1ff/go.mod h1:U9Wf0etSG2hKFSJKiIQK59IcXJcc3GF9JG/ELju6NEc=
 github.com/crossplane/crossplane-tools v0.0.0-20260719180100-659f1dc036c5 h1:JTWp/389uzSn6pz8cRHyh+zIHVKtyUQgVd2v9zbsGc4=
 github.com/crossplane/crossplane-tools v0.0.0-20260719180100-659f1dc036c5/go.mod h1:W5PNfXAOkvDjcDUCBsP2mEFDneCrrcMo1t+U3Dj5mjI=
-github.com/crossplane/crossplane/apis/v2 v2.4.0 h1:QmZqZe+vvi9IrnEK8rW7UsCDQBqagK6HFV1mYEw/DkQ=
-github.com/crossplane/crossplane/apis/v2 v2.4.0/go.mod h1:Ev+FjQqTTWJWoaXi63uKER215kDjTo8PghDCT0JapZs=
-github.com/crossplane/upjet/v2 v2.4.1-0.20260728103920-4f6e6e10dff2 h1:4NMn7SZ7zJDhfMFv3RbHNnGyEkNKKfKNmLRadmVoqzw=
-github.com/crossplane/upjet/v2 v2.4.1-0.20260728103920-4f6e6e10dff2/go.mod h1:AVQKglzarMh5CDQS5r/9Bc5YCVIHhtH+NQOVZFMLYf4=
+github.com/crossplane/crossplane/apis/v2 v2.4.1 h1:ye1vpLjSDicKQbKnMzPjzWNxwOdqYVlKDWSHt9VVz5g=
+github.com/crossplane/crossplane/apis/v2 v2.4.1/go.mod h1:OBNx+tl5RQh31Hqo2Q1KZ5tlwZXUIetAvpKKozP8HhU=
+github.com/crossplane/upjet/v2 v2.5.0 h1:RSCDmAED587XIazsmhOWh4ITVh/RRqbFasr/pYLRa0k=
+github.com/crossplane/upjet/v2 v2.5.0/go.mod h1:mk+Me18gPUhsQMWgg225vOsGeFocD9/GYI6opMSgHzk=
 github.com/cyphar/filepath-securejoin v0.4.1 h1:JyxxyPEaktOD+GAnqIqTf9A8tHyAG22rowi7HkoSU1s=
 github.com/cyphar/filepath-securejoin v0.4.1/go.mod h1:Sdj7gXlvMcPZsbhwhQ33GguGLDGQL7h7bg04C/+u9jI=
 github.com/dave/jennifer v1.7.1 h1:B4jJJDHelWcDhlRQxWeo0Npa/pYKBLrirAQoTN45txo=
@@ -604,8 +604,8 @@ google.golang.org/genproto/googleapis/api v0.0.0-20260526163538-3dc84a4a5aaa h1:
 google.golang.org/genproto/googleapis/api v0.0.0-20260526163538-3dc84a4a5aaa/go.mod h1:q4lMZS6kskjT5HvCPrnnypcDPVJqT/f4nfxmkE7gryY=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa h1:mZHHdPZl0dbGHCflZgAq/Q468DWVFcU2whhB2KAo8fk=
 google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa/go.mod h1:4Hqkh8ycfw05ld/3BWL7rJOSfebL2Q+DVDeRgYgxUU8=
-google.golang.org/grpc v1.83.1 h1:HIO0+BEtBP6soyqvqC8sNUjZ7bTs+0hFQuFF+RAy++Y=
-google.golang.org/grpc v1.83.1/go.mod h1:kDyl6SKsiHKt0uylY5gtn5cEjkrIOhQOGDgIc4JGwzQ=
+google.golang.org/grpc v1.83.2 h1:EManeRomTObA0BU7I8vXgg/78uE5MJ9M8B39EX2WscU=
+google.golang.org/grpc v1.83.2/go.mod h1:YPI1hK3kDked6iHvgX3tR0y+nX/qpMFKhPgFsokw1S8=
 google.golang.org/protobuf v1.26.0-rc.1/go.mod h1:jlhhOSvTdKEhbULTjvd4ARK9grFBp09yW+WbY/TyQbw=
 google.golang.org/protobuf v1.26.0/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQnmE0givc=
 google.golang.org/protobuf v1.36.12-0.20260120151049-f2248ac996af h1:+5/Sw3GsDNlEmu7TfklWKPdQ0Ykja5VEmq2i817+jbI=
