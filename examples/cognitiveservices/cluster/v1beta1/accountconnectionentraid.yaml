@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.upbound.io/v1beta1
+kind: AccountConnectionEntraID
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionentraid
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-connection-entra-id
+spec:
+  forProvider:
+    category: Databricks
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    target: https://example-workspace.databricks.net/
+
+---
+
+apiVersion: cognitiveservices.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionentraid
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionentraid
+spec:
+  forProvider:
+    customSubdomainName: uptest-${Rand.RFC1123Subdomain}
+    identity:
+      type: SystemAssigned
+    kind: AIServices
+    location: West Europe
+    projectManagementEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionentraid
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionentraid
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,87 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.upbound.io/v1beta1
+kind: AccountConnectionCustomKeys
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectioncustomkeys
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    category: CustomKeys
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    customKeysSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    metadata:
+      ApiType: Azure
+      Location: West Europe
+      ResourceId: ${azurerm_cognitive_account.openai.id}
+    targetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: openai
+
+---
+
+apiVersion: cognitiveservices.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectioncustomkeys
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    customSubdomainName: exampleaiservices
+    identity:
+      type: SystemAssigned
+    kind: AIServices
+    location: West Europe
+    projectManagementEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: cognitiveservices.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectioncustomkeys
+  labels:
+    testing.upbound.io/example-name: openai
+  name: openai
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    kind: OpenAI
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectioncustomkeys
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

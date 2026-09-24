@@ -19,6 +19,18 @@ func (tr *ComputeCluster) Hub() {}
 func (tr *ComputeInstance) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *DatastoreBlobstorage) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *DatastoreDatalakeGen2) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *DatastoreFileshare) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *InferenceCluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SynapseSpark) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -6,6 +6,7 @@ package machinelearningservices
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 )
@@ -87,6 +88,53 @@ func Configure(p *config.Provider) {
 		}
 		r.References["primary_user_assigned_identity"] = config.Reference{
 			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["identity.identity_ids"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	for _, name := range []string{
+		"azurerm_machine_learning_datastore_blobstorage",
+		"azurerm_machine_learning_datastore_datalake_gen2",
+	} {
+		p.AddResourceConfigurator(name, func(r *config.Resource) {
+			r.ShortGroup = group
+			r.References["workspace_id"] = config.Reference{
+				TerraformName: "azurerm_machine_learning_workspace",
+				Extractor:     rconfig.ExtractResourceIDFuncPath,
+			}
+			r.References["storage_container_id"] = config.Reference{
+				TerraformName: "azurerm_storage_container",
+				Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_manager_id",true)`,
+			}
+		})
+	}
+
+	p.AddResourceConfigurator("azurerm_machine_learning_datastore_fileshare", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.References["workspace_id"] = config.Reference{
+			TerraformName: "azurerm_machine_learning_workspace",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["storage_fileshare_id"] = config.Reference{
+			TerraformName: "azurerm_storage_share",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("rbac_scope_id",true)`,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_machine_learning_inference_cluster", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.TerraformResource.Schema["ssl"].Elem.(*schema.Resource).
+			Schema["key"].Sensitive = true
+		r.References["machine_learning_workspace_id"] = config.Reference{
+			TerraformName: "azurerm_machine_learning_workspace",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["kubernetes_cluster_id"] = config.Reference{
+			TerraformName: "azurerm_kubernetes_cluster",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["identity.identity_ids"] = config.Reference{

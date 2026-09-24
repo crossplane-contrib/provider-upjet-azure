@@ -227,6 +227,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_cognitive_account_rai_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/raiPolicies/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1/projects/project1
 	"azurerm_cognitive_account_project": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/projects/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1
+	"azurerm_cognitive_account_customer_managed_key": config.TemplatedStringAsIdentifier("", "{{ .parameters.cognitive_account_id }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_account_key": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_account_managed_identity": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_api_key": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_custom_keys": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_entra_id": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
 
 	// communication
 	//
@@ -1923,6 +1935,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// AI Foundry Projects can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/project1
 	"azurerm_ai_foundry_project": aiFoundryProjectExternalName(),
+	// Machine Learning Blob Storage DataStores can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/mlw1/dataStores/datastore1
+	"azurerm_machine_learning_datastore_blobstorage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/dataStores/{{ .external_name }}"),
+	// Machine Learning Data Lake Gen2 DataStores can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/mlw1/dataStores/datastore1
+	"azurerm_machine_learning_datastore_datalake_gen2": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/dataStores/{{ .external_name }}"),
+	// Machine Learning File Share DataStores can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/mlw1/dataStores/datastore1
+	"azurerm_machine_learning_datastore_fileshare": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/dataStores/{{ .external_name }}"),
+	// Machine Learning Inference Clusters can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.MachineLearningServices/workspaces/workspace1/computes/cluster1
+	"azurerm_machine_learning_inference_cluster": config.TemplatedStringAsIdentifier("name", "{{ .parameters.machine_learning_workspace_id }}/computes/{{ .external_name }}"),
 
 	// maintenance
 	//
