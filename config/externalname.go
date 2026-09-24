@@ -227,6 +227,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_cognitive_account_rai_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/raiPolicies/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1/projects/project1
 	"azurerm_cognitive_account_project": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/projects/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1
+	"azurerm_cognitive_account_customer_managed_key": config.TemplatedStringAsIdentifier("", "{{ .parameters.cognitive_account_id }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_account_key": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_account_managed_identity": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_api_key": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_custom_keys": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/connections/connection1
+	"azurerm_cognitive_account_connection_entra_id": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/connections/{{ .external_name }}"),
 
 	// communication
 	//

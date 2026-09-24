@@ -16,6 +16,60 @@ func (l *AIServicesList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this AccountConnectionAPIKeyList.
+func (l *AccountConnectionAPIKeyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AccountConnectionAccountKeyList.
+func (l *AccountConnectionAccountKeyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AccountConnectionAccountManagedIdentityList.
+func (l *AccountConnectionAccountManagedIdentityList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AccountConnectionCustomKeysList.
+func (l *AccountConnectionCustomKeysList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AccountConnectionEntraIDList.
+func (l *AccountConnectionEntraIDList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AccountCustomerManagedKeyList.
+func (l *AccountCustomerManagedKeyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this AccountList.
 func (l *AccountList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

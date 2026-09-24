@@ -489,6 +489,478 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this AccountConnectionAPIKey.
+func (mg *AccountConnectionAPIKey) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
+			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
+	}
+	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetRef,
+			Selector:     mg.Spec.ForProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Target")
+	}
+	mg.Spec.ForProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetRef,
+			Selector:     mg.Spec.InitProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Target")
+	}
+	mg.Spec.InitProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AccountConnectionAccountKey.
+func (mg *AccountConnectionAccountKey) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
+			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
+	}
+	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
+			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetRef,
+			Selector:     mg.Spec.ForProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Target")
+	}
+	mg.Spec.ForProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target),
+			Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetRef,
+			Selector:     mg.Spec.InitProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Target")
+	}
+	mg.Spec.InitProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AccountConnectionAccountManagedIdentity.
+func (mg *AccountConnectionAccountManagedIdentity) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
+			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
+	}
+	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
+			Extract:      resource.ExtractParamPath("vault_uri", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetRef,
+			Selector:     mg.Spec.ForProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Target")
+	}
+	mg.Spec.ForProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target),
+			Extract:      resource.ExtractParamPath("vault_uri", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetRef,
+			Selector:     mg.Spec.InitProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Target")
+	}
+	mg.Spec.InitProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AccountConnectionCustomKeys.
+func (mg *AccountConnectionCustomKeys) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
+			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
+	}
+	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetRef,
+			Selector:     mg.Spec.ForProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Target")
+	}
+	mg.Spec.ForProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetRef,
+			Selector:     mg.Spec.InitProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Target")
+	}
+	mg.Spec.InitProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AccountConnectionEntraID.
+func (mg *AccountConnectionEntraID) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
+			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
+	}
+	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.TargetRef,
+			Selector:     mg.Spec.ForProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Target")
+	}
+	mg.Spec.ForProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.TargetRef,
+			Selector:     mg.Spec.InitProvider.TargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Target")
+	}
+	mg.Spec.InitProvider.Target = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AccountCustomerManagedKey.
+func (mg *AccountCustomerManagedKey) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitiveAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CognitiveAccountIDRef,
+			Selector:     mg.Spec.ForProvider.CognitiveAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CognitiveAccountID")
+	}
+	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityClientID),
+			Extract:      resource.ExtractParamPath("client_id", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.IdentityClientIDRef,
+			Selector:     mg.Spec.ForProvider.IdentityClientIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IdentityClientID")
+	}
+	mg.Spec.ForProvider.IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IdentityClientIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
+	}
+	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityClientID),
+			Extract:      resource.ExtractParamPath("client_id", true),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.IdentityClientIDRef,
+			Selector:     mg.Spec.InitProvider.IdentityClientIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IdentityClientID")
+	}
+	mg.Spec.InitProvider.IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IdentityClientIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
+	}
+	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this AccountProject.
 func (mg *AccountProject) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

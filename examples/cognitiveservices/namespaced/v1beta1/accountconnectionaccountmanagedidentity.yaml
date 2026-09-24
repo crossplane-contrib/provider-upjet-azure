@@ -1,0 +1,83 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: AccountConnectionAccountManagedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountmanagedidentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-connection-managed-identity
+  namespace: upbound-system
+spec:
+  forProvider:
+    category: AzureStorageAccount
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    metadata:
+      ApiType: Azure
+      Location: westeurope
+      ResourceId: ${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/accountconnectionaccountmanagedidentity/providers/Microsoft.Storage/storageAccounts/cogconnmi6f3a
+    target: https://cogconnmi6f3a.blob.core.windows.net/
+
+---
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountmanagedidentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionaccountmanagedidentity
+  namespace: upbound-system
+spec:
+  forProvider:
+    customSubdomainName: uptest-${Rand.RFC1123Subdomain}
+    identity:
+      type: SystemAssigned
+    kind: AIServices
+    location: West Europe
+    projectManagementEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: storage.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountmanagedidentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: cogconnmi6f3a
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountmanagedidentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionaccountmanagedidentity
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
