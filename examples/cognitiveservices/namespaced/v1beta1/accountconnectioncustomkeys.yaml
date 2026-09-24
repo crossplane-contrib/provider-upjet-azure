@@ -12,6 +12,9 @@ metadata:
   name: example-connection-custom-keys
   namespace: upbound-system
 spec:
+  initProvider:
+    customKeysSecretRef:
+      name: example-cognitive-connection-custom-keys
   forProvider:
     category: CustomKeys
     cognitiveAccountIdSelector:
