@@ -207,6 +207,206 @@ func (mg *ComputeInstance) SetWriteConnectionSecretToReference(r *xpv2.SecretRef
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this DatastoreBlobstorage.
+func (mg *DatastoreBlobstorage) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this DatastoreDatalakeGen2.
+func (mg *DatastoreDatalakeGen2) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this DatastoreFileshare.
+func (mg *DatastoreFileshare) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DatastoreFileshare.
+func (mg *DatastoreFileshare) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this DatastoreFileshare.
+func (mg *DatastoreFileshare) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this DatastoreFileshare.
+func (mg *DatastoreFileshare) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this DatastoreFileshare.
+func (mg *DatastoreFileshare) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DatastoreFileshare.
+func (mg *DatastoreFileshare) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DatastoreFileshare.
+func (mg *DatastoreFileshare) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this DatastoreFileshare.
+func (mg *DatastoreFileshare) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this DatastoreFileshare.
+func (mg *DatastoreFileshare) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this DatastoreFileshare.
+func (mg *DatastoreFileshare) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this InferenceCluster.
+func (mg *InferenceCluster) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this InferenceCluster.
+func (mg *InferenceCluster) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this InferenceCluster.
+func (mg *InferenceCluster) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this InferenceCluster.
+func (mg *InferenceCluster) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this InferenceCluster.
+func (mg *InferenceCluster) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this InferenceCluster.
+func (mg *InferenceCluster) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this InferenceCluster.
+func (mg *InferenceCluster) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this InferenceCluster.
+func (mg *InferenceCluster) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this InferenceCluster.
+func (mg *InferenceCluster) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this InferenceCluster.
+func (mg *InferenceCluster) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SynapseSpark.
 func (mg *SynapseSpark) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

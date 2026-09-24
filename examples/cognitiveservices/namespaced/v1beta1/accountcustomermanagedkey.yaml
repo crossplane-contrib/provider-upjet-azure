@@ -31,6 +31,7 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
   labels:
     testing.upbound.io/example-name: example
   name: accountcustomermanagedkey
@@ -57,6 +58,7 @@ kind: UserAssignedIdentity
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
   labels:
     testing.upbound.io/example-name: example
   name: accountcustomermanagedkey
@@ -76,6 +78,7 @@ kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
   labels:
     testing.upbound.io/example-name: example
   name: uptest-${Rand.RFC1123Subdomain}
@@ -97,6 +100,7 @@ kind: AccessPolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
   labels:
     testing.upbound.io/example-name: client
   name: accountcustomermanagedkey-client
@@ -126,6 +130,7 @@ kind: AccessPolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "The Key Vault access policy for the user assigned identity needs the identity's principal ID."
   labels:
     testing.upbound.io/example-name: identity
   name: accountcustomermanagedkey-identity
@@ -149,6 +154,7 @@ kind: Key
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
   labels:
     testing.upbound.io/example-name: example
   name: accountcustomermanagedkey
@@ -176,6 +182,7 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
   labels:
     testing.upbound.io/example-name: example
   name: accountcustomermanagedkey

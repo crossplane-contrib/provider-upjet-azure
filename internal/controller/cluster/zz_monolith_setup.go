@@ -450,6 +450,10 @@ import (
 	aifoundryproject "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/aifoundryproject"
 	computecluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/computeinstance"
+	datastoreblobstorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/datastoreblobstorage"
+	datastoredatalakegen2 "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/datastoredatalakegen2"
+	datastorefileshare "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/datastorefileshare"
+	inferencecluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/inferencecluster"
 	synapsespark "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/synapsespark"
 	workspacemachinelearningservices "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/workspace"
 	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/workspaceoutboundrulefqdn"
@@ -1231,6 +1235,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		aifoundryproject.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
+		datastoreblobstorage.Setup,
+		datastoredatalakegen2.Setup,
+		datastorefileshare.Setup,
+		inferencecluster.Setup,
 		synapsespark.Setup,
 		workspacemachinelearningservices.Setup,
 		workspaceoutboundrulefqdn.Setup,
@@ -2018,6 +2026,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		aifoundryproject.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
+		datastoreblobstorage.SetupGated,
+		datastoredatalakegen2.SetupGated,
+		datastorefileshare.SetupGated,
+		inferencecluster.SetupGated,
 		synapsespark.SetupGated,
 		workspacemachinelearningservices.SetupGated,
 		workspaceoutboundrulefqdn.SetupGated,
@@ -2804,6 +2816,10 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		aifoundryproject.SetupWebhookWithManager,
 		computecluster.SetupWebhookWithManager,
 		computeinstance.SetupWebhookWithManager,
+		datastoreblobstorage.SetupWebhookWithManager,
+		datastoredatalakegen2.SetupWebhookWithManager,
+		datastorefileshare.SetupWebhookWithManager,
+		inferencecluster.SetupWebhookWithManager,
 		synapsespark.SetupWebhookWithManager,
 		workspacemachinelearningservices.SetupWebhookWithManager,
 		workspaceoutboundrulefqdn.SetupWebhookWithManager,

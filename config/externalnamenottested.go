@@ -463,8 +463,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// machinelearning
 	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/mlw1/datastores/datastore1
-	"azurerm_machine_learning_datastore_blobstorage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/datastores/{{ .external_name }}"),
 	// AIFoundryProject parses ai_services_hub_id to get required resourcegroup
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/project1
 	"azurerm_ai_foundry_project": config.IdentifierFromProvider,
