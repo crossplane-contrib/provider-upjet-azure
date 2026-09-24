@@ -10,6 +10,24 @@ package v1beta1
 func (tr *Account) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *AccountConnectionAccountKey) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AccountConnectionAccountManagedIdentity) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AccountConnectionAPIKey) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AccountConnectionCustomKeys) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AccountConnectionEntraID) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AccountCustomerManagedKey) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *AccountProject) Hub() {}
 
 // Hub marks this type as a conversion hub.

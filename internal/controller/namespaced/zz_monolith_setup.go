@@ -152,6 +152,12 @@ import (
 	profile "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/v2/internal/controller/namespaced/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/account"
+	accountconnectionaccountkey "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountconnectionaccountkey"
+	accountconnectionaccountmanagedidentity "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountconnectionaccountmanagedidentity"
+	accountconnectionapikey "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountconnectionapikey"
+	accountconnectioncustomkeys "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountconnectioncustomkeys"
+	accountconnectionentraid "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountconnectionentraid"
+	accountcustomermanagedkey "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountcustomermanagedkey"
 	accountproject "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountproject"
 	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraiblocklist"
 	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraipolicy"
@@ -927,6 +933,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
+		accountconnectionaccountkey.Setup,
+		accountconnectionaccountmanagedidentity.Setup,
+		accountconnectionapikey.Setup,
+		accountconnectioncustomkeys.Setup,
+		accountconnectionentraid.Setup,
+		accountcustomermanagedkey.Setup,
 		accountproject.Setup,
 		accountraiblocklist.Setup,
 		accountraipolicy.Setup,
@@ -1708,6 +1720,12 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.SetupGated,
 		appservicecertificateorder.SetupGated,
 		accountcognitiveservices.SetupGated,
+		accountconnectionaccountkey.SetupGated,
+		accountconnectionaccountmanagedidentity.SetupGated,
+		accountconnectionapikey.SetupGated,
+		accountconnectioncustomkeys.SetupGated,
+		accountconnectionentraid.SetupGated,
+		accountcustomermanagedkey.SetupGated,
 		accountproject.SetupGated,
 		accountraiblocklist.SetupGated,
 		accountraipolicy.SetupGated,
@@ -2488,6 +2506,12 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		profile.SetupWebhookWithManager,
 		appservicecertificateorder.SetupWebhookWithManager,
 		accountcognitiveservices.SetupWebhookWithManager,
+		accountconnectionaccountkey.SetupWebhookWithManager,
+		accountconnectionaccountmanagedidentity.SetupWebhookWithManager,
+		accountconnectionapikey.SetupWebhookWithManager,
+		accountconnectioncustomkeys.SetupWebhookWithManager,
+		accountconnectionentraid.SetupWebhookWithManager,
+		accountcustomermanagedkey.SetupWebhookWithManager,
 		accountproject.SetupWebhookWithManager,
 		accountraiblocklist.SetupWebhookWithManager,
 		accountraipolicy.SetupWebhookWithManager,

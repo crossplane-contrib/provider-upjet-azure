@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: AccountConnectionAPIKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionapikey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-connection-api-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    apiKeySecretRef:
+      key: api-key
+      name: example-cognitive-connection-api-key
+    category: ApiKey
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    target: https://api.example.com/
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-cognitive-connection-api-key
+  namespace: upbound-system
+type: Opaque
+stringData:
+  api-key: example-api-key
+
+---
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionapikey
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionapikey
+  namespace: upbound-system
+spec:
+  forProvider:
+    customSubdomainName: uptest-${Rand.RFC1123Subdomain}
+    identity:
+      type: SystemAssigned
+    kind: AIServices
+    location: West Europe
+    projectManagementEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionapikey
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionapikey
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe

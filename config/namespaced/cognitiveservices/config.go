@@ -70,4 +70,34 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+	p.AddResourceConfigurator("azurerm_cognitive_account_customer_managed_key", func(r *config.Resource) {
+		r.ShortGroup = group
+		r.References["cognitive_account_id"] = config.Reference{
+			TerraformName: "azurerm_cognitive_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["key_vault_key_id"] = config.Reference{
+			TerraformName: "azurerm_key_vault_key",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["identity_client_id"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)`,
+		}
+	})
+	for _, name := range []string{
+		"azurerm_cognitive_account_connection_account_key",
+		"azurerm_cognitive_account_connection_account_managed_identity",
+		"azurerm_cognitive_account_connection_api_key",
+		"azurerm_cognitive_account_connection_custom_keys",
+		"azurerm_cognitive_account_connection_entra_id",
+	} {
+		p.AddResourceConfigurator(name, func(r *config.Resource) {
+			r.ShortGroup = group
+			r.References["cognitive_account_id"] = config.Reference{
+				TerraformName: "azurerm_cognitive_account",
+				Extractor:     rconfig.ExtractResourceIDFuncPath,
+			}
+		})
+	}
 }
