@@ -1560,7 +1560,7 @@ spec:
                       remoteDebuggingVersion:
                         description: |-
                           The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022“
+                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
                         type: string
                       runtimeScaleMonitoringEnabled:
                         description: |-
@@ -3532,7 +3532,7 @@ spec:
                       remoteDebuggingVersion:
                         description: |-
                           The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022“
+                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
                         type: string
                       runtimeScaleMonitoringEnabled:
                         description: |-
@@ -5143,7 +5143,7 @@ spec:
                       remoteDebuggingVersion:
                         description: |-
                           The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022“
+                          The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
                         type: string
                       runtimeScaleMonitoringEnabled:
                         description: |-
