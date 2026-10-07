@@ -375,8 +375,19 @@ func resolveProviderConfigModern(ctx context.Context, crClient client.Client, mg
 		return nil, errors.Errorf("referenced provider config kind %q is not a provider config type %s/%s", configRef.Kind, mg.GetNamespace(), mg.GetName())
 	}
 
-	// Namespace will be ignored if the PC is a cluster-scoped type
-	if err := crClient.Get(ctx, types.NamespacedName{Name: configRef.Name, Namespace: mg.GetNamespace()}, pcObj); err != nil {
+	// A real API server's RESTMapper-aware client ignores the namespace for a
+	// cluster-scoped kind on its own; the diff server's in-memory client has
+	// no RESTMapper and keys its store by an exact (GVK, namespace, name)
+	// match, holding a ClusterProviderConfig under an empty namespace. So a
+	// namespaced managed resource referencing a ClusterProviderConfig (the
+	// default when providerConfigRef is unset) must clear the namespace here
+	// itself to resolve it, regardless of the managed resource's own
+	// namespace.
+	ns := mg.GetNamespace()
+	if configRef.Kind == namespacedv1beta1.ClusterProviderConfigKind {
+		ns = ""
+	}
+	if err := crClient.Get(ctx, types.NamespacedName{Name: configRef.Name, Namespace: ns}, pcObj); err != nil {
 		return nil, errors.Wrap(err, errGetProviderConfig)
 	}
 

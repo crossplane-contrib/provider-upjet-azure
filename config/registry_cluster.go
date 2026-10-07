@@ -104,6 +104,16 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 		if _, ok := oldSLAPIs[name]; ok {
 			r.Version = "v1beta2"
 			r.PreviousVersions = []string{"v1beta1"}
+			// Every version still in PreviousVersions here predates the
+			// singleton list to embedded object flattening, so its CRD type
+			// declares the field as a list - already the shape Terraform
+			// expects. Recording them tells a consumer that works at a
+			// requested API version rather than the reconciled one, i.e. the
+			// diff server, to skip the singleton list conversion for those
+			// versions; applying it would wrap the list into a list of lists.
+			// The reconciler itself is unaffected, as the API server converts
+			// every object to r.Version before a controller sees it.
+			r.SingletonListVersions = append([]string(nil), r.PreviousVersions...)
 			r.SetCRDStorageVersion(r.Version)
 			r.ControllerReconcileVersion = r.Version //nolint:staticcheck
 			r.Conversions = []conversion.Conversion{
