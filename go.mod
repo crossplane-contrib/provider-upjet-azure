@@ -16,6 +16,7 @@ require (
 	github.com/crossplane/crossplane/apis/v2 v2.4.2
 	github.com/crossplane/upjet/v2 v2.5.1-0.20261007065827-7b0ca4f362e7
 	github.com/google/go-cmp v0.7.0
+	github.com/hashicorp/go-azure-sdk/sdk v0.20260709.1191450
 	github.com/hashicorp/terraform-json v0.27.2
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.40.1
 	github.com/hashicorp/terraform-provider-azurerm v1.44.1-0.20230519070112-155958d2cb08
@@ -90,7 +91,6 @@ require (
 	github.com/hashicorp/go-azure-helpers v0.81.1 // indirect
 	github.com/hashicorp/go-azure-sdk/data-plane v0.20260709.1191450 // indirect
 	github.com/hashicorp/go-azure-sdk/resource-manager v0.20260709.1191450 // indirect
-	github.com/hashicorp/go-azure-sdk/sdk v0.20260709.1191450 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-cty v1.5.0 // indirect
@@ -202,6 +202,6 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.7.2 // indirect
 )
 
-replace github.com/hashicorp/terraform-provider-azurerm => /Users/sergenyalcin/workspace/hashicorp/terraform-provider-azurerm
+replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20261007121339-c06a00afbed1
 
 replace github.com/Azure/azure-sdk-for-go => github.com/Azure/azure-sdk-for-go v66.0.0+incompatible // v68.0.0+incompatible which crossplane-runtime >= v2.3.0 pulls in has breaking API changes which the terraform provider does not consume

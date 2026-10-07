@@ -26,6 +26,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	"github.com/crossplane/upjet/v2/pkg/controller/conversion"
+	"github.com/crossplane/upjet/v2/pkg/diffserver"
 	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -96,9 +97,19 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 			certsDirSet = true
 			return nil
 		}).String()
+
+		// Running the provider's controllers is the default command, so that
+		// the provider keeps behaving as it did before the internal commands
+		// were introduced, i.e. when it's invoked without any arguments.
+		startCmd = app.Command("start", "Start the provider's controllers.").Default()
+
+		internalCmd   = app.Command("internal", "Commands used internally by the Crossplane ecosystem. No compatibility guarantees are made for them.")
+		diffServerCmd = internalCmd.Command("diff-server", "Start a gRPC server serving the provider diff services.")
+		diffNetwork   = diffServerCmd.Flag("network", "The network the diff gRPC server listens on.").Default("tcp").Envar("DIFF_SERVER_NETWORK").Enum("tcp", "unix")
+		diffAddress   = diffServerCmd.Flag("address", "The address the diff gRPC server listens on. A socket path when the network is unix.").Default(":9099").Envar("DIFF_SERVER_ADDRESS").String()
 	)
 
-	kingpin.MustParse(app.Parse(os.Args[1:]))
+	cmd := kingpin.MustParse(app.Parse(os.Args[1:]))
 	log.Default().SetOutput(io.Discard)
 	ctrl.SetLogger(zap.New(zap.WriteTo(io.Discard)))
 
@@ -109,6 +120,43 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 		// *very* verbose even at info level, so we only provide it a real
 		// logger when we're running in debug mode.
 		ctrl.SetLogger(zl)
+	}
+
+	ctx := context.Background()
+	sdkProvider, err := xpprovider.GetProviderSchema(context.Background())
+	clusterProvider, err := config.GetProvider(ctx, sdkProvider, false)
+	kingpin.FatalIfError(err, "Cannot initialize the cluster provider configuration")
+	namespacedProvider, err := config.GetProviderNamespaced(ctx, sdkProvider, false)
+	kingpin.FatalIfError(err, "Cannot initialize the namespaced provider configuration")
+
+	// The diff server never talks to the Kubernetes API itself - its kube
+	// client is in-memory, seeded per request from the PlanRequest - so it is
+	// dispatched here, before a real cluster connection (ctrl.GetConfig,
+	// ctrl.NewManager below) is required to run this binary at all.
+	switch cmd {
+	case diffServerCmd.FullCommand():
+		// The diff server only needs to deserialize this provider's managed
+		// resources, so its scheme holds just the provider's APIs.
+		diffScheme := runtime.NewScheme()
+		kingpin.FatalIfError(corev1.AddToScheme(diffScheme), "Cannot add Kubernetes core APIs to the diff server scheme")
+		kingpin.FatalIfError(clusterapis.AddToScheme(diffScheme), "Cannot add cluster-scoped Azure APIs to the diff server scheme")
+		kingpin.FatalIfError(namespacedapis.AddToScheme(diffScheme), "Cannot add namespaced Azure APIs to the diff server scheme")
+
+		s := diffserver.NewServer(
+			diffserver.WithProviderConfigurations(clusterProvider, namespacedProvider),
+			diffserver.WithLogger(logr),
+			diffserver.WithTerraformSetupFn(clients.OfflineTerraformSetupBuilder(sdkProvider)),
+			// This package's controllers reconcile a single API group, while
+			// its scheme and provider configuration cover all of them. Declare
+			// the package's group so that a plan request for any other one is
+			// declined rather than answered from a configuration that does not
+			// run here. The monolithic package serves every group.
+			diffserver.WithAPIGroups("powerbidedicated"),
+		)
+		kingpin.FatalIfError(s.Serve(ctrl.SetupSignalHandler(), *diffNetwork, *diffAddress, diffScheme), "Cannot run the diff gRPC server")
+		return
+	case startCmd.FullCommand():
+		// the provider's controllers are started below.
 	}
 
 	// currently, we configure the jitter to be the 5% of the poll interval
@@ -201,12 +249,6 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 	metrics.Registry.MustRegister(metricRecorder)
 	metrics.Registry.MustRegister(stateMetrics)
 
-	ctx := context.Background()
-	sdkProvider, err := xpprovider.GetProviderSchema(context.Background())
-	clusterProvider, err := config.GetProvider(ctx, sdkProvider, false)
-	kingpin.FatalIfError(err, "Cannot initialize the cluster provider configuration")
-	namespacedProvider, err := config.GetProviderNamespaced(ctx, sdkProvider, false)
-	kingpin.FatalIfError(err, "Cannot initialize the namespaced provider configuration")
 	clusterOpts := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  logr,
