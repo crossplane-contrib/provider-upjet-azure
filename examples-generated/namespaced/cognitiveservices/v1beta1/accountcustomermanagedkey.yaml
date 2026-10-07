@@ -1,0 +1,132 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: AccountCustomerManagedKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identityClientIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    keyVaultKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    customSubdomainName: example-account
+    identity:
+      identityIdsRefs:
+      - name: example
+      type: SystemAssigned, UserAssigned
+    kind: Face
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US
+    purgeProtectionEnabled: true
+    rbacAuthorizationEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-key
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US
+
+---
+
+apiVersion: managedidentity.azure.m.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West US
+    name: example-identity
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

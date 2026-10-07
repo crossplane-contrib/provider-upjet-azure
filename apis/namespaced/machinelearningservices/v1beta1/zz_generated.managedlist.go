@@ -43,6 +43,42 @@ func (l *ComputeInstanceList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DatastoreBlobstorageList.
+func (l *DatastoreBlobstorageList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DatastoreDatalakeGen2List.
+func (l *DatastoreDatalakeGen2List) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DatastoreFileshareList.
+func (l *DatastoreFileshareList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this InferenceClusterList.
+func (l *InferenceClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SynapseSparkList.
 func (l *SynapseSparkList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

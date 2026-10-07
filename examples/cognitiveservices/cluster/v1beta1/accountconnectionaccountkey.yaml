@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.upbound.io/v1beta1
+kind: AccountConnectionAccountKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-connection-account-key
+spec:
+  forProvider:
+    accountKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-cognitive-connection-storage-account
+      namespace: upbound-system
+    category: AzureStorageAccount
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    metadata:
+      ApiType: Azure
+      Location: westeurope
+      ResourceId: ${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/accountconnectionaccountkey/providers/Microsoft.Storage/storageAccounts/cogconnak6f3a
+    targetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitiveservices.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionaccountkey
+spec:
+  forProvider:
+    customSubdomainName: uptest-${Rand.RFC1123Subdomain}
+    identity:
+      type: SystemAssigned
+    kind: AIServices
+    location: West Europe
+    projectManagementEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: cogconnak6f3a
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+  writeConnectionSecretToRef:
+    name: example-cognitive-connection-storage-account
+    namespace: upbound-system
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountconnectionaccountkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountconnectionaccountkey
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,194 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: machinelearningservices.azure.upbound.io/v1beta1
+kind: InferenceCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterPurpose: FastProd
+    description: This is an example cluster used with Terraform
+    kubernetesClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    machineLearningWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      stage: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: west europe
+    purgeProtectionEnabled: true
+    rbacAuthorizationEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: containerservice.azure.upbound.io/v1beta2
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultNodePool:
+      name: default
+      nodeCount: 3
+      vmSize: Standard_D3_v2
+      vnetSubnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    dnsPrefixPrivateCluster: prefix
+    identity:
+      type: SystemAssigned
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: machinelearningservices.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationInsightsIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identity:
+      type: SystemAssigned
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: west europe
+    tags:
+      stage: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.1.0.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/inferencecluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.1.0.0/16
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

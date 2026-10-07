@@ -90,7 +90,6 @@ var skipList = []string{
 	"azurerm_automation_dsc_configuration",
 	"azurerm_automation_dsc_nodeconfiguration", // depends on azurerm_automation_dsc_configuration
 	"azurerm_monitor_log_profile",
-	"azurerm_machine_learning_inference_cluster",
 	"azurerm_sql_failover_group",
 	"azurerm_logic_app_integration_account_certificate",
 	"azurerm_container_group",

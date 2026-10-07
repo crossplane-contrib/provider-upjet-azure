@@ -10,6 +10,12 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	account "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/account"
+	accountconnectionaccountkey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionaccountkey"
+	accountconnectionaccountmanagedidentity "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionaccountmanagedidentity"
+	accountconnectionapikey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionapikey"
+	accountconnectioncustomkeys "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectioncustomkeys"
+	accountconnectionentraid "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionentraid"
+	accountcustomermanagedkey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountcustomermanagedkey"
 	accountproject "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountproject"
 	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountraiblocklist"
 	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountraipolicy"
@@ -22,6 +28,12 @@ import (
 func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.Setup,
+		accountconnectionaccountkey.Setup,
+		accountconnectionaccountmanagedidentity.Setup,
+		accountconnectionapikey.Setup,
+		accountconnectioncustomkeys.Setup,
+		accountconnectionentraid.Setup,
+		accountcustomermanagedkey.Setup,
 		accountproject.Setup,
 		accountraiblocklist.Setup,
 		accountraipolicy.Setup,
@@ -40,6 +52,12 @@ func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.SetupGated,
+		accountconnectionaccountkey.SetupGated,
+		accountconnectionaccountmanagedidentity.SetupGated,
+		accountconnectionapikey.SetupGated,
+		accountconnectioncustomkeys.SetupGated,
+		accountconnectionentraid.SetupGated,
+		accountcustomermanagedkey.SetupGated,
 		accountproject.SetupGated,
 		accountraiblocklist.SetupGated,
 		accountraipolicy.SetupGated,
@@ -57,6 +75,12 @@ func SetupGated_cognitiveservices(mgr ctrl.Manager, o controller.Options) error 
 func SetupWebhookWithManager_cognitiveservices(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		account.SetupWebhookWithManager,
+		accountconnectionaccountkey.SetupWebhookWithManager,
+		accountconnectionaccountmanagedidentity.SetupWebhookWithManager,
+		accountconnectionapikey.SetupWebhookWithManager,
+		accountconnectioncustomkeys.SetupWebhookWithManager,
+		accountconnectionentraid.SetupWebhookWithManager,
+		accountcustomermanagedkey.SetupWebhookWithManager,
 		accountproject.SetupWebhookWithManager,
 		accountraiblocklist.SetupWebhookWithManager,
 		accountraipolicy.SetupWebhookWithManager,

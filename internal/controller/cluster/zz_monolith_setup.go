@@ -152,6 +152,12 @@ import (
 	profile "github.com/upbound/provider-azure/v2/internal/controller/cluster/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/v2/internal/controller/cluster/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/account"
+	accountconnectionaccountkey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionaccountkey"
+	accountconnectionaccountmanagedidentity "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionaccountmanagedidentity"
+	accountconnectionapikey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionapikey"
+	accountconnectioncustomkeys "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectioncustomkeys"
+	accountconnectionentraid "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionentraid"
+	accountcustomermanagedkey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountcustomermanagedkey"
 	accountproject "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountproject"
 	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountraiblocklist"
 	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountraipolicy"
@@ -444,6 +450,10 @@ import (
 	aifoundryproject "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/aifoundryproject"
 	computecluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/computeinstance"
+	datastoreblobstorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/datastoreblobstorage"
+	datastoredatalakegen2 "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/datastoredatalakegen2"
+	datastorefileshare "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/datastorefileshare"
+	inferencecluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/inferencecluster"
 	synapsespark "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/synapsespark"
 	workspacemachinelearningservices "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/workspace"
 	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/v2/internal/controller/cluster/machinelearningservices/workspaceoutboundrulefqdn"
@@ -927,6 +937,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
+		accountconnectionaccountkey.Setup,
+		accountconnectionaccountmanagedidentity.Setup,
+		accountconnectionapikey.Setup,
+		accountconnectioncustomkeys.Setup,
+		accountconnectionentraid.Setup,
+		accountcustomermanagedkey.Setup,
 		accountproject.Setup,
 		accountraiblocklist.Setup,
 		accountraipolicy.Setup,
@@ -1219,6 +1235,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		aifoundryproject.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
+		datastoreblobstorage.Setup,
+		datastoredatalakegen2.Setup,
+		datastorefileshare.Setup,
+		inferencecluster.Setup,
 		synapsespark.Setup,
 		workspacemachinelearningservices.Setup,
 		workspaceoutboundrulefqdn.Setup,
@@ -1708,6 +1728,12 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.SetupGated,
 		appservicecertificateorder.SetupGated,
 		accountcognitiveservices.SetupGated,
+		accountconnectionaccountkey.SetupGated,
+		accountconnectionaccountmanagedidentity.SetupGated,
+		accountconnectionapikey.SetupGated,
+		accountconnectioncustomkeys.SetupGated,
+		accountconnectionentraid.SetupGated,
+		accountcustomermanagedkey.SetupGated,
 		accountproject.SetupGated,
 		accountraiblocklist.SetupGated,
 		accountraipolicy.SetupGated,
@@ -2000,6 +2026,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		aifoundryproject.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
+		datastoreblobstorage.SetupGated,
+		datastoredatalakegen2.SetupGated,
+		datastorefileshare.SetupGated,
+		inferencecluster.SetupGated,
 		synapsespark.SetupGated,
 		workspacemachinelearningservices.SetupGated,
 		workspaceoutboundrulefqdn.SetupGated,
@@ -2488,6 +2518,12 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		profile.SetupWebhookWithManager,
 		appservicecertificateorder.SetupWebhookWithManager,
 		accountcognitiveservices.SetupWebhookWithManager,
+		accountconnectionaccountkey.SetupWebhookWithManager,
+		accountconnectionaccountmanagedidentity.SetupWebhookWithManager,
+		accountconnectionapikey.SetupWebhookWithManager,
+		accountconnectioncustomkeys.SetupWebhookWithManager,
+		accountconnectionentraid.SetupWebhookWithManager,
+		accountcustomermanagedkey.SetupWebhookWithManager,
 		accountproject.SetupWebhookWithManager,
 		accountraiblocklist.SetupWebhookWithManager,
 		accountraipolicy.SetupWebhookWithManager,
@@ -2780,6 +2816,10 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		aifoundryproject.SetupWebhookWithManager,
 		computecluster.SetupWebhookWithManager,
 		computeinstance.SetupWebhookWithManager,
+		datastoreblobstorage.SetupWebhookWithManager,
+		datastoredatalakegen2.SetupWebhookWithManager,
+		datastorefileshare.SetupWebhookWithManager,
+		inferencecluster.SetupWebhookWithManager,
 		synapsespark.SetupWebhookWithManager,
 		workspacemachinelearningservices.SetupWebhookWithManager,
 		workspaceoutboundrulefqdn.SetupWebhookWithManager,

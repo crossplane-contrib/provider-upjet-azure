@@ -1,0 +1,192 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: AccountCustomerManagedKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "The Key Vault access policy for the user assigned identity needs the identity's principal ID."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-customer-managed-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    cognitiveAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identityClientIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    keyVaultKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitiveservices.azure.m.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountcustomermanagedkey
+  namespace: upbound-system
+spec:
+  forProvider:
+    customSubdomainName: uptest-${Rand.RFC1123Subdomain}
+    identity:
+      identityIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      type: UserAssigned
+    kind: AIServices
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+
+---
+
+apiVersion: managedidentity.azure.m.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountcustomermanagedkey
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    name: accountcustomermanagedkey
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-${Rand.RFC1123Subdomain}
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
+  labels:
+    testing.upbound.io/example-name: client
+  name: accountcustomermanagedkey-client
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyPermissions:
+    - Create
+    - Delete
+    - Get
+    - GetRotationPolicy
+    - List
+    - Purge
+    - Recover
+    - UnwrapKey
+    - WrapKey
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "The Key Vault access policy for the user assigned identity needs the identity's principal ID."
+  labels:
+    testing.upbound.io/example-name: identity
+  name: accountcustomermanagedkey-identity
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyPermissions:
+    - Get
+    - UnwrapKey
+    - WrapKey
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${azurerm_user_assigned_identity.example.principal_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.m.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountcustomermanagedkey
+  namespace: upbound-system
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-key
+
+---
+
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitiveservices/v1beta1/accountcustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of AccountCustomerManagedKey. It is skipped because the parent resource is skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: accountcustomermanagedkey
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
