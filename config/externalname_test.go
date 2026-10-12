@@ -11,6 +11,34 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
+func TestDataFactoryIntegrationRuntimeGetIDFn(t *testing.T) {
+	const (
+		dataFactoryID = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example"
+		externalName  = "managed-vnet-ir"
+		wantID        = dataFactoryID + "/integrationRuntimes/" + externalName
+	)
+	resourceTypes := []string{
+		"azurerm_data_factory_integration_runtime_azure",
+		"azurerm_data_factory_integration_runtime_azure_ssis",
+		"azurerm_data_factory_integration_runtime_self_hosted",
+	}
+
+	for _, resourceType := range resourceTypes {
+		t.Run(resourceType, func(t *testing.T) {
+			externalNameConfig := TerraformPluginSDKExternalNameConfigs[resourceType]
+			gotID, err := externalNameConfig.GetIDFn(context.Background(), externalName, map[string]any{
+				"data_factory_id": dataFactoryID,
+			}, nil)
+			if err != nil {
+				t.Fatalf("GetIDFn() error = %v", err)
+			}
+			if diff := cmp.Diff(wantID, gotID); diff != "" {
+				t.Errorf("GetIDFn() mismatch (-want +got):\n%s", diff)
+			}
+		})
+	}
+}
+
 func TestMSSQLManagedInstanceFailoverGroupGetIDFn(t *testing.T) {
 	type args struct {
 		externalName string
