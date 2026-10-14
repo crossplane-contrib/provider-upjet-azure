@@ -36,6 +36,8 @@ func Configure(p *config.Provider) {
 			Schema["cluster_ca_certificate"].Sensitive = true
 		r.TerraformResource.Schema["kube_config"].Elem.(*schema.Resource).
 			Schema["password"].Sensitive = true
+		r.TerraformResource.Schema["default_node_pool"].Elem.(*schema.Resource).
+			Schema["upgrade_settings"].Computed = true
 
 		r.Kind = "KubernetesCluster"
 		r.LateInitializer = config.LateInitializer{
