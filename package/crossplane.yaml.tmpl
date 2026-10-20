@@ -32,6 +32,7 @@ metadata:
 spec:
   capabilities:
   - SafeStart
+  - DiffServer
 {{ if ne .Service "monolith" }}
   crossplane:
     version: ">=v1.12.1-0"
