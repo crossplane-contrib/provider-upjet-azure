@@ -98,10 +98,23 @@
       "matchStrings": ["CROSSPLANE_CLI_VERSION \\??= (?<currentValue>.*?)\\n"],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "crossplane/cli"
+    },
+    {
+      // We want a PR to bump kubectl-validate versions used through make variables in
+      // the Makefile, taking it from the official Github repository releases.
+      "customType": "regex",
+      "description": "Bump kubectl-validate version in the Makefile",
+      "managerFilePatterns": ["/^Makefile$/"],
+      "matchStrings": ["KUBECTL_VALIDATE_VERSION \\??= (?<currentValue>.*?)\\n"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "kubernetes-sigs/kubectl-validate"
     }
   ],
   // PackageRules disabled below should be enabled in case of vulnerabilities
+  // This relies on GH dependabot alerts and GH advisory database
   "vulnerabilityAlerts": {"enabled": true},
+  // Also check OSV database for vulnerabilities (includes the Go vulnerability database)
+  "osvVulnerabilityAlerts": true,
   "packageRules": [
     {
       // We need to ignore k8s.io/client-go older versions as they switched to
@@ -191,7 +204,7 @@
     },
     {
       // We want a single PR for bumping Crossplane and Crossplane CLI versions in CI
-      "matchDepNames": ["crossplane/crossplane"],
+      "matchDepNames": ["crossplane/crossplane", "crossplane/cli"],
       "groupName": "crossplane versions in CI",
       "groupSlug": "crossplane-in-ci"
     },
