@@ -129,6 +129,159 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	return nil
 }
 
+// ResolveReferences of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var mrsp reference.MultiNamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupPolicyDataLakeStorage", "BackupPolicyDataLakeStorageList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupPolicyDataLakeStorageID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.BackupPolicyDataLakeStorageIDRef,
+			Selector:     mg.Spec.ForProvider.BackupPolicyDataLakeStorageIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BackupPolicyDataLakeStorageID")
+	}
+	mg.Spec.ForProvider.BackupPolicyDataLakeStorageID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackupPolicyDataLakeStorageIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupVault", "BackupVaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataProtectionBackupVaultID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DataProtectionBackupVaultIDRef,
+			Selector:     mg.Spec.ForProvider.DataProtectionBackupVaultIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataProtectionBackupVaultID")
+	}
+	mg.Spec.ForProvider.DataProtectionBackupVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataProtectionBackupVaultIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
+			Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
+	}
+	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.StorageContainerNames),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.ForProvider.StorageContainerNamesRefs,
+			Selector:      mg.Spec.ForProvider.StorageContainerNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerNames")
+	}
+	mg.Spec.ForProvider.StorageContainerNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.StorageContainerNamesRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupPolicyDataLakeStorage", "BackupPolicyDataLakeStorageList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupPolicyDataLakeStorageID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.BackupPolicyDataLakeStorageIDRef,
+			Selector:     mg.Spec.InitProvider.BackupPolicyDataLakeStorageIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BackupPolicyDataLakeStorageID")
+	}
+	mg.Spec.InitProvider.BackupPolicyDataLakeStorageID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupPolicyDataLakeStorageIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.StorageContainerNames),
+			Extract:       reference.ExternalName(),
+			Namespace:     mg.GetNamespace(),
+			References:    mg.Spec.InitProvider.StorageContainerNamesRefs,
+			Selector:      mg.Spec.InitProvider.StorageContainerNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerNames")
+	}
+	mg.Spec.InitProvider.StorageContainerNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.StorageContainerNamesRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
 // ResolveReferences of this BackupInstanceDisk.
 func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
@@ -725,6 +878,38 @@ func (mg *BackupPolicyBlobStorage) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.m.upbound.io", "v1beta1", "BackupVault", "BackupVaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataProtectionBackupVaultID),
+			Extract:      rconfig.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DataProtectionBackupVaultIDRef,
+			Selector:     mg.Spec.ForProvider.DataProtectionBackupVaultIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataProtectionBackupVaultID")
+	}
+	mg.Spec.ForProvider.DataProtectionBackupVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataProtectionBackupVaultIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -47,6 +47,46 @@ func (mg *BackupInstanceBlobStorage) SetWriteConnectionSecretToReference(r *xpv2
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this BackupInstanceDataLakeStorage.
+func (mg *BackupInstanceDataLakeStorage) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this BackupInstanceDisk.
 func (mg *BackupInstanceDisk) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
@@ -244,6 +284,46 @@ func (mg *BackupPolicyBlobStorage) SetProviderConfigReference(r *xpv2.ProviderCo
 
 // SetWriteConnectionSecretToReference of this BackupPolicyBlobStorage.
 func (mg *BackupPolicyBlobStorage) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this BackupPolicyDataLakeStorage.
+func (mg *BackupPolicyDataLakeStorage) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
