@@ -1,0 +1,75 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupPolicyDataLakeStorage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicydatalakestorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupSchedule:
+    - R/2021-05-23T02:30:00+00:00/P1W
+    dataProtectionBackupVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    defaultRetentionDuration: P4M
+    retentionRule:
+    - absoluteCriteria: FirstOfWeek
+      duration: P6M
+      name: weekly
+    - daysOfWeek:
+      - Thursday
+      duration: P1W
+      name: thursday
+      scheduledBackupTimes:
+      - "2021-05-23T02:30:00Z"
+    - daysOfWeek:
+      - Tuesday
+      duration: P1D
+      name: monthly
+      scheduledBackupTimes:
+      - "2021-05-23T02:30:00Z"
+      weeksOfMonth:
+      - First
+      - Last
+    timeZone: India Standard Time
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta2
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicydatalakestorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicydatalakestorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

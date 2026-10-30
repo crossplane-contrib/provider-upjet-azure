@@ -1481,6 +1481,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Backup Instance Blob Storages can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataProtection/backupVaults/vault1/backupInstances/backupInstance1
 	"azurerm_data_protection_backup_instance_blob_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.vault_id }}/backupInstances/{{ .external_name }}"),
+	// Backup Instance Data Lake Storages can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataProtection/backupVaults/vault1/backupInstances/backupInstance1
+	"azurerm_data_protection_backup_instance_data_lake_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_protection_backup_vault_id }}/backupInstances/{{ .external_name }}"),
+	// Backup Policy Data Lake Storages can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataProtection/backupVaults/vault1/backupPolicies/backupPolicy1
+	"azurerm_data_protection_backup_policy_data_lake_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_protection_backup_vault_id }}/backupPolicies/{{ .external_name }}"),
 	// Backup Instance Disks can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataProtection/backupVaults/vault1/backupInstances/backupInstance1
 	"azurerm_data_protection_backup_instance_disk": config.TemplatedStringAsIdentifier("name", "{{ .parameters.vault_id }}/backupInstances/{{ .external_name }}"),

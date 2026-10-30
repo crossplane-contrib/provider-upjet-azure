@@ -10,11 +10,13 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	backupinstanceblobstorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstanceblobstorage"
+	backupinstancedatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancedatalakestorage"
 	backupinstancedisk "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancedisk"
 	backupinstancekubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancekubernetescluster"
 	backupinstancepostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancepostgresql"
 	backupinstancepostgresqlflexibleserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancepostgresqlflexibleserver"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicyblobstorage"
+	backuppolicydatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicydatalakestorage"
 	backuppolicydisk "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicydisk"
 	backuppolicykubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicykubernetescluster"
 	backuppolicypostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicypostgresql"
@@ -28,11 +30,13 @@ import (
 func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		backupinstanceblobstorage.Setup,
+		backupinstancedatalakestorage.Setup,
 		backupinstancedisk.Setup,
 		backupinstancekubernetescluster.Setup,
 		backupinstancepostgresql.Setup,
 		backupinstancepostgresqlflexibleserver.Setup,
 		backuppolicyblobstorage.Setup,
+		backuppolicydatalakestorage.Setup,
 		backuppolicydisk.Setup,
 		backuppolicykubernetescluster.Setup,
 		backuppolicypostgresql.Setup,
@@ -52,11 +56,13 @@ func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		backupinstanceblobstorage.SetupGated,
+		backupinstancedatalakestorage.SetupGated,
 		backupinstancedisk.SetupGated,
 		backupinstancekubernetescluster.SetupGated,
 		backupinstancepostgresql.SetupGated,
 		backupinstancepostgresqlflexibleserver.SetupGated,
 		backuppolicyblobstorage.SetupGated,
+		backuppolicydatalakestorage.SetupGated,
 		backuppolicydisk.SetupGated,
 		backuppolicykubernetescluster.SetupGated,
 		backuppolicypostgresql.SetupGated,
@@ -75,11 +81,13 @@ func SetupGated_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 func SetupWebhookWithManager_dataprotection(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		backupinstanceblobstorage.SetupWebhookWithManager,
+		backupinstancedatalakestorage.SetupWebhookWithManager,
 		backupinstancedisk.SetupWebhookWithManager,
 		backupinstancekubernetescluster.SetupWebhookWithManager,
 		backupinstancepostgresql.SetupWebhookWithManager,
 		backupinstancepostgresqlflexibleserver.SetupWebhookWithManager,
 		backuppolicyblobstorage.SetupWebhookWithManager,
+		backuppolicydatalakestorage.SetupWebhookWithManager,
 		backuppolicydisk.SetupWebhookWithManager,
 		backuppolicykubernetescluster.SetupWebhookWithManager,
 		backuppolicypostgresql.SetupWebhookWithManager,

@@ -19,6 +19,28 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_data_protection_backup_policy_data_lake_storage", func(r *config.Resource) {
+		r.References["data_protection_backup_vault_id"] = config.Reference{
+			TerraformName: "azurerm_data_protection_backup_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_data_protection_backup_instance_data_lake_storage", func(r *config.Resource) {
+		r.References["data_protection_backup_vault_id"] = config.Reference{
+			TerraformName: "azurerm_data_protection_backup_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["backup_policy_data_lake_storage_id"] = config.Reference{
+			TerraformName: "azurerm_data_protection_backup_policy_data_lake_storage",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["storage_account_id"] = config.Reference{
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_data_protection_backup_policy_disk", func(r *config.Resource) {
 		r.References["vault_id"] = config.Reference{
 			TerraformName: "azurerm_data_protection_backup_vault",

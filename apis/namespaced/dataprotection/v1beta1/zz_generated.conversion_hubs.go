@@ -10,6 +10,9 @@ package v1beta1
 func (tr *BackupInstanceBlobStorage) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *BackupInstanceDataLakeStorage) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *BackupInstanceDisk) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -23,6 +26,9 @@ func (tr *BackupInstancePostgreSQLFlexibleServer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BackupPolicyBlobStorage) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *BackupPolicyDataLakeStorage) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BackupPolicyDisk) Hub() {}
