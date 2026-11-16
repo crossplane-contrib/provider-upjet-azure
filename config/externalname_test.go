@@ -113,3 +113,98 @@ func TestMSSQLManagedInstanceFailoverGroupGetIDFn(t *testing.T) {
 		})
 	}
 }
+
+func TestKeyVaultURLIDConfGetIDFn(t *testing.T) {
+	const vaultID = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.KeyVault/vaults/example-kv"
+	type args struct {
+		resourceType string
+		versionless  bool
+		externalName string
+		parameters   map[string]any
+	}
+	cases := map[string]struct {
+		args args
+		want string
+	}{
+		"KeyVersioned": {
+			args: args{resourceType: "keys", versionless: true, externalName: "example-key/0123456789abcdef0123456789abcdef"},
+			want: "https://example-kv.vault.azure.net/keys/example-key/0123456789abcdef0123456789abcdef",
+		},
+		"KeyNameOnly": {
+			args: args{resourceType: "keys", versionless: true, externalName: "example-key"},
+			want: "https://example-kv.vault.azure.net/keys/example-key/latest",
+		},
+		"KeyNameTrailingSlash": {
+			args: args{resourceType: "keys", versionless: true, externalName: "example-key/"},
+			want: "https://example-kv.vault.azure.net/keys/example-key/latest",
+		},
+		"KeyEmptyExternalNameNotYetCreated": {
+			args: args{resourceType: "keys", versionless: true, externalName: ""},
+			want: "",
+		},
+		"SecretNameOnly": {
+			args: args{resourceType: "secrets", versionless: true, externalName: "example-secret"},
+			want: "https://example-kv.vault.azure.net/secrets/example-secret/latest",
+		},
+		"CertificateNameOnlyUnchanged": {
+			args: args{resourceType: "certificates", versionless: false, externalName: "example-cert"},
+			want: "",
+		},
+		"CertificateVersionedUnchanged": {
+			args: args{resourceType: "certificates", versionless: false, externalName: "example-cert/0123456789abcdef0123456789abcdef"},
+			want: "https://example-kv.vault.azure.net/certificates/example-cert/0123456789abcdef0123456789abcdef",
+		},
+	}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			params := map[string]any{"key_vault_id": vaultID}
+			for k, v := range tc.args.parameters {
+				params[k] = v
+			}
+			e := keyVaultURLIDConf(tc.args.resourceType, tc.args.versionless)
+			got, err := e.GetIDFn(context.Background(), tc.args.externalName, params, map[string]any{})
+			if err != nil {
+				t.Fatalf("GetIDFn(...): unexpected error: %v", err)
+			}
+			if diff := cmp.Diff(tc.want, got); diff != "" {
+				t.Errorf("GetIDFn(...): -want, +got:\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestKeyVaultURLIDConfGetExternalNameFn(t *testing.T) {
+	cases := map[string]struct {
+		versionless bool
+		id          string
+		want        string
+	}{
+		"KeyVersioned": {
+			versionless: true,
+			id:          "https://example-kv.vault.azure.net/keys/example-key/0123456789abcdef0123456789abcdef",
+			want:        "example-key/0123456789abcdef0123456789abcdef",
+		},
+		"KeyLatestRoundTripsToNameOnly": {
+			versionless: true,
+			id:          "https://example-kv.vault.azure.net/keys/example-key/latest",
+			want:        "example-key",
+		},
+		"CertificateLatestIsAnOrdinaryVersion": {
+			versionless: false,
+			id:          "https://example-kv.vault.azure.net/certificates/example-cert/latest",
+			want:        "example-cert/latest",
+		},
+	}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			e := keyVaultURLIDConf("keys", tc.versionless)
+			got, err := e.GetExternalNameFn(map[string]any{"id": tc.id})
+			if err != nil {
+				t.Fatalf("GetExternalNameFn(...): unexpected error: %v", err)
+			}
+			if diff := cmp.Diff(tc.want, got); diff != "" {
+				t.Errorf("GetExternalNameFn(...): -want, +got:\n%s", diff)
+			}
+		})
+	}
+}
