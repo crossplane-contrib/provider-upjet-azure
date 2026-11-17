@@ -121,8 +121,7 @@ spec:
                     type: object
                   clientType:
                     description: The application client type. Possible values are
-                      none, dotnet, java, python, go, php, ruby, django, nodejs and
-                      springBoot. Defaults to none.
+                      dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
                     type: string
                   name:
                     description: The name of the service connection. Changing this
@@ -393,8 +392,7 @@ spec:
                     type: object
                   clientType:
                     description: The application client type. Possible values are
-                      none, dotnet, java, python, go, php, ruby, django, nodejs and
-                      springBoot. Defaults to none.
+                      dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
                     type: string
                   name:
                     description: The name of the service connection. Changing this
@@ -698,8 +696,7 @@ spec:
                     type: object
                   clientType:
                     description: The application client type. Possible values are
-                      none, dotnet, java, python, go, php, ruby, django, nodejs and
-                      springBoot. Defaults to none.
+                      dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
                     type: string
                   id:
                     description: The ID of the service connector.

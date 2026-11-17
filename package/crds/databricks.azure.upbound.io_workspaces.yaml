@@ -78,7 +78,7 @@ spec:
                       firewall is enabled.
                     type: string
                   customParameters:
-                    description: A custom_parameters block as documented below.
+                    description: A custom_parameters block as defined below.
                     properties:
                       machineLearningWorkspaceId:
                         description: The ID of a Azure Machine Learning workspace
@@ -309,7 +309,7 @@ spec:
                       Defaults to false.
                     type: boolean
                   enhancedSecurityCompliance:
-                    description: An enhanced_security_compliance block as documented
+                    description: An enhanced_security_compliance block as defined
                       below. This feature is only valid if sku is set to premium.
                     properties:
                       automaticClusterUpdateEnabled:
@@ -575,7 +575,7 @@ spec:
                       firewall is enabled.
                     type: string
                   customParameters:
-                    description: A custom_parameters block as documented below.
+                    description: A custom_parameters block as defined below.
                     properties:
                       machineLearningWorkspaceId:
                         description: The ID of a Azure Machine Learning workspace
@@ -806,7 +806,7 @@ spec:
                       Defaults to false.
                     type: boolean
                   enhancedSecurityCompliance:
-                    description: An enhanced_security_compliance block as documented
+                    description: An enhanced_security_compliance block as defined
                       below. This feature is only valid if sku is set to premium.
                     properties:
                       automaticClusterUpdateEnabled:
@@ -1078,7 +1078,7 @@ spec:
                       firewall is enabled.
                     type: string
                   customParameters:
-                    description: A custom_parameters block as documented below.
+                    description: A custom_parameters block as defined below.
                     properties:
                       machineLearningWorkspaceId:
                         description: The ID of a Azure Machine Learning workspace
@@ -1161,7 +1161,7 @@ spec:
                       the Databricks Workspace.
                     type: string
                   enhancedSecurityCompliance:
-                    description: An enhanced_security_compliance block as documented
+                    description: An enhanced_security_compliance block as defined
                       below. This feature is only valid if sku is set to premium.
                     properties:
                       automaticClusterUpdateEnabled:
@@ -1222,7 +1222,7 @@ spec:
                       will automatically be rotated to the latest version.
                     type: boolean
                   managedDiskIdentity:
-                    description: A managed_disk_identity block as documented below.
+                    description: A managed_disk_identity block as defined below.
                     items:
                       properties:
                         principalId:
@@ -1277,7 +1277,7 @@ spec:
                       values are standard, premium, or trial.
                     type: string
                   storageAccountIdentity:
-                    description: A storage_account_identity block as documented below.
+                    description: A storage_account_identity block as defined below.
                     items:
                       properties:
                         principalId:
@@ -1306,7 +1306,7 @@ spec:
                       in Databricks control plane.
                     type: string
                   workspaceUrl:
-                    description: The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'
+                    description: The workspace URL which is of the format adb-{workspaceId}.{random}.azuredatabricks.net
                     type: string
                 type: object
               conditions:

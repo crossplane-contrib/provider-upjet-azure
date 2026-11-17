@@ -80,7 +80,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -2152,7 +2152,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -4215,7 +4215,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:

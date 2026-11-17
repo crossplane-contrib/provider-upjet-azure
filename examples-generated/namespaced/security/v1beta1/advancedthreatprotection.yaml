@@ -14,7 +14,31 @@ metadata:
 spec:
   forProvider:
     enabled: true
-    targetResourceId: ${azurerm_storage_account.example.id}
+    targetResourceId: ${azurerm_cosmosdb_account.example.id}
+
+---
+
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/advancedthreatprotection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    consistencyPolicy:
+      consistencyLevel: Eventual
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -30,25 +54,3 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-
----
-
-apiVersion: storage.azure.m.upbound.io/v1beta1
-kind: Account
-metadata:
-  annotations:
-    meta.upbound.io/example-id: security/v1beta1/advancedthreatprotection
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-  namespace: upbound-system
-spec:
-  forProvider:
-    accountReplicationType: LRS
-    accountTier: Standard
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    tags:
-      environment: example

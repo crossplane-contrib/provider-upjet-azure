@@ -28,8 +28,8 @@ type DatastoreFileshareInitParameters struct {
 	SharedAccessSignatureSecretRef *v2.SecretKeySelector `json:"sharedAccessSignatureSecretRef,omitempty" tf:"-"`
 
 	// The ID of the Storage Account File Share. Changing this forces a new Machine Learning DataStore to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("rbac_scope_id",true)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Share
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	StorageFileshareID *string `json:"storageFileshareId,omitempty" tf:"storage_fileshare_id,omitempty"`
 
 	// Reference to a Share in storage to populate storageFileshareId.
@@ -89,8 +89,8 @@ type DatastoreFileshareParameters struct {
 	SharedAccessSignatureSecretRef *v2.SecretKeySelector `json:"sharedAccessSignatureSecretRef,omitempty" tf:"-"`
 
 	// The ID of the Storage Account File Share. Changing this forces a new Machine Learning DataStore to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Share
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("rbac_scope_id",true)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Share
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageFileshareID *string `json:"storageFileshareId,omitempty" tf:"storage_fileshare_id,omitempty"`
 
@@ -108,8 +108,8 @@ type DatastoreFileshareParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning DataStore to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/machinelearningservices/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/machinelearningservices/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

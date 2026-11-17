@@ -16,7 +16,7 @@ import (
 type KeyVaultSASTokenInitParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
@@ -43,7 +43,7 @@ type KeyVaultSASTokenObservation struct {
 type KeyVaultSASTokenParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
@@ -187,7 +187,7 @@ type LinkedServiceAzureBlobStorageParameters struct {
 	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -285,7 +285,7 @@ type SASTokenLinkedKeyVaultKeyParameters struct {
 type ServicePrincipalLinkedKeyVaultKeyInitParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
@@ -312,7 +312,7 @@ type ServicePrincipalLinkedKeyVaultKeyObservation struct {
 type ServicePrincipalLinkedKeyVaultKeyParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
@@ -354,9 +354,10 @@ type LinkedServiceAzureBlobStorageStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="v1beta1 is deprecated since the Terraform AzureRM v5 bump, please migrate to v1beta2. Deprecated since v3.0.0."
 
 // LinkedServiceAzureBlobStorage is the Schema for the LinkedServiceAzureBlobStorages API. Manages a Linked Service (connection) between an Azure Blob Storage Account and Azure Data Factory.
+// Deprecated: This API version (v1beta1) has been deprecated in release v3.0.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

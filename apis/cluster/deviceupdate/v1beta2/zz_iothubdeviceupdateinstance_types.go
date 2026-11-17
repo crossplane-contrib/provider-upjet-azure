@@ -16,10 +16,16 @@ import (
 type DiagnosticStorageAccountInitParameters struct {
 
 	// Connection String of the Diagnostic Storage Account.
-	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
+	// Connection String of the Diagnostic Storage Account.
+	ConnectionStringWo *string `json:"connectionStringWo,omitempty" tf:"connection_string_wo,omitempty"`
+
+	// An integer value used to trigger an update for connection_string_wo. Possible values are integers greater than 1.
+	ConnectionStringWoVersion *float64 `json:"connectionStringWoVersion,omitempty" tf:"connection_string_wo_version,omitempty"`
 
 	// Resource ID of the Diagnostic Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -34,6 +40,12 @@ type DiagnosticStorageAccountInitParameters struct {
 
 type DiagnosticStorageAccountObservation struct {
 
+	// Connection String of the Diagnostic Storage Account.
+	ConnectionStringWo *string `json:"connectionStringWo,omitempty" tf:"connection_string_wo,omitempty"`
+
+	// An integer value used to trigger an update for connection_string_wo. Possible values are integers greater than 1.
+	ConnectionStringWoVersion *float64 `json:"connectionStringWoVersion,omitempty" tf:"connection_string_wo_version,omitempty"`
+
 	// Resource ID of the Diagnostic Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -42,10 +54,18 @@ type DiagnosticStorageAccountParameters struct {
 
 	// Connection String of the Diagnostic Storage Account.
 	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef v2.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	ConnectionStringSecretRef *v2.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
+	// Connection String of the Diagnostic Storage Account.
+	// +kubebuilder:validation:Optional
+	ConnectionStringWo *string `json:"connectionStringWo,omitempty" tf:"connection_string_wo,omitempty"`
+
+	// An integer value used to trigger an update for connection_string_wo. Possible values are integers greater than 1.
+	// +kubebuilder:validation:Optional
+	ConnectionStringWoVersion *float64 `json:"connectionStringWoVersion,omitempty" tf:"connection_string_wo_version,omitempty"`
 
 	// Resource ID of the Diagnostic Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -61,14 +81,14 @@ type DiagnosticStorageAccountParameters struct {
 
 type IOTHubDeviceUpdateInstanceInitParameters struct {
 
-	// Whether the diagnostic log collection is enabled. Possible values are true and false. Defaults to false.
+	// Whether the diagnostic log collection is enabled. Defaults to false.
 	DiagnosticEnabled *bool `json:"diagnosticEnabled,omitempty" tf:"diagnostic_enabled,omitempty"`
 
 	// A diagnostic_storage_account block as defined below.
 	DiagnosticStorageAccount *DiagnosticStorageAccountInitParameters `json:"diagnosticStorageAccount,omitempty" tf:"diagnostic_storage_account,omitempty"`
 
 	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
@@ -90,7 +110,7 @@ type IOTHubDeviceUpdateInstanceObservation struct {
 	// Specifies the ID of the IoT Hub Device Update Account where the IoT Hub Device Update Instance exists. Changing this forces a new resource to be created.
 	DeviceUpdateAccountID *string `json:"deviceUpdateAccountId,omitempty" tf:"device_update_account_id,omitempty"`
 
-	// Whether the diagnostic log collection is enabled. Possible values are true and false. Defaults to false.
+	// Whether the diagnostic log collection is enabled. Defaults to false.
 	DiagnosticEnabled *bool `json:"diagnosticEnabled,omitempty" tf:"diagnostic_enabled,omitempty"`
 
 	// A diagnostic_storage_account block as defined below.
@@ -110,7 +130,7 @@ type IOTHubDeviceUpdateInstanceObservation struct {
 type IOTHubDeviceUpdateInstanceParameters struct {
 
 	// Specifies the ID of the IoT Hub Device Update Account where the IoT Hub Device Update Instance exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/deviceupdate/v1beta2.IOTHubDeviceUpdateAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/deviceupdate/v1beta2.IOTHubDeviceUpdateAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeviceUpdateAccountID *string `json:"deviceUpdateAccountId,omitempty" tf:"device_update_account_id,omitempty"`
@@ -123,7 +143,7 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceUpdateAccountIDSelector *v2.Selector `json:"deviceUpdateAccountIdSelector,omitempty" tf:"-"`
 
-	// Whether the diagnostic log collection is enabled. Possible values are true and false. Defaults to false.
+	// Whether the diagnostic log collection is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DiagnosticEnabled *bool `json:"diagnosticEnabled,omitempty" tf:"diagnostic_enabled,omitempty"`
 
@@ -132,7 +152,7 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 	DiagnosticStorageAccount *DiagnosticStorageAccountParameters `json:"diagnosticStorageAccount,omitempty" tf:"diagnostic_storage_account,omitempty"`
 
 	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`

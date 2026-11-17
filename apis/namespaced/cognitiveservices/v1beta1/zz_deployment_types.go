@@ -27,6 +27,9 @@ type DeploymentInitParameters struct {
 	// A sku block as defined below.
 	Sku *SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
+	// The name of the deployment that should serve requests when this deployment would have otherwise been throttled due to reaching its throughput limit.
+	SpilloverDeploymentName *string `json:"spilloverDeploymentName,omitempty" tf:"spillover_deployment_name,omitempty"`
+
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	VersionUpgradeOption *string `json:"versionUpgradeOption,omitempty" tf:"version_upgrade_option,omitempty"`
 }
@@ -51,6 +54,9 @@ type DeploymentObservation struct {
 	// A sku block as defined below.
 	Sku *SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
+	// The name of the deployment that should serve requests when this deployment would have otherwise been throttled due to reaching its throughput limit.
+	SpilloverDeploymentName *string `json:"spilloverDeploymentName,omitempty" tf:"spillover_deployment_name,omitempty"`
+
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	VersionUpgradeOption *string `json:"versionUpgradeOption,omitempty" tf:"version_upgrade_option,omitempty"`
 }
@@ -58,7 +64,7 @@ type DeploymentObservation struct {
 type DeploymentParameters struct {
 
 	// The ID of the Cognitive Services Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cognitiveservices/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cognitiveservices/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
@@ -86,6 +92,10 @@ type DeploymentParameters struct {
 	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
 	Sku *SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The name of the deployment that should serve requests when this deployment would have otherwise been throttled due to reaching its throughput limit.
+	// +kubebuilder:validation:Optional
+	SpilloverDeploymentName *string `json:"spilloverDeploymentName,omitempty" tf:"spillover_deployment_name,omitempty"`
 
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	// +kubebuilder:validation:Optional

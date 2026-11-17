@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  dataResidencyBoundary:
+                    description: Specifies the data residency boundary. Possible values
+                      are WithinGeopair, WithinRegion.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -170,6 +174,10 @@ spec:
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimumTlsVersion:
+                    description: The minimum supported TLS version. Possible values
+                      are 1.0, 1.1, 1.2. Default is 1.2.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether or not public network access is allowed for
@@ -275,6 +283,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  dataResidencyBoundary:
+                    description: Specifies the data residency boundary. Possible values
+                      are WithinGeopair, WithinRegion.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -372,6 +384,10 @@ spec:
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimumTlsVersion:
+                    description: The minimum supported TLS version. Possible values
+                      are 1.0, 1.1, 1.2. Default is 1.2.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether or not public network access is allowed for
@@ -480,6 +496,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  dataResidencyBoundary:
+                    description: Specifies the data residency boundary. Possible values
+                      are WithinGeopair, WithinRegion.
+                    type: string
                   endpoint:
                     description: The Endpoint associated with the EventGrid Topic.
                     type: string
@@ -591,6 +611,10 @@ spec:
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimumTlsVersion:
+                    description: The minimum supported TLS version. Possible values
+                      are 1.0, 1.1, 1.2. Default is 1.2.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether or not public network access is allowed for

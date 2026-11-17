@@ -74,11 +74,10 @@ spec:
               forProvider:
                 properties:
                   containerNetworkInterface:
-                    description: A container_network_interface block as documented
-                      below.
+                    description: A container_network_interface block as defined below.
                     properties:
                       ipConfiguration:
-                        description: One or more ip_configuration blocks as documented
+                        description: One or more ip_configuration blocks as defined
                           below.
                         items:
                           properties:
@@ -277,11 +276,10 @@ spec:
                   autoscaler.
                 properties:
                   containerNetworkInterface:
-                    description: A container_network_interface block as documented
-                      below.
+                    description: A container_network_interface block as defined below.
                     properties:
                       ipConfiguration:
-                        description: One or more ip_configuration blocks as documented
+                        description: One or more ip_configuration blocks as defined
                           below.
                         items:
                           properties:
@@ -487,11 +485,10 @@ spec:
               atProvider:
                 properties:
                   containerNetworkInterface:
-                    description: A container_network_interface block as documented
-                      below.
+                    description: A container_network_interface block as defined below.
                     properties:
                       ipConfiguration:
-                        description: One or more ip_configuration blocks as documented
+                        description: One or more ip_configuration blocks as defined
                           below.
                         items:
                           properties:

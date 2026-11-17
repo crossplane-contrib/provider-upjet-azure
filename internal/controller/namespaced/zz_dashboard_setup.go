@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	grafana "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dashboard/grafana"
-	grafanamanagedprivateendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dashboard/grafanamanagedprivateendpoint"
+	grafana "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dashboard/grafana"
+	grafanamanagedprivateendpoint "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dashboard/grafanamanagedprivateendpoint"
 )
 
 // Setup_dashboard creates all controllers with the supplied logger and adds them to

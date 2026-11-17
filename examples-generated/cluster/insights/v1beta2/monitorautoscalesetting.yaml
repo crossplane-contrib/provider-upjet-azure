@@ -77,7 +77,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta2
+apiVersion: compute.azure.upbound.io/v1beta3
 kind: LinuxVirtualMachineScaleSet
 metadata:
   annotations:
@@ -133,7 +133,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   annotations:
@@ -154,7 +154,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: VirtualNetwork
 metadata:
   annotations:

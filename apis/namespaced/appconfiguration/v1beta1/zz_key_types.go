@@ -16,7 +16,7 @@ import (
 type KeyInitParameters struct {
 
 	// Specifies the id of the App Configuration. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appconfiguration/v1beta1.Configuration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/appconfiguration/v1beta1.Configuration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConfigurationStoreID *string `json:"configurationStoreId,omitempty" tf:"configuration_store_id,omitempty"`
 
@@ -54,7 +54,7 @@ type KeyInitParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
 	// The ID of the vault secret this App Configuration Key refers to. This should only be set when type is set to vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	VaultKeyReference *string `json:"vaultKeyReference,omitempty" tf:"vault_key_reference,omitempty"`
 
@@ -107,7 +107,7 @@ type KeyObservation struct {
 type KeyParameters struct {
 
 	// Specifies the id of the App Configuration. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appconfiguration/v1beta1.Configuration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/appconfiguration/v1beta1.Configuration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConfigurationStoreID *string `json:"configurationStoreId,omitempty" tf:"configuration_store_id,omitempty"`
@@ -154,7 +154,7 @@ type KeyParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
 	// The ID of the vault secret this App Configuration Key refers to. This should only be set when type is set to vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/keyvault/v1beta1.Secret
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_id",true)
 	// +kubebuilder:validation:Optional
 	VaultKeyReference *string `json:"vaultKeyReference,omitempty" tf:"vault_key_reference,omitempty"`

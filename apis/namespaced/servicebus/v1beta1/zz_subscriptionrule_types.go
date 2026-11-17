@@ -120,7 +120,7 @@ type SubscriptionRuleInitParameters struct {
 	// Represents set of actions written in SQL language-based syntax that is performed against a BrokeredMessage.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// A correlation_filter block as documented below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
+	// A correlation_filter block as defined below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
 	CorrelationFilter *CorrelationFilterInitParameters `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
 
 	// Type of filter to be applied to a BrokeredMessage. Possible values are SqlFilter and CorrelationFilter.
@@ -135,7 +135,7 @@ type SubscriptionRuleObservation struct {
 	// Represents set of actions written in SQL language-based syntax that is performed against a BrokeredMessage.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// A correlation_filter block as documented below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
+	// A correlation_filter block as defined below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
 	CorrelationFilter *CorrelationFilterObservation `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
 
 	// Type of filter to be applied to a BrokeredMessage. Possible values are SqlFilter and CorrelationFilter.
@@ -159,7 +159,7 @@ type SubscriptionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// A correlation_filter block as documented below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
+	// A correlation_filter block as defined below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
 	// +kubebuilder:validation:Optional
 	CorrelationFilter *CorrelationFilterParameters `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
 
@@ -172,7 +172,7 @@ type SubscriptionRuleParameters struct {
 	SQLFilter *string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty"`
 
 	// The ID of the ServiceBus Subscription in which this Rule should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/servicebus/v1beta1.Subscription
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/servicebus/v1beta1.Subscription
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`

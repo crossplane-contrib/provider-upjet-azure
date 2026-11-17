@@ -5522,6 +5522,11 @@ func (in *FilterInitParameters) DeepCopyInto(out *FilterInitParameters) {
 			}
 		}
 	}
+	if in.CreatedWithinDays != nil {
+		in, out := &in.CreatedWithinDays, &out.CreatedWithinDays
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ExcludePrefixes != nil {
 		in, out := &in.ExcludePrefixes, &out.ExcludePrefixes
 		*out = make([]*string, len(*in))
@@ -5585,6 +5590,11 @@ func (in *FilterObservation) DeepCopyInto(out *FilterObservation) {
 			}
 		}
 	}
+	if in.CreatedWithinDays != nil {
+		in, out := &in.CreatedWithinDays, &out.CreatedWithinDays
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ExcludePrefixes != nil {
 		in, out := &in.ExcludePrefixes, &out.ExcludePrefixes
 		*out = make([]*string, len(*in))
@@ -5647,6 +5657,11 @@ func (in *FilterParameters) DeepCopyInto(out *FilterParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.CreatedWithinDays != nil {
+		in, out := &in.CreatedWithinDays, &out.CreatedWithinDays
+		*out = new(float64)
+		**out = **in
 	}
 	if in.ExcludePrefixes != nil {
 		in, out := &in.ExcludePrefixes, &out.ExcludePrefixes

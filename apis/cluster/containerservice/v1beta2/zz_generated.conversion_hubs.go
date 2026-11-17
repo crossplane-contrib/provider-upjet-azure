@@ -7,10 +7,4 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *KubernetesCluster) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *KubernetesClusterNodePool) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *KubernetesFleetManager) Hub() {}

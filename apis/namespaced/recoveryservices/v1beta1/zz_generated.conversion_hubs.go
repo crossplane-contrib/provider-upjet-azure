@@ -34,10 +34,4 @@ func (tr *SiteRecoveryNetworkMapping) Hub() {}
 func (tr *SiteRecoveryProtectionContainer) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SiteRecoveryProtectionContainerMapping) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SiteRecoveryReplicationPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Vault) Hub() {}

@@ -12,7 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	apisresolver "github.com/upbound/provider-azure/v2/internal/apis"
+	apisresolver "github.com/upbound/provider-azure/v3/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -190,7 +190,7 @@ func (mg *FrontdoorCustomDomainAssociation) ResolveReferences(ctx context.Contex
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -230,7 +230,7 @@ func (mg *FrontdoorCustomDomainAssociation) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.CdnFrontdoorRouteIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.CdnFrontdoorRouteIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -406,7 +406,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.CdnFrontdoorOriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorOriginGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -426,7 +426,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.HostName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HostNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -448,7 +448,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 
 	if mg.Spec.ForProvider.PrivateLink != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -470,7 +470,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	if mg.Spec.ForProvider.PrivateLink != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -491,7 +491,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -510,7 +510,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.InitProvider.HostName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HostNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -532,7 +532,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 
 	if mg.Spec.InitProvider.PrivateLink != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -554,7 +554,7 @@ func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	if mg.Spec.InitProvider.PrivateLink != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -698,7 +698,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -798,7 +798,7 @@ func (mg *FrontdoorRoute) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.CdnFrontdoorRuleSetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.CdnFrontdoorRuleSetIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1109,7 +1109,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 			if mg.Spec.ForProvider.SecurityPolicies.Firewall.Association != nil {
 				for i6 := 0; i6 < len(mg.Spec.ForProvider.SecurityPolicies.Firewall.Association.Domain); i6++ {
 					{
-						m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+						m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 						if err != nil {
 							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}
@@ -1161,7 +1161,7 @@ func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c clie
 			if mg.Spec.InitProvider.SecurityPolicies.Firewall.Association != nil {
 				for i6 := 0; i6 < len(mg.Spec.InitProvider.SecurityPolicies.Firewall.Association.Domain); i6++ {
 					{
-						m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+						m, l, err = apisresolver.GetManagedResource("cdn.azure.m.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 						if err != nil {
 							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}

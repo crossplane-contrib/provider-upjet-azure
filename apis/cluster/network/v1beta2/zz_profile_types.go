@@ -19,8 +19,8 @@ type ContainerNetworkInterfaceIPConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -48,8 +48,8 @@ type ContainerNetworkInterfaceIPConfigurationParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -64,7 +64,7 @@ type ContainerNetworkInterfaceIPConfigurationParameters struct {
 
 type ContainerNetworkInterfaceInitParameters struct {
 
-	// One or more ip_configuration blocks as documented below.
+	// One or more ip_configuration blocks as defined below.
 	IPConfiguration []ContainerNetworkInterfaceIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Specifies the name of the IP Configuration.
@@ -73,7 +73,7 @@ type ContainerNetworkInterfaceInitParameters struct {
 
 type ContainerNetworkInterfaceObservation struct {
 
-	// One or more ip_configuration blocks as documented below.
+	// One or more ip_configuration blocks as defined below.
 	IPConfiguration []ContainerNetworkInterfaceIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Specifies the name of the IP Configuration.
@@ -82,7 +82,7 @@ type ContainerNetworkInterfaceObservation struct {
 
 type ContainerNetworkInterfaceParameters struct {
 
-	// One or more ip_configuration blocks as documented below.
+	// One or more ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
@@ -93,7 +93,7 @@ type ContainerNetworkInterfaceParameters struct {
 
 type ProfileInitParameters struct {
 
-	// A container_network_interface block as documented below.
+	// A container_network_interface block as defined below.
 	ContainerNetworkInterface *ContainerNetworkInterfaceInitParameters `json:"containerNetworkInterface,omitempty" tf:"container_network_interface,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -106,7 +106,7 @@ type ProfileInitParameters struct {
 
 type ProfileObservation struct {
 
-	// A container_network_interface block as documented below.
+	// A container_network_interface block as defined below.
 	ContainerNetworkInterface *ContainerNetworkInterfaceObservation `json:"containerNetworkInterface,omitempty" tf:"container_network_interface,omitempty"`
 
 	// A list of Container Network Interface IDs.
@@ -128,7 +128,7 @@ type ProfileObservation struct {
 
 type ProfileParameters struct {
 
-	// A container_network_interface block as documented below.
+	// A container_network_interface block as defined below.
 	// +kubebuilder:validation:Optional
 	ContainerNetworkInterface *ContainerNetworkInterfaceParameters `json:"containerNetworkInterface,omitempty" tf:"container_network_interface,omitempty"`
 
@@ -137,7 +137,7 @@ type ProfileParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

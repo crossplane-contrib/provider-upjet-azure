@@ -166,8 +166,7 @@ spec:
                     type: object
                   sku:
                     description: The SKU of the Public IP Prefix. Possible values
-                      are Standard and StandardV2. Defaults to Standard. Changing
-                      this forces a new resource to be created.
+                      are Standard and StandardV2. Defaults to Standard.
                     type: string
                   skuTier:
                     description: The SKU Tier that should be used for the Public IP
@@ -222,8 +221,7 @@ spec:
                     type: number
                   sku:
                     description: The SKU of the Public IP Prefix. Possible values
-                      are Standard and StandardV2. Defaults to Standard. Changing
-                      this forces a new resource to be created.
+                      are Standard and StandardV2. Defaults to Standard.
                     type: string
                   skuTier:
                     description: The SKU Tier that should be used for the Public IP
@@ -344,8 +342,7 @@ spec:
                     type: string
                   sku:
                     description: The SKU of the Public IP Prefix. Possible values
-                      are Standard and StandardV2. Defaults to Standard. Changing
-                      this forces a new resource to be created.
+                      are Standard and StandardV2. Defaults to Standard.
                     type: string
                   skuTier:
                     description: The SKU Tier that should be used for the Public IP

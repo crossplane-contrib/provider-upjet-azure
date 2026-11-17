@@ -57,7 +57,7 @@ type ProjectInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Resource Id of an associated DevCenter. Changing this forces a new Dev Center Project to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devcenter/v1beta1.Center
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devcenter/v1beta1.Center
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DevCenterID *string `json:"devCenterId,omitempty" tf:"dev_center_id,omitempty"`
 
@@ -121,7 +121,7 @@ type ProjectParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Resource Id of an associated DevCenter. Changing this forces a new Dev Center Project to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devcenter/v1beta1.Center
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devcenter/v1beta1.Center
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DevCenterID *string `json:"devCenterId,omitempty" tf:"dev_center_id,omitempty"`
@@ -147,7 +147,7 @@ type ProjectParameters struct {
 	MaximumDevBoxesPerUser *float64 `json:"maximumDevBoxesPerUser,omitempty" tf:"maximum_dev_boxes_per_user,omitempty"`
 
 	// Specifies the name of the Resource Group within which this Dev Center Project should exist. Changing this forces a new Dev Center Project to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

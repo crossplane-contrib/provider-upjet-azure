@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	managedredis "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/managedredis"
-	managedredisaccesspolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/managedredisaccesspolicyassignment"
-	rediscache "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscache"
-	rediscacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicy"
-	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicyassignment"
-	redisfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisfirewallrule"
-	redislinkedserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redislinkedserver"
+	managedredis "github.com/upbound/provider-azure/v3/internal/controller/namespaced/cache/managedredis"
+	managedredisaccesspolicyassignment "github.com/upbound/provider-azure/v3/internal/controller/namespaced/cache/managedredisaccesspolicyassignment"
+	rediscache "github.com/upbound/provider-azure/v3/internal/controller/namespaced/cache/rediscache"
+	rediscacheaccesspolicy "github.com/upbound/provider-azure/v3/internal/controller/namespaced/cache/rediscacheaccesspolicy"
+	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/v3/internal/controller/namespaced/cache/rediscacheaccesspolicyassignment"
+	redisfirewallrule "github.com/upbound/provider-azure/v3/internal/controller/namespaced/cache/redisfirewallrule"
+	redislinkedserver "github.com/upbound/provider-azure/v3/internal/controller/namespaced/cache/redislinkedserver"
 )
 
 // Setup_cache creates all controllers with the supplied logger and adds them to

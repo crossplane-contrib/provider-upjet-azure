@@ -50,7 +50,7 @@ type AppServiceCustomHostNameBindingParameters struct {
 	AppServiceName *string `json:"appServiceName" tf:"app_service_name,omitempty"`
 
 	// The name of the resource group in which the App Service exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -15,10 +15,13 @@ import (
 
 type BackupVaultInitParameters struct {
 
+	// Whether to enable Azure Monitor alerts for all job failures.
+	AlertsForAllJobFailuresEnabled *bool `json:"alertsForAllJobFailuresEnabled,omitempty" tf:"alerts_for_all_job_failures_enabled,omitempty"`
+
 	// Whether to enable cross-region restore for the Backup Vault.
 	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
 
-	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
 	// An identity block as defined below.
@@ -46,10 +49,13 @@ type BackupVaultInitParameters struct {
 
 type BackupVaultObservation struct {
 
+	// Whether to enable Azure Monitor alerts for all job failures.
+	AlertsForAllJobFailuresEnabled *bool `json:"alertsForAllJobFailuresEnabled,omitempty" tf:"alerts_for_all_job_failures_enabled,omitempty"`
+
 	// Whether to enable cross-region restore for the Backup Vault.
 	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
 
-	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
 	// The ID of the Backup Vault.
@@ -83,11 +89,15 @@ type BackupVaultObservation struct {
 
 type BackupVaultParameters struct {
 
+	// Whether to enable Azure Monitor alerts for all job failures.
+	// +kubebuilder:validation:Optional
+	AlertsForAllJobFailuresEnabled *bool `json:"alertsForAllJobFailuresEnabled,omitempty" tf:"alerts_for_all_job_failures_enabled,omitempty"`
+
 	// Whether to enable cross-region restore for the Backup Vault.
 	// +kubebuilder:validation:Optional
 	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
 
-	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
@@ -108,7 +118,7 @@ type BackupVaultParameters struct {
 	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
 
 	// The name of the Resource Group where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

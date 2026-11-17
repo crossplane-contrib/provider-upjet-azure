@@ -102,9 +102,7 @@ type VirtualDesktopHostPoolInitParameters struct {
 	// A friendly name for the Virtual Desktop Host Pool.
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
 
-	// BreadthFirst load balancing distributes new user sessions across all available session hosts in the host pool. Possible values are BreadthFirst, DepthFirst and Persistent.
-	// DepthFirst load balancing distributes new user sessions to an available session host with the highest number of connections but has not reached its maximum session limit threshold.
-	// Persistent should be used if the host pool type is Personal
+	// The type of the load balancer. Possible values are BreadthFirst, DepthFirst, MultiplePersistent and Persistent. Refer to the Azure documentation for more information.
 	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
 
 	// The location/region where the Virtual Desktop Host Pool is located. Changing this forces a new resource to be created.
@@ -158,9 +156,7 @@ type VirtualDesktopHostPoolObservation struct {
 	// The ID of the Virtual Desktop Host Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// BreadthFirst load balancing distributes new user sessions across all available session hosts in the host pool. Possible values are BreadthFirst, DepthFirst and Persistent.
-	// DepthFirst load balancing distributes new user sessions to an available session host with the highest number of connections but has not reached its maximum session limit threshold.
-	// Persistent should be used if the host pool type is Personal
+	// The type of the load balancer. Possible values are BreadthFirst, DepthFirst, MultiplePersistent and Persistent. Refer to the Azure documentation for more information.
 	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
 
 	// The location/region where the Virtual Desktop Host Pool is located. Changing this forces a new resource to be created.
@@ -217,9 +213,7 @@ type VirtualDesktopHostPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
 
-	// BreadthFirst load balancing distributes new user sessions across all available session hosts in the host pool. Possible values are BreadthFirst, DepthFirst and Persistent.
-	// DepthFirst load balancing distributes new user sessions to an available session host with the highest number of connections but has not reached its maximum session limit threshold.
-	// Persistent should be used if the host pool type is Personal
+	// The type of the load balancer. Possible values are BreadthFirst, DepthFirst, MultiplePersistent and Persistent. Refer to the Azure documentation for more information.
 	// +kubebuilder:validation:Optional
 	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
 
@@ -246,7 +240,7 @@ type VirtualDesktopHostPoolParameters struct {
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the resource group in which to create the Virtual Desktop Host Pool. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -66,7 +66,7 @@ spec:
                       to be created.
                     type: boolean
                   policy:
-                    description: One or more policy blocks as documented below.
+                    description: One or more policy blocks as defined below.
                     items:
                       properties:
                         name:
@@ -195,7 +195,7 @@ spec:
                       to be created.
                     type: boolean
                   policy:
-                    description: One or more policy blocks as documented below.
+                    description: One or more policy blocks as defined below.
                     items:
                       properties:
                         name:
@@ -296,7 +296,7 @@ spec:
                       to be created.
                     type: boolean
                   policy:
-                    description: One or more policy blocks as documented below.
+                    description: One or more policy blocks as defined below.
                     items:
                       properties:
                         name:

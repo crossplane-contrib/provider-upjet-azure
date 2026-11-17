@@ -40,7 +40,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: LoadBalancer
 metadata:
   annotations:
@@ -89,7 +89,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: PrivateLinkService
 metadata:
   annotations:
@@ -154,7 +154,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -177,7 +177,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -200,7 +200,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

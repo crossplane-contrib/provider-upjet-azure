@@ -125,5 +125,5 @@ func (tr *ResourceGroupTemplateDeployment) LateInitialize(attrs []byte) (bool, e
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ResourceGroupTemplateDeployment) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

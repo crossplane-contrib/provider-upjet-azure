@@ -22,9 +22,9 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/reconciler/reconciliationpolicy"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1"
-	"github.com/upbound/provider-azure/v2/internal/clients"
-	features "github.com/upbound/provider-azure/v2/internal/features"
+	v1beta1 "github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1"
+	"github.com/upbound/provider-azure/v3/internal/clients"
+	features "github.com/upbound/provider-azure/v3/internal/features"
 )
 
 // SetupWebhookWithManager registers the conversion webhook for IntegrationRuntimeSelfHosted.

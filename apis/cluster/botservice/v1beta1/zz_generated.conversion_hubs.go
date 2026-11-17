@@ -16,22 +16,13 @@ func (tr *BotChannelDirectLine) Hub() {}
 func (tr *BotChannelLine) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BotChannelMSTeams) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BotChannelSlack) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BotChannelSMS) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BotChannelsRegistration) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BotChannelWebChat) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BotConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BotWebApp) Hub() {}

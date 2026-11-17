@@ -70,7 +70,7 @@ spec:
 
 ---
 
-apiVersion: netapp.azure.m.upbound.io/v1beta1
+apiVersion: netapp.azure.m.upbound.io/v1beta2
 kind: Volume
 metadata:
   annotations:
@@ -115,7 +115,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -144,7 +144,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

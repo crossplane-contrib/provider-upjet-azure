@@ -35,7 +35,7 @@ type ActivationRulesInitParameters struct {
 	// Whether multi-factor authentication is required during activation
 	RequireMultifactorAuthentication *bool `json:"requireMultifactorAuthentication,omitempty" tf:"require_multifactor_authentication,omitempty"`
 
-	// Is ticket information requrired during activation of the role.
+	// Is ticket information required during activation of the role.
 	// Whether ticket information is required during activation
 	RequireTicketInfo *bool `json:"requireTicketInfo,omitempty" tf:"require_ticket_info,omitempty"`
 
@@ -66,7 +66,7 @@ type ActivationRulesObservation struct {
 	// Whether multi-factor authentication is required during activation
 	RequireMultifactorAuthentication *bool `json:"requireMultifactorAuthentication,omitempty" tf:"require_multifactor_authentication,omitempty"`
 
-	// Is ticket information requrired during activation of the role.
+	// Is ticket information required during activation of the role.
 	// Whether ticket information is required during activation
 	RequireTicketInfo *bool `json:"requireTicketInfo,omitempty" tf:"require_ticket_info,omitempty"`
 
@@ -102,7 +102,7 @@ type ActivationRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	RequireMultifactorAuthentication *bool `json:"requireMultifactorAuthentication,omitempty" tf:"require_multifactor_authentication,omitempty"`
 
-	// Is ticket information requrired during activation of the role.
+	// Is ticket information required during activation of the role.
 	// Whether ticket information is required during activation
 	// +kubebuilder:validation:Optional
 	RequireTicketInfo *bool `json:"requireTicketInfo,omitempty" tf:"require_ticket_info,omitempty"`
@@ -849,7 +849,7 @@ type EligibleAssignmentsParameters struct {
 
 type NotificationRulesInitParameters struct {
 
-	// A notification_target block as defined below to configure notfications on active role assignments.
+	// A notification_target block as defined below to configure notifications on active role assignments.
 	// Notifications about active assignments
 	ActiveAssignments *ActiveAssignmentsInitParameters `json:"activeAssignments,omitempty" tf:"active_assignments,omitempty"`
 
@@ -864,7 +864,7 @@ type NotificationRulesInitParameters struct {
 
 type NotificationRulesObservation struct {
 
-	// A notification_target block as defined below to configure notfications on active role assignments.
+	// A notification_target block as defined below to configure notifications on active role assignments.
 	// Notifications about active assignments
 	ActiveAssignments *ActiveAssignmentsObservation `json:"activeAssignments,omitempty" tf:"active_assignments,omitempty"`
 
@@ -879,7 +879,7 @@ type NotificationRulesObservation struct {
 
 type NotificationRulesParameters struct {
 
-	// A notification_target block as defined below to configure notfications on active role assignments.
+	// A notification_target block as defined below to configure notifications on active role assignments.
 	// Notifications about active assignments
 	// +kubebuilder:validation:Optional
 	ActiveAssignments *ActiveAssignmentsParameters `json:"activeAssignments,omitempty" tf:"active_assignments,omitempty"`
@@ -950,8 +950,8 @@ type RoleManagementPolicyInitParameters struct {
 
 	// The scoped Role Definition ID of the role for which this policy will apply. Changing this forces a new resource to be created.
 	// ID of the Azure Role to which this policy is assigned
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/authorization/v1beta1.RoleDefinition
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/authorization/v1beta1.RoleDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
@@ -964,7 +964,7 @@ type RoleManagementPolicyInitParameters struct {
 
 	// The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
 	// The scope of the role to which this policy will apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -1039,8 +1039,8 @@ type RoleManagementPolicyParameters struct {
 
 	// The scoped Role Definition ID of the role for which this policy will apply. Changing this forces a new resource to be created.
 	// ID of the Azure Role to which this policy is assigned
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/authorization/v1beta1.RoleDefinition
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/authorization/v1beta1.RoleDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
@@ -1054,7 +1054,7 @@ type RoleManagementPolicyParameters struct {
 
 	// The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
 	// The scope of the role to which this policy will apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`

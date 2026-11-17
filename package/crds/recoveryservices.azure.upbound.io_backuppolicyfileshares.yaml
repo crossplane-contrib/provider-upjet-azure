@@ -87,7 +87,8 @@ spec:
                         properties:
                           interval:
                             description: Specifies the interval at which backup needs
-                              to be triggered. Possible values are 4, 6, 8 and 12.
+                              to be triggered. Possible values are 1, 2, 4, 6, 8 and
+                              12.
                             type: number
                           startTime:
                             description: Specifies the start time of the hourly backup.
@@ -353,7 +354,7 @@ spec:
                       months:
                         description: The months of the year to retain backups of.
                           Must be one of January, February, March, April, May, June,
-                          July, Augest, September, October, November and December.
+                          July, August, September, October, November and December.
                         items:
                           type: string
                         type: array
@@ -410,7 +411,8 @@ spec:
                         properties:
                           interval:
                             description: Specifies the interval at which backup needs
-                              to be triggered. Possible values are 4, 6, 8 and 12.
+                              to be triggered. Possible values are 1, 2, 4, 6, 8 and
+                              12.
                             type: number
                           startTime:
                             description: Specifies the start time of the hourly backup.
@@ -516,7 +518,7 @@ spec:
                       months:
                         description: The months of the year to retain backups of.
                           Must be one of January, February, March, April, May, June,
-                          July, Augest, September, October, November and December.
+                          July, August, September, October, November and December.
                         items:
                           type: string
                         type: array
@@ -661,7 +663,8 @@ spec:
                         properties:
                           interval:
                             description: Specifies the interval at which backup needs
-                              to be triggered. Possible values are 4, 6, 8 and 12.
+                              to be triggered. Possible values are 1, 2, 4, 6, 8 and
+                              12.
                             type: number
                           startTime:
                             description: Specifies the start time of the hourly backup.
@@ -778,7 +781,7 @@ spec:
                       months:
                         description: The months of the year to retain backups of.
                           Must be one of January, February, March, April, May, June,
-                          July, Augest, September, October, November and December.
+                          July, August, September, October, November and December.
                         items:
                           type: string
                         type: array

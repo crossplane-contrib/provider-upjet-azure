@@ -44,7 +44,7 @@ type CustomHeaderParameters struct {
 
 type DNSConfigInitParameters struct {
 
-	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as documented below. Changing this forces a new resource to be created.
+	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as defined below. Changing this forces a new resource to be created.
 	RelativeName *string `json:"relativeName,omitempty" tf:"relative_name,omitempty"`
 
 	// The TTL value of the Profile used by Local DNS resolvers and clients.
@@ -53,7 +53,7 @@ type DNSConfigInitParameters struct {
 
 type DNSConfigObservation struct {
 
-	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as documented below. Changing this forces a new resource to be created.
+	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as defined below. Changing this forces a new resource to be created.
 	RelativeName *string `json:"relativeName,omitempty" tf:"relative_name,omitempty"`
 
 	// The TTL value of the Profile used by Local DNS resolvers and clients.
@@ -62,7 +62,7 @@ type DNSConfigObservation struct {
 
 type DNSConfigParameters struct {
 
-	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as documented below. Changing this forces a new resource to be created.
+	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RelativeName *string `json:"relativeName" tf:"relative_name,omitempty"`
 
@@ -238,7 +238,7 @@ type TrafficManagerProfileParameters struct {
 	ProfileStatus *string `json:"profileStatus,omitempty" tf:"profile_status,omitempty"`
 
 	// The name of the resource group in which to create the Traffic Manager profile. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -3299,6 +3299,11 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(SkuInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SpilloverDeploymentName != nil {
+		in, out := &in.SpilloverDeploymentName, &out.SpilloverDeploymentName
+		*out = new(string)
+		**out = **in
+	}
 	if in.VersionUpgradeOption != nil {
 		in, out := &in.VersionUpgradeOption, &out.VersionUpgradeOption
 		*out = new(string)
@@ -3381,6 +3386,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(SkuObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SpilloverDeploymentName != nil {
+		in, out := &in.SpilloverDeploymentName, &out.SpilloverDeploymentName
+		*out = new(string)
+		**out = **in
+	}
 	if in.VersionUpgradeOption != nil {
 		in, out := &in.VersionUpgradeOption, &out.VersionUpgradeOption
 		*out = new(string)
@@ -3435,6 +3445,11 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 		in, out := &in.Sku, &out.Sku
 		*out = new(SkuParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SpilloverDeploymentName != nil {
+		in, out := &in.SpilloverDeploymentName, &out.SpilloverDeploymentName
+		*out = new(string)
+		**out = **in
 	}
 	if in.VersionUpgradeOption != nil {
 		in, out := &in.VersionUpgradeOption, &out.VersionUpgradeOption

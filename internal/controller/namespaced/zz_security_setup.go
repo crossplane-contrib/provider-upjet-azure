@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	advancedthreatprotection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/advancedthreatprotection"
-	iotsecuritydevicegroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/iotsecuritydevicegroup"
-	iotsecuritysolution "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/iotsecuritysolution"
-	securitycenterassessment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterassessment"
-	securitycenterassessmentpolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterassessmentpolicy"
-	securitycentercontact "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycentercontact"
-	securitycenterservervulnerabilityassessmentvirtualmachine "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterservervulnerabilityassessmentvirtualmachine"
-	securitycentersetting "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycentersetting"
-	securitycentersubscriptionpricing "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycentersubscriptionpricing"
-	securitycenterworkspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterworkspace"
-	storagedefender "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/storagedefender"
+	advancedthreatprotection "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/advancedthreatprotection"
+	iotsecuritydevicegroup "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/iotsecuritydevicegroup"
+	iotsecuritysolution "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/iotsecuritysolution"
+	securitycenterassessment "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/securitycenterassessment"
+	securitycenterassessmentpolicy "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/securitycenterassessmentpolicy"
+	securitycentercontact "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/securitycentercontact"
+	securitycenterservervulnerabilityassessmentvirtualmachine "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/securitycenterservervulnerabilityassessmentvirtualmachine"
+	securitycentersetting "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/securitycentersetting"
+	securitycentersubscriptionpricing "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/securitycentersubscriptionpricing"
+	securitycenterworkspace "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/securitycenterworkspace"
+	storagedefender "github.com/upbound/provider-azure/v3/internal/controller/namespaced/security/storagedefender"
 )
 
 // Setup_security creates all controllers with the supplied logger and adds them to

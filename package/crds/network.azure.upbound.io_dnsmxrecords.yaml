@@ -75,7 +75,7 @@ spec:
                 properties:
                   record:
                     description: A list of values that make up the MX record. Each
-                      record block supports fields documented below.
+                      record block supports fields defined below.
                     items:
                       properties:
                         exchange:
@@ -273,7 +273,7 @@ spec:
                 properties:
                   record:
                     description: A list of values that make up the MX record. Each
-                      record block supports fields documented below.
+                      record block supports fields defined below.
                     items:
                       properties:
                         exchange:
@@ -405,7 +405,7 @@ spec:
                     type: string
                   record:
                     description: A list of values that make up the MX record. Each
-                      record block supports fields documented below.
+                      record block supports fields defined below.
                     items:
                       properties:
                         exchange:

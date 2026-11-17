@@ -12,7 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	apisresolver "github.com/upbound/provider-azure/v2/internal/apis"
+	apisresolver "github.com/upbound/provider-azure/v3/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -26,7 +26,7 @@ func (mg *FrontdoorCustomDomainAssociation) ResolveReferences( // ResolveReferen
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta3", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -66,7 +66,7 @@ func (mg *FrontdoorCustomDomainAssociation) ResolveReferences( // ResolveReferen
 	mg.Spec.ForProvider.CdnFrontdoorRouteIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.CdnFrontdoorRouteIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta3", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

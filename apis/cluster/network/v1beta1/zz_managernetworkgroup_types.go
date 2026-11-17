@@ -48,7 +48,7 @@ type ManagerNetworkGroupParameters struct {
 	MemberType *string `json:"memberType,omitempty" tf:"member_type,omitempty"`
 
 	// Specifies the ID of the Network Manager. Changing this forces a new Network Manager Network Group to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Manager
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta2.Manager
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`

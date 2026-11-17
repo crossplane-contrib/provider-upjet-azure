@@ -16,8 +16,8 @@ import (
 type VirtualDesktopWorkspaceApplicationGroupAssociationInitParameters struct {
 
 	// The resource ID for the Virtual Desktop Application Group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopApplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopApplicationGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	ApplicationGroupID *string `json:"applicationGroupId,omitempty" tf:"application_group_id,omitempty"`
 
 	// Reference to a VirtualDesktopApplicationGroup in desktopvirtualization to populate applicationGroupId.
@@ -29,8 +29,8 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationInitParameters struct {
 	ApplicationGroupIDSelector *v2.NamespacedSelector `json:"applicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The resource ID for the Virtual Desktop Workspace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopWorkspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopWorkspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Reference to a VirtualDesktopWorkspace in desktopvirtualization to populate workspaceId.
@@ -57,8 +57,8 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationObservation struct {
 type VirtualDesktopWorkspaceApplicationGroupAssociationParameters struct {
 
 	// The resource ID for the Virtual Desktop Application Group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopApplicationGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopApplicationGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationGroupID *string `json:"applicationGroupId,omitempty" tf:"application_group_id,omitempty"`
 
@@ -71,8 +71,8 @@ type VirtualDesktopWorkspaceApplicationGroupAssociationParameters struct {
 	ApplicationGroupIDSelector *v2.NamespacedSelector `json:"applicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The resource ID for the Virtual Desktop Workspace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopWorkspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/desktopvirtualization/v1beta1.VirtualDesktopWorkspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

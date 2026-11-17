@@ -15,39 +15,39 @@ import (
 
 type ActionsInitParameters struct {
 
-	// A base_blob block as documented below.
+	// A base_blob block as defined below.
 	BaseBlob *BaseBlobInitParameters `json:"baseBlob,omitempty" tf:"base_blob,omitempty"`
 
-	// A snapshot block as documented below.
+	// A snapshot block as defined below.
 	Snapshot *SnapshotInitParameters `json:"snapshot,omitempty" tf:"snapshot,omitempty"`
 
-	// A version block as documented below.
+	// A version block as defined below.
 	Version *VersionInitParameters `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ActionsObservation struct {
 
-	// A base_blob block as documented below.
+	// A base_blob block as defined below.
 	BaseBlob *BaseBlobObservation `json:"baseBlob,omitempty" tf:"base_blob,omitempty"`
 
-	// A snapshot block as documented below.
+	// A snapshot block as defined below.
 	Snapshot *SnapshotObservation `json:"snapshot,omitempty" tf:"snapshot,omitempty"`
 
-	// A version block as documented below.
+	// A version block as defined below.
 	Version *VersionObservation `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ActionsParameters struct {
 
-	// A base_blob block as documented below.
+	// A base_blob block as defined below.
 	// +kubebuilder:validation:Optional
 	BaseBlob *BaseBlobParameters `json:"baseBlob,omitempty" tf:"base_blob,omitempty"`
 
-	// A snapshot block as documented below.
+	// A snapshot block as defined below.
 	// +kubebuilder:validation:Optional
 	Snapshot *SnapshotParameters `json:"snapshot,omitempty" tf:"snapshot,omitempty"`
 
-	// A version block as documented below.
+	// A version block as defined below.
 	// +kubebuilder:validation:Optional
 	Version *VersionParameters `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -248,11 +248,11 @@ type FiltersParameters struct {
 
 type ManagementPolicyInitParameters struct {
 
-	// A rule block as documented below.
+	// A rule block as defined below.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Specifies the id of the storage account to apply the management policy to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -270,7 +270,7 @@ type ManagementPolicyObservation struct {
 	// The ID of the Storage Account Management Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A rule block as documented below.
+	// A rule block as defined below.
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Specifies the id of the storage account to apply the management policy to. Changing this forces a new resource to be created.
@@ -279,12 +279,12 @@ type ManagementPolicyObservation struct {
 
 type ManagementPolicyParameters struct {
 
-	// A rule block as documented below.
+	// A rule block as defined below.
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Specifies the id of the storage account to apply the management policy to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -339,13 +339,13 @@ type MatchBlobIndexTagParameters struct {
 
 type RuleInitParameters struct {
 
-	// An actions block as documented below.
+	// An actions block as defined below.
 	Actions *ActionsInitParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Boolean to specify whether the rule is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// A filters block as documented below.
+	// A filters block as defined below.
 	Filters *FiltersInitParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 
 	// The name of the rule. Rule name is case-sensitive. It must be unique within a policy.
@@ -354,13 +354,13 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
-	// An actions block as documented below.
+	// An actions block as defined below.
 	Actions *ActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Boolean to specify whether the rule is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// A filters block as documented below.
+	// A filters block as defined below.
 	Filters *FiltersObservation `json:"filters,omitempty" tf:"filters,omitempty"`
 
 	// The name of the rule. Rule name is case-sensitive. It must be unique within a policy.
@@ -369,7 +369,7 @@ type RuleObservation struct {
 
 type RuleParameters struct {
 
-	// An actions block as documented below.
+	// An actions block as defined below.
 	// +kubebuilder:validation:Optional
 	Actions *ActionsParameters `json:"actions" tf:"actions,omitempty"`
 
@@ -377,7 +377,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// A filters block as documented below.
+	// A filters block as defined below.
 	// +kubebuilder:validation:Optional
 	Filters *FiltersParameters `json:"filters" tf:"filters,omitempty"`
 

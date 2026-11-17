@@ -75,7 +75,7 @@ spec:
                 properties:
                   record:
                     description: A list of values that make up the txt record. Each
-                      record block supports fields documented below.
+                      record block supports fields defined below.
                     items:
                       properties:
                         value:
@@ -268,7 +268,7 @@ spec:
                 properties:
                   record:
                     description: A list of values that make up the txt record. Each
-                      record block supports fields documented below.
+                      record block supports fields defined below.
                     items:
                       properties:
                         value:
@@ -395,7 +395,7 @@ spec:
                     type: string
                   record:
                     description: A list of values that make up the txt record. Each
-                      record block supports fields documented below.
+                      record block supports fields defined below.
                     items:
                       properties:
                         value:

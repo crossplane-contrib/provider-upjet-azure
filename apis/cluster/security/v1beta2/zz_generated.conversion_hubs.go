@@ -10,7 +10,4 @@ package v1beta2
 func (tr *IOTSecurityDeviceGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *IOTSecuritySolution) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SecurityCenterAssessment) Hub() {}

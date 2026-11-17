@@ -445,7 +445,7 @@ type PolicySettingsInitParameters struct {
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb.
+	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb. Defaults to true.
 	FileUploadEnforcement *bool `json:"fileUploadEnforcement,omitempty" tf:"file_upload_enforcement,omitempty"`
 
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
@@ -478,7 +478,7 @@ type PolicySettingsObservation struct {
 	// Describes if the policy is in enabled state or disabled state. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb.
+	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb. Defaults to true.
 	FileUploadEnforcement *bool `json:"fileUploadEnforcement,omitempty" tf:"file_upload_enforcement,omitempty"`
 
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
@@ -512,7 +512,7 @@ type PolicySettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb.
+	// - Whether the firewall should block a request with upload size greater then file_upload_limit_in_mb. Defaults to true.
 	// +kubebuilder:validation:Optional
 	FileUploadEnforcement *bool `json:"fileUploadEnforcement,omitempty" tf:"file_upload_enforcement,omitempty"`
 
@@ -715,7 +715,7 @@ type WebApplicationFirewallPolicyParameters struct {
 	PolicySettings *PolicySettingsParameters `json:"policySettings,omitempty" tf:"policy_settings,omitempty"`
 
 	// The name of the resource group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

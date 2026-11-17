@@ -55,6 +55,7 @@ type BGPSettingsParameters struct {
 type LocalNetworkGatewayInitParameters struct {
 
 	// The list of string CIDRs representing the address spaces the gateway exposes.
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
@@ -77,6 +78,7 @@ type LocalNetworkGatewayInitParameters struct {
 type LocalNetworkGatewayObservation struct {
 
 	// The list of string CIDRs representing the address spaces the gateway exposes.
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
@@ -106,6 +108,7 @@ type LocalNetworkGatewayParameters struct {
 
 	// The list of string CIDRs representing the address spaces the gateway exposes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
@@ -125,7 +128,7 @@ type LocalNetworkGatewayParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the local network gateway. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

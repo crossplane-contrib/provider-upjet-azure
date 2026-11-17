@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	virtualdesktopapplicationgroup "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktopapplicationgroup"
-	virtualdesktophostpool "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktophostpool"
-	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
-	virtualdesktopworkspace "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktopworkspace"
-	virtualdesktopworkspaceapplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/cluster/desktopvirtualization/virtualdesktopworkspaceapplicationgroupassociation"
+	virtualdesktopapplicationgroup "github.com/upbound/provider-azure/v3/internal/controller/cluster/desktopvirtualization/virtualdesktopapplicationgroup"
+	virtualdesktophostpool "github.com/upbound/provider-azure/v3/internal/controller/cluster/desktopvirtualization/virtualdesktophostpool"
+	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v3/internal/controller/cluster/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
+	virtualdesktopworkspace "github.com/upbound/provider-azure/v3/internal/controller/cluster/desktopvirtualization/virtualdesktopworkspace"
+	virtualdesktopworkspaceapplicationgroupassociation "github.com/upbound/provider-azure/v3/internal/controller/cluster/desktopvirtualization/virtualdesktopworkspaceapplicationgroupassociation"
 )
 
 // Setup_desktopvirtualization creates all controllers with the supplied logger and adds them to

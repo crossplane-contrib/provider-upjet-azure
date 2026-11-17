@@ -67,7 +67,7 @@ spec:
                       Defaults to false.
                     type: boolean
                   cors:
-                    description: A cors block as documented below.
+                    description: A cors block as defined below.
                     items:
                       properties:
                         allowedOrigins:
@@ -233,7 +233,7 @@ spec:
                       Default and Serverless. Defaults to Default.
                     type: string
                   sku:
-                    description: A sku block as documented below.
+                    description: A sku block as defined below.
                     properties:
                       capacity:
                         description: Specifies the number of units associated with
@@ -257,7 +257,7 @@ spec:
                       handshake? Defaults to false.
                     type: boolean
                   upstreamEndpoint:
-                    description: An upstream_endpoint block as documented below. Using
+                    description: An upstream_endpoint block as defined below. Using
                       this block requires the SignalR service to be Serverless. When
                       creating multiple blocks they will be processed in the order
                       they are defined in.
@@ -312,7 +312,7 @@ spec:
                       Defaults to false.
                     type: boolean
                   cors:
-                    description: A cors block as documented below.
+                    description: A cors block as defined below.
                     items:
                       properties:
                         allowedOrigins:
@@ -391,7 +391,7 @@ spec:
                       Default and Serverless. Defaults to Default.
                     type: string
                   sku:
-                    description: A sku block as documented below.
+                    description: A sku block as defined below.
                     properties:
                       capacity:
                         description: Specifies the number of units associated with
@@ -415,7 +415,7 @@ spec:
                       handshake? Defaults to false.
                     type: boolean
                   upstreamEndpoint:
-                    description: An upstream_endpoint block as documented below. Using
+                    description: An upstream_endpoint block as defined below. Using
                       this block requires the SignalR service to be Serverless. When
                       creating multiple blocks they will be processed in the order
                       they are defined in.
@@ -529,7 +529,7 @@ spec:
                       Defaults to false.
                     type: boolean
                   cors:
-                    description: A cors block as documented below.
+                    description: A cors block as defined below.
                     items:
                       properties:
                         allowedOrigins:
@@ -636,7 +636,7 @@ spec:
                       Default and Serverless. Defaults to Default.
                     type: string
                   sku:
-                    description: A sku block as documented below.
+                    description: A sku block as defined below.
                     properties:
                       capacity:
                         description: Specifies the number of units associated with
@@ -660,7 +660,7 @@ spec:
                       handshake? Defaults to false.
                     type: boolean
                   upstreamEndpoint:
-                    description: An upstream_endpoint block as documented below. Using
+                    description: An upstream_endpoint block as defined below. Using
                       this block requires the SignalR service to be Serverless. When
                       creating multiple blocks they will be processed in the order
                       they are defined in.

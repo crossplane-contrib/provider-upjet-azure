@@ -10,10 +10,10 @@ package v1beta2
 func (tr *Certificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CertificateContacts) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Key) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagedHardwareSecurityModule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Vault) Hub() {}

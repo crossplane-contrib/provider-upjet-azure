@@ -18,6 +18,9 @@ type LoadBalancerProbeInitParameters struct {
 	// The interval, in seconds between probes to the backend endpoint for health status. The default value is 15, the minimum value is 5.
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
+	// Determines how new connections are handled by the load balancer when all backend instances are probed down. Possible values are AllProbedDown and AllProbedUp. Defaults to AllProbedDown.
+	NoHealthyBackendsBehavior *string `json:"noHealthyBackendsBehavior,omitempty" tf:"no_healthy_backends_behavior,omitempty"`
+
 	// The number of failed probe attempts after which the backend endpoint is removed from rotation. Default to 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
 	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
 
@@ -48,6 +51,9 @@ type LoadBalancerProbeObservation struct {
 	// The ID of the LoadBalancer in which to create the Probe. Changing this forces a new resource to be created.
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 
+	// Determines how new connections are handled by the load balancer when all backend instances are probed down. Possible values are AllProbedDown and AllProbedUp. Defaults to AllProbedDown.
+	NoHealthyBackendsBehavior *string `json:"noHealthyBackendsBehavior,omitempty" tf:"no_healthy_backends_behavior,omitempty"`
+
 	// The number of failed probe attempts after which the backend endpoint is removed from rotation. Default to 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
 	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
 
@@ -71,8 +77,8 @@ type LoadBalancerProbeParameters struct {
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
 	// The ID of the LoadBalancer in which to create the Probe. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.LoadBalancer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 
@@ -83,6 +89,10 @@ type LoadBalancerProbeParameters struct {
 	// Selector for a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v2.NamespacedSelector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
+
+	// Determines how new connections are handled by the load balancer when all backend instances are probed down. Possible values are AllProbedDown and AllProbedUp. Defaults to AllProbedDown.
+	// +kubebuilder:validation:Optional
+	NoHealthyBackendsBehavior *string `json:"noHealthyBackendsBehavior,omitempty" tf:"no_healthy_backends_behavior,omitempty"`
 
 	// The number of failed probe attempts after which the backend endpoint is removed from rotation. Default to 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
 	// +kubebuilder:validation:Optional

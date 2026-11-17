@@ -15,7 +15,7 @@ import (
 
 type DNSCAARecordInitParameters struct {
 
-	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	// A list of values that make up the CAA record. Each record block supports fields defined below.
 	Record []RecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
@@ -34,7 +34,7 @@ type DNSCAARecordObservation struct {
 	// The DNS CAA Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	// A list of values that make up the CAA record. Each record block supports fields defined below.
 	Record []RecordObservation `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -53,12 +53,12 @@ type DNSCAARecordObservation struct {
 
 type DNSCAARecordParameters struct {
 
-	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	// A list of values that make up the CAA record. Each record block supports fields defined below.
 	// +kubebuilder:validation:Optional
 	Record []RecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -80,7 +80,7 @@ type DNSCAARecordParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.DNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta2.DNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 

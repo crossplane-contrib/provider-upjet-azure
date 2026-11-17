@@ -159,7 +159,7 @@ spec:
                         type: object
                     type: object
                   contentFilter:
-                    description: A content_filter block as defined below.
+                    description: One or more content_filter blocks as defined below.
                     items:
                       properties:
                         blockEnabled:
@@ -212,7 +212,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   contentFilter:
-                    description: A content_filter block as defined below.
+                    description: One or more content_filter blocks as defined below.
                     items:
                       properties:
                         blockEnabled:
@@ -357,7 +357,7 @@ spec:
                       new resource to be created.
                     type: string
                   contentFilter:
-                    description: A content_filter block as defined below.
+                    description: One or more content_filter blocks as defined below.
                     items:
                       properties:
                         blockEnabled:

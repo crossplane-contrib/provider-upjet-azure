@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: recoveryservices.azure.upbound.io/v1beta2
+apiVersion: recoveryservices.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -56,7 +56,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:

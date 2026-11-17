@@ -19,8 +19,8 @@ type VirtualDesktopHostPoolRegistrationInfoInitParameters struct {
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The ID of the Virtual Desktop Host Pool to link the Registration Info to. Changing this forces a new Registration Info resource to be created. Only a single virtual_desktop_host_pool_registration_info resource should be associated with a given hostpool. Assigning multiple resources will produce inconsistent results.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/desktopvirtualization/v1beta1.VirtualDesktopHostPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/desktopvirtualization/v1beta1.VirtualDesktopHostPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	HostpoolID *string `json:"hostpoolId,omitempty" tf:"hostpool_id,omitempty"`
 
 	// Reference to a VirtualDesktopHostPool in desktopvirtualization to populate hostpoolId.
@@ -51,8 +51,8 @@ type VirtualDesktopHostPoolRegistrationInfoParameters struct {
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The ID of the Virtual Desktop Host Pool to link the Registration Info to. Changing this forces a new Registration Info resource to be created. Only a single virtual_desktop_host_pool_registration_info resource should be associated with a given hostpool. Assigning multiple resources will produce inconsistent results.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/desktopvirtualization/v1beta1.VirtualDesktopHostPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/desktopvirtualization/v1beta1.VirtualDesktopHostPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	HostpoolID *string `json:"hostpoolId,omitempty" tf:"hostpool_id,omitempty"`
 

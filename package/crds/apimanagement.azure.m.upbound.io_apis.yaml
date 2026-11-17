@@ -151,7 +151,7 @@ spec:
                       and websocket. Defaults to http.
                     type: string
                   contact:
-                    description: A contact block as documented below.
+                    description: A contact block as defined below.
                     properties:
                       email:
                         description: The email address of the contact person/organization.
@@ -171,7 +171,7 @@ spec:
                     description: The display name of the API.
                     type: string
                   import:
-                    description: A import block as documented below.
+                    description: A import block as defined below.
                     properties:
                       contentFormat:
                         description: 'The format of the content from which the API
@@ -202,7 +202,7 @@ spec:
                         type: object
                     type: object
                   license:
-                    description: A license block as documented below.
+                    description: A license block as defined below.
                     properties:
                       name:
                         description: The name of the license .
@@ -212,7 +212,7 @@ spec:
                         type: string
                     type: object
                   oauth2Authorization:
-                    description: An oauth2_authorization block as documented below.
+                    description: An oauth2_authorization block as defined below.
                     properties:
                       authorizationServerName:
                         description: OAuth authorization server identifier. The name
@@ -223,7 +223,7 @@ spec:
                         type: string
                     type: object
                   openidAuthentication:
-                    description: An openid_authentication block as documented below.
+                    description: An openid_authentication block as defined below.
                     properties:
                       bearerTokenSendingMethods:
                         description: How to send token to the server. A list of zero
@@ -353,7 +353,7 @@ spec:
                       azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
                     type: string
                   subscriptionKeyParameterNames:
-                    description: A subscription_key_parameter_names block as documented
+                    description: A subscription_key_parameter_names block as defined
                       below.
                     properties:
                       header:
@@ -404,7 +404,7 @@ spec:
                       and websocket. Defaults to http.
                     type: string
                   contact:
-                    description: A contact block as documented below.
+                    description: A contact block as defined below.
                     properties:
                       email:
                         description: The email address of the contact person/organization.
@@ -424,7 +424,7 @@ spec:
                     description: The display name of the API.
                     type: string
                   import:
-                    description: A import block as documented below.
+                    description: A import block as defined below.
                     properties:
                       contentFormat:
                         description: 'The format of the content from which the API
@@ -455,7 +455,7 @@ spec:
                         type: object
                     type: object
                   license:
-                    description: A license block as documented below.
+                    description: A license block as defined below.
                     properties:
                       name:
                         description: The name of the license .
@@ -465,7 +465,7 @@ spec:
                         type: string
                     type: object
                   oauth2Authorization:
-                    description: An oauth2_authorization block as documented below.
+                    description: An oauth2_authorization block as defined below.
                     properties:
                       authorizationServerName:
                         description: OAuth authorization server identifier. The name
@@ -476,7 +476,7 @@ spec:
                         type: string
                     type: object
                   openidAuthentication:
-                    description: An openid_authentication block as documented below.
+                    description: An openid_authentication block as defined below.
                     properties:
                       bearerTokenSendingMethods:
                         description: How to send token to the server. A list of zero
@@ -516,7 +516,7 @@ spec:
                       azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
                     type: string
                   subscriptionKeyParameterNames:
-                    description: A subscription_key_parameter_names block as documented
+                    description: A subscription_key_parameter_names block as defined
                       below.
                     properties:
                       header:
@@ -620,7 +620,7 @@ spec:
                       and websocket. Defaults to http.
                     type: string
                   contact:
-                    description: A contact block as documented below.
+                    description: A contact block as defined below.
                     properties:
                       email:
                         description: The email address of the contact person/organization.
@@ -643,7 +643,7 @@ spec:
                     description: The ID of the API Management API.
                     type: string
                   import:
-                    description: A import block as documented below.
+                    description: A import block as defined below.
                     properties:
                       contentFormat:
                         description: 'The format of the content from which the API
@@ -680,7 +680,7 @@ spec:
                     description: Is this API Revision online/accessible via the Gateway?
                     type: boolean
                   license:
-                    description: A license block as documented below.
+                    description: A license block as defined below.
                     properties:
                       name:
                         description: The name of the license .
@@ -690,7 +690,7 @@ spec:
                         type: string
                     type: object
                   oauth2Authorization:
-                    description: An oauth2_authorization block as documented below.
+                    description: An oauth2_authorization block as defined below.
                     properties:
                       authorizationServerName:
                         description: OAuth authorization server identifier. The name
@@ -701,7 +701,7 @@ spec:
                         type: string
                     type: object
                   openidAuthentication:
-                    description: An openid_authentication block as documented below.
+                    description: An openid_authentication block as defined below.
                     properties:
                       bearerTokenSendingMethods:
                         description: How to send token to the server. A list of zero
@@ -749,7 +749,7 @@ spec:
                       azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
                     type: string
                   subscriptionKeyParameterNames:
-                    description: A subscription_key_parameter_names block as documented
+                    description: A subscription_key_parameter_names block as defined
                       below.
                     properties:
                       header:

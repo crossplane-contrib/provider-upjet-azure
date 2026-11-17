@@ -232,6 +232,10 @@ spec:
                           be taken in ISO8601 Date Time format.
                         type: string
                     type: object
+                  maintenancePatchLevel:
+                    description: The maintenance patch level for the Autonomous Database.
+                      Defaults to Regular. Possible values are Early and Regular.
+                    type: string
                   mtlsConnectionRequired:
                     description: Specifies if the Autonomous Database requires mTLS
                       connections. Changing this forces a new Autonomous Database
@@ -585,6 +589,10 @@ spec:
                           be taken in ISO8601 Date Time format.
                         type: string
                     type: object
+                  maintenancePatchLevel:
+                    description: The maintenance patch level for the Autonomous Database.
+                      Defaults to Regular. Possible values are Early and Regular.
+                    type: string
                   mtlsConnectionRequired:
                     description: Specifies if the Autonomous Database requires mTLS
                       connections. Changing this forces a new Autonomous Database
@@ -982,6 +990,10 @@ spec:
                           be taken in ISO8601 Date Time format.
                         type: string
                     type: object
+                  maintenancePatchLevel:
+                    description: The maintenance patch level for the Autonomous Database.
+                      Defaults to Regular. Possible values are Early and Regular.
+                    type: string
                   mtlsConnectionRequired:
                     description: Specifies if the Autonomous Database requires mTLS
                       connections. Changing this forces a new Autonomous Database
@@ -991,6 +1003,9 @@ spec:
                     description: 'The national character set for the autonomous database.
                       Changing this forces a new Autonomous Database to be created.
                       The default is AL16UTF16. Allowed values are: AL16UTF16 or UTF8.'
+                    type: string
+                  ocid:
+                    description: The OCID of the Autonomous Database.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Autonomous

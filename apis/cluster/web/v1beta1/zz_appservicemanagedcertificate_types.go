@@ -16,7 +16,7 @@ import (
 type AppServiceManagedCertificateInitParameters struct {
 
 	// The ID of the App Service Custom Hostname Binding for the Certificate. Changing this forces a new App Service Managed Certificate to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.AppServiceCustomHostNameBinding
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/web/v1beta1.AppServiceCustomHostNameBinding
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CustomHostNameBindingID *string `json:"customHostnameBindingId,omitempty" tf:"custom_hostname_binding_id,omitempty"`
 
@@ -73,7 +73,7 @@ type AppServiceManagedCertificateObservation struct {
 type AppServiceManagedCertificateParameters struct {
 
 	// The ID of the App Service Custom Hostname Binding for the Certificate. Changing this forces a new App Service Managed Certificate to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.AppServiceCustomHostNameBinding
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/web/v1beta1.AppServiceCustomHostNameBinding
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CustomHostNameBindingID *string `json:"customHostnameBindingId,omitempty" tf:"custom_hostname_binding_id,omitempty"`

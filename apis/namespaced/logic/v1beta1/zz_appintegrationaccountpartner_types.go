@@ -15,7 +15,7 @@ import (
 
 type AppIntegrationAccountPartnerInitParameters struct {
 
-	// A business_identity block as documented below.
+	// A business_identity block as defined below.
 	BusinessIdentity []BusinessIdentityInitParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Partner.
@@ -24,7 +24,7 @@ type AppIntegrationAccountPartnerInitParameters struct {
 
 type AppIntegrationAccountPartnerObservation struct {
 
-	// A business_identity block as documented below.
+	// A business_identity block as defined below.
 	BusinessIdentity []BusinessIdentityObservation `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// The ID of the Logic App Integration Account Partner.
@@ -42,12 +42,12 @@ type AppIntegrationAccountPartnerObservation struct {
 
 type AppIntegrationAccountPartnerParameters struct {
 
-	// A business_identity block as documented below.
+	// A business_identity block as defined below.
 	// +kubebuilder:validation:Optional
 	BusinessIdentity []BusinessIdentityParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Partner to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/logic/v1beta1.AppIntegrationAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/logic/v1beta1.AppIntegrationAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
@@ -65,7 +65,7 @@ type AppIntegrationAccountPartnerParameters struct {
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Partner should exist. Changing this forces a new Logic App Integration Account Partner to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

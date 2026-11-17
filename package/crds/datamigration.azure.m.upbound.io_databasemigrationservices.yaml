@@ -460,6 +460,10 @@ spec:
                     description: Specify the name of the database migration service.
                       Changing this forces a new resource to be created.
                     type: string
+                  networkInterfaceId:
+                    description: The ID of the Network Interface created by Azure
+                      for the Database Migration Service.
+                    type: string
                   resourceGroupName:
                     description: Name of the resource group in which to create the
                       database migration service. Changing this forces a new resource

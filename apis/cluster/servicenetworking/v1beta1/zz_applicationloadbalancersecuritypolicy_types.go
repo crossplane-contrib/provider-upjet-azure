@@ -23,7 +23,7 @@ type ApplicationLoadBalancerSecurityPolicyInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Web Application Firewall Policy. Changing this forces a new Application Load Balancer Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.WebApplicationFirewallPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta2.WebApplicationFirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WebApplicationFirewallPolicyID *string `json:"webApplicationFirewallPolicyId,omitempty" tf:"web_application_firewall_policy_id,omitempty"`
 
@@ -58,7 +58,7 @@ type ApplicationLoadBalancerSecurityPolicyObservation struct {
 type ApplicationLoadBalancerSecurityPolicyParameters struct {
 
 	// The ID of the Application Load Balancer. Changing this forces a new Application Gateway for Containers Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicenetworking/v1beta1.ApplicationLoadBalancer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/servicenetworking/v1beta1.ApplicationLoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationLoadBalancerID *string `json:"applicationLoadBalancerId,omitempty" tf:"application_load_balancer_id,omitempty"`
@@ -81,7 +81,7 @@ type ApplicationLoadBalancerSecurityPolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Web Application Firewall Policy. Changing this forces a new Application Load Balancer Security Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.WebApplicationFirewallPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta2.WebApplicationFirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WebApplicationFirewallPolicyID *string `json:"webApplicationFirewallPolicyId,omitempty" tf:"web_application_firewall_policy_id,omitempty"`

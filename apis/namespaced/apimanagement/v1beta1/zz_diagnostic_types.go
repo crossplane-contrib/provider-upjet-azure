@@ -532,7 +532,7 @@ type DiagnosticFrontendResponseParameters struct {
 type DiagnosticInitParameters struct {
 
 	// The id of the target API Management Logger where the API Management Diagnostic should be saved.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Logger
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.Logger
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
 
@@ -564,6 +564,9 @@ type DiagnosticInitParameters struct {
 
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
+
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
 
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
@@ -607,6 +610,9 @@ type DiagnosticObservation struct {
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
+
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
@@ -623,7 +629,7 @@ type DiagnosticObservation struct {
 type DiagnosticParameters struct {
 
 	// The id of the target API Management Logger where the API Management Diagnostic should be saved.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Logger
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.Logger
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
@@ -637,7 +643,7 @@ type DiagnosticParameters struct {
 	APIManagementLoggerIDSelector *v2.NamespacedSelector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
 
 	// The Name of the API Management Service where this Diagnostic should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta2.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -677,12 +683,16 @@ type DiagnosticParameters struct {
 	// +kubebuilder:validation:Optional
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	// +kubebuilder:validation:Optional
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
+
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	// +kubebuilder:validation:Optional
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

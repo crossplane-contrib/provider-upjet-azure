@@ -23,7 +23,7 @@ type ShareDirectoryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Directory within the File Share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta1.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
 
@@ -36,7 +36,7 @@ type ShareDirectoryInitParameters struct {
 	StorageShareIDSelector *v2.NamespacedSelector `json:"storageShareIdSelector,omitempty" tf:"-"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta1.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("url",true)
 	StorageShareURL *string `json:"storageShareUrl,omitempty" tf:"storage_share_url,omitempty"`
 
@@ -80,7 +80,7 @@ type ShareDirectoryParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Directory within the File Share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta1.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
@@ -94,7 +94,7 @@ type ShareDirectoryParameters struct {
 	StorageShareIDSelector *v2.NamespacedSelector `json:"storageShareIdSelector,omitempty" tf:"-"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta1.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("url",true)
 	// +kubebuilder:validation:Optional
 	StorageShareURL *string `json:"storageShareUrl,omitempty" tf:"storage_share_url,omitempty"`
@@ -133,9 +133,10 @@ type ShareDirectoryStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="v1beta1 is deprecated since the Terraform AzureRM v5 bump, please migrate to v1beta2. Deprecated since v3.0.0."
 
 // ShareDirectory is the Schema for the ShareDirectorys API. Manages a Directory within an Azure Storage File Share.
+// Deprecated: This API version (v1beta1) has been deprecated in release v3.0.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -60,7 +60,7 @@ spec:
 
 ---
 
-apiVersion: datafactory.azure.m.upbound.io/v1beta1
+apiVersion: datafactory.azure.m.upbound.io/v1beta2
 kind: Pipeline
 metadata:
   annotations:
@@ -92,7 +92,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

@@ -1535,6 +1535,11 @@ func (in *AutonomousDatabaseInitParameters) DeepCopyInto(out *AutonomousDatabase
 		*out = new(LongTermBackupScheduleInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.MaintenancePatchLevel != nil {
+		in, out := &in.MaintenancePatchLevel, &out.MaintenancePatchLevel
+		*out = new(string)
+		**out = **in
+	}
 	if in.MtlsConnectionRequired != nil {
 		in, out := &in.MtlsConnectionRequired, &out.MtlsConnectionRequired
 		*out = new(bool)
@@ -1720,6 +1725,11 @@ func (in *AutonomousDatabaseObservation) DeepCopyInto(out *AutonomousDatabaseObs
 		*out = new(LongTermBackupScheduleObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.MaintenancePatchLevel != nil {
+		in, out := &in.MaintenancePatchLevel, &out.MaintenancePatchLevel
+		*out = new(string)
+		**out = **in
+	}
 	if in.MtlsConnectionRequired != nil {
 		in, out := &in.MtlsConnectionRequired, &out.MtlsConnectionRequired
 		*out = new(bool)
@@ -1727,6 +1737,11 @@ func (in *AutonomousDatabaseObservation) DeepCopyInto(out *AutonomousDatabaseObs
 	}
 	if in.NationalCharacterSet != nil {
 		in, out := &in.NationalCharacterSet, &out.NationalCharacterSet
+		*out = new(string)
+		**out = **in
+	}
+	if in.Ocid != nil {
+		in, out := &in.Ocid, &out.Ocid
 		*out = new(string)
 		**out = **in
 	}
@@ -1863,6 +1878,11 @@ func (in *AutonomousDatabaseParameters) DeepCopyInto(out *AutonomousDatabasePara
 		in, out := &in.LongTermBackupSchedule, &out.LongTermBackupSchedule
 		*out = new(LongTermBackupScheduleParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.MaintenancePatchLevel != nil {
+		in, out := &in.MaintenancePatchLevel, &out.MaintenancePatchLevel
+		*out = new(string)
+		**out = **in
 	}
 	if in.MtlsConnectionRequired != nil {
 		in, out := &in.MtlsConnectionRequired, &out.MtlsConnectionRequired

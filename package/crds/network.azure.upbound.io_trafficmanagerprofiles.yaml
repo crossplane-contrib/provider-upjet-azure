@@ -80,7 +80,7 @@ spec:
                       relativeName:
                         description: The relative domain name, this is combined with
                           the domain name used by Traffic Manager to form the FQDN
-                          which is exported as documented below. Changing this forces
+                          which is exported as defined below. Changing this forces
                           a new resource to be created.
                         type: string
                       ttl:
@@ -270,7 +270,7 @@ spec:
                       relativeName:
                         description: The relative domain name, this is combined with
                           the domain name used by Traffic Manager to form the FQDN
-                          which is exported as documented below. Changing this forces
+                          which is exported as defined below. Changing this forces
                           a new resource to be created.
                         type: string
                       ttl:
@@ -471,7 +471,7 @@ spec:
                       relativeName:
                         description: The relative domain name, this is combined with
                           the domain name used by Traffic Manager to form the FQDN
-                          which is exported as documented below. Changing this forces
+                          which is exported as defined below. Changing this forces
                           a new resource to be created.
                         type: string
                       ttl:

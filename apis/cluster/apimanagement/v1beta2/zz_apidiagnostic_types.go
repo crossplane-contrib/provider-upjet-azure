@@ -16,7 +16,7 @@ import (
 type APIDiagnosticInitParameters struct {
 
 	// The ID (name) of the Diagnostics Logger.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Logger
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/apimanagement/v1beta2.Logger
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
 
@@ -48,6 +48,9 @@ type APIDiagnosticInitParameters struct {
 
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
+
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
 
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
@@ -94,6 +97,9 @@ type APIDiagnosticObservation struct {
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
+
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
@@ -110,7 +116,7 @@ type APIDiagnosticObservation struct {
 type APIDiagnosticParameters struct {
 
 	// The ID (name) of the Diagnostics Logger.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Logger
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/apimanagement/v1beta2.Logger
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
@@ -124,7 +130,7 @@ type APIDiagnosticParameters struct {
 	APIManagementLoggerIDSelector *v2.Selector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
 
 	// The name of the API Management Service instance. Changing this forces a new API Management Service API Diagnostics Logs to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/apimanagement/v1beta3.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -137,7 +143,7 @@ type APIDiagnosticParameters struct {
 	APIManagementNameSelector *v2.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API on which to configure the Diagnostics Logs. Changing this forces a new API Management Service API Diagnostics Logs to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/apimanagement/v1beta2.API
 	// +kubebuilder:validation:Optional
 	APIName *string `json:"apiName,omitempty" tf:"api_name,omitempty"`
 
@@ -177,12 +183,16 @@ type APIDiagnosticParameters struct {
 	// +kubebuilder:validation:Optional
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	// +kubebuilder:validation:Optional
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
+
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
 	// +kubebuilder:validation:Optional
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
 	// The name of the Resource Group where the API Management Service API Diagnostics Logs should exist. Changing this forces a new API Management Service API Diagnostics Logs to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

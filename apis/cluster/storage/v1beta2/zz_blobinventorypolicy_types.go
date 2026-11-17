@@ -19,7 +19,7 @@ type BlobInventoryPolicyInitParameters struct {
 	Rules []RulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the storage account to apply this Blob Inventory Policy to. Changing this forces a new Storage Blob Inventory Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -51,7 +51,7 @@ type BlobInventoryPolicyParameters struct {
 	Rules []RulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the storage account to apply this Blob Inventory Policy to. Changing this forces a new Storage Blob Inventory Policy to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -70,6 +70,9 @@ type FilterInitParameters struct {
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
 	// +listType=set
 	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
+
+	// The number of days in the past to filter blob creation time. Possible values range between 1 and 36500.
+	CreatedWithinDays *float64 `json:"createdWithinDays,omitempty" tf:"created_within_days,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
 	// +listType=set
@@ -95,6 +98,9 @@ type FilterObservation struct {
 	// +listType=set
 	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
 
+	// The number of days in the past to filter blob creation time. Possible values range between 1 and 36500.
+	CreatedWithinDays *float64 `json:"createdWithinDays,omitempty" tf:"created_within_days,omitempty"`
+
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
 	// +listType=set
 	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
@@ -119,6 +125,10 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	BlobTypes []*string `json:"blobTypes" tf:"blob_types,omitempty"`
+
+	// The number of days in the past to filter blob creation time. Possible values range between 1 and 36500.
+	// +kubebuilder:validation:Optional
+	CreatedWithinDays *float64 `json:"createdWithinDays,omitempty" tf:"created_within_days,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
 	// +kubebuilder:validation:Optional
@@ -164,7 +174,7 @@ type RulesInitParameters struct {
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The storage container name to store the blob inventory files for this rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerName.
@@ -227,7 +237,7 @@ type RulesParameters struct {
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 
 	// The storage container name to store the blob inventory files for this rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 

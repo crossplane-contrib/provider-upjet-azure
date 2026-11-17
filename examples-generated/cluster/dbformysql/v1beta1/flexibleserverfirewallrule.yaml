@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: dbformysql.azure.upbound.io/v1beta2
+apiVersion: dbformysql.azure.upbound.io/v1beta3
 kind: FlexibleServer
 metadata:
   annotations:

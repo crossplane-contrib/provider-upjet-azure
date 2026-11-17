@@ -408,7 +408,7 @@ type EventHubDirectParameters struct {
 type EventHubInitParameters struct {
 
 	// The resource ID of the Event Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
 
@@ -436,7 +436,7 @@ type EventHubObservation struct {
 type EventHubParameters struct {
 
 	// The resource ID of the Event Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
@@ -554,7 +554,7 @@ type IisLogParameters struct {
 
 type LabelIncludeFilterInitParameters struct {
 
-	// The label of the filter. This label should be unique across all label_include_fileter block. Possible value is microsoft_metrics_include_label.
+	// The label of the filter. This label should be unique across all label_include_filter block. Possible value is microsoft_metrics_include_label.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The value of the filter.
@@ -563,7 +563,7 @@ type LabelIncludeFilterInitParameters struct {
 
 type LabelIncludeFilterObservation struct {
 
-	// The label of the filter. This label should be unique across all label_include_fileter block. Possible value is microsoft_metrics_include_label.
+	// The label of the filter. This label should be unique across all label_include_filter block. Possible value is microsoft_metrics_include_label.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The value of the filter.
@@ -572,7 +572,7 @@ type LabelIncludeFilterObservation struct {
 
 type LabelIncludeFilterParameters struct {
 
-	// The label of the filter. This label should be unique across all label_include_fileter block. Possible value is microsoft_metrics_include_label.
+	// The label of the filter. This label should be unique across all label_include_filter block. Possible value is microsoft_metrics_include_label.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label" tf:"label,omitempty"`
 
@@ -587,7 +587,7 @@ type LogAnalyticsInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of a Log Analytic Workspace resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 
@@ -616,7 +616,7 @@ type LogAnalyticsParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of a Log Analytic Workspace resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
@@ -721,7 +721,7 @@ type MonitorAccountParameters struct {
 type MonitorDataCollectionRuleIdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Data Collection Rule. Currently, up to 1 identity is supported.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -757,7 +757,7 @@ type MonitorDataCollectionRuleIdentityObservation struct {
 type MonitorDataCollectionRuleIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Data Collection Rule. Currently, up to 1 identity is supported.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -779,7 +779,7 @@ type MonitorDataCollectionRuleIdentityParameters struct {
 type MonitorDataCollectionRuleInitParameters struct {
 
 	// The resource ID of the Data Collection Endpoint that this rule can be used with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorDataCollectionEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta1.MonitorDataCollectionEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
 
@@ -806,7 +806,7 @@ type MonitorDataCollectionRuleInitParameters struct {
 	// An identity block as defined below.
 	Identity *MonitorDataCollectionRuleIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore and WorkspaceTransforms. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
+	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore, WorkspaceTransforms, and Direct. A rule of kind Linux does not allow for windows_event_log data sources, and a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed. A rule of kind Direct must use a data_collection_endpoint_id if you're sending data to a Log Analytics workspace configured for private link.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The Azure Region where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
@@ -846,11 +846,17 @@ type MonitorDataCollectionRuleObservation struct {
 	// The immutable ID of the Data Collection Rule.
 	ImmutableID *string `json:"immutableId,omitempty" tf:"immutable_id,omitempty"`
 
-	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore and WorkspaceTransforms. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
+	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore, WorkspaceTransforms, and Direct. A rule of kind Linux does not allow for windows_event_log data sources, and a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed. A rule of kind Direct must use a data_collection_endpoint_id if you're sending data to a Log Analytics workspace configured for private link.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The Azure Region where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The endpoint used for ingesting logs.
+	LogsIngestionEndpoint *string `json:"logsIngestionEndpoint,omitempty" tf:"logs_ingestion_endpoint,omitempty"`
+
+	// The endpoint used for ingesting metrics.
+	MetricsIngestionEndpoint *string `json:"metricsIngestionEndpoint,omitempty" tf:"metrics_ingestion_endpoint,omitempty"`
 
 	// The name of the Resource Group where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -866,7 +872,7 @@ type MonitorDataCollectionRuleObservation struct {
 type MonitorDataCollectionRuleParameters struct {
 
 	// The resource ID of the Data Collection Endpoint that this rule can be used with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorDataCollectionEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta1.MonitorDataCollectionEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
@@ -899,7 +905,7 @@ type MonitorDataCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity *MonitorDataCollectionRuleIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore and WorkspaceTransforms. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
+	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore, WorkspaceTransforms, and Direct. A rule of kind Linux does not allow for windows_event_log data sources, and a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed. A rule of kind Direct must use a data_collection_endpoint_id if you're sending data to a Log Analytics workspace configured for private link.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
@@ -908,7 +914,7 @@ type MonitorDataCollectionRuleParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -1108,7 +1114,7 @@ type StorageBlobDirectParameters struct {
 type StorageBlobInitParameters struct {
 
 	// The Storage Container name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Reference to a Container in storage to populate containerName.
@@ -1123,7 +1129,7 @@ type StorageBlobInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The resource ID of the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -1151,7 +1157,7 @@ type StorageBlobObservation struct {
 type StorageBlobParameters struct {
 
 	// The Storage Container name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
@@ -1168,7 +1174,7 @@ type StorageBlobParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The resource ID of the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

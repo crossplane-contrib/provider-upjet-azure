@@ -110,7 +110,7 @@ type SpringCloudConnectionInitParameters struct {
 	// The authentication info. An authentication block as defined below.
 	Authentication *AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
+	// The application client type. Possible values are dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The name of the service connection. Changing this forces a new resource to be created.
@@ -120,7 +120,7 @@ type SpringCloudConnectionInitParameters struct {
 	SecretStore *SecretStoreInitParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudJavaDeployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/appplatform/v1beta1.SpringCloudJavaDeployment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
 
@@ -133,7 +133,7 @@ type SpringCloudConnectionInitParameters struct {
 	SpringCloudIDSelector *v2.NamespacedSelector `json:"springCloudIdSelector,omitempty" tf:"-"`
 
 	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
@@ -154,7 +154,7 @@ type SpringCloudConnectionObservation struct {
 	// The authentication info. An authentication block as defined below.
 	Authentication *AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
+	// The application client type. Possible values are dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The ID of the service connector.
@@ -182,7 +182,7 @@ type SpringCloudConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Authentication *AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
+	// The application client type. Possible values are dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
 	// +kubebuilder:validation:Optional
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
@@ -195,7 +195,7 @@ type SpringCloudConnectionParameters struct {
 	SecretStore *SecretStoreParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1.SpringCloudJavaDeployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/appplatform/v1beta1.SpringCloudJavaDeployment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
@@ -209,7 +209,7 @@ type SpringCloudConnectionParameters struct {
 	SpringCloudIDSelector *v2.NamespacedSelector `json:"springCloudIdSelector,omitempty" tf:"-"`
 
 	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cosmosdb/v1beta1.SQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

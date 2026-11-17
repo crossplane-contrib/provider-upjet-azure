@@ -82,6 +82,9 @@ type TopicInboundIPRuleParameters struct {
 
 type TopicInitParameters struct {
 
+	// Specifies the data residency boundary. Possible values are WithinGeopair, WithinRegion.
+	DataResidencyBoundary *string `json:"dataResidencyBoundary,omitempty" tf:"data_residency_boundary,omitempty"`
+
 	// An identity block as defined below.
 	Identity *TopicIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -102,6 +105,9 @@ type TopicInitParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The minimum supported TLS version. Possible values are 1.0, 1.1, 1.2. Default is 1.2.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -221,6 +227,9 @@ type TopicInputMappingFieldsParameters struct {
 
 type TopicObservation struct {
 
+	// Specifies the data residency boundary. Possible values are WithinGeopair, WithinRegion.
+	DataResidencyBoundary *string `json:"dataResidencyBoundary,omitempty" tf:"data_residency_boundary,omitempty"`
+
 	// The Endpoint associated with the EventGrid Topic.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
@@ -248,6 +257,9 @@ type TopicObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The minimum supported TLS version. Possible values are 1.0, 1.1, 1.2. Default is 1.2.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -260,6 +272,10 @@ type TopicObservation struct {
 }
 
 type TopicParameters struct {
+
+	// Specifies the data residency boundary. Possible values are WithinGeopair, WithinRegion.
+	// +kubebuilder:validation:Optional
+	DataResidencyBoundary *string `json:"dataResidencyBoundary,omitempty" tf:"data_residency_boundary,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -289,12 +305,16 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The minimum supported TLS version. Possible values are 1.0, 1.1, 1.2. Default is 1.2.
+	// +kubebuilder:validation:Optional
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which the EventGrid Topic exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

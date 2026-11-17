@@ -126,7 +126,7 @@ type BackupPolicyFileShareParameters struct {
 	BackupTier *string `json:"backupTier,omitempty" tf:"backup_tier,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/recoveryservices/v1beta3.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
@@ -139,7 +139,7 @@ type BackupPolicyFileShareParameters struct {
 	RecoveryVaultNameSelector *v2.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the policy. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -178,7 +178,7 @@ type BackupPolicyFileShareParameters struct {
 
 type HourlyInitParameters struct {
 
-	// Specifies the interval at which backup needs to be triggered. Possible values are 4, 6, 8 and 12.
+	// Specifies the interval at which backup needs to be triggered. Possible values are 1, 2, 4, 6, 8 and 12.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// Specifies the start time of the hourly backup. The time format should be in 24-hour format. Times must be either on the hour or half hour (e.g. 12:00, 12:30, 13:00, etc.).
@@ -190,7 +190,7 @@ type HourlyInitParameters struct {
 
 type HourlyObservation struct {
 
-	// Specifies the interval at which backup needs to be triggered. Possible values are 4, 6, 8 and 12.
+	// Specifies the interval at which backup needs to be triggered. Possible values are 1, 2, 4, 6, 8 and 12.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// Specifies the start time of the hourly backup. The time format should be in 24-hour format. Times must be either on the hour or half hour (e.g. 12:00, 12:30, 13:00, etc.).
@@ -202,7 +202,7 @@ type HourlyObservation struct {
 
 type HourlyParameters struct {
 
-	// Specifies the interval at which backup needs to be triggered. Possible values are 4, 6, 8 and 12.
+	// Specifies the interval at which backup needs to be triggered. Possible values are 1, 2, 4, 6, 8 and 12.
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
@@ -346,7 +346,7 @@ type RetentionYearlyInitParameters struct {
 	// Including the last day of the month, default to false.
 	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
 
-	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, Augest, September, October, November and December.
+	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
 	// +listType=set
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
 
@@ -371,7 +371,7 @@ type RetentionYearlyObservation struct {
 	// Including the last day of the month, default to false.
 	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
 
-	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, Augest, September, October, November and December.
+	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
 	// +listType=set
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
 
@@ -399,7 +399,7 @@ type RetentionYearlyParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
 
-	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, Augest, September, October, November and December.
+	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Months []*string `json:"months" tf:"months,omitempty"`

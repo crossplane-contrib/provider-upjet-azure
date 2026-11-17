@@ -18,18 +18,6 @@ type IOTHubDPSCertificateInitParameters struct {
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
 	CertificateContentSecretRef v2.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
-	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubDPS
-	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
-
-	// Reference to a IOTHubDPS in devices to populate iotDpsName.
-	// +kubebuilder:validation:Optional
-	IOTDPSNameRef *v2.NamespacedReference `json:"iotDpsNameRef,omitempty" tf:"-"`
-
-	// Selector for a IOTHubDPS in devices to populate iotDpsName.
-	// +kubebuilder:validation:Optional
-	IOTDPSNameSelector *v2.NamespacedSelector `json:"iotDpsNameSelector,omitempty" tf:"-"`
-
 	// Specifies if the certificate is created in verified state. Defaults to false. Changing this forces a new resource to be created.
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
 }
@@ -56,7 +44,7 @@ type IOTHubDPSCertificateParameters struct {
 	CertificateContentSecretRef v2.LocalSecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHubDPS
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/devices/v1beta1.IOTHubDPS
 	// +kubebuilder:validation:Optional
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
 
@@ -73,7 +61,7 @@ type IOTHubDPSCertificateParameters struct {
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
 
 	// The name of the resource group under which the Iot Device Provisioning Service Certificate resource has to be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

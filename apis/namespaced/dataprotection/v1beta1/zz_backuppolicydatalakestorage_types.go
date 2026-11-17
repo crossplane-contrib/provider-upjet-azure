@@ -56,8 +56,8 @@ type BackupPolicyDataLakeStorageParameters struct {
 	BackupSchedule []*string `json:"backupSchedule,omitempty" tf:"backup_schedule,omitempty"`
 
 	// The ID of the Backup Vault where the Azure Backup Policy Data Lake Storage should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupVault
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/dataprotection/v1beta1.BackupVault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataProtectionBackupVaultID *string `json:"dataProtectionBackupVaultId,omitempty" tf:"data_protection_backup_vault_id,omitempty"`
 

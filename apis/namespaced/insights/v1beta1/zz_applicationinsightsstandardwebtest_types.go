@@ -16,7 +16,7 @@ import (
 type ApplicationInsightsStandardWebTestInitParameters struct {
 
 	// The ID of the Application Insights instance on which the WebTest operates. Changing this forces a new Application Insights Standard WebTest to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
 
@@ -109,7 +109,7 @@ type ApplicationInsightsStandardWebTestObservation struct {
 type ApplicationInsightsStandardWebTestParameters struct {
 
 	// The ID of the Application Insights instance on which the WebTest operates. Changing this forces a new Application Insights Standard WebTest to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
@@ -147,7 +147,7 @@ type ApplicationInsightsStandardWebTestParameters struct {
 	Request *RequestParameters `json:"request,omitempty" tf:"request,omitempty"`
 
 	// The name of the Resource Group where the Application Insights Standard WebTest should exist. Changing this forces a new Application Insights Standard WebTest to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -259,7 +259,7 @@ type RequestInitParameters struct {
 	// One or more header blocks as defined above.
 	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Should the parsing of dependend requests be enabled? Defaults to true.
+	// Should the parsing of dependent requests be enabled? Defaults to true.
 	ParseDependentRequestsEnabled *bool `json:"parseDependentRequestsEnabled,omitempty" tf:"parse_dependent_requests_enabled,omitempty"`
 
 	// The WebTest request URL.
@@ -280,7 +280,7 @@ type RequestObservation struct {
 	// One or more header blocks as defined above.
 	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Should the parsing of dependend requests be enabled? Defaults to true.
+	// Should the parsing of dependent requests be enabled? Defaults to true.
 	ParseDependentRequestsEnabled *bool `json:"parseDependentRequestsEnabled,omitempty" tf:"parse_dependent_requests_enabled,omitempty"`
 
 	// The WebTest request URL.
@@ -305,7 +305,7 @@ type RequestParameters struct {
 	// +kubebuilder:validation:Optional
 	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// Should the parsing of dependend requests be enabled? Defaults to true.
+	// Should the parsing of dependent requests be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	ParseDependentRequestsEnabled *bool `json:"parseDependentRequestsEnabled,omitempty" tf:"parse_dependent_requests_enabled,omitempty"`
 
@@ -322,6 +322,9 @@ type ValidationRulesInitParameters struct {
 	// The expected status code of the response. Default is '200', '0' means 'response code < 400'
 	ExpectedStatusCode *float64 `json:"expectedStatusCode,omitempty" tf:"expected_status_code,omitempty"`
 
+	// Should status code of the response be ignored? Defaults to false.
+	IgnoreStatusCode *bool `json:"ignoreStatusCode,omitempty" tf:"ignore_status_code,omitempty"`
+
 	// The number of days of SSL certificate validity remaining for the checked endpoint. If the certificate has a shorter remaining lifetime left, the test will fail. This number should be between 1 and 365.
 	SSLCertRemainingLifetime *float64 `json:"sslCertRemainingLifetime,omitempty" tf:"ssl_cert_remaining_lifetime,omitempty"`
 
@@ -336,6 +339,9 @@ type ValidationRulesObservation struct {
 
 	// The expected status code of the response. Default is '200', '0' means 'response code < 400'
 	ExpectedStatusCode *float64 `json:"expectedStatusCode,omitempty" tf:"expected_status_code,omitempty"`
+
+	// Should status code of the response be ignored? Defaults to false.
+	IgnoreStatusCode *bool `json:"ignoreStatusCode,omitempty" tf:"ignore_status_code,omitempty"`
 
 	// The number of days of SSL certificate validity remaining for the checked endpoint. If the certificate has a shorter remaining lifetime left, the test will fail. This number should be between 1 and 365.
 	SSLCertRemainingLifetime *float64 `json:"sslCertRemainingLifetime,omitempty" tf:"ssl_cert_remaining_lifetime,omitempty"`
@@ -353,6 +359,10 @@ type ValidationRulesParameters struct {
 	// The expected status code of the response. Default is '200', '0' means 'response code < 400'
 	// +kubebuilder:validation:Optional
 	ExpectedStatusCode *float64 `json:"expectedStatusCode,omitempty" tf:"expected_status_code,omitempty"`
+
+	// Should status code of the response be ignored? Defaults to false.
+	// +kubebuilder:validation:Optional
+	IgnoreStatusCode *bool `json:"ignoreStatusCode,omitempty" tf:"ignore_status_code,omitempty"`
 
 	// The number of days of SSL certificate validity remaining for the checked endpoint. If the certificate has a shorter remaining lifetime left, the test will fail. This number should be between 1 and 365.
 	// +kubebuilder:validation:Optional

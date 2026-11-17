@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	authorizationrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/authorizationrule"
-	cluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/cluster"
-	consumergroup "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/consumergroup"
-	eventhub "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/eventhub"
-	eventhubnamespace "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/eventhubnamespace"
-	namespaceauthorizationrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/namespaceauthorizationrule"
-	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/namespacedisasterrecoveryconfig"
-	namespaceschemagroup "github.com/upbound/provider-azure/v2/internal/controller/cluster/eventhub/namespaceschemagroup"
+	authorizationrule "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/authorizationrule"
+	cluster "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/cluster"
+	consumergroup "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/consumergroup"
+	eventhub "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/eventhub"
+	eventhubnamespace "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/eventhubnamespace"
+	namespaceauthorizationrule "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/namespaceauthorizationrule"
+	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/namespacedisasterrecoveryconfig"
+	namespaceschemagroup "github.com/upbound/provider-azure/v3/internal/controller/cluster/eventhub/namespaceschemagroup"
 )
 
 // Setup_eventhub creates all controllers with the supplied logger and adds them to

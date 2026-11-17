@@ -165,7 +165,7 @@ spec:
                       allowed. Changing this forces a new resource to be created.
                     type: string
                   releaseCriteria:
-                    description: A release_criteria block as documented below, which
+                    description: A release_criteria block as defined below, which
                       is used to select the criteria to meet before processing each
                       batch.
                     properties:
@@ -178,7 +178,7 @@ spec:
                           Batch Configuration.
                         type: number
                       recurrence:
-                        description: A recurrence block as documented below.
+                        description: A recurrence block as defined below.
                         properties:
                           endTime:
                             description: The end time of the schedule, formatted as
@@ -193,7 +193,7 @@ spec:
                             description: The number of frequencys between runs.
                             type: number
                           schedule:
-                            description: A schedule block as documented below.
+                            description: A schedule block as defined below.
                             properties:
                               hours:
                                 description: A list containing a single item, which
@@ -219,7 +219,7 @@ spec:
                                 type: array
                                 x-kubernetes-list-type: set
                               monthly:
-                                description: A monthly block as documented below.
+                                description: A monthly block as defined below.
                                 items:
                                   properties:
                                     week:
@@ -456,7 +456,7 @@ spec:
                       allowed. Changing this forces a new resource to be created.
                     type: string
                   releaseCriteria:
-                    description: A release_criteria block as documented below, which
+                    description: A release_criteria block as defined below, which
                       is used to select the criteria to meet before processing each
                       batch.
                     properties:
@@ -469,7 +469,7 @@ spec:
                           Batch Configuration.
                         type: number
                       recurrence:
-                        description: A recurrence block as documented below.
+                        description: A recurrence block as defined below.
                         properties:
                           endTime:
                             description: The end time of the schedule, formatted as
@@ -484,7 +484,7 @@ spec:
                             description: The number of frequencys between runs.
                             type: number
                           schedule:
-                            description: A schedule block as documented below.
+                            description: A schedule block as defined below.
                             properties:
                               hours:
                                 description: A list containing a single item, which
@@ -510,7 +510,7 @@ spec:
                                 type: array
                                 x-kubernetes-list-type: set
                               monthly:
-                                description: A monthly block as documented below.
+                                description: A monthly block as defined below.
                                 items:
                                   properties:
                                     week:
@@ -733,7 +733,7 @@ spec:
                       allowed. Changing this forces a new resource to be created.
                     type: string
                   releaseCriteria:
-                    description: A release_criteria block as documented below, which
+                    description: A release_criteria block as defined below, which
                       is used to select the criteria to meet before processing each
                       batch.
                     properties:
@@ -746,7 +746,7 @@ spec:
                           Batch Configuration.
                         type: number
                       recurrence:
-                        description: A recurrence block as documented below.
+                        description: A recurrence block as defined below.
                         properties:
                           endTime:
                             description: The end time of the schedule, formatted as
@@ -761,7 +761,7 @@ spec:
                             description: The number of frequencys between runs.
                             type: number
                           schedule:
-                            description: A schedule block as documented below.
+                            description: A schedule block as defined below.
                             properties:
                               hours:
                                 description: A list containing a single item, which
@@ -787,7 +787,7 @@ spec:
                                 type: array
                                 x-kubernetes-list-type: set
                               monthly:
-                                description: A monthly block as documented below.
+                                description: A monthly block as defined below.
                                 items:
                                   properties:
                                     week:

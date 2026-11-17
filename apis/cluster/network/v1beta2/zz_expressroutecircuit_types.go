@@ -42,7 +42,7 @@ type ExpressRouteCircuitInitParameters struct {
 	// The name of the ExpressRoute Service Provider. Changing this forces a new resource to be created.
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
-	// A sku block for the ExpressRoute circuit as documented below.
+	// A sku block for the ExpressRoute circuit as defined below.
 	Sku *ExpressRouteCircuitSkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -85,7 +85,7 @@ type ExpressRouteCircuitObservation struct {
 	// The ExpressRoute circuit provisioning state from your chosen service provider. Possible values are NotProvisioned, Provisioning, Provisioned, and Deprovisioning.
 	ServiceProviderProvisioningState *string `json:"serviceProviderProvisioningState,omitempty" tf:"service_provider_provisioning_state,omitempty"`
 
-	// A sku block for the ExpressRoute circuit as documented below.
+	// A sku block for the ExpressRoute circuit as defined below.
 	Sku *ExpressRouteCircuitSkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -128,7 +128,7 @@ type ExpressRouteCircuitParameters struct {
 	RateLimitingEnabled *bool `json:"rateLimitingEnabled,omitempty" tf:"rate_limiting_enabled,omitempty"`
 
 	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -144,7 +144,7 @@ type ExpressRouteCircuitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
-	// A sku block for the ExpressRoute circuit as documented below.
+	// A sku block for the ExpressRoute circuit as defined below.
 	// +kubebuilder:validation:Optional
 	Sku *ExpressRouteCircuitSkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 

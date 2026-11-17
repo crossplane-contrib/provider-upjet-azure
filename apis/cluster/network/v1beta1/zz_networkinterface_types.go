@@ -34,8 +34,8 @@ type NetworkInterfaceIPConfigurationInitParameters struct {
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
 	// Reference to a Public IP Address to associate with this NIC
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
@@ -47,7 +47,7 @@ type NetworkInterfaceIPConfigurationInitParameters struct {
 	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet where this Network Interface should be located in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -114,8 +114,8 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
 	// Reference to a Public IP Address to associate with this NIC
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
@@ -128,7 +128,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet where this Network Interface should be located in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -144,13 +144,13 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 type NetworkInterfaceInitParameters struct {
 
-	// Should Accelerated Networking be enabled? Defaults to false.
+	// Whether accelerated networking is enabled. Defaults to false.
 	AcceleratedNetworkingEnabled *bool `json:"acceleratedNetworkingEnabled,omitempty" tf:"accelerated_networking_enabled,omitempty"`
 
-	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, and MaxConnections.
 	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
 
-	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A8, A4, A1, A2 and None.
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4, and A8.
 	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
 
 	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
@@ -162,7 +162,7 @@ type NetworkInterfaceInitParameters struct {
 	// One or more ip_configuration blocks as defined below.
 	IPConfiguration []NetworkInterfaceIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
-	// Should IP Forwarding be enabled? Defaults to false.
+	// Whether IP Forwarding is enabled. Defaults to false.
 	IPForwardingEnabled *bool `json:"ipForwardingEnabled,omitempty" tf:"ip_forwarding_enabled,omitempty"`
 
 	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
@@ -178,16 +178,16 @@ type NetworkInterfaceInitParameters struct {
 
 type NetworkInterfaceObservation struct {
 
-	// Should Accelerated Networking be enabled? Defaults to false.
+	// Whether accelerated networking is enabled. Defaults to false.
 	AcceleratedNetworkingEnabled *bool `json:"acceleratedNetworkingEnabled,omitempty" tf:"accelerated_networking_enabled,omitempty"`
 
 	// If the Virtual Machine using this Network Interface is part of an Availability Set, then this list will have the union of all DNS servers from all Network Interfaces that are part of the Availability Set.
 	AppliedDNSServers []*string `json:"appliedDnsServers,omitempty" tf:"applied_dns_servers,omitempty"`
 
-	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, and MaxConnections.
 	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
 
-	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A8, A4, A1, A2 and None.
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4, and A8.
 	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
 
 	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
@@ -202,7 +202,7 @@ type NetworkInterfaceObservation struct {
 	// One or more ip_configuration blocks as defined below.
 	IPConfiguration []NetworkInterfaceIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
-	// Should IP Forwarding be enabled? Defaults to false.
+	// Whether IP Forwarding is enabled. Defaults to false.
 	IPForwardingEnabled *bool `json:"ipForwardingEnabled,omitempty" tf:"ip_forwarding_enabled,omitempty"`
 
 	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
@@ -236,15 +236,15 @@ type NetworkInterfaceObservation struct {
 
 type NetworkInterfaceParameters struct {
 
-	// Should Accelerated Networking be enabled? Defaults to false.
+	// Whether accelerated networking is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AcceleratedNetworkingEnabled *bool `json:"acceleratedNetworkingEnabled,omitempty" tf:"accelerated_networking_enabled,omitempty"`
 
-	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, and MaxConnections.
 	// +kubebuilder:validation:Optional
 	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
 
-	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A8, A4, A1, A2 and None.
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4, and A8.
 	// +kubebuilder:validation:Optional
 	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
 
@@ -260,7 +260,7 @@ type NetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Optional
 	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
-	// Should IP Forwarding be enabled? Defaults to false.
+	// Whether IP Forwarding is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	IPForwardingEnabled *bool `json:"ipForwardingEnabled,omitempty" tf:"ip_forwarding_enabled,omitempty"`
 
@@ -273,7 +273,7 @@ type NetworkInterfaceParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which to create the Network Interface. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -12,7 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	apisresolver "github.com/upbound/provider-azure/v2/internal/apis"
+	apisresolver "github.com/upbound/provider-azure/v3/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -25,7 +25,7 @@ func (mg *BotChannelAlexa) ResolveReferences( // ResolveReferences of this BotCh
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta1", "BotChannelsRegistration", "BotChannelsRegistrationList")
+		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta2", "BotChannelsRegistration", "BotChannelsRegistrationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -77,7 +77,7 @@ func (mg *BotChannelDirectLine) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta1", "BotChannelsRegistration", "BotChannelsRegistrationList")
+		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta2", "BotChannelsRegistration", "BotChannelsRegistrationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -129,7 +129,7 @@ func (mg *BotChannelLine) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta1", "BotChannelsRegistration", "BotChannelsRegistrationList")
+		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta2", "BotChannelsRegistration", "BotChannelsRegistrationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -233,7 +233,7 @@ func (mg *BotChannelSMS) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta1", "BotChannelsRegistration", "BotChannelsRegistrationList")
+		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta2", "BotChannelsRegistration", "BotChannelsRegistrationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -285,7 +285,7 @@ func (mg *BotChannelSlack) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta1", "BotChannelsRegistration", "BotChannelsRegistrationList")
+		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta2", "BotChannelsRegistration", "BotChannelsRegistrationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -337,7 +337,7 @@ func (mg *BotChannelWebChat) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta1", "BotChannelsRegistration", "BotChannelsRegistrationList")
+		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta2", "BotChannelsRegistration", "BotChannelsRegistrationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -441,7 +441,7 @@ func (mg *BotConnection) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta1", "BotChannelsRegistration", "BotChannelsRegistrationList")
+		m, l, err = apisresolver.GetManagedResource("botservice.azure.upbound.io", "v1beta2", "BotChannelsRegistration", "BotChannelsRegistrationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

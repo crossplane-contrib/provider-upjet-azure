@@ -57,7 +57,7 @@ type VPNServerConfigurationPolicyGroupInitParameters struct {
 	// Is this a default VPN Server Configuration Policy Group? Defaults to false. Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// One or more policy blocks as documented below.
+	// One or more policy blocks as defined below.
 	Policy []PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The priority of this VPN Server Configuration Policy Group. Defaults to 0.
@@ -72,7 +72,7 @@ type VPNServerConfigurationPolicyGroupObservation struct {
 	// Is this a default VPN Server Configuration Policy Group? Defaults to false. Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// One or more policy blocks as documented below.
+	// One or more policy blocks as defined below.
 	Policy []PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The priority of this VPN Server Configuration Policy Group. Defaults to 0.
@@ -88,7 +88,7 @@ type VPNServerConfigurationPolicyGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// One or more policy blocks as documented below.
+	// One or more policy blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -97,7 +97,7 @@ type VPNServerConfigurationPolicyGroupParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID of the VPN Server Configuration that the VPN Server Configuration Policy Group belongs to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VPNServerConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.VPNServerConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationID *string `json:"vpnServerConfigurationId,omitempty" tf:"vpn_server_configuration_id,omitempty"`

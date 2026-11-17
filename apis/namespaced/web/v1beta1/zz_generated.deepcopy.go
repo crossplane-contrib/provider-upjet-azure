@@ -11460,6 +11460,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -11753,6 +11758,11 @@ func (in *LinuxFunctionAppObservation) DeepCopyInto(out *LinuxFunctionAppObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -12008,6 +12018,11 @@ func (in *LinuxFunctionAppParameters) DeepCopyInto(out *LinuxFunctionAppParamete
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -16132,6 +16147,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -16380,6 +16400,11 @@ func (in *LinuxFunctionAppSlotObservation) DeepCopyInto(out *LinuxFunctionAppSlo
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -16615,6 +16640,11 @@ func (in *LinuxFunctionAppSlotParameters) DeepCopyInto(out *LinuxFunctionAppSlot
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -39857,6 +39887,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -40130,6 +40165,11 @@ func (in *WindowsFunctionAppObservation) DeepCopyInto(out *WindowsFunctionAppObs
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -40380,6 +40420,11 @@ func (in *WindowsFunctionAppParameters) DeepCopyInto(out *WindowsFunctionAppPara
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -45621,6 +45666,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -45869,6 +45919,11 @@ func (in *WindowsFunctionAppSlotObservation) DeepCopyInto(out *WindowsFunctionAp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -46104,6 +46159,11 @@ func (in *WindowsFunctionAppSlotParameters) DeepCopyInto(out *WindowsFunctionApp
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -51750,6 +51810,11 @@ func (in *WindowsWebAppInitParameters) DeepCopyInto(out *WindowsWebAppInitParame
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -52300,6 +52365,11 @@ func (in *WindowsWebAppObservation) DeepCopyInto(out *WindowsWebAppObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -52525,6 +52595,11 @@ func (in *WindowsWebAppParameters) DeepCopyInto(out *WindowsWebAppParameters) {
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -57868,6 +57943,11 @@ func (in *WindowsWebAppSlotInitParameters) DeepCopyInto(out *WindowsWebAppSlotIn
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -58568,6 +58648,11 @@ func (in *WindowsWebAppSlotObservation) DeepCopyInto(out *WindowsWebAppSlotObser
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FtpPublishBasicAuthenticationEnabled != nil {
 		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
 		*out = new(bool)
@@ -58793,6 +58878,11 @@ func (in *WindowsWebAppSlotParameters) DeepCopyInto(out *WindowsWebAppSlotParame
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EndToEndTLSEncryptionEnabled != nil {
+		in, out := &in.EndToEndTLSEncryptionEnabled, &out.EndToEndTLSEncryptionEnabled
 		*out = new(bool)
 		**out = **in
 	}

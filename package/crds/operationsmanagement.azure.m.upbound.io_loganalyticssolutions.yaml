@@ -64,7 +64,7 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   plan:
-                    description: A plan block as documented below.
+                    description: A plan block as defined below.
                     properties:
                       product:
                         description: The product name of the solution. For example
@@ -372,7 +372,7 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   plan:
-                    description: A plan block as documented below.
+                    description: A plan block as defined below.
                     properties:
                       product:
                         description: The product name of the solution. For example
@@ -747,7 +747,7 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   plan:
-                    description: A plan block as documented below.
+                    description: A plan block as defined below.
                     properties:
                       name:
                         type: string

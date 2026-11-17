@@ -86,7 +86,7 @@ spec:
                       set changing this forces a new resource to be created.
                     type: string
                   customerManagedKey:
-                    description: A customer_managed_key block as documented below.
+                    description: A customer_managed_key block as defined below.
                     properties:
                       identityClientId:
                         description: The Client ID of the User Assigned Identity that
@@ -802,7 +802,7 @@ spec:
                       set changing this forces a new resource to be created.
                     type: string
                   customerManagedKey:
-                    description: A customer_managed_key block as documented below.
+                    description: A customer_managed_key block as defined below.
                     properties:
                       identityClientId:
                         description: The Client ID of the User Assigned Identity that
@@ -1481,7 +1481,7 @@ spec:
                       set changing this forces a new resource to be created.
                     type: string
                   customerManagedKey:
-                    description: A customer_managed_key block as documented below.
+                    description: A customer_managed_key block as defined below.
                     properties:
                       identityClientId:
                         description: The Client ID of the User Assigned Identity that

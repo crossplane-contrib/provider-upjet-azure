@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	account "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/account"
-	accountconnectionaccountkey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionaccountkey"
-	accountconnectionaccountmanagedidentity "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionaccountmanagedidentity"
-	accountconnectionapikey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionapikey"
-	accountconnectioncustomkeys "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectioncustomkeys"
-	accountconnectionentraid "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountconnectionentraid"
-	accountcustomermanagedkey "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountcustomermanagedkey"
-	accountproject "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountproject"
-	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountraiblocklist"
-	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/accountraipolicy"
-	deployment "github.com/upbound/provider-azure/v2/internal/controller/cluster/cognitiveservices/deployment"
+	account "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/account"
+	accountconnectionaccountkey "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountconnectionaccountkey"
+	accountconnectionaccountmanagedidentity "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountconnectionaccountmanagedidentity"
+	accountconnectionapikey "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountconnectionapikey"
+	accountconnectioncustomkeys "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountconnectioncustomkeys"
+	accountconnectionentraid "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountconnectionentraid"
+	accountcustomermanagedkey "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountcustomermanagedkey"
+	accountproject "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountproject"
+	accountraiblocklist "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountraiblocklist"
+	accountraipolicy "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/accountraipolicy"
+	deployment "github.com/upbound/provider-azure/v3/internal/controller/cluster/cognitiveservices/deployment"
 )
 
 // Setup_cognitiveservices creates all controllers with the supplied logger and adds them to

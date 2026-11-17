@@ -125,5 +125,5 @@ func (tr *SubscriptionTemplateDeployment) LateInitialize(attrs []byte) (bool, er
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SubscriptionTemplateDeployment) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

@@ -25,7 +25,7 @@ spec:
 
 ---
 
-apiVersion: botservice.azure.upbound.io/v1beta1
+apiVersion: botservice.azure.upbound.io/v1beta2
 kind: BotChannelsRegistration
 metadata:
   annotations:

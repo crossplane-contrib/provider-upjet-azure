@@ -13,12 +13,6 @@ func (tr *LinuxFunctionApp) Hub() {}
 func (tr *LinuxFunctionAppSlot) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinuxWebApp) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinuxWebAppSlot) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *WindowsFunctionApp) Hub() {}
 
 // Hub marks this type as a conversion hub.

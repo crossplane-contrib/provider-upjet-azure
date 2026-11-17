@@ -18,7 +18,7 @@ type PartnerAuthorizationInitParameters struct {
 	// Expiration time of the partner authorization. Value should be in RFC 3339 format in UTC time zone, for example: "2025-02-04T00:00:00Z".
 	AuthorizationExpirationTimeInUtc *string `json:"authorizationExpirationTimeInUtc,omitempty" tf:"authorization_expiration_time_in_utc,omitempty"`
 
-	// The partner name.
+	// The name of a verified partner.
 	PartnerName *string `json:"partnerName,omitempty" tf:"partner_name,omitempty"`
 
 	// The immutable id of the corresponding partner registration.
@@ -30,7 +30,7 @@ type PartnerAuthorizationObservation struct {
 	// Expiration time of the partner authorization. Value should be in RFC 3339 format in UTC time zone, for example: "2025-02-04T00:00:00Z".
 	AuthorizationExpirationTimeInUtc *string `json:"authorizationExpirationTimeInUtc,omitempty" tf:"authorization_expiration_time_in_utc,omitempty"`
 
-	// The partner name.
+	// The name of a verified partner.
 	PartnerName *string `json:"partnerName,omitempty" tf:"partner_name,omitempty"`
 
 	// The immutable id of the corresponding partner registration.
@@ -43,13 +43,13 @@ type PartnerAuthorizationParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizationExpirationTimeInUtc *string `json:"authorizationExpirationTimeInUtc,omitempty" tf:"authorization_expiration_time_in_utc,omitempty"`
 
-	// The partner name.
+	// The name of a verified partner.
 	// +kubebuilder:validation:Optional
-	PartnerName *string `json:"partnerName" tf:"partner_name,omitempty"`
+	PartnerName *string `json:"partnerName,omitempty" tf:"partner_name,omitempty"`
 
 	// The immutable id of the corresponding partner registration.
 	// +kubebuilder:validation:Optional
-	PartnerRegistrationID *string `json:"partnerRegistrationId" tf:"partner_registration_id,omitempty"`
+	PartnerRegistrationID *string `json:"partnerRegistrationId,omitempty" tf:"partner_registration_id,omitempty"`
 }
 
 type PartnerConfigurationInitParameters struct {
@@ -95,7 +95,7 @@ type PartnerConfigurationParameters struct {
 	PartnerAuthorization []PartnerAuthorizationParameters `json:"partnerAuthorization,omitempty" tf:"partner_authorization,omitempty"`
 
 	// The name of the Resource Group where the Event Grid Partner Configuration should exist. Changing this forces a new Event Grid Partner Configuration to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

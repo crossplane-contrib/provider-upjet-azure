@@ -7,9 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *MSSQLDatabaseExtendedAuditingPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -25,9 +22,6 @@ func (tr *MSSQLJobCredential) Hub() {}
 func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MSSQLManagedInstanceTransparentDataEncryption) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MSSQLOutboundFirewallRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -35,12 +29,6 @@ func (tr *MSSQLServerDNSAlias) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MSSQLServerMicrosoftSupportAuditingPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLServerSecurityAlertPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLServerTransparentDataEncryption) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MSSQLVirtualNetworkRule) Hub() {}

@@ -25,8 +25,8 @@ type TableEntityInitParameters struct {
 	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// The Storage Share ID in which this file will be placed into.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Table
+	// The ID of the storage table in which this entity will be placed. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
 
@@ -54,7 +54,7 @@ type TableEntityObservation struct {
 	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// The Storage Share ID in which this file will be placed into.
+	// The ID of the storage table in which this entity will be placed. Changing this forces a new resource to be created.
 	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
 }
 
@@ -73,8 +73,8 @@ type TableEntityParameters struct {
 	// +kubebuilder:validation:Optional
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// The Storage Share ID in which this file will be placed into.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Table
+	// The ID of the storage table in which this entity will be placed. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`

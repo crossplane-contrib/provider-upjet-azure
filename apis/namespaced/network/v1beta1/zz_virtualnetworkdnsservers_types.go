@@ -17,19 +17,6 @@ type VirtualNetworkDNSServersInitParameters struct {
 
 	// List of IP addresses of DNS servers
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
-
-	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
-
-	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v2.NamespacedReference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
-
-	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v2.NamespacedSelector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkDNSServersObservation struct {
@@ -51,8 +38,8 @@ type VirtualNetworkDNSServersParameters struct {
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 

@@ -64,6 +64,9 @@ type AutonomousDatabaseInitParameters struct {
 	// A long_term_backup_schedule block as defined below.
 	LongTermBackupSchedule *LongTermBackupScheduleInitParameters `json:"longTermBackupSchedule,omitempty" tf:"long_term_backup_schedule,omitempty"`
 
+	// The maintenance patch level for the Autonomous Database. Defaults to Regular. Possible values are Early and Regular.
+	MaintenancePatchLevel *string `json:"maintenancePatchLevel,omitempty" tf:"maintenance_patch_level,omitempty"`
+
 	// Specifies if the Autonomous Database requires mTLS connections. Changing this forces a new Autonomous Database to be created. Default value false.
 	MtlsConnectionRequired *bool `json:"mtlsConnectionRequired,omitempty" tf:"mtls_connection_required,omitempty"`
 
@@ -71,8 +74,8 @@ type AutonomousDatabaseInitParameters struct {
 	NationalCharacterSet *string `json:"nationalCharacterSet,omitempty" tf:"national_character_set,omitempty"`
 
 	// The OCID of the subnet the resource is associated with. Changing this forces a new Autonomous Database to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -142,11 +145,17 @@ type AutonomousDatabaseObservation struct {
 	// A long_term_backup_schedule block as defined below.
 	LongTermBackupSchedule *LongTermBackupScheduleObservation `json:"longTermBackupSchedule,omitempty" tf:"long_term_backup_schedule,omitempty"`
 
+	// The maintenance patch level for the Autonomous Database. Defaults to Regular. Possible values are Early and Regular.
+	MaintenancePatchLevel *string `json:"maintenancePatchLevel,omitempty" tf:"maintenance_patch_level,omitempty"`
+
 	// Specifies if the Autonomous Database requires mTLS connections. Changing this forces a new Autonomous Database to be created. Default value false.
 	MtlsConnectionRequired *bool `json:"mtlsConnectionRequired,omitempty" tf:"mtls_connection_required,omitempty"`
 
 	// The national character set for the autonomous database. Changing this forces a new Autonomous Database to be created. The default is AL16UTF16. Allowed values are: AL16UTF16 or UTF8.
 	NationalCharacterSet *string `json:"nationalCharacterSet,omitempty" tf:"national_character_set,omitempty"`
+
+	// The OCID of the Autonomous Database.
+	Ocid *string `json:"ocid,omitempty" tf:"ocid,omitempty"`
 
 	// The name of the Resource Group where the Autonomous Database should exist. Changing this forces a new Autonomous Database to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -229,6 +238,10 @@ type AutonomousDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	LongTermBackupSchedule *LongTermBackupScheduleParameters `json:"longTermBackupSchedule,omitempty" tf:"long_term_backup_schedule,omitempty"`
 
+	// The maintenance patch level for the Autonomous Database. Defaults to Regular. Possible values are Early and Regular.
+	// +kubebuilder:validation:Optional
+	MaintenancePatchLevel *string `json:"maintenancePatchLevel,omitempty" tf:"maintenance_patch_level,omitempty"`
+
 	// Specifies if the Autonomous Database requires mTLS connections. Changing this forces a new Autonomous Database to be created. Default value false.
 	// +kubebuilder:validation:Optional
 	MtlsConnectionRequired *bool `json:"mtlsConnectionRequired,omitempty" tf:"mtls_connection_required,omitempty"`
@@ -238,7 +251,7 @@ type AutonomousDatabaseParameters struct {
 	NationalCharacterSet *string `json:"nationalCharacterSet,omitempty" tf:"national_character_set,omitempty"`
 
 	// The name of the Resource Group where the Autonomous Database should exist. Changing this forces a new Autonomous Database to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -251,8 +264,8 @@ type AutonomousDatabaseParameters struct {
 	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The OCID of the subnet the resource is associated with. Changing this forces a new Autonomous Database to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

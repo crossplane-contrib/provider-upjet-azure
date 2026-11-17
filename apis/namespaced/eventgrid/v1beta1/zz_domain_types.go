@@ -21,6 +21,9 @@ type DomainInitParameters struct {
 	// Whether to delete the domain topic when the last event subscription at the scope of the domain topic is deleted. Defaults to true.
 	AutoDeleteTopicWithLastSubscription *bool `json:"autoDeleteTopicWithLastSubscription,omitempty" tf:"auto_delete_topic_with_last_subscription,omitempty"`
 
+	// Specifies the data residency boundary. Possible values are WithinGeopair, WithinRegion.
+	DataResidencyBoundary *string `json:"dataResidencyBoundary,omitempty" tf:"data_residency_boundary,omitempty"`
+
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -42,6 +45,9 @@ type DomainInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The minimum TLS version that clients can use. Possible values are 1.0, 1.1, 1.2. Default is 1.2.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -57,6 +63,9 @@ type DomainObservation struct {
 
 	// Whether to delete the domain topic when the last event subscription at the scope of the domain topic is deleted. Defaults to true.
 	AutoDeleteTopicWithLastSubscription *bool `json:"autoDeleteTopicWithLastSubscription,omitempty" tf:"auto_delete_topic_with_last_subscription,omitempty"`
+
+	// Specifies the data residency boundary. Possible values are WithinGeopair, WithinRegion.
+	DataResidencyBoundary *string `json:"dataResidencyBoundary,omitempty" tf:"data_residency_boundary,omitempty"`
 
 	// The Endpoint associated with the EventGrid Domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
@@ -85,6 +94,9 @@ type DomainObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The minimum TLS version that clients can use. Possible values are 1.0, 1.1, 1.2. Default is 1.2.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -105,6 +117,10 @@ type DomainParameters struct {
 	// Whether to delete the domain topic when the last event subscription at the scope of the domain topic is deleted. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoDeleteTopicWithLastSubscription *bool `json:"autoDeleteTopicWithLastSubscription,omitempty" tf:"auto_delete_topic_with_last_subscription,omitempty"`
+
+	// Specifies the data residency boundary. Possible values are WithinGeopair, WithinRegion.
+	// +kubebuilder:validation:Optional
+	DataResidencyBoundary *string `json:"dataResidencyBoundary,omitempty" tf:"data_residency_boundary,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -134,12 +150,16 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The minimum TLS version that clients can use. Possible values are 1.0, 1.1, 1.2. Default is 1.2.
+	// +kubebuilder:validation:Optional
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which the EventGrid Domain exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

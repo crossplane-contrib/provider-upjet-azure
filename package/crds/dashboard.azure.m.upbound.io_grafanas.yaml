@@ -166,7 +166,7 @@ spec:
                     type: boolean
                   grafanaMajorVersion:
                     description: Which major version of Grafana to deploy. Possible
-                      values are 11, 12.
+                      values are 12, 13.
                     type: string
                   identity:
                     description: An identity block as defined below. Changing this
@@ -551,7 +551,7 @@ spec:
                     type: boolean
                   grafanaMajorVersion:
                     description: Which major version of Grafana to deploy. Possible
-                      values are 11, 12.
+                      values are 12, 13.
                     type: string
                   identity:
                     description: An identity block as defined below. Changing this
@@ -831,7 +831,7 @@ spec:
                     type: string
                   grafanaMajorVersion:
                     description: Which major version of Grafana to deploy. Possible
-                      values are 11, 12.
+                      values are 12, 13.
                     type: string
                   grafanaVersion:
                     description: The full Grafana software semantic version deployed.

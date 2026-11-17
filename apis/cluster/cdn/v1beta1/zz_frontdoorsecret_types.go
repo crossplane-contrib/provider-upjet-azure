@@ -16,7 +16,7 @@ import (
 type CustomerCertificateInitParameters struct {
 
 	// The ID of the Key Vault certificate resource to use. Changing this forces a new Front Door Secret to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
@@ -31,17 +31,20 @@ type CustomerCertificateInitParameters struct {
 
 type CustomerCertificateObservation struct {
 
+	// The key vault certificate expiration date.
+	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
+
 	// The ID of the Key Vault certificate resource to use. Changing this forces a new Front Door Secret to be created.
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
-	// (Computed) One or more subject alternative names contained within the key vault certificate.
+	// One or more subject alternative names contained within the key vault certificate.
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }
 
 type CustomerCertificateParameters struct {
 
 	// The ID of the Key Vault certificate resource to use. Changing this forces a new Front Door Secret to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
@@ -79,7 +82,7 @@ type FrontdoorSecretObservation struct {
 type FrontdoorSecretParameters struct {
 
 	// The Resource ID of the Front Door Profile. Changing this forces a new Front Door Secret to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cdn/v1beta1.FrontdoorProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/cdn/v1beta1.FrontdoorProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`

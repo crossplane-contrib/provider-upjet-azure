@@ -443,6 +443,11 @@ func (in *DatabaseMigrationServiceObservation) DeepCopyInto(out *DatabaseMigrati
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkInterfaceID != nil {
+		in, out := &in.NetworkInterfaceID, &out.NetworkInterfaceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)

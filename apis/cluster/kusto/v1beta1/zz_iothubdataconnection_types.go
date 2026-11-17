@@ -16,7 +16,7 @@ import (
 type IOTHubDataConnectionInitParameters struct {
 
 	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/kusto/v1beta3.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in kusto to populate clusterName.
@@ -28,7 +28,7 @@ type IOTHubDataConnectionInitParameters struct {
 	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the IotHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta1.IOTHubConsumerGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta1.IOTHubConsumerGroup
 	ConsumerGroup *string `json:"consumerGroup,omitempty" tf:"consumer_group,omitempty"`
 
 	// Reference to a IOTHubConsumerGroup in devices to populate consumerGroup.
@@ -43,7 +43,7 @@ type IOTHubDataConnectionInitParameters struct {
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// Specifies the name of the Kusto Database this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/kusto/v1beta1.Database
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Reference to a Database in kusto to populate databaseName.
@@ -62,7 +62,7 @@ type IOTHubDataConnectionInitParameters struct {
 	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
 
 	// Specifies the resource id of the IotHub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
@@ -84,7 +84,7 @@ type IOTHubDataConnectionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -99,7 +99,7 @@ type IOTHubDataConnectionInitParameters struct {
 	RetrievalStartDate *string `json:"retrievalStartDate,omitempty" tf:"retrieval_start_date,omitempty"`
 
 	// Specifies the IotHub Shared Access Policy this data connection will use for ingestion, which must have read permission. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta1.IOTHubSharedAccessPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta1.IOTHubSharedAccessPolicy
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// Reference to a IOTHubSharedAccessPolicy in devices to populate sharedAccessPolicyName.
@@ -166,7 +166,7 @@ type IOTHubDataConnectionObservation struct {
 type IOTHubDataConnectionParameters struct {
 
 	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/kusto/v1beta3.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -179,7 +179,7 @@ type IOTHubDataConnectionParameters struct {
 	ClusterNameSelector *v2.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the IotHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta1.IOTHubConsumerGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta1.IOTHubConsumerGroup
 	// +kubebuilder:validation:Optional
 	ConsumerGroup *string `json:"consumerGroup,omitempty" tf:"consumer_group,omitempty"`
 
@@ -196,7 +196,7 @@ type IOTHubDataConnectionParameters struct {
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// Specifies the name of the Kusto Database this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/kusto/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -218,7 +218,7 @@ type IOTHubDataConnectionParameters struct {
 	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
 
 	// Specifies the resource id of the IotHub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
@@ -244,7 +244,7 @@ type IOTHubDataConnectionParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -261,7 +261,7 @@ type IOTHubDataConnectionParameters struct {
 	RetrievalStartDate *string `json:"retrievalStartDate,omitempty" tf:"retrieval_start_date,omitempty"`
 
 	// Specifies the IotHub Shared Access Policy this data connection will use for ingestion, which must have read permission. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta1.IOTHubSharedAccessPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/devices/v1beta1.IOTHubSharedAccessPolicy
 	// +kubebuilder:validation:Optional
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 

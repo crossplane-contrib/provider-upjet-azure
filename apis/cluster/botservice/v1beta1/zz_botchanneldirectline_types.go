@@ -43,7 +43,7 @@ type BotChannelDirectLineObservation struct {
 type BotChannelDirectLineParameters struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/botservice/v1beta1.BotChannelsRegistration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/botservice/v1beta2.BotChannelsRegistration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
@@ -61,7 +61,7 @@ type BotChannelDirectLineParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -86,7 +86,7 @@ type SiteInitParameters struct {
 	// Is the endpoint parameters enabled for this site?
 	EndpointParametersEnabled *bool `json:"endpointParametersEnabled,omitempty" tf:"endpoint_parameters_enabled,omitempty"`
 
-	// Enables additional security measures for this site, see Enhanced Directline Authentication Features. Disabled by default.
+	// Enables additional security measures for this site, see Direct Line enhanced authentication. Disabled by default.
 	EnhancedAuthenticationEnabled *bool `json:"enhancedAuthenticationEnabled,omitempty" tf:"enhanced_authentication_enabled,omitempty"`
 
 	// The name of the site
@@ -117,7 +117,7 @@ type SiteObservation struct {
 	// Is the endpoint parameters enabled for this site?
 	EndpointParametersEnabled *bool `json:"endpointParametersEnabled,omitempty" tf:"endpoint_parameters_enabled,omitempty"`
 
-	// Enables additional security measures for this site, see Enhanced Directline Authentication Features. Disabled by default.
+	// Enables additional security measures for this site, see Direct Line enhanced authentication. Disabled by default.
 	EnhancedAuthenticationEnabled *bool `json:"enhancedAuthenticationEnabled,omitempty" tf:"enhanced_authentication_enabled,omitempty"`
 
 	// Id for the site
@@ -153,7 +153,7 @@ type SiteParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointParametersEnabled *bool `json:"endpointParametersEnabled,omitempty" tf:"endpoint_parameters_enabled,omitempty"`
 
-	// Enables additional security measures for this site, see Enhanced Directline Authentication Features. Disabled by default.
+	// Enables additional security measures for this site, see Direct Line enhanced authentication. Disabled by default.
 	// +kubebuilder:validation:Optional
 	EnhancedAuthenticationEnabled *bool `json:"enhancedAuthenticationEnabled,omitempty" tf:"enhanced_authentication_enabled,omitempty"`
 

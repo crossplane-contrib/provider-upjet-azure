@@ -29,7 +29,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.m.upbound.io/v1beta1
+apiVersion: compute.azure.m.upbound.io/v1beta2
 kind: OrchestratedVirtualMachineScaleSet
 metadata:
   annotations:

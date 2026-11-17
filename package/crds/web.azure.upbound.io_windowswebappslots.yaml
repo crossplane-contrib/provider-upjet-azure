@@ -943,6 +943,10 @@ spec:
                     description: Should the Windows Web App Slot be enabled? Defaults
                       to true.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -1147,7 +1151,7 @@ spec:
                           nodeVersion:
                             description: The version of node to use when current_stack
                               is set to node. Possible values include ~12, ~14, ~16,
-                              ~18, ~20 and ~22.
+                              ~18, ~20, ~22 and ~24.
                             type: string
                           phpVersion:
                             description: The version of PHP to use when current_stack
@@ -1803,7 +1807,7 @@ spec:
                     type: boolean
                   virtualNetworkImagePullEnabled:
                     description: Whether traffic for the image pull should be routed
-                      over the virtual network.
+                      over the virtual network. Defaults to false.
                     type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
@@ -2701,6 +2705,10 @@ spec:
                     description: Should the Windows Web App Slot be enabled? Defaults
                       to true.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -2907,7 +2915,7 @@ spec:
                           nodeVersion:
                             description: The version of node to use when current_stack
                               is set to node. Possible values include ~12, ~14, ~16,
-                              ~18, ~20 and ~22.
+                              ~18, ~20, ~22 and ~24.
                             type: string
                           phpVersion:
                             description: The version of PHP to use when current_stack
@@ -3565,7 +3573,7 @@ spec:
                     type: boolean
                   virtualNetworkImagePullEnabled:
                     description: Whether traffic for the image pull should be routed
-                      over the virtual network.
+                      over the virtual network. Defaults to false.
                     type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App
@@ -4437,6 +4445,10 @@ spec:
                     description: Should the Windows Web App Slot be enabled? Defaults
                       to true.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -4643,7 +4655,7 @@ spec:
                           nodeVersion:
                             description: The version of node to use when current_stack
                               is set to node. Possible values include ~12, ~14, ~16,
-                              ~18, ~20 and ~22.
+                              ~18, ~20, ~22 and ~24.
                             type: string
                           phpVersion:
                             description: The version of PHP to use when current_stack
@@ -5138,7 +5150,7 @@ spec:
                     type: boolean
                   virtualNetworkImagePullEnabled:
                     description: Whether traffic for the image pull should be routed
-                      over the virtual network.
+                      over the virtual network. Defaults to false.
                     type: boolean
                   virtualNetworkSubnetId:
                     description: The subnet id which will be used by this Web App

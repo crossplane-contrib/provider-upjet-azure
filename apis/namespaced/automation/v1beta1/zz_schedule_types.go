@@ -50,23 +50,23 @@ type ScheduleInitParameters struct {
 	// The end time of the schedule.
 	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
 
-	// The frequency of the schedule. - can be either OneTime, Day, Hour, Week, or Month.
+	// The frequency of the schedule. - can be either OneTime, Minute, Day, Hour, Week, or Month.
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
-	// The number of frequencys between runs. Only valid when frequency is Day, Hour, Week, or Month and defaults to 1.
+	// The number of frequencys between runs. Only valid when frequency is Minute, Day, Hour, Week, or Month and defaults to 1.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// List of days of the month that the job should execute on. Must be between 1 and 31. -1 for last day of the month. Only valid when frequency is Month.
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields defined below.
 	MonthlyOccurrence *MonthlyOccurrenceInitParameters `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
 
 	// Start time of the schedule. Must be at least five minutes in the future. Defaults to seven minutes in the future from the time the resource is created.
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
-	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
+	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/rest/api/maps/timezone/gettimezoneenumwindows
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
@@ -85,20 +85,20 @@ type ScheduleObservation struct {
 	// The end time of the schedule.
 	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
 
-	// The frequency of the schedule. - can be either OneTime, Day, Hour, Week, or Month.
+	// The frequency of the schedule. - can be either OneTime, Minute, Day, Hour, Week, or Month.
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// The Automation Schedule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The number of frequencys between runs. Only valid when frequency is Day, Hour, Week, or Month and defaults to 1.
+	// The number of frequencys between runs. Only valid when frequency is Minute, Day, Hour, Week, or Month and defaults to 1.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// List of days of the month that the job should execute on. Must be between 1 and 31. -1 for last day of the month. Only valid when frequency is Month.
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields defined below.
 	MonthlyOccurrence *MonthlyOccurrenceObservation `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
 
 	// The name of the resource group in which the Schedule is created. Changing this forces a new resource to be created.
@@ -107,7 +107,7 @@ type ScheduleObservation struct {
 	// Start time of the schedule. Must be at least five minutes in the future. Defaults to seven minutes in the future from the time the resource is created.
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
-	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
+	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/rest/api/maps/timezone/gettimezoneenumwindows
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
@@ -118,7 +118,7 @@ type ScheduleObservation struct {
 type ScheduleParameters struct {
 
 	// The name of the automation account in which the Schedule is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/automation/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
@@ -138,11 +138,11 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
 
-	// The frequency of the schedule. - can be either OneTime, Day, Hour, Week, or Month.
+	// The frequency of the schedule. - can be either OneTime, Minute, Day, Hour, Week, or Month.
 	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
-	// The number of frequencys between runs. Only valid when frequency is Day, Hour, Week, or Month and defaults to 1.
+	// The number of frequencys between runs. Only valid when frequency is Minute, Day, Hour, Week, or Month and defaults to 1.
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
@@ -151,12 +151,12 @@ type ScheduleParameters struct {
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields defined below.
 	// +kubebuilder:validation:Optional
 	MonthlyOccurrence *MonthlyOccurrenceParameters `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
 
 	// The name of the resource group in which the Schedule is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -172,7 +172,7 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
-	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
+	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/rest/api/maps/timezone/gettimezoneenumwindows
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 

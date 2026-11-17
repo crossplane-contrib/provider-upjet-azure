@@ -255,7 +255,7 @@ type ManagedDevopsPoolInitParameters struct {
 	AzureDevopsOrganization *AzureDevopsOrganizationInitParameters `json:"azureDevopsOrganization,omitempty" tf:"azure_devops_organization,omitempty"`
 
 	// The ID of the Dev Center project.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devcenter/v1beta1.Project
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/devcenter/v1beta1.Project
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DevCenterProjectID *string `json:"devCenterProjectId,omitempty" tf:"dev_center_project_id,omitempty"`
 
@@ -340,7 +340,7 @@ type ManagedDevopsPoolParameters struct {
 	AzureDevopsOrganization *AzureDevopsOrganizationParameters `json:"azureDevopsOrganization,omitempty" tf:"azure_devops_organization,omitempty"`
 
 	// The ID of the Dev Center project.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devcenter/v1beta1.Project
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/devcenter/v1beta1.Project
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DevCenterProjectID *string `json:"devCenterProjectId,omitempty" tf:"dev_center_project_id,omitempty"`
@@ -366,7 +366,7 @@ type ManagedDevopsPoolParameters struct {
 	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 
 	// The name of the Resource Group where the Managed DevOps Pool should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -775,7 +775,7 @@ type PermissionInitParameters struct {
 	// An administrator_account block as defined below. This block is only valid when kind is set to SpecificAccounts. Changing this forces a new resource to be created.
 	AdministratorAccount *AdministratorAccountInitParameters `json:"administratorAccount,omitempty" tf:"administrator_account,omitempty"`
 
-	// Determines who has admin permissions to the Azure DevOps pool. Possible values are Inherit and SpecificAccounts. Changing this forces a new resource to be created.
+	// Determines who has admin permissions to the Azure DevOps pool. Possible values are CreatorOnly, Inherit, and SpecificAccounts. Changing this forces a new resource to be created.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 }
 
@@ -784,7 +784,7 @@ type PermissionObservation struct {
 	// An administrator_account block as defined below. This block is only valid when kind is set to SpecificAccounts. Changing this forces a new resource to be created.
 	AdministratorAccount *AdministratorAccountObservation `json:"administratorAccount,omitempty" tf:"administrator_account,omitempty"`
 
-	// Determines who has admin permissions to the Azure DevOps pool. Possible values are Inherit and SpecificAccounts. Changing this forces a new resource to be created.
+	// Determines who has admin permissions to the Azure DevOps pool. Possible values are CreatorOnly, Inherit, and SpecificAccounts. Changing this forces a new resource to be created.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 }
 
@@ -794,7 +794,7 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	AdministratorAccount *AdministratorAccountParameters `json:"administratorAccount,omitempty" tf:"administrator_account,omitempty"`
 
-	// Determines who has admin permissions to the Azure DevOps pool. Possible values are Inherit and SpecificAccounts. Changing this forces a new resource to be created.
+	// Determines who has admin permissions to the Azure DevOps pool. Possible values are CreatorOnly, Inherit, and SpecificAccounts. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind" tf:"kind,omitempty"`
 }
@@ -1207,8 +1207,8 @@ type VirtualMachineScaleSetFabricInitParameters struct {
 	Storage *StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// The subnet ID on which to put all machines created in the pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -1264,8 +1264,8 @@ type VirtualMachineScaleSetFabricParameters struct {
 	Storage *StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// The subnet ID on which to put all machines created in the pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

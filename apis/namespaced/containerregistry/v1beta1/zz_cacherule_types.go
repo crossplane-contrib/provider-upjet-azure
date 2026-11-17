@@ -17,8 +17,8 @@ type CacheRuleInitParameters struct {
 
 	// The ARM resource ID of the Credential Store which is associated with the Cache Rule.
 	// The ARM resource ID of the credential store which is associated with the cache rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.CredentialSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/containerregistry/v1beta1.CredentialSet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	CredentialSetID *string `json:"credentialSetId,omitempty" tf:"credential_set_id,omitempty"`
 
 	// Reference to a CredentialSet in containerregistry to populate credentialSetId.
@@ -62,8 +62,8 @@ type CacheRuleObservation struct {
 type CacheRuleParameters struct {
 
 	// The ID of the Container Registry where the Cache Rule should apply. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Registry
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/containerregistry/v1beta2.Registry
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
 
@@ -77,8 +77,8 @@ type CacheRuleParameters struct {
 
 	// The ARM resource ID of the Credential Store which is associated with the Cache Rule.
 	// The ARM resource ID of the credential store which is associated with the cache rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.CredentialSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/containerregistry/v1beta1.CredentialSet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CredentialSetID *string `json:"credentialSetId,omitempty" tf:"credential_set_id,omitempty"`
 

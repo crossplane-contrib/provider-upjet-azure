@@ -93,8 +93,8 @@ type LinkedServiceAzureDatabricksInitParameters struct {
 	KeyVaultPassword *LinkedServiceAzureDatabricksKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// The ID of the Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/databricks/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	MsiWorkSpaceResourceID *string `json:"msiWorkSpaceResourceId,omitempty" tf:"msi_work_space_resource_id,omitempty"`
 
 	// Reference to a Workspace in databricks to populate msiWorkSpaceResourceId.
@@ -106,7 +106,7 @@ type LinkedServiceAzureDatabricksInitParameters struct {
 	MsiWorkSpaceResourceIDSelector *v2.NamespacedSelector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
 
 	// Authenticate to ADB via managed service identity.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/databricks/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MsiWorkspaceID *string `json:"msiWorkspaceId,omitempty" tf:"msi_workspace_id,omitempty"`
 
@@ -222,7 +222,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -256,8 +256,8 @@ type LinkedServiceAzureDatabricksParameters struct {
 	KeyVaultPassword *LinkedServiceAzureDatabricksKeyVaultPasswordParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// The ID of the Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/databricks/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MsiWorkSpaceResourceID *string `json:"msiWorkSpaceResourceId,omitempty" tf:"msi_work_space_resource_id,omitempty"`
 
@@ -270,7 +270,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 	MsiWorkSpaceResourceIDSelector *v2.NamespacedSelector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
 
 	// Authenticate to ADB via managed service identity.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/databricks/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MsiWorkspaceID *string `json:"msiWorkspaceId,omitempty" tf:"msi_workspace_id,omitempty"`
@@ -436,9 +436,10 @@ type LinkedServiceAzureDatabricksStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="v1beta1 is deprecated since the Terraform AzureRM v5 bump, please migrate to v1beta2. Deprecated since v3.0.0."
 
 // LinkedServiceAzureDatabricks is the Schema for the LinkedServiceAzureDatabrickss API. Manages a Linked Service (connection) between Azure Databricks and Azure Data Factory.
+// Deprecated: This API version (v1beta1) has been deprecated in release v3.0.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -13,10 +13,10 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type GatewayInitParameters struct {
+type GatewayInitParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/apimanagement/v1beta3.Management
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
 
@@ -31,11 +31,11 @@ type GatewayInitParameters struct {
 	// The description of the API Management Gateway.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A location_data block as documented below.
+	// A location_data block as defined below.
 	LocationData *LocationDataInitParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
-type GatewayObservation struct {
+type GatewayObservation_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
@@ -46,14 +46,14 @@ type GatewayObservation struct {
 	// The ID of the API Management Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A location_data block as documented below.
+	// A location_data block as defined below.
 	LocationData *LocationDataObservation `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
-type GatewayParameters struct {
+type GatewayParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/apimanagement/v1beta3.Management
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
@@ -70,7 +70,7 @@ type GatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A location_data block as documented below.
+	// A location_data block as defined below.
 	// +kubebuilder:validation:Optional
 	LocationData *LocationDataParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
@@ -127,7 +127,7 @@ type LocationDataParameters struct {
 // GatewaySpec defines the desired state of Gateway
 type GatewaySpec struct {
 	v2.ClusterManagedResourceSpec `json:",inline"`
-	ForProvider                   GatewayParameters `json:"forProvider"`
+	ForProvider                   GatewayParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -138,13 +138,13 @@ type GatewaySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GatewayInitParameters `json:"initProvider,omitempty"`
+	InitProvider GatewayInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // GatewayStatus defines the observed state of Gateway.
 type GatewayStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               GatewayObservation `json:"atProvider,omitempty"`
+	AtProvider               GatewayObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

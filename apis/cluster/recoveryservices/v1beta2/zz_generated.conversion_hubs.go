@@ -14,9 +14,3 @@ func (tr *BackupPolicyVM) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BackupPolicyVMWorkload) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SiteRecoveryProtectionContainerMapping) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Vault) Hub() {}

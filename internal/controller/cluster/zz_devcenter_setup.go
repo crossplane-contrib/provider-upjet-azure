@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	center "github.com/upbound/provider-azure/v2/internal/controller/cluster/devcenter/center"
-	project "github.com/upbound/provider-azure/v2/internal/controller/cluster/devcenter/project"
+	center "github.com/upbound/provider-azure/v3/internal/controller/cluster/devcenter/center"
+	project "github.com/upbound/provider-azure/v3/internal/controller/cluster/devcenter/project"
 )
 
 // Setup_devcenter creates all controllers with the supplied logger and adds them to

@@ -10,98 +10,127 @@ package namespaced
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/alertsmanagement/v1beta1"
-	v1beta1analysisservices "github.com/upbound/provider-azure/v2/apis/namespaced/analysisservices/v1beta1"
-	v1beta1apimanagement "github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1"
-	v1beta1appconfiguration "github.com/upbound/provider-azure/v2/apis/namespaced/appconfiguration/v1beta1"
-	v1beta1appplatform "github.com/upbound/provider-azure/v2/apis/namespaced/appplatform/v1beta1"
-	v1beta1attestation "github.com/upbound/provider-azure/v2/apis/namespaced/attestation/v1beta1"
-	v1beta1authorization "github.com/upbound/provider-azure/v2/apis/namespaced/authorization/v1beta1"
-	v1beta1automation "github.com/upbound/provider-azure/v2/apis/namespaced/automation/v1beta1"
-	v1beta1azure "github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1"
-	v1beta1azurestackhci "github.com/upbound/provider-azure/v2/apis/namespaced/azurestackhci/v1beta1"
-	v1beta1botservice "github.com/upbound/provider-azure/v2/apis/namespaced/botservice/v1beta1"
-	v1beta1cache "github.com/upbound/provider-azure/v2/apis/namespaced/cache/v1beta1"
-	v1beta1cdn "github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1"
-	v1beta1certificateregistration "github.com/upbound/provider-azure/v2/apis/namespaced/certificateregistration/v1beta1"
-	v1beta1cognitiveservices "github.com/upbound/provider-azure/v2/apis/namespaced/cognitiveservices/v1beta1"
-	v1beta1communication "github.com/upbound/provider-azure/v2/apis/namespaced/communication/v1beta1"
-	v1beta1compute "github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1"
-	v1beta1confidentialledger "github.com/upbound/provider-azure/v2/apis/namespaced/confidentialledger/v1beta1"
-	v1beta1consumption "github.com/upbound/provider-azure/v2/apis/namespaced/consumption/v1beta1"
-	v1beta1containerapp "github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1"
-	v1beta1containerregistry "github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1"
-	v1beta1containerservice "github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta1"
-	v1beta1cosmosdb "github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1"
-	v1beta1costmanagement "github.com/upbound/provider-azure/v2/apis/namespaced/costmanagement/v1beta1"
-	v1beta1customproviders "github.com/upbound/provider-azure/v2/apis/namespaced/customproviders/v1beta1"
-	v1beta1dashboard "github.com/upbound/provider-azure/v2/apis/namespaced/dashboard/v1beta1"
-	v1beta1databoxedge "github.com/upbound/provider-azure/v2/apis/namespaced/databoxedge/v1beta1"
-	v1beta1databricks "github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1"
-	v1beta1datafactory "github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1"
-	v1beta1datamigration "github.com/upbound/provider-azure/v2/apis/namespaced/datamigration/v1beta1"
-	v1beta1dataprotection "github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1"
-	v1beta1datashare "github.com/upbound/provider-azure/v2/apis/namespaced/datashare/v1beta1"
-	v1beta1dbformysql "github.com/upbound/provider-azure/v2/apis/namespaced/dbformysql/v1beta1"
-	v1beta1dbforpostgresql "github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1"
-	v1beta1desktopvirtualization "github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1"
-	v1beta1devcenter "github.com/upbound/provider-azure/v2/apis/namespaced/devcenter/v1beta1"
-	v1beta1devices "github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1"
-	v1beta1deviceupdate "github.com/upbound/provider-azure/v2/apis/namespaced/deviceupdate/v1beta1"
-	v1beta1devopsinfrastructure "github.com/upbound/provider-azure/v2/apis/namespaced/devopsinfrastructure/v1beta1"
-	v1beta1devtestlab "github.com/upbound/provider-azure/v2/apis/namespaced/devtestlab/v1beta1"
-	v1beta1digitaltwins "github.com/upbound/provider-azure/v2/apis/namespaced/digitaltwins/v1beta1"
-	v1beta1elastic "github.com/upbound/provider-azure/v2/apis/namespaced/elastic/v1beta1"
-	v1beta1eventgrid "github.com/upbound/provider-azure/v2/apis/namespaced/eventgrid/v1beta1"
-	v1beta1eventhub "github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1"
-	v1beta1fluidrelay "github.com/upbound/provider-azure/v2/apis/namespaced/fluidrelay/v1beta1"
-	v1beta1guestconfiguration "github.com/upbound/provider-azure/v2/apis/namespaced/guestconfiguration/v1beta1"
-	v1beta1hdinsight "github.com/upbound/provider-azure/v2/apis/namespaced/hdinsight/v1beta1"
-	v1beta1healthbot "github.com/upbound/provider-azure/v2/apis/namespaced/healthbot/v1beta1"
-	v1beta1healthcareapis "github.com/upbound/provider-azure/v2/apis/namespaced/healthcareapis/v1beta1"
-	v1beta1insights "github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1"
-	v1beta1iotcentral "github.com/upbound/provider-azure/v2/apis/namespaced/iotcentral/v1beta1"
-	v1beta1keyvault "github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1"
-	v1beta1kusto "github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1"
-	v1beta1loadtestservice "github.com/upbound/provider-azure/v2/apis/namespaced/loadtestservice/v1beta1"
-	v1beta1logic "github.com/upbound/provider-azure/v2/apis/namespaced/logic/v1beta1"
-	v1beta1machinelearningservices "github.com/upbound/provider-azure/v2/apis/namespaced/machinelearningservices/v1beta1"
-	v1beta1maintenance "github.com/upbound/provider-azure/v2/apis/namespaced/maintenance/v1beta1"
-	v1beta1managedidentity "github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1"
-	v1beta1management "github.com/upbound/provider-azure/v2/apis/namespaced/management/v1beta1"
-	v1beta1maps "github.com/upbound/provider-azure/v2/apis/namespaced/maps/v1beta1"
-	v1beta1marketplaceordering "github.com/upbound/provider-azure/v2/apis/namespaced/marketplaceordering/v1beta1"
-	v1beta1netapp "github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1"
-	v1beta1network "github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1"
-	v1beta1notificationhubs "github.com/upbound/provider-azure/v2/apis/namespaced/notificationhubs/v1beta1"
-	v1beta1operationalinsights "github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1"
-	v1beta1operationsmanagement "github.com/upbound/provider-azure/v2/apis/namespaced/operationsmanagement/v1beta1"
-	v1beta1oracle "github.com/upbound/provider-azure/v2/apis/namespaced/oracle/v1beta1"
-	v1beta1policyinsights "github.com/upbound/provider-azure/v2/apis/namespaced/policyinsights/v1beta1"
-	v1beta1portal "github.com/upbound/provider-azure/v2/apis/namespaced/portal/v1beta1"
-	v1beta1powerbidedicated "github.com/upbound/provider-azure/v2/apis/namespaced/powerbidedicated/v1beta1"
-	v1beta1purview "github.com/upbound/provider-azure/v2/apis/namespaced/purview/v1beta1"
-	v1beta1recoveryservices "github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta1"
-	v1beta1relay "github.com/upbound/provider-azure/v2/apis/namespaced/relay/v1beta1"
-	v1beta1resources "github.com/upbound/provider-azure/v2/apis/namespaced/resources/v1beta1"
-	v1beta1search "github.com/upbound/provider-azure/v2/apis/namespaced/search/v1beta1"
-	v1beta1security "github.com/upbound/provider-azure/v2/apis/namespaced/security/v1beta1"
-	v1beta1securityinsights "github.com/upbound/provider-azure/v2/apis/namespaced/securityinsights/v1beta1"
-	v1beta1servicebus "github.com/upbound/provider-azure/v2/apis/namespaced/servicebus/v1beta1"
-	v1beta1servicefabric "github.com/upbound/provider-azure/v2/apis/namespaced/servicefabric/v1beta1"
-	v1beta1servicelinker "github.com/upbound/provider-azure/v2/apis/namespaced/servicelinker/v1beta1"
-	v1beta1servicenetworking "github.com/upbound/provider-azure/v2/apis/namespaced/servicenetworking/v1beta1"
-	v1beta1signalrservice "github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1"
-	v1beta1solutions "github.com/upbound/provider-azure/v2/apis/namespaced/solutions/v1beta1"
-	v1beta1spring "github.com/upbound/provider-azure/v2/apis/namespaced/spring/v1beta1"
-	v1beta1sql "github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1"
-	v1beta1storage "github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1"
-	v1beta1storagesync "github.com/upbound/provider-azure/v2/apis/namespaced/storagesync/v1beta1"
-	v1beta1streamanalytics "github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1"
-	v1beta1synapse "github.com/upbound/provider-azure/v2/apis/namespaced/synapse/v1beta1"
-	v1alpha1 "github.com/upbound/provider-azure/v2/apis/namespaced/v1alpha1"
-	v1beta1namespaced "github.com/upbound/provider-azure/v2/apis/namespaced/v1beta1"
-	v1beta1web "github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/v3/apis/namespaced/alertsmanagement/v1beta1"
+	v1beta1analysisservices "github.com/upbound/provider-azure/v3/apis/namespaced/analysisservices/v1beta1"
+	v1beta1apimanagement "github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1"
+	v1beta2 "github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta2"
+	v1beta1appconfiguration "github.com/upbound/provider-azure/v3/apis/namespaced/appconfiguration/v1beta1"
+	v1beta1appplatform "github.com/upbound/provider-azure/v3/apis/namespaced/appplatform/v1beta1"
+	v1beta1attestation "github.com/upbound/provider-azure/v3/apis/namespaced/attestation/v1beta1"
+	v1beta1authorization "github.com/upbound/provider-azure/v3/apis/namespaced/authorization/v1beta1"
+	v1beta2authorization "github.com/upbound/provider-azure/v3/apis/namespaced/authorization/v1beta2"
+	v1beta1automation "github.com/upbound/provider-azure/v3/apis/namespaced/automation/v1beta1"
+	v1beta2automation "github.com/upbound/provider-azure/v3/apis/namespaced/automation/v1beta2"
+	v1beta1azure "github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1"
+	v1beta1azurestackhci "github.com/upbound/provider-azure/v3/apis/namespaced/azurestackhci/v1beta1"
+	v1beta1botservice "github.com/upbound/provider-azure/v3/apis/namespaced/botservice/v1beta1"
+	v1beta2botservice "github.com/upbound/provider-azure/v3/apis/namespaced/botservice/v1beta2"
+	v1beta1cache "github.com/upbound/provider-azure/v3/apis/namespaced/cache/v1beta1"
+	v1beta1cdn "github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta1"
+	v1beta2cdn "github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta2"
+	v1beta1certificateregistration "github.com/upbound/provider-azure/v3/apis/namespaced/certificateregistration/v1beta1"
+	v1beta1cognitiveservices "github.com/upbound/provider-azure/v3/apis/namespaced/cognitiveservices/v1beta1"
+	v1beta1communication "github.com/upbound/provider-azure/v3/apis/namespaced/communication/v1beta1"
+	v1beta2communication "github.com/upbound/provider-azure/v3/apis/namespaced/communication/v1beta2"
+	v1beta1compute "github.com/upbound/provider-azure/v3/apis/namespaced/compute/v1beta1"
+	v1beta2compute "github.com/upbound/provider-azure/v3/apis/namespaced/compute/v1beta2"
+	v1beta1confidentialledger "github.com/upbound/provider-azure/v3/apis/namespaced/confidentialledger/v1beta1"
+	v1beta1consumption "github.com/upbound/provider-azure/v3/apis/namespaced/consumption/v1beta1"
+	v1beta1containerapp "github.com/upbound/provider-azure/v3/apis/namespaced/containerapp/v1beta1"
+	v1beta2containerapp "github.com/upbound/provider-azure/v3/apis/namespaced/containerapp/v1beta2"
+	v1beta1containerregistry "github.com/upbound/provider-azure/v3/apis/namespaced/containerregistry/v1beta1"
+	v1beta2containerregistry "github.com/upbound/provider-azure/v3/apis/namespaced/containerregistry/v1beta2"
+	v1beta1containerservice "github.com/upbound/provider-azure/v3/apis/namespaced/containerservice/v1beta1"
+	v1beta2containerservice "github.com/upbound/provider-azure/v3/apis/namespaced/containerservice/v1beta2"
+	v1beta1cosmosdb "github.com/upbound/provider-azure/v3/apis/namespaced/cosmosdb/v1beta1"
+	v1beta2cosmosdb "github.com/upbound/provider-azure/v3/apis/namespaced/cosmosdb/v1beta2"
+	v1beta1costmanagement "github.com/upbound/provider-azure/v3/apis/namespaced/costmanagement/v1beta1"
+	v1beta1customproviders "github.com/upbound/provider-azure/v3/apis/namespaced/customproviders/v1beta1"
+	v1beta1dashboard "github.com/upbound/provider-azure/v3/apis/namespaced/dashboard/v1beta1"
+	v1beta1databoxedge "github.com/upbound/provider-azure/v3/apis/namespaced/databoxedge/v1beta1"
+	v1beta1databricks "github.com/upbound/provider-azure/v3/apis/namespaced/databricks/v1beta1"
+	v1beta1datafactory "github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1"
+	v1beta2datafactory "github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta2"
+	v1beta1datamigration "github.com/upbound/provider-azure/v3/apis/namespaced/datamigration/v1beta1"
+	v1beta1dataprotection "github.com/upbound/provider-azure/v3/apis/namespaced/dataprotection/v1beta1"
+	v1beta1datashare "github.com/upbound/provider-azure/v3/apis/namespaced/datashare/v1beta1"
+	v1beta1dbformysql "github.com/upbound/provider-azure/v3/apis/namespaced/dbformysql/v1beta1"
+	v1beta2dbformysql "github.com/upbound/provider-azure/v3/apis/namespaced/dbformysql/v1beta2"
+	v1beta1dbforpostgresql "github.com/upbound/provider-azure/v3/apis/namespaced/dbforpostgresql/v1beta1"
+	v1beta1desktopvirtualization "github.com/upbound/provider-azure/v3/apis/namespaced/desktopvirtualization/v1beta1"
+	v1beta1devcenter "github.com/upbound/provider-azure/v3/apis/namespaced/devcenter/v1beta1"
+	v1beta1devices "github.com/upbound/provider-azure/v3/apis/namespaced/devices/v1beta1"
+	v1beta1deviceupdate "github.com/upbound/provider-azure/v3/apis/namespaced/deviceupdate/v1beta1"
+	v1beta1devopsinfrastructure "github.com/upbound/provider-azure/v3/apis/namespaced/devopsinfrastructure/v1beta1"
+	v1beta1devtestlab "github.com/upbound/provider-azure/v3/apis/namespaced/devtestlab/v1beta1"
+	v1beta1digitaltwins "github.com/upbound/provider-azure/v3/apis/namespaced/digitaltwins/v1beta1"
+	v1beta1elastic "github.com/upbound/provider-azure/v3/apis/namespaced/elastic/v1beta1"
+	v1beta1eventgrid "github.com/upbound/provider-azure/v3/apis/namespaced/eventgrid/v1beta1"
+	v1beta2eventgrid "github.com/upbound/provider-azure/v3/apis/namespaced/eventgrid/v1beta2"
+	v1beta1eventhub "github.com/upbound/provider-azure/v3/apis/namespaced/eventhub/v1beta1"
+	v1beta2eventhub "github.com/upbound/provider-azure/v3/apis/namespaced/eventhub/v1beta2"
+	v1beta1fluidrelay "github.com/upbound/provider-azure/v3/apis/namespaced/fluidrelay/v1beta1"
+	v1beta1guestconfiguration "github.com/upbound/provider-azure/v3/apis/namespaced/guestconfiguration/v1beta1"
+	v1beta1hdinsight "github.com/upbound/provider-azure/v3/apis/namespaced/hdinsight/v1beta1"
+	v1beta2hdinsight "github.com/upbound/provider-azure/v3/apis/namespaced/hdinsight/v1beta2"
+	v1beta1healthbot "github.com/upbound/provider-azure/v3/apis/namespaced/healthbot/v1beta1"
+	v1beta1healthcareapis "github.com/upbound/provider-azure/v3/apis/namespaced/healthcareapis/v1beta1"
+	v1beta1insights "github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta1"
+	v1beta2insights "github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta2"
+	v1beta1iotcentral "github.com/upbound/provider-azure/v3/apis/namespaced/iotcentral/v1beta1"
+	v1beta1keyvault "github.com/upbound/provider-azure/v3/apis/namespaced/keyvault/v1beta1"
+	v1beta2keyvault "github.com/upbound/provider-azure/v3/apis/namespaced/keyvault/v1beta2"
+	v1beta1kusto "github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1"
+	v1beta2kusto "github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta2"
+	v1beta1loadtestservice "github.com/upbound/provider-azure/v3/apis/namespaced/loadtestservice/v1beta1"
+	v1beta1logic "github.com/upbound/provider-azure/v3/apis/namespaced/logic/v1beta1"
+	v1beta1machinelearningservices "github.com/upbound/provider-azure/v3/apis/namespaced/machinelearningservices/v1beta1"
+	v1beta1maintenance "github.com/upbound/provider-azure/v3/apis/namespaced/maintenance/v1beta1"
+	v1beta1managedidentity "github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1"
+	v1beta2managedidentity "github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta2"
+	v1beta1management "github.com/upbound/provider-azure/v3/apis/namespaced/management/v1beta1"
+	v1beta1maps "github.com/upbound/provider-azure/v3/apis/namespaced/maps/v1beta1"
+	v1beta1marketplaceordering "github.com/upbound/provider-azure/v3/apis/namespaced/marketplaceordering/v1beta1"
+	v1beta1netapp "github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta1"
+	v1beta2netapp "github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta2"
+	v1beta1network "github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1"
+	v1beta2network "github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2"
+	v1beta1notificationhubs "github.com/upbound/provider-azure/v3/apis/namespaced/notificationhubs/v1beta1"
+	v1beta1operationalinsights "github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta1"
+	v1beta2operationalinsights "github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2"
+	v1beta1operationsmanagement "github.com/upbound/provider-azure/v3/apis/namespaced/operationsmanagement/v1beta1"
+	v1beta1oracle "github.com/upbound/provider-azure/v3/apis/namespaced/oracle/v1beta1"
+	v1beta1policyinsights "github.com/upbound/provider-azure/v3/apis/namespaced/policyinsights/v1beta1"
+	v1beta1portal "github.com/upbound/provider-azure/v3/apis/namespaced/portal/v1beta1"
+	v1beta1powerbidedicated "github.com/upbound/provider-azure/v3/apis/namespaced/powerbidedicated/v1beta1"
+	v1beta1purview "github.com/upbound/provider-azure/v3/apis/namespaced/purview/v1beta1"
+	v1beta1recoveryservices "github.com/upbound/provider-azure/v3/apis/namespaced/recoveryservices/v1beta1"
+	v1beta2recoveryservices "github.com/upbound/provider-azure/v3/apis/namespaced/recoveryservices/v1beta2"
+	v1beta1relay "github.com/upbound/provider-azure/v3/apis/namespaced/relay/v1beta1"
+	v1beta1resources "github.com/upbound/provider-azure/v3/apis/namespaced/resources/v1beta1"
+	v1beta1search "github.com/upbound/provider-azure/v3/apis/namespaced/search/v1beta1"
+	v1beta1security "github.com/upbound/provider-azure/v3/apis/namespaced/security/v1beta1"
+	v1beta2security "github.com/upbound/provider-azure/v3/apis/namespaced/security/v1beta2"
+	v1beta1securityinsights "github.com/upbound/provider-azure/v3/apis/namespaced/securityinsights/v1beta1"
+	v1beta2securityinsights "github.com/upbound/provider-azure/v3/apis/namespaced/securityinsights/v1beta2"
+	v1beta1servicebus "github.com/upbound/provider-azure/v3/apis/namespaced/servicebus/v1beta1"
+	v1beta1servicefabric "github.com/upbound/provider-azure/v3/apis/namespaced/servicefabric/v1beta1"
+	v1beta1servicelinker "github.com/upbound/provider-azure/v3/apis/namespaced/servicelinker/v1beta1"
+	v1beta1servicenetworking "github.com/upbound/provider-azure/v3/apis/namespaced/servicenetworking/v1beta1"
+	v1beta1signalrservice "github.com/upbound/provider-azure/v3/apis/namespaced/signalrservice/v1beta1"
+	v1beta1solutions "github.com/upbound/provider-azure/v3/apis/namespaced/solutions/v1beta1"
+	v1beta1spring "github.com/upbound/provider-azure/v3/apis/namespaced/spring/v1beta1"
+	v1beta1sql "github.com/upbound/provider-azure/v3/apis/namespaced/sql/v1beta1"
+	v1beta2sql "github.com/upbound/provider-azure/v3/apis/namespaced/sql/v1beta2"
+	v1beta1storage "github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta1"
+	v1beta2storage "github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2"
+	v1beta1storagesync "github.com/upbound/provider-azure/v3/apis/namespaced/storagesync/v1beta1"
+	v1beta1streamanalytics "github.com/upbound/provider-azure/v3/apis/namespaced/streamanalytics/v1beta1"
+	v1beta1synapse "github.com/upbound/provider-azure/v3/apis/namespaced/synapse/v1beta1"
+	v1alpha1 "github.com/upbound/provider-azure/v3/apis/namespaced/v1alpha1"
+	v1beta1namespaced "github.com/upbound/provider-azure/v3/apis/namespaced/v1beta1"
+	v1beta1web "github.com/upbound/provider-azure/v3/apis/namespaced/web/v1beta1"
+	v1beta2web "github.com/upbound/provider-azure/v3/apis/namespaced/web/v1beta2"
 )
 
 func init() {
@@ -110,36 +139,49 @@ func init() {
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1beta1analysisservices.SchemeBuilder.AddToScheme,
 		v1beta1apimanagement.SchemeBuilder.AddToScheme,
+		v1beta2.SchemeBuilder.AddToScheme,
 		v1beta1appconfiguration.SchemeBuilder.AddToScheme,
 		v1beta1appplatform.SchemeBuilder.AddToScheme,
 		v1beta1attestation.SchemeBuilder.AddToScheme,
 		v1beta1authorization.SchemeBuilder.AddToScheme,
+		v1beta2authorization.SchemeBuilder.AddToScheme,
 		v1beta1automation.SchemeBuilder.AddToScheme,
+		v1beta2automation.SchemeBuilder.AddToScheme,
 		v1beta1azure.SchemeBuilder.AddToScheme,
 		v1beta1azurestackhci.SchemeBuilder.AddToScheme,
 		v1beta1botservice.SchemeBuilder.AddToScheme,
+		v1beta2botservice.SchemeBuilder.AddToScheme,
 		v1beta1cache.SchemeBuilder.AddToScheme,
 		v1beta1cdn.SchemeBuilder.AddToScheme,
+		v1beta2cdn.SchemeBuilder.AddToScheme,
 		v1beta1certificateregistration.SchemeBuilder.AddToScheme,
 		v1beta1cognitiveservices.SchemeBuilder.AddToScheme,
 		v1beta1communication.SchemeBuilder.AddToScheme,
+		v1beta2communication.SchemeBuilder.AddToScheme,
 		v1beta1compute.SchemeBuilder.AddToScheme,
+		v1beta2compute.SchemeBuilder.AddToScheme,
 		v1beta1confidentialledger.SchemeBuilder.AddToScheme,
 		v1beta1consumption.SchemeBuilder.AddToScheme,
 		v1beta1containerapp.SchemeBuilder.AddToScheme,
+		v1beta2containerapp.SchemeBuilder.AddToScheme,
 		v1beta1containerregistry.SchemeBuilder.AddToScheme,
+		v1beta2containerregistry.SchemeBuilder.AddToScheme,
 		v1beta1containerservice.SchemeBuilder.AddToScheme,
+		v1beta2containerservice.SchemeBuilder.AddToScheme,
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
+		v1beta2cosmosdb.SchemeBuilder.AddToScheme,
 		v1beta1costmanagement.SchemeBuilder.AddToScheme,
 		v1beta1customproviders.SchemeBuilder.AddToScheme,
 		v1beta1dashboard.SchemeBuilder.AddToScheme,
 		v1beta1databoxedge.SchemeBuilder.AddToScheme,
 		v1beta1databricks.SchemeBuilder.AddToScheme,
 		v1beta1datafactory.SchemeBuilder.AddToScheme,
+		v1beta2datafactory.SchemeBuilder.AddToScheme,
 		v1beta1datamigration.SchemeBuilder.AddToScheme,
 		v1beta1dataprotection.SchemeBuilder.AddToScheme,
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformysql.SchemeBuilder.AddToScheme,
+		v1beta2dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta1desktopvirtualization.SchemeBuilder.AddToScheme,
 		v1beta1devcenter.SchemeBuilder.AddToScheme,
@@ -150,28 +192,38 @@ func init() {
 		v1beta1digitaltwins.SchemeBuilder.AddToScheme,
 		v1beta1elastic.SchemeBuilder.AddToScheme,
 		v1beta1eventgrid.SchemeBuilder.AddToScheme,
+		v1beta2eventgrid.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
+		v1beta2eventhub.SchemeBuilder.AddToScheme,
 		v1beta1fluidrelay.SchemeBuilder.AddToScheme,
 		v1beta1guestconfiguration.SchemeBuilder.AddToScheme,
 		v1beta1hdinsight.SchemeBuilder.AddToScheme,
+		v1beta2hdinsight.SchemeBuilder.AddToScheme,
 		v1beta1healthbot.SchemeBuilder.AddToScheme,
 		v1beta1healthcareapis.SchemeBuilder.AddToScheme,
 		v1beta1insights.SchemeBuilder.AddToScheme,
+		v1beta2insights.SchemeBuilder.AddToScheme,
 		v1beta1iotcentral.SchemeBuilder.AddToScheme,
 		v1beta1keyvault.SchemeBuilder.AddToScheme,
+		v1beta2keyvault.SchemeBuilder.AddToScheme,
 		v1beta1kusto.SchemeBuilder.AddToScheme,
+		v1beta2kusto.SchemeBuilder.AddToScheme,
 		v1beta1loadtestservice.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
 		v1beta1machinelearningservices.SchemeBuilder.AddToScheme,
 		v1beta1maintenance.SchemeBuilder.AddToScheme,
 		v1beta1managedidentity.SchemeBuilder.AddToScheme,
+		v1beta2managedidentity.SchemeBuilder.AddToScheme,
 		v1beta1management.SchemeBuilder.AddToScheme,
 		v1beta1maps.SchemeBuilder.AddToScheme,
 		v1beta1marketplaceordering.SchemeBuilder.AddToScheme,
 		v1beta1netapp.SchemeBuilder.AddToScheme,
+		v1beta2netapp.SchemeBuilder.AddToScheme,
 		v1beta1network.SchemeBuilder.AddToScheme,
+		v1beta2network.SchemeBuilder.AddToScheme,
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
+		v1beta2operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
 		v1beta1oracle.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
@@ -179,11 +231,14 @@ func init() {
 		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,
 		v1beta1purview.SchemeBuilder.AddToScheme,
 		v1beta1recoveryservices.SchemeBuilder.AddToScheme,
+		v1beta2recoveryservices.SchemeBuilder.AddToScheme,
 		v1beta1relay.SchemeBuilder.AddToScheme,
 		v1beta1resources.SchemeBuilder.AddToScheme,
 		v1beta1search.SchemeBuilder.AddToScheme,
 		v1beta1security.SchemeBuilder.AddToScheme,
+		v1beta2security.SchemeBuilder.AddToScheme,
 		v1beta1securityinsights.SchemeBuilder.AddToScheme,
+		v1beta2securityinsights.SchemeBuilder.AddToScheme,
 		v1beta1servicebus.SchemeBuilder.AddToScheme,
 		v1beta1servicefabric.SchemeBuilder.AddToScheme,
 		v1beta1servicelinker.SchemeBuilder.AddToScheme,
@@ -192,13 +247,16 @@ func init() {
 		v1beta1solutions.SchemeBuilder.AddToScheme,
 		v1beta1spring.SchemeBuilder.AddToScheme,
 		v1beta1sql.SchemeBuilder.AddToScheme,
+		v1beta2sql.SchemeBuilder.AddToScheme,
 		v1beta1storage.SchemeBuilder.AddToScheme,
+		v1beta2storage.SchemeBuilder.AddToScheme,
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1beta1synapse.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1namespaced.SchemeBuilder.AddToScheme,
 		v1beta1web.SchemeBuilder.AddToScheme,
+		v1beta2web.SchemeBuilder.AddToScheme,
 	)
 }
 

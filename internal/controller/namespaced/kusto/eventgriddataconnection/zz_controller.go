@@ -22,16 +22,16 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/reconciler/reconciliationpolicy"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1"
-	"github.com/upbound/provider-azure/v2/internal/clients"
-	features "github.com/upbound/provider-azure/v2/internal/features"
+	v1beta2 "github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta2"
+	"github.com/upbound/provider-azure/v3/internal/clients"
+	features "github.com/upbound/provider-azure/v3/internal/features"
 )
 
 // SetupWebhookWithManager registers the conversion webhook for EventGridDataConnection.
 func SetupWebhookWithManager(mgr ctrl.Manager) error {
-	if err := ctrl.NewWebhookManagedBy(mgr, &v1beta1.EventGridDataConnection{}).
+	if err := ctrl.NewWebhookManagedBy(mgr, &v1beta2.EventGridDataConnection{}).
 		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.EventGridDataConnection")
+		return errors.Wrap(err, "cannot register webhook for the kind v1beta2.EventGridDataConnection")
 	}
 	return nil
 }
@@ -40,27 +40,27 @@ func SetupWebhookWithManager(mgr ctrl.Manager) error {
 func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
 	o.Options.Gate.Register(func() {
 		if err := Setup(mgr, o); err != nil {
-			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", v1beta1.EventGridDataConnection_GroupVersionKind.String())
+			mgr.GetLogger().Error(err, "unable to setup reconciler", "gvk", v1beta2.EventGridDataConnection_GroupVersionKind.String())
 		}
-	}, v1beta1.EventGridDataConnection_GroupVersionKind)
+	}, v1beta2.EventGridDataConnection_GroupVersionKind)
 	return nil
 }
 
 // Setup adds a controller that reconciles EventGridDataConnection managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1beta1.EventGridDataConnection_GroupVersionKind.String())
+	name := managed.ControllerName(v1beta2.EventGridDataConnection_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	rl := reconciliationpolicy.NewExponentialFailureRateLimiter(time.Second, 60*time.Second)
-	eventHandler := handler.NewEventHandler(handler.WithDefaultRateLimiter(rl), handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.EventGridDataConnection_GroupVersionKind)))
-	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.EventGridDataConnection_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
+	eventHandler := handler.NewEventHandler(handler.WithDefaultRateLimiter(rl), handler.WithLogger(o.Logger.WithValues("gvk", v1beta2.EventGridDataConnection_GroupVersionKind)))
+	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta2.EventGridDataConnection_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
 			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["azurerm_kusto_eventgrid_data_connection"],
 				tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
 				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
 				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
-				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.EventGridDataConnection_GroupVersionKind, mgr, o.PollInterval)),
+				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta2.EventGridDataConnection_GroupVersionKind, mgr, o.PollInterval)),
 				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)),
 			),
 		),
@@ -92,14 +92,14 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 
 	if o.MetricOptions != nil && o.MetricOptions.MRStateMetrics != nil {
 		stateMetricsRecorder := statemetrics.NewMRStateRecorder(
-			mgr.GetClient(), o.Logger, o.MetricOptions.MRStateMetrics, &v1beta1.EventGridDataConnectionList{}, o.MetricOptions.PollStateMetricInterval,
+			mgr.GetClient(), o.Logger, o.MetricOptions.MRStateMetrics, &v1beta2.EventGridDataConnectionList{}, o.MetricOptions.PollStateMetricInterval,
 		)
 		if err := mgr.Add(stateMetricsRecorder); err != nil {
-			return errors.Wrap(err, "cannot register MR state metrics recorder for kind v1beta1.EventGridDataConnectionList")
+			return errors.Wrap(err, "cannot register MR state metrics recorder for kind v1beta2.EventGridDataConnectionList")
 		}
 	}
 
-	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.EventGridDataConnection_GroupVersionKind), opts...)
+	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta2.EventGridDataConnection_GroupVersionKind), opts...)
 	co := o.ForControllerRuntime()
 	co.RateLimiter = rl
 
@@ -107,12 +107,12 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		Named(name).
 		WithOptions(co).
 		WithEventFilter(xpresource.DesiredStateChanged()).
-		Watches(&v1beta1.EventGridDataConnection{}, eventHandler).
+		Watches(&v1beta2.EventGridDataConnection{}, eventHandler).
 		Complete(
 			reconciliationpolicy.NewReconciler(
 				ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter),
 				mgr,
-				v1beta1.EventGridDataConnection_GroupVersionKind,
+				v1beta2.EventGridDataConnection_GroupVersionKind,
 				reconciliationpolicy.WithRateLimiter(rl),
 				reconciliationpolicy.WithSource(clients.ReconciliationPolicy),
 			),

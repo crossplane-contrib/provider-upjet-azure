@@ -19,7 +19,7 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/logic/v1beta1.AppIntegrationAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/logic/v1beta1.AppIntegrationAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
 
@@ -38,11 +38,11 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
+	// A release_criteria block as defined below, which is used to select the criteria to meet before processing each batch.
 	ReleaseCriteria *ReleaseCriteriaInitParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -72,7 +72,7 @@ type AppIntegrationAccountBatchConfigurationObservation struct {
 	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
+	// A release_criteria block as defined below, which is used to select the criteria to meet before processing each batch.
 	ReleaseCriteria *ReleaseCriteriaObservation `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
@@ -86,7 +86,7 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/logic/v1beta1.AppIntegrationAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/logic/v1beta1.AppIntegrationAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
@@ -108,12 +108,12 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
+	// A release_criteria block as defined below, which is used to select the criteria to meet before processing each batch.
 	// +kubebuilder:validation:Optional
 	ReleaseCriteria *ReleaseCriteriaParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -166,7 +166,7 @@ type RecurrenceInitParameters struct {
 	// The number of frequencys between runs.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// A schedule block as documented below.
+	// A schedule block as defined below.
 	Schedule *ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The start time of the schedule, formatted as an RFC3339 string.
@@ -187,7 +187,7 @@ type RecurrenceObservation struct {
 	// The number of frequencys between runs.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// A schedule block as documented below.
+	// A schedule block as defined below.
 	Schedule *ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The start time of the schedule, formatted as an RFC3339 string.
@@ -211,7 +211,7 @@ type RecurrenceParameters struct {
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
-	// A schedule block as documented below.
+	// A schedule block as defined below.
 	// +kubebuilder:validation:Optional
 	Schedule *ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
@@ -232,7 +232,7 @@ type ReleaseCriteriaInitParameters struct {
 	// The message count for the Logic App Integration Batch Configuration.
 	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
 
-	// A recurrence block as documented below.
+	// A recurrence block as defined below.
 	Recurrence *RecurrenceInitParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
@@ -244,7 +244,7 @@ type ReleaseCriteriaObservation struct {
 	// The message count for the Logic App Integration Batch Configuration.
 	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
 
-	// A recurrence block as documented below.
+	// A recurrence block as defined below.
 	Recurrence *RecurrenceObservation `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
@@ -258,7 +258,7 @@ type ReleaseCriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
 
-	// A recurrence block as documented below.
+	// A recurrence block as defined below.
 	// +kubebuilder:validation:Optional
 	Recurrence *RecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
@@ -277,7 +277,7 @@ type ScheduleInitParameters struct {
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// A monthly block as documented below.
+	// A monthly block as defined below.
 	Monthly []MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
@@ -299,7 +299,7 @@ type ScheduleObservation struct {
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// A monthly block as documented below.
+	// A monthly block as defined below.
 	Monthly []MonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
@@ -324,7 +324,7 @@ type ScheduleParameters struct {
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// A monthly block as documented below.
+	// A monthly block as defined below.
 	// +kubebuilder:validation:Optional
 	Monthly []MonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 

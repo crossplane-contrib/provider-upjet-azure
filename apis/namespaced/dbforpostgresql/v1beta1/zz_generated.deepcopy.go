@@ -1488,13 +1488,28 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageIops != nil {
+		in, out := &in.StorageIops, &out.StorageIops
+		*out = new(float64)
+		**out = **in
+	}
 	if in.StorageMb != nil {
 		in, out := &in.StorageMb, &out.StorageMb
 		*out = new(float64)
 		**out = **in
 	}
+	if in.StorageThroughput != nil {
+		in, out := &in.StorageThroughput, &out.StorageThroughput
+		*out = new(float64)
+		**out = **in
+	}
 	if in.StorageTier != nil {
 		in, out := &in.StorageTier, &out.StorageTier
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageType != nil {
+		in, out := &in.StorageType, &out.StorageType
 		*out = new(string)
 		**out = **in
 	}
@@ -1691,13 +1706,28 @@ func (in *FlexibleServerObservation) DeepCopyInto(out *FlexibleServerObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.StorageIops != nil {
+		in, out := &in.StorageIops, &out.StorageIops
+		*out = new(float64)
+		**out = **in
+	}
 	if in.StorageMb != nil {
 		in, out := &in.StorageMb, &out.StorageMb
 		*out = new(float64)
 		**out = **in
 	}
+	if in.StorageThroughput != nil {
+		in, out := &in.StorageThroughput, &out.StorageThroughput
+		*out = new(float64)
+		**out = **in
+	}
 	if in.StorageTier != nil {
 		in, out := &in.StorageTier, &out.StorageTier
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageType != nil {
+		in, out := &in.StorageType, &out.StorageType
 		*out = new(string)
 		**out = **in
 	}
@@ -1902,13 +1932,28 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 		*out = new(v2.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageIops != nil {
+		in, out := &in.StorageIops, &out.StorageIops
+		*out = new(float64)
+		**out = **in
+	}
 	if in.StorageMb != nil {
 		in, out := &in.StorageMb, &out.StorageMb
 		*out = new(float64)
 		**out = **in
 	}
+	if in.StorageThroughput != nil {
+		in, out := &in.StorageThroughput, &out.StorageThroughput
+		*out = new(float64)
+		**out = **in
+	}
 	if in.StorageTier != nil {
 		in, out := &in.StorageTier, &out.StorageTier
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageType != nil {
+		in, out := &in.StorageType, &out.StorageType
 		*out = new(string)
 		**out = **in
 	}
