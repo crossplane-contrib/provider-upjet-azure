@@ -89,7 +89,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: containerservice.azure.m.upbound.io/v1beta1
+apiVersion: containerservice.azure.m.upbound.io/v1beta2
 kind: KubernetesCluster
 metadata:
   annotations:
@@ -111,6 +111,8 @@ spec:
     identity:
       type: SystemAssigned
     location: North Europe
+    nodeProvisioningProfile:
+      mode: Manual
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

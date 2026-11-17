@@ -1,0 +1,71 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSZoneVirtualNetworkLink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-test-pdzvnl
+spec:
+  forProvider:
+    registrationEnabled: true
+    privateDnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
+    crossplane.io/external-name: example.com
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-test-pdzvnl
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-test-pdzvnl
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta3
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-test-pdzvnl
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

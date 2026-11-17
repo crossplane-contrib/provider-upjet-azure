@@ -54,7 +54,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -70,13 +70,13 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-vn-rule
-    serviceEndpoints:
-      - Microsoft.Sql
+    serviceEndpoint:
+      - service: Microsoft.Sql
     virtualNetworkNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

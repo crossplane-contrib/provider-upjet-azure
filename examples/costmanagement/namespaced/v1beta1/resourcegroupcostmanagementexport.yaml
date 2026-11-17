@@ -41,7 +41,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -59,7 +59,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
@@ -70,6 +70,6 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

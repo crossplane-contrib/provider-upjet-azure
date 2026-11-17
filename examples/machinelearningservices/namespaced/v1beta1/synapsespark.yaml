@@ -23,7 +23,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: rgsynapsespark
 ---
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -53,6 +53,7 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: true
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgsynapsespark
@@ -99,7 +100,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

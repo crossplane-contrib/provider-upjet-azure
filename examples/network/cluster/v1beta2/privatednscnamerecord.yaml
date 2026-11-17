@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSCNAMERecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record: example.com
+    ttl: 300
+    privateDnsZoneIdRef:
+      name: example

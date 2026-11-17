@@ -27,7 +27,7 @@ type: Opaque
 data:
   password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
 ---
-apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

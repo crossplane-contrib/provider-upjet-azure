@@ -46,7 +46,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:
@@ -77,7 +77,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -97,7 +97,7 @@ spec:
   writeConnectionSecretToRef:
     name: example-storage-account
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Share
 metadata:
   annotations:
@@ -109,4 +109,5 @@ metadata:
 spec:
   forProvider:
     quota: 5
-    storageAccountName: exampleaes545
+    storageAccountIdRef:
+      name: exampleaes545

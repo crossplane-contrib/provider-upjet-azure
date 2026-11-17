@@ -50,7 +50,7 @@ spec:
 
 ---
 
-apiVersion: insights.azure.upbound.io/v1beta1
+apiVersion: insights.azure.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -69,7 +69,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta2
+apiVersion: keyvault.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -82,6 +82,7 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: false
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -105,7 +106,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:

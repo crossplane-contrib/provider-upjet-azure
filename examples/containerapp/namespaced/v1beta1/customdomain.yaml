@@ -23,7 +23,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: containerapp.azure.m.upbound.io/v1beta1
+apiVersion: containerapp.azure.m.upbound.io/v1beta2
 kind: ContainerApp
 metadata:
   annotations:
@@ -137,7 +137,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:

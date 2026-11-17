@@ -36,7 +36,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: datafactory.azure.m.upbound.io/v1beta1
+apiVersion: datafactory.azure.m.upbound.io/v1beta2
 kind: Pipeline
 metadata:
   annotations:

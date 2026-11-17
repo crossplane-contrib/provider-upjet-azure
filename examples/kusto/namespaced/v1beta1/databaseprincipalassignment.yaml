@@ -27,7 +27,7 @@ spec:
     role: Viewer
     tenantId: ${azurerm_data_factory.example.identity.0.principal_id}
 ---
-apiVersion: kusto.azure.m.upbound.io/v1beta1
+apiVersion: kusto.azure.m.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:

@@ -22,7 +22,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: securitycenterassessment-vm
 ---
-apiVersion: compute.azure.m.upbound.io/v1beta1
+apiVersion: compute.azure.m.upbound.io/v1beta2
 kind: LinuxVirtualMachineScaleSet
 metadata:
   annotations:
@@ -90,7 +90,7 @@ spec:
     displayName: Test Display Name
     severity: Medium
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -110,7 +110,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: securitycenterassessment-vn
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

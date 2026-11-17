@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: sql.azure.upbound.io/v1beta2
+apiVersion: sql.azure.upbound.io/v1beta3
 kind: MSSQLDatabase
 metadata:
   annotations:

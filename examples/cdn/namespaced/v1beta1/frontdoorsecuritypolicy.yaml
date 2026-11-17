@@ -29,7 +29,7 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: frontdoorsecuritypolicy
 ---
-apiVersion: cdn.azure.m.upbound.io/v1beta1
+apiVersion: cdn.azure.m.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -49,7 +49,6 @@ spec:
     hostName: contoso.fabrikam.com
     tls:
       certificateType: ManagedCertificate
-      minimumTlsVersion: TLS12
 ---
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: DNSZone

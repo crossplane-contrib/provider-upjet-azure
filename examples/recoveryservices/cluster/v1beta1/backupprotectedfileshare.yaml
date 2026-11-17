@@ -70,7 +70,7 @@ spec:
     retentionDaily:
       count: 10
 ---
-apiVersion: recoveryservices.azure.upbound.io/v1beta2
+apiVersion: recoveryservices.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -98,7 +98,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -115,7 +115,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Share
 metadata:
   annotations:
@@ -126,4 +126,5 @@ metadata:
 spec:
   forProvider:
     quota: 1
-    storageAccountName: sampleuser001
+    storageAccountIdRef:
+      name: sampleuser001

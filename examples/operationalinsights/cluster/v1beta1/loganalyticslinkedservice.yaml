@@ -22,7 +22,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: automation.azure.upbound.io/v1beta2
+apiVersion: automation.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
     tags:
       environment: development
 ---
-apiVersion: operationalinsights.azure.upbound.io/v1beta2
+apiVersion: operationalinsights.azure.upbound.io/v1beta3
 kind: Workspace
 metadata:
   annotations:

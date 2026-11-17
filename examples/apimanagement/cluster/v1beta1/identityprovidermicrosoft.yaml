@@ -33,7 +33,7 @@ type: Opaque
 stringData:
   example-key: dXBib3VuZHJvY2tz
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta2
+apiVersion: apimanagement.azure.upbound.io/v1beta3
 kind: Management
 metadata:
   annotations:

@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta3
+kind: Account
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: cosmosdb/v1beta3/account
+  labels:
+    testing.upbound.io/example-name: db
+  name: example-cosmosdb-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    capabilities:
+    - name: EnableAggregationPipeline
+    - name: mongoEnableDocLevelTTL
+    - name: MongoDBv3.4
+    - name: EnableMongo
+    consistencyPolicy:
+      consistencyLevel: BoundedStaleness
+      maxIntervalInSeconds: 300
+      maxStalenessPrefix: 100000
+    automaticFailoverEnabled: true
+    geoLocation:
+    - failoverPriority: 1
+      location: eastus
+    - failoverPriority: 0
+      location: westus
+    kind: MongoDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: example
+  name: cosmosdb-rg
+spec:
+  forProvider:
+    location: West Europe

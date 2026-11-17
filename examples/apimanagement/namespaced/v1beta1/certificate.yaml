@@ -47,7 +47,7 @@ stringData:
     naEu7x5fyQOk4HozkpweR+Jx1sBlTRsa49/qSHt/6ULKfO01/cTs4iF71ykXPbh3
     Kj9cI2uo9aYtXkxkhKrGyUpA7FJqWw==
 ---
-apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+apiVersion: apimanagement.azure.m.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

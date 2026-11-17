@@ -73,7 +73,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: compute.azure.m.upbound.io/v1beta1
+apiVersion: compute.azure.m.upbound.io/v1beta2
 kind: LinuxVirtualMachineScaleSet
 metadata:
   annotations:
@@ -126,7 +126,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -146,7 +146,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

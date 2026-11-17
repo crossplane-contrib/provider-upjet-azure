@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta2
+apiVersion: web.azure.upbound.io/v1beta3
 kind: LinuxWebApp
 metadata:
   annotations:

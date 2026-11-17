@@ -13,7 +13,7 @@ spec:
     tags:
       provisioner: crossplane
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   name: example-vn
@@ -26,7 +26,7 @@ spec:
     addressSpace:
       - "10.0.0.0/16"
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   name: example-subnet

@@ -29,7 +29,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.upbound.io/v1beta2
+apiVersion: cosmosdb.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:

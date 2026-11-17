@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: cdn.azure.upbound.io/v1beta2
+apiVersion: cdn.azure.upbound.io/v1beta3
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -49,7 +49,6 @@ spec:
     hostName: contoso.fabrikam.com
     tls:
       certificateType: ManagedCertificate
-      minimumTlsVersion: TLS12
 
 ---
 

@@ -81,7 +81,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -100,7 +100,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Blob
 metadata:
   annotations:
@@ -111,17 +111,14 @@ metadata:
 spec:
   forProvider:
     sourceContent: '[scripts file content]'
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: galleryappversionstoracc
-    storageContainerNameSelector:
+    storageContainerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: galleryappversionstorcont
     type: Block
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
@@ -132,6 +129,6 @@ metadata:
 spec:
   forProvider:
     containerAccessType: blob
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: galleryappversionstoracc

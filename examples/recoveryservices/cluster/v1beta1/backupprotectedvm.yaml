@@ -47,7 +47,7 @@ spec:
     retentionDaily:
       count: 10
 ---
-apiVersion: recoveryservices.azure.upbound.io/v1beta2
+apiVersion: recoveryservices.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -63,7 +63,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku: Standard
-    softDeleteEnabled: false
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup

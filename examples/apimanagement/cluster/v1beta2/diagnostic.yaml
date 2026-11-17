@@ -80,7 +80,7 @@ spec:
 
 ---
 
-apiVersion: insights.azure.upbound.io/v1beta1
+apiVersion: insights.azure.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -102,7 +102,7 @@ spec:
 
 ---
 
-apiVersion: apimanagement.azure.upbound.io/v1beta2
+apiVersion: apimanagement.azure.upbound.io/v1beta3
 kind: Management
 metadata:
   annotations:

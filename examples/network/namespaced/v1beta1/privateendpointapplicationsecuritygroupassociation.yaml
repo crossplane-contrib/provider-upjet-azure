@@ -76,7 +76,7 @@ spec:
     tags:
       provisioner: crossplane
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   name: example-vn-for-lb
@@ -92,7 +92,7 @@ spec:
     addressSpace:
       - "10.0.0.0/16"
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   name: service
@@ -110,7 +110,7 @@ spec:
     addressPrefixes:
       - "10.0.1.0/24"
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   name: endpoint
@@ -146,7 +146,7 @@ spec:
     tags:
       environment: Production
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: LoadBalancer
 metadata:
   name: testloadbalancer
@@ -165,7 +165,7 @@ spec:
         publicIpAddressIdRef:
           name: publicipforlb
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: PrivateLinkService
 metadata:
   name: example

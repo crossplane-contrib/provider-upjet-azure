@@ -112,7 +112,7 @@ spec:
     virtualHubIdRef:
       name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: ExpressRouteConnection
 metadata:
   name: example-route-connection
