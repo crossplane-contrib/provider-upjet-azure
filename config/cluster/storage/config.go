@@ -10,8 +10,8 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
-	"github.com/upbound/provider-azure/v2/config/cluster/common"
+	"github.com/upbound/provider-azure/v3/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v3/config/cluster/common"
 )
 
 // Configure configures storage group
@@ -51,17 +51,16 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_blob", func(r *config.Resource) {
-		r.References["storage_account_name"] = config.Reference{
-			TerraformName: "azurerm_storage_account",
-		}
-		r.References["storage_container_name"] = config.Reference{
+		r.References["storage_container_id"] = config.Reference{
 			TerraformName: "azurerm_storage_container",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_container", func(r *config.Resource) {
-		r.References["storage_account_name"] = config.Reference{
+		r.References["storage_account_id"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -81,17 +80,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_share_directory", func(r *config.Resource) {
-		r.References["share_name"] = config.Reference{
+		r.References["storage_share_url"] = config.Reference{
 			TerraformName: "azurerm_storage_share",
-			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
-		}
-		r.References["storage_account_name"] = config.Reference{
-			TerraformName: "azurerm_storage_account",
-			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
-		}
-		r.References["storage_share_id"] = config.Reference{
-			TerraformName: "azurerm_storage_share",
-			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("url",true)`,
 		}
 	})
 

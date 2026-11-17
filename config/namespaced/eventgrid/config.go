@@ -5,7 +5,7 @@
 package eventgrid
 
 import (
-	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
@@ -27,7 +27,7 @@ func Configure(p *config.Provider) {
 	// 	}
 	// })
 	p.AddResourceConfigurator("azurerm_eventgrid_system_topic", func(r *config.Resource) {
-		r.References["source_arm_resource_id"] = config.Reference{
+		r.References["source_resource_id"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
 			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
 		}

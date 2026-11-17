@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v3/apis/cluster/rconfig"
 )
 
 const group = "machinelearningservices"
@@ -108,7 +108,7 @@ func Configure(p *config.Provider) {
 			}
 			r.References["storage_container_id"] = config.Reference{
 				TerraformName: "azurerm_storage_container",
-				Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("resource_manager_id",true)`,
+				Extractor:     rconfig.ExtractResourceIDFuncPath,
 			}
 		})
 	}
@@ -121,7 +121,7 @@ func Configure(p *config.Provider) {
 		}
 		r.References["storage_fileshare_id"] = config.Reference{
 			TerraformName: "azurerm_storage_share",
-			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("rbac_scope_id",true)`,
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 

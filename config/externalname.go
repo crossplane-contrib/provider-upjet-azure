@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/upbound/provider-azure/v2/config/cluster/common"
+	"github.com/upbound/provider-azure/v3/config/cluster/common"
 
 	"github.com/pkg/errors"
 
@@ -195,7 +195,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.BotService/botServices/botService1/channels/AlexaChannel
 	"azurerm_bot_channel_alexa": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.BotService/botServices/{{ .parameters.bot_name }}/channels/AlexaChannel"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.BotService/botServices/example/channels/DirectlineChannel
-	"azurerm_bot_channel_directline": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.BotService/botServices/{{ .parameters.bot_name }}/channels/DirectlineChannel"),
+	"azurerm_bot_channel_directline": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.BotService/botServices/{{ .parameters.bot_name }}/channels/DirectLineChannel"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.BotService/botServices/botService1/channels/LineChannel
 	"azurerm_bot_channel_line": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.BotService/botServices/{{ .parameters.bot_name }}/channels/LineChannel"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.BotService/botServices/example/channels/MsTeamsChannel
@@ -361,7 +361,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_iothub":                            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/iotHubs/{{ .external_name }}"),
 	"azurerm_iothub_consumer_group":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/iotHubs/{{ .parameters.iothub_name }}/eventHubEndpoints/{{ .parameters.eventhub_endpoint_name }}/consumerGroups/{{ .external_name }}"),
 	"azurerm_iothub_dps":                        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/provisioningServices/{{ .external_name }}"),
-	"azurerm_iothub_dps_certificate":            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/provisioningServices/{{ .parameters.iothub_dps_name }}/certificates/{{ .external_name }}"),
+	"azurerm_iothub_dps_certificate":            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/provisioningServices/{{ .parameters.iot_dps_name }}/certificates/{{ .external_name }}"),
 	"azurerm_iothub_dps_shared_access_policy":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/provisioningServices/{{ .parameters.iothub_dps_name }}/keys/{{ .external_name }}"),
 	"azurerm_iothub_shared_access_policy":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/iotHubs/{{ .parameters.iothub_name }}/iotHubKeys/{{ .external_name }}"),
 	"azurerm_iothub_endpoint_storage_container": config.TemplatedStringAsIdentifier("name", "{{ .parameters.iothub_id }}/endpoints/{{ .external_name }}"),
@@ -376,7 +376,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// eventhub
 	"azurerm_eventhub_namespace":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .external_name }}"),
-	"azurerm_eventhub":                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .external_name }}"),
+	"azurerm_eventhub":                    config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/eventhubs/{{ .external_name }}"),
 	"azurerm_eventhub_consumer_group":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .parameters.eventhub_name }}/consumerGroups/{{ .external_name }}"),
 	"azurerm_eventhub_authorization_rule": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .parameters.eventhub_name }}/authorizationRules/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventHub/namespaces/namespace1/schemaGroups/group1
@@ -605,7 +605,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_network_gateway":                     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworkGateways/{{ .external_name }}"),
 	"azurerm_virtual_network_peering":                     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .parameters.virtual_network_name }}/virtualNetworkPeerings/{{ .external_name }}"),
 	"azurerm_virtual_network_gateway_connection":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/connections/{{ .external_name }}"),
-	"azurerm_virtual_network_dns_servers":                 config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .parameters.virtual_network_name }}/dnsServers/default"),
+	"azurerm_virtual_network_dns_servers":                 config.TemplatedStringAsIdentifier("", "{{ .parameters.virtual_network_id }}/dnsServers/default"),
 	"azurerm_virtual_wan":                                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualWans/{{ .external_name }}"),
 	"azurerm_virtual_hub":                                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualHubs/{{ .external_name }}"),
 	"azurerm_public_ip":                                   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/publicIPAddresses/{{ .external_name }}"),
@@ -622,14 +622,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_dns_srv_record":                              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/dnsZones/{{ .parameters.zone_name }}/SRV/{{ .external_name }}"),
 	"azurerm_dns_txt_record":                              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/dnsZones/{{ .parameters.zone_name }}/TXT/{{ .external_name }}"),
 	"azurerm_private_dns_zone":                            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .external_name }}"),
-	"azurerm_private_dns_a_record":                        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.zone_name }}/A/{{ .external_name }}"),
-	"azurerm_private_dns_aaaa_record":                     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.zone_name }}/AAAA/{{ .external_name }}"),
-	"azurerm_private_dns_cname_record":                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.zone_name }}/CNAME/{{ .external_name }}"),
-	"azurerm_private_dns_mx_record":                       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.zone_name }}/MX/{{ .external_name }}"),
-	"azurerm_private_dns_ptr_record":                      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.zone_name }}/PTR/{{ .external_name }}"),
-	"azurerm_private_dns_srv_record":                      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.zone_name }}/SRV/{{ .external_name }}"),
-	"azurerm_private_dns_txt_record":                      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.zone_name }}/TXT/{{ .external_name }}"),
-	"azurerm_private_dns_zone_virtual_network_link":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateDnsZones/{{ .parameters.private_dns_zone_name }}/virtualNetworkLinks/{{ .external_name }}"),
+	"azurerm_private_dns_a_record":                        config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/A/{{ .external_name }}"),
+	"azurerm_private_dns_aaaa_record":                     config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/AAAA/{{ .external_name }}"),
+	"azurerm_private_dns_cname_record":                    config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/CNAME/{{ .external_name }}"),
+	"azurerm_private_dns_mx_record":                       config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/MX/{{ .external_name }}"),
+	"azurerm_private_dns_ptr_record":                      config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/PTR/{{ .external_name }}"),
+	"azurerm_private_dns_srv_record":                      config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/SRV/{{ .external_name }}"),
+	"azurerm_private_dns_txt_record":                      config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/TXT/{{ .external_name }}"),
+	"azurerm_private_dns_zone_virtual_network_link":       config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_zone_id }}/virtualNetworkLinks/{{ .external_name }}"),
 	"azurerm_private_link_service":                        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateLinkServices/{{ .external_name }}"),
 	"azurerm_private_endpoint":                            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/privateEndpoints/{{ .external_name }}"),
 	"azurerm_private_dns_resolver_inbound_endpoint":       config.TemplatedStringAsIdentifier("name", "{{ .parameters.private_dns_resolver_id}}/inboundEndpoints/{{ .external_name }}"),
@@ -718,7 +718,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// redis
 	"azurerm_redis_cache":                          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redis/{{ .external_name }}"),
 	"azurerm_redis_firewall_rule":                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redis/{{ .parameters.redis_cache_name }}/firewallRules/{{ .external_name }}"),
-	"azurerm_redis_linked_server":                  config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redis/{{ .parameters.target_redis_cache_name }}/linkedServers/{{ .parameters.linked_redis_cache_name }}"),
+	"azurerm_redis_linked_server":                  redisLinkedServer(),
 	"azurerm_redis_cache_access_policy":            config.TemplatedStringAsIdentifier("name", "{{ .parameters.redis_cache_id }}/accessPolicies/{{ .external_name }}"),
 	"azurerm_redis_cache_access_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.redis_cache_id }}/accessPolicyAssignments/{{ .external_name }}"),
 	// terraform import azurerm_managed_redis.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/redisEnterprise/cluster1
@@ -845,7 +845,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_storage_account_network_rules":         config.IdentifierFromProvider,
 	"azurerm_storage_blob":                          storageBlob(),
 	"azurerm_storage_blob_inventory_policy":         config.IdentifierFromProvider,
-	"azurerm_storage_container":                     storageContainer(),
+	"azurerm_storage_container":                     config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/blobServices/default/containers/{{ .external_name }}"),
 	"azurerm_storage_data_lake_gen2_filesystem":     storageDataLakeGen2Filesystem(),
 	"azurerm_storage_encryption_scope":              config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/encryptionScopes/{{ .external_name }}"),
 	"azurerm_storage_management_policy":             config.TemplatedStringAsIdentifier("", "{{ .parameters.storage_account_id }}/managementPolicies/default"),
@@ -853,28 +853,28 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// The id of this resource is a concatenation of 2 resource names, but in the terraform documentation
 	// this reasource does not have a name so instead it concatenates destination and target storage account IDs
 	"azurerm_storage_object_replication": config.IdentifierFromProvider,
-	"azurerm_storage_queue":              storageQueue(),
-	"azurerm_storage_share":              storageShare(),
+	"azurerm_storage_queue":              config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/queueServices/default/queues/{{ .external_name }}"),
+	"azurerm_storage_share":              config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/fileServices/default/shares/{{ .external_name }}"),
 	// Table ID comes with an unusual https format there the name attribute is not separated by "/",
 	// but fits this remplate Tables('replace-with-table-name')
-	"azurerm_storage_table": config.IdentifierFromProvider,
+	"azurerm_storage_table": storageTable(),
 
 	// storagesync
 	"azurerm_storage_sync": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageSync/storageSyncServices/{{ .external_name }}"),
 
 	// streamanalytics
 	"azurerm_stream_analytics_cluster":                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/clusters/{{ .external_name }}"),
-	"azurerm_stream_analytics_function_javascript_uda":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.job_name }}/functions/{{ .external_name }}"),
+	"azurerm_stream_analytics_function_javascript_uda":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.stream_analytics_job_id }}/functions/{{ .external_name }}"),
 	"azurerm_stream_analytics_job":                      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .external_name }}"),
 	"azurerm_stream_analytics_managed_private_endpoint": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/clusters/{{ .parameters.stream_analytics_cluster_name }}/privateEndpoints/{{ .external_name }}"),
-	"azurerm_stream_analytics_output_function":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_id }}/outputs/{{ .external_name }}"),
+	"azurerm_stream_analytics_output_function":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
 	"azurerm_stream_analytics_output_synapse":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
 	"azurerm_stream_analytics_output_table":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
 	// "azurerm_stream_analytics_function_javascript_udf": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.job_name }}/outputs/{{ .external_name }}"),
 	// "azurerm_stream_analytics_output_cosmosdb":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_id }}/outputs/{{ .external_name }}"),
 	// Does not work, tracked in https://github.com/upbound/official-providers/issues/368
-	"azurerm_stream_analytics_output_powerbi": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
-	"azurerm_stream_analytics_output_blob":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_id }}/outputs/{{ .external_name }}"),
+	"azurerm_stream_analytics_output_powerbi": config.TemplatedStringAsIdentifier("name", "{{ .parameters.stream_analytics_job_id }}/outputs/{{ .external_name }}"),
+	"azurerm_stream_analytics_output_blob":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
 
 	// azurerm_policy_definition can be imported at subscription or management group level
 	// Example IDs:
@@ -976,7 +976,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// costmanagement
 	//
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.CostManagement/exports/export1
-	"azurerm_resource_group_cost_management_export": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.CostManagement/exports/{{ .external_name }}"),
+	"azurerm_resource_group_cost_management_export": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.CostManagement/exports/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/providers/Microsoft.CostManagement/exports/export1
 	"azurerm_subscription_cost_management_export": config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/scheduledActions/dailyanomalybyresourcegroup
@@ -1747,7 +1747,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// federated_identity
 	//
 	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{parentIdentityName}/federatedIdentityCredentials/{resourceName}
-	"azurerm_federated_identity_credential": config.TemplatedStringAsIdentifier("name", "{{ .parameters.parent_id }}/federatedIdentityCredentials/{{ .external_name }}"),
+	"azurerm_federated_identity_credential": config.TemplatedStringAsIdentifier("name", "{{ .parameters.user_assigned_identity_id }}/federatedIdentityCredentials/{{ .external_name }}"),
 
 	// virtual_hub
 	//
@@ -2024,25 +2024,6 @@ func getKeyVaultSuffix(terraformProviderConfig map[string]interface{}) string {
 	return keyVaultSuffixByEnvironment["public"]
 }
 
-func getStorageAccountName(parameters map[string]interface{}) (string, error) {
-	if name, ok := parameters["storage_account_name"]; ok && name != nil && name != "" {
-		nameStr, ok := name.(string)
-		if !ok {
-			return "", errors.New("storage_account_name is not a string")
-		}
-		return nameStr, nil
-	}
-	if id, ok := parameters["storage_account_id"]; ok && id != nil && id != "" {
-		idStr, ok := id.(string)
-		if !ok {
-			return "", errors.New("storage_account_id is not a string")
-		}
-		parts := strings.Split(idStr, "/")
-		return parts[len(parts)-1], nil
-	}
-	return "", errors.New("cannot get storage_account_name or storage_account_id")
-}
-
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -2156,91 +2137,68 @@ func storageBlob() config.ExternalName {
 		return w[len(w)-1], nil
 	}
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
-		storageAccountName, err := getStorageAccountName(parameters)
-		if err != nil {
-			return "", err
+		// storage_container_id format:
+		// /subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account>/blobServices/default/containers/<container>
+		containerID, ok := parameters["storage_container_id"].(string)
+		if !ok || containerID == "" {
+			return "", errors.New("cannot get storage_container_id")
 		}
-		containerName, ok := parameters["storage_container_name"]
-		if !ok {
-			return "", errors.New("cannot get storage_container_name")
+		w := strings.Split(containerID, "/")
+		if len(w) != 13 || !strings.EqualFold(w[7], "storageAccounts") || !strings.EqualFold(w[11], "containers") {
+			return "", errors.Errorf("storage_container_id %q is not a storage container resource ID", containerID)
 		}
 		suffix := getStorageSuffix(terraformProviderConfig)
-		return fmt.Sprintf("https://%s.blob.%s/%s/%s", storageAccountName, suffix, containerName, externalName), nil
+		return fmt.Sprintf("https://%s.blob.%s/%s/%s", w[8], suffix, w[12], externalName), nil
 	}
 	return e
 }
 
-func storageContainer() config.ExternalName {
-	e := config.NameAsIdentifier
-	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-		id, ok := tfstate["id"]
-		if !ok {
-			return "", errors.New("id in tfstate cannot be empty")
+// redisLinkedServer builds the ID
+// /subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.Cache/redis/<target cache>/linkedServers/<linked cache>
+// The linked cache's name is not an argument of the resource: it is the last
+// segment of linked_redis_cache_id.
+func redisLinkedServer() config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redis/{{ .parameters.target_redis_cache_name }}/linkedServers/{{ .parameters.linked_redis_cache_name }}")
+	e.IdentifierFields = []string{"resource_group_name", "target_redis_cache_name", "linked_redis_cache_id"}
+	getID := e.GetIDFn
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
+		cacheID, ok := parameters["linked_redis_cache_id"].(string)
+		if !ok || cacheID == "" {
+			return "", errors.New("cannot get linked_redis_cache_id")
 		}
-		idStr, ok := id.(string)
-		if !ok {
-			return "", errors.New("id in tfstate is not a string")
+		w := strings.Split(cacheID, "/")
+		p := make(map[string]interface{}, len(parameters)+1)
+		for k, v := range parameters {
+			p[k] = v
 		}
-		w := strings.Split(idStr, "/")
-		return w[len(w)-1], nil
-	}
-	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
-		storageAccountName, err := getStorageAccountName(parameters)
-		if err != nil {
-			return "", err
-		}
-		suffix := getStorageSuffix(terraformProviderConfig)
-		return fmt.Sprintf("https://%s.blob.%s/%s", storageAccountName, suffix, externalName), nil
-	}
-	return e
-}
-
-func storageQueue() config.ExternalName {
-	e := config.NameAsIdentifier
-	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-		id, ok := tfstate["id"]
-		if !ok {
-			return "", errors.New("id in tfstate cannot be empty")
-		}
-		idStr, ok := id.(string)
-		if !ok {
-			return "", errors.New("id in tfstate is not a string")
-		}
-		w := strings.Split(idStr, "/")
-		return w[len(w)-1], nil
-	}
-	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
-		storageAccountName, err := getStorageAccountName(parameters)
-		if err != nil {
-			return "", err
-		}
-		suffix := getStorageSuffix(terraformProviderConfig)
-		return fmt.Sprintf("https://%s.queue.%s/%s", storageAccountName, suffix, externalName), nil
+		p["linked_redis_cache_name"] = w[len(w)-1]
+		return getID(ctx, externalName, p, terraformProviderConfig)
 	}
 	return e
 }
 
-func storageShare() config.ExternalName {
-	e := config.NameAsIdentifier
-	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-		id, ok := tfstate["id"]
-		if !ok {
-			return "", errors.New("id in tfstate cannot be empty")
+// storageTable keeps the Terraform ID as the external name. Since AzureRM
+// v5 that ID is the table's Resource Manager ID:
+// /subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.Storage/storageAccounts/<account>/tableServices/default/tables/<table>
+// A table created with storage_account_name before v5 has the data plane
+// URL https://<account>.table.<suffix>/Tables('<table>') as its external
+// name, which v5 can no longer parse, so the ID of such a table is built
+// from its parameters.
+func storageTable() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		if externalName == "" || strings.HasPrefix(externalName, "/subscriptions/") {
+			return externalName, nil
 		}
-		idStr, ok := id.(string)
-		if !ok {
-			return "", errors.New("id in tfstate is not a string")
+		accountID, ok := parameters["storage_account_id"].(string)
+		if !ok || accountID == "" {
+			return "", errors.New("cannot get storage_account_id")
 		}
-		w := strings.Split(idStr, "/")
-		return w[len(w)-1], nil
-	}
-	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
-		storageAccountName, err := getStorageAccountName(parameters)
-		if err != nil {
-			return "", err
+		name, ok := parameters["name"].(string)
+		if !ok || name == "" {
+			return "", errors.New("cannot get name")
 		}
-		suffix := getStorageSuffix(terraformProviderConfig)
-		return fmt.Sprintf("https://%s.file.%s/%s", storageAccountName, suffix, externalName), nil
+		return fmt.Sprintf("%s/tableServices/default/tables/%s", accountID, name), nil
 	}
 	return e
 }

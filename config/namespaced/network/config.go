@@ -12,7 +12,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
 )
 
 // Configure configures virtual group
@@ -133,7 +133,7 @@ func Configure(p *config.Provider) {
 		r.References["network_watcher_name"] = config.Reference{
 			TerraformName: "azurerm_network_watcher",
 		}
-		r.References["network_security_group_id"] = config.Reference{
+		r.References["target_resource_id"] = config.Reference{
 			TerraformName: "azurerm_network_security_group",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
@@ -245,50 +245,58 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_a_record", func(r *config.Resource) {
-		r.References["zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_aaaa_record", func(r *config.Resource) {
-		r.References["zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_cname_record", func(r *config.Resource) {
-		r.References["zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
-		r.References["zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_ptr_record", func(r *config.Resource) {
-		r.References["zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_srv_record", func(r *config.Resource) {
-		r.References["zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_txt_record", func(r *config.Resource) {
-		r.References["zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_zone_virtual_network_link", func(r *config.Resource) {
-		r.References["private_dns_zone_name"] = config.Reference{
+		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["virtual_network_id"] = config.Reference{
 			TerraformName: "azurerm_virtual_network",

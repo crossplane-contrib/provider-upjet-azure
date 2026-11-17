@@ -7,7 +7,7 @@ package kusto
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
 )
 
 // Configure configures kusto group
@@ -19,7 +19,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_kusto_attached_database_configuration", func(r *config.Resource) {
-		r.References["cluster_resource_id"] = config.Reference{
+		r.References["cluster_id"] = config.Reference{
 			TerraformName: "azurerm_kusto_cluster",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}

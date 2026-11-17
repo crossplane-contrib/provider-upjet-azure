@@ -7,8 +7,8 @@ package authorization
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
-	"github.com/upbound/provider-azure/v2/config/namespaced/common"
+	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v3/config/namespaced/common"
 )
 
 // Configure configures authorization group
@@ -40,10 +40,6 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_policy_set_definition", func(r *config.Resource) {
 		r.Kind = "PolicySetDefinition"
-		r.References["management_group_id"] = config.Reference{
-			TerraformName: "azurerm_management_group",
-			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
 	})
 
 	p.AddResourceConfigurator("azurerm_role_management_policy", func(r *config.Resource) {
