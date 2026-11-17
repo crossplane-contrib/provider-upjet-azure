@@ -150,6 +150,18 @@ func TestKeyVaultURLIDConfGetIDFn(t *testing.T) {
 			args: args{resourceType: "certificates", versionless: false, externalName: "example-cert"},
 			want: "",
 		},
+		"KeyNameOnlyIgnoresVersionParameter": {
+			args: args{resourceType: "keys", versionless: true, externalName: "example-key", parameters: map[string]any{"version": "0123456789abcdef0123456789abcdef"}},
+			want: "https://example-kv.vault.azure.net/keys/example-key/latest",
+		},
+		"CertificateNameOnlyWithVersionParameterUnchanged": {
+			args: args{resourceType: "certificates", versionless: false, externalName: "example-cert", parameters: map[string]any{"version": "0123456789abcdef0123456789abcdef"}},
+			want: "https://example-kv.vault.azure.net/certificates/example-cert",
+		},
+		"CertificateEmptyVersionParameterUnchanged": {
+			args: args{resourceType: "certificates", versionless: false, externalName: "example-cert", parameters: map[string]any{"version": ""}},
+			want: "",
+		},
 		"CertificateVersionedUnchanged": {
 			args: args{resourceType: "certificates", versionless: false, externalName: "example-cert/0123456789abcdef0123456789abcdef"},
 			want: "https://example-kv.vault.azure.net/certificates/example-cert/0123456789abcdef0123456789abcdef",
@@ -175,29 +187,33 @@ func TestKeyVaultURLIDConfGetIDFn(t *testing.T) {
 
 func TestKeyVaultURLIDConfGetExternalNameFn(t *testing.T) {
 	cases := map[string]struct {
-		versionless bool
-		id          string
-		want        string
+		resourceType string
+		versionless  bool
+		id           string
+		want         string
 	}{
 		"KeyVersioned": {
-			versionless: true,
-			id:          "https://example-kv.vault.azure.net/keys/example-key/0123456789abcdef0123456789abcdef",
-			want:        "example-key/0123456789abcdef0123456789abcdef",
+			resourceType: "keys",
+			versionless:  true,
+			id:           "https://example-kv.vault.azure.net/keys/example-key/0123456789abcdef0123456789abcdef",
+			want:         "example-key/0123456789abcdef0123456789abcdef",
 		},
 		"KeyLatestRoundTripsToNameOnly": {
-			versionless: true,
-			id:          "https://example-kv.vault.azure.net/keys/example-key/latest",
-			want:        "example-key",
+			resourceType: "keys",
+			versionless:  true,
+			id:           "https://example-kv.vault.azure.net/keys/example-key/latest",
+			want:         "example-key",
 		},
 		"CertificateLatestIsAnOrdinaryVersion": {
-			versionless: false,
-			id:          "https://example-kv.vault.azure.net/certificates/example-cert/latest",
-			want:        "example-cert/latest",
+			resourceType: "certificates",
+			versionless:  false,
+			id:           "https://example-kv.vault.azure.net/certificates/example-cert/latest",
+			want:         "example-cert/latest",
 		},
 	}
 	for name, tc := range cases {
 		t.Run(name, func(t *testing.T) {
-			e := keyVaultURLIDConf("keys", tc.versionless)
+			e := keyVaultURLIDConf(tc.resourceType, tc.versionless)
 			got, err := e.GetExternalNameFn(map[string]any{"id": tc.id})
 			if err != nil {
 				t.Fatalf("GetExternalNameFn(...): unexpected error: %v", err)
