@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VPNServerConfiguration
 metadata:
   annotations:
@@ -48,7 +48,7 @@ spec:
   forProvider:
     location: West Europe
     radius:
-    - server:
+      server:
       - address: 10.105.1.1
         score: 15
         secretSecretRef:

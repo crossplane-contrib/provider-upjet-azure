@@ -13,116 +13,19 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AIServicesCustomerManagedKeyInitParameters struct {
-
-	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there are multiple identities attached to the Azure AI Service.
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// The ID of the Key Vault Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
-
-	// The ID of the managed HSM Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
-	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
-}
-
-type AIServicesCustomerManagedKeyObservation struct {
-
-	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there are multiple identities attached to the Azure AI Service.
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// The ID of the Key Vault Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
-
-	// The ID of the managed HSM Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
-	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
-}
-
-type AIServicesCustomerManagedKeyParameters struct {
-
-	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there are multiple identities attached to the Azure AI Service.
-	// +kubebuilder:validation:Optional
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// The ID of the Key Vault Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
-
-	// The ID of the managed HSM Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
-	// +kubebuilder:validation:Optional
-	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
-}
-
-type AIServicesIdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Services Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this AI Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AIServicesIdentityObservation struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Services Account.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Principal ID associated with this Managed Service Identity.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Tenant ID associated with this Managed Service Identity.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this AI Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AIServicesIdentityParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Services Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this AI Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type AIServicesInitParameters struct {
 
 	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. Changing this forces a new resource to be created.
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 
 	// A customer_managed_key block as documented below.
-	CustomerManagedKey *AIServicesCustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+	CustomerManagedKey *CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// List of FQDNs allowed for the AI Services Account.
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// An identity block as defined below.
-	Identity *AIServicesIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication is enabled for the AI Services Account. Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
@@ -131,7 +34,7 @@ type AIServicesInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
-	NetworkAcls *AIServicesNetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	NetworkAcls *NetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
 	// Whether outbound network access is restricted for the AI Services Account. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
@@ -143,63 +46,11 @@ type AIServicesInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A storage block as defined below.
-	Storage []AIServicesStorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
+	Storage []StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
-type AIServicesNetworkAclsInitParameters struct {
-
-	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices. Defaults to AzureServices.
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
-
-	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
-
-	// One or more IP Addresses, or CIDR Blocks which should be able to access the AI Services Account.
-	// +listType=set
-	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
-
-	// A virtual_network_rules block as defined below.
-	VirtualNetworkRules []NetworkAclsVirtualNetworkRulesInitParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
-}
-
-type AIServicesNetworkAclsObservation struct {
-
-	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices. Defaults to AzureServices.
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
-
-	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
-
-	// One or more IP Addresses, or CIDR Blocks which should be able to access the AI Services Account.
-	// +listType=set
-	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
-
-	// A virtual_network_rules block as defined below.
-	VirtualNetworkRules []NetworkAclsVirtualNetworkRulesObservation `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
-}
-
-type AIServicesNetworkAclsParameters struct {
-
-	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices. Defaults to AzureServices.
-	// +kubebuilder:validation:Optional
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
-
-	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
-	// +kubebuilder:validation:Optional
-	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
-
-	// One or more IP Addresses, or CIDR Blocks which should be able to access the AI Services Account.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
-
-	// A virtual_network_rules block as defined below.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkRules []NetworkAclsVirtualNetworkRulesParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
 }
 
 type AIServicesObservation struct {
@@ -208,7 +59,7 @@ type AIServicesObservation struct {
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 
 	// A customer_managed_key block as documented below.
-	CustomerManagedKey *AIServicesCustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+	CustomerManagedKey *CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// The endpoint used to connect to the AI Services Account.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
@@ -220,7 +71,7 @@ type AIServicesObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *AIServicesIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication is enabled for the AI Services Account. Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
@@ -229,7 +80,7 @@ type AIServicesObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
-	NetworkAcls *AIServicesNetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	NetworkAcls *NetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
 	// Whether outbound network access is restricted for the AI Services Account. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
@@ -244,7 +95,7 @@ type AIServicesObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A storage block as defined below.
-	Storage []AIServicesStorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
+	Storage []StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -259,7 +110,7 @@ type AIServicesParameters struct {
 
 	// A customer_managed_key block as documented below.
 	// +kubebuilder:validation:Optional
-	CustomerManagedKey *AIServicesCustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+	CustomerManagedKey *CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// List of FQDNs allowed for the AI Services Account.
 	// +kubebuilder:validation:Optional
@@ -267,7 +118,7 @@ type AIServicesParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *AIServicesIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication is enabled for the AI Services Account. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -279,7 +130,7 @@ type AIServicesParameters struct {
 
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
 	// +kubebuilder:validation:Optional
-	NetworkAcls *AIServicesNetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	NetworkAcls *NetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
 	// Whether outbound network access is restricted for the AI Services Account. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -308,7 +159,7 @@ type AIServicesParameters struct {
 
 	// A storage block as defined below.
 	// +kubebuilder:validation:Optional
-	Storage []AIServicesStorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
+	Storage []StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -316,7 +167,156 @@ type AIServicesParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type AIServicesStorageInitParameters struct {
+type CustomerManagedKeyInitParameters struct {
+
+	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there are multiple identities attached to the Azure AI Service.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the managed HSM Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+}
+
+type CustomerManagedKeyObservation struct {
+
+	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there are multiple identities attached to the Azure AI Service.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the managed HSM Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+}
+
+type CustomerManagedKeyParameters struct {
+
+	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there are multiple identities attached to the Azure AI Service.
+	// +kubebuilder:validation:Optional
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the managed HSM Key which should be used to encrypt the data in this AI Services Account. Exactly one of key_vault_key_id, managed_hsm_key_id must be specified.
+	// +kubebuilder:validation:Optional
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Services Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this AI Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Services Account.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this AI Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Services Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this AI Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type NetworkAclsInitParameters struct {
+
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices. Defaults to AzureServices.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the AI Services Account.
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// A virtual_network_rules block as defined below.
+	VirtualNetworkRules []VirtualNetworkRulesInitParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
+}
+
+type NetworkAclsObservation struct {
+
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices. Defaults to AzureServices.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the AI Services Account.
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// A virtual_network_rules block as defined below.
+	VirtualNetworkRules []VirtualNetworkRulesObservation `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
+}
+
+type NetworkAclsParameters struct {
+
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices. Defaults to AzureServices.
+	// +kubebuilder:validation:Optional
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
+	// +kubebuilder:validation:Optional
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the AI Services Account.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// A virtual_network_rules block as defined below.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkRules []VirtualNetworkRulesParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
+}
+
+type StorageInitParameters struct {
 
 	// The client ID of the Managed Identity associated with the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -345,7 +345,7 @@ type AIServicesStorageInitParameters struct {
 	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
-type AIServicesStorageObservation struct {
+type StorageObservation struct {
 
 	// The client ID of the Managed Identity associated with the Storage Account.
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
@@ -354,7 +354,7 @@ type AIServicesStorageObservation struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
-type AIServicesStorageParameters struct {
+type StorageParameters struct {
 
 	// The client ID of the Managed Identity associated with the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -385,7 +385,7 @@ type AIServicesStorageParameters struct {
 	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
-type NetworkAclsVirtualNetworkRulesInitParameters struct {
+type VirtualNetworkRulesInitParameters struct {
 
 	// Whether to ignore a missing Virtual Network Service Endpoint or not. Default to false.
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
@@ -404,7 +404,7 @@ type NetworkAclsVirtualNetworkRulesInitParameters struct {
 	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
-type NetworkAclsVirtualNetworkRulesObservation struct {
+type VirtualNetworkRulesObservation struct {
 
 	// Whether to ignore a missing Virtual Network Service Endpoint or not. Default to false.
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
@@ -413,7 +413,7 @@ type NetworkAclsVirtualNetworkRulesObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
-type NetworkAclsVirtualNetworkRulesParameters struct {
+type VirtualNetworkRulesParameters struct {
 
 	// Whether to ignore a missing Virtual Network Service Endpoint or not. Default to false.
 	// +kubebuilder:validation:Optional

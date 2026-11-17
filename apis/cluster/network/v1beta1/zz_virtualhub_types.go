@@ -13,7 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type VirtualHubInitParameters_2 struct {
+type VirtualHubInitParameters struct {
 
 	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
@@ -54,7 +54,7 @@ type VirtualHubInitParameters_2 struct {
 	VirtualWanIDSelector *v2.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
-type VirtualHubObservation_2 struct {
+type VirtualHubObservation struct {
 
 	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
@@ -100,7 +100,7 @@ type VirtualHubObservation_2 struct {
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 }
 
-type VirtualHubParameters_2 struct {
+type VirtualHubParameters struct {
 
 	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
 	// +kubebuilder:validation:Optional
@@ -195,7 +195,7 @@ type VirtualHubRouteParameters struct {
 // VirtualHubSpec defines the desired state of VirtualHub
 type VirtualHubSpec struct {
 	v2.ClusterManagedResourceSpec `json:",inline"`
-	ForProvider                   VirtualHubParameters_2 `json:"forProvider"`
+	ForProvider                   VirtualHubParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -206,13 +206,13 @@ type VirtualHubSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider VirtualHubInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider VirtualHubInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualHubStatus defines the observed state of VirtualHub.
 type VirtualHubStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               VirtualHubObservation_2 `json:"atProvider,omitempty"`
+	AtProvider               VirtualHubObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

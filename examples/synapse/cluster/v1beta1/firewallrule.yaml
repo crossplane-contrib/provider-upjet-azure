@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -71,7 +71,7 @@ spec:
 
 ---
 
-apiVersion: synapse.azure.upbound.io/v1beta1
+apiVersion: synapse.azure.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:
@@ -82,7 +82,7 @@ metadata:
 spec:
   forProvider:
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
     location: North Central US
     resourceGroupNameSelector:
       matchLabels:

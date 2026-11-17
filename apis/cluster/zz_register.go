@@ -38,7 +38,6 @@ import (
 	v1beta1compute "github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta1"
 	v1beta2compute "github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2"
 	v1beta1confidentialledger "github.com/upbound/provider-azure/v2/apis/cluster/confidentialledger/v1beta1"
-	v1beta1consumption "github.com/upbound/provider-azure/v2/apis/cluster/consumption/v1beta1"
 	v1beta2consumption "github.com/upbound/provider-azure/v2/apis/cluster/consumption/v1beta2"
 	v1beta1containerapp "github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta1"
 	v1beta2containerapp "github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta2"
@@ -70,24 +69,18 @@ import (
 	v1beta1devcenter "github.com/upbound/provider-azure/v2/apis/cluster/devcenter/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta1"
 	v1beta2devices "github.com/upbound/provider-azure/v2/apis/cluster/devices/v1beta2"
-	v1beta1deviceupdate "github.com/upbound/provider-azure/v2/apis/cluster/deviceupdate/v1beta1"
 	v1beta2deviceupdate "github.com/upbound/provider-azure/v2/apis/cluster/deviceupdate/v1beta2"
 	v1beta1devopsinfrastructure "github.com/upbound/provider-azure/v2/apis/cluster/devopsinfrastructure/v1beta1"
 	v1beta1devtestlab "github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta1"
 	v1beta2devtestlab "github.com/upbound/provider-azure/v2/apis/cluster/devtestlab/v1beta2"
-	v1beta1digitaltwins "github.com/upbound/provider-azure/v2/apis/cluster/digitaltwins/v1beta1"
 	v1beta2digitaltwins "github.com/upbound/provider-azure/v2/apis/cluster/digitaltwins/v1beta2"
-	v1beta1elastic "github.com/upbound/provider-azure/v2/apis/cluster/elastic/v1beta1"
 	v1beta2elastic "github.com/upbound/provider-azure/v2/apis/cluster/elastic/v1beta2"
 	v1beta1eventgrid "github.com/upbound/provider-azure/v2/apis/cluster/eventgrid/v1beta1"
 	v1beta2eventgrid "github.com/upbound/provider-azure/v2/apis/cluster/eventgrid/v1beta2"
 	v1beta1eventhub "github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta1"
 	v1beta2eventhub "github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2"
-	v1beta1fluidrelay "github.com/upbound/provider-azure/v2/apis/cluster/fluidrelay/v1beta1"
 	v1beta2fluidrelay "github.com/upbound/provider-azure/v2/apis/cluster/fluidrelay/v1beta2"
-	v1beta1guestconfiguration "github.com/upbound/provider-azure/v2/apis/cluster/guestconfiguration/v1beta1"
 	v1beta2guestconfiguration "github.com/upbound/provider-azure/v2/apis/cluster/guestconfiguration/v1beta2"
-	v1beta1hdinsight "github.com/upbound/provider-azure/v2/apis/cluster/hdinsight/v1beta1"
 	v1beta2hdinsight "github.com/upbound/provider-azure/v2/apis/cluster/hdinsight/v1beta2"
 	v1beta1healthbot "github.com/upbound/provider-azure/v2/apis/cluster/healthbot/v1beta1"
 	v1beta1healthcareapis "github.com/upbound/provider-azure/v2/apis/cluster/healthcareapis/v1beta1"
@@ -100,7 +93,6 @@ import (
 	v1beta2keyvault "github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2"
 	v1beta1kusto "github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta1"
 	v1beta2kusto "github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2"
-	v1beta1loadtestservice "github.com/upbound/provider-azure/v2/apis/cluster/loadtestservice/v1beta1"
 	v1beta2loadtestservice "github.com/upbound/provider-azure/v2/apis/cluster/loadtestservice/v1beta2"
 	v1beta1logic "github.com/upbound/provider-azure/v2/apis/cluster/logic/v1beta1"
 	v1beta2logic "github.com/upbound/provider-azure/v2/apis/cluster/logic/v1beta2"
@@ -120,14 +112,12 @@ import (
 	v1beta2notificationhubs "github.com/upbound/provider-azure/v2/apis/cluster/notificationhubs/v1beta2"
 	v1beta1operationalinsights "github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta1"
 	v1beta2operationalinsights "github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2"
-	v1beta1operationsmanagement "github.com/upbound/provider-azure/v2/apis/cluster/operationsmanagement/v1beta1"
 	v1beta2operationsmanagement "github.com/upbound/provider-azure/v2/apis/cluster/operationsmanagement/v1beta2"
 	v1beta1oracle "github.com/upbound/provider-azure/v2/apis/cluster/oracle/v1beta1"
 	v1beta1orbital "github.com/upbound/provider-azure/v2/apis/cluster/orbital/v1beta1"
 	v1beta1policyinsights "github.com/upbound/provider-azure/v2/apis/cluster/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/v2/apis/cluster/portal/v1beta1"
 	v1beta1powerbidedicated "github.com/upbound/provider-azure/v2/apis/cluster/powerbidedicated/v1beta1"
-	v1beta1purview "github.com/upbound/provider-azure/v2/apis/cluster/purview/v1beta1"
 	v1beta2purview "github.com/upbound/provider-azure/v2/apis/cluster/purview/v1beta2"
 	v1beta1recoveryservices "github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta1"
 	v1beta2recoveryservices "github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2"
@@ -141,9 +131,7 @@ import (
 	v1beta1securityinsights "github.com/upbound/provider-azure/v2/apis/cluster/securityinsights/v1beta1"
 	v1beta1servicebus "github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta1"
 	v1beta2servicebus "github.com/upbound/provider-azure/v2/apis/cluster/servicebus/v1beta2"
-	v1beta1servicefabric "github.com/upbound/provider-azure/v2/apis/cluster/servicefabric/v1beta1"
 	v1beta2servicefabric "github.com/upbound/provider-azure/v2/apis/cluster/servicefabric/v1beta2"
-	v1beta1servicelinker "github.com/upbound/provider-azure/v2/apis/cluster/servicelinker/v1beta1"
 	v1beta2servicelinker "github.com/upbound/provider-azure/v2/apis/cluster/servicelinker/v1beta2"
 	v1beta1servicenetworking "github.com/upbound/provider-azure/v2/apis/cluster/servicenetworking/v1beta1"
 	v1beta1signalrservice "github.com/upbound/provider-azure/v2/apis/cluster/signalrservice/v1beta1"
@@ -198,7 +186,6 @@ func init() {
 		v1beta1compute.SchemeBuilder.AddToScheme,
 		v1beta2compute.SchemeBuilder.AddToScheme,
 		v1beta1confidentialledger.SchemeBuilder.AddToScheme,
-		v1beta1consumption.SchemeBuilder.AddToScheme,
 		v1beta2consumption.SchemeBuilder.AddToScheme,
 		v1beta1containerapp.SchemeBuilder.AddToScheme,
 		v1beta2containerapp.SchemeBuilder.AddToScheme,
@@ -230,24 +217,18 @@ func init() {
 		v1beta1devcenter.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta2devices.SchemeBuilder.AddToScheme,
-		v1beta1deviceupdate.SchemeBuilder.AddToScheme,
 		v1beta2deviceupdate.SchemeBuilder.AddToScheme,
 		v1beta1devopsinfrastructure.SchemeBuilder.AddToScheme,
 		v1beta1devtestlab.SchemeBuilder.AddToScheme,
 		v1beta2devtestlab.SchemeBuilder.AddToScheme,
-		v1beta1digitaltwins.SchemeBuilder.AddToScheme,
 		v1beta2digitaltwins.SchemeBuilder.AddToScheme,
-		v1beta1elastic.SchemeBuilder.AddToScheme,
 		v1beta2elastic.SchemeBuilder.AddToScheme,
 		v1beta1eventgrid.SchemeBuilder.AddToScheme,
 		v1beta2eventgrid.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
 		v1beta2eventhub.SchemeBuilder.AddToScheme,
-		v1beta1fluidrelay.SchemeBuilder.AddToScheme,
 		v1beta2fluidrelay.SchemeBuilder.AddToScheme,
-		v1beta1guestconfiguration.SchemeBuilder.AddToScheme,
 		v1beta2guestconfiguration.SchemeBuilder.AddToScheme,
-		v1beta1hdinsight.SchemeBuilder.AddToScheme,
 		v1beta2hdinsight.SchemeBuilder.AddToScheme,
 		v1beta1healthbot.SchemeBuilder.AddToScheme,
 		v1beta1healthcareapis.SchemeBuilder.AddToScheme,
@@ -260,7 +241,6 @@ func init() {
 		v1beta2keyvault.SchemeBuilder.AddToScheme,
 		v1beta1kusto.SchemeBuilder.AddToScheme,
 		v1beta2kusto.SchemeBuilder.AddToScheme,
-		v1beta1loadtestservice.SchemeBuilder.AddToScheme,
 		v1beta2loadtestservice.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
 		v1beta2logic.SchemeBuilder.AddToScheme,
@@ -280,14 +260,12 @@ func init() {
 		v1beta2notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta2operationalinsights.SchemeBuilder.AddToScheme,
-		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
 		v1beta2operationsmanagement.SchemeBuilder.AddToScheme,
 		v1beta1oracle.SchemeBuilder.AddToScheme,
 		v1beta1orbital.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,
 		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,
-		v1beta1purview.SchemeBuilder.AddToScheme,
 		v1beta2purview.SchemeBuilder.AddToScheme,
 		v1beta1recoveryservices.SchemeBuilder.AddToScheme,
 		v1beta2recoveryservices.SchemeBuilder.AddToScheme,
@@ -301,9 +279,7 @@ func init() {
 		v1beta1securityinsights.SchemeBuilder.AddToScheme,
 		v1beta1servicebus.SchemeBuilder.AddToScheme,
 		v1beta2servicebus.SchemeBuilder.AddToScheme,
-		v1beta1servicefabric.SchemeBuilder.AddToScheme,
 		v1beta2servicefabric.SchemeBuilder.AddToScheme,
-		v1beta1servicelinker.SchemeBuilder.AddToScheme,
 		v1beta2servicelinker.SchemeBuilder.AddToScheme,
 		v1beta1servicenetworking.SchemeBuilder.AddToScheme,
 		v1beta1signalrservice.SchemeBuilder.AddToScheme,

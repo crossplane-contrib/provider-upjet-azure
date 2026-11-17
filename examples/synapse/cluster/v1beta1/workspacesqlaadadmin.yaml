@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -69,7 +69,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Key
 metadata:
   annotations:
@@ -107,7 +107,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -146,7 +146,7 @@ spec:
 
 ---
 
-apiVersion: synapse.azure.upbound.io/v1beta1
+apiVersion: synapse.azure.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:
@@ -158,7 +158,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

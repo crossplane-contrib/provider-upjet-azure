@@ -25,7 +25,7 @@ spec:
       namespace: upbound-system
     description: Redis cache instances
 ---
-apiVersion: cache.azure.upbound.io/v1beta1
+apiVersion: cache.azure.upbound.io/v1beta2
 kind: RedisCache
 metadata:
   annotations:
@@ -45,13 +45,13 @@ spec:
     location: West Europe
     minimumTlsVersion: "1.2"
     redisConfiguration:
-    - {}
+      {}
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: Basic
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

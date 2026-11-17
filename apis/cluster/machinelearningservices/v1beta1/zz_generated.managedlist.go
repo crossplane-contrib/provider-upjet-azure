@@ -25,24 +25,6 @@ func (l *AIFoundryProjectList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ComputeClusterList.
-func (l *ComputeClusterList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ComputeInstanceList.
-func (l *ComputeInstanceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this DatastoreBlobstorageList.
 func (l *DatastoreBlobstorageList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -72,24 +54,6 @@ func (l *DatastoreFileshareList) GetItems() []resource.Managed {
 
 // GetItems of this InferenceClusterList.
 func (l *InferenceClusterList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SynapseSparkList.
-func (l *SynapseSparkList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this WorkspaceList.
-func (l *WorkspaceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

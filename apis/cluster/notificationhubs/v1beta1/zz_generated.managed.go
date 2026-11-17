@@ -57,56 +57,6 @@ func (mg *AuthorizationRule) SetWriteConnectionSecretToReference(r *xpv2.SecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this NotificationHub.
-func (mg *NotificationHub) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this NotificationHub.
-func (mg *NotificationHub) GetDeletionPolicy() xpv2.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this NotificationHub.
-func (mg *NotificationHub) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this NotificationHub.
-func (mg *NotificationHub) GetProviderConfigReference() *xpv2.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this NotificationHub.
-func (mg *NotificationHub) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this NotificationHub.
-func (mg *NotificationHub) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this NotificationHub.
-func (mg *NotificationHub) SetDeletionPolicy(r xpv2.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this NotificationHub.
-func (mg *NotificationHub) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this NotificationHub.
-func (mg *NotificationHub) SetProviderConfigReference(r *xpv2.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this NotificationHub.
-func (mg *NotificationHub) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this NotificationHubNamespace.
 func (mg *NotificationHubNamespace) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

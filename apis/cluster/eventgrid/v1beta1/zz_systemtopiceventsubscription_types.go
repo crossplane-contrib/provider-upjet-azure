@@ -13,737 +13,206 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AdvancedFilterBoolEqualsInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *bool `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterBoolEqualsObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *bool `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterBoolEqualsParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	// +kubebuilder:validation:Optional
-	Value *bool `json:"value" tf:"value,omitempty"`
-}
-
-type AdvancedFilterIsNotNullInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type AdvancedFilterIsNotNullObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type AdvancedFilterIsNotNullParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-}
-
-type AdvancedFilterIsNullOrUndefinedInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type AdvancedFilterIsNullOrUndefinedObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type AdvancedFilterIsNullOrUndefinedParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-}
-
-type AdvancedFilterNumberGreaterThanInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberGreaterThanObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberGreaterThanOrEqualsInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberGreaterThanOrEqualsObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberGreaterThanOrEqualsParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberGreaterThanParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberInInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberInObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberInParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*float64 `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberInRangeInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberInRangeObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberInRangeParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values [][]*float64 `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberLessThanInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberLessThanObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberLessThanOrEqualsInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberLessThanOrEqualsObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberLessThanOrEqualsParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberLessThanParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies a single value to compare to when using a single value operator.
-	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
-}
-
-type AdvancedFilterNumberNotInInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberNotInObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberNotInParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*float64 `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberNotInRangeInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberNotInRangeObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterNumberNotInRangeParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values [][]*float64 `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringBeginsWithInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringBeginsWithObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringBeginsWithParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringContainsInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringContainsObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringContainsParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringEndsWithInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringEndsWithObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringEndsWithParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringInInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringInObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringInParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotBeginsWithInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotBeginsWithObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotBeginsWithParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotContainsInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotContainsObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotContainsParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotEndsWithInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotEndsWithObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotEndsWithParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotInInitParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotInObservation struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type AdvancedFilterStringNotInParameters struct {
-
-	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// Specifies an array of values to compare to when using a multiple values operator.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
-}
-
-type SystemTopicEventSubscriptionAdvancedFilterInitParameters struct {
+type AdvancedFilterInitParameters struct {
 
 	// Compares a value of an event using a single boolean value.
-	BoolEquals []AdvancedFilterBoolEqualsInitParameters `json:"boolEquals,omitempty" tf:"bool_equals,omitempty"`
+	BoolEquals []BoolEqualsInitParameters `json:"boolEquals,omitempty" tf:"bool_equals,omitempty"`
 
 	// Evaluates if a value of an event isn't NULL or undefined.
-	IsNotNull []AdvancedFilterIsNotNullInitParameters `json:"isNotNull,omitempty" tf:"is_not_null,omitempty"`
+	IsNotNull []IsNotNullInitParameters `json:"isNotNull,omitempty" tf:"is_not_null,omitempty"`
 
 	// Evaluates if a value of an event is NULL or undefined.
-	IsNullOrUndefined []AdvancedFilterIsNullOrUndefinedInitParameters `json:"isNullOrUndefined,omitempty" tf:"is_null_or_undefined,omitempty"`
+	IsNullOrUndefined []IsNullOrUndefinedInitParameters `json:"isNullOrUndefined,omitempty" tf:"is_null_or_undefined,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberGreaterThan []AdvancedFilterNumberGreaterThanInitParameters `json:"numberGreaterThan,omitempty" tf:"number_greater_than,omitempty"`
+	NumberGreaterThan []NumberGreaterThanInitParameters `json:"numberGreaterThan,omitempty" tf:"number_greater_than,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberGreaterThanOrEquals []AdvancedFilterNumberGreaterThanOrEqualsInitParameters `json:"numberGreaterThanOrEquals,omitempty" tf:"number_greater_than_or_equals,omitempty"`
+	NumberGreaterThanOrEquals []NumberGreaterThanOrEqualsInitParameters `json:"numberGreaterThanOrEquals,omitempty" tf:"number_greater_than_or_equals,omitempty"`
 
 	// Compares a value of an event using multiple floating point numbers.
-	NumberIn []AdvancedFilterNumberInInitParameters `json:"numberIn,omitempty" tf:"number_in,omitempty"`
+	NumberIn []NumberInInitParameters `json:"numberIn,omitempty" tf:"number_in,omitempty"`
 
 	// Compares a value of an event using multiple floating point number ranges.
-	NumberInRange []AdvancedFilterNumberInRangeInitParameters `json:"numberInRange,omitempty" tf:"number_in_range,omitempty"`
+	NumberInRange []NumberInRangeInitParameters `json:"numberInRange,omitempty" tf:"number_in_range,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberLessThan []AdvancedFilterNumberLessThanInitParameters `json:"numberLessThan,omitempty" tf:"number_less_than,omitempty"`
+	NumberLessThan []NumberLessThanInitParameters `json:"numberLessThan,omitempty" tf:"number_less_than,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberLessThanOrEquals []AdvancedFilterNumberLessThanOrEqualsInitParameters `json:"numberLessThanOrEquals,omitempty" tf:"number_less_than_or_equals,omitempty"`
+	NumberLessThanOrEquals []NumberLessThanOrEqualsInitParameters `json:"numberLessThanOrEquals,omitempty" tf:"number_less_than_or_equals,omitempty"`
 
 	// Compares a value of an event using multiple floating point numbers.
-	NumberNotIn []AdvancedFilterNumberNotInInitParameters `json:"numberNotIn,omitempty" tf:"number_not_in,omitempty"`
+	NumberNotIn []NumberNotInInitParameters `json:"numberNotIn,omitempty" tf:"number_not_in,omitempty"`
 
 	// Compares a value of an event using multiple floating point number ranges.
-	NumberNotInRange []AdvancedFilterNumberNotInRangeInitParameters `json:"numberNotInRange,omitempty" tf:"number_not_in_range,omitempty"`
+	NumberNotInRange []NumberNotInRangeInitParameters `json:"numberNotInRange,omitempty" tf:"number_not_in_range,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringBeginsWith []AdvancedFilterStringBeginsWithInitParameters `json:"stringBeginsWith,omitempty" tf:"string_begins_with,omitempty"`
+	StringBeginsWith []StringBeginsWithInitParameters `json:"stringBeginsWith,omitempty" tf:"string_begins_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringContains []AdvancedFilterStringContainsInitParameters `json:"stringContains,omitempty" tf:"string_contains,omitempty"`
+	StringContains []StringContainsInitParameters `json:"stringContains,omitempty" tf:"string_contains,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringEndsWith []AdvancedFilterStringEndsWithInitParameters `json:"stringEndsWith,omitempty" tf:"string_ends_with,omitempty"`
+	StringEndsWith []StringEndsWithInitParameters `json:"stringEndsWith,omitempty" tf:"string_ends_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringIn []AdvancedFilterStringInInitParameters `json:"stringIn,omitempty" tf:"string_in,omitempty"`
+	StringIn []StringInInitParameters `json:"stringIn,omitempty" tf:"string_in,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotBeginsWith []AdvancedFilterStringNotBeginsWithInitParameters `json:"stringNotBeginsWith,omitempty" tf:"string_not_begins_with,omitempty"`
+	StringNotBeginsWith []StringNotBeginsWithInitParameters `json:"stringNotBeginsWith,omitempty" tf:"string_not_begins_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotContains []AdvancedFilterStringNotContainsInitParameters `json:"stringNotContains,omitempty" tf:"string_not_contains,omitempty"`
+	StringNotContains []StringNotContainsInitParameters `json:"stringNotContains,omitempty" tf:"string_not_contains,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotEndsWith []AdvancedFilterStringNotEndsWithInitParameters `json:"stringNotEndsWith,omitempty" tf:"string_not_ends_with,omitempty"`
+	StringNotEndsWith []StringNotEndsWithInitParameters `json:"stringNotEndsWith,omitempty" tf:"string_not_ends_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotIn []AdvancedFilterStringNotInInitParameters `json:"stringNotIn,omitempty" tf:"string_not_in,omitempty"`
+	StringNotIn []StringNotInInitParameters `json:"stringNotIn,omitempty" tf:"string_not_in,omitempty"`
 }
 
-type SystemTopicEventSubscriptionAdvancedFilterObservation struct {
+type AdvancedFilterObservation struct {
 
 	// Compares a value of an event using a single boolean value.
-	BoolEquals []AdvancedFilterBoolEqualsObservation `json:"boolEquals,omitempty" tf:"bool_equals,omitempty"`
+	BoolEquals []BoolEqualsObservation `json:"boolEquals,omitempty" tf:"bool_equals,omitempty"`
 
 	// Evaluates if a value of an event isn't NULL or undefined.
-	IsNotNull []AdvancedFilterIsNotNullObservation `json:"isNotNull,omitempty" tf:"is_not_null,omitempty"`
+	IsNotNull []IsNotNullObservation `json:"isNotNull,omitempty" tf:"is_not_null,omitempty"`
 
 	// Evaluates if a value of an event is NULL or undefined.
-	IsNullOrUndefined []AdvancedFilterIsNullOrUndefinedObservation `json:"isNullOrUndefined,omitempty" tf:"is_null_or_undefined,omitempty"`
+	IsNullOrUndefined []IsNullOrUndefinedObservation `json:"isNullOrUndefined,omitempty" tf:"is_null_or_undefined,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberGreaterThan []AdvancedFilterNumberGreaterThanObservation `json:"numberGreaterThan,omitempty" tf:"number_greater_than,omitempty"`
+	NumberGreaterThan []NumberGreaterThanObservation `json:"numberGreaterThan,omitempty" tf:"number_greater_than,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberGreaterThanOrEquals []AdvancedFilterNumberGreaterThanOrEqualsObservation `json:"numberGreaterThanOrEquals,omitempty" tf:"number_greater_than_or_equals,omitempty"`
+	NumberGreaterThanOrEquals []NumberGreaterThanOrEqualsObservation `json:"numberGreaterThanOrEquals,omitempty" tf:"number_greater_than_or_equals,omitempty"`
 
 	// Compares a value of an event using multiple floating point numbers.
-	NumberIn []AdvancedFilterNumberInObservation `json:"numberIn,omitempty" tf:"number_in,omitempty"`
+	NumberIn []NumberInObservation `json:"numberIn,omitempty" tf:"number_in,omitempty"`
 
 	// Compares a value of an event using multiple floating point number ranges.
-	NumberInRange []AdvancedFilterNumberInRangeObservation `json:"numberInRange,omitempty" tf:"number_in_range,omitempty"`
+	NumberInRange []NumberInRangeObservation `json:"numberInRange,omitempty" tf:"number_in_range,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberLessThan []AdvancedFilterNumberLessThanObservation `json:"numberLessThan,omitempty" tf:"number_less_than,omitempty"`
+	NumberLessThan []NumberLessThanObservation `json:"numberLessThan,omitempty" tf:"number_less_than,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
-	NumberLessThanOrEquals []AdvancedFilterNumberLessThanOrEqualsObservation `json:"numberLessThanOrEquals,omitempty" tf:"number_less_than_or_equals,omitempty"`
+	NumberLessThanOrEquals []NumberLessThanOrEqualsObservation `json:"numberLessThanOrEquals,omitempty" tf:"number_less_than_or_equals,omitempty"`
 
 	// Compares a value of an event using multiple floating point numbers.
-	NumberNotIn []AdvancedFilterNumberNotInObservation `json:"numberNotIn,omitempty" tf:"number_not_in,omitempty"`
+	NumberNotIn []NumberNotInObservation `json:"numberNotIn,omitempty" tf:"number_not_in,omitempty"`
 
 	// Compares a value of an event using multiple floating point number ranges.
-	NumberNotInRange []AdvancedFilterNumberNotInRangeObservation `json:"numberNotInRange,omitempty" tf:"number_not_in_range,omitempty"`
+	NumberNotInRange []NumberNotInRangeObservation `json:"numberNotInRange,omitempty" tf:"number_not_in_range,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringBeginsWith []AdvancedFilterStringBeginsWithObservation `json:"stringBeginsWith,omitempty" tf:"string_begins_with,omitempty"`
+	StringBeginsWith []StringBeginsWithObservation `json:"stringBeginsWith,omitempty" tf:"string_begins_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringContains []AdvancedFilterStringContainsObservation `json:"stringContains,omitempty" tf:"string_contains,omitempty"`
+	StringContains []StringContainsObservation `json:"stringContains,omitempty" tf:"string_contains,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringEndsWith []AdvancedFilterStringEndsWithObservation `json:"stringEndsWith,omitempty" tf:"string_ends_with,omitempty"`
+	StringEndsWith []StringEndsWithObservation `json:"stringEndsWith,omitempty" tf:"string_ends_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringIn []AdvancedFilterStringInObservation `json:"stringIn,omitempty" tf:"string_in,omitempty"`
+	StringIn []StringInObservation `json:"stringIn,omitempty" tf:"string_in,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotBeginsWith []AdvancedFilterStringNotBeginsWithObservation `json:"stringNotBeginsWith,omitempty" tf:"string_not_begins_with,omitempty"`
+	StringNotBeginsWith []StringNotBeginsWithObservation `json:"stringNotBeginsWith,omitempty" tf:"string_not_begins_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotContains []AdvancedFilterStringNotContainsObservation `json:"stringNotContains,omitempty" tf:"string_not_contains,omitempty"`
+	StringNotContains []StringNotContainsObservation `json:"stringNotContains,omitempty" tf:"string_not_contains,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotEndsWith []AdvancedFilterStringNotEndsWithObservation `json:"stringNotEndsWith,omitempty" tf:"string_not_ends_with,omitempty"`
+	StringNotEndsWith []StringNotEndsWithObservation `json:"stringNotEndsWith,omitempty" tf:"string_not_ends_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
-	StringNotIn []AdvancedFilterStringNotInObservation `json:"stringNotIn,omitempty" tf:"string_not_in,omitempty"`
+	StringNotIn []StringNotInObservation `json:"stringNotIn,omitempty" tf:"string_not_in,omitempty"`
 }
 
-type SystemTopicEventSubscriptionAdvancedFilterParameters struct {
+type AdvancedFilterParameters struct {
 
 	// Compares a value of an event using a single boolean value.
 	// +kubebuilder:validation:Optional
-	BoolEquals []AdvancedFilterBoolEqualsParameters `json:"boolEquals,omitempty" tf:"bool_equals,omitempty"`
+	BoolEquals []BoolEqualsParameters `json:"boolEquals,omitempty" tf:"bool_equals,omitempty"`
 
 	// Evaluates if a value of an event isn't NULL or undefined.
 	// +kubebuilder:validation:Optional
-	IsNotNull []AdvancedFilterIsNotNullParameters `json:"isNotNull,omitempty" tf:"is_not_null,omitempty"`
+	IsNotNull []IsNotNullParameters `json:"isNotNull,omitempty" tf:"is_not_null,omitempty"`
 
 	// Evaluates if a value of an event is NULL or undefined.
 	// +kubebuilder:validation:Optional
-	IsNullOrUndefined []AdvancedFilterIsNullOrUndefinedParameters `json:"isNullOrUndefined,omitempty" tf:"is_null_or_undefined,omitempty"`
+	IsNullOrUndefined []IsNullOrUndefinedParameters `json:"isNullOrUndefined,omitempty" tf:"is_null_or_undefined,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
 	// +kubebuilder:validation:Optional
-	NumberGreaterThan []AdvancedFilterNumberGreaterThanParameters `json:"numberGreaterThan,omitempty" tf:"number_greater_than,omitempty"`
+	NumberGreaterThan []NumberGreaterThanParameters `json:"numberGreaterThan,omitempty" tf:"number_greater_than,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
 	// +kubebuilder:validation:Optional
-	NumberGreaterThanOrEquals []AdvancedFilterNumberGreaterThanOrEqualsParameters `json:"numberGreaterThanOrEquals,omitempty" tf:"number_greater_than_or_equals,omitempty"`
+	NumberGreaterThanOrEquals []NumberGreaterThanOrEqualsParameters `json:"numberGreaterThanOrEquals,omitempty" tf:"number_greater_than_or_equals,omitempty"`
 
 	// Compares a value of an event using multiple floating point numbers.
 	// +kubebuilder:validation:Optional
-	NumberIn []AdvancedFilterNumberInParameters `json:"numberIn,omitempty" tf:"number_in,omitempty"`
+	NumberIn []NumberInParameters `json:"numberIn,omitempty" tf:"number_in,omitempty"`
 
 	// Compares a value of an event using multiple floating point number ranges.
 	// +kubebuilder:validation:Optional
-	NumberInRange []AdvancedFilterNumberInRangeParameters `json:"numberInRange,omitempty" tf:"number_in_range,omitempty"`
+	NumberInRange []NumberInRangeParameters `json:"numberInRange,omitempty" tf:"number_in_range,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
 	// +kubebuilder:validation:Optional
-	NumberLessThan []AdvancedFilterNumberLessThanParameters `json:"numberLessThan,omitempty" tf:"number_less_than,omitempty"`
+	NumberLessThan []NumberLessThanParameters `json:"numberLessThan,omitempty" tf:"number_less_than,omitempty"`
 
 	// Compares a value of an event using a single floating point number.
 	// +kubebuilder:validation:Optional
-	NumberLessThanOrEquals []AdvancedFilterNumberLessThanOrEqualsParameters `json:"numberLessThanOrEquals,omitempty" tf:"number_less_than_or_equals,omitempty"`
+	NumberLessThanOrEquals []NumberLessThanOrEqualsParameters `json:"numberLessThanOrEquals,omitempty" tf:"number_less_than_or_equals,omitempty"`
 
 	// Compares a value of an event using multiple floating point numbers.
 	// +kubebuilder:validation:Optional
-	NumberNotIn []AdvancedFilterNumberNotInParameters `json:"numberNotIn,omitempty" tf:"number_not_in,omitempty"`
+	NumberNotIn []NumberNotInParameters `json:"numberNotIn,omitempty" tf:"number_not_in,omitempty"`
 
 	// Compares a value of an event using multiple floating point number ranges.
 	// +kubebuilder:validation:Optional
-	NumberNotInRange []AdvancedFilterNumberNotInRangeParameters `json:"numberNotInRange,omitempty" tf:"number_not_in_range,omitempty"`
+	NumberNotInRange []NumberNotInRangeParameters `json:"numberNotInRange,omitempty" tf:"number_not_in_range,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringBeginsWith []AdvancedFilterStringBeginsWithParameters `json:"stringBeginsWith,omitempty" tf:"string_begins_with,omitempty"`
+	StringBeginsWith []StringBeginsWithParameters `json:"stringBeginsWith,omitempty" tf:"string_begins_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringContains []AdvancedFilterStringContainsParameters `json:"stringContains,omitempty" tf:"string_contains,omitempty"`
+	StringContains []StringContainsParameters `json:"stringContains,omitempty" tf:"string_contains,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringEndsWith []AdvancedFilterStringEndsWithParameters `json:"stringEndsWith,omitempty" tf:"string_ends_with,omitempty"`
+	StringEndsWith []StringEndsWithParameters `json:"stringEndsWith,omitempty" tf:"string_ends_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringIn []AdvancedFilterStringInParameters `json:"stringIn,omitempty" tf:"string_in,omitempty"`
+	StringIn []StringInParameters `json:"stringIn,omitempty" tf:"string_in,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringNotBeginsWith []AdvancedFilterStringNotBeginsWithParameters `json:"stringNotBeginsWith,omitempty" tf:"string_not_begins_with,omitempty"`
+	StringNotBeginsWith []StringNotBeginsWithParameters `json:"stringNotBeginsWith,omitempty" tf:"string_not_begins_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringNotContains []AdvancedFilterStringNotContainsParameters `json:"stringNotContains,omitempty" tf:"string_not_contains,omitempty"`
+	StringNotContains []StringNotContainsParameters `json:"stringNotContains,omitempty" tf:"string_not_contains,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringNotEndsWith []AdvancedFilterStringNotEndsWithParameters `json:"stringNotEndsWith,omitempty" tf:"string_not_ends_with,omitempty"`
+	StringNotEndsWith []StringNotEndsWithParameters `json:"stringNotEndsWith,omitempty" tf:"string_not_ends_with,omitempty"`
 
 	// Compares a value of an event using multiple string values.
 	// +kubebuilder:validation:Optional
-	StringNotIn []AdvancedFilterStringNotInParameters `json:"stringNotIn,omitempty" tf:"string_not_in,omitempty"`
+	StringNotIn []StringNotInParameters `json:"stringNotIn,omitempty" tf:"string_not_in,omitempty"`
 }
 
-type SystemTopicEventSubscriptionAzureFunctionEndpointInitParameters struct {
+type AzureFunctionEndpointInitParameters struct {
 
 	// Specifies the ID of the Function where the Event Subscription will receive events. This must be the functions ID in format {function_app.id}/functions/{name}.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
@@ -755,7 +224,7 @@ type SystemTopicEventSubscriptionAzureFunctionEndpointInitParameters struct {
 	PreferredBatchSizeInKilobytes *float64 `json:"preferredBatchSizeInKilobytes,omitempty" tf:"preferred_batch_size_in_kilobytes,omitempty"`
 }
 
-type SystemTopicEventSubscriptionAzureFunctionEndpointObservation struct {
+type AzureFunctionEndpointObservation struct {
 
 	// Specifies the ID of the Function where the Event Subscription will receive events. This must be the functions ID in format {function_app.id}/functions/{name}.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
@@ -767,7 +236,7 @@ type SystemTopicEventSubscriptionAzureFunctionEndpointObservation struct {
 	PreferredBatchSizeInKilobytes *float64 `json:"preferredBatchSizeInKilobytes,omitempty" tf:"preferred_batch_size_in_kilobytes,omitempty"`
 }
 
-type SystemTopicEventSubscriptionAzureFunctionEndpointParameters struct {
+type AzureFunctionEndpointParameters struct {
 
 	// Specifies the ID of the Function where the Event Subscription will receive events. This must be the functions ID in format {function_app.id}/functions/{name}.
 	// +kubebuilder:validation:Optional
@@ -782,7 +251,36 @@ type SystemTopicEventSubscriptionAzureFunctionEndpointParameters struct {
 	PreferredBatchSizeInKilobytes *float64 `json:"preferredBatchSizeInKilobytes,omitempty" tf:"preferred_batch_size_in_kilobytes,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeadLetterIdentityInitParameters struct {
+type BoolEqualsInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *bool `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type BoolEqualsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *bool `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type BoolEqualsParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	// +kubebuilder:validation:Optional
+	Value *bool `json:"value" tf:"value,omitempty"`
+}
+
+type DeadLetterIdentityInitParameters struct {
 
 	// Specifies the type of Managed Service Identity that is used for dead lettering. Allowed value is SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -791,7 +289,7 @@ type SystemTopicEventSubscriptionDeadLetterIdentityInitParameters struct {
 	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeadLetterIdentityObservation struct {
+type DeadLetterIdentityObservation struct {
 
 	// Specifies the type of Managed Service Identity that is used for dead lettering. Allowed value is SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -800,7 +298,7 @@ type SystemTopicEventSubscriptionDeadLetterIdentityObservation struct {
 	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeadLetterIdentityParameters struct {
+type DeadLetterIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that is used for dead lettering. Allowed value is SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -811,7 +309,7 @@ type SystemTopicEventSubscriptionDeadLetterIdentityParameters struct {
 	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeliveryIdentityInitParameters struct {
+type DeliveryIdentityInitParameters struct {
 
 	// Specifies the type of Managed Service Identity that is used for event delivery. Allowed value is SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -820,7 +318,7 @@ type SystemTopicEventSubscriptionDeliveryIdentityInitParameters struct {
 	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeliveryIdentityObservation struct {
+type DeliveryIdentityObservation struct {
 
 	// Specifies the type of Managed Service Identity that is used for event delivery. Allowed value is SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -829,7 +327,7 @@ type SystemTopicEventSubscriptionDeliveryIdentityObservation struct {
 	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeliveryIdentityParameters struct {
+type DeliveryIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that is used for event delivery. Allowed value is SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -840,7 +338,7 @@ type SystemTopicEventSubscriptionDeliveryIdentityParameters struct {
 	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeliveryPropertyInitParameters struct {
+type DeliveryPropertyInitParameters struct {
 
 	// The name of the header to send on to the destination.
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
@@ -858,7 +356,7 @@ type SystemTopicEventSubscriptionDeliveryPropertyInitParameters struct {
 	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
-type SystemTopicEventSubscriptionDeliveryPropertyObservation struct {
+type DeliveryPropertyObservation struct {
 
 	// The name of the header to send on to the destination.
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
@@ -873,7 +371,7 @@ type SystemTopicEventSubscriptionDeliveryPropertyObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type SystemTopicEventSubscriptionDeliveryPropertyParameters struct {
+type DeliveryPropertyParameters struct {
 
 	// The name of the header to send on to the destination.
 	// +kubebuilder:validation:Optional
@@ -896,25 +394,701 @@ type SystemTopicEventSubscriptionDeliveryPropertyParameters struct {
 	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
+type IsNotNullInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type IsNotNullObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type IsNotNullParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+}
+
+type IsNullOrUndefinedInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type IsNullOrUndefinedObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
+type IsNullOrUndefinedParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+}
+
+type NumberGreaterThanInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberGreaterThanObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberGreaterThanOrEqualsInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberGreaterThanOrEqualsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberGreaterThanOrEqualsParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value" tf:"value,omitempty"`
+}
+
+type NumberGreaterThanParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value" tf:"value,omitempty"`
+}
+
+type NumberInInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberInParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*float64 `json:"values" tf:"values,omitempty"`
+}
+
+type NumberInRangeInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberInRangeObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberInRangeParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values [][]*float64 `json:"values" tf:"values,omitempty"`
+}
+
+type NumberLessThanInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberLessThanObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberLessThanOrEqualsInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberLessThanOrEqualsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type NumberLessThanOrEqualsParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value" tf:"value,omitempty"`
+}
+
+type NumberLessThanParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value" tf:"value,omitempty"`
+}
+
+type NumberNotInInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberNotInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberNotInParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*float64 `json:"values" tf:"values,omitempty"`
+}
+
+type NumberNotInRangeInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberNotInRangeObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NumberNotInRangeParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values [][]*float64 `json:"values" tf:"values,omitempty"`
+}
+
+type RetryPolicyInitParameters struct {
+
+	// Specifies the time to live (in minutes) for events. Supported range is 1 to 1440. See official documentation for more details.
+	EventTimeToLive *float64 `json:"eventTimeToLive,omitempty" tf:"event_time_to_live,omitempty"`
+
+	// Specifies the maximum number of delivery retry attempts for events.
+	MaxDeliveryAttempts *float64 `json:"maxDeliveryAttempts,omitempty" tf:"max_delivery_attempts,omitempty"`
+}
+
+type RetryPolicyObservation struct {
+
+	// Specifies the time to live (in minutes) for events. Supported range is 1 to 1440. See official documentation for more details.
+	EventTimeToLive *float64 `json:"eventTimeToLive,omitempty" tf:"event_time_to_live,omitempty"`
+
+	// Specifies the maximum number of delivery retry attempts for events.
+	MaxDeliveryAttempts *float64 `json:"maxDeliveryAttempts,omitempty" tf:"max_delivery_attempts,omitempty"`
+}
+
+type RetryPolicyParameters struct {
+
+	// Specifies the time to live (in minutes) for events. Supported range is 1 to 1440. See official documentation for more details.
+	// +kubebuilder:validation:Optional
+	EventTimeToLive *float64 `json:"eventTimeToLive" tf:"event_time_to_live,omitempty"`
+
+	// Specifies the maximum number of delivery retry attempts for events.
+	// +kubebuilder:validation:Optional
+	MaxDeliveryAttempts *float64 `json:"maxDeliveryAttempts" tf:"max_delivery_attempts,omitempty"`
+}
+
+type StorageBlobDeadLetterDestinationInitParameters struct {
+
+	// Specifies the id of the storage account id where the storage blob is located.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Specifies the name of the Storage blob container that is the destination of the deadletter events.
+	StorageBlobContainerName *string `json:"storageBlobContainerName,omitempty" tf:"storage_blob_container_name,omitempty"`
+}
+
+type StorageBlobDeadLetterDestinationObservation struct {
+
+	// Specifies the id of the storage account id where the storage blob is located.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Specifies the name of the Storage blob container that is the destination of the deadletter events.
+	StorageBlobContainerName *string `json:"storageBlobContainerName,omitempty" tf:"storage_blob_container_name,omitempty"`
+}
+
+type StorageBlobDeadLetterDestinationParameters struct {
+
+	// Specifies the id of the storage account id where the storage blob is located.
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
+
+	// Specifies the name of the Storage blob container that is the destination of the deadletter events.
+	// +kubebuilder:validation:Optional
+	StorageBlobContainerName *string `json:"storageBlobContainerName" tf:"storage_blob_container_name,omitempty"`
+}
+
+type StorageQueueEndpointInitParameters struct {
+
+	// Storage queue message time to live in seconds.
+	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
+
+	// Specifies the name of the storage queue where the Event Subscription will receive events.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Queue
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+
+	// Reference to a Queue in storage to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in storage to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+
+	// Specifies the id of the storage account id where the storage queue is located.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+}
+
+type StorageQueueEndpointObservation struct {
+
+	// Storage queue message time to live in seconds.
+	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
+
+	// Specifies the name of the storage queue where the Event Subscription will receive events.
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+
+	// Specifies the id of the storage account id where the storage queue is located.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+}
+
+type StorageQueueEndpointParameters struct {
+
+	// Storage queue message time to live in seconds.
+	// +kubebuilder:validation:Optional
+	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
+
+	// Specifies the name of the storage queue where the Event Subscription will receive events.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Queue
+	// +kubebuilder:validation:Optional
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+
+	// Reference to a Queue in storage to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in storage to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+
+	// Specifies the id of the storage account id where the storage queue is located.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+}
+
+type StringBeginsWithInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringBeginsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringBeginsWithParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type StringContainsInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringContainsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringContainsParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type StringEndsWithInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringEndsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringEndsWithParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type StringInInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringInParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type StringNotBeginsWithInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotBeginsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotBeginsWithParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type StringNotContainsInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotContainsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotContainsParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type StringNotEndsWithInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotEndsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotEndsWithParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type StringNotInInitParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type StringNotInParameters struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type SubjectFilterInitParameters struct {
+
+	// Specifies if subject_begins_with and subject_ends_with case sensitive. This value
+	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path prefix.
+	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path suffix.
+	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
+}
+
+type SubjectFilterObservation struct {
+
+	// Specifies if subject_begins_with and subject_ends_with case sensitive. This value
+	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path prefix.
+	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path suffix.
+	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
+}
+
+type SubjectFilterParameters struct {
+
+	// Specifies if subject_begins_with and subject_ends_with case sensitive. This value
+	// +kubebuilder:validation:Optional
+	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path prefix.
+	// +kubebuilder:validation:Optional
+	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path suffix.
+	// +kubebuilder:validation:Optional
+	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
+}
+
 type SystemTopicEventSubscriptionInitParameters struct {
 
 	// A advanced_filter block as defined below.
-	AdvancedFilter *SystemTopicEventSubscriptionAdvancedFilterInitParameters `json:"advancedFilter,omitempty" tf:"advanced_filter,omitempty"`
+	AdvancedFilter *AdvancedFilterInitParameters `json:"advancedFilter,omitempty" tf:"advanced_filter,omitempty"`
 
 	// Specifies whether advanced filters should be evaluated against an array of values instead of expecting a singular value. Defaults to false.
 	AdvancedFilteringOnArraysEnabled *bool `json:"advancedFilteringOnArraysEnabled,omitempty" tf:"advanced_filtering_on_arrays_enabled,omitempty"`
 
 	// An azure_function_endpoint block as defined below.
-	AzureFunctionEndpoint *SystemTopicEventSubscriptionAzureFunctionEndpointInitParameters `json:"azureFunctionEndpoint,omitempty" tf:"azure_function_endpoint,omitempty"`
+	AzureFunctionEndpoint *AzureFunctionEndpointInitParameters `json:"azureFunctionEndpoint,omitempty" tf:"azure_function_endpoint,omitempty"`
 
 	// A dead_letter_identity block as defined below.
-	DeadLetterIdentity *SystemTopicEventSubscriptionDeadLetterIdentityInitParameters `json:"deadLetterIdentity,omitempty" tf:"dead_letter_identity,omitempty"`
+	DeadLetterIdentity *DeadLetterIdentityInitParameters `json:"deadLetterIdentity,omitempty" tf:"dead_letter_identity,omitempty"`
 
 	// A delivery_identity block as defined below.
-	DeliveryIdentity *SystemTopicEventSubscriptionDeliveryIdentityInitParameters `json:"deliveryIdentity,omitempty" tf:"delivery_identity,omitempty"`
+	DeliveryIdentity *DeliveryIdentityInitParameters `json:"deliveryIdentity,omitempty" tf:"delivery_identity,omitempty"`
 
 	// One or more delivery_property blocks as defined below.
-	DeliveryProperty []SystemTopicEventSubscriptionDeliveryPropertyInitParameters `json:"deliveryProperty,omitempty" tf:"delivery_property,omitempty"`
+	DeliveryProperty []DeliveryPropertyInitParameters `json:"deliveryProperty,omitempty" tf:"delivery_property,omitempty"`
 
 	// Specifies the event delivery schema for the event subscription. Possible values include: EventGridSchema, CloudEventSchemaV1_0, CustomInputSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
 	EventDeliverySchema *string `json:"eventDeliverySchema,omitempty" tf:"event_delivery_schema,omitempty"`
@@ -935,7 +1109,7 @@ type SystemTopicEventSubscriptionInitParameters struct {
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A retry_policy block as defined below.
-	RetryPolicy *SystemTopicEventSubscriptionRetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+	RetryPolicy *RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// Specifies the id where the Service Bus Queue is located.
 	ServiceBusQueueEndpointID *string `json:"serviceBusQueueEndpointId,omitempty" tf:"service_bus_queue_endpoint_id,omitempty"`
@@ -944,37 +1118,37 @@ type SystemTopicEventSubscriptionInitParameters struct {
 	ServiceBusTopicEndpointID *string `json:"serviceBusTopicEndpointId,omitempty" tf:"service_bus_topic_endpoint_id,omitempty"`
 
 	// A storage_blob_dead_letter_destination block as defined below.
-	StorageBlobDeadLetterDestination *SystemTopicEventSubscriptionStorageBlobDeadLetterDestinationInitParameters `json:"storageBlobDeadLetterDestination,omitempty" tf:"storage_blob_dead_letter_destination,omitempty"`
+	StorageBlobDeadLetterDestination *StorageBlobDeadLetterDestinationInitParameters `json:"storageBlobDeadLetterDestination,omitempty" tf:"storage_blob_dead_letter_destination,omitempty"`
 
 	// A storage_queue_endpoint block as defined below.
-	StorageQueueEndpoint *SystemTopicEventSubscriptionStorageQueueEndpointInitParameters `json:"storageQueueEndpoint,omitempty" tf:"storage_queue_endpoint,omitempty"`
+	StorageQueueEndpoint *StorageQueueEndpointInitParameters `json:"storageQueueEndpoint,omitempty" tf:"storage_queue_endpoint,omitempty"`
 
 	// A subject_filter block as defined below.
-	SubjectFilter *SystemTopicEventSubscriptionSubjectFilterInitParameters `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
+	SubjectFilter *SubjectFilterInitParameters `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
 
 	// A webhook_endpoint block as defined below.
-	WebhookEndpoint *SystemTopicEventSubscriptionWebhookEndpointInitParameters `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
+	WebhookEndpoint *WebhookEndpointInitParameters `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
 }
 
 type SystemTopicEventSubscriptionObservation struct {
 
 	// A advanced_filter block as defined below.
-	AdvancedFilter *SystemTopicEventSubscriptionAdvancedFilterObservation `json:"advancedFilter,omitempty" tf:"advanced_filter,omitempty"`
+	AdvancedFilter *AdvancedFilterObservation `json:"advancedFilter,omitempty" tf:"advanced_filter,omitempty"`
 
 	// Specifies whether advanced filters should be evaluated against an array of values instead of expecting a singular value. Defaults to false.
 	AdvancedFilteringOnArraysEnabled *bool `json:"advancedFilteringOnArraysEnabled,omitempty" tf:"advanced_filtering_on_arrays_enabled,omitempty"`
 
 	// An azure_function_endpoint block as defined below.
-	AzureFunctionEndpoint *SystemTopicEventSubscriptionAzureFunctionEndpointObservation `json:"azureFunctionEndpoint,omitempty" tf:"azure_function_endpoint,omitempty"`
+	AzureFunctionEndpoint *AzureFunctionEndpointObservation `json:"azureFunctionEndpoint,omitempty" tf:"azure_function_endpoint,omitempty"`
 
 	// A dead_letter_identity block as defined below.
-	DeadLetterIdentity *SystemTopicEventSubscriptionDeadLetterIdentityObservation `json:"deadLetterIdentity,omitempty" tf:"dead_letter_identity,omitempty"`
+	DeadLetterIdentity *DeadLetterIdentityObservation `json:"deadLetterIdentity,omitempty" tf:"dead_letter_identity,omitempty"`
 
 	// A delivery_identity block as defined below.
-	DeliveryIdentity *SystemTopicEventSubscriptionDeliveryIdentityObservation `json:"deliveryIdentity,omitempty" tf:"delivery_identity,omitempty"`
+	DeliveryIdentity *DeliveryIdentityObservation `json:"deliveryIdentity,omitempty" tf:"delivery_identity,omitempty"`
 
 	// One or more delivery_property blocks as defined below.
-	DeliveryProperty []SystemTopicEventSubscriptionDeliveryPropertyObservation `json:"deliveryProperty,omitempty" tf:"delivery_property,omitempty"`
+	DeliveryProperty []DeliveryPropertyObservation `json:"deliveryProperty,omitempty" tf:"delivery_property,omitempty"`
 
 	// Specifies the event delivery schema for the event subscription. Possible values include: EventGridSchema, CloudEventSchemaV1_0, CustomInputSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
 	EventDeliverySchema *string `json:"eventDeliverySchema,omitempty" tf:"event_delivery_schema,omitempty"`
@@ -1001,7 +1175,7 @@ type SystemTopicEventSubscriptionObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A retry_policy block as defined below.
-	RetryPolicy *SystemTopicEventSubscriptionRetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+	RetryPolicy *RetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// Specifies the id where the Service Bus Queue is located.
 	ServiceBusQueueEndpointID *string `json:"serviceBusQueueEndpointId,omitempty" tf:"service_bus_queue_endpoint_id,omitempty"`
@@ -1010,26 +1184,26 @@ type SystemTopicEventSubscriptionObservation struct {
 	ServiceBusTopicEndpointID *string `json:"serviceBusTopicEndpointId,omitempty" tf:"service_bus_topic_endpoint_id,omitempty"`
 
 	// A storage_blob_dead_letter_destination block as defined below.
-	StorageBlobDeadLetterDestination *SystemTopicEventSubscriptionStorageBlobDeadLetterDestinationObservation `json:"storageBlobDeadLetterDestination,omitempty" tf:"storage_blob_dead_letter_destination,omitempty"`
+	StorageBlobDeadLetterDestination *StorageBlobDeadLetterDestinationObservation `json:"storageBlobDeadLetterDestination,omitempty" tf:"storage_blob_dead_letter_destination,omitempty"`
 
 	// A storage_queue_endpoint block as defined below.
-	StorageQueueEndpoint *SystemTopicEventSubscriptionStorageQueueEndpointObservation `json:"storageQueueEndpoint,omitempty" tf:"storage_queue_endpoint,omitempty"`
+	StorageQueueEndpoint *StorageQueueEndpointObservation `json:"storageQueueEndpoint,omitempty" tf:"storage_queue_endpoint,omitempty"`
 
 	// A subject_filter block as defined below.
-	SubjectFilter *SystemTopicEventSubscriptionSubjectFilterObservation `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
+	SubjectFilter *SubjectFilterObservation `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
 
 	// The System Topic where the Event Subscription should be created in. Changing this forces a new Event Subscription to be created.
 	SystemTopic *string `json:"systemTopic,omitempty" tf:"system_topic,omitempty"`
 
 	// A webhook_endpoint block as defined below.
-	WebhookEndpoint *SystemTopicEventSubscriptionWebhookEndpointObservation `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
+	WebhookEndpoint *WebhookEndpointObservation `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
 }
 
 type SystemTopicEventSubscriptionParameters struct {
 
 	// A advanced_filter block as defined below.
 	// +kubebuilder:validation:Optional
-	AdvancedFilter *SystemTopicEventSubscriptionAdvancedFilterParameters `json:"advancedFilter,omitempty" tf:"advanced_filter,omitempty"`
+	AdvancedFilter *AdvancedFilterParameters `json:"advancedFilter,omitempty" tf:"advanced_filter,omitempty"`
 
 	// Specifies whether advanced filters should be evaluated against an array of values instead of expecting a singular value. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1037,19 +1211,19 @@ type SystemTopicEventSubscriptionParameters struct {
 
 	// An azure_function_endpoint block as defined below.
 	// +kubebuilder:validation:Optional
-	AzureFunctionEndpoint *SystemTopicEventSubscriptionAzureFunctionEndpointParameters `json:"azureFunctionEndpoint,omitempty" tf:"azure_function_endpoint,omitempty"`
+	AzureFunctionEndpoint *AzureFunctionEndpointParameters `json:"azureFunctionEndpoint,omitempty" tf:"azure_function_endpoint,omitempty"`
 
 	// A dead_letter_identity block as defined below.
 	// +kubebuilder:validation:Optional
-	DeadLetterIdentity *SystemTopicEventSubscriptionDeadLetterIdentityParameters `json:"deadLetterIdentity,omitempty" tf:"dead_letter_identity,omitempty"`
+	DeadLetterIdentity *DeadLetterIdentityParameters `json:"deadLetterIdentity,omitempty" tf:"dead_letter_identity,omitempty"`
 
 	// A delivery_identity block as defined below.
 	// +kubebuilder:validation:Optional
-	DeliveryIdentity *SystemTopicEventSubscriptionDeliveryIdentityParameters `json:"deliveryIdentity,omitempty" tf:"delivery_identity,omitempty"`
+	DeliveryIdentity *DeliveryIdentityParameters `json:"deliveryIdentity,omitempty" tf:"delivery_identity,omitempty"`
 
 	// One or more delivery_property blocks as defined below.
 	// +kubebuilder:validation:Optional
-	DeliveryProperty []SystemTopicEventSubscriptionDeliveryPropertyParameters `json:"deliveryProperty,omitempty" tf:"delivery_property,omitempty"`
+	DeliveryProperty []DeliveryPropertyParameters `json:"deliveryProperty,omitempty" tf:"delivery_property,omitempty"`
 
 	// Specifies the event delivery schema for the event subscription. Possible values include: EventGridSchema, CloudEventSchemaV1_0, CustomInputSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1090,7 +1264,7 @@ type SystemTopicEventSubscriptionParameters struct {
 
 	// A retry_policy block as defined below.
 	// +kubebuilder:validation:Optional
-	RetryPolicy *SystemTopicEventSubscriptionRetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+	RetryPolicy *RetryPolicyParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
 	// Specifies the id where the Service Bus Queue is located.
 	// +kubebuilder:validation:Optional
@@ -1102,15 +1276,15 @@ type SystemTopicEventSubscriptionParameters struct {
 
 	// A storage_blob_dead_letter_destination block as defined below.
 	// +kubebuilder:validation:Optional
-	StorageBlobDeadLetterDestination *SystemTopicEventSubscriptionStorageBlobDeadLetterDestinationParameters `json:"storageBlobDeadLetterDestination,omitempty" tf:"storage_blob_dead_letter_destination,omitempty"`
+	StorageBlobDeadLetterDestination *StorageBlobDeadLetterDestinationParameters `json:"storageBlobDeadLetterDestination,omitempty" tf:"storage_blob_dead_letter_destination,omitempty"`
 
 	// A storage_queue_endpoint block as defined below.
 	// +kubebuilder:validation:Optional
-	StorageQueueEndpoint *SystemTopicEventSubscriptionStorageQueueEndpointParameters `json:"storageQueueEndpoint,omitempty" tf:"storage_queue_endpoint,omitempty"`
+	StorageQueueEndpoint *StorageQueueEndpointParameters `json:"storageQueueEndpoint,omitempty" tf:"storage_queue_endpoint,omitempty"`
 
 	// A subject_filter block as defined below.
 	// +kubebuilder:validation:Optional
-	SubjectFilter *SystemTopicEventSubscriptionSubjectFilterParameters `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
+	SubjectFilter *SubjectFilterParameters `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
 
 	// The System Topic where the Event Subscription should be created in. Changing this forces a new Event Subscription to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventgrid/v1beta2.SystemTopic
@@ -1127,184 +1301,10 @@ type SystemTopicEventSubscriptionParameters struct {
 
 	// A webhook_endpoint block as defined below.
 	// +kubebuilder:validation:Optional
-	WebhookEndpoint *SystemTopicEventSubscriptionWebhookEndpointParameters `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
+	WebhookEndpoint *WebhookEndpointParameters `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
 }
 
-type SystemTopicEventSubscriptionRetryPolicyInitParameters struct {
-
-	// Specifies the time to live (in minutes) for events. Supported range is 1 to 1440. See official documentation for more details.
-	EventTimeToLive *float64 `json:"eventTimeToLive,omitempty" tf:"event_time_to_live,omitempty"`
-
-	// Specifies the maximum number of delivery retry attempts for events.
-	MaxDeliveryAttempts *float64 `json:"maxDeliveryAttempts,omitempty" tf:"max_delivery_attempts,omitempty"`
-}
-
-type SystemTopicEventSubscriptionRetryPolicyObservation struct {
-
-	// Specifies the time to live (in minutes) for events. Supported range is 1 to 1440. See official documentation for more details.
-	EventTimeToLive *float64 `json:"eventTimeToLive,omitempty" tf:"event_time_to_live,omitempty"`
-
-	// Specifies the maximum number of delivery retry attempts for events.
-	MaxDeliveryAttempts *float64 `json:"maxDeliveryAttempts,omitempty" tf:"max_delivery_attempts,omitempty"`
-}
-
-type SystemTopicEventSubscriptionRetryPolicyParameters struct {
-
-	// Specifies the time to live (in minutes) for events. Supported range is 1 to 1440. See official documentation for more details.
-	// +kubebuilder:validation:Optional
-	EventTimeToLive *float64 `json:"eventTimeToLive" tf:"event_time_to_live,omitempty"`
-
-	// Specifies the maximum number of delivery retry attempts for events.
-	// +kubebuilder:validation:Optional
-	MaxDeliveryAttempts *float64 `json:"maxDeliveryAttempts" tf:"max_delivery_attempts,omitempty"`
-}
-
-type SystemTopicEventSubscriptionStorageBlobDeadLetterDestinationInitParameters struct {
-
-	// Specifies the id of the storage account id where the storage blob is located.
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
-
-	// Specifies the name of the Storage blob container that is the destination of the deadletter events.
-	StorageBlobContainerName *string `json:"storageBlobContainerName,omitempty" tf:"storage_blob_container_name,omitempty"`
-}
-
-type SystemTopicEventSubscriptionStorageBlobDeadLetterDestinationObservation struct {
-
-	// Specifies the id of the storage account id where the storage blob is located.
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
-
-	// Specifies the name of the Storage blob container that is the destination of the deadletter events.
-	StorageBlobContainerName *string `json:"storageBlobContainerName,omitempty" tf:"storage_blob_container_name,omitempty"`
-}
-
-type SystemTopicEventSubscriptionStorageBlobDeadLetterDestinationParameters struct {
-
-	// Specifies the id of the storage account id where the storage blob is located.
-	// +kubebuilder:validation:Optional
-	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
-
-	// Specifies the name of the Storage blob container that is the destination of the deadletter events.
-	// +kubebuilder:validation:Optional
-	StorageBlobContainerName *string `json:"storageBlobContainerName" tf:"storage_blob_container_name,omitempty"`
-}
-
-type SystemTopicEventSubscriptionStorageQueueEndpointInitParameters struct {
-
-	// Storage queue message time to live in seconds.
-	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
-
-	// Specifies the name of the storage queue where the Event Subscription will receive events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Queue
-	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
-
-	// Reference to a Queue in storage to populate queueName.
-	// +kubebuilder:validation:Optional
-	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
-
-	// Selector for a Queue in storage to populate queueName.
-	// +kubebuilder:validation:Optional
-	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
-
-	// Specifies the id of the storage account id where the storage queue is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
-
-	// Reference to a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
-
-	// Selector for a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
-}
-
-type SystemTopicEventSubscriptionStorageQueueEndpointObservation struct {
-
-	// Storage queue message time to live in seconds.
-	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
-
-	// Specifies the name of the storage queue where the Event Subscription will receive events.
-	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
-
-	// Specifies the id of the storage account id where the storage queue is located.
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
-}
-
-type SystemTopicEventSubscriptionStorageQueueEndpointParameters struct {
-
-	// Storage queue message time to live in seconds.
-	// +kubebuilder:validation:Optional
-	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
-
-	// Specifies the name of the storage queue where the Event Subscription will receive events.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Queue
-	// +kubebuilder:validation:Optional
-	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
-
-	// Reference to a Queue in storage to populate queueName.
-	// +kubebuilder:validation:Optional
-	QueueNameRef *v2.Reference `json:"queueNameRef,omitempty" tf:"-"`
-
-	// Selector for a Queue in storage to populate queueName.
-	// +kubebuilder:validation:Optional
-	QueueNameSelector *v2.Selector `json:"queueNameSelector,omitempty" tf:"-"`
-
-	// Specifies the id of the storage account id where the storage queue is located.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
-
-	// Reference to a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v2.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
-
-	// Selector for a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
-}
-
-type SystemTopicEventSubscriptionSubjectFilterInitParameters struct {
-
-	// Specifies if subject_begins_with and subject_ends_with case sensitive. This value
-	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
-
-	// A string to filter events for an event subscription based on a resource path prefix.
-	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
-
-	// A string to filter events for an event subscription based on a resource path suffix.
-	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
-}
-
-type SystemTopicEventSubscriptionSubjectFilterObservation struct {
-
-	// Specifies if subject_begins_with and subject_ends_with case sensitive. This value
-	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
-
-	// A string to filter events for an event subscription based on a resource path prefix.
-	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
-
-	// A string to filter events for an event subscription based on a resource path suffix.
-	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
-}
-
-type SystemTopicEventSubscriptionSubjectFilterParameters struct {
-
-	// Specifies if subject_begins_with and subject_ends_with case sensitive. This value
-	// +kubebuilder:validation:Optional
-	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
-
-	// A string to filter events for an event subscription based on a resource path prefix.
-	// +kubebuilder:validation:Optional
-	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
-
-	// A string to filter events for an event subscription based on a resource path suffix.
-	// +kubebuilder:validation:Optional
-	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
-}
-
-type SystemTopicEventSubscriptionWebhookEndpointInitParameters struct {
+type WebhookEndpointInitParameters struct {
 
 	// The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.
 	ActiveDirectoryAppIDOrURI *string `json:"activeDirectoryAppIdOrUri,omitempty" tf:"active_directory_app_id_or_uri,omitempty"`
@@ -1322,7 +1322,7 @@ type SystemTopicEventSubscriptionWebhookEndpointInitParameters struct {
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
-type SystemTopicEventSubscriptionWebhookEndpointObservation struct {
+type WebhookEndpointObservation struct {
 
 	// The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.
 	ActiveDirectoryAppIDOrURI *string `json:"activeDirectoryAppIdOrUri,omitempty" tf:"active_directory_app_id_or_uri,omitempty"`
@@ -1343,7 +1343,7 @@ type SystemTopicEventSubscriptionWebhookEndpointObservation struct {
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
-type SystemTopicEventSubscriptionWebhookEndpointParameters struct {
+type WebhookEndpointParameters struct {
 
 	// The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.
 	// +kubebuilder:validation:Optional

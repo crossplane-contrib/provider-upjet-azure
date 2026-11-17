@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta1
+apiVersion: web.azure.upbound.io/v1beta2
 kind: LinuxFunctionAppSlot
 metadata:
   annotations:
@@ -32,14 +32,14 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotlfa
     siteConfig:
-    - {}
+      {}
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotacc
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta1
+apiVersion: web.azure.upbound.io/v1beta2
 kind: LinuxFunctionApp
 metadata:
   annotations:
@@ -58,7 +58,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslot-sp
     siteConfig:
-    - {}
+      {}
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotacc
@@ -99,7 +99,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

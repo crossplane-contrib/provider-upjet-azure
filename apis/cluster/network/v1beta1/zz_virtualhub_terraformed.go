@@ -113,7 +113,7 @@ func (tr *VirtualHub) GetMergedParameters(shouldMergeInitProvider bool) (map[str
 // LateInitialize this VirtualHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *VirtualHub) LateInitialize(attrs []byte) (bool, error) {
-	params := &VirtualHubParameters_2{}
+	params := &VirtualHubParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}

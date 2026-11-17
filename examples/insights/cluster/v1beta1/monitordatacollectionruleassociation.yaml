@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: LinuxVirtualMachine
 metadata:
   annotations:
@@ -41,7 +41,7 @@ spec:
     networkInterfaceIdsRefs:
     - name: mdcraexample
     osDisk:
-    - caching: ReadWrite
+      caching: ReadWrite
       name: myosdisk-example
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
@@ -49,7 +49,7 @@ spec:
         testing.upbound.io/example-name: example
     size: Standard_B2s
     sourceImageReference:
-    - offer: UbuntuServer
+      offer: UbuntuServer
       publisher: Canonical
       sku: 16.04-LTS
       version: latest
@@ -72,7 +72,7 @@ spec:
 
 ---
 
-apiVersion: insights.azure.upbound.io/v1beta1
+apiVersion: insights.azure.upbound.io/v1beta2
 kind: MonitorDataCollectionRule
 metadata:
   annotations:
@@ -88,8 +88,8 @@ spec:
       streams:
       - Microsoft-InsightsMetrics
     destinations:
-    - azureMonitorMetrics:
-      - name: example-destination-metrics
+      azureMonitorMetrics:
+        name: example-destination-metrics
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -134,7 +134,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -155,7 +155,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

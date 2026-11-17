@@ -32,7 +32,7 @@ spec:
       </html>
     subject: Customized confirmation email for your new $OrganizationName API account
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

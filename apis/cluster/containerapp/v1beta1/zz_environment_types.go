@@ -13,44 +13,6 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type EnvironmentIdentityInitParameters struct {
-
-	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type EnvironmentIdentityObservation struct {
-
-	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The ID of the Container App Environment
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The ID of the Container App Environment
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type EnvironmentIdentityParameters struct {
-
-	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type EnvironmentInitParameters struct {
 
 	// Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
@@ -58,7 +20,7 @@ type EnvironmentInitParameters struct {
 	DaprApplicationInsightsConnectionStringSecretRef *v2.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// An identity block as defined below.
-	Identity *EnvironmentIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
@@ -148,7 +110,7 @@ type EnvironmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *EnvironmentIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
@@ -215,7 +177,7 @@ type EnvironmentParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *EnvironmentIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
@@ -309,6 +271,44 @@ type EnvironmentParameters struct {
 	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The ID of the Container App Environment
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the Container App Environment
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type WorkloadProfileInitParameters struct {

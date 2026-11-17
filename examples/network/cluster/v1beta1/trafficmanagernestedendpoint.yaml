@@ -57,7 +57,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: TrafficManagerProfile
 metadata:
   annotations:
@@ -68,10 +68,10 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-    - relativeName: nested-profile-qwerty
+      relativeName: nested-profile-qwerty
       ttl: 30
     monitorConfig:
-    - path: /
+      path: /
       port: 443
       protocol: HTTP
     resourceGroupNameSelector:
@@ -81,7 +81,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: TrafficManagerProfile
 metadata:
   annotations:
@@ -92,10 +92,10 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-    - relativeName: parent-profile-werty
+      relativeName: parent-profile-werty
       ttl: 100
     monitorConfig:
-    - intervalInSeconds: 30
+      intervalInSeconds: 30
       path: /
       port: 80
       protocol: HTTP

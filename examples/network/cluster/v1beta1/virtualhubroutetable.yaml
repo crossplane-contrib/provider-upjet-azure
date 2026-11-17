@@ -60,7 +60,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -122,7 +122,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualHubConnection
 metadata:
   annotations:
@@ -141,7 +141,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

@@ -16,33 +16,6 @@ func (l *BackupContainerStorageAccountList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this BackupPolicyFileShareList.
-func (l *BackupPolicyFileShareList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this BackupPolicyVMList.
-func (l *BackupPolicyVMList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this BackupPolicyVMWorkloadList.
-func (l *BackupPolicyVMWorkloadList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this BackupProtectedFileShareList.
 func (l *BackupProtectedFileShareList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -88,26 +61,8 @@ func (l *SiteRecoveryProtectionContainerList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SiteRecoveryProtectionContainerMappingList.
-func (l *SiteRecoveryProtectionContainerMappingList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this SiteRecoveryReplicationPolicyList.
 func (l *SiteRecoveryReplicationPolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VaultList.
-func (l *VaultList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

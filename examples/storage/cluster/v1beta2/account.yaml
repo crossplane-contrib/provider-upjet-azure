@@ -10,11 +10,11 @@
 # Uptest should succeed, as long as the hardcoded `metadata.name`
 # below is available.
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: storage/v1beta1/account
+    meta.upbound.io/example-id: storage/v1beta2/account
   labels:
     testing.upbound.io/example-name: example-storage
   name: examplesabumptest4540
@@ -33,7 +33,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: storage/v1beta1/account
+    meta.upbound.io/example-id: storage/v1beta2/account
   labels:
     testing.upbound.io/example-name: example-storage
   name: example-storage-${Rand.RFC1123Subdomain}

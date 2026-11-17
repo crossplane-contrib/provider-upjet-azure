@@ -177,7 +177,7 @@ type DefaultDatabaseParameters struct {
 	PersistenceRedisDatabaseBackupFrequency *string `json:"persistenceRedisDatabaseBackupFrequency,omitempty" tf:"persistence_redis_database_backup_frequency,omitempty"`
 }
 
-type ManagedRedisIdentityInitParameters struct {
+type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Managed Redis instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -197,7 +197,7 @@ type ManagedRedisIdentityInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type ManagedRedisIdentityObservation struct {
+type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Managed Redis instance.
 	// +listType=set
@@ -213,7 +213,7 @@ type ManagedRedisIdentityObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type ManagedRedisIdentityParameters struct {
+type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Managed Redis instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -247,7 +247,7 @@ type ManagedRedisInitParameters struct {
 	HighAvailabilityEnabled *bool `json:"highAvailabilityEnabled,omitempty" tf:"high_availability_enabled,omitempty"`
 
 	// An identity block as defined below.
-	Identity *ManagedRedisIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Managed Redis instance should exist. Refer to "Redis Cache" on the product availability documentation for supported locations. Changing this forces a new Managed Redis instance to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -281,7 +281,7 @@ type ManagedRedisObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *ManagedRedisIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Managed Redis instance should exist. Refer to "Redis Cache" on the product availability documentation for supported locations. Changing this forces a new Managed Redis instance to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -316,7 +316,7 @@ type ManagedRedisParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *ManagedRedisIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Managed Redis instance should exist. Refer to "Redis Cache" on the product availability documentation for supported locations. Changing this forces a new Managed Redis instance to be created.
 	// +kubebuilder:validation:Optional

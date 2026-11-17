@@ -26,7 +26,7 @@ spec:
 
 ---
 
-apiVersion: cache.azure.upbound.io/v1beta1
+apiVersion: cache.azure.upbound.io/v1beta2
 kind: RedisCache
 metadata:
   labels:
@@ -42,7 +42,7 @@ spec:
     family: P
     location: East US
     redisConfiguration:
-    - maxmemoryDelta: 2
+      maxmemoryDelta: 2
       maxmemoryPolicy: allkeys-lru
       maxmemoryReserved: 2
     resourceGroupNameSelector:
@@ -52,7 +52,7 @@ spec:
 
 ---
 
-apiVersion: cache.azure.upbound.io/v1beta1
+apiVersion: cache.azure.upbound.io/v1beta2
 kind: RedisCache
 metadata:
   labels:
@@ -68,7 +68,7 @@ spec:
     family: P
     location: West US
     redisConfiguration:
-    - maxmemoryDelta: 2
+      maxmemoryDelta: 2
       maxmemoryPolicy: allkeys-lru
       maxmemoryReserved: 2
     resourceGroupNameSelector:

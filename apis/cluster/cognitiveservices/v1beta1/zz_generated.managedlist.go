@@ -70,15 +70,6 @@ func (l *AccountCustomerManagedKeyList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this AccountList.
-func (l *AccountList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this AccountProjectList.
 func (l *AccountProjectList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -99,15 +90,6 @@ func (l *AccountRaiBlocklistList) GetItems() []resource.Managed {
 
 // GetItems of this AccountRaiPolicyList.
 func (l *AccountRaiPolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this DeploymentList.
-func (l *DeploymentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

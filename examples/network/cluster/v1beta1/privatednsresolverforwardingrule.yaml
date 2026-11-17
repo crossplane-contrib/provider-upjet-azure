@@ -88,7 +88,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -103,7 +103,7 @@ spec:
     delegation:
     - name: Microsoft.Network.dnsResolvers
       serviceDelegation:
-      - actions:
+        actions:
         - Microsoft.Network/virtualNetworks/subnets/join/action
         name: Microsoft.Network/dnsResolvers
     resourceGroupNameSelector:

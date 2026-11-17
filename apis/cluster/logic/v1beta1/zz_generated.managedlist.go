@@ -25,15 +25,6 @@ func (l *AppActionHTTPList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this AppIntegrationAccountBatchConfigurationList.
-func (l *AppIntegrationAccountBatchConfigurationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this AppIntegrationAccountList.
 func (l *AppIntegrationAccountList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -81,24 +72,6 @@ func (l *AppTriggerCustomList) GetItems() []resource.Managed {
 
 // GetItems of this AppTriggerHTTPRequestList.
 func (l *AppTriggerHTTPRequestList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this AppTriggerRecurrenceList.
-func (l *AppTriggerRecurrenceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this AppWorkflowList.
-func (l *AppWorkflowList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

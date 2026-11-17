@@ -13,52 +13,75 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type ContainerEnvInitParameters struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the environment variable for the container.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+type AuthenticationInitParameters struct {
 
 	// Name of the Container App secret from which to pull the environment variable value.
-	// The name of the secret that contains the value for this environment variable.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 
-	// The value for this secret.
-	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// Trigger Parameter that uses the secret.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
 }
 
-type ContainerEnvObservation struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the environment variable for the container.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+type AuthenticationObservation struct {
 
 	// Name of the Container App secret from which to pull the environment variable value.
-	// The name of the secret that contains the value for this environment variable.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 
-	// The value for this secret.
-	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// Trigger Parameter that uses the secret.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
 }
 
-type ContainerEnvParameters struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the environment variable for the container.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
+type AuthenticationParameters struct {
 
 	// Name of the Container App secret from which to pull the environment variable value.
-	// The name of the secret that contains the value for this environment variable.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 
-	// The value for this secret.
-	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+	// Trigger Parameter that uses the secret.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	TriggerParameter *string `json:"triggerParameter" tf:"trigger_parameter,omitempty"`
+}
+
+type ContainerInitParameters struct {
+
+	// A list of extra arguments to pass to the container.
+	// A list of args to pass to the container.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
+	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
+
+	// One or more env blocks as detailed below.
+	Env []EnvInitParameters `json:"env,omitempty" tf:"env,omitempty"`
+
+	// The image to use to create the container.
+	// The image to use to create the container.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// A liveness_probe block as detailed below.
+	LivenessProbe []LivenessProbeInitParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
+
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A readiness_probe block as detailed below.
+	ReadinessProbe []ReadinessProbeInitParameters `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
+
+	// A startup_probe block as detailed below.
+	StartupProbe []StartupProbeInitParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
+
+	// A volume_mounts block as detailed below.
+	VolumeMounts []VolumeMountsInitParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
 type ContainerJobIdentityInitParameters struct {
@@ -147,7 +170,7 @@ type ContainerJobInitParameters struct {
 	ManualTriggerConfig *ManualTriggerConfigInitParameters `json:"manualTriggerConfig,omitempty" tf:"manual_trigger_config,omitempty"`
 
 	// One or more registry blocks as defined below.
-	Registry []ContainerJobRegistryInitParameters `json:"registry,omitempty" tf:"registry,omitempty"`
+	Registry []RegistryInitParameters `json:"registry,omitempty" tf:"registry,omitempty"`
 
 	// The maximum number of times a replica is allowed to retry.
 	ReplicaRetryLimit *float64 `json:"replicaRetryLimit,omitempty" tf:"replica_retry_limit,omitempty"`
@@ -166,7 +189,7 @@ type ContainerJobInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template block as defined below.
-	Template *ContainerJobTemplateInitParameters `json:"template,omitempty" tf:"template,omitempty"`
+	Template *TemplateInitParameters `json:"template,omitempty" tf:"template,omitempty"`
 
 	// The name of the workload profile to use for the Container App Job.
 	WorkloadProfileName *string `json:"workloadProfileName,omitempty" tf:"workload_profile_name,omitempty"`
@@ -199,7 +222,7 @@ type ContainerJobObservation struct {
 	OutboundIPAddresses []*string `json:"outboundIpAddresses,omitempty" tf:"outbound_ip_addresses,omitempty"`
 
 	// One or more registry blocks as defined below.
-	Registry []ContainerJobRegistryObservation `json:"registry,omitempty" tf:"registry,omitempty"`
+	Registry []RegistryObservation `json:"registry,omitempty" tf:"registry,omitempty"`
 
 	// The maximum number of times a replica is allowed to retry.
 	ReplicaRetryLimit *float64 `json:"replicaRetryLimit,omitempty" tf:"replica_retry_limit,omitempty"`
@@ -221,7 +244,7 @@ type ContainerJobObservation struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template block as defined below.
-	Template *ContainerJobTemplateObservation `json:"template,omitempty" tf:"template,omitempty"`
+	Template *TemplateObservation `json:"template,omitempty" tf:"template,omitempty"`
 
 	// The name of the workload profile to use for the Container App Job.
 	WorkloadProfileName *string `json:"workloadProfileName,omitempty" tf:"workload_profile_name,omitempty"`
@@ -261,7 +284,7 @@ type ContainerJobParameters struct {
 
 	// One or more registry blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Registry []ContainerJobRegistryParameters `json:"registry,omitempty" tf:"registry,omitempty"`
+	Registry []RegistryParameters `json:"registry,omitempty" tf:"registry,omitempty"`
 
 	// The maximum number of times a replica is allowed to retry.
 	// +kubebuilder:validation:Optional
@@ -299,72 +322,11 @@ type ContainerJobParameters struct {
 
 	// A template block as defined below.
 	// +kubebuilder:validation:Optional
-	Template *ContainerJobTemplateParameters `json:"template,omitempty" tf:"template,omitempty"`
+	Template *TemplateParameters `json:"template,omitempty" tf:"template,omitempty"`
 
 	// The name of the workload profile to use for the Container App Job.
 	// +kubebuilder:validation:Optional
 	WorkloadProfileName *string `json:"workloadProfileName,omitempty" tf:"workload_profile_name,omitempty"`
-}
-
-type ContainerJobRegistryInitParameters struct {
-
-	// A Managed Identity to use to authenticate with Azure Container Registry.
-	// ID of the System or User Managed Identity used to pull images from the Container Registry
-	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The name of the Secret that contains the registry login password.
-	// The name of the Secret Reference containing the password value for this user on the Container Registry.
-	PasswordSecretName *string `json:"passwordSecretName,omitempty" tf:"password_secret_name,omitempty"`
-
-	// The URL of the Azure Container Registry server.
-	// The hostname for the Container Registry.
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
-
-	// The username to use to authenticate with Azure Container Registry.
-	// The username to use for this Container Registry.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type ContainerJobRegistryObservation struct {
-
-	// A Managed Identity to use to authenticate with Azure Container Registry.
-	// ID of the System or User Managed Identity used to pull images from the Container Registry
-	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The name of the Secret that contains the registry login password.
-	// The name of the Secret Reference containing the password value for this user on the Container Registry.
-	PasswordSecretName *string `json:"passwordSecretName,omitempty" tf:"password_secret_name,omitempty"`
-
-	// The URL of the Azure Container Registry server.
-	// The hostname for the Container Registry.
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
-
-	// The username to use to authenticate with Azure Container Registry.
-	// The username to use for this Container Registry.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type ContainerJobRegistryParameters struct {
-
-	// A Managed Identity to use to authenticate with Azure Container Registry.
-	// ID of the System or User Managed Identity used to pull images from the Container Registry
-	// +kubebuilder:validation:Optional
-	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The name of the Secret that contains the registry login password.
-	// The name of the Secret Reference containing the password value for this user on the Container Registry.
-	// +kubebuilder:validation:Optional
-	PasswordSecretName *string `json:"passwordSecretName,omitempty" tf:"password_secret_name,omitempty"`
-
-	// The URL of the Azure Container Registry server.
-	// The hostname for the Container Registry.
-	// +kubebuilder:validation:Optional
-	Server *string `json:"server" tf:"server,omitempty"`
-
-	// The username to use to authenticate with Azure Container Registry.
-	// The username to use for this Container Registry.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type ContainerJobSecretInitParameters struct {
@@ -444,549 +406,151 @@ type ContainerJobSecretParameters struct {
 	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
-type ContainerJobTemplateInitParameters struct {
+type ContainerObservation struct {
 
-	// A container block as defined below.
-	Container []TemplateContainerInitParameters `json:"container,omitempty" tf:"container,omitempty"`
+	// A list of extra arguments to pass to the container.
+	// A list of args to pass to the container.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// A init_container block as defined below.
-	InitContainer []TemplateInitContainerInitParameters `json:"initContainer,omitempty" tf:"init_container,omitempty"`
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
+	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// A volume block as defined below.
-	Volume []TemplateVolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
-}
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-type ContainerJobTemplateObservation struct {
+	// One or more env blocks as detailed below.
+	Env []EnvObservation `json:"env,omitempty" tf:"env,omitempty"`
 
-	// A container block as defined below.
-	Container []TemplateContainerObservation `json:"container,omitempty" tf:"container,omitempty"`
+	// The amount of ephemeral storage available to the Container App.
+	// The amount of ephemeral storage available to the Container App.
+	EphemeralStorage *string `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
-	// A init_container block as defined below.
-	InitContainer []TemplateInitContainerObservation `json:"initContainer,omitempty" tf:"init_container,omitempty"`
+	// The image to use to create the container.
+	// The image to use to create the container.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// A volume block as defined below.
-	Volume []TemplateVolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
-}
+	// A liveness_probe block as detailed below.
+	LivenessProbe []LivenessProbeObservation `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-type ContainerJobTemplateParameters struct {
-
-	// A container block as defined below.
-	// +kubebuilder:validation:Optional
-	Container []TemplateContainerParameters `json:"container" tf:"container,omitempty"`
-
-	// A init_container block as defined below.
-	// +kubebuilder:validation:Optional
-	InitContainer []TemplateInitContainerParameters `json:"initContainer,omitempty" tf:"init_container,omitempty"`
-
-	// A volume block as defined below.
-	// +kubebuilder:validation:Optional
-	Volume []TemplateVolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
-}
-
-type ContainerLivenessProbeInitParameters struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	Header []LivenessProbeHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
-}
-
-type ContainerLivenessProbeObservation struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	Header []LivenessProbeHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
-
-	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
-	TerminationGracePeriodSeconds *float64 `json:"terminationGracePeriodSeconds,omitempty" tf:"termination_grace_period_seconds,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
-}
-
-type ContainerLivenessProbeParameters struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
-	// +kubebuilder:validation:Optional
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	// +kubebuilder:validation:Optional
-	Header []LivenessProbeHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	// +kubebuilder:validation:Optional
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
-	// +kubebuilder:validation:Optional
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	// +kubebuilder:validation:Optional
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port" tf:"port,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	// +kubebuilder:validation:Optional
-	Transport *string `json:"transport" tf:"transport,omitempty"`
-}
-
-type ContainerReadinessProbeHeaderInitParameters struct {
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The HTTP Header Name.
+	// The name of the container.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value for this secret.
-	// The HTTP Header value.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// A readiness_probe block as detailed below.
+	ReadinessProbe []ReadinessProbeObservation `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
+
+	// A startup_probe block as detailed below.
+	StartupProbe []StartupProbeObservation `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
+
+	// A volume_mounts block as detailed below.
+	VolumeMounts []VolumeMountsObservation `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
-type ContainerReadinessProbeHeaderObservation struct {
+type ContainerParameters struct {
+
+	// A list of extra arguments to pass to the container.
+	// A list of args to pass to the container.
+	// +kubebuilder:validation:Optional
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
+	// +kubebuilder:validation:Optional
+	CPU *float64 `json:"cpu" tf:"cpu,omitempty"`
+
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// +kubebuilder:validation:Optional
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
+
+	// One or more env blocks as detailed below.
+	// +kubebuilder:validation:Optional
+	Env []EnvParameters `json:"env,omitempty" tf:"env,omitempty"`
+
+	// The image to use to create the container.
+	// The image to use to create the container.
+	// +kubebuilder:validation:Optional
+	Image *string `json:"image" tf:"image,omitempty"`
+
+	// A liveness_probe block as detailed below.
+	// +kubebuilder:validation:Optional
+	LivenessProbe []LivenessProbeParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
+
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
+	// +kubebuilder:validation:Optional
+	Memory *string `json:"memory" tf:"memory,omitempty"`
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The HTTP Header Name.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The value for this secret.
-	// The HTTP Header value.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ContainerReadinessProbeHeaderParameters struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The HTTP Header Name.
+	// The name of the container.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value for this secret.
-	// The HTTP Header value.
+	// A readiness_probe block as detailed below.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value" tf:"value,omitempty"`
+	ReadinessProbe []ReadinessProbeParameters `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
+
+	// A startup_probe block as detailed below.
+	// +kubebuilder:validation:Optional
+	StartupProbe []StartupProbeParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
+
+	// A volume_mounts block as detailed below.
+	// +kubebuilder:validation:Optional
+	VolumeMounts []VolumeMountsParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
 }
 
-type ContainerReadinessProbeInitParameters struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `48`. Defaults to `3`.
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	Header []ContainerReadinessProbeHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
-
-	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
-	SuccessCountThreshold *float64 `json:"successCountThreshold,omitempty" tf:"success_count_threshold,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
-}
-
-type ContainerReadinessProbeObservation struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `48`. Defaults to `3`.
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	Header []ContainerReadinessProbeHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
-
-	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
-	SuccessCountThreshold *float64 `json:"successCountThreshold,omitempty" tf:"success_count_threshold,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
-}
-
-type ContainerReadinessProbeParameters struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `48`. Defaults to `3`.
-	// +kubebuilder:validation:Optional
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	// +kubebuilder:validation:Optional
-	Header []ContainerReadinessProbeHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	// +kubebuilder:validation:Optional
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
-	// +kubebuilder:validation:Optional
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	// +kubebuilder:validation:Optional
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port" tf:"port,omitempty"`
-
-	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
-	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
-	// +kubebuilder:validation:Optional
-	SuccessCountThreshold *float64 `json:"successCountThreshold,omitempty" tf:"success_count_threshold,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	// +kubebuilder:validation:Optional
-	Transport *string `json:"transport" tf:"transport,omitempty"`
-}
-
-type ContainerStartupProbeHeaderInitParameters struct {
+type EnvInitParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The HTTP Header Name.
+	// The name of the environment variable for the container.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Name of the Container App secret from which to pull the environment variable value.
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
 	// The value for this secret.
-	// The HTTP Header value.
+	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ContainerStartupProbeHeaderObservation struct {
+type EnvObservation struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The HTTP Header Name.
+	// The name of the environment variable for the container.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Name of the Container App secret from which to pull the environment variable value.
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
 	// The value for this secret.
-	// The HTTP Header value.
+	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ContainerStartupProbeHeaderParameters struct {
+type EnvParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The HTTP Header Name.
+	// The name of the environment variable for the container.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Name of the Container App secret from which to pull the environment variable value.
+	// The name of the secret that contains the value for this environment variable.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 
 	// The value for this secret.
-	// The HTTP Header value.
+	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value" tf:"value,omitempty"`
-}
-
-type ContainerStartupProbeInitParameters struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `240`. Defaults to `3`.
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	Header []ContainerStartupProbeHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
-}
-
-type ContainerStartupProbeObservation struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `240`. Defaults to `3`.
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	Header []ContainerStartupProbeHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
-
-	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
-	TerminationGracePeriodSeconds *float64 `json:"terminationGracePeriodSeconds,omitempty" tf:"termination_grace_period_seconds,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
-}
-
-type ContainerStartupProbeParameters struct {
-
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
-	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `240`. Defaults to `3`.
-	// +kubebuilder:validation:Optional
-	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
-
-	// A header block as detailed below.
-	// +kubebuilder:validation:Optional
-	Header []ContainerStartupProbeHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
-	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
-	// +kubebuilder:validation:Optional
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
-
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
-	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
-	// +kubebuilder:validation:Optional
-	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
-
-	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
-	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
-	// +kubebuilder:validation:Optional
-	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The port number on which to connect. Possible values are between 1 and 65535.
-	// The port number on which to connect. Possible values are between `1` and `65535`.
-	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port" tf:"port,omitempty"`
-
-	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
-	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
-	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
-
-	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
-	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
-	// +kubebuilder:validation:Optional
-	Transport *string `json:"transport" tf:"transport,omitempty"`
-}
-
-type ContainerVolumeMountsInitParameters struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the Volume to be mounted in the container.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The path in the container at which to mount this volume.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The sub path of the volume to be mounted in the container.
-	// The sub path of the volume to be mounted in the container.
-	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
-}
-
-type ContainerVolumeMountsObservation struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the Volume to be mounted in the container.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The path in the container at which to mount this volume.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// The sub path of the volume to be mounted in the container.
-	// The sub path of the volume to be mounted in the container.
-	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
-}
-
-type ContainerVolumeMountsParameters struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the Volume to be mounted in the container.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// The path within the container at which the volume should be mounted. Must not contain :.
-	// The path in the container at which to mount this volume.
-	// +kubebuilder:validation:Optional
-	Path *string `json:"path" tf:"path,omitempty"`
-
-	// The sub path of the volume to be mounted in the container.
-	// The sub path of the volume to be mounted in the container.
-	// +kubebuilder:validation:Optional
-	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EventTriggerConfigInitParameters struct {
@@ -1028,7 +592,7 @@ type EventTriggerConfigParameters struct {
 	Scale []ScaleParameters `json:"scale,omitempty" tf:"scale,omitempty"`
 }
 
-type LivenessProbeHeaderInitParameters struct {
+type HeaderInitParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
 	// The HTTP Header Name.
@@ -1039,7 +603,7 @@ type LivenessProbeHeaderInitParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type LivenessProbeHeaderObservation struct {
+type HeaderObservation struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
 	// The HTTP Header Name.
@@ -1050,7 +614,7 @@ type LivenessProbeHeaderObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type LivenessProbeHeaderParameters struct {
+type HeaderParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
 	// The HTTP Header Name.
@@ -1061,6 +625,339 @@ type LivenessProbeHeaderParameters struct {
 	// The HTTP Header value.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type InitContainerEnvInitParameters struct {
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the environment variable for the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Name of the Container App secret from which to pull the environment variable value.
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The value for this secret.
+	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type InitContainerEnvObservation struct {
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the environment variable for the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Name of the Container App secret from which to pull the environment variable value.
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The value for this secret.
+	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type InitContainerEnvParameters struct {
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the environment variable for the container.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Name of the Container App secret from which to pull the environment variable value.
+	// The name of the secret that contains the value for this environment variable.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The value for this secret.
+	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type InitContainerInitParameters struct {
+
+	// A list of extra arguments to pass to the container.
+	// A list of args to pass to the container.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
+	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
+
+	// One or more env blocks as detailed below.
+	Env []InitContainerEnvInitParameters `json:"env,omitempty" tf:"env,omitempty"`
+
+	// The image to use to create the container.
+	// The image to use to create the container.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A volume_mounts block as detailed below.
+	VolumeMounts []InitContainerVolumeMountsInitParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
+}
+
+type InitContainerObservation struct {
+
+	// A list of extra arguments to pass to the container.
+	// A list of args to pass to the container.
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
+	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
+
+	// One or more env blocks as detailed below.
+	Env []InitContainerEnvObservation `json:"env,omitempty" tf:"env,omitempty"`
+
+	// The amount of ephemeral storage available to the Container App.
+	// The amount of ephemeral storage available to the Container App.
+	EphemeralStorage *string `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
+
+	// The image to use to create the container.
+	// The image to use to create the container.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A volume_mounts block as detailed below.
+	VolumeMounts []InitContainerVolumeMountsObservation `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
+}
+
+type InitContainerParameters struct {
+
+	// A list of extra arguments to pass to the container.
+	// A list of args to pass to the container.
+	// +kubebuilder:validation:Optional
+	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The amount of vCPU to allocate to the container.
+	// The amount of vCPU to allocate to the container.
+	// +kubebuilder:validation:Optional
+	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+	// +kubebuilder:validation:Optional
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
+
+	// One or more env blocks as detailed below.
+	// +kubebuilder:validation:Optional
+	Env []InitContainerEnvParameters `json:"env,omitempty" tf:"env,omitempty"`
+
+	// The image to use to create the container.
+	// The image to use to create the container.
+	// +kubebuilder:validation:Optional
+	Image *string `json:"image" tf:"image,omitempty"`
+
+	// The amount of memory to allocate to the container.
+	// The amount of memory to allocate to the container.
+	// +kubebuilder:validation:Optional
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the container.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// A volume_mounts block as detailed below.
+	// +kubebuilder:validation:Optional
+	VolumeMounts []InitContainerVolumeMountsParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
+}
+
+type InitContainerVolumeMountsInitParameters struct {
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The path in the container at which to mount this volume.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
+}
+
+type InitContainerVolumeMountsObservation struct {
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The path in the container at which to mount this volume.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
+}
+
+type InitContainerVolumeMountsParameters struct {
+
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The name of the Volume to be mounted in the container.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The path in the container at which to mount this volume.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path" tf:"path,omitempty"`
+
+	// The sub path of the volume to be mounted in the container.
+	// The sub path of the volume to be mounted in the container.
+	// +kubebuilder:validation:Optional
+	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
+}
+
+type LivenessProbeInitParameters struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
+}
+
+type LivenessProbeObservation struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	TerminationGracePeriodSeconds *float64 `json:"terminationGracePeriodSeconds,omitempty" tf:"termination_grace_period_seconds,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
+}
+
+type LivenessProbeParameters struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `30`. Defaults to `3`.
+	// +kubebuilder:validation:Optional
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	// +kubebuilder:validation:Optional
+	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `1` seconds.
+	// +kubebuilder:validation:Optional
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	// +kubebuilder:validation:Optional
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port" tf:"port,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	// +kubebuilder:validation:Optional
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	// +kubebuilder:validation:Optional
+	Transport *string `json:"transport" tf:"transport,omitempty"`
 }
 
 type ManualTriggerConfigInitParameters struct {
@@ -1092,39 +989,242 @@ type ManualTriggerConfigParameters struct {
 	ReplicaCompletionCount *float64 `json:"replicaCompletionCount,omitempty" tf:"replica_completion_count,omitempty"`
 }
 
-type RulesAuthenticationInitParameters struct {
+type ReadinessProbeHeaderInitParameters struct {
 
-	// Name of the Container App secret from which to pull the environment variable value.
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The HTTP Header Name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Trigger Parameter that uses the secret.
-	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+	// The value for this secret.
+	// The HTTP Header value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type RulesAuthenticationObservation struct {
+type ReadinessProbeHeaderObservation struct {
 
-	// Name of the Container App secret from which to pull the environment variable value.
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The HTTP Header Name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Trigger Parameter that uses the secret.
-	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+	// The value for this secret.
+	// The HTTP Header value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type RulesAuthenticationParameters struct {
+type ReadinessProbeHeaderParameters struct {
 
-	// Name of the Container App secret from which to pull the environment variable value.
+	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
+	// The HTTP Header Name.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Trigger Parameter that uses the secret.
+	// The value for this secret.
+	// The HTTP Header value.
 	// +kubebuilder:validation:Optional
-	TriggerParameter *string `json:"triggerParameter" tf:"trigger_parameter,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type ReadinessProbeInitParameters struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `48`. Defaults to `3`.
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	Header []ReadinessProbeHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
+	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
+	SuccessCountThreshold *float64 `json:"successCountThreshold,omitempty" tf:"success_count_threshold,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
+}
+
+type ReadinessProbeObservation struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `48`. Defaults to `3`.
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	Header []ReadinessProbeHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
+	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
+	SuccessCountThreshold *float64 `json:"successCountThreshold,omitempty" tf:"success_count_threshold,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
+}
+
+type ReadinessProbeParameters struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `48`. Defaults to `3`.
+	// +kubebuilder:validation:Optional
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	// +kubebuilder:validation:Optional
+	Header []ReadinessProbeHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	// +kubebuilder:validation:Optional
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	// +kubebuilder:validation:Optional
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port" tf:"port,omitempty"`
+
+	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
+	// The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
+	// +kubebuilder:validation:Optional
+	SuccessCountThreshold *float64 `json:"successCountThreshold,omitempty" tf:"success_count_threshold,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	// +kubebuilder:validation:Optional
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	// +kubebuilder:validation:Optional
+	Transport *string `json:"transport" tf:"transport,omitempty"`
+}
+
+type RegistryInitParameters struct {
+
+	// A Managed Identity to use to authenticate with Azure Container Registry.
+	// ID of the System or User Managed Identity used to pull images from the Container Registry
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The name of the Secret that contains the registry login password.
+	// The name of the Secret Reference containing the password value for this user on the Container Registry.
+	PasswordSecretName *string `json:"passwordSecretName,omitempty" tf:"password_secret_name,omitempty"`
+
+	// The URL of the Azure Container Registry server.
+	// The hostname for the Container Registry.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The username to use to authenticate with Azure Container Registry.
+	// The username to use for this Container Registry.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type RegistryObservation struct {
+
+	// A Managed Identity to use to authenticate with Azure Container Registry.
+	// ID of the System or User Managed Identity used to pull images from the Container Registry
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The name of the Secret that contains the registry login password.
+	// The name of the Secret Reference containing the password value for this user on the Container Registry.
+	PasswordSecretName *string `json:"passwordSecretName,omitempty" tf:"password_secret_name,omitempty"`
+
+	// The URL of the Azure Container Registry server.
+	// The hostname for the Container Registry.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The username to use to authenticate with Azure Container Registry.
+	// The username to use for this Container Registry.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type RegistryParameters struct {
+
+	// A Managed Identity to use to authenticate with Azure Container Registry.
+	// ID of the System or User Managed Identity used to pull images from the Container Registry
+	// +kubebuilder:validation:Optional
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The name of the Secret that contains the registry login password.
+	// The name of the Secret Reference containing the password value for this user on the Container Registry.
+	// +kubebuilder:validation:Optional
+	PasswordSecretName *string `json:"passwordSecretName,omitempty" tf:"password_secret_name,omitempty"`
+
+	// The URL of the Azure Container Registry server.
+	// The hostname for the Container Registry.
+	// +kubebuilder:validation:Optional
+	Server *string `json:"server" tf:"server,omitempty"`
+
+	// The username to use to authenticate with Azure Container Registry.
+	// The username to use for this Container Registry.
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type RulesInitParameters struct {
 
 	// A authentication block as defined below.
-	Authentication []RulesAuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// Type of the scale rule. Possible values are activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid, solace-event-queue and github-runner.
 	CustomRuleType *string `json:"customRuleType,omitempty" tf:"custom_rule_type,omitempty"`
@@ -1144,7 +1244,7 @@ type RulesInitParameters struct {
 type RulesObservation struct {
 
 	// A authentication block as defined below.
-	Authentication []RulesAuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+	Authentication []AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// Type of the scale rule. Possible values are activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid, solace-event-queue and github-runner.
 	CustomRuleType *string `json:"customRuleType,omitempty" tf:"custom_rule_type,omitempty"`
@@ -1165,7 +1265,7 @@ type RulesParameters struct {
 
 	// A authentication block as defined below.
 	// +kubebuilder:validation:Optional
-	Authentication []RulesAuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// Type of the scale rule. Possible values are activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid, solace-event-queue and github-runner.
 	// +kubebuilder:validation:Optional
@@ -1274,307 +1374,226 @@ type ScheduleTriggerConfigParameters struct {
 	ReplicaCompletionCount *float64 `json:"replicaCompletionCount,omitempty" tf:"replica_completion_count,omitempty"`
 }
 
-type TemplateContainerInitParameters struct {
-
-	// A list of extra arguments to pass to the container.
-	// A list of args to pass to the container.
-	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The amount of vCPU to allocate to the container.
-	// The amount of vCPU to allocate to the container.
-	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
-
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
-
-	// One or more env blocks as detailed below.
-	Env []ContainerEnvInitParameters `json:"env,omitempty" tf:"env,omitempty"`
-
-	// The image to use to create the container.
-	// The image to use to create the container.
-	Image *string `json:"image,omitempty" tf:"image,omitempty"`
-
-	// A liveness_probe block as detailed below.
-	LivenessProbe []ContainerLivenessProbeInitParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
-
-	// The amount of memory to allocate to the container.
-	// The amount of memory to allocate to the container.
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+type StartupProbeHeaderInitParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the container.
+	// The HTTP Header Name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A readiness_probe block as detailed below.
-	ReadinessProbe []ContainerReadinessProbeInitParameters `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
-
-	// A startup_probe block as detailed below.
-	StartupProbe []ContainerStartupProbeInitParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
-
-	// A volume_mounts block as detailed below.
-	VolumeMounts []ContainerVolumeMountsInitParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
-}
-
-type TemplateContainerObservation struct {
-
-	// A list of extra arguments to pass to the container.
-	// A list of args to pass to the container.
-	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The amount of vCPU to allocate to the container.
-	// The amount of vCPU to allocate to the container.
-	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
-
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
-
-	// One or more env blocks as detailed below.
-	Env []ContainerEnvObservation `json:"env,omitempty" tf:"env,omitempty"`
-
-	// The amount of ephemeral storage available to the Container App.
-	// The amount of ephemeral storage available to the Container App.
-	EphemeralStorage *string `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
-
-	// The image to use to create the container.
-	// The image to use to create the container.
-	Image *string `json:"image,omitempty" tf:"image,omitempty"`
-
-	// A liveness_probe block as detailed below.
-	LivenessProbe []ContainerLivenessProbeObservation `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
-
-	// The amount of memory to allocate to the container.
-	// The amount of memory to allocate to the container.
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the container.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A readiness_probe block as detailed below.
-	ReadinessProbe []ContainerReadinessProbeObservation `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
-
-	// A startup_probe block as detailed below.
-	StartupProbe []ContainerStartupProbeObservation `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
-
-	// A volume_mounts block as detailed below.
-	VolumeMounts []ContainerVolumeMountsObservation `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
-}
-
-type TemplateContainerParameters struct {
-
-	// A list of extra arguments to pass to the container.
-	// A list of args to pass to the container.
-	// +kubebuilder:validation:Optional
-	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The amount of vCPU to allocate to the container.
-	// The amount of vCPU to allocate to the container.
-	// +kubebuilder:validation:Optional
-	CPU *float64 `json:"cpu" tf:"cpu,omitempty"`
-
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// +kubebuilder:validation:Optional
-	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
-
-	// One or more env blocks as detailed below.
-	// +kubebuilder:validation:Optional
-	Env []ContainerEnvParameters `json:"env,omitempty" tf:"env,omitempty"`
-
-	// The image to use to create the container.
-	// The image to use to create the container.
-	// +kubebuilder:validation:Optional
-	Image *string `json:"image" tf:"image,omitempty"`
-
-	// A liveness_probe block as detailed below.
-	// +kubebuilder:validation:Optional
-	LivenessProbe []ContainerLivenessProbeParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
-
-	// The amount of memory to allocate to the container.
-	// The amount of memory to allocate to the container.
-	// +kubebuilder:validation:Optional
-	Memory *string `json:"memory" tf:"memory,omitempty"`
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the container.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// A readiness_probe block as detailed below.
-	// +kubebuilder:validation:Optional
-	ReadinessProbe []ContainerReadinessProbeParameters `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
-
-	// A startup_probe block as detailed below.
-	// +kubebuilder:validation:Optional
-	StartupProbe []ContainerStartupProbeParameters `json:"startupProbe,omitempty" tf:"startup_probe,omitempty"`
-
-	// A volume_mounts block as detailed below.
-	// +kubebuilder:validation:Optional
-	VolumeMounts []ContainerVolumeMountsParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
-}
-
-type TemplateInitContainerEnvInitParameters struct {
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the environment variable for the container.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Name of the Container App secret from which to pull the environment variable value.
-	// The name of the secret that contains the value for this environment variable.
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 
 	// The value for this secret.
-	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+	// The HTTP Header value.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type TemplateInitContainerEnvObservation struct {
+type StartupProbeHeaderObservation struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the environment variable for the container.
+	// The HTTP Header Name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Name of the Container App secret from which to pull the environment variable value.
-	// The name of the secret that contains the value for this environment variable.
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
-
 	// The value for this secret.
-	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+	// The HTTP Header value.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type TemplateInitContainerEnvParameters struct {
+type StartupProbeHeaderParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the environment variable for the container.
+	// The HTTP Header Name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
-
-	// Name of the Container App secret from which to pull the environment variable value.
-	// The name of the secret that contains the value for this environment variable.
-	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 
 	// The value for this secret.
-	// The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+	// The HTTP Header value.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
-type TemplateInitContainerInitParameters struct {
+type StartupProbeInitParameters struct {
 
-	// A list of extra arguments to pass to the container.
-	// A list of args to pass to the container.
-	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `240`. Defaults to `3`.
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
 
-	// The amount of vCPU to allocate to the container.
-	// The amount of vCPU to allocate to the container.
-	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
+	// A header block as detailed below.
+	Header []StartupProbeHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// One or more env blocks as detailed below.
-	Env []TemplateInitContainerEnvInitParameters `json:"env,omitempty" tf:"env,omitempty"`
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
 
-	// The image to use to create the container.
-	// The image to use to create the container.
-	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
 
-	// The amount of memory to allocate to the container.
-	// The amount of memory to allocate to the container.
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
+}
+
+type StartupProbeObservation struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `240`. Defaults to `3`.
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	Header []StartupProbeHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+	TerminationGracePeriodSeconds *float64 `json:"terminationGracePeriodSeconds,omitempty" tf:"termination_grace_period_seconds,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
+}
+
+type StartupProbeParameters struct {
+
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 240. Defaults to 3.
+	// The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `240`. Defaults to `3`.
+	// +kubebuilder:validation:Optional
+	FailureCountThreshold *float64 `json:"failureCountThreshold,omitempty" tf:"failure_count_threshold,omitempty"`
+
+	// A header block as detailed below.
+	// +kubebuilder:validation:Optional
+	Header []StartupProbeHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+
+	// The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+	// The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between 0 and 60. Defaults to 0 seconds.
+	// The number of seconds elapsed after the container has started before the probe is initiated. Possible values are between `0` and `60`. Defaults to `0` seconds.
+	// +kubebuilder:validation:Optional
+	InitialDelay *float64 `json:"initialDelay,omitempty" tf:"initial_delay,omitempty"`
+
+	// How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+	// How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+	// +kubebuilder:validation:Optional
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The path within the container at which the volume should be mounted. Must not contain :.
+	// The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number on which to connect. Possible values are between 1 and 65535.
+	// The port number on which to connect. Possible values are between `1` and `65535`.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port" tf:"port,omitempty"`
+
+	// Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+	// Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+	// +kubebuilder:validation:Optional
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Type of probe. Possible values are TCP, HTTP, and HTTPS.
+	// Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+	// +kubebuilder:validation:Optional
+	Transport *string `json:"transport" tf:"transport,omitempty"`
+}
+
+type TemplateInitParameters struct {
+
+	// A container block as defined below.
+	Container []ContainerInitParameters `json:"container,omitempty" tf:"container,omitempty"`
+
+	// A init_container block as defined below.
+	InitContainer []InitContainerInitParameters `json:"initContainer,omitempty" tf:"init_container,omitempty"`
+
+	// A volume block as defined below.
+	Volume []VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+}
+
+type TemplateObservation struct {
+
+	// A container block as defined below.
+	Container []ContainerObservation `json:"container,omitempty" tf:"container,omitempty"`
+
+	// A init_container block as defined below.
+	InitContainer []InitContainerObservation `json:"initContainer,omitempty" tf:"init_container,omitempty"`
+
+	// A volume block as defined below.
+	Volume []VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
+}
+
+type TemplateParameters struct {
+
+	// A container block as defined below.
+	// +kubebuilder:validation:Optional
+	Container []ContainerParameters `json:"container" tf:"container,omitempty"`
+
+	// A init_container block as defined below.
+	// +kubebuilder:validation:Optional
+	InitContainer []InitContainerParameters `json:"initContainer,omitempty" tf:"init_container,omitempty"`
+
+	// A volume block as defined below.
+	// +kubebuilder:validation:Optional
+	Volume []VolumeParameters `json:"volume,omitempty" tf:"volume,omitempty"`
+}
+
+type VolumeInitParameters struct {
+
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string e.g. dir_mode=0751,file_mode=0751.
+	// Mount options used while mounting the AzureFile. Must be a comma-separated string.
+	MountOptions *string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the container.
+	// The name of the volume.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A volume_mounts block as detailed below.
-	VolumeMounts []TemplateInitContainerVolumeMountsInitParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
+	// The name of the storage to use for the volume.
+	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
+	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
+
+	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
+	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
 
-type TemplateInitContainerObservation struct {
-
-	// A list of extra arguments to pass to the container.
-	// A list of args to pass to the container.
-	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The amount of vCPU to allocate to the container.
-	// The amount of vCPU to allocate to the container.
-	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
-
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
-
-	// One or more env blocks as detailed below.
-	Env []TemplateInitContainerEnvObservation `json:"env,omitempty" tf:"env,omitempty"`
-
-	// The amount of ephemeral storage available to the Container App.
-	// The amount of ephemeral storage available to the Container App.
-	EphemeralStorage *string `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
-
-	// The image to use to create the container.
-	// The image to use to create the container.
-	Image *string `json:"image,omitempty" tf:"image,omitempty"`
-
-	// The amount of memory to allocate to the container.
-	// The amount of memory to allocate to the container.
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the container.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A volume_mounts block as detailed below.
-	VolumeMounts []TemplateInitContainerVolumeMountsObservation `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
-}
-
-type TemplateInitContainerParameters struct {
-
-	// A list of extra arguments to pass to the container.
-	// A list of args to pass to the container.
-	// +kubebuilder:validation:Optional
-	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
-
-	// The amount of vCPU to allocate to the container.
-	// The amount of vCPU to allocate to the container.
-	// +kubebuilder:validation:Optional
-	CPU *float64 `json:"cpu,omitempty" tf:"cpu,omitempty"`
-
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
-	// +kubebuilder:validation:Optional
-	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
-
-	// One or more env blocks as detailed below.
-	// +kubebuilder:validation:Optional
-	Env []TemplateInitContainerEnvParameters `json:"env,omitempty" tf:"env,omitempty"`
-
-	// The image to use to create the container.
-	// The image to use to create the container.
-	// +kubebuilder:validation:Optional
-	Image *string `json:"image" tf:"image,omitempty"`
-
-	// The amount of memory to allocate to the container.
-	// The amount of memory to allocate to the container.
-	// +kubebuilder:validation:Optional
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the container.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// A volume_mounts block as detailed below.
-	// +kubebuilder:validation:Optional
-	VolumeMounts []TemplateInitContainerVolumeMountsParameters `json:"volumeMounts,omitempty" tf:"volume_mounts,omitempty"`
-}
-
-type TemplateInitContainerVolumeMountsInitParameters struct {
+type VolumeMountsInitParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
 	// The name of the Volume to be mounted in the container.
@@ -1589,7 +1608,7 @@ type TemplateInitContainerVolumeMountsInitParameters struct {
 	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
-type TemplateInitContainerVolumeMountsObservation struct {
+type VolumeMountsObservation struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
 	// The name of the Volume to be mounted in the container.
@@ -1604,7 +1623,7 @@ type TemplateInitContainerVolumeMountsObservation struct {
 	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
-type TemplateInitContainerVolumeMountsParameters struct {
+type VolumeMountsParameters struct {
 
 	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
 	// The name of the Volume to be mounted in the container.
@@ -1622,7 +1641,7 @@ type TemplateInitContainerVolumeMountsParameters struct {
 	SubPath *string `json:"subPath,omitempty" tf:"sub_path,omitempty"`
 }
 
-type TemplateVolumeInitParameters struct {
+type VolumeObservation struct {
 
 	// Mount options used while mounting the AzureFile. Must be a comma-separated string e.g. dir_mode=0751,file_mode=0751.
 	// Mount options used while mounting the AzureFile. Must be a comma-separated string.
@@ -1641,26 +1660,7 @@ type TemplateVolumeInitParameters struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
 
-type TemplateVolumeObservation struct {
-
-	// Mount options used while mounting the AzureFile. Must be a comma-separated string e.g. dir_mode=0751,file_mode=0751.
-	// Mount options used while mounting the AzureFile. Must be a comma-separated string.
-	MountOptions *string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
-
-	// The name of the volume to mount. This must match the name of a volume defined in the volume block.
-	// The name of the volume.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The name of the storage to use for the volume.
-	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
-	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
-
-	// The type of storage to use for the volume. Possible values are AzureFile, EmptyDir, NfsAzureFile and Secret. Defaults to EmptyDir.
-	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
-}
-
-type TemplateVolumeParameters struct {
+type VolumeParameters struct {
 
 	// Mount options used while mounting the AzureFile. Must be a comma-separated string e.g. dir_mode=0751,file_mode=0751.
 	// Mount options used while mounting the AzureFile. Must be a comma-separated string.

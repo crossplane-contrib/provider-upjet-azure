@@ -19,7 +19,7 @@ spec:
 ---
 
 
-apiVersion: operationsmanagement.azure.upbound.io/v1beta1
+apiVersion: operationsmanagement.azure.upbound.io/v1beta2
 kind: LogAnalyticsSolution
 metadata:
   annotations:
@@ -31,7 +31,7 @@ spec:
   forProvider:
     location: West Europe
     plan:
-    - product: OMSGallery/SecurityInsights
+      product: OMSGallery/SecurityInsights
       publisher: Microsoft
     resourceGroupNameSelector:
       matchLabels:
@@ -46,7 +46,7 @@ spec:
 
 ---
 
-apiVersion: operationalinsights.azure.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:

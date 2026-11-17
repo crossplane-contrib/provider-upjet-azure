@@ -27,7 +27,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: automation.azure.upbound.io/v1beta1
+apiVersion: automation.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -43,7 +43,7 @@ spec:
         testing.upbound.io/example-name: rgwebhook
     skuName: Basic
 ---
-apiVersion: automation.azure.upbound.io/v1beta1
+apiVersion: automation.azure.upbound.io/v1beta2
 kind: RunBook
 metadata:
   annotations:

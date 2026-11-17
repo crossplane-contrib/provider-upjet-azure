@@ -60,7 +60,7 @@ type CustomerManagedKeyParameters struct {
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId" tf:"user_assigned_identity_id,omitempty"`
 }
 
-type MongoClusterIdentityInitParameters struct {
+type IdentityInitParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign.
 	// +listType=set
@@ -70,7 +70,7 @@ type MongoClusterIdentityInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type MongoClusterIdentityObservation struct {
+type IdentityObservation struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign.
 	// +listType=set
@@ -80,7 +80,7 @@ type MongoClusterIdentityObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type MongoClusterIdentityParameters struct {
+type IdentityParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign.
 	// +kubebuilder:validation:Optional
@@ -120,7 +120,7 @@ type MongoClusterInitParameters struct {
 	HighAvailabilityMode *string `json:"highAvailabilityMode,omitempty" tf:"high_availability_mode,omitempty"`
 
 	// An identity block as detailed below.
-	Identity *MongoClusterIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The supported Azure location where the MongoDB Cluster exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -132,7 +132,7 @@ type MongoClusterInitParameters struct {
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// A restore block as defined below. Required when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
-	Restore *MongoClusterRestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
+	Restore *RestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// The Number of shards to provision on the MongoDB Cluster. Changing this forces a new resource to be created.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
@@ -205,7 +205,7 @@ type MongoClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as detailed below.
-	Identity *MongoClusterIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The supported Azure location where the MongoDB Cluster exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -220,7 +220,7 @@ type MongoClusterObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A restore block as defined below. Required when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
-	Restore *MongoClusterRestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
+	Restore *RestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// The Number of shards to provision on the MongoDB Cluster. Changing this forces a new resource to be created.
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
@@ -282,7 +282,7 @@ type MongoClusterParameters struct {
 
 	// An identity block as detailed below.
 	// +kubebuilder:validation:Optional
-	Identity *MongoClusterIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The supported Azure location where the MongoDB Cluster exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -311,7 +311,7 @@ type MongoClusterParameters struct {
 
 	// A restore block as defined below. Required when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Restore *MongoClusterRestoreParameters `json:"restore,omitempty" tf:"restore,omitempty"`
+	Restore *RestoreParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// The Number of shards to provision on the MongoDB Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -363,7 +363,7 @@ type MongoClusterParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
-type MongoClusterRestoreInitParameters struct {
+type RestoreInitParameters struct {
 
 	// The point in time (in UTC) to restore from, in ISO 8601 format (e.g., 2024-01-01T00:00:00Z). Changing this forces a new resource to be created.
 	PointInTimeUtc *string `json:"pointInTimeUtc,omitempty" tf:"point_in_time_utc,omitempty"`
@@ -372,7 +372,7 @@ type MongoClusterRestoreInitParameters struct {
 	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
 }
 
-type MongoClusterRestoreObservation struct {
+type RestoreObservation struct {
 
 	// The point in time (in UTC) to restore from, in ISO 8601 format (e.g., 2024-01-01T00:00:00Z). Changing this forces a new resource to be created.
 	PointInTimeUtc *string `json:"pointInTimeUtc,omitempty" tf:"point_in_time_utc,omitempty"`
@@ -381,7 +381,7 @@ type MongoClusterRestoreObservation struct {
 	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
 }
 
-type MongoClusterRestoreParameters struct {
+type RestoreParameters struct {
 
 	// The point in time (in UTC) to restore from, in ISO 8601 format (e.g., 2024-01-01T00:00:00Z). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

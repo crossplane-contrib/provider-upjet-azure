@@ -113,7 +113,7 @@ func (tr *AccessPolicy) GetMergedParameters(shouldMergeInitProvider bool) (map[s
 // LateInitialize this AccessPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AccessPolicy) LateInitialize(attrs []byte) (bool, error) {
-	params := &AccessPolicyParameters_2{}
+	params := &AccessPolicyParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}

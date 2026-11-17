@@ -32,7 +32,7 @@ type ObjectReplicationInitParameters struct {
 	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
 
 	// One or more rules blocks as defined below.
-	Rules []ObjectReplicationRulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+	Rules []RulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -63,7 +63,7 @@ type ObjectReplicationObservation struct {
 	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
 
 	// One or more rules blocks as defined below.
-	Rules []ObjectReplicationRulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
+	Rules []RulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the Object Replication in the source storage account.
 	SourceObjectReplicationID *string `json:"sourceObjectReplicationId,omitempty" tf:"source_object_replication_id,omitempty"`
@@ -94,7 +94,7 @@ type ObjectReplicationParameters struct {
 
 	// One or more rules blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Rules []ObjectReplicationRulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+	Rules []RulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -111,7 +111,7 @@ type ObjectReplicationParameters struct {
 	SourceStorageAccountIDSelector *v2.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
 }
 
-type ObjectReplicationRulesInitParameters struct {
+type RulesInitParameters struct {
 
 	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
@@ -145,7 +145,7 @@ type ObjectReplicationRulesInitParameters struct {
 	SourceContainerNameSelector *v2.Selector `json:"sourceContainerNameSelector,omitempty" tf:"-"`
 }
 
-type ObjectReplicationRulesObservation struct {
+type RulesObservation struct {
 
 	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
@@ -163,7 +163,7 @@ type ObjectReplicationRulesObservation struct {
 	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`
 }
 
-type ObjectReplicationRulesParameters struct {
+type RulesParameters struct {
 
 	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	// +kubebuilder:validation:Optional

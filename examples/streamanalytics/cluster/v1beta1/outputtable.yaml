@@ -42,7 +42,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -77,7 +77,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: exampleoutputtableacc
 ---
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
 kind: Job
 metadata:
   annotations:

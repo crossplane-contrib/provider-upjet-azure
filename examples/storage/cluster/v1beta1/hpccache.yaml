@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-apiVersion: storagecache.azure.upbound.io/v1beta1
+apiVersion: storagecache.azure.upbound.io/v1beta2
 kind: HPCCache
 metadata:
   name: example2

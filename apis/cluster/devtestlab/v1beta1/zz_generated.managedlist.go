@@ -7,15 +7,6 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this GlobalVMShutdownScheduleList.
-func (l *GlobalVMShutdownScheduleList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this LabList.
 func (l *LabList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -25,44 +16,8 @@ func (l *LabList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this LinuxVirtualMachineList.
-func (l *LinuxVirtualMachineList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PolicyList.
 func (l *PolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ScheduleList.
-func (l *ScheduleList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VirtualNetworkList.
-func (l *VirtualNetworkList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this WindowsVirtualMachineList.
-func (l *WindowsVirtualMachineList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

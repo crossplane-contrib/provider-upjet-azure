@@ -30,7 +30,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudAPIPortal
 metadata:
   annotations:
@@ -46,7 +46,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudGateway
 metadata:
   annotations:
@@ -60,7 +60,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudService
 metadata:
   annotations:

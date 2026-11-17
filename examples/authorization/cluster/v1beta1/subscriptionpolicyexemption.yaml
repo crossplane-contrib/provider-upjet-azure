@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: authorization.azure.upbound.io/v1beta1
+apiVersion: authorization.azure.upbound.io/v1beta2
 kind: SubscriptionPolicyAssignment
 metadata:
   annotations:
@@ -31,7 +31,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: westus
     policyDefinitionIdSelector:
       matchLabels:

@@ -34,15 +34,6 @@ func (l *IOTHubDPSCertificateList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this IOTHubDPSList.
-func (l *IOTHubDPSList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this IOTHubDPSSharedAccessPolicyList.
 func (l *IOTHubDPSSharedAccessPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -99,15 +90,6 @@ func (l *IOTHubEnrichmentList) GetItems() []resource.Managed {
 
 // GetItems of this IOTHubFallbackRouteList.
 func (l *IOTHubFallbackRouteList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this IOTHubList.
-func (l *IOTHubList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

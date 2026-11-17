@@ -31,7 +31,7 @@ spec:
         </inbound>
       </policies>
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: APIOperation
 metadata:
   annotations:
@@ -54,7 +54,7 @@ spec:
     method: DELETE
     urlTemplate: /resource
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: API
 metadata:
   annotations:
@@ -75,7 +75,7 @@ spec:
     protocols:
     - https
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

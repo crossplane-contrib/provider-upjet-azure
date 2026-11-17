@@ -13,49 +13,10 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type CertificateContactsContactInitParameters struct {
-
-	// E-mail address of the contact.
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
-
-	// Name of the contact.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Phone number of the contact.
-	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
-}
-
-type CertificateContactsContactObservation struct {
-
-	// E-mail address of the contact.
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
-
-	// Name of the contact.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Phone number of the contact.
-	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
-}
-
-type CertificateContactsContactParameters struct {
-
-	// E-mail address of the contact.
-	// +kubebuilder:validation:Optional
-	Email *string `json:"email" tf:"email,omitempty"`
-
-	// Name of the contact.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Phone number of the contact.
-	// +kubebuilder:validation:Optional
-	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
-}
-
 type CertificateContactsInitParameters struct {
 
 	// One or more contact blocks as defined below.
-	Contact []CertificateContactsContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
+	Contact []ContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
@@ -74,7 +35,7 @@ type CertificateContactsInitParameters struct {
 type CertificateContactsObservation struct {
 
 	// One or more contact blocks as defined below.
-	Contact []CertificateContactsContactObservation `json:"contact,omitempty" tf:"contact,omitempty"`
+	Contact []ContactObservation `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault Certificate Contacts.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -87,7 +48,7 @@ type CertificateContactsParameters struct {
 
 	// One or more contact blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Contact []CertificateContactsContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
+	Contact []ContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
@@ -102,6 +63,45 @@ type CertificateContactsParameters struct {
 	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+}
+
+type ContactInitParameters struct {
+
+	// E-mail address of the contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Name of the contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number of the contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
+type ContactObservation struct {
+
+	// E-mail address of the contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Name of the contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number of the contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
+type ContactParameters struct {
+
+	// E-mail address of the contact.
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email" tf:"email,omitempty"`
+
+	// Name of the contact.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number of the contact.
+	// +kubebuilder:validation:Optional
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
 // CertificateContactsSpec defines the desired state of CertificateContacts

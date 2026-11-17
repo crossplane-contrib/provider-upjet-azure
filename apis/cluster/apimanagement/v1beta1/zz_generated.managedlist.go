@@ -7,33 +7,6 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this APIDiagnosticList.
-func (l *APIDiagnosticList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this APIList.
-func (l *APIList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this APIOperationList.
-func (l *APIOperationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this APIOperationPolicyList.
 func (l *APIOperationPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -106,15 +79,6 @@ func (l *AuthorizationServerList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this BackendList.
-func (l *BackendList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this CertificateList.
 func (l *CertificateList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -133,15 +97,6 @@ func (l *CustomDomainList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this DiagnosticList.
-func (l *DiagnosticList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this EmailTemplateList.
 func (l *EmailTemplateList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -153,15 +108,6 @@ func (l *EmailTemplateList) GetItems() []resource.Managed {
 
 // GetItems of this GatewayAPIList.
 func (l *GatewayAPIList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this GatewayList.
-func (l *GatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -234,33 +180,6 @@ func (l *IdentityProviderMicrosoftList) GetItems() []resource.Managed {
 
 // GetItems of this IdentityProviderTwitterList.
 func (l *IdentityProviderTwitterList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this LoggerList.
-func (l *LoggerList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ManagementList.
-func (l *ManagementList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this NamedValueList.
-func (l *NamedValueList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

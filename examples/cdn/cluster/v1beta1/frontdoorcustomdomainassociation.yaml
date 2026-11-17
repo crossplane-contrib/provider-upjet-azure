@@ -18,7 +18,7 @@ spec:
     cdnFrontdoorRouteIdsRefs:
     - name: example
 ---
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorRoute
 metadata:
   annotations:
@@ -29,15 +29,15 @@ metadata:
 spec:
   forProvider:
     cache:
-      - compressionEnabled: true
-        contentTypesToCompress:
-          - text/html
-          - text/javascript
-          - text/xml
-        queryStringCachingBehavior: IgnoreSpecifiedQueryStrings
-        queryStrings:
-          - account
-          - settings
+      compressionEnabled: true
+      contentTypesToCompress:
+        - text/html
+        - text/javascript
+        - text/xml
+      queryStringCachingBehavior: IgnoreSpecifiedQueryStrings
+      queryStrings:
+        - account
+        - settings
     cdnFrontdoorCustomDomainIdsRefs:
       - name: contoso
       - name: fabrikam
@@ -59,7 +59,7 @@ spec:
       - Http
       - Https
 ---
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -77,10 +77,10 @@ spec:
         testing.upbound.io/example-name: example
     hostName: contoso.contoso.com
     tls:
-      - certificateType: ManagedCertificate
-        minimumTlsVersion: TLS12
+      certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
 ---
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -98,10 +98,10 @@ spec:
         testing.upbound.io/example-name: example
     hostName: contoso.fabrikam.com
     tls:
-      - certificateType: ManagedCertificate
-        minimumTlsVersion: TLS12
+      certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
 ---
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorOrigin
 metadata:
   annotations:
@@ -123,7 +123,7 @@ spec:
     priority: 1
     weight: 1
 ---
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorOriginGroup
 metadata:
   annotations:
@@ -137,14 +137,14 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     healthProbe:
-      - intervalInSeconds: 240
-        path: /healthProbe
-        protocol: Https
-        requestType: HEAD
+      intervalInSeconds: 240
+      path: /healthProbe
+      protocol: Https
+      requestType: HEAD
     loadBalancing:
-      - additionalLatencyInMilliseconds: 0
-        sampleSize: 16
-        successfulSamplesRequired: 3
+      additionalLatencyInMilliseconds: 0
+      sampleSize: 16
+      successfulSamplesRequired: 3
     restoreTrafficTimeToHealedOrNewEndpointInMinutes: 10
     sessionAffinityEnabled: true
 ---
@@ -165,7 +165,7 @@ spec:
     tags:
       environment: Production
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: DNSZone
 metadata:
   annotations:

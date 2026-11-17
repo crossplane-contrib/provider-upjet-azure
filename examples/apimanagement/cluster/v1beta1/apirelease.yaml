@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: API
 metadata:
   annotations:
@@ -34,14 +34,14 @@ spec:
         testing.upbound.io/example-name: example
     displayName: Example API
     import:
-    - contentFormat: swagger-link-json
+      contentFormat: swagger-link-json
       contentValue: http://conferenceapi.azurewebsites.net/?format=json
     path: example
     protocols:
     - https
     revision: "1"
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

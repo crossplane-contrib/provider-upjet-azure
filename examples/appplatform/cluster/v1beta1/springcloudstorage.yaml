@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudService
 metadata:
   annotations:
@@ -53,7 +53,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

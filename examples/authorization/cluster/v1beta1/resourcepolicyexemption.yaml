@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -57,7 +57,7 @@ spec:
 
 ---
 
-apiVersion: authorization.azure.upbound.io/v1beta1
+apiVersion: authorization.azure.upbound.io/v1beta2
 kind: ResourcePolicyAssignment
 metadata:
   annotations:
@@ -69,7 +69,7 @@ metadata:
 spec:
   forProvider:
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: westus
     name: assignment1
     policyDefinitionIdSelector:

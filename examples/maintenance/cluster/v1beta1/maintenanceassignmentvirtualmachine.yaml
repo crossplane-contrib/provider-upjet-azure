@@ -21,7 +21,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: LinuxVirtualMachine
 metadata:
   annotations:
@@ -40,19 +40,19 @@ spec:
     networkInterfaceIdsRefs:
     - name: example
     osDisk:
-    - caching: ReadWrite
+      caching: ReadWrite
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgmaintenance
     size: Standard_F2
     sourceImageReference:
-    - offer: UbuntuServer
+      offer: UbuntuServer
       publisher: Canonical
       sku: 16.04-LTS
       version: latest
 ---
-apiVersion: maintenance.azure.upbound.io/v1beta1
+apiVersion: maintenance.azure.upbound.io/v1beta2
 kind: MaintenanceConfiguration
 metadata:
   annotations:
@@ -106,7 +106,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -126,7 +126,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

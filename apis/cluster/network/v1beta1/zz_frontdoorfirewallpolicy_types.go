@@ -102,6 +102,45 @@ type CustomRuleParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type ExclusionInitParameters struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+}
+
+type ExclusionObservation struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+}
+
+type ExclusionParameters struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	// +kubebuilder:validation:Optional
+	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	// +kubebuilder:validation:Optional
+	Selector *string `json:"selector" tf:"selector,omitempty"`
+}
+
 type FrontdoorFirewallPolicyInitParameters struct {
 
 	// If a custom_rule block's action type is block, this is the response body. The body must be specified in base64 encoding.
@@ -219,49 +258,10 @@ type FrontdoorFirewallPolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type ManagedRuleExclusionInitParameters struct {
-
-	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
-	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
-
-	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
-	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
-}
-
-type ManagedRuleExclusionObservation struct {
-
-	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
-	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
-
-	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
-	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
-}
-
-type ManagedRuleExclusionParameters struct {
-
-	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
-	// +kubebuilder:validation:Optional
-	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
-
-	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
-	// +kubebuilder:validation:Optional
-	Selector *string `json:"selector" tf:"selector,omitempty"`
-}
-
 type ManagedRuleInitParameters struct {
 
 	// One or more exclusion blocks as defined below.
-	Exclusion []ManagedRuleExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+	Exclusion []ExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
 	// One or more override blocks as defined below.
 	Override []OverrideInitParameters `json:"override,omitempty" tf:"override,omitempty"`
@@ -276,7 +276,7 @@ type ManagedRuleInitParameters struct {
 type ManagedRuleObservation struct {
 
 	// One or more exclusion blocks as defined below.
-	Exclusion []ManagedRuleExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+	Exclusion []ExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
 	// One or more override blocks as defined below.
 	Override []OverrideObservation `json:"override,omitempty" tf:"override,omitempty"`
@@ -292,7 +292,7 @@ type ManagedRuleParameters struct {
 
 	// One or more exclusion blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Exclusion []ManagedRuleExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+	Exclusion []ExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
 	// One or more override blocks as defined below.
 	// +kubebuilder:validation:Optional

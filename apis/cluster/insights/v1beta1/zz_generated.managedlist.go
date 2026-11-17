@@ -43,15 +43,6 @@ func (l *ApplicationInsightsSmartDetectionRuleList) GetItems() []resource.Manage
 	return items
 }
 
-// GetItems of this ApplicationInsightsStandardWebTestList.
-func (l *ApplicationInsightsStandardWebTestList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ApplicationInsightsWebTestList.
 func (l *ApplicationInsightsWebTestList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -61,44 +52,8 @@ func (l *ApplicationInsightsWebTestList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ApplicationInsightsWorkbookList.
-func (l *ApplicationInsightsWorkbookList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ApplicationInsightsWorkbookTemplateList.
 func (l *ApplicationInsightsWorkbookTemplateList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorActionGroupList.
-func (l *MonitorActionGroupList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorActivityLogAlertList.
-func (l *MonitorActivityLogAlertList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorAutoscaleSettingList.
-func (l *MonitorAutoscaleSettingList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -124,33 +79,6 @@ func (l *MonitorDataCollectionRuleAssociationList) GetItems() []resource.Managed
 	return items
 }
 
-// GetItems of this MonitorDataCollectionRuleList.
-func (l *MonitorDataCollectionRuleList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorDiagnosticSettingList.
-func (l *MonitorDiagnosticSettingList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorMetricAlertList.
-func (l *MonitorMetricAlertList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this MonitorPrivateLinkScopeList.
 func (l *MonitorPrivateLinkScopeList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -162,33 +90,6 @@ func (l *MonitorPrivateLinkScopeList) GetItems() []resource.Managed {
 
 // GetItems of this MonitorPrivateLinkScopedServiceList.
 func (l *MonitorPrivateLinkScopedServiceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorScheduledQueryRulesAlertList.
-func (l *MonitorScheduledQueryRulesAlertList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorScheduledQueryRulesAlertV2List.
-func (l *MonitorScheduledQueryRulesAlertV2List) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this MonitorScheduledQueryRulesLogList.
-func (l *MonitorScheduledQueryRulesLogList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

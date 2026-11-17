@@ -39,7 +39,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateEndpoint
 metadata:
   name: peascaex
@@ -52,7 +52,7 @@ spec:
   forProvider:
     location: West Europe
     privateServiceConnection:
-    - isManualConnection: false
+      isManualConnection: false
       name: example-privateserviceconnection
        # ID of the PrivateLinkService below
       privateConnectionResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/loadbalancerrg/providers/Microsoft.Network/privateLinkServices/example
@@ -78,7 +78,7 @@ spec:
       provisioner: crossplane
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   name: example-vn-for-lb
@@ -94,7 +94,7 @@ spec:
       - "10.0.0.0/16"
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   name: service
@@ -112,7 +112,7 @@ spec:
       - "10.0.1.0/24"
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   name: endpoint

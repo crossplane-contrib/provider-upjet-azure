@@ -13,7 +13,7 @@ spec:
       provisioner: crossplane
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: DNSZone
 metadata:
   name: example

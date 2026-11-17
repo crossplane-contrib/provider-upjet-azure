@@ -24,7 +24,7 @@ spec:
         testing.upbound.io/example-name: example
     sourceVmId: "${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/example/providers/Microsoft.Compute/virtualMachines/example"
 ---
-apiVersion: recoveryservices.azure.upbound.io/v1beta1
+apiVersion: recoveryservices.azure.upbound.io/v1beta2
 kind: BackupPolicyVM
 metadata:
   annotations:
@@ -36,7 +36,7 @@ metadata:
 spec:
   forProvider:
     backup:
-    - frequency: Daily
+      frequency: Daily
       time: "23:00"
     recoveryVaultNameSelector:
       matchLabels:
@@ -45,9 +45,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     retentionDaily:
-      - count: 10
+      count: 10
 ---
-apiVersion: recoveryservices.azure.upbound.io/v1beta1
+apiVersion: recoveryservices.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:

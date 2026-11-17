@@ -82,38 +82,13 @@ type AuthenticationCredentialsParameters struct {
 	UsernameSecretIDSelector *v2.Selector `json:"usernameSecretIdSelector,omitempty" tf:"-"`
 }
 
-type CredentialSetIdentityInitParameters struct {
-
-	// The type of Managed Service Identity that is configured on for the Container Registry Credential Set. Currently the only possible value is SystemAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type CredentialSetIdentityObservation struct {
-
-	// The principal ID of the Identity.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The tenant ID of the Identity.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// The type of Managed Service Identity that is configured on for the Container Registry Credential Set. Currently the only possible value is SystemAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type CredentialSetIdentityParameters struct {
-
-	// The type of Managed Service Identity that is configured on for the Container Registry Credential Set. Currently the only possible value is SystemAssigned.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type CredentialSetInitParameters struct {
 
 	// A authentication_credentials block as defined below.
 	AuthenticationCredentials *AuthenticationCredentialsInitParameters `json:"authenticationCredentials,omitempty" tf:"authentication_credentials,omitempty"`
 
 	// An identity block as defined below.
-	Identity *CredentialSetIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The login server for the Credential Set. Changing this forces a new Container Registry Credential Set to be created.
 	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
@@ -131,7 +106,7 @@ type CredentialSetObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *CredentialSetIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The login server for the Credential Set. Changing this forces a new Container Registry Credential Set to be created.
 	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
@@ -159,11 +134,36 @@ type CredentialSetParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *CredentialSetIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The login server for the Credential Set. Changing this forces a new Container Registry Credential Set to be created.
 	// +kubebuilder:validation:Optional
 	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// The type of Managed Service Identity that is configured on for the Container Registry Credential Set. Currently the only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// The principal ID of the Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The tenant ID of the Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of Managed Service Identity that is configured on for the Container Registry Credential Set. Currently the only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// The type of Managed Service Identity that is configured on for the Container Registry Credential Set. Currently the only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // CredentialSetSpec defines the desired state of CredentialSet

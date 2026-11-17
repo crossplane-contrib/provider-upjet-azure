@@ -13,7 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type CustomDomainInitParameters_2 struct {
+type CustomDomainInitParameters struct {
 
 	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
@@ -33,7 +33,7 @@ type CustomDomainInitParameters_2 struct {
 	ContainerAppEnvironmentCertificateIDSelector *v2.Selector `json:"containerAppEnvironmentCertificateIdSelector,omitempty" tf:"-"`
 }
 
-type CustomDomainObservation_2 struct {
+type CustomDomainObservation struct {
 
 	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
@@ -51,7 +51,7 @@ type CustomDomainObservation_2 struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
-type CustomDomainParameters_2 struct {
+type CustomDomainParameters struct {
 
 	// The Certificate Binding type. Possible values are Auto, Disabled and SniEnabled. Required with container_app_environment_certificate_id.
 	// The Binding type. Possible values include `Disabled` and `SniEnabled`.
@@ -90,7 +90,7 @@ type CustomDomainParameters_2 struct {
 // CustomDomainSpec defines the desired state of CustomDomain
 type CustomDomainSpec struct {
 	v2.ClusterManagedResourceSpec `json:",inline"`
-	ForProvider                   CustomDomainParameters_2 `json:"forProvider"`
+	ForProvider                   CustomDomainParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,13 +101,13 @@ type CustomDomainSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider CustomDomainInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider CustomDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // CustomDomainStatus defines the observed state of CustomDomain.
 type CustomDomainStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               CustomDomainObservation_2 `json:"atProvider,omitempty"`
+	AtProvider               CustomDomainObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: TrafficManagerProfile
 metadata:
   annotations:
@@ -45,10 +45,10 @@ metadata:
 spec:
   forProvider:
     dnsConfig:
-    - relativeName: example-profile-qwerty
+      relativeName: example-profile-qwerty
       ttl: 100
     monitorConfig:
-    - intervalInSeconds: 30
+      intervalInSeconds: 30
       path: /
       port: 80
       protocol: HTTP

@@ -13,85 +13,6 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type BastionHostIPConfigurationInitParameters struct {
-
-	// The name of the IP configuration. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Reference to a Public IP Address to associate with this Bastion Host. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
-
-	// Reference to a PublicIP in network to populate publicIpAddressId.
-	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
-
-	// Selector for a PublicIP in network to populate publicIpAddressId.
-	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
-
-	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-
-	// Reference to a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-}
-
-type BastionHostIPConfigurationObservation struct {
-
-	// The name of the IP configuration. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Reference to a Public IP Address to associate with this Bastion Host. Changing this forces a new resource to be created.
-	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
-
-	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-}
-
-type BastionHostIPConfigurationParameters struct {
-
-	// The name of the IP configuration. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// Reference to a Public IP Address to associate with this Bastion Host. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
-
-	// Reference to a PublicIP in network to populate publicIpAddressId.
-	// +kubebuilder:validation:Optional
-	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
-
-	// Selector for a PublicIP in network to populate publicIpAddressId.
-	// +kubebuilder:validation:Optional
-	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
-
-	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-
-	// Reference to a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-}
-
 type BastionHostInitParameters struct {
 
 	// Is Copy/Paste feature enabled for the Bastion Host. Defaults to true.
@@ -101,7 +22,7 @@ type BastionHostInitParameters struct {
 	FileCopyEnabled *bool `json:"fileCopyEnabled,omitempty" tf:"file_copy_enabled,omitempty"`
 
 	// A ip_configuration block as defined below. Changing this forces a new resource to be created.
-	IPConfiguration *BastionHostIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	IPConfiguration *IPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Is IP Connect feature enabled for the Bastion Host. Defaults to false.
 	IPConnectEnabled *bool `json:"ipConnectEnabled,omitempty" tf:"ip_connect_enabled,omitempty"`
@@ -154,7 +75,7 @@ type BastionHostObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A ip_configuration block as defined below. Changing this forces a new resource to be created.
-	IPConfiguration *BastionHostIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	IPConfiguration *IPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Is IP Connect feature enabled for the Bastion Host. Defaults to false.
 	IPConnectEnabled *bool `json:"ipConnectEnabled,omitempty" tf:"ip_connect_enabled,omitempty"`
@@ -210,7 +131,7 @@ type BastionHostParameters struct {
 
 	// A ip_configuration block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	IPConfiguration *BastionHostIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	IPConfiguration *IPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Is IP Connect feature enabled for the Bastion Host. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -270,6 +191,85 @@ type BastionHostParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+}
+
+type IPConfigurationInitParameters struct {
+
+	// The name of the IP configuration. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Public IP Address to associate with this Bastion Host. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+
+	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type IPConfigurationObservation struct {
+
+	// The name of the IP configuration. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Public IP Address to associate with this Bastion Host. Changing this forces a new resource to be created.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type IPConfigurationParameters struct {
+
+	// The name of the IP configuration. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Reference to a Public IP Address to associate with this Bastion Host. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v2.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+
+	// Reference to a subnet in which this Bastion Host has been created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v2.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v2.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // BastionHostSpec defines the desired state of BastionHost

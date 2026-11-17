@@ -44,7 +44,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta1
+apiVersion: web.azure.upbound.io/v1beta2
 kind: LinuxFunctionApp
 metadata:
   annotations:
@@ -63,8 +63,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: funcappfunction-sp
     siteConfig:
-    - applicationStack:
-      - pythonVersion: "3.9"
+      applicationStack:
+        pythonVersion: "3.9"
     storageAccountAccessKeySecretRef:
       key: example-key
       name: example-name
@@ -109,7 +109,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
