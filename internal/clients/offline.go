@@ -22,32 +22,25 @@ import (
 	tfazureclient "github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	namespacedv1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-azure/v3/apis/namespaced/v1beta1"
 )
 
 const (
 	// Terraform Provider configuration key for the Azure CLI authenticator,
 	// which defaults to true and shells out to the `az` binary.
 	keyUseCLI = "use_cli"
-	// Terraform Provider configuration key for the provider's (4.x,
-	// soon-to-be-deprecated) top-level enhanced-validation block.
+	// Key of the enhanced-validation block inside the Terraform provider's
+	// features block.
 	keyEnhancedValidation = "enhanced_validation"
 	// Within an enhanced_validation block, whether to validate resource
-	// provider arguments against the list of supported providers. This is
-	// deliberately disabled for offline diffs: EnsureRegistered - the same
-	// eager ARM call skip_provider_registration is meant to avoid - only
-	// skips populating its resource-provider cache when *both*
-	// skip_provider_registration is set *and* this is false. On this
-	// provider's current (4.x) branch it defaults to true (FivePointOh() is
-	// gated behind ARM_FIVEPOINTZERO_BETA, which is never set here), so
-	// skip_provider_registration alone does not suppress the call; see
-	// offlineConfiguration's own comment for how this was found.
+	// provider arguments against the list of supported providers. Enabled,
+	// it makes EnsureRegistered populate its resource-provider cache with an
+	// eager ARM call, even when no resource provider is to be registered.
 	keyEnhancedValidationResourceProviders = "resource_providers"
 	// Within an enhanced_validation block, whether to validate the
-	// location argument against Azure's metadata service. Same defaulting
-	// problem as resource_providers above, different eager call: left
-	// enabled, Configure fetches the supported-locations list from Azure's
-	// metadata endpoint.
+	// location argument against Azure's metadata service. Enabled,
+	// Configure fetches the supported-locations list from Azure's metadata
+	// endpoint.
 	keyEnhancedValidationLocations = "locations"
 
 	// Placeholder identities used when configuring the Terraform provider for
@@ -141,11 +134,10 @@ func configureOffline(ctx context.Context, tfProvider *schema.Provider, pcSpec *
 	// calls, each closed off differently:
 	//
 	//   - buildClient's resource-provider registration (EnsureRegistered) is
-	//     closed by configuration: skip_provider_registration and
+	//     closed by configuration: resource_provider_registrations=none and
 	//     enhanced_validation.resource_providers=false together, both set
 	//     unconditionally in offlineConfiguration (see its own comment for
-	//     why both are required - confirmed by a genuine e2e run that still
-	//     reached the network with only one of them set).
+	//     why both are required).
 	//
 	//   - clients.Build's oid-discovery fallback (NewResourceManagerAccount,
 	//     reached only when the access token carries no oid claim) is closed
@@ -190,39 +182,36 @@ func denyOutboundRequest(req *http.Request) (*http.Request, error) {
 // assumed to be unavailable.
 func offlineConfiguration(pcSpec *namespacedv1beta1.ProviderConfigSpec) map[string]any {
 	cfg := map[string]any{
-		keyTerraformFeatures: []interface{}{map[string]interface{}{}}, // one empty features block
-		keySubscriptionID:    offlineSubscriptionID,
-		keyTenantID:          offlineTenantID,
-		keyClientID:          offlineClientID,
+		// One features block. Enhanced validation of resource providers and
+		// of locations each make Configure call Azure eagerly, which an
+		// offline, credential-less diff cannot do. Both default to disabled,
+		// but the defaults can be overridden with environment variables.
+		keyTerraformFeatures: []interface{}{map[string]interface{}{
+			keyEnhancedValidation: []interface{}{
+				map[string]interface{}{
+					keyEnhancedValidationResourceProviders: false,
+					keyEnhancedValidationLocations:         false,
+				},
+			},
+		}},
+		keySubscriptionID: offlineSubscriptionID,
+		keyTenantID:       offlineTenantID,
+		keyClientID:       offlineClientID,
 		// A non-empty client secret makes the Azure SDK pick the client
 		// credentials authorizer, whose token request offlineTokenClient
 		// answers locally. Were all credentials empty, the SDK would fall
 		// through to the Azure CLI authorizer and shell out to `az`.
 		keyClientSecret: offlineClientSecret,
 		keyUseCLI:       false,
-		// Terraform AzureRM provider would otherwise try to register every
-		// resource provider in the subscription during Configure, an eager
-		// ARM call that an offline, credential-less diff cannot make either.
-		// This is already unconditional in TerraformSetupBuilder for an
-		// unrelated reason (see its own comment); kept unconditional here too
-		// so the behaviour does not depend on which builder is in use.
-		//
-		// It is not sufficient by itself, though: confirmed by a genuine e2e
-		// run that still reached management.azure.com with only this key set.
-		// buildClient's EnsureRegistered only skips populating its
-		// resource-provider cache when the required-providers set is empty
-		// *and* enhanced validation for resource providers is disabled - and
-		// that defaults to enabled on this provider's current branch, as does
-		// enhanced validation for locations, an independent eager call to
-		// Azure's metadata service found the same way. Both have to be turned
-		// off alongside skip_provider_registration, not instead of it.
-		keySkipProviderRegistration: true,
-		keyEnhancedValidation: []interface{}{
-			map[string]interface{}{
-				keyEnhancedValidationResourceProviders: false,
-				keyEnhancedValidationLocations:         false,
-			},
-		},
+		// Registering resource providers during Configure is an eager ARM
+		// call that an offline, credential-less diff cannot make.
+		// TerraformSetupBuilder sets the same value for an unrelated reason
+		// (see its own comment). It is not sufficient by itself:
+		// EnsureRegistered only skips populating its resource-provider cache
+		// when no resource provider is to be registered *and* enhanced
+		// validation for resource providers is disabled, hence the features
+		// block above.
+		keyResourceProviderRegistrations: resourceProviderRegistrationsNone,
 	}
 
 	if pcSpec == nil {

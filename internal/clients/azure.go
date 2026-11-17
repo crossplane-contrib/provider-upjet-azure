@@ -24,8 +24,8 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	clusterv1beta1 "github.com/upbound/provider-azure/v2/apis/cluster/v1beta1"
-	namespacedv1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/v1beta1"
+	clusterv1beta1 "github.com/upbound/provider-azure/v3/apis/cluster/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-azure/v3/apis/namespaced/v1beta1"
 )
 
 const (
@@ -47,7 +47,8 @@ const (
 	keyAzureTenantID       = "tenantId"
 	// Terraform Provider configuration block keys
 	keyTerraformFeatures                      = "features"
-	keySkipProviderRegistration               = "skip_provider_registration"
+	keyResourceProviderRegistrations          = "resource_provider_registrations"
+	resourceProviderRegistrationsNone         = "none"
 	keyUseMSI                                 = "use_msi"
 	keyClientID                               = "client_id"
 	keySubscriptionID                         = "subscription_id"
@@ -127,13 +128,13 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 		featuresBlock := map[string]interface{}{}
 		ps.Configuration = map[string]interface{}{
 			keyTerraformFeatures: []interface{}{featuresBlock}, // one features block
-			// Terraform AzureRM provider tries to register all resource providers
-			// in Azure just in case if the provider of the resource you're
-			// trying to create is not registered and the returned error is
-			// ambiguous. However, this requires service principal to have provider
-			// registration permissions which are irrelevant in most contexts.
-			// For details, see https://github.com/upbound/provider-azure/v2/issues/104
-			keySkipProviderRegistration: true,
+			// Registering resource providers needs the service principal to
+			// have provider registration permissions, which are irrelevant in
+			// most contexts, so the provider registers none. "none" is the
+			// Terraform provider's default too, but that default can be
+			// overridden with ARM_RESOURCE_PROVIDER_REGISTRATIONS.
+			// For details, see https://github.com/upbound/provider-azure/issues/104
+			keyResourceProviderRegistrations: resourceProviderRegistrationsNone,
 		}
 
 		if pcSpec.StorageUseAzureAD != nil {
