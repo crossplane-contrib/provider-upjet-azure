@@ -25,15 +25,15 @@ type OutputFunctionInitParameters struct {
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.FunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.LinuxFunctionApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
 
-	// Reference to a FunctionApp in web to populate functionApp.
+	// Reference to a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppRef *v2.Reference `json:"functionAppRef,omitempty" tf:"-"`
 
-	// Selector for a FunctionApp in web to populate functionApp.
+	// Selector for a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppSelector *v2.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 
@@ -92,16 +92,16 @@ type OutputFunctionParameters struct {
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.FunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.LinuxFunctionApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
 
-	// Reference to a FunctionApp in web to populate functionApp.
+	// Reference to a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppRef *v2.Reference `json:"functionAppRef,omitempty" tf:"-"`
 
-	// Selector for a FunctionApp in web to populate functionApp.
+	// Selector for a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppSelector *v2.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 

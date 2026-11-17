@@ -529,15 +529,6 @@ func (l *NetworkInterfaceSecurityGroupAssociationList) GetItems() []resource.Man
 	return items
 }
 
-// GetItems of this PacketCaptureList.
-func (l *PacketCaptureList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PointToSiteVPNGatewayList.
 func (l *PointToSiteVPNGatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

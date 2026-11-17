@@ -29,22 +29,6 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
-	p.AddResourceConfigurator("azurerm_ai_services", func(r *config.Resource) {
-		r.ShortGroup = group
-		r.Kind = "AIServices"
-		r.References["storage.storage_account_id"] = config.Reference{
-			TerraformName: "azurerm_storage_account",
-			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-		r.References["storage.identity_client_id"] = config.Reference{
-			TerraformName: "azurerm_user_assigned_identity",
-			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)`,
-		}
-		r.References["identity.identity_ids"] = config.Reference{
-			TerraformName: "azurerm_user_assigned_identity",
-			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-	})
 	p.AddResourceConfigurator("azurerm_cognitive_account_rai_blocklist", func(r *config.Resource) {
 		r.ShortGroup = group
 		r.References["cognitive_account_id"] = config.Reference{

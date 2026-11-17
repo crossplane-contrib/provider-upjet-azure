@@ -77,7 +77,6 @@ import (
 	v1beta1operationalinsights "github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1"
 	v1beta1operationsmanagement "github.com/upbound/provider-azure/v2/apis/namespaced/operationsmanagement/v1beta1"
 	v1beta1oracle "github.com/upbound/provider-azure/v2/apis/namespaced/oracle/v1beta1"
-	v1beta1orbital "github.com/upbound/provider-azure/v2/apis/namespaced/orbital/v1beta1"
 	v1beta1policyinsights "github.com/upbound/provider-azure/v2/apis/namespaced/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/v2/apis/namespaced/portal/v1beta1"
 	v1beta1powerbidedicated "github.com/upbound/provider-azure/v2/apis/namespaced/powerbidedicated/v1beta1"
@@ -97,7 +96,6 @@ import (
 	v1beta1spring "github.com/upbound/provider-azure/v2/apis/namespaced/spring/v1beta1"
 	v1beta1sql "github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1"
 	v1beta1storage "github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1"
-	v1beta1storagecache "github.com/upbound/provider-azure/v2/apis/namespaced/storagecache/v1beta1"
 	v1beta1storagesync "github.com/upbound/provider-azure/v2/apis/namespaced/storagesync/v1beta1"
 	v1beta1streamanalytics "github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1"
 	v1beta1synapse "github.com/upbound/provider-azure/v2/apis/namespaced/synapse/v1beta1"
@@ -176,7 +174,6 @@ func init() {
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
 		v1beta1oracle.SchemeBuilder.AddToScheme,
-		v1beta1orbital.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,
 		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,
@@ -196,7 +193,6 @@ func init() {
 		v1beta1spring.SchemeBuilder.AddToScheme,
 		v1beta1sql.SchemeBuilder.AddToScheme,
 		v1beta1storage.SchemeBuilder.AddToScheme,
-		v1beta1storagecache.SchemeBuilder.AddToScheme,
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1beta1synapse.SchemeBuilder.AddToScheme,

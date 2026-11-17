@@ -52,15 +52,6 @@ func (l *AppServiceManagedCertificateList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this AppServicePlanList.
-func (l *AppServicePlanList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this FunctionAppActiveSlotList.
 func (l *FunctionAppActiveSlotList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -90,24 +81,6 @@ func (l *FunctionAppFunctionList) GetItems() []resource.Managed {
 
 // GetItems of this FunctionAppHybridConnectionList.
 func (l *FunctionAppHybridConnectionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this FunctionAppList.
-func (l *FunctionAppList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this FunctionAppSlotList.
-func (l *FunctionAppSlotList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -162,15 +135,6 @@ func (l *ServicePlanList) GetItems() []resource.Managed {
 
 // GetItems of this SourceControlTokenList.
 func (l *SourceControlTokenList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this StaticSiteList.
-func (l *StaticSiteList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -22,12 +22,6 @@ func (tr *RedisCacheAccessPolicy) Hub() {}
 func (tr *RedisCacheAccessPolicyAssignment) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *RedisEnterpriseCluster) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *RedisEnterpriseDatabase) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RedisFirewallRule) Hub() {}
 
 // Hub marks this type as a conversion hub.

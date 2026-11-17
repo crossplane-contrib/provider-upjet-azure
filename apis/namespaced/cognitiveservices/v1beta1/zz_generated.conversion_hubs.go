@@ -37,7 +37,4 @@ func (tr *AccountRaiBlocklist) Hub() {}
 func (tr *AccountRaiPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AIServices) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Deployment) Hub() {}

@@ -24,6 +24,16 @@ func Configure(p *config.Provider) {
 		}
 		r.Path = "functionjavascriptudas"
 	})
+	p.AddResourceConfigurator("azurerm_stream_analytics_output_function", func(r *config.Resource) {
+		// The upstream example still points function_app at the removed
+		// azurerm_function_app, so no reference is injected for it. The
+		// field takes the app's name, while the external name of a
+		// LinuxFunctionApp is its resource ID.
+		r.References["function_app"] = config.Reference{
+			TerraformName: "azurerm_linux_function_app",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
+		}
+	})
 	p.AddResourceConfigurator("azurerm_stream_analytics_output_blob", func(r *config.Resource) {
 		r.References["stream_analytics_job_name"] = config.Reference{
 			TerraformName: "azurerm_stream_analytics_job",

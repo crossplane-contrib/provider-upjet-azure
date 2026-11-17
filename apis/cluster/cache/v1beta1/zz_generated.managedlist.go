@@ -43,24 +43,6 @@ func (l *RedisCacheAccessPolicyList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this RedisEnterpriseClusterList.
-func (l *RedisEnterpriseClusterList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this RedisEnterpriseDatabaseList.
-func (l *RedisEnterpriseDatabaseList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this RedisFirewallRuleList.
 func (l *RedisFirewallRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

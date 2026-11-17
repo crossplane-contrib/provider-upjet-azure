@@ -114,7 +114,6 @@ import (
 	v1beta2operationalinsights "github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2"
 	v1beta2operationsmanagement "github.com/upbound/provider-azure/v2/apis/cluster/operationsmanagement/v1beta2"
 	v1beta1oracle "github.com/upbound/provider-azure/v2/apis/cluster/oracle/v1beta1"
-	v1beta1orbital "github.com/upbound/provider-azure/v2/apis/cluster/orbital/v1beta1"
 	v1beta1policyinsights "github.com/upbound/provider-azure/v2/apis/cluster/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/v2/apis/cluster/portal/v1beta1"
 	v1beta1powerbidedicated "github.com/upbound/provider-azure/v2/apis/cluster/powerbidedicated/v1beta1"
@@ -142,8 +141,6 @@ import (
 	v1beta2sql "github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2"
 	v1beta1storage "github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1"
 	v1beta2storage "github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2"
-	v1beta1storagecache "github.com/upbound/provider-azure/v2/apis/cluster/storagecache/v1beta1"
-	v1beta2storagecache "github.com/upbound/provider-azure/v2/apis/cluster/storagecache/v1beta2"
 	v1beta1storagesync "github.com/upbound/provider-azure/v2/apis/cluster/storagesync/v1beta1"
 	v1beta1streamanalytics "github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta1"
 	v1beta2streamanalytics "github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2"
@@ -262,7 +259,6 @@ func init() {
 		v1beta2operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta2operationsmanagement.SchemeBuilder.AddToScheme,
 		v1beta1oracle.SchemeBuilder.AddToScheme,
-		v1beta1orbital.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,
 		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,
@@ -290,8 +286,6 @@ func init() {
 		v1beta2sql.SchemeBuilder.AddToScheme,
 		v1beta1storage.SchemeBuilder.AddToScheme,
 		v1beta2storage.SchemeBuilder.AddToScheme,
-		v1beta1storagecache.SchemeBuilder.AddToScheme,
-		v1beta2storagecache.SchemeBuilder.AddToScheme,
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1beta2streamanalytics.SchemeBuilder.AddToScheme,

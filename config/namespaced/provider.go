@@ -43,7 +43,6 @@ import (
 	"github.com/upbound/provider-azure/v2/config/namespaced/network"
 	"github.com/upbound/provider-azure/v2/config/namespaced/notificationhubs"
 	"github.com/upbound/provider-azure/v2/config/namespaced/operationalinsights"
-	"github.com/upbound/provider-azure/v2/config/namespaced/orbital"
 	"github.com/upbound/provider-azure/v2/config/namespaced/postgresql"
 	"github.com/upbound/provider-azure/v2/config/namespaced/relay"
 	"github.com/upbound/provider-azure/v2/config/namespaced/resource"
@@ -53,7 +52,6 @@ import (
 	"github.com/upbound/provider-azure/v2/config/namespaced/servicebus"
 	"github.com/upbound/provider-azure/v2/config/namespaced/sql"
 	"github.com/upbound/provider-azure/v2/config/namespaced/storage"
-	"github.com/upbound/provider-azure/v2/config/namespaced/storagecache"
 	"github.com/upbound/provider-azure/v2/config/namespaced/storagesync"
 	"github.com/upbound/provider-azure/v2/config/namespaced/streamanalytics"
 	"github.com/upbound/provider-azure/v2/config/namespaced/web"
@@ -94,7 +92,6 @@ func init() {
 	ProviderConfiguration.AddConfig(netapp.Configure)
 	ProviderConfiguration.AddConfig(dataprotection.Configure)
 	ProviderConfiguration.AddConfig(kusto.Configure)
-	ProviderConfiguration.AddConfig(storagecache.Configure)
 	ProviderConfiguration.AddConfig(servicebus.Configure)
 	ProviderConfiguration.AddConfig(consumption.Configure)
 	ProviderConfiguration.AddConfig(streamanalytics.Configure)
@@ -104,7 +101,6 @@ func init() {
 	ProviderConfiguration.AddConfig(relay.Configure)
 	ProviderConfiguration.AddConfig(cdn.Configure)
 	ProviderConfiguration.AddConfig(certificateregistration.Configure)
-	ProviderConfiguration.AddConfig(orbital.Configure)
 	ProviderConfiguration.AddConfig(appplatform.Configure)
 	ProviderConfiguration.AddConfig(cognitiveservices.Configure)
 	ProviderConfiguration.AddConfig(machinelearningservices.Configure)

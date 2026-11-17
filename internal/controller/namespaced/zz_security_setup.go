@@ -14,7 +14,6 @@ import (
 	iotsecuritysolution "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/iotsecuritysolution"
 	securitycenterassessment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterassessment"
 	securitycenterassessmentpolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterassessmentpolicy"
-	securitycenterautoprovisioning "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterautoprovisioning"
 	securitycentercontact "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycentercontact"
 	securitycenterservervulnerabilityassessmentvirtualmachine "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterservervulnerabilityassessmentvirtualmachine"
 	securitycentersetting "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycentersetting"
@@ -32,7 +31,6 @@ func Setup_security(mgr ctrl.Manager, o controller.Options) error {
 		iotsecuritysolution.Setup,
 		securitycenterassessment.Setup,
 		securitycenterassessmentpolicy.Setup,
-		securitycenterautoprovisioning.Setup,
 		securitycentercontact.Setup,
 		securitycenterservervulnerabilityassessmentvirtualmachine.Setup,
 		securitycentersetting.Setup,
@@ -56,7 +54,6 @@ func SetupGated_security(mgr ctrl.Manager, o controller.Options) error {
 		iotsecuritysolution.SetupGated,
 		securitycenterassessment.SetupGated,
 		securitycenterassessmentpolicy.SetupGated,
-		securitycenterautoprovisioning.SetupGated,
 		securitycentercontact.SetupGated,
 		securitycenterservervulnerabilityassessmentvirtualmachine.SetupGated,
 		securitycentersetting.SetupGated,
@@ -79,7 +76,6 @@ func SetupWebhookWithManager_security(mgr ctrl.Manager) error {
 		iotsecuritysolution.SetupWebhookWithManager,
 		securitycenterassessment.SetupWebhookWithManager,
 		securitycenterassessmentpolicy.SetupWebhookWithManager,
-		securitycenterautoprovisioning.SetupWebhookWithManager,
 		securitycentercontact.SetupWebhookWithManager,
 		securitycenterservervulnerabilityassessmentvirtualmachine.SetupWebhookWithManager,
 		securitycentersetting.SetupWebhookWithManager,

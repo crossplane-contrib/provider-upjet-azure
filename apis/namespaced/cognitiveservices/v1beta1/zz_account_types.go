@@ -13,93 +13,6 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AccountCustomerManagedKeyInitParameters struct {
-
-	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
-}
-
-type AccountCustomerManagedKeyObservation struct {
-
-	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
-}
-
-type AccountCustomerManagedKeyParameters struct {
-
-	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
-	// +kubebuilder:validation:Optional
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
-}
-
-type AccountIdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AccountIdentityObservation struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Principal ID associated with this Managed Service Identity.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Tenant ID associated with this Managed Service Identity.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AccountIdentityParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type AccountInitParameters struct {
 
 	// If kind is TextAnalytics this specifies the ID of the Search service.
@@ -112,7 +25,7 @@ type AccountInitParameters struct {
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 
 	// A customer_managed_key block as documented below.
-	CustomerManagedKey *AccountCustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+	CustomerManagedKey *CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// Whether to enable the dynamic throttling for this Cognitive Service Account. This attribute cannot be set when the kind is OpenAI or AIServices.
 	DynamicThrottlingEnabled *bool `json:"dynamicThrottlingEnabled,omitempty" tf:"dynamic_throttling_enabled,omitempty"`
@@ -121,7 +34,7 @@ type AccountInitParameters struct {
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// An identity block as defined below.
-	Identity *AccountIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the type of Cognitive Service Account that should be created. Possible values are Academic, AIServices, AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7, CognitiveServices, ComputerVision, ContentModerator, ContentSafety, CustomSpeech, CustomVision.Prediction, CustomVision.Training, Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition, Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation and WebLM. Changing this forces a new resource to be created except when upgrading the Cognitive Service Account from OpenAI to AIServices or rolling back from AIServices to OpenAI. More information on upgrade and rollback scenario.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
@@ -145,7 +58,7 @@ type AccountInitParameters struct {
 	MetricsAdvisorWebsiteName *string `json:"metricsAdvisorWebsiteName,omitempty" tf:"metrics_advisor_website_name,omitempty"`
 
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
-	NetworkAcls *AccountNetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	NetworkAcls *NetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
 	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
 	NetworkInjection *NetworkInjectionInitParameters `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
@@ -166,63 +79,11 @@ type AccountInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A storage block as defined below.
-	Storage []AccountStorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
+	Storage []StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
-type AccountNetworkAclsInitParameters struct {
-
-	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
-
-	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
-
-	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
-	// +listType=set
-	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
-
-	// A virtual_network_rules block as defined below.
-	VirtualNetworkRules []NetworkAclsVirtualNetworkRulesInitParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
-}
-
-type AccountNetworkAclsObservation struct {
-
-	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
-
-	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
-
-	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
-	// +listType=set
-	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
-
-	// A virtual_network_rules block as defined below.
-	VirtualNetworkRules []NetworkAclsVirtualNetworkRulesObservation `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
-}
-
-type AccountNetworkAclsParameters struct {
-
-	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
-	// +kubebuilder:validation:Optional
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
-
-	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
-	// +kubebuilder:validation:Optional
-	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
-
-	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
-
-	// A virtual_network_rules block as defined below.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkRules []NetworkAclsVirtualNetworkRulesParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
 }
 
 type AccountObservation struct {
@@ -234,7 +95,7 @@ type AccountObservation struct {
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 
 	// A customer_managed_key block as documented below.
-	CustomerManagedKey *AccountCustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+	CustomerManagedKey *CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// Whether to enable the dynamic throttling for this Cognitive Service Account. This attribute cannot be set when the kind is OpenAI or AIServices.
 	DynamicThrottlingEnabled *bool `json:"dynamicThrottlingEnabled,omitempty" tf:"dynamic_throttling_enabled,omitempty"`
@@ -249,7 +110,7 @@ type AccountObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *AccountIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the type of Cognitive Service Account that should be created. Possible values are Academic, AIServices, AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7, CognitiveServices, ComputerVision, ContentModerator, ContentSafety, CustomSpeech, CustomVision.Prediction, CustomVision.Training, Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition, Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation and WebLM. Changing this forces a new resource to be created except when upgrading the Cognitive Service Account from OpenAI to AIServices or rolling back from AIServices to OpenAI. More information on upgrade and rollback scenario.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
@@ -273,7 +134,7 @@ type AccountObservation struct {
 	MetricsAdvisorWebsiteName *string `json:"metricsAdvisorWebsiteName,omitempty" tf:"metrics_advisor_website_name,omitempty"`
 
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
-	NetworkAcls *AccountNetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	NetworkAcls *NetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
 	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
 	NetworkInjection *NetworkInjectionObservation `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
@@ -297,7 +158,7 @@ type AccountObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A storage block as defined below.
-	Storage []AccountStorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
+	Storage []StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -320,7 +181,7 @@ type AccountParameters struct {
 
 	// A customer_managed_key block as documented below.
 	// +kubebuilder:validation:Optional
-	CustomerManagedKey *AccountCustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+	CustomerManagedKey *CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// Whether to enable the dynamic throttling for this Cognitive Service Account. This attribute cannot be set when the kind is OpenAI or AIServices.
 	// +kubebuilder:validation:Optional
@@ -332,7 +193,7 @@ type AccountParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *AccountIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the type of Cognitive Service Account that should be created. Possible values are Academic, AIServices, AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7, CognitiveServices, ComputerVision, ContentModerator, ContentSafety, CustomSpeech, CustomVision.Prediction, CustomVision.Training, Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition, Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation and WebLM. Changing this forces a new resource to be created except when upgrading the Cognitive Service Account from OpenAI to AIServices or rolling back from AIServices to OpenAI. More information on upgrade and rollback scenario.
 	// +kubebuilder:validation:Optional
@@ -364,7 +225,7 @@ type AccountParameters struct {
 
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
 	// +kubebuilder:validation:Optional
-	NetworkAcls *AccountNetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	NetworkAcls *NetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
 	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
 	// +kubebuilder:validation:Optional
@@ -405,7 +266,7 @@ type AccountParameters struct {
 
 	// A storage block as defined below.
 	// +kubebuilder:validation:Optional
-	Storage []AccountStorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
+	Storage []StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -413,122 +274,143 @@ type AccountParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type AccountStorageInitParameters struct {
+type CustomerManagedKeyInitParameters struct {
 
-	// The client ID of the managed identity associated with the storage resource.
+	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+}
+
+type CustomerManagedKeyObservation struct {
+
+	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+}
+
+type CustomerManagedKeyParameters struct {
+
+	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
+	// +kubebuilder:validation:Optional
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
-	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
-	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
-
-	// Full resource id of a Microsoft.Storage resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Reference to a Account in storage to populate storageAccountId.
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a Account in storage to populate storageAccountId.
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type AccountStorageObservation struct {
+type IdentityObservation struct {
 
-	// The client ID of the managed identity associated with the storage resource.
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Full resource id of a Microsoft.Storage resource.
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type AccountStorageParameters struct {
+type IdentityParameters struct {
 
-	// The client ID of the managed identity associated with the storage resource.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
-	// +kubebuilder:validation:Optional
-	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
-	// +kubebuilder:validation:Optional
-	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
-	// +kubebuilder:validation:Optional
-	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
-
-	// Full resource id of a Microsoft.Storage resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Reference to a Account in storage to populate storageAccountId.
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a Account in storage to populate storageAccountId.
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
 	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
-type NetworkAclsVirtualNetworkRulesInitParameters struct {
+type NetworkAclsInitParameters struct {
 
-	// Whether ignore missing vnet service endpoint or not. Defaults to false.
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
-	// The ID of the subnet which should be able to access this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
-	// Reference to a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// Selector for a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	// A virtual_network_rules block as defined below.
+	VirtualNetworkRules []VirtualNetworkRulesInitParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
 }
 
-type NetworkAclsVirtualNetworkRulesObservation struct {
+type NetworkAclsObservation struct {
 
-	// Whether ignore missing vnet service endpoint or not. Defaults to false.
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
-	// The ID of the subnet which should be able to access this Cognitive Account.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// A virtual_network_rules block as defined below.
+	VirtualNetworkRules []VirtualNetworkRulesObservation `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
 }
 
-type NetworkAclsVirtualNetworkRulesParameters struct {
+type NetworkAclsParameters struct {
 
-	// Whether ignore missing vnet service endpoint or not. Defaults to false.
+	// Whether to allow trusted Azure Services to access the service. Possible values are None and AzureServices.
 	// +kubebuilder:validation:Optional
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
-	// The ID of the subnet which should be able to access this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
-	// Reference to a Subnet in network to populate subnetId.
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
 	// +kubebuilder:validation:Optional
-	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// Selector for a Subnet in network to populate subnetId.
+	// A virtual_network_rules block as defined below.
 	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+	VirtualNetworkRules []VirtualNetworkRulesParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
 }
 
 type NetworkInjectionInitParameters struct {
@@ -566,6 +448,124 @@ type NetworkInjectionParameters struct {
 	Scenario *string `json:"scenario" tf:"scenario,omitempty"`
 
 	// The ID of the subnet which the Agent Client is injected into.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type StorageInitParameters struct {
+
+	// The client ID of the managed identity associated with the storage resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
+
+	// Full resource id of a Microsoft.Storage resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+}
+
+type StorageObservation struct {
+
+	// The client ID of the managed identity associated with the storage resource.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// Full resource id of a Microsoft.Storage resource.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+}
+
+type StorageParameters struct {
+
+	// The client ID of the managed identity associated with the storage resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
+	// +kubebuilder:validation:Optional
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDRef *v2.NamespacedReference `json:"identityClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDSelector *v2.NamespacedSelector `json:"identityClientIdSelector,omitempty" tf:"-"`
+
+	// Full resource id of a Microsoft.Storage resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v2.NamespacedReference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v2.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+}
+
+type VirtualNetworkRulesInitParameters struct {
+
+	// Whether ignore missing vnet service endpoint or not. Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The ID of the subnet which should be able to access this Cognitive Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v2.NamespacedReference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v2.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type VirtualNetworkRulesObservation struct {
+
+	// Whether ignore missing vnet service endpoint or not. Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The ID of the subnet which should be able to access this Cognitive Account.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type VirtualNetworkRulesParameters struct {
+
+	// Whether ignore missing vnet service endpoint or not. Defaults to false.
+	// +kubebuilder:validation:Optional
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The ID of the subnet which should be able to access this Cognitive Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -57,56 +57,6 @@ func (mg *BackupPolicyDisk) SetWriteConnectionSecretToReference(r *xpv2.SecretRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetDeletionPolicy() xpv2.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetProviderConfigReference() *xpv2.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetDeletionPolicy(r xpv2.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetProviderConfigReference(r *xpv2.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this BackupVault.
 func (mg *BackupVault) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

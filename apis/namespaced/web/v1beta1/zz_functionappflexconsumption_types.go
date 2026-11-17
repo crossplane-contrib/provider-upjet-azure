@@ -13,6 +13,63 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type ActiveDirectoryInitParameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with Azure Active Directory.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+}
+
+type ActiveDirectoryObservation struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with Azure Active Directory.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+}
+
+type ActiveDirectoryParameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	// +kubebuilder:validation:Optional
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with Azure Active Directory.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+}
+
 type ActiveDirectoryV2InitParameters struct {
 
 	// The list of allowed Applications for the Default Authorisation Policy.
@@ -283,276 +340,193 @@ type AppleV2Parameters struct {
 	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
 }
 
-type AuthSettingsActiveDirectoryInitParameters struct {
+type AuthSettingsInitParameters struct {
 
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+	// An active_directory block as defined above.
+	ActiveDirectory *ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the Client to use to authenticate with Azure Active Directory.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
-	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
+	// Should the Authentication / Authorization feature be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A facebook block as defined below.
+	Facebook *FacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
+
+	// A github block as defined below.
+	Github *GithubInitParameters `json:"github,omitempty" tf:"github,omitempty"`
+
+	// A google block as defined below.
+	Google *GoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
+
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// A microsoft block as defined below.
+	Microsoft *MicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+
+	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+
+	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// A twitter block as defined below.
+	Twitter *TwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
+
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
-type AuthSettingsActiveDirectoryObservation struct {
+type AuthSettingsObservation struct {
 
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+	// An active_directory block as defined above.
+	ActiveDirectory *ActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the Client to use to authenticate with Azure Active Directory.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
+	// Should the Authentication / Authorization feature be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A facebook block as defined below.
+	Facebook *FacebookObservation `json:"facebook,omitempty" tf:"facebook,omitempty"`
+
+	// A github block as defined below.
+	Github *GithubObservation `json:"github,omitempty" tf:"github,omitempty"`
+
+	// A google block as defined below.
+	Google *GoogleObservation `json:"google,omitempty" tf:"google,omitempty"`
+
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// A microsoft block as defined below.
+	Microsoft *MicrosoftObservation `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+
+	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+
+	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// A twitter block as defined below.
+	Twitter *TwitterObservation `json:"twitter,omitempty" tf:"twitter,omitempty"`
+
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
-type AuthSettingsActiveDirectoryParameters struct {
+type AuthSettingsParameters struct {
 
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	// An active_directory block as defined above.
 	// +kubebuilder:validation:Optional
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+	ActiveDirectory *ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the Client to use to authenticate with Azure Active Directory.
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +mapType=granular
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
+	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-}
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
-type AuthSettingsFacebookInitParameters struct {
-
-	// The App ID of the Facebook app used for login.
-	// The App ID of the Facebook app used for login.
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
-
-	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
-	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
-	AppSecretSecretRef *v2.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name that contains the app_secret value used for Facebook Login.
-	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
-	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsFacebookObservation struct {
-
-	// The App ID of the Facebook app used for login.
-	// The App ID of the Facebook app used for login.
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
-
-	// The app setting name that contains the app_secret value used for Facebook Login.
-	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
-	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsFacebookParameters struct {
-
-	// The App ID of the Facebook app used for login.
-	// The App ID of the Facebook app used for login.
+	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
+	// Should the Authentication / Authorization feature be enabled?
 	// +kubebuilder:validation:Optional
-	AppID *string `json:"appId" tf:"app_id,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
-	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	// A facebook block as defined below.
 	// +kubebuilder:validation:Optional
-	AppSecretSecretRef *v2.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+	Facebook *FacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
 
-	// The app setting name that contains the app_secret value used for Facebook Login.
-	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	// A github block as defined below.
 	// +kubebuilder:validation:Optional
-	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+	Github *GithubParameters `json:"github,omitempty" tf:"github,omitempty"`
 
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	// A google block as defined below.
 	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
+	Google *GoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
 
-type AuthSettingsGoogleInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsGoogleObservation struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsGoogleParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	// A microsoft block as defined below.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	Microsoft *MicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
 
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
 	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
 	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
 
-type AuthSettingsMicrosoftInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsMicrosoftObservation struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsMicrosoftParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
 
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	// A twitter block as defined below.
 	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+	Twitter *TwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
 
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
 	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
-	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type AuthSettingsTwitterInitParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
-	ConsumerSecretSecretRef *v2.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type AuthSettingsTwitterObservation struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type AuthSettingsTwitterParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
-
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
-	// +kubebuilder:validation:Optional
-	ConsumerSecretSecretRef *v2.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
-	// +kubebuilder:validation:Optional
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
 type AuthSettingsV2InitParameters struct {
@@ -842,6 +816,88 @@ type AzureStaticWebAppV2Parameters struct {
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 }
 
+type ConnectionStringInitParameters struct {
+
+	// The name which should be used for this Connection.
+	// The name which should be used for this Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	ValueSecretRef v2.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
+}
+
+type ConnectionStringObservation struct {
+
+	// The name which should be used for this Connection.
+	// The name which should be used for this Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ConnectionStringParameters struct {
+
+	// The name which should be used for this Connection.
+	// The name which should be used for this Connection.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	// +kubebuilder:validation:Optional
+	ValueSecretRef v2.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
+}
+
+type CorsInitParameters struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials allowed in CORS requests? Defaults to false.
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type CorsObservation struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials allowed in CORS requests? Defaults to false.
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type CorsParameters struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials allowed in CORS requests? Defaults to false.
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
 type CustomOidcV2InitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
@@ -940,6 +996,63 @@ type CustomOidcV2Parameters struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
+type FacebookInitParameters struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	AppSecretSecretRef *v2.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type FacebookObservation struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type FacebookParameters struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	// +kubebuilder:validation:Optional
+	AppID *string `json:"appId" tf:"app_id,omitempty"`
+
+	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	AppSecretSecretRef *v2.LocalSecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	// +kubebuilder:validation:Optional
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
 type FacebookV2InitParameters struct {
 
 	// The App ID of the Facebook app used for login.
@@ -1001,297 +1114,6 @@ type FacebookV2Parameters struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsInitParameters struct {
-
-	// An active_directory block as defined above.
-	ActiveDirectory *AuthSettingsActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
-
-	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// +mapType=granular
-	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
-
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
-	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
-	// Should the Authentication / Authorization feature be enabled?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A facebook block as defined below.
-	Facebook *AuthSettingsFacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
-
-	// A github block as defined below.
-	Github *GithubInitParameters `json:"github,omitempty" tf:"github,omitempty"`
-
-	// A google block as defined below.
-	Google *AuthSettingsGoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
-
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// A microsoft block as defined below.
-	Microsoft *AuthSettingsMicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
-
-	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
-	// The RuntimeVersion of the Authentication / Authorization feature in use.
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-
-	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
-	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// A twitter block as defined below.
-	Twitter *AuthSettingsTwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
-
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
-	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsObservation struct {
-
-	// An active_directory block as defined above.
-	ActiveDirectory *AuthSettingsActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
-
-	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// +mapType=granular
-	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
-
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
-	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
-	// Should the Authentication / Authorization feature be enabled?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A facebook block as defined below.
-	Facebook *AuthSettingsFacebookObservation `json:"facebook,omitempty" tf:"facebook,omitempty"`
-
-	// A github block as defined below.
-	Github *GithubObservation `json:"github,omitempty" tf:"github,omitempty"`
-
-	// A google block as defined below.
-	Google *AuthSettingsGoogleObservation `json:"google,omitempty" tf:"google,omitempty"`
-
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// A microsoft block as defined below.
-	Microsoft *AuthSettingsMicrosoftObservation `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
-
-	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
-	// The RuntimeVersion of the Authentication / Authorization feature in use.
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-
-	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
-	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// A twitter block as defined below.
-	Twitter *AuthSettingsTwitterObservation `json:"twitter,omitempty" tf:"twitter,omitempty"`
-
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
-	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsParameters struct {
-
-	// An active_directory block as defined above.
-	// +kubebuilder:validation:Optional
-	ActiveDirectory *AuthSettingsActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
-
-	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
-
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
-	// +kubebuilder:validation:Optional
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
-	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
-	// +kubebuilder:validation:Optional
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
-	// Should the Authentication / Authorization feature be enabled?
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
-
-	// A facebook block as defined below.
-	// +kubebuilder:validation:Optional
-	Facebook *AuthSettingsFacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
-
-	// A github block as defined below.
-	// +kubebuilder:validation:Optional
-	Github *GithubParameters `json:"github,omitempty" tf:"github,omitempty"`
-
-	// A google block as defined below.
-	// +kubebuilder:validation:Optional
-	Google *AuthSettingsGoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
-
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
-	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// A microsoft block as defined below.
-	// +kubebuilder:validation:Optional
-	Microsoft *AuthSettingsMicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
-
-	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
-	// The RuntimeVersion of the Authentication / Authorization feature in use.
-	// +kubebuilder:validation:Optional
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	// +kubebuilder:validation:Optional
-	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-
-	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
-	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
-	// +kubebuilder:validation:Optional
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// A twitter block as defined below.
-	// +kubebuilder:validation:Optional
-	Twitter *AuthSettingsTwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
-
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
-	// +kubebuilder:validation:Optional
-	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionConnectionStringInitParameters struct {
-
-	// The name which should be used for this Connection.
-	// The name which should be used for this Connection.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
-	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The connection string value.
-	// The connection string value.
-	ValueSecretRef v2.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
-}
-
-type FunctionAppFlexConsumptionConnectionStringObservation struct {
-
-	// The name which should be used for this Connection.
-	// The name which should be used for this Connection.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
-	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type FunctionAppFlexConsumptionConnectionStringParameters struct {
-
-	// The name which should be used for this Connection.
-	// The name which should be used for this Connection.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
-	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-
-	// The connection string value.
-	// The connection string value.
-	// +kubebuilder:validation:Optional
-	ValueSecretRef v2.LocalSecretKeySelector `json:"valueSecretRef" tf:"-"`
-}
-
-type FunctionAppFlexConsumptionIdentityInitParameters struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type FunctionAppFlexConsumptionIdentityObservation struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Principal ID associated with this Managed Service Identity.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Tenant ID associated with this Managed Service Identity.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type FunctionAppFlexConsumptionIdentityParameters struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type FunctionAppFlexConsumptionInitParameters struct {
 
 	// One or more always_ready blocks as defined below.
@@ -1303,7 +1125,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
-	AuthSettings *FunctionAppFlexConsumptionAuthSettingsInitParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+	AuthSettings *AuthSettingsInitParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// An auth_settings_v2 block as defined below.
 	AuthSettingsV2 *AuthSettingsV2InitParameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
@@ -1321,7 +1143,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
-	ConnectionString []FunctionAppFlexConsumptionConnectionStringInitParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+	ConnectionString []ConnectionStringInitParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// Is the Function App enabled? Defaults to true.
 	// Is the Function App enabled.
@@ -1335,7 +1157,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// A identity block as defined below.
-	Identity *FunctionAppFlexConsumptionIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	InstanceMemoryInMb *float64 `json:"instanceMemoryInMb,omitempty" tf:"instance_memory_in_mb,omitempty"`
@@ -1370,7 +1192,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	ServicePlanIDSelector *v2.NamespacedSelector `json:"servicePlanIdSelector,omitempty" tf:"-"`
 
 	// A site_config block as defined below.
-	SiteConfig *FunctionAppFlexConsumptionSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+	SiteConfig *SiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A sticky_settings block as defined below.
 	StickySettings *StickySettingsInitParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
@@ -1458,7 +1280,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
-	AuthSettings *FunctionAppFlexConsumptionAuthSettingsObservation `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+	AuthSettings *AuthSettingsObservation `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// An auth_settings_v2 block as defined below.
 	AuthSettingsV2 *AuthSettingsV2Observation `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
@@ -1476,7 +1298,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
-	ConnectionString []FunctionAppFlexConsumptionConnectionStringObservation `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+	ConnectionString []ConnectionStringObservation `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The default hostname of the Linux Function App.
 	DefaultHostName *string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty"`
@@ -1499,7 +1321,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A identity block as defined below.
-	Identity *FunctionAppFlexConsumptionIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	InstanceMemoryInMb *float64 `json:"instanceMemoryInMb,omitempty" tf:"instance_memory_in_mb,omitempty"`
@@ -1542,7 +1364,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
 	// A site_config block as defined below.
-	SiteConfig *FunctionAppFlexConsumptionSiteConfigObservation `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+	SiteConfig *SiteConfigObservation `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A sticky_settings block as defined below.
 	StickySettings *StickySettingsObservation `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
@@ -1593,7 +1415,7 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// A auth_settings block as defined below.
 	// +kubebuilder:validation:Optional
-	AuthSettings *FunctionAppFlexConsumptionAuthSettingsParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+	AuthSettings *AuthSettingsParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// An auth_settings_v2 block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1616,7 +1438,7 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// One or more connection_string blocks as defined below.
 	// +kubebuilder:validation:Optional
-	ConnectionString []FunctionAppFlexConsumptionConnectionStringParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+	ConnectionString []ConnectionStringParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// Is the Function App enabled? Defaults to true.
 	// Is the Function App enabled.
@@ -1634,7 +1456,7 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// A identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *FunctionAppFlexConsumptionIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	// +kubebuilder:validation:Optional
@@ -1690,7 +1512,7 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// A site_config block as defined below.
 	// +kubebuilder:validation:Optional
-	SiteConfig *FunctionAppFlexConsumptionSiteConfigParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+	SiteConfig *SiteConfigParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A sticky_settings block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1775,438 +1597,6 @@ type FunctionAppFlexConsumptionParameters struct {
 	// The local path and filename of the Zip packaged application to deploy to this Function App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
 	// +kubebuilder:validation:Optional
 	ZipDeployFile *string `json:"zipDeployFile,omitempty" tf:"zip_deploy_file,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
-
-	// The URL of the API definition that describes this Linux Function App.
-	// The URL of the API definition that describes this Linux Function App.
-	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
-
-	// The ID of the API Management API for this Linux Function App.
-	// The ID of the API Management API for this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
-
-	// Reference to a API in apimanagement to populate apiManagementApiId.
-	// +kubebuilder:validation:Optional
-	APIManagementAPIIDRef *v2.NamespacedReference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
-
-	// Selector for a API in apimanagement to populate apiManagementApiId.
-	// +kubebuilder:validation:Optional
-	APIManagementAPIIDSelector *v2.NamespacedSelector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
-
-	// The App command line to launch.
-	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
-	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
-
-	// An app_service_logs block as defined above.
-	AppServiceLogs *AppServiceLogsInitParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
-
-	// The Connection String for linking the Linux Function App to Application Insights.
-	// The Connection String for linking the Linux Function App to Application Insights.
-	ApplicationInsightsConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
-
-	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
-	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
-	ApplicationInsightsKeySecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
-
-	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
-	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDRef *v2.NamespacedReference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
-	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDSelector *v2.NamespacedSelector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
-
-	// Should connections for Azure Container Registry use Managed Identity.
-	// Should connections for Azure Container Registry use Managed Identity.
-	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
-
-	// A cors block as defined above.
-	Cors *SiteConfigCorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
-
-	// Specifies a list of Default Documents for the Linux Web App.
-	// Specifies a list of Default Documents for the Linux Web App.
-	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
-
-	// The number of minimum instances for this Linux Function App. Only affects apps on Elastic Premium plans.
-	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
-
-	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
-	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
-
-	// The path to be checked for this function app health.
-	// The path to be checked for this function app health.
-	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
-
-	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
-	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
-	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
-
-	// One or more ip_restriction blocks as defined above.
-	IPRestriction []SiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
-
-	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
-	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
-
-	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
-	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
-	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
-
-	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
-	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
-	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
-
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
-	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
-
-	// Should Remote Debugging be enabled. Defaults to false.
-	// Should Remote Debugging be enabled. Defaults to `false`.
-	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
-
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
-	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
-
-	// Should Scale Monitoring of the Functions Runtime be enabled?
-	// Should Functions Runtime Scale Monitoring be enabled.
-	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
-
-	// One or more scm_ip_restriction blocks as defined above.
-	ScmIPRestriction []SiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
-
-	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
-	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
-
-	// The minimum version of TLS required for SSL requests to the SCM site. Possible values include 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
-	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
-
-	// Should the Linux Function App ip_restriction configuration be used for the SCM also.
-	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
-	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
-
-	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
-	// Should the Linux Function App use a 32-bit worker.
-	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
-
-	// Should the Linux Function App route all traffic through the virtual network. Defaults to false.
-	// Should the Linux Function App route all traffic through the virtual network.
-	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
-
-	// Should Web Sockets be enabled. Defaults to false.
-	// Should Web Sockets be enabled. Defaults to `false`.
-	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
-
-	// The number of Workers for this Linux Function App.
-	// The number of Workers for this Linux Function App.
-	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigObservation struct {
-
-	// The URL of the API definition that describes this Linux Function App.
-	// The URL of the API definition that describes this Linux Function App.
-	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
-
-	// The ID of the API Management API for this Linux Function App.
-	// The ID of the API Management API for this Linux Function App.
-	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
-
-	// The App command line to launch.
-	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
-	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
-
-	// An app_service_logs block as defined above.
-	AppServiceLogs *AppServiceLogsObservation `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
-
-	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
-
-	// Should connections for Azure Container Registry use Managed Identity.
-	// Should connections for Azure Container Registry use Managed Identity.
-	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
-
-	// A cors block as defined above.
-	Cors *SiteConfigCorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
-
-	// Specifies a list of Default Documents for the Linux Web App.
-	// Specifies a list of Default Documents for the Linux Web App.
-	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
-
-	// Is the Function App enabled? Defaults to true.
-	// Is detailed error logging enabled
-	DetailedErrorLoggingEnabled *bool `json:"detailedErrorLoggingEnabled,omitempty" tf:"detailed_error_logging_enabled,omitempty"`
-
-	// The number of minimum instances for this Linux Function App. Only affects apps on Elastic Premium plans.
-	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
-
-	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
-	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
-
-	// The path to be checked for this function app health.
-	// The path to be checked for this function app health.
-	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
-
-	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
-	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
-	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
-
-	// One or more ip_restriction blocks as defined above.
-	IPRestriction []SiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
-
-	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
-	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
-
-	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
-	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
-	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
-
-	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
-	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
-	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
-
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
-	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
-
-	// Should Remote Debugging be enabled. Defaults to false.
-	// Should Remote Debugging be enabled. Defaults to `false`.
-	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
-
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
-	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
-
-	// Should Scale Monitoring of the Functions Runtime be enabled?
-	// Should Functions Runtime Scale Monitoring be enabled.
-	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
-
-	// One or more scm_ip_restriction blocks as defined above.
-	ScmIPRestriction []SiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
-
-	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
-	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
-
-	// The minimum version of TLS required for SSL requests to the SCM site. Possible values include 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
-	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
-
-	// The SCM Type in use by the Linux Function App.
-	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
-
-	// Should the Linux Function App ip_restriction configuration be used for the SCM also.
-	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
-	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
-
-	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
-	// Should the Linux Function App use a 32-bit worker.
-	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
-
-	// Should the Linux Function App route all traffic through the virtual network. Defaults to false.
-	// Should the Linux Function App route all traffic through the virtual network.
-	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
-
-	// Should Web Sockets be enabled. Defaults to false.
-	// Should Web Sockets be enabled. Defaults to `false`.
-	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
-
-	// The number of Workers for this Linux Function App.
-	// The number of Workers for this Linux Function App.
-	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigParameters struct {
-
-	// The URL of the API definition that describes this Linux Function App.
-	// The URL of the API definition that describes this Linux Function App.
-	// +kubebuilder:validation:Optional
-	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
-
-	// The ID of the API Management API for this Linux Function App.
-	// The ID of the API Management API for this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
-
-	// Reference to a API in apimanagement to populate apiManagementApiId.
-	// +kubebuilder:validation:Optional
-	APIManagementAPIIDRef *v2.NamespacedReference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
-
-	// Selector for a API in apimanagement to populate apiManagementApiId.
-	// +kubebuilder:validation:Optional
-	APIManagementAPIIDSelector *v2.NamespacedSelector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
-
-	// The App command line to launch.
-	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
-	// +kubebuilder:validation:Optional
-	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
-
-	// An app_service_logs block as defined above.
-	// +kubebuilder:validation:Optional
-	AppServiceLogs *AppServiceLogsParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
-
-	// The Connection String for linking the Linux Function App to Application Insights.
-	// The Connection String for linking the Linux Function App to Application Insights.
-	// +kubebuilder:validation:Optional
-	ApplicationInsightsConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
-
-	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
-	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
-	// +kubebuilder:validation:Optional
-	ApplicationInsightsKeySecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
-
-	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
-	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDRef *v2.NamespacedReference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
-	// +kubebuilder:validation:Optional
-	ContainerRegistryManagedIdentityClientIDSelector *v2.NamespacedSelector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
-
-	// Should connections for Azure Container Registry use Managed Identity.
-	// Should connections for Azure Container Registry use Managed Identity.
-	// +kubebuilder:validation:Optional
-	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
-
-	// A cors block as defined above.
-	// +kubebuilder:validation:Optional
-	Cors *SiteConfigCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
-
-	// Specifies a list of Default Documents for the Linux Web App.
-	// Specifies a list of Default Documents for the Linux Web App.
-	// +kubebuilder:validation:Optional
-	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
-
-	// The number of minimum instances for this Linux Function App. Only affects apps on Elastic Premium plans.
-	// +kubebuilder:validation:Optional
-	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
-
-	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
-	// +kubebuilder:validation:Optional
-	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
-
-	// The path to be checked for this function app health.
-	// The path to be checked for this function app health.
-	// +kubebuilder:validation:Optional
-	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
-
-	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
-	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
-	// +kubebuilder:validation:Optional
-	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
-
-	// One or more ip_restriction blocks as defined above.
-	// +kubebuilder:validation:Optional
-	IPRestriction []SiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
-
-	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
-	// +kubebuilder:validation:Optional
-	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
-
-	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
-	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
-	// +kubebuilder:validation:Optional
-	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
-
-	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
-	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
-	// +kubebuilder:validation:Optional
-	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
-
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
-	// +kubebuilder:validation:Optional
-	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
-
-	// Should Remote Debugging be enabled. Defaults to false.
-	// Should Remote Debugging be enabled. Defaults to `false`.
-	// +kubebuilder:validation:Optional
-	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
-
-	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
-	// +kubebuilder:validation:Optional
-	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
-
-	// Should Scale Monitoring of the Functions Runtime be enabled?
-	// Should Functions Runtime Scale Monitoring be enabled.
-	// +kubebuilder:validation:Optional
-	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
-
-	// One or more scm_ip_restriction blocks as defined above.
-	// +kubebuilder:validation:Optional
-	ScmIPRestriction []SiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
-
-	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
-	// +kubebuilder:validation:Optional
-	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
-
-	// The minimum version of TLS required for SSL requests to the SCM site. Possible values include 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
-	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
-	// +kubebuilder:validation:Optional
-	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
-
-	// Should the Linux Function App ip_restriction configuration be used for the SCM also.
-	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
-	// +kubebuilder:validation:Optional
-	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
-
-	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
-	// Should the Linux Function App use a 32-bit worker.
-	// +kubebuilder:validation:Optional
-	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
-
-	// Should the Linux Function App route all traffic through the virtual network. Defaults to false.
-	// Should the Linux Function App route all traffic through the virtual network.
-	// +kubebuilder:validation:Optional
-	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
-
-	// Should Web Sockets be enabled. Defaults to false.
-	// Should Web Sockets be enabled. Defaults to `false`.
-	// +kubebuilder:validation:Optional
-	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
-
-	// The number of Workers for this Linux Function App.
-	// The number of Workers for this Linux Function App.
-	// +kubebuilder:validation:Optional
-	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteCredentialInitParameters struct {
-}
-
-type FunctionAppFlexConsumptionSiteCredentialObservation struct {
-
-	// The Site Credentials Username used for publishing.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Site Credentials Password used for publishing.
-	Password *string `json:"password,omitempty" tf:"password,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteCredentialParameters struct {
 }
 
 type GithubInitParameters struct {
@@ -2314,6 +1704,63 @@ type GithubV2Parameters struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
+type GoogleInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type GoogleObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type GoogleParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
 type GoogleV2InitParameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
@@ -2375,7 +1822,7 @@ type GoogleV2Parameters struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
-type IPRestrictionHeadersInitParameters struct {
+type HeadersInitParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
@@ -2390,7 +1837,7 @@ type IPRestrictionHeadersInitParameters struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
-type IPRestrictionHeadersObservation struct {
+type HeadersObservation struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
@@ -2405,7 +1852,7 @@ type IPRestrictionHeadersObservation struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
-type IPRestrictionHeadersParameters struct {
+type HeadersParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	// +kubebuilder:validation:Optional
@@ -2422,6 +1869,194 @@ type IPRestrictionHeadersParameters struct {
 	// Specifies a list of Hosts for which matching should be applied.
 	// +kubebuilder:validation:Optional
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type IPRestrictionInitParameters struct {
+
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A headers block as defined above.
+	Headers *HeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The Site Credentials Username used for publishing.
+	// The name which should be used for this `ip_restriction`.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type IPRestrictionObservation struct {
+
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A headers block as defined above.
+	Headers *HeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The Site Credentials Username used for publishing.
+	// The name which should be used for this `ip_restriction`.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+}
+
+type IPRestrictionParameters struct {
+
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A headers block as defined above.
+	// +kubebuilder:validation:Optional
+	Headers *HeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	// +kubebuilder:validation:Optional
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The Site Credentials Username used for publishing.
+	// The name which should be used for this `ip_restriction`.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	// +kubebuilder:validation:Optional
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.NamespacedReference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.NamespacedSelector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type LoginInitParameters struct {
@@ -2576,6 +2211,63 @@ type LoginParameters struct {
 	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
 }
 
+type MicrosoftInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type MicrosoftObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type MicrosoftParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSecretRef *v2.LocalSecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
 type MicrosoftV2InitParameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
@@ -2637,175 +2329,7 @@ type MicrosoftV2Parameters struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
-type SiteConfigCorsInitParameters struct {
-
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials allowed in CORS requests? Defaults to false.
-	// Are credentials allowed in CORS requests? Defaults to `false`.
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type SiteConfigCorsObservation struct {
-
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials allowed in CORS requests? Defaults to false.
-	// Are credentials allowed in CORS requests? Defaults to `false`.
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type SiteConfigCorsParameters struct {
-
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials allowed in CORS requests? Defaults to false.
-	// Are credentials allowed in CORS requests? Defaults to `false`.
-	// +kubebuilder:validation:Optional
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type SiteConfigIPRestrictionInitParameters struct {
-
-	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
-	// The action to take. Possible values are `Allow` or `Deny`.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The Description of this IP Restriction.
-	// The description of the IP restriction rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A headers block as defined above.
-	Headers *IPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
-	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The Site Credentials Username used for publishing.
-	// The name which should be used for this `ip_restriction`.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority value of this ip_restriction. Defaults to 65000.
-	// The priority value of this `ip_restriction`.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type SiteConfigIPRestrictionObservation struct {
-
-	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
-	// The action to take. Possible values are `Allow` or `Deny`.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The Description of this IP Restriction.
-	// The description of the IP restriction rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A headers block as defined above.
-	Headers *IPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
-	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The Site Credentials Username used for publishing.
-	// The name which should be used for this `ip_restriction`.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority value of this ip_restriction. Defaults to 65000.
-	// The priority value of this `ip_restriction`.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-}
-
-type SiteConfigIPRestrictionParameters struct {
-
-	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
-	// The action to take. Possible values are `Allow` or `Deny`.
-	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The Description of this IP Restriction.
-	// The description of the IP restriction rule.
-	// +kubebuilder:validation:Optional
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A headers block as defined above.
-	// +kubebuilder:validation:Optional
-	Headers *IPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
-	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	// +kubebuilder:validation:Optional
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The Site Credentials Username used for publishing.
-	// The name which should be used for this `ip_restriction`.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority value of this ip_restriction. Defaults to 65000.
-	// The priority value of this `ip_restriction`.
-	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	// The Service Tag used for this IP Restriction.
-	// +kubebuilder:validation:Optional
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v2.NamespacedReference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type SiteConfigScmIPRestrictionHeadersInitParameters struct {
+type ScmIPRestrictionHeadersInitParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
@@ -2820,7 +2344,7 @@ type SiteConfigScmIPRestrictionHeadersInitParameters struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
-type SiteConfigScmIPRestrictionHeadersObservation struct {
+type ScmIPRestrictionHeadersObservation struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
@@ -2835,7 +2359,7 @@ type SiteConfigScmIPRestrictionHeadersObservation struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
-type SiteConfigScmIPRestrictionHeadersParameters struct {
+type ScmIPRestrictionHeadersParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	// +kubebuilder:validation:Optional
@@ -2854,7 +2378,7 @@ type SiteConfigScmIPRestrictionHeadersParameters struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
-type SiteConfigScmIPRestrictionInitParameters struct {
+type ScmIPRestrictionInitParameters struct {
 
 	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
@@ -2865,7 +2389,7 @@ type SiteConfigScmIPRestrictionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers *SiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *ScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2898,7 +2422,7 @@ type SiteConfigScmIPRestrictionInitParameters struct {
 	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
-type SiteConfigScmIPRestrictionObservation struct {
+type ScmIPRestrictionObservation struct {
 
 	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
@@ -2909,7 +2433,7 @@ type SiteConfigScmIPRestrictionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers *SiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *ScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2932,7 +2456,7 @@ type SiteConfigScmIPRestrictionObservation struct {
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
 
-type SiteConfigScmIPRestrictionParameters struct {
+type ScmIPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
@@ -2946,7 +2470,7 @@ type SiteConfigScmIPRestrictionParameters struct {
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
-	Headers *SiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *ScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2982,6 +2506,438 @@ type SiteConfigScmIPRestrictionParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v2.NamespacedSelector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type SiteConfigInitParameters struct {
+
+	// The URL of the API definition that describes this Linux Function App.
+	// The URL of the API definition that describes this Linux Function App.
+	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
+
+	// The ID of the API Management API for this Linux Function App.
+	// The ID of the API Management API for this Linux Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
+
+	// Reference to a API in apimanagement to populate apiManagementApiId.
+	// +kubebuilder:validation:Optional
+	APIManagementAPIIDRef *v2.NamespacedReference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API in apimanagement to populate apiManagementApiId.
+	// +kubebuilder:validation:Optional
+	APIManagementAPIIDSelector *v2.NamespacedSelector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
+
+	// The App command line to launch.
+	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
+	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+
+	// An app_service_logs block as defined above.
+	AppServiceLogs *AppServiceLogsInitParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+
+	// The Connection String for linking the Linux Function App to Application Insights.
+	// The Connection String for linking the Linux Function App to Application Insights.
+	ApplicationInsightsConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+
+	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
+	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
+	ApplicationInsightsKeySecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
+
+	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
+	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryManagedIdentityClientIDRef *v2.NamespacedReference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryManagedIdentityClientIDSelector *v2.NamespacedSelector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
+
+	// Should connections for Azure Container Registry use Managed Identity.
+	// Should connections for Azure Container Registry use Managed Identity.
+	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
+
+	// A cors block as defined above.
+	Cors *CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// Specifies a list of Default Documents for the Linux Web App.
+	// Specifies a list of Default Documents for the Linux Web App.
+	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
+
+	// The number of minimum instances for this Linux Function App. Only affects apps on Elastic Premium plans.
+	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
+
+	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
+	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
+
+	// The path to be checked for this function app health.
+	// The path to be checked for this function app health.
+	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
+
+	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
+	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
+
+	// One or more ip_restriction blocks as defined above.
+	IPRestriction []IPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
+	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
+	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
+	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
+
+	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
+	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
+	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
+
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// Should Remote Debugging be enabled. Defaults to false.
+	// Should Remote Debugging be enabled. Defaults to `false`.
+	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
+
+	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
+	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
+	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
+
+	// Should Scale Monitoring of the Functions Runtime be enabled?
+	// Should Functions Runtime Scale Monitoring be enabled.
+	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
+
+	// One or more scm_ip_restriction blocks as defined above.
+	ScmIPRestriction []ScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
+
+	// The minimum version of TLS required for SSL requests to the SCM site. Possible values include 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
+
+	// Should the Linux Function App ip_restriction configuration be used for the SCM also.
+	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
+	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
+
+	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
+	// Should the Linux Function App use a 32-bit worker.
+	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
+
+	// Should the Linux Function App route all traffic through the virtual network. Defaults to false.
+	// Should the Linux Function App route all traffic through the virtual network.
+	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
+
+	// Should Web Sockets be enabled. Defaults to false.
+	// Should Web Sockets be enabled. Defaults to `false`.
+	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
+
+	// The number of Workers for this Linux Function App.
+	// The number of Workers for this Linux Function App.
+	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
+}
+
+type SiteConfigObservation struct {
+
+	// The URL of the API definition that describes this Linux Function App.
+	// The URL of the API definition that describes this Linux Function App.
+	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
+
+	// The ID of the API Management API for this Linux Function App.
+	// The ID of the API Management API for this Linux Function App.
+	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
+
+	// The App command line to launch.
+	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
+	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+
+	// An app_service_logs block as defined above.
+	AppServiceLogs *AppServiceLogsObservation `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+
+	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
+	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
+	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
+
+	// Should connections for Azure Container Registry use Managed Identity.
+	// Should connections for Azure Container Registry use Managed Identity.
+	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
+
+	// A cors block as defined above.
+	Cors *CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// Specifies a list of Default Documents for the Linux Web App.
+	// Specifies a list of Default Documents for the Linux Web App.
+	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
+
+	// Is the Function App enabled? Defaults to true.
+	// Is detailed error logging enabled
+	DetailedErrorLoggingEnabled *bool `json:"detailedErrorLoggingEnabled,omitempty" tf:"detailed_error_logging_enabled,omitempty"`
+
+	// The number of minimum instances for this Linux Function App. Only affects apps on Elastic Premium plans.
+	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
+
+	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
+	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
+
+	// The path to be checked for this function app health.
+	// The path to be checked for this function app health.
+	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
+
+	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
+	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
+
+	// One or more ip_restriction blocks as defined above.
+	IPRestriction []IPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
+	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
+	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
+	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
+
+	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
+	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
+	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
+
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// Should Remote Debugging be enabled. Defaults to false.
+	// Should Remote Debugging be enabled. Defaults to `false`.
+	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
+
+	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
+	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
+	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
+
+	// Should Scale Monitoring of the Functions Runtime be enabled?
+	// Should Functions Runtime Scale Monitoring be enabled.
+	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
+
+	// One or more scm_ip_restriction blocks as defined above.
+	ScmIPRestriction []ScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
+
+	// The minimum version of TLS required for SSL requests to the SCM site. Possible values include 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
+
+	// The SCM Type in use by the Linux Function App.
+	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
+
+	// Should the Linux Function App ip_restriction configuration be used for the SCM also.
+	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
+	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
+
+	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
+	// Should the Linux Function App use a 32-bit worker.
+	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
+
+	// Should the Linux Function App route all traffic through the virtual network. Defaults to false.
+	// Should the Linux Function App route all traffic through the virtual network.
+	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
+
+	// Should Web Sockets be enabled. Defaults to false.
+	// Should Web Sockets be enabled. Defaults to `false`.
+	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
+
+	// The number of Workers for this Linux Function App.
+	// The number of Workers for this Linux Function App.
+	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
+}
+
+type SiteConfigParameters struct {
+
+	// The URL of the API definition that describes this Linux Function App.
+	// The URL of the API definition that describes this Linux Function App.
+	// +kubebuilder:validation:Optional
+	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
+
+	// The ID of the API Management API for this Linux Function App.
+	// The ID of the API Management API for this Linux Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
+
+	// Reference to a API in apimanagement to populate apiManagementApiId.
+	// +kubebuilder:validation:Optional
+	APIManagementAPIIDRef *v2.NamespacedReference `json:"apiManagementApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API in apimanagement to populate apiManagementApiId.
+	// +kubebuilder:validation:Optional
+	APIManagementAPIIDSelector *v2.NamespacedSelector `json:"apiManagementApiIdSelector,omitempty" tf:"-"`
+
+	// The App command line to launch.
+	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
+	// +kubebuilder:validation:Optional
+	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+
+	// An app_service_logs block as defined above.
+	// +kubebuilder:validation:Optional
+	AppServiceLogs *AppServiceLogsParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+
+	// The Connection String for linking the Linux Function App to Application Insights.
+	// The Connection String for linking the Linux Function App to Application Insights.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+
+	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
+	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsKeySecretRef *v2.LocalSecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
+
+	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
+	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryManagedIdentityClientIDRef *v2.NamespacedReference `json:"containerRegistryManagedIdentityClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate containerRegistryManagedIdentityClientId.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryManagedIdentityClientIDSelector *v2.NamespacedSelector `json:"containerRegistryManagedIdentityClientIdSelector,omitempty" tf:"-"`
+
+	// Should connections for Azure Container Registry use Managed Identity.
+	// Should connections for Azure Container Registry use Managed Identity.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
+
+	// A cors block as defined above.
+	// +kubebuilder:validation:Optional
+	Cors *CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// Specifies a list of Default Documents for the Linux Web App.
+	// Specifies a list of Default Documents for the Linux Web App.
+	// +kubebuilder:validation:Optional
+	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
+
+	// The number of minimum instances for this Linux Function App. Only affects apps on Elastic Premium plans.
+	// +kubebuilder:validation:Optional
+	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
+
+	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
+	// +kubebuilder:validation:Optional
+	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
+
+	// The path to be checked for this function app health.
+	// The path to be checked for this function app health.
+	// +kubebuilder:validation:Optional
+	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
+
+	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
+	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
+
+	// One or more ip_restriction blocks as defined above.
+	// +kubebuilder:validation:Optional
+	IPRestriction []IPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
+	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
+	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
+	// +kubebuilder:validation:Optional
+	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
+
+	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
+	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
+	// +kubebuilder:validation:Optional
+	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
+
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// +kubebuilder:validation:Optional
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// Should Remote Debugging be enabled. Defaults to false.
+	// Should Remote Debugging be enabled. Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
+
+	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
+	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
+	// +kubebuilder:validation:Optional
+	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
+
+	// Should Scale Monitoring of the Functions Runtime be enabled?
+	// Should Functions Runtime Scale Monitoring be enabled.
+	// +kubebuilder:validation:Optional
+	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
+
+	// One or more scm_ip_restriction blocks as defined above.
+	// +kubebuilder:validation:Optional
+	ScmIPRestriction []ScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
+
+	// The minimum version of TLS required for SSL requests to the SCM site. Possible values include 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// +kubebuilder:validation:Optional
+	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
+
+	// Should the Linux Function App ip_restriction configuration be used for the SCM also.
+	// Should the Linux Function App `ip_restriction` configuration be used for the SCM also.
+	// +kubebuilder:validation:Optional
+	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
+
+	// Should the Linux Web App Linux Function App use a 32-bit worker. Defaults to false.
+	// Should the Linux Function App use a 32-bit worker.
+	// +kubebuilder:validation:Optional
+	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
+
+	// Should the Linux Function App route all traffic through the virtual network. Defaults to false.
+	// Should the Linux Function App route all traffic through the virtual network.
+	// +kubebuilder:validation:Optional
+	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
+
+	// Should Web Sockets be enabled. Defaults to false.
+	// Should Web Sockets be enabled. Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
+
+	// The number of Workers for this Linux Function App.
+	// The number of Workers for this Linux Function App.
+	// +kubebuilder:validation:Optional
+	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
+}
+
+type SiteCredentialInitParameters struct {
+}
+
+type SiteCredentialObservation struct {
+
+	// The Site Credentials Username used for publishing.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Site Credentials Password used for publishing.
+	Password *string `json:"password,omitempty" tf:"password,omitempty"`
+}
+
+type SiteCredentialParameters struct {
 }
 
 type StickySettingsInitParameters struct {
@@ -3011,6 +2967,50 @@ type StickySettingsParameters struct {
 	// A list of connection_string names that the Linux Function App will not swap between Slots when a swap operation is triggered.
 	// +kubebuilder:validation:Optional
 	ConnectionStringNames []*string `json:"connectionStringNames,omitempty" tf:"connection_string_names,omitempty"`
+}
+
+type TwitterInitParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	ConsumerSecretSecretRef *v2.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type TwitterObservation struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type TwitterParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	ConsumerSecretSecretRef *v2.LocalSecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	// +kubebuilder:validation:Optional
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
 }
 
 type TwitterV2InitParameters struct {

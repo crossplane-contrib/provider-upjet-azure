@@ -67,7 +67,6 @@ import (
 	networkinterfacebackendaddresspoolassociation "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/networkinterfacebackendaddresspoolassociation"
 	networkinterfacenatruleassociation "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/networkinterfacenatruleassociation"
 	networkinterfacesecuritygroupassociation "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/networkinterfacesecuritygroupassociation"
-	packetcapture "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/packetcapture"
 	pointtositevpngateway "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/pointtositevpngateway"
 	privatednsaaaarecord "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/privatednsaaaarecord"
 	privatednsarecord "github.com/upbound/provider-azure/v2/internal/controller/cluster/network/privatednsarecord"
@@ -192,7 +191,6 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfacebackendaddresspoolassociation.Setup,
 		networkinterfacenatruleassociation.Setup,
 		networkinterfacesecuritygroupassociation.Setup,
-		packetcapture.Setup,
 		pointtositevpngateway.Setup,
 		privatednsaaaarecord.Setup,
 		privatednsarecord.Setup,
@@ -323,7 +321,6 @@ func SetupGated_network(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfacebackendaddresspoolassociation.SetupGated,
 		networkinterfacenatruleassociation.SetupGated,
 		networkinterfacesecuritygroupassociation.SetupGated,
-		packetcapture.SetupGated,
 		pointtositevpngateway.SetupGated,
 		privatednsaaaarecord.SetupGated,
 		privatednsarecord.SetupGated,
@@ -453,7 +450,6 @@ func SetupWebhookWithManager_network(mgr ctrl.Manager) error {
 		networkinterfacebackendaddresspoolassociation.SetupWebhookWithManager,
 		networkinterfacenatruleassociation.SetupWebhookWithManager,
 		networkinterfacesecuritygroupassociation.SetupWebhookWithManager,
-		packetcapture.SetupWebhookWithManager,
 		pointtositevpngateway.SetupWebhookWithManager,
 		privatednsaaaarecord.SetupWebhookWithManager,
 		privatednsarecord.SetupWebhookWithManager,

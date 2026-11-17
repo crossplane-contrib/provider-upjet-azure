@@ -7,33 +7,6 @@ package v1beta2
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this AppServicePlanList.
-func (l *AppServicePlanList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this FunctionAppList.
-func (l *FunctionAppList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this FunctionAppSlotList.
-func (l *FunctionAppSlotList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this LinuxFunctionAppList.
 func (l *LinuxFunctionAppList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -63,15 +36,6 @@ func (l *LinuxWebAppList) GetItems() []resource.Managed {
 
 // GetItems of this LinuxWebAppSlotList.
 func (l *LinuxWebAppSlotList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this StaticSiteList.
-func (l *StaticSiteList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

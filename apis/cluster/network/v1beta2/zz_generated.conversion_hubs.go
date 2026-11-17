@@ -49,9 +49,6 @@ func (tr *LocalNetworkGateway) Hub() {}
 func (tr *Manager) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PacketCapture) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *PointToSiteVPNGateway) Hub() {}
 
 // Hub marks this type as a conversion hub.

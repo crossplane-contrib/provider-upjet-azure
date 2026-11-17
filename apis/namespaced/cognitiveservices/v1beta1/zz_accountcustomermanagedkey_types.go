@@ -13,7 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AccountCustomerManagedKeyInitParameters_2 struct {
+type AccountCustomerManagedKeyInitParameters struct {
 
 	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
@@ -42,7 +42,7 @@ type AccountCustomerManagedKeyInitParameters_2 struct {
 	KeyVaultKeyIDSelector *v2.NamespacedSelector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 }
 
-type AccountCustomerManagedKeyObservation_2 struct {
+type AccountCustomerManagedKeyObservation struct {
 
 	// The ID of the Cognitive Account. Changing this forces a new resource to be created.
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
@@ -57,7 +57,7 @@ type AccountCustomerManagedKeyObservation_2 struct {
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 }
 
-type AccountCustomerManagedKeyParameters_2 struct {
+type AccountCustomerManagedKeyParameters struct {
 
 	// The ID of the Cognitive Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cognitiveservices/v1beta1.Account
@@ -105,7 +105,7 @@ type AccountCustomerManagedKeyParameters_2 struct {
 // AccountCustomerManagedKeySpec defines the desired state of AccountCustomerManagedKey
 type AccountCustomerManagedKeySpec struct {
 	v2.ManagedResourceSpec `json:",inline"`
-	ForProvider            AccountCustomerManagedKeyParameters_2 `json:"forProvider"`
+	ForProvider            AccountCustomerManagedKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -116,13 +116,13 @@ type AccountCustomerManagedKeySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider AccountCustomerManagedKeyInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider AccountCustomerManagedKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountCustomerManagedKeyStatus defines the observed state of AccountCustomerManagedKey.
 type AccountCustomerManagedKeyStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               AccountCustomerManagedKeyObservation_2 `json:"atProvider,omitempty"`
+	AtProvider               AccountCustomerManagedKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

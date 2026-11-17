@@ -498,14 +498,14 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.m.upbound.io", "v1beta1", "FunctionApp", "FunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.m.upbound.io", "v1beta1", "LinuxFunctionApp", "LinuxFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionApp),
-			Extract:      resource.ExtractParamPath("name", false),
+			Extract:      resource.ExtractParamPath("name", true),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FunctionAppRef,
 			Selector:     mg.Spec.ForProvider.FunctionAppSelector,
@@ -558,14 +558,14 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.m.upbound.io", "v1beta1", "FunctionApp", "FunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.m.upbound.io", "v1beta1", "LinuxFunctionApp", "LinuxFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionApp),
-			Extract:      resource.ExtractParamPath("name", false),
+			Extract:      resource.ExtractParamPath("name", true),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FunctionAppRef,
 			Selector:     mg.Spec.InitProvider.FunctionAppSelector,

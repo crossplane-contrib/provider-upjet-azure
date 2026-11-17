@@ -7,15 +7,6 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *AppServicePlan) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FunctionApp) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FunctionAppSlot) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinuxFunctionApp) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -26,9 +17,6 @@ func (tr *LinuxWebApp) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LinuxWebAppSlot) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StaticSite) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *WindowsFunctionApp) Hub() {}

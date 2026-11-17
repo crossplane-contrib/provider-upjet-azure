@@ -27,24 +27,6 @@ spec:
 
 ---
 
-apiVersion: cognitiveservices.azure.upbound.io/v1beta1
-kind: AIServices
-metadata:
-  annotations:
-    meta.upbound.io/example-id: machinelearningservices/v1beta1/aifoundry
-  labels:
-    testing.upbound.io/example-name: example
-  name: exampleaifoundry
-spec:
-  forProvider:
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    skuName: S0
-
----
-
 apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Vault
 metadata:

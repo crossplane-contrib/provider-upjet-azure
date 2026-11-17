@@ -48,12 +48,6 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("azurerm_data_protection_backup_policy_postgresql", func(r *config.Resource) {
-		r.References["vault_name"] = config.Reference{
-			TerraformName: "azurerm_data_protection_backup_vault",
-		}
-	})
-
 	p.AddResourceConfigurator("azurerm_data_protection_backup_policy_postgresql_flexible_server", func(r *config.Resource) {
 		r.References["vault_id"] = config.Reference{
 			TerraformName: "azurerm_data_protection_backup_vault",

@@ -365,16 +365,6 @@ func Configure(p *config.Provider) {
 		delete(r.References, "private_service_connection.private_connection_resource_id")
 	})
 
-	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
-		r.References["network_watcher_name"] = config.Reference{
-			TerraformName: "azurerm_network_watcher",
-		}
-		r.References["storage_location.storage_account_id"] = config.Reference{
-			TerraformName: "azurerm_storage_account",
-			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-	})
-
 	p.AddResourceConfigurator("azurerm_point_to_site_vpn_gateway", func(r *config.Resource) {
 		r.References["virtual_hub_id"] = config.Reference{
 			TerraformName: "azurerm_virtual_hub",

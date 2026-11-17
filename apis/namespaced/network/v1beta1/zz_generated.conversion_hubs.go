@@ -181,9 +181,6 @@ func (tr *NetworkInterfaceNatRuleAssociation) Hub() {}
 func (tr *NetworkInterfaceSecurityGroupAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PacketCapture) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *PointToSiteVPNGateway) Hub() {}
 
 // Hub marks this type as a conversion hub.

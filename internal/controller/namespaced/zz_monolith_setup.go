@@ -132,8 +132,6 @@ import (
 	rediscachecache "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscache"
 	rediscacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicy"
 	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicyassignment"
-	redisenterprisecluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisenterprisecluster"
-	redisenterprisedatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redislinkedserver"
 	endpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cdn/endpoint"
@@ -161,7 +159,6 @@ import (
 	accountproject "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountproject"
 	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraiblocklist"
 	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraipolicy"
-	aiservices "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/aiservices"
 	deployment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/deployment"
 	service "github.com/upbound/provider-azure/v2/internal/controller/namespaced/communication/service"
 	availabilityset "github.com/upbound/provider-azure/v2/internal/controller/namespaced/compute/availabilityset"
@@ -295,13 +292,11 @@ import (
 	backupinstancedatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancedatalakestorage"
 	backupinstancedisk "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancedisk"
 	backupinstancekubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancekubernetescluster"
-	backupinstancepostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancepostgresql"
 	backupinstancepostgresqlflexibleserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupinstancepostgresqlflexibleserver"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicyblobstorage"
 	backuppolicydatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicydatalakestorage"
 	backuppolicydisk "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicydisk"
 	backuppolicykubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicykubernetescluster"
-	backuppolicypostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicypostgresql"
 	backuppolicypostgresqlflexibleserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backuppolicypostgresqlflexibleserver"
 	backupvault "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/backupvault"
 	resourceguard "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dataprotection/resourceguard"
@@ -316,10 +311,6 @@ import (
 	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibleserveractivedirectoryadministrator"
 	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibleserverconfiguration"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibleserverfirewallrule"
-	activedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/activedirectoryadministrator"
-	configurationdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/configuration"
-	database "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/database"
-	firewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/firewallrule"
 	flexibleserverdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserver"
 	flexibleserveractivedirectoryadministratordbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserveractivedirectoryadministrator"
 	flexibleserverbackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverbackup"
@@ -327,9 +318,6 @@ import (
 	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallruledbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverfirewallrule"
 	flexibleservervirtualendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleservervirtualendpoint"
-	serverdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/server"
-	serverkey "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/serverkey"
-	virtualnetworkrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/virtualnetworkrule"
 	virtualdesktopapplicationgroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopapplicationgroup"
 	virtualdesktophostpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpool"
 	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
@@ -431,7 +419,7 @@ import (
 	clusterkusto "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/cluster"
 	clustermanagedprivateendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/clustermanagedprivateendpoint"
 	clusterprincipalassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/clusterprincipalassignment"
-	databasekusto "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/database"
+	database "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/database"
 	databaseprincipalassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/databaseprincipalassignment"
 	eventgriddataconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/eventgriddataconnection"
 	eventhubdataconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/kusto/eventhubdataconnection"
@@ -469,7 +457,6 @@ import (
 	managementgroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/management/managementgroup"
 	managementgroupsubscriptionassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/management/managementgroupsubscriptionassociation"
 	accountmaps "github.com/upbound/provider-azure/v2/internal/controller/namespaced/maps/account"
-	creator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/maps/creator"
 	marketplaceagreement "github.com/upbound/provider-azure/v2/internal/controller/namespaced/marketplaceordering/marketplaceagreement"
 	accountnetapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/netapp/account"
 	pool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/netapp/pool"
@@ -534,7 +521,6 @@ import (
 	networkinterfacebackendaddresspoolassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/networkinterfacebackendaddresspoolassociation"
 	networkinterfacenatruleassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/networkinterfacenatruleassociation"
 	networkinterfacesecuritygroupassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/networkinterfacesecuritygroupassociation"
-	packetcapture "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/packetcapture"
 	pointtositevpngateway "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/pointtositevpngateway"
 	privatednsaaaarecord "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/privatednsaaaarecord"
 	privatednsarecord "github.com/upbound/provider-azure/v2/internal/controller/namespaced/network/privatednsarecord"
@@ -612,8 +598,6 @@ import (
 	autonomousdatabasebackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/oracle/autonomousdatabasebackup"
 	autonomousdatabaseclonefrombackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/oracle/autonomousdatabaseclonefrombackup"
 	autonomousdatabaseclonefromdatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/oracle/autonomousdatabaseclonefromdatabase"
-	contactprofile "github.com/upbound/provider-azure/v2/internal/controller/namespaced/orbital/contactprofile"
-	spacecraft "github.com/upbound/provider-azure/v2/internal/controller/namespaced/orbital/spacecraft"
 	resourcepolicyremediation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/policyinsights/resourcepolicyremediation"
 	subscriptionpolicyremediation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/policyinsights/subscriptionpolicyremediation"
 	dashboard "github.com/upbound/provider-azure/v2/internal/controller/namespaced/portal/dashboard"
@@ -647,7 +631,6 @@ import (
 	iotsecuritysolution "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/iotsecuritysolution"
 	securitycenterassessment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterassessment"
 	securitycenterassessmentpolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterassessmentpolicy"
-	securitycenterautoprovisioning "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterautoprovisioning"
 	securitycentercontact "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycentercontact"
 	securitycenterservervulnerabilityassessmentvirtualmachine "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycenterservervulnerabilityassessmentvirtualmachine"
 	securitycentersetting "github.com/upbound/provider-azure/v2/internal/controller/namespaced/security/securitycentersetting"
@@ -724,11 +707,6 @@ import (
 	sharedirectory "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storage/sharedirectory"
 	tablestorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storage/table"
 	tableentity "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storage/tableentity"
-	hpccache "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storagecache/hpccache"
-	hpccacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storagecache/hpccacheaccesspolicy"
-	hpccacheblobnfstarget "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storagecache/hpccacheblobnfstarget"
-	hpccacheblobtarget "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storagecache/hpccacheblobtarget"
-	hpccachenfstarget "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storagecache/hpccachenfstarget"
 	storagesync "github.com/upbound/provider-azure/v2/internal/controller/namespaced/storagesync/storagesync"
 	clusterstreamanalytics "github.com/upbound/provider-azure/v2/internal/controller/namespaced/streamanalytics/cluster"
 	functionjavascriptuda "github.com/upbound/provider-azure/v2/internal/controller/namespaced/streamanalytics/functionjavascriptuda"
@@ -748,7 +726,7 @@ import (
 	streaminputblob "github.com/upbound/provider-azure/v2/internal/controller/namespaced/streamanalytics/streaminputblob"
 	streaminputeventhub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/streamanalytics/streaminputeventhub"
 	streaminputiothub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/streamanalytics/streaminputiothub"
-	firewallrulesynapse "github.com/upbound/provider-azure/v2/internal/controller/namespaced/synapse/firewallrule"
+	firewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/synapse/firewallrule"
 	integrationruntimeazuresynapse "github.com/upbound/provider-azure/v2/internal/controller/namespaced/synapse/integrationruntimeazure"
 	integrationruntimeselfhostedsynapse "github.com/upbound/provider-azure/v2/internal/controller/namespaced/synapse/integrationruntimeselfhosted"
 	linkedservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/synapse/linkedservice"
@@ -772,20 +750,16 @@ import (
 	appservicecertificatebinding "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appservicecertificatebinding"
 	appservicecustomhostnamebinding "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appservicecustomhostnamebinding"
 	appservicemanagedcertificate "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appservicemanagedcertificate"
-	appserviceplan "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appserviceplan"
-	functionapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionapp"
 	functionappactiveslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappactiveslot"
 	functionappflexconsumption "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappflexconsumption"
 	functionappfunction "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappfunction"
 	functionapphybridconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionapphybridconnection"
-	functionappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappslot"
 	linuxfunctionapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxfunctionapp"
 	linuxfunctionappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxfunctionappslot"
 	linuxwebapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxwebapp"
 	linuxwebappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxwebappslot"
 	serviceplan "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/serviceplan"
 	sourcecontroltoken "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/sourcecontroltoken"
-	staticsite "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/staticsite"
 	windowsfunctionapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/windowsfunctionapp"
 	windowsfunctionappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/windowsfunctionappslot"
 	windowswebapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/windowswebapp"
@@ -919,8 +893,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		rediscachecache.Setup,
 		rediscacheaccesspolicy.Setup,
 		rediscacheaccesspolicyassignment.Setup,
-		redisenterprisecluster.Setup,
-		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
 		endpoint.Setup,
@@ -948,7 +920,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accountproject.Setup,
 		accountraiblocklist.Setup,
 		accountraipolicy.Setup,
-		aiservices.Setup,
 		deployment.Setup,
 		service.Setup,
 		availabilityset.Setup,
@@ -1082,13 +1053,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		backupinstancedatalakestorage.Setup,
 		backupinstancedisk.Setup,
 		backupinstancekubernetescluster.Setup,
-		backupinstancepostgresql.Setup,
 		backupinstancepostgresqlflexibleserver.Setup,
 		backuppolicyblobstorage.Setup,
 		backuppolicydatalakestorage.Setup,
 		backuppolicydisk.Setup,
 		backuppolicykubernetescluster.Setup,
-		backuppolicypostgresql.Setup,
 		backuppolicypostgresqlflexibleserver.Setup,
 		backupvault.Setup,
 		resourceguard.Setup,
@@ -1103,10 +1072,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserveractivedirectoryadministrator.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverfirewallrule.Setup,
-		activedirectoryadministrator.Setup,
-		configurationdbforpostgresql.Setup,
-		database.Setup,
-		firewallrule.Setup,
 		flexibleserverdbforpostgresql.Setup,
 		flexibleserveractivedirectoryadministratordbforpostgresql.Setup,
 		flexibleserverbackup.Setup,
@@ -1114,9 +1079,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallruledbforpostgresql.Setup,
 		flexibleservervirtualendpoint.Setup,
-		serverdbforpostgresql.Setup,
-		serverkey.Setup,
-		virtualnetworkrule.Setup,
 		virtualdesktopapplicationgroup.Setup,
 		virtualdesktophostpool.Setup,
 		virtualdesktophostpoolregistrationinfo.Setup,
@@ -1218,7 +1180,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterkusto.Setup,
 		clustermanagedprivateendpoint.Setup,
 		clusterprincipalassignment.Setup,
-		databasekusto.Setup,
+		database.Setup,
 		databaseprincipalassignment.Setup,
 		eventgriddataconnection.Setup,
 		eventhubdataconnection.Setup,
@@ -1256,7 +1218,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		managementgroup.Setup,
 		managementgroupsubscriptionassociation.Setup,
 		accountmaps.Setup,
-		creator.Setup,
 		marketplaceagreement.Setup,
 		accountnetapp.Setup,
 		pool.Setup,
@@ -1321,7 +1282,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfacebackendaddresspoolassociation.Setup,
 		networkinterfacenatruleassociation.Setup,
 		networkinterfacesecuritygroupassociation.Setup,
-		packetcapture.Setup,
 		pointtositevpngateway.Setup,
 		privatednsaaaarecord.Setup,
 		privatednsarecord.Setup,
@@ -1399,8 +1359,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		autonomousdatabasebackup.Setup,
 		autonomousdatabaseclonefrombackup.Setup,
 		autonomousdatabaseclonefromdatabase.Setup,
-		contactprofile.Setup,
-		spacecraft.Setup,
 		resourcepolicyremediation.Setup,
 		subscriptionpolicyremediation.Setup,
 		dashboard.Setup,
@@ -1434,7 +1392,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		iotsecuritysolution.Setup,
 		securitycenterassessment.Setup,
 		securitycenterassessmentpolicy.Setup,
-		securitycenterautoprovisioning.Setup,
 		securitycentercontact.Setup,
 		securitycenterservervulnerabilityassessmentvirtualmachine.Setup,
 		securitycentersetting.Setup,
@@ -1511,11 +1468,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		sharedirectory.Setup,
 		tablestorage.Setup,
 		tableentity.Setup,
-		hpccache.Setup,
-		hpccacheaccesspolicy.Setup,
-		hpccacheblobnfstarget.Setup,
-		hpccacheblobtarget.Setup,
-		hpccachenfstarget.Setup,
 		storagesync.Setup,
 		clusterstreamanalytics.Setup,
 		functionjavascriptuda.Setup,
@@ -1535,7 +1487,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		streaminputblob.Setup,
 		streaminputeventhub.Setup,
 		streaminputiothub.Setup,
-		firewallrulesynapse.Setup,
+		firewallrule.Setup,
 		integrationruntimeazuresynapse.Setup,
 		integrationruntimeselfhostedsynapse.Setup,
 		linkedservice.Setup,
@@ -1559,20 +1511,16 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appservicecertificatebinding.Setup,
 		appservicecustomhostnamebinding.Setup,
 		appservicemanagedcertificate.Setup,
-		appserviceplan.Setup,
-		functionapp.Setup,
 		functionappactiveslot.Setup,
 		functionappflexconsumption.Setup,
 		functionappfunction.Setup,
 		functionapphybridconnection.Setup,
-		functionappslot.Setup,
 		linuxfunctionapp.Setup,
 		linuxfunctionappslot.Setup,
 		linuxwebapp.Setup,
 		linuxwebappslot.Setup,
 		serviceplan.Setup,
 		sourcecontroltoken.Setup,
-		staticsite.Setup,
 		windowsfunctionapp.Setup,
 		windowsfunctionappslot.Setup,
 		windowswebapp.Setup,
@@ -1712,8 +1660,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		rediscachecache.SetupGated,
 		rediscacheaccesspolicy.SetupGated,
 		rediscacheaccesspolicyassignment.SetupGated,
-		redisenterprisecluster.SetupGated,
-		redisenterprisedatabase.SetupGated,
 		redisfirewallrule.SetupGated,
 		redislinkedserver.SetupGated,
 		endpoint.SetupGated,
@@ -1741,7 +1687,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		accountproject.SetupGated,
 		accountraiblocklist.SetupGated,
 		accountraipolicy.SetupGated,
-		aiservices.SetupGated,
 		deployment.SetupGated,
 		service.SetupGated,
 		availabilityset.SetupGated,
@@ -1875,13 +1820,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		backupinstancedatalakestorage.SetupGated,
 		backupinstancedisk.SetupGated,
 		backupinstancekubernetescluster.SetupGated,
-		backupinstancepostgresql.SetupGated,
 		backupinstancepostgresqlflexibleserver.SetupGated,
 		backuppolicyblobstorage.SetupGated,
 		backuppolicydatalakestorage.SetupGated,
 		backuppolicydisk.SetupGated,
 		backuppolicykubernetescluster.SetupGated,
-		backuppolicypostgresql.SetupGated,
 		backuppolicypostgresqlflexibleserver.SetupGated,
 		backupvault.SetupGated,
 		resourceguard.SetupGated,
@@ -1896,10 +1839,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserveractivedirectoryadministrator.SetupGated,
 		flexibleserverconfiguration.SetupGated,
 		flexibleserverfirewallrule.SetupGated,
-		activedirectoryadministrator.SetupGated,
-		configurationdbforpostgresql.SetupGated,
-		database.SetupGated,
-		firewallrule.SetupGated,
 		flexibleserverdbforpostgresql.SetupGated,
 		flexibleserveractivedirectoryadministratordbforpostgresql.SetupGated,
 		flexibleserverbackup.SetupGated,
@@ -1907,9 +1846,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverdatabase.SetupGated,
 		flexibleserverfirewallruledbforpostgresql.SetupGated,
 		flexibleservervirtualendpoint.SetupGated,
-		serverdbforpostgresql.SetupGated,
-		serverkey.SetupGated,
-		virtualnetworkrule.SetupGated,
 		virtualdesktopapplicationgroup.SetupGated,
 		virtualdesktophostpool.SetupGated,
 		virtualdesktophostpoolregistrationinfo.SetupGated,
@@ -2011,7 +1947,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterkusto.SetupGated,
 		clustermanagedprivateendpoint.SetupGated,
 		clusterprincipalassignment.SetupGated,
-		databasekusto.SetupGated,
+		database.SetupGated,
 		databaseprincipalassignment.SetupGated,
 		eventgriddataconnection.SetupGated,
 		eventhubdataconnection.SetupGated,
@@ -2049,7 +1985,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		managementgroup.SetupGated,
 		managementgroupsubscriptionassociation.SetupGated,
 		accountmaps.SetupGated,
-		creator.SetupGated,
 		marketplaceagreement.SetupGated,
 		accountnetapp.SetupGated,
 		pool.SetupGated,
@@ -2114,7 +2049,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfacebackendaddresspoolassociation.SetupGated,
 		networkinterfacenatruleassociation.SetupGated,
 		networkinterfacesecuritygroupassociation.SetupGated,
-		packetcapture.SetupGated,
 		pointtositevpngateway.SetupGated,
 		privatednsaaaarecord.SetupGated,
 		privatednsarecord.SetupGated,
@@ -2192,8 +2126,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		autonomousdatabasebackup.SetupGated,
 		autonomousdatabaseclonefrombackup.SetupGated,
 		autonomousdatabaseclonefromdatabase.SetupGated,
-		contactprofile.SetupGated,
-		spacecraft.SetupGated,
 		resourcepolicyremediation.SetupGated,
 		subscriptionpolicyremediation.SetupGated,
 		dashboard.SetupGated,
@@ -2227,7 +2159,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		iotsecuritysolution.SetupGated,
 		securitycenterassessment.SetupGated,
 		securitycenterassessmentpolicy.SetupGated,
-		securitycenterautoprovisioning.SetupGated,
 		securitycentercontact.SetupGated,
 		securitycenterservervulnerabilityassessmentvirtualmachine.SetupGated,
 		securitycentersetting.SetupGated,
@@ -2304,11 +2235,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		sharedirectory.SetupGated,
 		tablestorage.SetupGated,
 		tableentity.SetupGated,
-		hpccache.SetupGated,
-		hpccacheaccesspolicy.SetupGated,
-		hpccacheblobnfstarget.SetupGated,
-		hpccacheblobtarget.SetupGated,
-		hpccachenfstarget.SetupGated,
 		storagesync.SetupGated,
 		clusterstreamanalytics.SetupGated,
 		functionjavascriptuda.SetupGated,
@@ -2328,7 +2254,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		streaminputblob.SetupGated,
 		streaminputeventhub.SetupGated,
 		streaminputiothub.SetupGated,
-		firewallrulesynapse.SetupGated,
+		firewallrule.SetupGated,
 		integrationruntimeazuresynapse.SetupGated,
 		integrationruntimeselfhostedsynapse.SetupGated,
 		linkedservice.SetupGated,
@@ -2352,20 +2278,16 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		appservicecertificatebinding.SetupGated,
 		appservicecustomhostnamebinding.SetupGated,
 		appservicemanagedcertificate.SetupGated,
-		appserviceplan.SetupGated,
-		functionapp.SetupGated,
 		functionappactiveslot.SetupGated,
 		functionappflexconsumption.SetupGated,
 		functionappfunction.SetupGated,
 		functionapphybridconnection.SetupGated,
-		functionappslot.SetupGated,
 		linuxfunctionapp.SetupGated,
 		linuxfunctionappslot.SetupGated,
 		linuxwebapp.SetupGated,
 		linuxwebappslot.SetupGated,
 		serviceplan.SetupGated,
 		sourcecontroltoken.SetupGated,
-		staticsite.SetupGated,
 		windowsfunctionapp.SetupGated,
 		windowsfunctionappslot.SetupGated,
 		windowswebapp.SetupGated,
@@ -2504,8 +2426,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		rediscachecache.SetupWebhookWithManager,
 		rediscacheaccesspolicy.SetupWebhookWithManager,
 		rediscacheaccesspolicyassignment.SetupWebhookWithManager,
-		redisenterprisecluster.SetupWebhookWithManager,
-		redisenterprisedatabase.SetupWebhookWithManager,
 		redisfirewallrule.SetupWebhookWithManager,
 		redislinkedserver.SetupWebhookWithManager,
 		endpoint.SetupWebhookWithManager,
@@ -2533,7 +2453,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		accountproject.SetupWebhookWithManager,
 		accountraiblocklist.SetupWebhookWithManager,
 		accountraipolicy.SetupWebhookWithManager,
-		aiservices.SetupWebhookWithManager,
 		deployment.SetupWebhookWithManager,
 		service.SetupWebhookWithManager,
 		availabilityset.SetupWebhookWithManager,
@@ -2667,13 +2586,11 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		backupinstancedatalakestorage.SetupWebhookWithManager,
 		backupinstancedisk.SetupWebhookWithManager,
 		backupinstancekubernetescluster.SetupWebhookWithManager,
-		backupinstancepostgresql.SetupWebhookWithManager,
 		backupinstancepostgresqlflexibleserver.SetupWebhookWithManager,
 		backuppolicyblobstorage.SetupWebhookWithManager,
 		backuppolicydatalakestorage.SetupWebhookWithManager,
 		backuppolicydisk.SetupWebhookWithManager,
 		backuppolicykubernetescluster.SetupWebhookWithManager,
-		backuppolicypostgresql.SetupWebhookWithManager,
 		backuppolicypostgresqlflexibleserver.SetupWebhookWithManager,
 		backupvault.SetupWebhookWithManager,
 		resourceguard.SetupWebhookWithManager,
@@ -2688,10 +2605,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		flexibleserveractivedirectoryadministrator.SetupWebhookWithManager,
 		flexibleserverconfiguration.SetupWebhookWithManager,
 		flexibleserverfirewallrule.SetupWebhookWithManager,
-		activedirectoryadministrator.SetupWebhookWithManager,
-		configurationdbforpostgresql.SetupWebhookWithManager,
-		database.SetupWebhookWithManager,
-		firewallrule.SetupWebhookWithManager,
 		flexibleserverdbforpostgresql.SetupWebhookWithManager,
 		flexibleserveractivedirectoryadministratordbforpostgresql.SetupWebhookWithManager,
 		flexibleserverbackup.SetupWebhookWithManager,
@@ -2699,9 +2612,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		flexibleserverdatabase.SetupWebhookWithManager,
 		flexibleserverfirewallruledbforpostgresql.SetupWebhookWithManager,
 		flexibleservervirtualendpoint.SetupWebhookWithManager,
-		serverdbforpostgresql.SetupWebhookWithManager,
-		serverkey.SetupWebhookWithManager,
-		virtualnetworkrule.SetupWebhookWithManager,
 		virtualdesktopapplicationgroup.SetupWebhookWithManager,
 		virtualdesktophostpool.SetupWebhookWithManager,
 		virtualdesktophostpoolregistrationinfo.SetupWebhookWithManager,
@@ -2803,7 +2713,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		clusterkusto.SetupWebhookWithManager,
 		clustermanagedprivateendpoint.SetupWebhookWithManager,
 		clusterprincipalassignment.SetupWebhookWithManager,
-		databasekusto.SetupWebhookWithManager,
+		database.SetupWebhookWithManager,
 		databaseprincipalassignment.SetupWebhookWithManager,
 		eventgriddataconnection.SetupWebhookWithManager,
 		eventhubdataconnection.SetupWebhookWithManager,
@@ -2841,7 +2751,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		managementgroup.SetupWebhookWithManager,
 		managementgroupsubscriptionassociation.SetupWebhookWithManager,
 		accountmaps.SetupWebhookWithManager,
-		creator.SetupWebhookWithManager,
 		marketplaceagreement.SetupWebhookWithManager,
 		accountnetapp.SetupWebhookWithManager,
 		pool.SetupWebhookWithManager,
@@ -2906,7 +2815,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		networkinterfacebackendaddresspoolassociation.SetupWebhookWithManager,
 		networkinterfacenatruleassociation.SetupWebhookWithManager,
 		networkinterfacesecuritygroupassociation.SetupWebhookWithManager,
-		packetcapture.SetupWebhookWithManager,
 		pointtositevpngateway.SetupWebhookWithManager,
 		privatednsaaaarecord.SetupWebhookWithManager,
 		privatednsarecord.SetupWebhookWithManager,
@@ -2984,8 +2892,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		autonomousdatabasebackup.SetupWebhookWithManager,
 		autonomousdatabaseclonefrombackup.SetupWebhookWithManager,
 		autonomousdatabaseclonefromdatabase.SetupWebhookWithManager,
-		contactprofile.SetupWebhookWithManager,
-		spacecraft.SetupWebhookWithManager,
 		resourcepolicyremediation.SetupWebhookWithManager,
 		subscriptionpolicyremediation.SetupWebhookWithManager,
 		dashboard.SetupWebhookWithManager,
@@ -3019,7 +2925,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		iotsecuritysolution.SetupWebhookWithManager,
 		securitycenterassessment.SetupWebhookWithManager,
 		securitycenterassessmentpolicy.SetupWebhookWithManager,
-		securitycenterautoprovisioning.SetupWebhookWithManager,
 		securitycentercontact.SetupWebhookWithManager,
 		securitycenterservervulnerabilityassessmentvirtualmachine.SetupWebhookWithManager,
 		securitycentersetting.SetupWebhookWithManager,
@@ -3096,11 +3001,6 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		sharedirectory.SetupWebhookWithManager,
 		tablestorage.SetupWebhookWithManager,
 		tableentity.SetupWebhookWithManager,
-		hpccache.SetupWebhookWithManager,
-		hpccacheaccesspolicy.SetupWebhookWithManager,
-		hpccacheblobnfstarget.SetupWebhookWithManager,
-		hpccacheblobtarget.SetupWebhookWithManager,
-		hpccachenfstarget.SetupWebhookWithManager,
 		storagesync.SetupWebhookWithManager,
 		clusterstreamanalytics.SetupWebhookWithManager,
 		functionjavascriptuda.SetupWebhookWithManager,
@@ -3120,7 +3020,7 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		streaminputblob.SetupWebhookWithManager,
 		streaminputeventhub.SetupWebhookWithManager,
 		streaminputiothub.SetupWebhookWithManager,
-		firewallrulesynapse.SetupWebhookWithManager,
+		firewallrule.SetupWebhookWithManager,
 		integrationruntimeazuresynapse.SetupWebhookWithManager,
 		integrationruntimeselfhostedsynapse.SetupWebhookWithManager,
 		linkedservice.SetupWebhookWithManager,
@@ -3144,20 +3044,16 @@ func SetupWebhookWithManager_monolith(mgr ctrl.Manager) error {
 		appservicecertificatebinding.SetupWebhookWithManager,
 		appservicecustomhostnamebinding.SetupWebhookWithManager,
 		appservicemanagedcertificate.SetupWebhookWithManager,
-		appserviceplan.SetupWebhookWithManager,
-		functionapp.SetupWebhookWithManager,
 		functionappactiveslot.SetupWebhookWithManager,
 		functionappflexconsumption.SetupWebhookWithManager,
 		functionappfunction.SetupWebhookWithManager,
 		functionapphybridconnection.SetupWebhookWithManager,
-		functionappslot.SetupWebhookWithManager,
 		linuxfunctionapp.SetupWebhookWithManager,
 		linuxfunctionappslot.SetupWebhookWithManager,
 		linuxwebapp.SetupWebhookWithManager,
 		linuxwebappslot.SetupWebhookWithManager,
 		serviceplan.SetupWebhookWithManager,
 		sourcecontroltoken.SetupWebhookWithManager,
-		staticsite.SetupWebhookWithManager,
 		windowsfunctionapp.SetupWebhookWithManager,
 		windowsfunctionappslot.SetupWebhookWithManager,
 		windowswebapp.SetupWebhookWithManager,

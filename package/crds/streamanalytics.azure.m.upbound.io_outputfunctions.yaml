@@ -83,7 +83,8 @@ spec:
                     description: The name of the Function App.
                     type: string
                   functionAppRef:
-                    description: Reference to a FunctionApp in web to populate functionApp.
+                    description: Reference to a LinuxFunctionApp in web to populate
+                      functionApp.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +121,8 @@ spec:
                     - name
                     type: object
                   functionAppSelector:
-                    description: Selector for a FunctionApp in web to populate functionApp.
+                    description: Selector for a LinuxFunctionApp in web to populate
+                      functionApp.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -376,7 +378,8 @@ spec:
                     description: The name of the Function App.
                     type: string
                   functionAppRef:
-                    description: Reference to a FunctionApp in web to populate functionApp.
+                    description: Reference to a LinuxFunctionApp in web to populate
+                      functionApp.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -413,7 +416,8 @@ spec:
                     - name
                     type: object
                   functionAppSelector:
-                    description: Selector for a FunctionApp in web to populate functionApp.
+                    description: Selector for a LinuxFunctionApp in web to populate
+                      functionApp.
                     properties:
                       matchControllerRef:
                         description: |-
