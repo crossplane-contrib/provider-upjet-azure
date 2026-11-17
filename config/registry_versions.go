@@ -25,7 +25,8 @@ var v5BreakingAPIs string
 
 // v5APIConversions holds, per Terraform resource in v5BreakingAPIs, how the
 // fields of the previous and the new API version relate. It is derived from
-// the CRD schemas of the two versions and is as immutable as the list.
+// the CRD schemas of the two versions by hack/api-conversions/generate.py
+// and is as immutable as the list.
 //
 //go:embed v5-api-conversions.json
 var v5APIConversions []byte

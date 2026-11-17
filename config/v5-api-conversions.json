@@ -127,14 +127,26 @@
   "currentOnly": []
  },
  "azurerm_cdn_frontdoor_rule": {
-  "renames": [],
+  "renames": [
+   [
+    "spec.forProvider.behaviorOnMatch",
+    "spec.forProvider.behaviourOnMatch"
+   ],
+   [
+    "spec.initProvider.behaviorOnMatch",
+    "spec.initProvider.behaviourOnMatch"
+   ],
+   [
+    "status.atProvider.behaviorOnMatch",
+    "status.atProvider.behaviourOnMatch"
+   ]
+  ],
   "previousOnly": [
    "spec.forProvider.actions.requestHeaderAction",
    "spec.forProvider.actions.responseHeaderAction",
    "spec.forProvider.actions.routeConfigurationOverrideAction",
    "spec.forProvider.actions.urlRedirectAction",
    "spec.forProvider.actions.urlRewriteAction",
-   "spec.forProvider.behaviorOnMatch",
    "spec.forProvider.conditions.clientPortCondition",
    "spec.forProvider.conditions.cookiesCondition",
    "spec.forProvider.conditions.hostNameCondition",
@@ -159,7 +171,6 @@
    "spec.initProvider.actions.routeConfigurationOverrideAction",
    "spec.initProvider.actions.urlRedirectAction",
    "spec.initProvider.actions.urlRewriteAction",
-   "spec.initProvider.behaviorOnMatch",
    "spec.initProvider.conditions.clientPortCondition",
    "spec.initProvider.conditions.cookiesCondition",
    "spec.initProvider.conditions.hostNameCondition",
@@ -184,7 +195,6 @@
    "status.atProvider.actions.routeConfigurationOverrideAction",
    "status.atProvider.actions.urlRedirectAction",
    "status.atProvider.actions.urlRewriteAction",
-   "status.atProvider.behaviorOnMatch",
    "status.atProvider.conditions.clientPortCondition",
    "status.atProvider.conditions.cookiesCondition",
    "status.atProvider.conditions.hostNameCondition",
@@ -211,7 +221,6 @@
    "spec.forProvider.actions.routeConfigurationOverride",
    "spec.forProvider.actions.urlRedirect",
    "spec.forProvider.actions.urlRewrite",
-   "spec.forProvider.behaviourOnMatch",
    "spec.forProvider.conditions.clientPort",
    "spec.forProvider.conditions.deviceType",
    "spec.forProvider.conditions.hostName",
@@ -236,7 +245,6 @@
    "spec.initProvider.actions.routeConfigurationOverride",
    "spec.initProvider.actions.urlRedirect",
    "spec.initProvider.actions.urlRewrite",
-   "spec.initProvider.behaviourOnMatch",
    "spec.initProvider.conditions.clientPort",
    "spec.initProvider.conditions.deviceType",
    "spec.initProvider.conditions.hostName",
@@ -261,7 +269,6 @@
    "status.atProvider.actions.routeConfigurationOverride",
    "status.atProvider.actions.urlRedirect",
    "status.atProvider.actions.urlRewrite",
-   "status.atProvider.behaviourOnMatch",
    "status.atProvider.conditions.clientPort",
    "status.atProvider.conditions.deviceType",
    "status.atProvider.conditions.hostName",
