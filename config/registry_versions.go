@@ -93,9 +93,8 @@ func bumpBreakingAPIVersions(pc *ujconfig.Provider) {
 // version has is kept in an annotation while the object is served at the
 // other version, so converting an object there and back loses nothing.
 func (c apiConversion) conversions(prev, cur string) []conversion.Conversion {
-	cs := []conversion.Conversion{
-		conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes()),
-	}
+	cs := make([]conversion.Conversion, 0, 1+2*(len(c.Renames)+len(c.PreviousOnly)+len(c.CurrentOnly)))
+	cs = append(cs, conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes()))
 	for _, r := range c.Renames {
 		cs = append(cs,
 			conversion.NewFieldRenameConversion(prev, r[0], cur, r[1]),
