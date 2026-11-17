@@ -1,0 +1,1718 @@
+{
+ "azurerm_api_management": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.protocols.enableHttp2",
+   "spec.forProvider.security.enableBackendSsl30",
+   "spec.forProvider.security.enableBackendTls10",
+   "spec.forProvider.security.enableBackendTls11",
+   "spec.forProvider.security.enableFrontendSsl30",
+   "spec.forProvider.security.enableFrontendTls10",
+   "spec.forProvider.security.enableFrontendTls11",
+   "spec.initProvider.protocols.enableHttp2",
+   "spec.initProvider.security.enableBackendSsl30",
+   "spec.initProvider.security.enableBackendTls10",
+   "spec.initProvider.security.enableBackendTls11",
+   "spec.initProvider.security.enableFrontendSsl30",
+   "spec.initProvider.security.enableFrontendTls10",
+   "spec.initProvider.security.enableFrontendTls11",
+   "status.atProvider.hostnameConfiguration.developerPortal[*].keyVaultId",
+   "status.atProvider.hostnameConfiguration.management[*].keyVaultId",
+   "status.atProvider.hostnameConfiguration.portal[*].keyVaultId",
+   "status.atProvider.hostnameConfiguration.proxy[*].keyVaultId",
+   "status.atProvider.hostnameConfiguration.scm[*].keyVaultId",
+   "status.atProvider.protocols.enableHttp2",
+   "status.atProvider.security.enableBackendSsl30",
+   "status.atProvider.security.enableBackendTls10",
+   "status.atProvider.security.enableBackendTls11",
+   "status.atProvider.security.enableFrontendSsl30",
+   "status.atProvider.security.enableFrontendTls10",
+   "status.atProvider.security.enableFrontendTls11"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_api_management_custom_domain": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.developerPortal[*].keyVaultId",
+   "spec.forProvider.gateway[*].keyVaultId",
+   "spec.forProvider.management[*].keyVaultId",
+   "spec.forProvider.portal[*].keyVaultId",
+   "spec.forProvider.scm[*].keyVaultId",
+   "spec.initProvider.developerPortal[*].keyVaultId",
+   "spec.initProvider.gateway[*].keyVaultId",
+   "spec.initProvider.management[*].keyVaultId",
+   "spec.initProvider.portal[*].keyVaultId",
+   "spec.initProvider.scm[*].keyVaultId",
+   "status.atProvider.developerPortal[*].keyVaultId",
+   "status.atProvider.gateway[*].keyVaultId",
+   "status.atProvider.management[*].keyVaultId",
+   "status.atProvider.portal[*].keyVaultId",
+   "status.atProvider.scm[*].keyVaultId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_application_gateway": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.authenticationCertificate",
+   "spec.forProvider.backendHttpSettings[*].authenticationCertificate",
+   "spec.forProvider.enableHttp2",
+   "spec.forProvider.sslProfile[*].verifyClientCertIssuerDn",
+   "spec.initProvider.authenticationCertificate",
+   "spec.initProvider.backendHttpSettings[*].authenticationCertificate",
+   "spec.initProvider.enableHttp2",
+   "spec.initProvider.sslProfile[*].verifyClientCertIssuerDn",
+   "status.atProvider.authenticationCertificate",
+   "status.atProvider.backendHttpSettings[*].authenticationCertificate",
+   "status.atProvider.enableHttp2",
+   "status.atProvider.sslProfile[*].verifyClientCertIssuerDn"
+  ],
+  "currentOnly": [
+   "spec.forProvider.sslProfile[*].clientAuthenticationMode",
+   "spec.initProvider.sslProfile[*].clientAuthenticationMode",
+   "status.atProvider.sslProfile[*].clientAuthenticationMode"
+  ]
+ },
+ "azurerm_application_insights": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.dailyDataCapNotificationsDisabled",
+   "spec.forProvider.disableIpMasking",
+   "spec.forProvider.localAuthenticationDisabled",
+   "spec.initProvider.dailyDataCapNotificationsDisabled",
+   "spec.initProvider.disableIpMasking",
+   "spec.initProvider.localAuthenticationDisabled",
+   "status.atProvider.dailyDataCapNotificationsDisabled",
+   "status.atProvider.disableIpMasking",
+   "status.atProvider.localAuthenticationDisabled"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_automation_account": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.encryption[*].keySource",
+   "spec.initProvider.encryption[*].keySource",
+   "status.atProvider.encryption[*].keySource"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_bot_channel_ms_teams": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableCalling",
+   "spec.initProvider.enableCalling",
+   "status.atProvider.enableCalling"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_bot_channels_registration": {
+  "renames": [],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_bot_web_app": {
+  "renames": [],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_cdn_frontdoor_custom_domain": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.tls.minimumTlsVersion",
+   "spec.initProvider.tls.minimumTlsVersion",
+   "status.atProvider.tls.minimumTlsVersion"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_cdn_frontdoor_rule": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.actions.requestHeaderAction",
+   "spec.forProvider.actions.responseHeaderAction",
+   "spec.forProvider.actions.routeConfigurationOverrideAction",
+   "spec.forProvider.actions.urlRedirectAction",
+   "spec.forProvider.actions.urlRewriteAction",
+   "spec.forProvider.behaviorOnMatch",
+   "spec.forProvider.conditions.clientPortCondition",
+   "spec.forProvider.conditions.cookiesCondition",
+   "spec.forProvider.conditions.hostNameCondition",
+   "spec.forProvider.conditions.httpVersionCondition",
+   "spec.forProvider.conditions.isDeviceCondition",
+   "spec.forProvider.conditions.postArgsCondition",
+   "spec.forProvider.conditions.queryStringCondition",
+   "spec.forProvider.conditions.remoteAddressCondition",
+   "spec.forProvider.conditions.requestBodyCondition",
+   "spec.forProvider.conditions.requestHeaderCondition",
+   "spec.forProvider.conditions.requestMethodCondition",
+   "spec.forProvider.conditions.requestSchemeCondition",
+   "spec.forProvider.conditions.requestUriCondition",
+   "spec.forProvider.conditions.serverPortCondition",
+   "spec.forProvider.conditions.socketAddressCondition",
+   "spec.forProvider.conditions.sslProtocolCondition",
+   "spec.forProvider.conditions.urlFileExtensionCondition",
+   "spec.forProvider.conditions.urlFilenameCondition",
+   "spec.forProvider.conditions.urlPathCondition",
+   "spec.initProvider.actions.requestHeaderAction",
+   "spec.initProvider.actions.responseHeaderAction",
+   "spec.initProvider.actions.routeConfigurationOverrideAction",
+   "spec.initProvider.actions.urlRedirectAction",
+   "spec.initProvider.actions.urlRewriteAction",
+   "spec.initProvider.behaviorOnMatch",
+   "spec.initProvider.conditions.clientPortCondition",
+   "spec.initProvider.conditions.cookiesCondition",
+   "spec.initProvider.conditions.hostNameCondition",
+   "spec.initProvider.conditions.httpVersionCondition",
+   "spec.initProvider.conditions.isDeviceCondition",
+   "spec.initProvider.conditions.postArgsCondition",
+   "spec.initProvider.conditions.queryStringCondition",
+   "spec.initProvider.conditions.remoteAddressCondition",
+   "spec.initProvider.conditions.requestBodyCondition",
+   "spec.initProvider.conditions.requestHeaderCondition",
+   "spec.initProvider.conditions.requestMethodCondition",
+   "spec.initProvider.conditions.requestSchemeCondition",
+   "spec.initProvider.conditions.requestUriCondition",
+   "spec.initProvider.conditions.serverPortCondition",
+   "spec.initProvider.conditions.socketAddressCondition",
+   "spec.initProvider.conditions.sslProtocolCondition",
+   "spec.initProvider.conditions.urlFileExtensionCondition",
+   "spec.initProvider.conditions.urlFilenameCondition",
+   "spec.initProvider.conditions.urlPathCondition",
+   "status.atProvider.actions.requestHeaderAction",
+   "status.atProvider.actions.responseHeaderAction",
+   "status.atProvider.actions.routeConfigurationOverrideAction",
+   "status.atProvider.actions.urlRedirectAction",
+   "status.atProvider.actions.urlRewriteAction",
+   "status.atProvider.behaviorOnMatch",
+   "status.atProvider.conditions.clientPortCondition",
+   "status.atProvider.conditions.cookiesCondition",
+   "status.atProvider.conditions.hostNameCondition",
+   "status.atProvider.conditions.httpVersionCondition",
+   "status.atProvider.conditions.isDeviceCondition",
+   "status.atProvider.conditions.postArgsCondition",
+   "status.atProvider.conditions.queryStringCondition",
+   "status.atProvider.conditions.remoteAddressCondition",
+   "status.atProvider.conditions.requestBodyCondition",
+   "status.atProvider.conditions.requestHeaderCondition",
+   "status.atProvider.conditions.requestMethodCondition",
+   "status.atProvider.conditions.requestSchemeCondition",
+   "status.atProvider.conditions.requestUriCondition",
+   "status.atProvider.conditions.serverPortCondition",
+   "status.atProvider.conditions.socketAddressCondition",
+   "status.atProvider.conditions.sslProtocolCondition",
+   "status.atProvider.conditions.urlFileExtensionCondition",
+   "status.atProvider.conditions.urlFilenameCondition",
+   "status.atProvider.conditions.urlPathCondition"
+  ],
+  "currentOnly": [
+   "spec.forProvider.actions.modifyRequestHeader",
+   "spec.forProvider.actions.modifyResponseHeader",
+   "spec.forProvider.actions.routeConfigurationOverride",
+   "spec.forProvider.actions.urlRedirect",
+   "spec.forProvider.actions.urlRewrite",
+   "spec.forProvider.behaviourOnMatch",
+   "spec.forProvider.conditions.clientPort",
+   "spec.forProvider.conditions.deviceType",
+   "spec.forProvider.conditions.hostName",
+   "spec.forProvider.conditions.httpVersion",
+   "spec.forProvider.conditions.postArgument",
+   "spec.forProvider.conditions.queryString",
+   "spec.forProvider.conditions.remoteAddress",
+   "spec.forProvider.conditions.requestBody",
+   "spec.forProvider.conditions.requestCookies",
+   "spec.forProvider.conditions.requestFileExtension",
+   "spec.forProvider.conditions.requestFilename",
+   "spec.forProvider.conditions.requestHeader",
+   "spec.forProvider.conditions.requestMethod",
+   "spec.forProvider.conditions.requestPath",
+   "spec.forProvider.conditions.requestScheme",
+   "spec.forProvider.conditions.requestUrl",
+   "spec.forProvider.conditions.serverPort",
+   "spec.forProvider.conditions.socketAddress",
+   "spec.forProvider.conditions.sslProtocol",
+   "spec.initProvider.actions.modifyRequestHeader",
+   "spec.initProvider.actions.modifyResponseHeader",
+   "spec.initProvider.actions.routeConfigurationOverride",
+   "spec.initProvider.actions.urlRedirect",
+   "spec.initProvider.actions.urlRewrite",
+   "spec.initProvider.behaviourOnMatch",
+   "spec.initProvider.conditions.clientPort",
+   "spec.initProvider.conditions.deviceType",
+   "spec.initProvider.conditions.hostName",
+   "spec.initProvider.conditions.httpVersion",
+   "spec.initProvider.conditions.postArgument",
+   "spec.initProvider.conditions.queryString",
+   "spec.initProvider.conditions.remoteAddress",
+   "spec.initProvider.conditions.requestBody",
+   "spec.initProvider.conditions.requestCookies",
+   "spec.initProvider.conditions.requestFileExtension",
+   "spec.initProvider.conditions.requestFilename",
+   "spec.initProvider.conditions.requestHeader",
+   "spec.initProvider.conditions.requestMethod",
+   "spec.initProvider.conditions.requestPath",
+   "spec.initProvider.conditions.requestScheme",
+   "spec.initProvider.conditions.requestUrl",
+   "spec.initProvider.conditions.serverPort",
+   "spec.initProvider.conditions.socketAddress",
+   "spec.initProvider.conditions.sslProtocol",
+   "status.atProvider.actions.modifyRequestHeader",
+   "status.atProvider.actions.modifyResponseHeader",
+   "status.atProvider.actions.routeConfigurationOverride",
+   "status.atProvider.actions.urlRedirect",
+   "status.atProvider.actions.urlRewrite",
+   "status.atProvider.behaviourOnMatch",
+   "status.atProvider.conditions.clientPort",
+   "status.atProvider.conditions.deviceType",
+   "status.atProvider.conditions.hostName",
+   "status.atProvider.conditions.httpVersion",
+   "status.atProvider.conditions.postArgument",
+   "status.atProvider.conditions.queryString",
+   "status.atProvider.conditions.remoteAddress",
+   "status.atProvider.conditions.requestBody",
+   "status.atProvider.conditions.requestCookies",
+   "status.atProvider.conditions.requestFileExtension",
+   "status.atProvider.conditions.requestFilename",
+   "status.atProvider.conditions.requestHeader",
+   "status.atProvider.conditions.requestMethod",
+   "status.atProvider.conditions.requestPath",
+   "status.atProvider.conditions.requestScheme",
+   "status.atProvider.conditions.requestUrl",
+   "status.atProvider.conditions.serverPort",
+   "status.atProvider.conditions.socketAddress",
+   "status.atProvider.conditions.sslProtocol"
+  ]
+ },
+ "azurerm_communication_service": {
+  "renames": [],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_container_app": {
+  "renames": [],
+  "previousOnly": [
+   "status.atProvider.template.container[*].livenessProbe[*].terminationGracePeriodSeconds",
+   "status.atProvider.template.container[*].startupProbe[*].terminationGracePeriodSeconds"
+  ],
+  "currentOnly": [
+   "spec.forProvider.ingress.sessionAffinityEnabled",
+   "spec.initProvider.ingress.sessionAffinityEnabled",
+   "status.atProvider.ingress.sessionAffinityEnabled"
+  ]
+ },
+ "azurerm_container_app_job": {
+  "renames": [],
+  "previousOnly": [
+   "status.atProvider.template.container[*].livenessProbe[*].terminationGracePeriodSeconds",
+   "status.atProvider.template.container[*].startupProbe[*].terminationGracePeriodSeconds"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_container_registry": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.georeplications[*].regionalEndpointEnabled",
+   "spec.forProvider.trustPolicyEnabled",
+   "spec.initProvider.georeplications[*].regionalEndpointEnabled",
+   "spec.initProvider.trustPolicyEnabled",
+   "status.atProvider.georeplications[*].regionalEndpointEnabled",
+   "status.atProvider.trustPolicyEnabled"
+  ],
+  "currentOnly": [
+   "spec.forProvider.georeplications[*].globalEndpointRoutingEnabled",
+   "spec.initProvider.georeplications[*].globalEndpointRoutingEnabled",
+   "status.atProvider.georeplications[*].globalEndpointRoutingEnabled"
+  ]
+ },
+ "azurerm_cosmosdb_account": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.localAuthenticationDisabled",
+   "spec.forProvider.managedHsmKeyId",
+   "spec.initProvider.localAuthenticationDisabled",
+   "spec.initProvider.managedHsmKeyId",
+   "status.atProvider.localAuthenticationDisabled",
+   "status.atProvider.managedHsmKeyId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_data_factory_linked_service_azure_blob_storage": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.keyVaultSasToken",
+   "spec.initProvider.keyVaultSasToken",
+   "status.atProvider.keyVaultSasToken"
+  ],
+  "currentOnly": [
+   "spec.forProvider.sasTokenLinkedKeyVaultKey.linkedServiceNameRef",
+   "spec.forProvider.sasTokenLinkedKeyVaultKey.linkedServiceNameSelector",
+   "spec.initProvider.sasTokenLinkedKeyVaultKey.linkedServiceNameRef",
+   "spec.initProvider.sasTokenLinkedKeyVaultKey.linkedServiceNameSelector"
+  ]
+ },
+ "azurerm_data_factory_linked_service_azure_databricks": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.msiWorkSpaceResourceId",
+   "spec.forProvider.msiWorkSpaceResourceIdRef",
+   "spec.forProvider.msiWorkSpaceResourceIdSelector",
+   "spec.initProvider.msiWorkSpaceResourceId",
+   "spec.initProvider.msiWorkSpaceResourceIdRef",
+   "spec.initProvider.msiWorkSpaceResourceIdSelector",
+   "status.atProvider.msiWorkSpaceResourceId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_data_factory_pipeline": {
+  "renames": [
+   [
+    "spec.forProvider.moniterMetricsAfterDuration",
+    "spec.forProvider.monitorMetricsAfterDuration"
+   ],
+   [
+    "spec.initProvider.moniterMetricsAfterDuration",
+    "spec.initProvider.monitorMetricsAfterDuration"
+   ],
+   [
+    "status.atProvider.moniterMetricsAfterDuration",
+    "status.atProvider.monitorMetricsAfterDuration"
+   ]
+  ],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_disk_encryption_set": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.managedHsmKeyId",
+   "spec.initProvider.managedHsmKeyId",
+   "status.atProvider.managedHsmKeyId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_eventgrid_event_subscription": {
+  "renames": [
+   [
+    "spec.forProvider.eventhubEndpointId",
+    "spec.forProvider.eventhubId"
+   ],
+   [
+    "spec.forProvider.hybridConnectionEndpointId",
+    "spec.forProvider.hybridConnectionId"
+   ],
+   [
+    "spec.forProvider.serviceBusQueueEndpointId",
+    "spec.forProvider.serviceBusQueueId"
+   ],
+   [
+    "spec.forProvider.serviceBusTopicEndpointId",
+    "spec.forProvider.serviceBusTopicId"
+   ],
+   [
+    "spec.initProvider.eventhubEndpointId",
+    "spec.initProvider.eventhubId"
+   ],
+   [
+    "spec.initProvider.hybridConnectionEndpointId",
+    "spec.initProvider.hybridConnectionId"
+   ],
+   [
+    "spec.initProvider.serviceBusQueueEndpointId",
+    "spec.initProvider.serviceBusQueueId"
+   ],
+   [
+    "spec.initProvider.serviceBusTopicEndpointId",
+    "spec.initProvider.serviceBusTopicId"
+   ],
+   [
+    "status.atProvider.eventhubEndpointId",
+    "status.atProvider.eventhubId"
+   ],
+   [
+    "status.atProvider.hybridConnectionEndpointId",
+    "status.atProvider.hybridConnectionId"
+   ],
+   [
+    "status.atProvider.serviceBusQueueEndpointId",
+    "status.atProvider.serviceBusQueueId"
+   ],
+   [
+    "status.atProvider.serviceBusTopicEndpointId",
+    "status.atProvider.serviceBusTopicId"
+   ]
+  ],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_eventgrid_system_topic": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.sourceArmResourceId",
+   "spec.forProvider.sourceArmResourceIdRef",
+   "spec.forProvider.sourceArmResourceIdSelector",
+   "spec.initProvider.sourceArmResourceId",
+   "spec.initProvider.sourceArmResourceIdRef",
+   "spec.initProvider.sourceArmResourceIdSelector",
+   "status.atProvider.metricArmResourceId",
+   "status.atProvider.sourceArmResourceId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_eventgrid_system_topic_event_subscription": {
+  "renames": [
+   [
+    "spec.forProvider.eventhubEndpointId",
+    "spec.forProvider.eventhubId"
+   ],
+   [
+    "spec.forProvider.hybridConnectionEndpointId",
+    "spec.forProvider.hybridConnectionId"
+   ],
+   [
+    "spec.forProvider.serviceBusQueueEndpointId",
+    "spec.forProvider.serviceBusQueueId"
+   ],
+   [
+    "spec.forProvider.serviceBusTopicEndpointId",
+    "spec.forProvider.serviceBusTopicId"
+   ],
+   [
+    "spec.initProvider.eventhubEndpointId",
+    "spec.initProvider.eventhubId"
+   ],
+   [
+    "spec.initProvider.hybridConnectionEndpointId",
+    "spec.initProvider.hybridConnectionId"
+   ],
+   [
+    "spec.initProvider.serviceBusQueueEndpointId",
+    "spec.initProvider.serviceBusQueueId"
+   ],
+   [
+    "spec.initProvider.serviceBusTopicEndpointId",
+    "spec.initProvider.serviceBusTopicId"
+   ],
+   [
+    "status.atProvider.eventhubEndpointId",
+    "status.atProvider.eventhubId"
+   ],
+   [
+    "status.atProvider.hybridConnectionEndpointId",
+    "status.atProvider.hybridConnectionId"
+   ],
+   [
+    "status.atProvider.serviceBusQueueEndpointId",
+    "status.atProvider.serviceBusQueueId"
+   ],
+   [
+    "status.atProvider.serviceBusTopicEndpointId",
+    "status.atProvider.serviceBusTopicId"
+   ]
+  ],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_eventhub": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.namespaceName",
+   "spec.forProvider.namespaceNameRef",
+   "spec.forProvider.namespaceNameSelector",
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.initProvider.namespaceId",
+   "spec.initProvider.namespaceIdRef",
+   "spec.initProvider.namespaceIdSelector",
+   "status.atProvider.namespaceName",
+   "status.atProvider.resourceGroupName"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_express_route_connection": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableInternetSecurity",
+   "spec.forProvider.privateLinkFastPathEnabled",
+   "spec.initProvider.enableInternetSecurity",
+   "spec.initProvider.privateLinkFastPathEnabled",
+   "status.atProvider.enableInternetSecurity",
+   "status.atProvider.privateLinkFastPathEnabled"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_federated_identity_credential": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.parentId",
+   "spec.forProvider.parentIdRef",
+   "spec.forProvider.parentIdSelector",
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.initProvider.resourceGroupName",
+   "spec.initProvider.resourceGroupNameRef",
+   "spec.initProvider.resourceGroupNameSelector",
+   "spec.initProvider.userAssignedIdentityId",
+   "spec.initProvider.userAssignedIdentityIdRef",
+   "spec.initProvider.userAssignedIdentityIdSelector",
+   "status.atProvider.parentId",
+   "status.atProvider.resourceGroupName"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_hdinsight_hadoop_cluster": {
+  "renames": [
+   [
+    "spec.forProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.forProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "spec.initProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.initProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "status.atProvider.storageAccountGen2.managedIdentityResourceId",
+    "status.atProvider.storageAccountGen2.userAssignedIdentityId"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.storageAccount[*].storageContainerId",
+   "spec.forProvider.storageAccount[*].storageContainerIdRef",
+   "spec.forProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.forProvider.storageAccount[*].storageResourceId",
+   "spec.forProvider.storageAccountGen2.storageResourceId",
+   "spec.initProvider.storageAccount[*].storageContainerId",
+   "spec.initProvider.storageAccount[*].storageContainerIdRef",
+   "spec.initProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.initProvider.storageAccount[*].storageResourceId",
+   "spec.initProvider.storageAccountGen2.storageResourceId",
+   "status.atProvider.storageAccount[*].storageContainerId",
+   "status.atProvider.storageAccount[*].storageResourceId",
+   "status.atProvider.storageAccountGen2.storageResourceId"
+  ],
+  "currentOnly": [
+   "spec.forProvider.storageAccount[*].storageAccountId",
+   "spec.forProvider.storageAccount[*].storageContainerUrl",
+   "spec.forProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.forProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.forProvider.storageAccountGen2.storageAccountId",
+   "spec.initProvider.storageAccount[*].storageAccountId",
+   "spec.initProvider.storageAccount[*].storageContainerUrl",
+   "spec.initProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.initProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.initProvider.storageAccountGen2.storageAccountId",
+   "status.atProvider.storageAccount[*].storageAccountId",
+   "status.atProvider.storageAccount[*].storageContainerUrl",
+   "status.atProvider.storageAccountGen2.storageAccountId"
+  ]
+ },
+ "azurerm_hdinsight_hbase_cluster": {
+  "renames": [
+   [
+    "spec.forProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.forProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "spec.initProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.initProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "status.atProvider.storageAccountGen2.managedIdentityResourceId",
+    "status.atProvider.storageAccountGen2.userAssignedIdentityId"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.storageAccount[*].storageContainerId",
+   "spec.forProvider.storageAccount[*].storageContainerIdRef",
+   "spec.forProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.forProvider.storageAccount[*].storageResourceId",
+   "spec.forProvider.storageAccountGen2.storageResourceId",
+   "spec.initProvider.storageAccount[*].storageContainerId",
+   "spec.initProvider.storageAccount[*].storageContainerIdRef",
+   "spec.initProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.initProvider.storageAccount[*].storageResourceId",
+   "spec.initProvider.storageAccountGen2.storageResourceId",
+   "status.atProvider.storageAccount[*].storageContainerId",
+   "status.atProvider.storageAccount[*].storageResourceId",
+   "status.atProvider.storageAccountGen2.storageResourceId"
+  ],
+  "currentOnly": [
+   "spec.forProvider.storageAccount[*].storageAccountId",
+   "spec.forProvider.storageAccount[*].storageContainerUrl",
+   "spec.forProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.forProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.forProvider.storageAccountGen2.storageAccountId",
+   "spec.initProvider.storageAccount[*].storageAccountId",
+   "spec.initProvider.storageAccount[*].storageContainerUrl",
+   "spec.initProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.initProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.initProvider.storageAccountGen2.storageAccountId",
+   "status.atProvider.storageAccount[*].storageAccountId",
+   "status.atProvider.storageAccount[*].storageContainerUrl",
+   "status.atProvider.storageAccountGen2.storageAccountId"
+  ]
+ },
+ "azurerm_hdinsight_interactive_query_cluster": {
+  "renames": [
+   [
+    "spec.forProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.forProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "spec.initProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.initProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "status.atProvider.storageAccountGen2.managedIdentityResourceId",
+    "status.atProvider.storageAccountGen2.userAssignedIdentityId"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.storageAccount[*].storageContainerId",
+   "spec.forProvider.storageAccount[*].storageContainerIdRef",
+   "spec.forProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.forProvider.storageAccount[*].storageResourceId",
+   "spec.forProvider.storageAccountGen2.storageResourceId",
+   "spec.initProvider.storageAccount[*].storageContainerId",
+   "spec.initProvider.storageAccount[*].storageContainerIdRef",
+   "spec.initProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.initProvider.storageAccount[*].storageResourceId",
+   "spec.initProvider.storageAccountGen2.storageResourceId",
+   "status.atProvider.storageAccount[*].storageContainerId",
+   "status.atProvider.storageAccount[*].storageResourceId",
+   "status.atProvider.storageAccountGen2.storageResourceId"
+  ],
+  "currentOnly": [
+   "spec.forProvider.storageAccount[*].storageAccountId",
+   "spec.forProvider.storageAccount[*].storageContainerUrl",
+   "spec.forProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.forProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.forProvider.storageAccountGen2.storageAccountId",
+   "spec.initProvider.storageAccount[*].storageAccountId",
+   "spec.initProvider.storageAccount[*].storageContainerUrl",
+   "spec.initProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.initProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.initProvider.storageAccountGen2.storageAccountId",
+   "status.atProvider.storageAccount[*].storageAccountId",
+   "status.atProvider.storageAccount[*].storageContainerUrl",
+   "status.atProvider.storageAccountGen2.storageAccountId"
+  ]
+ },
+ "azurerm_hdinsight_kafka_cluster": {
+  "renames": [
+   [
+    "spec.forProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.forProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "spec.initProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.initProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "status.atProvider.storageAccountGen2.managedIdentityResourceId",
+    "status.atProvider.storageAccountGen2.userAssignedIdentityId"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.storageAccount[*].storageContainerId",
+   "spec.forProvider.storageAccount[*].storageContainerIdRef",
+   "spec.forProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.forProvider.storageAccount[*].storageResourceId",
+   "spec.forProvider.storageAccountGen2.storageResourceId",
+   "spec.initProvider.storageAccount[*].storageContainerId",
+   "spec.initProvider.storageAccount[*].storageContainerIdRef",
+   "spec.initProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.initProvider.storageAccount[*].storageResourceId",
+   "spec.initProvider.storageAccountGen2.storageResourceId",
+   "status.atProvider.storageAccount[*].storageContainerId",
+   "status.atProvider.storageAccount[*].storageResourceId",
+   "status.atProvider.storageAccountGen2.storageResourceId"
+  ],
+  "currentOnly": [
+   "spec.forProvider.storageAccount[*].storageAccountId",
+   "spec.forProvider.storageAccount[*].storageContainerUrl",
+   "spec.forProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.forProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.forProvider.storageAccountGen2.storageAccountId",
+   "spec.initProvider.storageAccount[*].storageAccountId",
+   "spec.initProvider.storageAccount[*].storageContainerUrl",
+   "spec.initProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.initProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.initProvider.storageAccountGen2.storageAccountId",
+   "status.atProvider.storageAccount[*].storageAccountId",
+   "status.atProvider.storageAccount[*].storageContainerUrl",
+   "status.atProvider.storageAccountGen2.storageAccountId"
+  ]
+ },
+ "azurerm_hdinsight_spark_cluster": {
+  "renames": [
+   [
+    "spec.forProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.forProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "spec.initProvider.storageAccountGen2.managedIdentityResourceId",
+    "spec.initProvider.storageAccountGen2.userAssignedIdentityId"
+   ],
+   [
+    "status.atProvider.storageAccountGen2.managedIdentityResourceId",
+    "status.atProvider.storageAccountGen2.userAssignedIdentityId"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.storageAccount[*].storageContainerId",
+   "spec.forProvider.storageAccount[*].storageContainerIdRef",
+   "spec.forProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.forProvider.storageAccount[*].storageResourceId",
+   "spec.forProvider.storageAccountGen2.storageResourceId",
+   "spec.initProvider.storageAccount[*].storageContainerId",
+   "spec.initProvider.storageAccount[*].storageContainerIdRef",
+   "spec.initProvider.storageAccount[*].storageContainerIdSelector",
+   "spec.initProvider.storageAccount[*].storageResourceId",
+   "spec.initProvider.storageAccountGen2.storageResourceId",
+   "status.atProvider.storageAccount[*].storageContainerId",
+   "status.atProvider.storageAccount[*].storageResourceId",
+   "status.atProvider.storageAccountGen2.storageResourceId"
+  ],
+  "currentOnly": [
+   "spec.forProvider.storageAccount[*].storageAccountId",
+   "spec.forProvider.storageAccount[*].storageContainerUrl",
+   "spec.forProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.forProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.forProvider.storageAccountGen2.storageAccountId",
+   "spec.initProvider.storageAccount[*].storageAccountId",
+   "spec.initProvider.storageAccount[*].storageContainerUrl",
+   "spec.initProvider.storageAccount[*].storageContainerUrlRef",
+   "spec.initProvider.storageAccount[*].storageContainerUrlSelector",
+   "spec.initProvider.storageAccountGen2.storageAccountId",
+   "status.atProvider.storageAccount[*].storageAccountId",
+   "status.atProvider.storageAccount[*].storageContainerUrl",
+   "status.atProvider.storageAccountGen2.storageAccountId"
+  ]
+ },
+ "azurerm_iot_security_solution": {
+  "renames": [
+   [
+    "spec.forProvider.recommendationsEnabled",
+    "spec.forProvider.recommendations"
+   ],
+   [
+    "spec.initProvider.recommendationsEnabled",
+    "spec.initProvider.recommendations"
+   ],
+   [
+    "status.atProvider.recommendationsEnabled",
+    "status.atProvider.recommendations"
+   ]
+  ],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_key_vault": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.contact",
+   "spec.forProvider.enableRbacAuthorization",
+   "spec.initProvider.contact",
+   "spec.initProvider.enableRbacAuthorization",
+   "status.atProvider.contact",
+   "status.atProvider.enableRbacAuthorization"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_key_vault_certificate_contacts": {
+  "renames": [],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_kubernetes_cluster": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.defaultNodePool.kubeletConfig.containerLogMaxLine",
+   "spec.forProvider.defaultNodePool.linuxOsConfig.transparentHugePageEnabled",
+   "spec.initProvider.defaultNodePool.kubeletConfig.containerLogMaxLine",
+   "spec.initProvider.defaultNodePool.linuxOsConfig.transparentHugePageEnabled",
+   "status.atProvider.defaultNodePool.kubeletConfig.containerLogMaxLine",
+   "status.atProvider.defaultNodePool.linuxOsConfig.transparentHugePageEnabled"
+  ],
+  "currentOnly": [
+   "spec.forProvider.defaultNodePool.security",
+   "spec.forProvider.keyManagementService.keyVaultId",
+   "spec.forProvider.omsAgent.retinaFlowLogsEnabled",
+   "spec.initProvider.defaultNodePool.security",
+   "spec.initProvider.keyManagementService.keyVaultId",
+   "spec.initProvider.omsAgent.retinaFlowLogsEnabled",
+   "status.atProvider.defaultNodePool.security",
+   "status.atProvider.keyManagementService.keyVaultId",
+   "status.atProvider.omsAgent.retinaFlowLogsEnabled"
+  ]
+ },
+ "azurerm_kubernetes_cluster_node_pool": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.kubeletConfig.containerLogMaxLine",
+   "spec.forProvider.linuxOsConfig.transparentHugePageEnabled",
+   "spec.initProvider.kubeletConfig.containerLogMaxLine",
+   "spec.initProvider.linuxOsConfig.transparentHugePageEnabled",
+   "status.atProvider.kubeletConfig.containerLogMaxLine",
+   "status.atProvider.linuxOsConfig.transparentHugePageEnabled"
+  ],
+  "currentOnly": [
+   "spec.forProvider.security",
+   "spec.initProvider.security",
+   "status.atProvider.security"
+  ]
+ },
+ "azurerm_kusto_attached_database_configuration": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.clusterResourceId",
+   "spec.forProvider.clusterResourceIdRef",
+   "spec.forProvider.clusterResourceIdSelector",
+   "spec.initProvider.clusterResourceId",
+   "spec.initProvider.clusterResourceIdRef",
+   "spec.initProvider.clusterResourceIdSelector",
+   "status.atProvider.clusterResourceId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_kusto_cluster": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.languageExtensions",
+   "spec.forProvider.virtualNetworkConfiguration",
+   "spec.initProvider.languageExtensions",
+   "spec.initProvider.virtualNetworkConfiguration",
+   "status.atProvider.languageExtensions",
+   "status.atProvider.virtualNetworkConfiguration"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_kusto_eventgrid_data_connection": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.eventgridResourceId",
+   "spec.forProvider.managedIdentityResourceId",
+   "spec.initProvider.eventgridResourceId",
+   "spec.initProvider.managedIdentityResourceId",
+   "status.atProvider.eventgridResourceId",
+   "status.atProvider.managedIdentityResourceId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_lb": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.publicIpAddressId",
+   "spec.forProvider.subnetId",
+   "spec.forProvider.subnetIdRef",
+   "spec.forProvider.subnetIdSelector",
+   "spec.initProvider.publicIpAddressId",
+   "spec.initProvider.subnetId",
+   "spec.initProvider.subnetIdRef",
+   "spec.initProvider.subnetIdSelector",
+   "status.atProvider.publicIpAddressId",
+   "status.atProvider.subnetId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_lb_nat_rule": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableFloatingIp",
+   "spec.forProvider.enableTcpReset",
+   "spec.initProvider.enableFloatingIp",
+   "spec.initProvider.enableTcpReset",
+   "status.atProvider.enableFloatingIp",
+   "status.atProvider.enableTcpReset"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_lb_outbound_rule": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableTcpReset",
+   "spec.initProvider.enableTcpReset",
+   "status.atProvider.enableTcpReset"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_lb_rule": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableFloatingIp",
+   "spec.forProvider.enableTcpReset",
+   "spec.initProvider.enableFloatingIp",
+   "spec.initProvider.enableTcpReset",
+   "status.atProvider.enableFloatingIp",
+   "status.atProvider.enableTcpReset"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_linux_virtual_machine": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.vmAgentPlatformUpdatesEnabled",
+   "spec.initProvider.vmAgentPlatformUpdatesEnabled"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_linux_virtual_machine_scale_set": {
+  "renames": [
+   [
+    "spec.forProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade",
+    "spec.forProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled"
+   ],
+   [
+    "spec.initProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade",
+    "spec.initProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled"
+   ],
+   [
+    "status.atProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade",
+    "status.atProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.automaticOsUpgradePolicy.disableAutomaticRollback",
+   "spec.forProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "spec.forProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "spec.forProvider.networkInterface[*].enableAcceleratedNetworking",
+   "spec.forProvider.networkInterface[*].enableIpForwarding",
+   "spec.initProvider.automaticOsUpgradePolicy.disableAutomaticRollback",
+   "spec.initProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "spec.initProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "spec.initProvider.networkInterface[*].enableAcceleratedNetworking",
+   "spec.initProvider.networkInterface[*].enableIpForwarding",
+   "status.atProvider.automaticOsUpgradePolicy.disableAutomaticRollback",
+   "status.atProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "status.atProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "status.atProvider.networkInterface[*].enableAcceleratedNetworking",
+   "status.atProvider.networkInterface[*].enableIpForwarding"
+  ],
+  "currentOnly": [
+   "spec.forProvider.automaticOsUpgradePolicy.automaticRollbackEnabled",
+   "spec.forProvider.automaticZoneRebalancingEnabled",
+   "spec.forProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "spec.forProvider.networkInterface[*].ipForwardingEnabled",
+   "spec.initProvider.automaticOsUpgradePolicy.automaticRollbackEnabled",
+   "spec.initProvider.automaticZoneRebalancingEnabled",
+   "spec.initProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "spec.initProvider.networkInterface[*].ipForwardingEnabled",
+   "status.atProvider.automaticOsUpgradePolicy.automaticRollbackEnabled",
+   "status.atProvider.automaticZoneRebalancingEnabled",
+   "status.atProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "status.atProvider.networkInterface[*].ipForwardingEnabled"
+  ]
+ },
+ "azurerm_linux_web_app": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.siteConfig.applicationStack.rubyVersion",
+   "spec.initProvider.siteConfig.applicationStack.rubyVersion",
+   "status.atProvider.siteConfig.applicationStack.rubyVersion"
+  ],
+  "currentOnly": [
+   "spec.forProvider.endToEndTlsEncryptionEnabled",
+   "spec.initProvider.endToEndTlsEncryptionEnabled",
+   "status.atProvider.endToEndTlsEncryptionEnabled"
+  ]
+ },
+ "azurerm_linux_web_app_slot": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.siteConfig.applicationStack.rubyVersion",
+   "spec.initProvider.siteConfig.applicationStack.rubyVersion",
+   "status.atProvider.siteConfig.applicationStack.rubyVersion"
+  ],
+  "currentOnly": [
+   "spec.forProvider.endToEndTlsEncryptionEnabled",
+   "spec.initProvider.endToEndTlsEncryptionEnabled",
+   "status.atProvider.endToEndTlsEncryptionEnabled"
+  ]
+ },
+ "azurerm_log_analytics_linked_storage_account": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.workspaceResourceId",
+   "spec.initProvider.workspaceResourceId",
+   "status.atProvider.workspaceResourceId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_log_analytics_workspace": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.internetIngestionEnabled",
+   "spec.forProvider.internetQueryEnabled",
+   "spec.forProvider.localAuthenticationDisabled",
+   "spec.initProvider.internetIngestionEnabled",
+   "spec.initProvider.internetQueryEnabled",
+   "spec.initProvider.localAuthenticationDisabled",
+   "status.atProvider.internetIngestionEnabled",
+   "status.atProvider.internetQueryEnabled",
+   "status.atProvider.localAuthenticationDisabled"
+  ],
+  "currentOnly": [
+   "spec.forProvider.internetIngestionAccessType",
+   "spec.forProvider.internetQueryAccessType",
+   "spec.initProvider.internetIngestionAccessType",
+   "spec.initProvider.internetQueryAccessType",
+   "status.atProvider.internetIngestionAccessType",
+   "status.atProvider.internetQueryAccessType"
+  ]
+ },
+ "azurerm_monitor_diagnostic_setting": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enabledLog[*].retentionPolicy",
+   "spec.forProvider.metric",
+   "spec.initProvider.enabledLog[*].retentionPolicy",
+   "spec.initProvider.metric",
+   "status.atProvider.enabledLog[*].retentionPolicy",
+   "status.atProvider.metric"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_mssql_database": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.longTermRetentionPolicy.immutableBackupsEnabled",
+   "spec.forProvider.threatDetectionPolicy.emailAccountAdmins",
+   "spec.initProvider.longTermRetentionPolicy.immutableBackupsEnabled",
+   "spec.initProvider.threatDetectionPolicy.emailAccountAdmins",
+   "status.atProvider.longTermRetentionPolicy.immutableBackupsEnabled",
+   "status.atProvider.threatDetectionPolicy.emailAccountAdmins"
+  ],
+  "currentOnly": [
+   "spec.forProvider.threatDetectionPolicy.emailAccountAdminsEnabled",
+   "spec.initProvider.threatDetectionPolicy.emailAccountAdminsEnabled",
+   "status.atProvider.threatDetectionPolicy.emailAccountAdminsEnabled"
+  ]
+ },
+ "azurerm_mssql_database_extended_auditing_policy": {
+  "renames": [
+   [
+    "spec.forProvider.storageEndpoint",
+    "spec.forProvider.blobStorageEndpoint"
+   ],
+   [
+    "spec.initProvider.storageEndpoint",
+    "spec.initProvider.blobStorageEndpoint"
+   ],
+   [
+    "status.atProvider.storageEndpoint",
+    "status.atProvider.blobStorageEndpoint"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.storageEndpointRef",
+   "spec.forProvider.storageEndpointSelector",
+   "spec.initProvider.storageEndpointRef",
+   "spec.initProvider.storageEndpointSelector"
+  ],
+  "currentOnly": [
+   "spec.forProvider.blobStorageEndpointRef",
+   "spec.forProvider.blobStorageEndpointSelector",
+   "spec.initProvider.blobStorageEndpointRef",
+   "spec.initProvider.blobStorageEndpointSelector"
+  ]
+ },
+ "azurerm_mssql_managed_database": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.longTermRetentionPolicy.immutableBackupsEnabled",
+   "spec.initProvider.longTermRetentionPolicy.immutableBackupsEnabled",
+   "status.atProvider.longTermRetentionPolicy.immutableBackupsEnabled"
+  ],
+  "currentOnly": [
+   "spec.forProvider.recoverDatabaseId",
+   "spec.initProvider.recoverDatabaseId",
+   "status.atProvider.recoverDatabaseId"
+  ]
+ },
+ "azurerm_mssql_managed_instance_transparent_data_encryption": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.managedHsmKeyId",
+   "spec.initProvider.managedHsmKeyId",
+   "status.atProvider.managedHsmKeyId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_mssql_server_security_alert_policy": {
+  "renames": [
+   [
+    "spec.forProvider.emailAccountAdmins",
+    "spec.forProvider.emailAccountAdminsEnabled"
+   ],
+   [
+    "spec.initProvider.emailAccountAdmins",
+    "spec.initProvider.emailAccountAdminsEnabled"
+   ],
+   [
+    "status.atProvider.emailAccountAdmins",
+    "status.atProvider.emailAccountAdminsEnabled"
+   ]
+  ],
+  "previousOnly": [],
+  "currentOnly": []
+ },
+ "azurerm_mssql_server_transparent_data_encryption": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.managedHsmKeyId",
+   "spec.initProvider.managedHsmKeyId",
+   "status.atProvider.managedHsmKeyId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_mysql_flexible_server": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.customerManagedKey.managedHsmKeyId",
+   "spec.initProvider.customerManagedKey.managedHsmKeyId",
+   "status.atProvider.customerManagedKey.managedHsmKeyId",
+   "status.atProvider.publicNetworkAccessEnabled"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_netapp_volume": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.exportPolicyRule[*].protocolsEnabled",
+   "spec.initProvider.exportPolicyRule[*].protocolsEnabled",
+   "status.atProvider.exportPolicyRule[*].protocolsEnabled",
+   "status.atProvider.mountIpAddresses"
+  ],
+  "currentOnly": [
+   "spec.forProvider.breakthroughModeEnabled",
+   "spec.forProvider.unixPermissions",
+   "spec.initProvider.breakthroughModeEnabled",
+   "spec.initProvider.unixPermissions",
+   "status.atProvider.breakthroughModeEnabled",
+   "status.atProvider.mountTarget",
+   "status.atProvider.unixPermissions"
+  ]
+ },
+ "azurerm_network_watcher_flow_log": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.networkSecurityGroupId",
+   "spec.forProvider.networkSecurityGroupIdRef",
+   "spec.forProvider.networkSecurityGroupIdSelector",
+   "spec.initProvider.networkSecurityGroupId",
+   "spec.initProvider.networkSecurityGroupIdRef",
+   "spec.initProvider.networkSecurityGroupIdSelector",
+   "status.atProvider.networkSecurityGroupId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_orchestrated_virtual_machine_scale_set": {
+  "renames": [
+   [
+    "spec.forProvider.osProfile.windowsConfiguration.enableAutomaticUpdates",
+    "spec.forProvider.osProfile.windowsConfiguration.automaticUpdatesEnabled"
+   ],
+   [
+    "spec.initProvider.osProfile.windowsConfiguration.enableAutomaticUpdates",
+    "spec.initProvider.osProfile.windowsConfiguration.automaticUpdatesEnabled"
+   ],
+   [
+    "status.atProvider.osProfile.windowsConfiguration.enableAutomaticUpdates",
+    "status.atProvider.osProfile.windowsConfiguration.automaticUpdatesEnabled"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "spec.forProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "spec.forProvider.networkInterface[*].enableAcceleratedNetworking",
+   "spec.forProvider.networkInterface[*].enableIpForwarding",
+   "spec.forProvider.skuProfile.vmSizes",
+   "spec.initProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "spec.initProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "spec.initProvider.networkInterface[*].enableAcceleratedNetworking",
+   "spec.initProvider.networkInterface[*].enableIpForwarding",
+   "spec.initProvider.skuProfile.vmSizes",
+   "status.atProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "status.atProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "status.atProvider.networkInterface[*].enableAcceleratedNetworking",
+   "status.atProvider.networkInterface[*].enableIpForwarding",
+   "status.atProvider.skuProfile.vmSizes"
+  ],
+  "currentOnly": [
+   "spec.forProvider.automaticZoneRebalancingEnabled",
+   "spec.forProvider.dataDisk[*].diskIopsReadWrite",
+   "spec.forProvider.dataDisk[*].diskMbpsReadWrite",
+   "spec.forProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "spec.forProvider.networkInterface[*].ipForwardingEnabled",
+   "spec.forProvider.resilientVirtualMachineCreationEnabled",
+   "spec.forProvider.resilientVirtualMachineDeletionEnabled",
+   "spec.initProvider.automaticZoneRebalancingEnabled",
+   "spec.initProvider.dataDisk[*].diskIopsReadWrite",
+   "spec.initProvider.dataDisk[*].diskMbpsReadWrite",
+   "spec.initProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "spec.initProvider.networkInterface[*].ipForwardingEnabled",
+   "spec.initProvider.resilientVirtualMachineCreationEnabled",
+   "spec.initProvider.resilientVirtualMachineDeletionEnabled",
+   "status.atProvider.automaticZoneRebalancingEnabled",
+   "status.atProvider.dataDisk[*].diskIopsReadWrite",
+   "status.atProvider.dataDisk[*].diskMbpsReadWrite",
+   "status.atProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "status.atProvider.networkInterface[*].ipForwardingEnabled",
+   "status.atProvider.resilientVirtualMachineCreationEnabled",
+   "status.atProvider.resilientVirtualMachineDeletionEnabled"
+  ]
+ },
+ "azurerm_policy_set_definition": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.managementGroupId",
+   "spec.forProvider.managementGroupIdRef",
+   "spec.forProvider.managementGroupIdSelector",
+   "spec.initProvider.managementGroupId",
+   "spec.initProvider.managementGroupIdRef",
+   "spec.initProvider.managementGroupIdSelector",
+   "status.atProvider.managementGroupId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_private_dns_a_record": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.forProvider.zoneName",
+   "spec.forProvider.zoneNameRef",
+   "spec.forProvider.zoneNameSelector",
+   "status.atProvider.resourceGroupName",
+   "status.atProvider.zoneName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_dns_aaaa_record": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.forProvider.zoneName",
+   "spec.forProvider.zoneNameRef",
+   "spec.forProvider.zoneNameSelector",
+   "status.atProvider.resourceGroupName",
+   "status.atProvider.zoneName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_dns_cname_record": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.forProvider.zoneName",
+   "spec.forProvider.zoneNameRef",
+   "spec.forProvider.zoneNameSelector",
+   "status.atProvider.resourceGroupName",
+   "status.atProvider.zoneName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_dns_mx_record": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.forProvider.zoneName",
+   "spec.forProvider.zoneNameRef",
+   "spec.forProvider.zoneNameSelector",
+   "status.atProvider.resourceGroupName",
+   "status.atProvider.zoneName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_dns_ptr_record": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.forProvider.zoneName",
+   "spec.forProvider.zoneNameRef",
+   "spec.forProvider.zoneNameSelector",
+   "status.atProvider.resourceGroupName",
+   "status.atProvider.zoneName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_dns_srv_record": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.forProvider.zoneName",
+   "spec.forProvider.zoneNameRef",
+   "spec.forProvider.zoneNameSelector",
+   "status.atProvider.resourceGroupName",
+   "status.atProvider.zoneName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_dns_txt_record": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "spec.forProvider.zoneName",
+   "spec.forProvider.zoneNameRef",
+   "spec.forProvider.zoneNameSelector",
+   "status.atProvider.resourceGroupName",
+   "status.atProvider.zoneName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_dns_zone_virtual_network_link": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.privateDnsZoneName",
+   "spec.forProvider.privateDnsZoneNameRef",
+   "spec.forProvider.privateDnsZoneNameSelector",
+   "spec.forProvider.resourceGroupName",
+   "spec.forProvider.resourceGroupNameRef",
+   "spec.forProvider.resourceGroupNameSelector",
+   "status.atProvider.privateDnsZoneName",
+   "status.atProvider.resourceGroupName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.privateDnsZoneId",
+   "spec.forProvider.privateDnsZoneIdRef",
+   "spec.forProvider.privateDnsZoneIdSelector",
+   "status.atProvider.privateDnsZoneId"
+  ]
+ },
+ "azurerm_private_link_service": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableProxyProtocol",
+   "spec.initProvider.enableProxyProtocol",
+   "status.atProvider.enableProxyProtocol"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_recovery_services_vault": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.softDeleteEnabled",
+   "spec.initProvider.softDeleteEnabled",
+   "status.atProvider.softDeleteEnabled"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_sentinel_alert_rule_fusion": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.name",
+   "spec.initProvider.name",
+   "status.atProvider.name"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_site_recovery_protection_container_mapping": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.automaticUpdate.enabled",
+   "spec.initProvider.automaticUpdate.enabled",
+   "status.atProvider.automaticUpdate.enabled"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_storage_account": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.customerManagedKey.managedHsmKeyId",
+   "spec.forProvider.queueProperties",
+   "spec.forProvider.staticWebsite",
+   "spec.initProvider.customerManagedKey.managedHsmKeyId",
+   "spec.initProvider.queueProperties",
+   "spec.initProvider.staticWebsite",
+   "status.atProvider.customerManagedKey.managedHsmKeyId",
+   "status.atProvider.queueProperties",
+   "status.atProvider.staticWebsite"
+  ],
+  "currentOnly": [
+   "spec.forProvider.publicNetworkAccess",
+   "spec.forProvider.smbOauthEnabled",
+   "spec.initProvider.publicNetworkAccess",
+   "spec.initProvider.smbOauthEnabled",
+   "status.atProvider.accountReplicationTypeMigratingTo",
+   "status.atProvider.accountReplicationTypeMigrationInProgress",
+   "status.atProvider.publicNetworkAccess",
+   "status.atProvider.smbOauthEnabled"
+  ]
+ },
+ "azurerm_storage_blob": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.storageAccountName",
+   "spec.forProvider.storageAccountNameRef",
+   "spec.forProvider.storageAccountNameSelector",
+   "spec.forProvider.storageContainerName",
+   "spec.forProvider.storageContainerNameRef",
+   "spec.forProvider.storageContainerNameSelector",
+   "spec.initProvider.storageAccountName",
+   "spec.initProvider.storageAccountNameRef",
+   "spec.initProvider.storageAccountNameSelector",
+   "spec.initProvider.storageContainerName",
+   "spec.initProvider.storageContainerNameRef",
+   "spec.initProvider.storageContainerNameSelector",
+   "status.atProvider.storageAccountName",
+   "status.atProvider.storageContainerName"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_storage_container": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.storageAccountName",
+   "spec.forProvider.storageAccountNameRef",
+   "spec.forProvider.storageAccountNameSelector",
+   "spec.initProvider.storageAccountId",
+   "spec.initProvider.storageAccountIdRef",
+   "spec.initProvider.storageAccountIdSelector",
+   "spec.initProvider.storageAccountName",
+   "spec.initProvider.storageAccountNameRef",
+   "spec.initProvider.storageAccountNameSelector",
+   "status.atProvider.resourceManagerId",
+   "status.atProvider.storageAccountName"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_storage_queue": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.storageAccountName",
+   "spec.forProvider.storageAccountNameRef",
+   "spec.forProvider.storageAccountNameSelector",
+   "spec.initProvider.storageAccountId",
+   "spec.initProvider.storageAccountName",
+   "spec.initProvider.storageAccountNameRef",
+   "spec.initProvider.storageAccountNameSelector",
+   "status.atProvider.resourceManagerId",
+   "status.atProvider.storageAccountName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.storageAccountIdRef",
+   "spec.forProvider.storageAccountIdSelector"
+  ]
+ },
+ "azurerm_storage_share": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.storageAccountName",
+   "spec.initProvider.storageAccountId",
+   "spec.initProvider.storageAccountIdRef",
+   "spec.initProvider.storageAccountIdSelector",
+   "spec.initProvider.storageAccountName",
+   "status.atProvider.resourceManagerId",
+   "status.atProvider.storageAccountName"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_storage_share_directory": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.storageShareId",
+   "spec.forProvider.storageShareIdRef",
+   "spec.forProvider.storageShareIdSelector",
+   "spec.initProvider.storageShareId",
+   "spec.initProvider.storageShareIdRef",
+   "spec.initProvider.storageShareIdSelector",
+   "status.atProvider.storageShareId"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_storage_table": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.storageAccountName",
+   "spec.forProvider.storageAccountNameRef",
+   "spec.forProvider.storageAccountNameSelector",
+   "spec.initProvider.storageAccountName",
+   "spec.initProvider.storageAccountNameRef",
+   "spec.initProvider.storageAccountNameSelector",
+   "status.atProvider.storageAccountName"
+  ],
+  "currentOnly": [
+   "spec.forProvider.storageAccountIdRef",
+   "spec.forProvider.storageAccountIdSelector",
+   "spec.initProvider.storageAccountIdRef",
+   "spec.initProvider.storageAccountIdSelector"
+  ]
+ },
+ "azurerm_subnet": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.serviceEndpoints",
+   "spec.initProvider.serviceEndpoints",
+   "status.atProvider.serviceEndpoints"
+  ],
+  "currentOnly": [
+   "spec.forProvider.networkSecurityGroupIdWo",
+   "spec.forProvider.networkSecurityGroupIdWoVersion",
+   "spec.forProvider.routeTableIdWo",
+   "spec.forProvider.routeTableIdWoVersion",
+   "spec.forProvider.serviceEndpoint",
+   "spec.initProvider.networkSecurityGroupIdWo",
+   "spec.initProvider.networkSecurityGroupIdWoVersion",
+   "spec.initProvider.routeTableIdWo",
+   "spec.initProvider.routeTableIdWoVersion",
+   "spec.initProvider.serviceEndpoint",
+   "status.atProvider.networkSecurityGroupId",
+   "status.atProvider.networkSecurityGroupIdWo",
+   "status.atProvider.networkSecurityGroupIdWoVersion",
+   "status.atProvider.routeTableId",
+   "status.atProvider.routeTableIdWo",
+   "status.atProvider.routeTableIdWoVersion",
+   "status.atProvider.serviceEndpoint"
+  ]
+ },
+ "azurerm_virtual_network": {
+  "renames": [],
+  "previousOnly": [
+   "status.atProvider.subnet[*].serviceEndpoints"
+  ],
+  "currentOnly": [
+   "spec.forProvider.advertisedGatewayPrefixes",
+   "spec.initProvider.advertisedGatewayPrefixes",
+   "status.atProvider.advertisedGatewayPrefixes",
+   "status.atProvider.subnet[*].serviceEndpoint"
+  ]
+ },
+ "azurerm_virtual_network_gateway": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableBgp",
+   "spec.initProvider.enableBgp",
+   "status.atProvider.enableBgp"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_virtual_network_gateway_connection": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableBgp",
+   "spec.initProvider.enableBgp",
+   "status.atProvider.enableBgp"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_windows_virtual_machine": {
+  "renames": [],
+  "previousOnly": [
+   "spec.forProvider.enableAutomaticUpdates",
+   "spec.forProvider.vmAgentPlatformUpdatesEnabled",
+   "spec.initProvider.enableAutomaticUpdates",
+   "spec.initProvider.vmAgentPlatformUpdatesEnabled",
+   "status.atProvider.enableAutomaticUpdates"
+  ],
+  "currentOnly": []
+ },
+ "azurerm_windows_virtual_machine_scale_set": {
+  "renames": [
+   [
+    "spec.forProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade",
+    "spec.forProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled"
+   ],
+   [
+    "spec.forProvider.enableAutomaticUpdates",
+    "spec.forProvider.automaticUpdatesEnabled"
+   ],
+   [
+    "spec.initProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade",
+    "spec.initProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled"
+   ],
+   [
+    "spec.initProvider.enableAutomaticUpdates",
+    "spec.initProvider.automaticUpdatesEnabled"
+   ],
+   [
+    "status.atProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade",
+    "status.atProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled"
+   ],
+   [
+    "status.atProvider.enableAutomaticUpdates",
+    "status.atProvider.automaticUpdatesEnabled"
+   ]
+  ],
+  "previousOnly": [
+   "spec.forProvider.automaticOsUpgradePolicy.disableAutomaticRollback",
+   "spec.forProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "spec.forProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "spec.forProvider.networkInterface[*].enableAcceleratedNetworking",
+   "spec.forProvider.networkInterface[*].enableIpForwarding",
+   "spec.initProvider.automaticOsUpgradePolicy.disableAutomaticRollback",
+   "spec.initProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "spec.initProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "spec.initProvider.networkInterface[*].enableAcceleratedNetworking",
+   "spec.initProvider.networkInterface[*].enableIpForwarding",
+   "status.atProvider.automaticOsUpgradePolicy.disableAutomaticRollback",
+   "status.atProvider.dataDisk[*].ultraSsdDiskIopsReadWrite",
+   "status.atProvider.dataDisk[*].ultraSsdDiskMbpsReadWrite",
+   "status.atProvider.networkInterface[*].enableAcceleratedNetworking",
+   "status.atProvider.networkInterface[*].enableIpForwarding"
+  ],
+  "currentOnly": [
+   "spec.forProvider.automaticOsUpgradePolicy.automaticRollbackEnabled",
+   "spec.forProvider.automaticZoneRebalancingEnabled",
+   "spec.forProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "spec.forProvider.networkInterface[*].ipForwardingEnabled",
+   "spec.initProvider.automaticOsUpgradePolicy.automaticRollbackEnabled",
+   "spec.initProvider.automaticZoneRebalancingEnabled",
+   "spec.initProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "spec.initProvider.networkInterface[*].ipForwardingEnabled",
+   "status.atProvider.automaticOsUpgradePolicy.automaticRollbackEnabled",
+   "status.atProvider.automaticZoneRebalancingEnabled",
+   "status.atProvider.networkInterface[*].acceleratedNetworkingEnabled",
+   "status.atProvider.networkInterface[*].ipForwardingEnabled"
+  ]
+ }
+}

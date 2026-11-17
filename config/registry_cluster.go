@@ -15,9 +15,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-azure/v2/config/cluster"
-	"github.com/upbound/provider-azure/v2/config/cluster/common"
-	"github.com/upbound/provider-azure/v2/config/templates"
+	"github.com/upbound/provider-azure/v3/config/cluster"
+	"github.com/upbound/provider-azure/v3/config/cluster/common"
+	"github.com/upbound/provider-azure/v3/config/templates"
 )
 
 // GetProvider returns provider configuration
@@ -53,6 +53,7 @@ func GetProvider(_ context.Context, sdkProvider *schema.Provider, generationProv
 	)
 
 	bumpVersionsWithEmbeddedLists(pc)
+	bumpBreakingAPIVersions(pc)
 	// "azure" group contains resources that actually do not have a specific
 	// group, e.g. ResourceGroup with APIVersion "azure.upbound.io/v1beta1".
 	// We need to include the controllers for this group into the base packages
