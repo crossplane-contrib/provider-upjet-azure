@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Runs the storage version migration as an init container of a provider
+# package. v3.0.0 removes the deprecated v1beta1 API versions, and the API
+# server rejects a CRD update that removes a version still listed in the CRD's
+# status.storedVersions. The init container re-stores every object at the
+# current storage version and removes the old versions from that list.
+#
+# Upgrade to the latest v2.x release first and let it reconcile: only a v2.x
+# provider can still convert an object stored as v1beta1. Then apply this before
+# or together with the upgrade to v3.0.0, and reference it from the Provider:
+#   spec:
+#     runtimeConfigRef:
+#       name: sv-migration
+#
+# Use one DeploymentRuntimeConfig per resource package: the image of both
+# containers must be the image of the package the Provider installs, and the
+# ServiceAccount name must be unique. Don't reference it from the family
+# package (provider-family-azure): none of its kinds has a version to migrate
+# and its binary has no init command, so the init container would fail.
+#
+# The init container runs as the provider's ServiceAccount. Removing a version
+# from status.storedVersions needs the patch verb on
+# customresourcedefinitions/status, which Crossplane's RBAC manager doesn't
+# grant. Without it the objects are still re-stored, a message is logged, and
+# status.storedVersions keeps the old version, so the CRD update is still
+# rejected. The ClusterRole and ClusterRoleBinding below grant it to the
+# ServiceAccount named in spec.serviceAccountTemplate. Pinning that name is
+# what lets the binding exist before the upgrade: otherwise the ServiceAccount
+# is named after the provider revision.
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: sv-migration
+spec:
+  serviceAccountTemplate:
+    metadata:
+      name: sv-migration-sa
+  deploymentTemplate:
+    spec:
+      selector: {}
+      template:
+        spec:
+          containers:
+            - name: package-runtime
+              image: xpkg.upbound.io/upbound/provider-azure-storage:v3.0.0
+          initContainers:
+            - name: sv-migrator
+              image: xpkg.upbound.io/upbound/provider-azure-storage:v3.0.0
+              args:
+                - init
+              securityContext:
+                runAsUser: 2000
+                runAsGroup: 2000
+                runAsNonRoot: true
+                allowPrivilegeEscalation: false
+                privileged: false
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: provider-azure-crd-status-patcher
+rules:
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions/status"]
+    verbs: ["patch"]
+---
+# The namespace is the one Crossplane is installed in.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: provider-azure-crd-status-patcher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: provider-azure-crd-status-patcher
+subjects:
+  - kind: ServiceAccount
+    name: sv-migration-sa
+    namespace: crossplane-system
