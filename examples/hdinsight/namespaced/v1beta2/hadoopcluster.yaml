@@ -20,7 +20,7 @@ spec:
     gateway:
       passwordSecretRef:
         key: example-key
-        name: example-secret
+        name: example-secret-hadoopcluster
       username: acctestusrgw
     location: West Europe
     resourceGroupNameSelector:
@@ -30,30 +30,30 @@ spec:
       headNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-hadoopcluster
         username: acctestusrvm
         vmSize: Standard_D3_V2
       workerNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-hadoopcluster
         targetInstanceCount: 3
         username: acctestusrvm
         vmSize: Standard_D4_V2
       zookeeperNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-hadoopcluster
         username: acctestusrvm
         vmSize: Standard_D3_V2
     storageAccount:
       - isDefault: true
         storageAccountKeySecretRef:
           key: attribute.primary_access_key
-          name: example-storage-account
+          name: example-storage-account-hadoopcluster
         storageContainerUrlSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: hadoopcluster
     tier: Standard
     tlsMinVersion: "1.2"
 ---
@@ -77,8 +77,8 @@ metadata:
     meta.upbound.io/example-id: hdinsight/v1beta2/hadoopcluster
     uptest.upbound.io/pre-delete-hook: ../testhooks/delete-hadoopcluster.sh
   labels:
-    testing.upbound.io/example-name: example0001
-  name: example0001
+    testing.upbound.io/example-name: example0001-hadoopcluster
+  name: exampleb83a6571
   namespace: upbound-system
 spec:
   forProvider:
@@ -89,7 +89,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: rghadoopcluster
   writeConnectionSecretToRef:
-    name: example-storage-account
+    name: example-storage-account-hadoopcluster
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Container
@@ -97,21 +97,21 @@ metadata:
   annotations:
     meta.upbound.io/example-id: hdinsight/v1beta2/hadoopcluster
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: hadoopcluster
+  name: example-hadoopcluster
   namespace: upbound-system
 spec:
   forProvider:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example0001
+        testing.upbound.io/example-name: example0001-hadoopcluster
 ---
 apiVersion: v1
 data:
   example-key: VGVyckFmb3JtMTIzIQ==
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-hadoopcluster
   namespace: upbound-system
 type: Opaque

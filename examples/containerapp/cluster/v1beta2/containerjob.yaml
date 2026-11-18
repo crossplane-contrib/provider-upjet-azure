@@ -8,14 +8,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta2/containerjob
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerjob
   name: examplecontainerjob
 spec:
   forProvider:
     containerAppEnvironmentIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    location: West Europe
+        testing.upbound.io/example-name: containerjob
+    location: Sweden Central
     manualTriggerConfig:
       parallelism: 4
       replicaCompletionCount: 1
@@ -23,7 +23,7 @@ spec:
     replicaTimeoutInSeconds: 10
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerjob
     template:
       container:
       - cpu: 0.25
@@ -40,17 +40,18 @@ metadata:
     uptest.upbound.io/pre-delete-hook: ../testhooks/delete-containerjob.sh
     meta.upbound.io/example-id: containerapp/v1beta2/containerjob
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerjob
   name: examplecontainerjob
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerjob
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerjob
 
 ---
 
@@ -60,14 +61,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta2/containerjob
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerjob
   name: examplecontainerjob
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerjob
     retentionInDays: 30
     sku: PerGB2018
 
@@ -79,8 +80,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta2/containerjob
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerjob
   name: examplecontainerjob
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central

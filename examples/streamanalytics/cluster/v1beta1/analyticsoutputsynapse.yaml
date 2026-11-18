@@ -66,7 +66,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -86,7 +86,7 @@ spec:
     eventsLateArrivalMaxDelayInSeconds: 60
     eventsOutOfOrderMaxDelayInSeconds: 50
     eventsOutOfOrderPolicy: Adjust
-    location: West Europe
+    location: Sweden Central
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:
@@ -109,7 +109,7 @@ metadata:
   name: exampleoutputsynapse
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
 apiVersion: sql.azure.upbound.io/v1beta2
 kind: MSSQLServer
@@ -126,7 +126,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

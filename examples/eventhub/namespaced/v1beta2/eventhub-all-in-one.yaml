@@ -6,65 +6,65 @@ apiVersion: eventhub.azure.m.upbound.io/v1beta1
 kind: AuthorizationRule
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: eventhub-eventhub-all-in-one
+  name: example-eventhub-eventhub-all-in-one
   namespace: upbound-system
 spec:
   forProvider:
     eventhubNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-eventhub-all-in-one
     listen: true
     manage: false
     namespaceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-eventhub-all-in-one
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-eventhub
+        testing.upbound.io/example-name: example-eventhub-eventhub-eventhub-all-in-one
     send: false
 ---
 apiVersion: eventhub.azure.m.upbound.io/v1beta1
 kind: ConsumerGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: eventhub-eventhub-all-in-one
+  name: example-eventhub-eventhub-all-in-one
   namespace: upbound-system
 spec:
   forProvider:
     eventhubNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-eventhub-all-in-one
     namespaceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-eventhub-all-in-one
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-eventhub
+        testing.upbound.io/example-name: example-eventhub-eventhub-eventhub-all-in-one
     userMetadata: some-meta-data
 ---
 apiVersion: eventhub.azure.m.upbound.io/v1beta2
 kind: EventHub
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: eventhub-eventhub-all-in-one
+  name: example-eventhub-eventhub-all-in-one
   namespace: upbound-system
 spec:
   forProvider:
     messageRetention: 1
     namespaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-eventhub-all-in-one
     partitionCount: 2
 ---
 apiVersion: eventhub.azure.m.upbound.io/v1beta1
 kind: EventHubNamespace
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-eventhub-ns-upbound
+    testing.upbound.io/example-name: eventhub-eventhub-all-in-one
+  name: example-eventhub-ns-upbound-eventhub-eventhub-all-in-one
   namespace: upbound-system
 spec:
   forProvider:
@@ -72,7 +72,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-eventhub
+        testing.upbound.io/example-name: example-eventhub-eventhub-eventhub-all-in-one
     sku: Standard
     tags:
       environment: Production
@@ -81,7 +81,7 @@ apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example-eventhub
+    testing.upbound.io/example-name: example-eventhub-eventhub-eventhub-all-in-one
   name: example-eventhub-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:

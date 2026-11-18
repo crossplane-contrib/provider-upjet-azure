@@ -8,13 +8,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabaseextendedauditingpolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: auditingpolicyname
+    testing.upbound.io/example-name: sql-mssqldatabaseextendedauditingpolicy
+  name: auditingpolicyname-sql-mssqldatabaseextendedauditingpolicy
 spec:
   forProvider:
     databaseIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sql-mssqldatabaseextendedauditingpolicy
     retentionInDays: 0
 
 ---
@@ -25,13 +25,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabaseextendedauditingpolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: database
+    testing.upbound.io/example-name: sql-mssqldatabaseextendedauditingpolicy
+  name: database-sql-mssqldatabaseextendedauditingpolicy
 spec:
   forProvider:
     serverIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sql-mssqldatabaseextendedauditingpolicy
 
 ---
 
@@ -41,19 +41,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabaseextendedauditingpolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: mssqlservername
+    testing.upbound.io/example-name: sql-mssqldatabaseextendedauditingpolicy
+  name: mssqlservername-sql-mssqldatabaseextendedauditingpolicy
 spec:
   forProvider:
     administratorLogin: missadministrator
     administratorLoginPasswordSecretRef:
       key: example-key
-      name: example-secret
+      name: example-secret-sql-mssqldatabaseextendedauditingpolicy
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sql-mssqldatabaseextendedauditingpolicy
     version: "12.0"
 
 ---
@@ -61,7 +61,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-sql-mssqldatabaseextendedauditingpolicy
   namespace: upbound-system
 type: Opaque
 data:
@@ -75,8 +75,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabaseextendedauditingpolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: policy-rg
+    testing.upbound.io/example-name: sql-mssqldatabaseextendedauditingpolicy
+  name: policy-rg-sql-mssqldatabaseextendedauditingpolicy
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central

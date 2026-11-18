@@ -28,6 +28,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     functionAppIdSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotlfa
@@ -47,6 +49,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     name: linuxfuncnappslotapp
     location: West Europe
     resourceGroupNameSelector:

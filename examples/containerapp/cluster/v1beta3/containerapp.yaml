@@ -8,16 +8,16 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta3/containerapp
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerapp
   name: example
 spec:
   forProvider:
     containerAppEnvironmentIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
     revisionMode: Single
     template:
       container:
@@ -34,17 +34,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta3/containerapp
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerapp
+  name: example-containerapp
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
 
 ---
 
@@ -54,14 +55,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta3/containerapp
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerapp
+  name: example-containerapp
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
     retentionInDays: 30
     sku: PerGB2018
 
@@ -73,8 +74,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta1/containerapp
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerapp
+  name: example-containerapp
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central

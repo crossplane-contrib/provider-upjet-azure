@@ -36,7 +36,7 @@ spec:
       key: password
       name: example-secret
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-vn-rule
@@ -54,7 +54,7 @@ metadata:
   name: example-sql-vn-rule-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
@@ -93,7 +93,7 @@ spec:
   forProvider:
     addressSpace:
     - 10.7.29.0/29
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-vn-rule

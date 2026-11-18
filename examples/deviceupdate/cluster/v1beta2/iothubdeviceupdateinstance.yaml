@@ -9,17 +9,17 @@ metadata:
     meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
     uptest.upbound.io/timeout: "7200"
   labels:
-    testing.upbound.io/example-name: example
-  name: iothduiex
+    testing.upbound.io/example-name: iothubdeviceupdateinstance
+  name: iothduiex0d82c62b
 spec:
   forProvider:
     deviceUpdateAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: iothubdeviceupdateinstance
     diagnosticEnabled: true
     iothubIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: iothubdeviceupdateinstance
     tags:
       key: value
 
@@ -31,14 +31,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
   labels:
-    testing.upbound.io/example-name: example
-  name: iothduiex
+    testing.upbound.io/example-name: iothubdeviceupdateinstance
+  name: iothduiex0d82c62b
 spec:
   forProvider:
     location: East US
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: iothubdeviceupdateinstance
     sku:
       capacity: 1
       name: S1
@@ -51,14 +51,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
   labels:
-    testing.upbound.io/example-name: example
-  name: iothduiex
+    testing.upbound.io/example-name: iothubdeviceupdateinstance
+  name: iothduiex0d82c62b
 spec:
   forProvider:
     location: East US
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: iothubdeviceupdateinstance
 
 ---
 
@@ -68,8 +68,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: deviceupdate/v1beta1/iothubdeviceupdateinstance
   labels:
-    testing.upbound.io/example-name: example
-  name: iothduiex
+    testing.upbound.io/example-name: iothubdeviceupdateinstance
+  name: iothduiex0d82c62b
 spec:
   forProvider:
     location: East US
@@ -82,8 +82,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
   labels:
-    testing.upbound.io/example-name: example
-  name: iothduiex
+    testing.upbound.io/example-name: iothubdeviceupdateinstance
+  name: iothduiex0d82c62b
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -91,4 +91,4 @@ spec:
     location: East US
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: iothubdeviceupdateinstance

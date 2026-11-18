@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/blob
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: blob
   name: example
   namespace: upbound-system
 spec:
@@ -16,7 +16,7 @@ spec:
     sourceContent: inline content for this blob
     storageContainerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: blob
     type: Block
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -38,8 +38,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/blob
   labels:
-    testing.upbound.io/example-name: example
-  name: upteststorageacc
+    testing.upbound.io/example-name: blob
+  name: upteststorageaa9b5457f
   namespace: upbound-system
 spec:
   forProvider:
@@ -56,12 +56,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/blob
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: blob
+  name: example-blob
   namespace: upbound-system
 spec:
   forProvider:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: blob

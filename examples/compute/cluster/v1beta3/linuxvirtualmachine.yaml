@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
   name: example
 spec:
   forProvider:
@@ -19,13 +19,13 @@ spec:
     adminUsername: adminuser
     location: West Europe
     networkInterfaceIdsRefs:
-    - name: example
+    - name: example-linuxvirtualmachine
     osDisk:
       caching: ReadWrite
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
     size: Standard_F2
     sourceImageReference:
       offer: UbuntuServer
@@ -41,8 +41,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
 spec:
   forProvider:
     ipConfiguration:
@@ -50,11 +50,11 @@ spec:
       privateIpAddressAllocation: Dynamic
       subnetIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: example
+          testing.upbound.io/example-name: linuxvirtualmachine
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
 
 ---
 
@@ -64,8 +64,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
 spec:
   forProvider:
     location: West Europe
@@ -78,18 +78,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
 spec:
   forProvider:
     addressPrefixes:
     - 10.0.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
 
 ---
 
@@ -99,8 +99,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
 spec:
   forProvider:
     addressSpace:
@@ -108,4 +108,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine

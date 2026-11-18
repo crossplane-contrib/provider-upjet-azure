@@ -8,14 +8,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: automation/v1beta3/account
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: automation-account
   name: example
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: automation-account
     skuName: Basic
     tags:
       environment: development
@@ -28,8 +28,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: automation/v1beta1/account
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: automation-account
+  name: example-automation-account
 spec:
   forProvider:
     location: West Europe

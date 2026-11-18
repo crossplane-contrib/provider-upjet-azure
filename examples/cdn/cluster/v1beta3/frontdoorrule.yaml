@@ -6,9 +6,10 @@ apiVersion: cdn.azure.upbound.io/v1beta3
 kind: FrontdoorRule
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorrule
   name: example
 spec:
   forProvider:
@@ -25,19 +26,12 @@ spec:
         originGroup:
           cdnFrontdoorOriginGroupIdSelector:
             matchLabels:
-              testing.upbound.io/example-name: example
+              testing.upbound.io/example-name: frontdoorrule
           forwardingProtocol: HttpsOnly
-      urlRedirect:
-        destinationFragment: UrlRedirect
-        destinationHostName: contoso.com
-        destinationPath: /exampleredirection
-        queryString: clientIp={client_ip}
-        redirectProtocol: MatchRequest
-        redirectType: PermanentRedirect
     behaviourOnMatch: Continue
     cdnFrontdoorRuleSetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     conditions:
       deviceType:
       - operator: Equal
@@ -82,13 +76,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorrule
   name: example
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     tags:
       endpoint: contoso.com
 
@@ -100,13 +94,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoorrule
+  name: example-frontdoorrule
 spec:
   forProvider:
     cdnFrontdoorOriginGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     certificateNameCheckEnabled: false
     enabled: true
     hostName: contoso.com
@@ -124,13 +118,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoorrule
+  name: example-frontdoorrule
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     healthProbe:
       intervalInSeconds: 240
       path: /healthProbe
@@ -151,8 +145,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoorrule
+  name: example-frontdoorrule
 spec:
   forProvider:
     resourceGroupNameSelector:
@@ -168,13 +162,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorrule
   name: example
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
 
 ---
 

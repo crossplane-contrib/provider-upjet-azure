@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoreblobstorage
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoreblobstorage
   name: exampledatastore
   namespace: upbound-system
 spec:
@@ -19,10 +19,10 @@ spec:
     description: Example blob storage datastore
     storageContainerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
     workspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
 
 ---
 
@@ -32,7 +32,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoreblobstorage
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoreblobstorage
   name: mldsblobcontainer
   namespace: upbound-system
 spec:
@@ -40,7 +40,7 @@ spec:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
 
 ---
 
@@ -50,26 +50,26 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoreblobstorage
   labels:
-    testing.upbound.io/example-name: example
-  name: datastoreblobstorage
+    testing.upbound.io/example-name: datastoreblobstorage
+  name: mlds-blob-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     applicationInsightsIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
     identity:
       type: SystemAssigned
     keyVaultIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
 
 ---
 
@@ -79,7 +79,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoreblobstorage
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoreblobstorage
   name: datastoreblobstorage
   namespace: upbound-system
 spec:
@@ -88,7 +88,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
 
 ---
 
@@ -98,7 +98,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoreblobstorage
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoreblobstorage
   name: uptest-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
@@ -107,7 +107,7 @@ spec:
     rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
     skuName: standard
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
@@ -119,8 +119,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoreblobstorage
   labels:
-    testing.upbound.io/example-name: example
-  name: mldsblob6f3a
+    testing.upbound.io/example-name: datastoreblobstorage
+  name: mldsblobfa39440800
   namespace: upbound-system
 spec:
   forProvider:
@@ -129,7 +129,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoreblobstorage
   writeConnectionSecretToRef:
     name: example-mlds-blob-storage-account
 
@@ -141,7 +141,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoreblobstorage
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoreblobstorage
   name: datastoreblobstorage
   namespace: upbound-system
 spec:

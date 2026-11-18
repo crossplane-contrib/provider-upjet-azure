@@ -8,18 +8,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
   labels:
-    testing.upbound.io/example-name: examplemssqldatabase
-  name: examplemssqldatabase
+    testing.upbound.io/example-name: examplemssqldatabase-sql-mssqldatabase
+  name: examplemssqldatabase-sql-mssqldatabase
   namespace: upbound-system
 spec:
   forProvider:
     collation: SQL_Latin1_General_CP1_CI_AS
     elasticPoolIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: mssqldatabasepool
+        testing.upbound.io/example-name: mssqldatabasepool-sql-mssqldatabase
     serverIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: mssqldatabasesrv
+        testing.upbound.io/example-name: mssqldatabasesrv-sql-mssqldatabase
     skuName: ElasticPool
     tags:
       foo: bar
@@ -30,22 +30,22 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
   labels:
-    testing.upbound.io/example-name: mssqldatabasepool
-  name: mssqldatabasepool
+    testing.upbound.io/example-name: mssqldatabasepool-sql-mssqldatabase
+  name: mssqldatabasepool-sql-mssqldatabase
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     maxSizeGb: 5
     perDatabaseSettings:
       maxCapacity: 4
       minCapacity: 1
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: mssqldatabase-rg
+        testing.upbound.io/example-name: mssqldatabase-rg-sql-mssqldatabase
     serverNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: mssqldatabasesrv
+        testing.upbound.io/example-name: mssqldatabasesrv-sql-mssqldatabase
     sku:
       capacity: 4
       family: Gen5
@@ -59,19 +59,19 @@ metadata:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: mssqldatabasesrv
-  name: sqldatabasev1beta1ns
+    testing.upbound.io/example-name: mssqldatabasesrv-sql-mssqldatabase
+  name: sqldatabasev1beta1ns-sql-mssqldatabase
   namespace: upbound-system
 spec:
   forProvider:
     administratorLogin: 4dm1n157r470r
     administratorLoginPasswordSecretRef:
       key: example-key
-      name: example-secret
-    location: West Europe
+      name: example-secret-sql-mssqldatabase
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: mssqldatabase-rg
+        testing.upbound.io/example-name: mssqldatabase-rg-sql-mssqldatabase
     version: "12.0"
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -80,12 +80,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
   labels:
-    testing.upbound.io/example-name: mssqldatabase-rg
-  name: sqldatabasev1beta1ns
+    testing.upbound.io/example-name: mssqldatabase-rg-sql-mssqldatabase
+  name: sqldatabasev1beta1ns-sql-mssqldatabase
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
 apiVersion: sql.azure.m.upbound.io/v1beta2
 kind: MSSQLDatabase
@@ -93,8 +93,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqldatabase
   labels:
-    testing.upbound.io/example-name: examplemssqldatabasecopy
-  name: examplemssqldatabasecopy
+    testing.upbound.io/example-name: examplemssqldatabasecopy-sql-mssqldatabase
+  name: examplemssqldatabasecopy-sql-mssqldatabase
   namespace: upbound-system
 spec:
   forProvider:
@@ -102,13 +102,13 @@ spec:
     createMode: Copy
     creationSourceDatabaseIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: examplemssqldatabase
+        testing.upbound.io/example-name: examplemssqldatabase-sql-mssqldatabase
     elasticPoolIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: mssqldatabasepool
+        testing.upbound.io/example-name: mssqldatabasepool-sql-mssqldatabase
     serverIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: mssqldatabasesrv
+        testing.upbound.io/example-name: mssqldatabasesrv-sql-mssqldatabase
     tags:
       foo: bar
 ---
@@ -117,6 +117,6 @@ data:
   example-key: dGVzdFBhc3N3b3JkITEyMw==
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-sql-mssqldatabase
   namespace: upbound-system
 type: Opaque

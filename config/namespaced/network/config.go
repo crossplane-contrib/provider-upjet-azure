@@ -133,8 +133,10 @@ func Configure(p *config.Provider) {
 		r.References["network_watcher_name"] = config.Reference{
 			TerraformName: "azurerm_network_watcher",
 		}
+		// Azure accepts new flow logs only on virtual networks: NSG flow
+		// logs can no longer be created since June 30, 2025.
 		r.References["target_resource_id"] = config.Reference{
-			TerraformName: "azurerm_network_security_group",
+			TerraformName: "azurerm_virtual_network",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["storage_account_id"] = config.Reference{

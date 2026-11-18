@@ -6,18 +6,18 @@ apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: AuthorizationRule
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventhub-all-in-one
   name: example
 spec:
   forProvider:
     eventhubNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-all-in-one
     listen: true
     manage: false
     namespaceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-all-in-one
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-eventhub
@@ -29,16 +29,16 @@ apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: ConsumerGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventhub-all-in-one
   name: example
 spec:
   forProvider:
     eventhubNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-all-in-one
     namespaceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-all-in-one
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-eventhub
@@ -50,14 +50,14 @@ apiVersion: eventhub.azure.upbound.io/v1beta3
 kind: EventHub
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventhub-all-in-one
   name: example
 spec:
   forProvider:
     messageRetention: 1
     namespaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventhub-all-in-one
     partitionCount: 2
 
 ---
@@ -66,7 +66,7 @@ apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHubNamespace
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventhub-all-in-one
   name: example-eventhub-ns-upbound
 spec:
   forProvider:

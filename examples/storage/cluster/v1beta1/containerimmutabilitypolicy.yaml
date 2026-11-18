@@ -4,7 +4,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
   name: example
 spec:
   forProvider:
@@ -13,7 +13,7 @@ spec:
     protectedAppendWritesEnabled: true
     storageContainerResourceManagerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerimmutabilitypolicy
 
 ---
 
@@ -23,8 +23,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
+  name: example-containerimmutabilitypolicy
 spec:
   forProvider:
     location: West Europe
@@ -37,7 +37,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
   name: examplesa5398932221211
 spec:
   forProvider:
@@ -46,7 +46,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerimmutabilitypolicy
     tags:
       environment: staging
 
@@ -58,11 +58,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
+  name: example-containerimmutabilitypolicy
 spec:
   forProvider:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerimmutabilitypolicy

@@ -44,7 +44,7 @@ metadata:
   name: msql-example
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
@@ -63,7 +63,7 @@ spec:
     eventsLateArrivalMaxDelayInSeconds: 60
     eventsOutOfOrderMaxDelayInSeconds: 50
     eventsOutOfOrderPolicy: Adjust
-    location: West Europe
+    location: Sweden Central
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:
@@ -93,7 +93,7 @@ spec:
       key: password
       name: example-sql-server
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -143,7 +143,7 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

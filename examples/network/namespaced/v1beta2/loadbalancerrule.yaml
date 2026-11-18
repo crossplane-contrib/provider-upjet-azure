@@ -13,5 +13,5 @@ spec:
     frontendIpConfigurationName: PublicIPAddress
     frontendPort: 3389
     loadbalancerIdRef:
-      name: example
+      name: example-loadbalancer
     protocol: Tcp

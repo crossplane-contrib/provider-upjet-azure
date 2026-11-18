@@ -6,6 +6,7 @@ apiVersion: appplatform.azure.upbound.io/v1beta1
 kind: SpringCloudActiveDeployment
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudactivedeployment
   labels:
     testing.upbound.io/example-name: example
@@ -25,6 +26,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudActiveDeployment. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudactivedeployment
   labels:
     testing.upbound.io/example-name: example
@@ -39,6 +41,7 @@ apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudApp
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudactivedeployment
     uptest.upbound.io/pre-delete-hook: ../testhooks/delete-spring-active-deployment.sh
   labels:
@@ -59,6 +62,7 @@ apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudJavaDeployment
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudactivedeployment
   labels:
     testing.upbound.io/example-name: example
@@ -75,6 +79,7 @@ apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudService
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudactivedeployment
   labels:
     testing.upbound.io/example-name: example

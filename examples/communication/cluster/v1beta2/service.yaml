@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: communication/v1beta2/service
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: service
   name: servicename
 spec:
   forProvider:

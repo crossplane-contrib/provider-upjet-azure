@@ -33,7 +33,7 @@ spec:
     offerType: Standard
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: cosmosdb-account
 
 ---
 
@@ -43,7 +43,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cosmosdb/v1beta1/account
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: cosmosdb-account
   name: cosmosdb-rg
 spec:
   forProvider:

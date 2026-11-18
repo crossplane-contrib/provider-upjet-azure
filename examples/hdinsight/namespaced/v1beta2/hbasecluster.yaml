@@ -20,7 +20,7 @@ spec:
     gateway:
       passwordSecretRef:
         key: example-key
-        name: example-secret
+        name: example-secret-hbasecluster
       username: acctestusrgw
     location: West Europe
     resourceGroupNameSelector:
@@ -30,30 +30,30 @@ spec:
       headNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-hbasecluster
         username: acctestusrvm
         vmSize: Standard_D3_V2
       workerNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-hbasecluster
         targetInstanceCount: 3
         username: acctestusrvm
         vmSize: Standard_D3_V2
       zookeeperNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-hbasecluster
         username: acctestusrvm
         vmSize: Standard_D3_V2
     storageAccount:
       - isDefault: true
         storageAccountKeySecretRef:
           key: attribute.primary_access_key
-          name: example-storage-account
+          name: example-storage-account-hbasecluster
         storageContainerUrlSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: hbasecluster
     tier: Standard
     tlsMinVersion: "1.2"
 ---
@@ -77,8 +77,8 @@ metadata:
     meta.upbound.io/example-id: hdinsight/v1beta2/hbasecluster
     uptest.upbound.io/pre-delete-hook: ../testhooks/delete-hbasecluster.sh
   labels:
-    testing.upbound.io/example-name: example0001
-  name: example0001
+    testing.upbound.io/example-name: example0001-hbasecluster
+  name: exampledebe4615
   namespace: upbound-system
 spec:
   forProvider:
@@ -89,7 +89,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: rghbasecluster
   writeConnectionSecretToRef:
-    name: example-storage-account
+    name: example-storage-account-hbasecluster
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Container
@@ -97,21 +97,21 @@ metadata:
   annotations:
     meta.upbound.io/example-id: hdinsight/v1beta2/hbasecluster
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: hbasecluster
+  name: example-hbasecluster
   namespace: upbound-system
 spec:
   forProvider:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example0001
+        testing.upbound.io/example-name: example0001-hbasecluster
 ---
 apiVersion: v1
 data:
   example-key: VGVyckFmb3JtMTIzIQ==
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-hbasecluster
   namespace: upbound-system
 type: Opaque

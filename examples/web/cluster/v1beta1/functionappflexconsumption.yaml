@@ -12,6 +12,8 @@ metadata:
   name: functionappflexnamec12a
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

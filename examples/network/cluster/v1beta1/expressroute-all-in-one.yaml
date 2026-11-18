@@ -115,6 +115,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta3
 kind: ExpressRouteConnection
 metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
   name: example-route-connection
 spec:
   forProvider:

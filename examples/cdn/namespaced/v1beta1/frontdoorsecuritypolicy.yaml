@@ -6,6 +6,7 @@ apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorSecurityPolicy
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
   labels:
     testing.upbound.io/example-name: frontdoorsecuritypolicy

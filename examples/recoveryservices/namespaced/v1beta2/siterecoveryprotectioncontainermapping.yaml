@@ -7,6 +7,7 @@ kind: SiteRecoveryProtectionContainerMapping
 metadata:
   annotations:
     meta.upbound.io/example-id: recoveryservices/v1beta2/siterecoveryprotectioncontainermapping
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-siterecoveryprotectioncontainermapping.sh
   labels:
     testing.upbound.io/example-name: container-mapping
   name: container-mapping
@@ -27,7 +28,7 @@ spec:
         testing.upbound.io/example-name: secondary
     recoveryVaultNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: vault
+        testing.upbound.io/example-name: vault-siterecoveryprotectioncontainermapping
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary
@@ -38,8 +39,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: recoveryservices/v1beta2/siterecoveryprotectioncontainermapping
   labels:
-    testing.upbound.io/example-name: vault
-  name: vault
+    testing.upbound.io/example-name: vault-siterecoveryprotectioncontainermapping
+  name: vault-siterecoveryprotectioncontainermapping
   namespace: upbound-system
 spec:
   forProvider:
@@ -89,7 +90,7 @@ spec:
     location: West US
     recoveryVaultNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: vault
+        testing.upbound.io/example-name: vault-siterecoveryprotectioncontainermapping
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary
@@ -108,7 +109,7 @@ spec:
     location: East US
     recoveryVaultNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: vault
+        testing.upbound.io/example-name: vault-siterecoveryprotectioncontainermapping
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary
@@ -129,7 +130,7 @@ spec:
         testing.upbound.io/example-name: primary
     recoveryVaultNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: vault
+        testing.upbound.io/example-name: vault-siterecoveryprotectioncontainermapping
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary
@@ -150,7 +151,7 @@ spec:
         testing.upbound.io/example-name: secondary
     recoveryVaultNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: vault
+        testing.upbound.io/example-name: vault-siterecoveryprotectioncontainermapping
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary
@@ -170,7 +171,7 @@ spec:
     recoveryPointRetentionInMinutes: 240
     recoveryVaultNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: vault
+        testing.upbound.io/example-name: vault-siterecoveryprotectioncontainermapping
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: secondary

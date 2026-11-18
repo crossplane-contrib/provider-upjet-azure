@@ -6,6 +6,7 @@ apiVersion: appplatform.azure.upbound.io/v1beta1
 kind: SpringCloudStorage
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
   labels:
     testing.upbound.io/example-name: example
@@ -26,6 +27,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudStorage. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
   labels:
     testing.upbound.io/example-name: example
@@ -40,6 +42,7 @@ apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudService
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
   labels:
     testing.upbound.io/example-name: example
@@ -57,6 +60,7 @@ apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudStorage. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
   labels:
     testing.upbound.io/example-name: example

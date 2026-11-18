@@ -8,8 +8,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
 spec:
   forProvider:
     backendPort: 3389
@@ -17,11 +17,11 @@ spec:
     frontendPort: 3389
     loadbalancerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
     protocol: Tcp
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
 
 ---
 
@@ -31,19 +31,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
 spec:
   forProvider:
     frontendIpConfiguration:
     - name: PublicIPAddress
       publicIpAddressIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: example
+          testing.upbound.io/example-name: loadbalancernatrule
     location: West US
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
 
 ---
 
@@ -53,15 +53,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
 spec:
   forProvider:
     allocationMethod: Static
     location: West US
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
 
 ---
 
@@ -71,8 +71,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
 spec:
   forProvider:
     location: West Europe

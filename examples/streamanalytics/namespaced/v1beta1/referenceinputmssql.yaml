@@ -64,7 +64,7 @@ spec:
     administratorLoginPasswordSecretRef:
       key: example-key
       name: example-name
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: refinputmssql-rg
@@ -81,7 +81,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
 apiVersion: v1
 kind: Secret
@@ -108,7 +108,7 @@ spec:
     eventsLateArrivalMaxDelayInSeconds: 60
     eventsOutOfOrderMaxDelayInSeconds: 50
     eventsOutOfOrderPolicy: Adjust
-    location: West Europe
+    location: Sweden Central
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:

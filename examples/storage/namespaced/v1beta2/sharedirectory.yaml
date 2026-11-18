@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: sharedirectory
   name: sdexample
   namespace: upbound-system
 spec:
@@ -16,7 +16,7 @@ spec:
     name: example
     storageShareUrlSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sharedirectory
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -24,7 +24,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: sharedirectory
   name: sdexample
   namespace: upbound-system
 spec:
@@ -37,8 +37,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
-  name: sdexamplebumptest55
+    testing.upbound.io/example-name: sharedirectory
+  name: sdexamplebumpt11aa9d4c
   namespace: upbound-system
 spec:
   forProvider:
@@ -47,7 +47,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sharedirectory
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Share
@@ -55,7 +55,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: sharedirectory
   name: sdexample
   namespace: upbound-system
 spec:
@@ -63,4 +63,4 @@ spec:
     quota: 50
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sharedirectory

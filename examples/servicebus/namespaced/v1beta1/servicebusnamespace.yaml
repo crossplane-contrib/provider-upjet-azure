@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicebus/v1beta2/servicebusnamespace
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: servicebusnamespace
   name: example-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
@@ -16,7 +16,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: servicebusnamespace
     sku: Standard
     tags:
       source: terraform
@@ -27,8 +27,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: servicebus/v1beta1/servicebusnamespace
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: servicebusnamespace
+  name: example-servicebusnamespace
   namespace: upbound-system
 spec:
   forProvider:

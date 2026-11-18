@@ -102,7 +102,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     synapseWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: linkedservice-ws-label
@@ -120,7 +120,7 @@ spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: West Europe
+    location: Sweden Central
     managedVirtualNetworkEnabled: true
     resourceGroupNameSelector:
       matchLabels:

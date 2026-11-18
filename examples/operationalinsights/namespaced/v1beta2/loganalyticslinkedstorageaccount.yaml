@@ -6,9 +6,10 @@ apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: LogAnalyticsLinkedStorageAccount
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: operationalinsights/v1beta2/loganalyticslinkedstorageaccount
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: loganalyticslinkedstorageaccount
   name: example
   namespace: upbound-system
 spec:
@@ -18,10 +19,10 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: rg-operationalinsights
     storageAccountIdsRefs:
-      - name: sampleacc001
+      - name: sampleacc36d4c48b
     workspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loganalyticslinkedstorageaccount
 ---
 apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
@@ -29,8 +30,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: operationalinsights/v1beta2/loganalyticslinkedstorageaccount
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loganalyticslinkedstorageaccount
+  name: example-loganalyticslinkedstorageaccount
   namespace: upbound-system
 spec:
   forProvider:
@@ -59,8 +60,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: operationalinsights/v1beta2/loganalyticslinkedstorageaccount
   labels:
-    testing.upbound.io/example-name: sampleacc001
-  name: sampleacc001
+    testing.upbound.io/example-name: sampleacc36d4c48b
+  name: sampleacc36d4c48b
   namespace: upbound-system
 spec:
   forProvider:

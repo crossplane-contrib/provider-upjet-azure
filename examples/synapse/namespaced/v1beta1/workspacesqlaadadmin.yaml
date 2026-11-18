@@ -33,7 +33,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     purgeProtectionEnabled: true
     rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
@@ -99,7 +99,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
@@ -117,7 +117,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: wssqlaadadmin-rg
@@ -152,7 +152,7 @@ spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: wssqlaadadmin-rg

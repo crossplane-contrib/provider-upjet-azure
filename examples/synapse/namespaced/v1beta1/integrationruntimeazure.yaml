@@ -16,7 +16,7 @@ spec:
     location: South Africa North
     synapseWorkspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: integration-ws-label
+        testing.upbound.io/example-name: integration-ws-label-integrationruntimeazure
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -24,8 +24,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
-    testing.upbound.io/example-name: integration-rg-label
-  name: integration-rg
+    testing.upbound.io/example-name: integration-rg-label-integrationruntimeazure
+  name: integration-rg-integrationruntimeazure
   namespace: upbound-system
 spec:
   forProvider:
@@ -37,8 +37,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
-    testing.upbound.io/example-name: account-label
-  name: integruntimeaccounta
+    testing.upbound.io/example-name: account-label-integrationruntimeazure
+  name: integruntimeaca54f898a
   namespace: upbound-system
 spec:
   forProvider:
@@ -49,7 +49,7 @@ spec:
     location: South Africa North
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: integration-rg-label
+        testing.upbound.io/example-name: integration-rg-label-integrationruntimeazure
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta1
 kind: DataLakeGen2FileSystem
@@ -57,14 +57,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
-    testing.upbound.io/example-name: file-system-label
-  name: file-system
+    testing.upbound.io/example-name: file-system-label-integrationruntimeazure
+  name: file-system-integrationruntimeazure
   namespace: upbound-system
 spec:
   forProvider:
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: account-label
+        testing.upbound.io/example-name: account-label-integrationruntimeazure
 ---
 apiVersion: synapse.azure.m.upbound.io/v1beta1
 kind: Workspace
@@ -72,8 +72,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
-    testing.upbound.io/example-name: integration-ws-label
-  name: integration-ws
+    testing.upbound.io/example-name: integration-ws-label-integrationruntimeazure
+  name: integrationws768498bc
   namespace: upbound-system
 spec:
   forProvider:
@@ -82,8 +82,8 @@ spec:
     location: South Africa North
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: integration-rg-label
+        testing.upbound.io/example-name: integration-rg-label-integrationruntimeazure
     sqlAdministratorLogin: sqladminuser
     storageDataLakeGen2FilesystemIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: file-system-label
+        testing.upbound.io/example-name: file-system-label-integrationruntimeazure

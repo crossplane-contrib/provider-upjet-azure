@@ -8,13 +8,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerservice/v1beta3/kubernetesclusternodepool
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: kubernetescluster
   name: example
 spec:
   forProvider:
     kubernetesClusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: kubernetescluster
     nodeCount: 1
     tags:
       Environment: Production
@@ -28,7 +28,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerservice/v1beta3/kubernetesclusternodepool
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: kubernetescluster
   name: example
 spec:
   forProvider:

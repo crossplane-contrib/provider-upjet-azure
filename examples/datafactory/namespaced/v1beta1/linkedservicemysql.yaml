@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/linkedservicemysql
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: linkedservicemysql
   name: example
   namespace: upbound-system
 spec:

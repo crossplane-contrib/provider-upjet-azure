@@ -7,15 +7,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/share
   labels:
-    testing.upbound.io/example-name: example
-  name: sdexamplebumptest5sd
+    testing.upbound.io/example-name: share
+  name: sdexamplebumpt3483060b
   namespace: upbound-system
 spec:
   forProvider:
     quota: 50
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: share
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
@@ -23,8 +23,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/share
   labels:
-    testing.upbound.io/example-name: example
-  name: sdexamplebumptest5sd
+    testing.upbound.io/example-name: share
+  name: sdexamplebumpt3483060b
   namespace: upbound-system
 spec:
   forProvider:
@@ -33,7 +33,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: share
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -41,8 +41,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/share
   labels:
-    testing.upbound.io/example-name: example
-  name: sdexamplebumptest5sd
+    testing.upbound.io/example-name: share
+  name: sdexamplebumpt3483060b
   namespace: upbound-system
 spec:
   forProvider:

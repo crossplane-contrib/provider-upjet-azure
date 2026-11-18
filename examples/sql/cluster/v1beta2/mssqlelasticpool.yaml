@@ -12,7 +12,7 @@ metadata:
   name: examplemssqlelasticpool
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     maxSizeGb: 5
     perDatabaseSettings:
       maxCapacity: 4
@@ -41,7 +41,7 @@ metadata:
   name: mssqlelasticpool-rg
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
@@ -59,9 +59,9 @@ spec:
     administratorLogin: 4dm1n157r470r
     administratorLoginPasswordSecretRef:
       key: example-key
-      name: example-secret
+      name: example-secret-mssqlelasticpool
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: mssqlelasticpool-rg
@@ -74,6 +74,6 @@ data:
   example-key: dGVzdFBhc3N3b3JkITEyMw==
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-mssqlelasticpool
   namespace: upbound-system
 type: Opaque

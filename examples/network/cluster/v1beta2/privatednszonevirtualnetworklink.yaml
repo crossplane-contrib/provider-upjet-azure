@@ -8,17 +8,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
 spec:
   forProvider:
     registrationEnabled: true
     privateDnsZoneIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink
     virtualNetworkIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink
 
 ---
 
@@ -29,13 +29,13 @@ metadata:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
     crossplane.io/external-name: example.com
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
 spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink
 
 ---
 
@@ -45,7 +45,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
 spec:
   forProvider:
@@ -59,7 +59,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
 spec:
   forProvider:
@@ -68,4 +68,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink

@@ -16,6 +16,8 @@ spec:
     appServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: linuxwebappslot-lwa
+    authSettings:
+      enabled: false
     name: lnxappslotexample
     siteConfig: {}
 ---
@@ -30,6 +32,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

@@ -8,8 +8,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta2/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
   namespace: upbound-system
 spec:
   forProvider:
@@ -17,11 +17,11 @@ spec:
       - category: AuditEvent
     enabledMetric:
       - category: AllMetrics
-    name: insightsmds
+    name: insightsmdscd7c76d0
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: insightsmds
-    targetResourceId: ${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/insightsmds/providers/Microsoft.KeyVault/vaults/insightsmds
+        testing.upbound.io/example-name: insightsmdscd7c76d0
+    targetResourceId: ${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/insightsmdscd7c76d0/providers/Microsoft.KeyVault/vaults/insightsmdscd7c76d0
 ---
 apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
@@ -29,8 +29,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta2/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
   namespace: upbound-system
 spec:
   forProvider:
@@ -39,7 +39,7 @@ spec:
     rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: insightsmds
+        testing.upbound.io/example-name: insightsmdscd7c76d0
     skuName: standard
     softDeleteRetentionDays: 7
     tenantId: ${data.azurerm_client_config.current.tenant_id}
@@ -50,8 +50,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta2/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
   namespace: upbound-system
 spec:
   forProvider:
@@ -63,8 +63,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta2/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
   namespace: upbound-system
 spec:
   forProvider:
@@ -73,4 +73,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: insightsmds
+        testing.upbound.io/example-name: insightsmdscd7c76d0

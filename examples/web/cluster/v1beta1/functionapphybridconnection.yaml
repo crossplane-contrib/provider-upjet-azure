@@ -123,6 +123,8 @@ metadata:
   name: funcapphybrconn-wfa
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

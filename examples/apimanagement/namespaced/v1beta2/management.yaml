@@ -9,8 +9,8 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta2/management
     uptest.upbound.io/timeout: "7200"
   labels:
-    testing.upbound.io/example-name: example
-  name: upbound-example
+    testing.upbound.io/example-name: management
+  name: upbound-example-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
@@ -19,7 +19,7 @@ spec:
     publisherName: My Company
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: management
     skuName: Developer_1
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -28,7 +28,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apimanagement/v1beta2/management
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: management
   name: example-api-management-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:

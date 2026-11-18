@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eventgrid/v1beta2/eventsubscription
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventsubscription
   name: example
   namespace: upbound-system
 spec:
@@ -23,7 +23,7 @@ spec:
           testing.upbound.io/example-name: eventsubscriptionqueue
       storageAccountIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: eventgridstoracc
+          testing.upbound.io/example-name: eventgridstora3e0ed320
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -44,8 +44,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eventgrid/v1beta2/eventsubscription
   labels:
-    testing.upbound.io/example-name: eventgridstoracc
-  name: eventgridstoracc
+    testing.upbound.io/example-name: eventgridstora3e0ed320
+  name: eventgridstora3e0ed320
   namespace: upbound-system
 spec:
   forProvider:
@@ -71,4 +71,4 @@ spec:
   forProvider:
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: eventgridstoracc
+        testing.upbound.io/example-name: eventgridstora3e0ed320

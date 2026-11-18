@@ -8,8 +8,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: operationalinsights/v1beta2/workspace
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: operationalinsights-workspace
+  name: example-operationalinsights-workspace
   namespace: upbound-system
 spec:
   forProvider:

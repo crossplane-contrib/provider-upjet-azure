@@ -6,18 +6,19 @@ apiVersion: cdn.azure.upbound.io/v1beta3
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorcustomdomain
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorcustomdomain
   name: example
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorcustomdomain
     dnsZoneIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorcustomdomain
     hostName: contoso.fabrikam.com
     tls:
       certificateType: ManagedCertificate
@@ -30,8 +31,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorcustomdomain
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoorcustomdomain
+  name: example-frontdoorcustomdomain
 spec:
   forProvider:
     resourceGroupNameSelector:
@@ -48,7 +49,7 @@ metadata:
     crossplane.io/external-name: upbound-example.com
     meta.upbound.io/example-id: cdn/v1beta3/frontdoorcustomdomain
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorcustomdomain
   name: example
 spec:
   forProvider:

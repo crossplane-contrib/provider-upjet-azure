@@ -6,16 +6,17 @@ apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorOrigin
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoororigin
+  name: example-frontdoororigin
   namespace: upbound-system
 spec:
   forProvider:
     cdnFrontdoorOriginGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoororigin
     certificateNameCheckEnabled: false
     enabled: true
     hostName: contoso.com
@@ -31,14 +32,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoororigin
+  name: example-frontdoororigin
   namespace: upbound-system
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoororigin
     loadBalancing: {}
 ---
 apiVersion: cdn.azure.m.upbound.io/v1beta1
@@ -47,14 +48,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoororigin
+  name: example-frontdoororigin
   namespace: upbound-system
 spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoororigin
     skuName: Premium_AzureFrontDoor
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -63,8 +64,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta1/frontdoororigin
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoororigin
+  name: example-frontdoororigin
   namespace: upbound-system
 spec:
   forProvider:

@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/tableentity
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: tableentity
   name: teexample
   namespace: upbound-system
 spec:
@@ -19,7 +19,7 @@ spec:
     rowKey: examplerow
     storageTableIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: tableentity
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -27,7 +27,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/tableentity
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: tableentity
   name: teexample
   namespace: upbound-system
 spec:
@@ -40,8 +40,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/tableentity
   labels:
-    testing.upbound.io/example-name: example
-  name: teexamplebumptest
+    testing.upbound.io/example-name: tableentity
+  name: teexamplebumpt0081bd44
   namespace: upbound-system
 spec:
   forProvider:
@@ -50,7 +50,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: tableentity
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Table
@@ -58,7 +58,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/tableentity
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: tableentity
   name: teexample
   namespace: upbound-system
 spec:
@@ -66,4 +66,4 @@ spec:
     name: myexampletable
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: tableentity

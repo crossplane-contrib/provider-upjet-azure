@@ -27,7 +27,7 @@ spec:
       - name: example
         publicIpAddressIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: applicationgateway
     frontendPort:
       - name: example
         port: 80
@@ -51,7 +51,7 @@ spec:
         ruleType: Basic
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     sku:
       capacity: 2
       name: Standard_v2
@@ -63,8 +63,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/applicationgateway
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationgateway
+  name: example-applicationgateway
   namespace: upbound-system
 spec:
   forProvider:
@@ -72,7 +72,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     sku: Standard
 ---
 apiVersion: network.azure.m.upbound.io/v1beta2
@@ -90,10 +90,10 @@ spec:
       - 10.254.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
 ---
 apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
@@ -110,10 +110,10 @@ spec:
       - 10.254.0.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
 ---
 apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
@@ -121,8 +121,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/applicationgateway
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationgateway
+  name: example-applicationgateway
   namespace: upbound-system
 spec:
   forProvider:
@@ -131,7 +131,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -139,8 +139,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/applicationgateway
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationgateway
+  name: example-applicationgateway
   namespace: upbound-system
 spec:
   forProvider:

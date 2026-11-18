@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: firewallrule
   name: firewallrule
   namespace: upbound-system
 spec:
@@ -30,7 +30,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: North Central US
+    location: Sweden Central
 ---
 apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
@@ -38,8 +38,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
-    testing.upbound.io/example-name: account-label
-  name: firewallaccounta
+    testing.upbound.io/example-name: account-label-firewallrule
+  name: firewallaccounc53f15f7
   namespace: upbound-system
 spec:
   forProvider:
@@ -47,7 +47,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: North Central US
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: firewall-rg-label
@@ -58,14 +58,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
-    testing.upbound.io/example-name: file-system-label
-  name: file-system
+    testing.upbound.io/example-name: file-system-label-firewallrule
+  name: file-system-firewallrule
   namespace: upbound-system
 spec:
   forProvider:
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: account-label
+        testing.upbound.io/example-name: account-label-firewallrule
 ---
 apiVersion: synapse.azure.m.upbound.io/v1beta1
 kind: Workspace
@@ -74,17 +74,17 @@ metadata:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
     testing.upbound.io/example-name: firewall-ws-label
-  name: firewall-ws
+  name: firewall-ws-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: North Central US
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: firewall-rg-label
     sqlAdministratorLogin: sqladminuser
     storageDataLakeGen2FilesystemIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: file-system-label
+        testing.upbound.io/example-name: file-system-label-firewallrule

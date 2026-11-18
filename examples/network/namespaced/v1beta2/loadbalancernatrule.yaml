@@ -8,8 +8,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
   namespace: upbound-system
 spec:
   forProvider:
@@ -18,11 +18,11 @@ spec:
     frontendPort: 3389
     loadbalancerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
     protocol: Tcp
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
 ---
 apiVersion: network.azure.m.upbound.io/v1beta2
 kind: LoadBalancer
@@ -30,8 +30,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
   namespace: upbound-system
 spec:
   forProvider:
@@ -39,11 +39,11 @@ spec:
       - name: PublicIPAddress
         publicIpAddressIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: loadbalancernatrule
     location: West US
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
 ---
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: PublicIP
@@ -51,8 +51,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
   namespace: upbound-system
 spec:
   forProvider:
@@ -60,7 +60,7 @@ spec:
     location: West US
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: loadbalancernatrule
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -68,8 +68,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/loadbalancernatrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancernatrule
+  name: example-loadbalancernatrule
   namespace: upbound-system
 spec:
   forProvider:

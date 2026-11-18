@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: automation/v1beta2/account
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: automation-account
   name: example
   namespace: upbound-system
 spec:
@@ -16,7 +16,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: automation-account
     skuName: Basic
     tags:
       environment: development
@@ -27,8 +27,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: automation/v1beta2/account
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: automation-account
+  name: example-automation-account
   namespace: upbound-system
 spec:
   forProvider:

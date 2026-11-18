@@ -8,17 +8,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta1/environment
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: environment
+  name: example-environment
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: environment
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: environment
 
 ---
 
@@ -28,14 +29,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta1/environment
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: environment
+  name: example-environment
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: environment
     retentionInDays: 30
     sku: PerGB2018
 
@@ -47,8 +48,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta1/environment
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: environment
+  name: example-environment
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central

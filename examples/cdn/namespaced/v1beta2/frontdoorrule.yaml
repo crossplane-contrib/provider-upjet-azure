@@ -6,9 +6,10 @@ apiVersion: cdn.azure.m.upbound.io/v1beta2
 kind: FrontdoorRule
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorrule
   name: example
   namespace: upbound-system
 spec:
@@ -26,19 +27,12 @@ spec:
         originGroup:
           cdnFrontdoorOriginGroupIdSelector:
             matchLabels:
-              testing.upbound.io/example-name: example
+              testing.upbound.io/example-name: frontdoorrule
           forwardingProtocol: HttpsOnly
-      urlRedirect:
-        destinationFragment: UrlRedirect
-        destinationHostName: contoso.com
-        destinationPath: /exampleredirection
-        queryString: clientIp={client_ip}
-        redirectProtocol: MatchRequest
-        redirectType: PermanentRedirect
     behaviourOnMatch: Continue
     cdnFrontdoorRuleSetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     conditions:
       deviceType:
         - operator: Equal
@@ -81,14 +75,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorrule
   name: example
   namespace: upbound-system
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     tags:
       endpoint: contoso.com
 ---
@@ -98,14 +92,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoorrule
+  name: example-frontdoorrule
   namespace: upbound-system
 spec:
   forProvider:
     cdnFrontdoorOriginGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     certificateNameCheckEnabled: false
     enabled: true
     hostName: contoso.com
@@ -121,14 +115,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoorrule
+  name: example-frontdoorrule
   namespace: upbound-system
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
     healthProbe:
       intervalInSeconds: 240
       path: /healthProbe
@@ -147,8 +141,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: frontdoorrule
+  name: example-frontdoorrule
   namespace: upbound-system
 spec:
   forProvider:
@@ -163,14 +157,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: frontdoorrule
   name: example
   namespace: upbound-system
 spec:
   forProvider:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: frontdoorrule
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup

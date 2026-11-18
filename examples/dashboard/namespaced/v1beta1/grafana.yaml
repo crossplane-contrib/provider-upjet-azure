@@ -7,16 +7,16 @@ kind: Grafana
 metadata:
   annotations:
     meta.upbound.io/example-id: dashboard/v1beta1/grafana
-    uptest.upbound.io/timeout: "1800"
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: grafanans
-  name: grafanans
+  name: grafanans-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     apiKeyEnabled: true
     deterministicOutboundIpEnabled: true
-    grafanaMajorVersion: "11"
+    grafanaMajorVersion: "13"
     identity:
       type: SystemAssigned
     location: West Europe
@@ -32,7 +32,7 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: dashboard/v1beta1/grafana
-    uptest.upbound.io/timeout: "1800"
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: grafanans
   name: grafanans

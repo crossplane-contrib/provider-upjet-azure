@@ -6,8 +6,8 @@ apiVersion: network.azure.m.upbound.io/v1beta2
 kind: LoadBalancer
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancer
+  name: example-loadbalancer
   namespace: upbound-system
 spec:
   forProvider:
@@ -15,7 +15,7 @@ spec:
       - name: PublicIPAddress
         publicIpAddressIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: loadbalancer
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -25,8 +25,8 @@ apiVersion: network.azure.m.upbound.io/v1beta1
 kind: PublicIP
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: loadbalancer
+  name: example-loadbalancer
   namespace: upbound-system
 spec:
   forProvider:

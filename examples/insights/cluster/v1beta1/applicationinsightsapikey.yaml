@@ -39,7 +39,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationinsightsapikey
 
 ---
 
@@ -49,7 +49,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta1/applicationinsightsapikey
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: applicationinsightsapikey
   name: example
 spec:
   forProvider:

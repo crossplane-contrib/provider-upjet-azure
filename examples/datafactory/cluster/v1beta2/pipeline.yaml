@@ -8,13 +8,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta2/pipeline
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: pipeline
   name: dfpexample
 spec:
   forProvider:
     dataFactoryIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: pipeline
 
 ---
 
@@ -24,14 +24,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta2/pipeline
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: pipeline
   name: dfpexample
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: pipeline
 
 ---
 
@@ -41,7 +41,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta2/pipeline
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: pipeline
   name: dfpexample
 spec:
   forProvider:

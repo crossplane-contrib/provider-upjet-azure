@@ -423,7 +423,7 @@ spec:
                       for.
                     type: string
                   targetResourceIdRef:
-                    description: Reference to a SecurityGroup in network to populate
+                    description: Reference to a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       name:
@@ -458,7 +458,7 @@ spec:
                     - name
                     type: object
                   targetResourceIdSelector:
-                    description: Selector for a SecurityGroup in network to populate
+                    description: Selector for a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       matchControllerRef:
@@ -875,7 +875,7 @@ spec:
                       for.
                     type: string
                   targetResourceIdRef:
-                    description: Reference to a SecurityGroup in network to populate
+                    description: Reference to a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       name:
@@ -910,7 +910,7 @@ spec:
                     - name
                     type: object
                   targetResourceIdSelector:
-                    description: Selector for a SecurityGroup in network to populate
+                    description: Selector for a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       matchControllerRef:
@@ -1690,7 +1690,7 @@ spec:
                       for.
                     type: string
                   targetResourceIdRef:
-                    description: Reference to a SecurityGroup in network to populate
+                    description: Reference to a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       name:
@@ -1725,7 +1725,7 @@ spec:
                     - name
                     type: object
                   targetResourceIdSelector:
-                    description: Selector for a SecurityGroup in network to populate
+                    description: Selector for a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       matchControllerRef:
@@ -2063,7 +2063,7 @@ spec:
                       for.
                     type: string
                   targetResourceIdRef:
-                    description: Reference to a SecurityGroup in network to populate
+                    description: Reference to a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       name:
@@ -2098,7 +2098,7 @@ spec:
                     - name
                     type: object
                   targetResourceIdSelector:
-                    description: Selector for a SecurityGroup in network to populate
+                    description: Selector for a VirtualNetwork in network to populate
                       targetResourceId.
                     properties:
                       matchControllerRef:

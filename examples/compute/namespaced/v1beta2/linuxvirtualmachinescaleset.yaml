@@ -6,9 +6,10 @@ apiVersion: compute.azure.m.upbound.io/v1beta2
 kind: LinuxVirtualMachineScaleSet
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: linuxvirtualmachinescaleset
   name: example
   namespace: upbound-system
 spec:
@@ -25,7 +26,7 @@ spec:
             primary: true
             subnetIdSelector:
               matchLabels:
-                testing.upbound.io/example-name: internal
+                testing.upbound.io/example-name: internal-linuxvirtualmachinescaleset
         name: example
         primary: true
     osDisk:
@@ -33,7 +34,7 @@ spec:
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
     sku: Standard_F2
     sourceImageReference:
       offer: UbuntuServer
@@ -47,8 +48,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: internal
-  name: internal
+    testing.upbound.io/example-name: internal-linuxvirtualmachinescaleset
+  name: internal-linuxvirtualmachinescaleset
   namespace: upbound-system
 spec:
   forProvider:
@@ -56,10 +57,10 @@ spec:
       - 10.0.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
 ---
 apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
@@ -67,8 +68,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachinescaleset
+  name: example-linuxvirtualmachinescaleset
   namespace: upbound-system
 spec:
   forProvider:
@@ -77,7 +78,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -85,8 +86,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachinescaleset
+  name: example-linuxvirtualmachinescaleset
   namespace: upbound-system
 spec:
   forProvider:

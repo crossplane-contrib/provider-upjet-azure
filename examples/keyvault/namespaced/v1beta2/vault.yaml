@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: keyvault/v1beta2/vault
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: keyvault-vault
   name: uptest-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
@@ -19,7 +19,7 @@ spec:
     rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: keyvault-vault
     skuName: standard
     softDeleteRetentionDays: 7
     tenantId: ${data.azurerm_client_config.current.tenant_id}
@@ -30,7 +30,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: keyvault/v1beta2/vault
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: keyvault-vault
   name: uptest-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:

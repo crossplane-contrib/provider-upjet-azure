@@ -17,7 +17,7 @@ spec:
     databaseIdSelector:
       matchLabels:
         testing.upbound.io/example-name: mssqljobagent-db
-    location: northeurope
+    location: Germany West Central
     name: example-job-agent
 ---
 apiVersion: sql.azure.m.upbound.io/v1beta2
@@ -53,7 +53,7 @@ spec:
     administratorLoginPasswordSecretRef:
       key: example-key
       name: example-secret
-    location: northeurope
+    location: Germany West Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: mssqljobagent-rg
@@ -70,7 +70,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: northeurope
+    location: Germany West Central
 ---
 apiVersion: v1
 kind: Secret

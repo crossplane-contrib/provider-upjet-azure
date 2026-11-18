@@ -54,6 +54,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     name: funcappfunction-lin-app
     resourceGroupNameSelector:

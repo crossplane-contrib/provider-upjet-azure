@@ -6,9 +6,10 @@ apiVersion: compute.azure.upbound.io/v1beta3
 kind: LinuxVirtualMachineScaleSet
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: compute/v1beta3/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: linuxvirtualmachinescaleset
   name: example
 spec:
   forProvider:
@@ -25,7 +26,7 @@ spec:
         primary: true
         subnetIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: internal
+            testing.upbound.io/example-name: internal-linuxvirtualmachinescaleset
       name: example
       primary: true
     osDisk:
@@ -33,7 +34,7 @@ spec:
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
     sku: Standard_F2
     sourceImageReference:
       offer: UbuntuServer
@@ -49,18 +50,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: internal
-  name: internal
+    testing.upbound.io/example-name: internal-linuxvirtualmachinescaleset
+  name: internal-linuxvirtualmachinescaleset
 spec:
   forProvider:
     addressPrefixes:
     - 10.0.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
 
 ---
 
@@ -70,8 +71,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachinescaleset
+  name: example-linuxvirtualmachinescaleset
 spec:
   forProvider:
     addressSpace:
@@ -79,7 +80,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachinescaleset
 
 ---
 
@@ -89,8 +90,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachinescaleset
+  name: example-linuxvirtualmachinescaleset
 spec:
   forProvider:
     location: West Europe

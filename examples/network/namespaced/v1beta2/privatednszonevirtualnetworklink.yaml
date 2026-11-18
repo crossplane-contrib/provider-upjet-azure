@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
   namespace: upbound-system
 spec:
@@ -16,10 +16,10 @@ spec:
     registrationEnabled: true
     privateDnsZoneIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink
     virtualNetworkIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink
 ---
 apiVersion: network.azure.m.upbound.io/v1beta1
 kind: PrivateDNSZone
@@ -28,14 +28,14 @@ metadata:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
     crossplane.io/external-name: example.com
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
   namespace: upbound-system
 spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -43,7 +43,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
   namespace: upbound-system
 spec:
@@ -56,7 +56,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/privatednszonevirtualnetworklink
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: privatednszonevirtualnetworklink
   name: example-test-pdzvnl
   namespace: upbound-system
 spec:
@@ -66,4 +66,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: privatednszonevirtualnetworklink

@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta2/sparkpool
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: sparkpool
   name: sparkpool
   namespace: upbound-system
 spec:
@@ -34,8 +34,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta2/sparkpool
   labels:
-    testing.upbound.io/example-name: account-label
-  name: accountqwertynameabcde
+    testing.upbound.io/example-name: account-label-sparkpool
+  name: accountqwertyne0d85282
   namespace: upbound-system
 spec:
   forProvider:
@@ -43,7 +43,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: East US 2
+    location: Germany West Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: security-alert-resource-group-label
@@ -54,14 +54,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta2/sparkpool
   labels:
-    testing.upbound.io/example-name: file-system-label
-  name: file-system
+    testing.upbound.io/example-name: file-system-label-sparkpool
+  name: file-system-sparkpool
   namespace: upbound-system
 spec:
   forProvider:
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: account-label
+        testing.upbound.io/example-name: account-label-sparkpool
 ---
 apiVersion: synapse.azure.m.upbound.io/v1beta1
 kind: Workspace
@@ -70,20 +70,20 @@ metadata:
     meta.upbound.io/example-id: synapse/v1beta2/sparkpool
   labels:
     testing.upbound.io/example-name: sparkpool-synapse-ws-label
-  name: sparkpool-synapse-ws-1234
+  name: sparkpool-synapse-ws-1234-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: East US 2
+    location: Germany West Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: security-alert-resource-group-label
     sqlAdministratorLogin: sqladminuser
     storageDataLakeGen2FilesystemIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: file-system-label
+        testing.upbound.io/example-name: file-system-label-sparkpool
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -96,4 +96,4 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: East US 2
+    location: Germany West Central

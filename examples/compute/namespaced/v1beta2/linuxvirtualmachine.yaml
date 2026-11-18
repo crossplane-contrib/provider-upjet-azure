@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
   name: example
   namespace: upbound-system
 spec:
@@ -19,13 +19,13 @@ spec:
     adminUsername: adminuser
     location: West Europe
     networkInterfaceIdsRefs:
-      - name: example
+      - name: example-linuxvirtualmachine
     osDisk:
       caching: ReadWrite
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
     size: Standard_F2
     sourceImageReference:
       offer: UbuntuServer
@@ -39,8 +39,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
   namespace: upbound-system
 spec:
   forProvider:
@@ -49,11 +49,11 @@ spec:
         privateIpAddressAllocation: Dynamic
         subnetIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: example
+            testing.upbound.io/example-name: linuxvirtualmachine
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -61,8 +61,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
   namespace: upbound-system
 spec:
   forProvider:
@@ -74,8 +74,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
   namespace: upbound-system
 spec:
   forProvider:
@@ -83,10 +83,10 @@ spec:
       - 10.0.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine
 ---
 apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
@@ -94,8 +94,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta2/linuxvirtualmachine
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: linuxvirtualmachine
+  name: example-linuxvirtualmachine
   namespace: upbound-system
 spec:
   forProvider:
@@ -104,4 +104,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: linuxvirtualmachine

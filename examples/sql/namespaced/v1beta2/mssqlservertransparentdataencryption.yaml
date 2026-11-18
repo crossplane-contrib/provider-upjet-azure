@@ -8,14 +8,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqlservertransparentdataencryption
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: mssqlservertransparentdataencryption
   name: example
   namespace: upbound-system
 spec:
   forProvider:
     serverIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: mssqlservertransparentdataencryption
 ---
 apiVersion: sql.azure.m.upbound.io/v1beta1
 kind: MSSQLServer
@@ -23,7 +23,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqlservertransparentdataencryption
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: mssqlservertransparentdataencryption
   name: ${Rand.RFC1123Subdomain}-trans-enc
   namespace: upbound-system
 spec:
@@ -31,8 +31,8 @@ spec:
     administratorLogin: missadministrator
     administratorLoginPasswordSecretRef:
       key: example-key
-      name: example-secret
-    location: EastUs
+      name: example-secret-mssqlservertransparentdataencryption
+    location: UK South
     minimumTlsVersion: "1.2"
     resourceGroupNameSelector:
       matchLabels:
@@ -52,12 +52,12 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: EastUs
+    location: UK South
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-mssqlservertransparentdataencryption
   namespace: upbound-system
 type: Opaque
 stringData:

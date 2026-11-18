@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/subnet
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: subnet
   name: example-subnet
   namespace: upbound-system
 spec:
@@ -23,10 +23,10 @@ spec:
           name: Microsoft.ContainerInstance/containerGroups
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: subnet
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: subnet
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -34,7 +34,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/subnet
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: subnet
   name: example-subnet
   namespace: upbound-system
 spec:
@@ -47,7 +47,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta2/subnet
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: subnet
   name: example-subnet
   namespace: upbound-system
 spec:
@@ -57,4 +57,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: subnet

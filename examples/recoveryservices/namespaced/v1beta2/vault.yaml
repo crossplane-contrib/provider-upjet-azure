@@ -8,15 +8,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: recoveryservices/v1beta2/vault
   labels:
-    testing.upbound.io/example-name: vault
-  name: vault
+    testing.upbound.io/example-name: vault-recoveryservices-vault
+  name: vault-recoveryservices-vault
   namespace: upbound-system
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: recoveryservices-vault
     sku: Standard
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -25,8 +25,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: recoveryservices/v1beta2/vault
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: recoveryservices-vault
+  name: example-recoveryservices-vault
   namespace: upbound-system
 spec:
   forProvider:

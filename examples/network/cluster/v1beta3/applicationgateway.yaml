@@ -26,7 +26,7 @@ spec:
     - name: example
       publicIpAddressIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: example
+          testing.upbound.io/example-name: applicationgateway
     frontendPort:
     - name: example
       port: 80
@@ -50,7 +50,7 @@ spec:
       ruleType: Basic
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     sku:
       capacity: 2
       name: Standard_v2
@@ -64,15 +64,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/applicationgateway
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationgateway
+  name: example-applicationgateway
 spec:
   forProvider:
     allocationMethod: Static
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     sku: Standard
 
 ---
@@ -91,10 +91,10 @@ spec:
     - 10.254.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
 
 ---
 
@@ -112,10 +112,10 @@ spec:
     - 10.254.0.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
 
 ---
 
@@ -125,8 +125,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/applicationgateway
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationgateway
+  name: example-applicationgateway
 spec:
   forProvider:
     addressSpace:
@@ -134,7 +134,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationgateway
 
 ---
 
@@ -144,8 +144,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: applicationgateway
+  name: example-applicationgateway
 spec:
   forProvider:
     location: West Europe

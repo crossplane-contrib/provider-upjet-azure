@@ -31,10 +31,11 @@ metadata:
   name: example-e-ec
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -49,7 +50,7 @@ metadata:
   name: example-w-ec
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -66,7 +67,7 @@ metadata:
   name: example-rg-ec
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
 apiVersion: v1
 kind: Secret

@@ -12,6 +12,8 @@ metadata:
   name: linuxappexample
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

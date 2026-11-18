@@ -183,15 +183,15 @@ type WatcherFlowLogInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Resource for which to enable flow logs for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
-	// Reference to a SecurityGroup in network to populate targetResourceId.
+	// Reference to a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup in network to populate targetResourceId.
+	// Selector for a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
@@ -316,16 +316,16 @@ type WatcherFlowLogParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Resource for which to enable flow logs for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
-	// Reference to a SecurityGroup in network to populate targetResourceId.
+	// Reference to a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDRef *v2.NamespacedReference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup in network to populate targetResourceId.
+	// Selector for a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDSelector *v2.NamespacedSelector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 

@@ -12,13 +12,19 @@ metadata:
   name: examplelinslot
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     functionAppIdSelector:
       matchLabels:
         testing.upbound.io/example-name: linuxfuncnappslotapp
     siteConfig: {}
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account-linuxfunctionappslot
+      namespace: upbound-system
     storageAccountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: linuxfuncnappslotacc
+        testing.upbound.io/example-name: linuxfuncnappseaef0144
 
 ---
 
@@ -32,6 +38,8 @@ metadata:
   name: linuxfuncnappslotapp
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     name: linuxfuncnappslotapp
     resourceGroupNameSelector:
@@ -43,11 +51,11 @@ spec:
     siteConfig: {}
     storageAccountAccessKeySecretRef:
       key: attribute.primary_access_key
-      name: example-storage-account
+      name: example-storage-account-linuxfunctionappslot
       namespace: upbound-system
     storageAccountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: linuxfuncnappslotacc
+        testing.upbound.io/example-name: linuxfuncnappseaef0144
 
 ---
 
@@ -91,8 +99,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta2/linuxfunctionappslot
   labels:
-    testing.upbound.io/example-name: linuxfuncnappslotacc
-  name: linuxfuncnappslotacc
+    testing.upbound.io/example-name: linuxfuncnappseaef0144
+  name: linuxfuncnappseaef0144
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -102,5 +110,5 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: linuxfuncnappslot-rg
   writeConnectionSecretToRef:
-    name: example-storage-account
+    name: example-storage-account-linuxfunctionappslot
     namespace: upbound-system

@@ -9,13 +9,13 @@ metadata:
     meta.upbound.io/example-id: compute/v1beta3/windowsvirtualmachinescaleset
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: windowsvirtualmachinescaleset
   name: example
 spec:
   forProvider:
     adminPasswordSecretRef:
       key: password
-      name: example-secret
+      name: example-secret-windowsvirtualmachinescaleset
       namespace: upbound-system
     adminUsername: adminuser
     instances: 1
@@ -26,7 +26,7 @@ spec:
         primary: true
         subnetIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: internal
+            testing.upbound.io/example-name: internal-windowsvirtualmachinescaleset
       name: example
       primary: true
     osDisk:
@@ -34,7 +34,7 @@ spec:
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowsvirtualmachinescaleset
     sku: Standard_F2
     sourceImageReference:
       offer: WindowsServer
@@ -50,8 +50,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: windowsvirtualmachinescaleset
+  name: example-windowsvirtualmachinescaleset
 spec:
   forProvider:
     location: West Europe
@@ -64,18 +64,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/windowsvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: internal
-  name: internal
+    testing.upbound.io/example-name: internal-windowsvirtualmachinescaleset
+  name: internal-windowsvirtualmachinescaleset
 spec:
   forProvider:
     addressPrefixes:
     - 10.0.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowsvirtualmachinescaleset
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowsvirtualmachinescaleset
 
 ---
 
@@ -85,8 +85,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta3/windowsvirtualmachinescaleset
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: windowsvirtualmachinescaleset
+  name: example-windowsvirtualmachinescaleset
 spec:
   forProvider:
     addressSpace:
@@ -94,7 +94,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowsvirtualmachinescaleset
 
 ---
 
@@ -105,6 +105,6 @@ kind: Secret
 metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachinescaleset
-  name: example-secret
+  name: example-secret-windowsvirtualmachinescaleset
   namespace: upbound-system
 type: Opaque

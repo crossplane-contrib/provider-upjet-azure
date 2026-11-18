@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqlserversecurityalertpolicy
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: mssqlserversecurityalertpolicy
   name: alertpolicyname
 spec:
   forProvider:
@@ -17,11 +17,11 @@ spec:
     - Data_Exfiltration
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: mssqlserversecurityalertpolicy
     retentionDays: 0
     serverNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: mssqlserversecurityalertpolicy
     state: Enabled
 
 ---
@@ -32,11 +32,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqlserversecurityalertpolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: policy-rg
+    testing.upbound.io/example-name: mssqlserversecurityalertpolicy
+  name: policy-rg-mssqlserversecurityalertpolicy
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
@@ -46,19 +46,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta2/mssqlserversecurityalertpolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: mssqlservername
+    testing.upbound.io/example-name: mssqlserversecurityalertpolicy
+  name: mssqlservername-mssqlserversecurityalertpolicy
 spec:
   forProvider:
     administratorLogin: missadministrator
     administratorLoginPasswordSecretRef:
       key: example-key
-      name: example-secret
+      name: example-secret-mssqlserversecurityalertpolicy
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: mssqlserversecurityalertpolicy
     version: "12.0"
 
 ---
@@ -66,7 +66,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-mssqlserversecurityalertpolicy
   namespace: upbound-system
 type: Opaque
 data:

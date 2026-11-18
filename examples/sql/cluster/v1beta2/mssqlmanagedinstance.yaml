@@ -19,7 +19,7 @@ spec:
     identity:
       type: SystemAssigned
     licenseType: BasePrice
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameRef:
       name: example-sql-rg
     skuName: GP_Gen5
@@ -50,7 +50,7 @@ metadata:
   name: example-sql-rg
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     tags:
       provisioner: crossplane
 
@@ -68,7 +68,7 @@ spec:
   forProvider:
     addressSpace:
     - 10.0.0.0/16
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameRef:
       name: example-sql-rg
 
@@ -111,7 +111,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameRef:
       name: example-sql-rg
     tags:
@@ -147,7 +147,7 @@ metadata:
 spec:
   forProvider:
     bgpRoutePropagationEnabled: true
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameRef:
       name: example-sql-rg
     tags:

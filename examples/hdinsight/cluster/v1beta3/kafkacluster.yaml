@@ -19,7 +19,7 @@ spec:
     gateway:
       passwordSecretRef:
         key: example-key
-        name: example-secret
+        name: example-secret-kafkacluster
         namespace: upbound-system
       username: acctestusrgw
     location: West Europe
@@ -30,7 +30,7 @@ spec:
       headNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-kafkacluster
           namespace: upbound-system
         username: acctestusrvm
         vmSize: Standard_D3_V2
@@ -38,7 +38,7 @@ spec:
         numberOfDisksPerNode: 1
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-kafkacluster
           namespace: upbound-system
         targetInstanceCount: 3
         username: acctestusrvm
@@ -46,7 +46,7 @@ spec:
       zookeeperNode:
         passwordSecretRef:
           key: example-key
-          name: example-secret
+          name: example-secret-kafkacluster
           namespace: upbound-system
         username: acctestusrvm
         vmSize: Standard_D3_V2
@@ -54,11 +54,11 @@ spec:
     - isDefault: true
       storageAccountKeySecretRef:
         key: attribute.primary_access_key
-        name: example-storage-account
+        name: example-storage-account-kafkacluster
         namespace: upbound-system
       storageContainerUrlSelector:
         matchLabels:
-          testing.upbound.io/example-name: example
+          testing.upbound.io/example-name: kafkacluster
     tier: Standard
     tlsMinVersion: "1.2"
 
@@ -85,8 +85,8 @@ metadata:
     meta.upbound.io/example-id: hdinsight/v1beta3/kafkacluster
     uptest.upbound.io/pre-delete-hook: ../testhooks/delete-kafka.sh
   labels:
-    testing.upbound.io/example-name: example0001
-  name: example0001
+    testing.upbound.io/example-name: example0001-kafkacluster
+  name: example67aa2426
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -96,7 +96,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: rgkafkacluster
   writeConnectionSecretToRef:
-    name: example-storage-account
+    name: example-storage-account-kafkacluster
     namespace: upbound-system
 
 ---
@@ -107,14 +107,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: hdinsight/v1beta3/kafkacluster
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: kafkacluster
+  name: example-kafkacluster
 spec:
   forProvider:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example0001
+        testing.upbound.io/example-name: example0001-kafkacluster
 
 ---
 
@@ -123,6 +123,6 @@ data:
   example-key: VGVyckFmb3JtMTIzIQ==
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-kafkacluster
   namespace: upbound-system
 type: Opaque

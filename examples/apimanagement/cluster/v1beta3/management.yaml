@@ -9,8 +9,8 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta3/management
     uptest.upbound.io/timeout: "7200"
   labels:
-    testing.upbound.io/example-name: example
-  name: upbound-example
+    testing.upbound.io/example-name: management
+  name: upbound-example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -18,7 +18,7 @@ spec:
     publisherName: My Company
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: management
     skuName: Developer_1
 
 ---
@@ -29,7 +29,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: management
   name: example-api-management-${Rand.RFC1123Subdomain}
 spec:
   forProvider:

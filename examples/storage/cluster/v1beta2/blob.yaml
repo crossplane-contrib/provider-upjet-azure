@@ -8,14 +8,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/blob
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: blob
   name: example
 spec:
   forProvider:
     sourceContent: inline content for this blob
     storageContainerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: blob
     type: Block
 
 ---
@@ -40,8 +40,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/blob
   labels:
-    testing.upbound.io/example-name: example
-  name: upteststorageacc
+    testing.upbound.io/example-name: blob
+  name: upteststorageaa9b5457f
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -59,11 +59,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/blob
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: blob
+  name: example-blob
 spec:
   forProvider:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: blob

@@ -7,21 +7,22 @@ kind: WatcherFlowLog
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/watcherflowlog
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-watcherflowlog.sh
   name: example
 spec:
   forProvider:
     enabled: true
     targetResourceIdRef:
-      name: example
+      name: example-watcherflowlog-vnet
     networkWatcherNameRef:
-      name: norway-watcher
+      name: poland-watcher
     resourceGroupNameRef:
-      name: norway-watcher-rg
+      name: poland-watcher-rg
     retentionPolicy:
       days: 7
       enabled: true
     storageAccountIdRef:
-      name: saflow2762022
+      name: saflow9da7affb
 
 ---
 
@@ -30,38 +31,41 @@ kind: Watcher
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/watcherflowlog
-  name: norway-watcher
+  name: poland-watcher
 spec:
   forProvider:
-    location: Norway East
+    location: Poland Central
     resourceGroupNameRef:
-      name: norway-watcher-rg
+      name: poland-watcher-rg
 
 ---
 
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
-  name: norway-watcher-rg
+  name: poland-watcher-rg
 spec:
   forProvider:
-    location: Norway East
+    location: Poland Central
     tags:
       provisioner: crossplane
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
-kind: SecurityGroup
+apiVersion: network.azure.upbound.io/v1beta3
+kind: VirtualNetwork
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/watcherflowlog
-  name: example
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-watcherflowlog.sh
+  name: example-watcherflowlog-vnet
 spec:
   forProvider:
-    location: Norway East
+    addressSpace:
+      - 10.0.0.0/16
+    location: Poland Central
     resourceGroupNameRef:
-      name: norway-watcher-rg
+      name: poland-watcher-rg
     tags:
       environment: Production
 
@@ -72,16 +76,17 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/watcherflowlog
-  name: saflow2762022
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-watcherflowlog.sh
+  name: saflow9da7affb
 spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: Norway East
+    location: Poland Central
     resourceGroupNameRef:
-      name: norway-watcher-rg
+      name: poland-watcher-rg
     tags:
       provisioner: crossplane
   writeConnectionSecretToRef:
-    name: example-storage-account
+    name: example-storage-account-watcherflowlog
     namespace: upbound-system

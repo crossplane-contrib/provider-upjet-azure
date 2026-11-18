@@ -8,14 +8,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: sharedirectory
   name: sdexample
 spec:
   forProvider:
     name: example
     storageShareUrlSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sharedirectory
 
 ---
 
@@ -25,7 +25,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: sharedirectory
   name: sdexample-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
@@ -39,8 +39,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
-  name: sdexamplebumptest5524
+    testing.upbound.io/example-name: sharedirectory
+  name: sdexamplebumpta2020f0e
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -48,7 +48,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sharedirectory
 
 ---
 
@@ -58,11 +58,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta2/sharedirectory
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: sharedirectory
   name: sdexample
 spec:
   forProvider:
     quota: 50
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sharedirectory

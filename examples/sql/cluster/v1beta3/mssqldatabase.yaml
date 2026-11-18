@@ -35,7 +35,7 @@ metadata:
   name: mssqldatabasepool
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     maxSizeGb: 5
     perDatabaseSettings:
       maxCapacity: 4
@@ -68,9 +68,9 @@ spec:
     administratorLogin: 4dm1n157r470r
     administratorLoginPasswordSecretRef:
       key: example-key
-      name: example-secret
+      name: example-secret-mssqldatabase
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: mssqldatabase-rg
@@ -88,7 +88,7 @@ metadata:
   name: sqldatabasev1beta2
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
@@ -123,6 +123,6 @@ data:
   example-key: dGVzdFBhc3N3b3JkITEyMw==
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-mssqldatabase
   namespace: upbound-system
 type: Opaque

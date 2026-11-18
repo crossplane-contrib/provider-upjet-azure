@@ -8,17 +8,17 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta2/containerapp
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerapp
   name: example
   namespace: upbound-system
 spec:
   forProvider:
     containerAppEnvironmentIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
     revisionMode: Single
     template:
       container:
@@ -33,18 +33,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta2/containerapp
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerapp
+  name: example-containerapp
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
 ---
 apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
@@ -52,15 +53,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta2/containerapp
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerapp
+  name: example-containerapp
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerapp
     retentionInDays: 30
     sku: PerGB2018
 ---
@@ -70,9 +71,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: containerapp/v1beta2/containerapp
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerapp
+  name: example-containerapp
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central

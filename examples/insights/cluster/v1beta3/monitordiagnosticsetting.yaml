@@ -8,19 +8,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta3/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
 spec:
   forProvider:
     enabledLog:
     - category: AuditEvent
     enabledMetric:
     - category: AllMetrics
-    name: insightsmds
+    name: insightsmdscd7c76d0
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: insightsmds
-    targetResourceId: ${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/insightsmds/providers/Microsoft.KeyVault/vaults/insightsmds
+        testing.upbound.io/example-name: insightsmdscd7c76d0
+    targetResourceId: ${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/insightsmdscd7c76d0/providers/Microsoft.KeyVault/vaults/insightsmdscd7c76d0
 
 ---
 
@@ -30,8 +30,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta3/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
 spec:
   forProvider:
     location: West Europe
@@ -39,7 +39,7 @@ spec:
     rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: insightsmds
+        testing.upbound.io/example-name: insightsmdscd7c76d0
     skuName: standard
     softDeleteRetentionDays: 7
     tenantId: ${data.azurerm_client_config.current.tenant_id}
@@ -52,8 +52,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta1/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
 spec:
   forProvider:
     location: West Europe
@@ -66,8 +66,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta3/monitordiagnosticsetting
   labels:
-    testing.upbound.io/example-name: insightsmds
-  name: insightsmds
+    testing.upbound.io/example-name: insightsmdscd7c76d0
+  name: insightsmdscd7c76d0
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -75,4 +75,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: insightsmds
+        testing.upbound.io/example-name: insightsmdscd7c76d0

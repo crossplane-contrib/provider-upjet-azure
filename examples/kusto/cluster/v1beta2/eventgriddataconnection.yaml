@@ -9,7 +9,7 @@ metadata:
     uptest.upbound.io/timeout: "7200"
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventgriddataconnection
   name: example
 spec:
   forProvider:
@@ -18,21 +18,21 @@ spec:
     dataFormat: JSON
     databaseNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     eventhubConsumerGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     eventhubIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     location: West Europe
     mappingRuleName: my-table-mapping
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
 
 ---
 
@@ -42,14 +42,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventgriddataconnection
   name: kustoexample
 spec:
   forProvider:
     messageRetention: 1
     namespaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     partitionCount: 1
 
 ---
@@ -60,19 +60,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
-  name: kexample
+    testing.upbound.io/example-name: eventgriddataconnection
+  name: kexamplea25303d7
 spec:
   forProvider:
     eventhubNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     namespaceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
 
 ---
 
@@ -82,14 +82,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventgriddataconnection
   name: kustoexample
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     sku: Standard
 
 ---
@@ -100,14 +100,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventgriddataconnection
   name: kcluster
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     sku:
       capacity: 2
       name: Standard_D13_v2
@@ -120,7 +120,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventgriddataconnection
   name: example
 spec:
   forProvider:
@@ -130,7 +130,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection
     softDeletePeriod: P31D
 
 ---
@@ -141,7 +141,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: eventgriddataconnection
   name: kusto-example
 spec:
   forProvider:
@@ -155,8 +155,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: example
-  name: kexample
+    testing.upbound.io/example-name: eventgriddataconnection
+  name: kexamplea25303d7
 spec:
   forProvider:
     accountReplicationType: GRS
@@ -164,4 +164,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: eventgriddataconnection

@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/cluster
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: cluster
   name: examplekustocluster
   namespace: upbound-system
 spec:
@@ -16,7 +16,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: cluster
     sku:
       capacity: 2
       name: Standard_D13_v2
@@ -29,7 +29,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta2/cluster
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: cluster
   name: my-kusto-rg
   namespace: upbound-system
 spec:

@@ -8,13 +8,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta3/linkedserviceazuredatabricks
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: linkedserviceazuredatabricks
   name: example
 spec:
   forProvider:
     accessTokenSecretRef:
       key: example-key
-      name: example-name
+      name: example-name-linkedserviceazuredatabricks
       namespace: upbound-system
     adbDomain: https://example.com
     dataFactoryIdSelector:
@@ -76,7 +76,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: azuredatabricks-rg
-    sku: standard
+    sku: premium
 
 ---
 
@@ -99,6 +99,6 @@ data:
   example-key: RGVmYXVsdEVuZHBvaW50c1Byb3RvY29sPWh0dHBzO0FjY291bnROYW1lPXN0b3JhZ2U7QWNjb3VudEtleT1rZXk7RW5kcG9pbnRTdWZmaXg9Y29yZS53aW5kb3dzLm5ldA==
 kind: Secret
 metadata:
-  name: example-name
+  name: example-name-linkedserviceazuredatabricks
   namespace: upbound-system
 type: Opaque

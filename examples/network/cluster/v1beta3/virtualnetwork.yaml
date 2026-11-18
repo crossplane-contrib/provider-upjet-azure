@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/virtualnetwork
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: virtualnetwork
+  name: example-virtualnetwork
 spec:
   forProvider:
     addressSpace:
@@ -13,7 +13,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: virtualnetwork
     tags:
       environment: Production
 
@@ -25,14 +25,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/virtualnetwork
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: virtualnetwork
+  name: example-virtualnetwork
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: virtualnetwork
 
 ---
 
@@ -42,8 +42,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta3/virtualnetwork
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: virtualnetwork
+  name: example-virtualnetwork
 spec:
   forProvider:
     location: West Europe

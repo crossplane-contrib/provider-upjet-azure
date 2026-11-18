@@ -6,6 +6,8 @@
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
   name: loadbalancerrg
 spec:
   forProvider:
@@ -48,7 +50,7 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta2
 kind: LoadBalancerNatRule
 metadata:
-  name: example
+  name: example-loadbalancer-all-in-one
 spec:
   forProvider:
     backendPort: 3389

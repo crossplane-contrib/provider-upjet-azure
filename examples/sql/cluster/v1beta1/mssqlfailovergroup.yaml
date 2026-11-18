@@ -97,7 +97,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-failover-primary
@@ -120,7 +120,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: North Europe
+    location: Germany West Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-failover-secondary
@@ -138,7 +138,7 @@ metadata:
   name: example-sql-failover-secondary-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    location: North Europe
+    location: Germany West Central
 
 ---
 
@@ -152,7 +152,7 @@ metadata:
   name: example-sql-failover-primary-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 

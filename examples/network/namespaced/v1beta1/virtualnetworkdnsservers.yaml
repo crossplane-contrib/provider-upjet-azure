@@ -4,7 +4,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/virtualnetworkdnsservers
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: virtualnetworkdnsservers
   name: example
   namespace: upbound-system
 spec:
@@ -15,7 +15,7 @@ spec:
     - 10.7.7.1
     virtualNetworkIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: virtualnetworkdnsservers
 
 ---
 
@@ -25,8 +25,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/virtualnetworkdnsservers
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: virtualnetworkdnsservers
+  name: example-virtualnetworkdnsservers
   namespace: upbound-system
 spec:
   forProvider:
@@ -40,8 +40,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/virtualnetworkdnsservers
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: virtualnetworkdnsservers
+  name: example-virtualnetworkdnsservers
   namespace: upbound-system
 spec:
   forProvider:
@@ -50,4 +50,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: virtualnetworkdnsservers
