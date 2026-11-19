@@ -396,9 +396,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// keyvault
 	"azurerm_key_vault":                                              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/vaults/{{ .external_name }}"),
-	"azurerm_key_vault_secret":                                       keyVaultURLIDConf("secrets"),
-	"azurerm_key_vault_key":                                          keyVaultURLIDConf("keys"),
-	"azurerm_key_vault_certificate":                                  keyVaultURLIDConf("certificates"),
+	"azurerm_key_vault_secret":                                       keyVaultURLIDConf("secrets", true),
+	"azurerm_key_vault_key":                                          keyVaultURLIDConf("keys", true),
+	"azurerm_key_vault_certificate":                                  keyVaultURLIDConf("certificates", false),
 	"azurerm_key_vault_certificate_issuer":                           keyVaultURLIDWithoutVersionConfFn("certificates/issuers"),
 	"azurerm_key_vault_managed_storage_account":                      keyVaultURLIDWithoutVersionConfFn("storage"),
 	"azurerm_key_vault_managed_storage_account_sas_token_definition": config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_storage_account_id }}/sas/{{ .external_name }}"),
@@ -2093,7 +2093,20 @@ func getStorageAccountName(parameters map[string]interface{}) (string, error) {
 	return "", errors.New("cannot get storage_account_name or storage_account_id")
 }
 
-func keyVaultURLIDConf(resourceType string) config.ExternalName {
+// keyVaultLatestVersion is the version segment written into the Terraform ID
+// when the external name names a Key Vault item without a version. The
+// Terraform provider parses these IDs as versioned, but its Read, Update and
+// Delete for keys and secrets address the item by name only (Read fetches it
+// with an empty version, i.e. the latest), so the segment only has to be
+// non-empty. It does surface in the computed "version" (keys) and
+// "resource_id" (keys and secrets) attributes.
+const keyVaultLatestVersion = "latest"
+
+// keyVaultURLIDConf configures the external name of a Key Vault item as
+// "<name>/<version>". With versionless set, "<name>" and "<name>/" are also
+// accepted and refer to the item's latest version. Only set it for resources
+// whose Terraform Read ignores the version in the ID.
+func keyVaultURLIDConf(resourceType string, versionless bool) config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
 		id, ok := tfstate["id"]
@@ -2101,7 +2114,11 @@ func keyVaultURLIDConf(resourceType string) config.ExternalName {
 			return "", errors.New("cannot get id")
 		}
 		words := strings.Split(id.(string), "/")
-		return fmt.Sprintf("%s/%s", words[len(words)-2], words[len(words)-1]), nil
+		name, version := words[len(words)-2], words[len(words)-1]
+		if versionless && version == keyVaultLatestVersion {
+			return name, nil
+		}
+		return fmt.Sprintf("%s/%s", name, version), nil
 	}
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
 		keyVaultID, ok := parameters["key_vault_id"]
@@ -2111,17 +2128,32 @@ func keyVaultURLIDConf(resourceType string) config.ExternalName {
 		words := strings.Split(keyVaultID.(string), "/")
 		keyVaultName := words[len(words)-1]
 
-		if len(externalName) == 0 || len(strings.Split(externalName, "/")) < 2 {
-			if parameters["version"] == nil || parameters["version"] == "" {
-				return "", nil
-			}
+		item, ok := keyVaultItemPath(externalName, parameters, versionless)
+		if !ok {
+			return "", nil
 		}
 
 		suffix := getKeyVaultSuffix(terraformProviderConfig)
 		return fmt.Sprintf("https://%s.%s/%s/%s",
-			keyVaultName, suffix, resourceType, externalName), nil
+			keyVaultName, suffix, resourceType, item), nil
 	}
 	return e
+}
+
+// keyVaultItemPath returns the "<name>/<version>" part of a Key Vault item ID
+// for an external name, or false when the ID cannot be built yet (the item is
+// not created, or has no version and versionless is not set).
+func keyVaultItemPath(externalName string, parameters map[string]interface{}, versionless bool) (string, bool) {
+	name, version, hasSlash := strings.Cut(externalName, "/")
+	if versionless && name != "" && version == "" {
+		return name + "/" + keyVaultLatestVersion, true
+	}
+	if externalName == "" || !hasSlash {
+		if parameters["version"] == nil || parameters["version"] == "" {
+			return "", false
+		}
+	}
+	return externalName, true
 }
 
 func keyVaultURLIDWithoutVersionConfFn(resourceType string) config.ExternalName {
