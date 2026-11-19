@@ -13,7 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AccessPolicyInitParameters_2 struct {
+type AccessPolicyInitParameters struct {
 
 	// The object ID of an Application in Azure Active Directory. Changing this forces a new resource to be created.
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
@@ -50,7 +50,7 @@ type AccessPolicyInitParameters_2 struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
-type AccessPolicyObservation_2 struct {
+type AccessPolicyObservation struct {
 
 	// The object ID of an Application in Azure Active Directory. Changing this forces a new resource to be created.
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
@@ -80,7 +80,7 @@ type AccessPolicyObservation_2 struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
-type AccessPolicyParameters_2 struct {
+type AccessPolicyParameters struct {
 
 	// The object ID of an Application in Azure Active Directory. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -128,7 +128,7 @@ type AccessPolicyParameters_2 struct {
 // AccessPolicySpec defines the desired state of AccessPolicy
 type AccessPolicySpec struct {
 	v2.ClusterManagedResourceSpec `json:",inline"`
-	ForProvider                   AccessPolicyParameters_2 `json:"forProvider"`
+	ForProvider                   AccessPolicyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -139,13 +139,13 @@ type AccessPolicySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider AccessPolicyInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider AccessPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccessPolicyStatus defines the observed state of AccessPolicy.
 type AccessPolicyStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               AccessPolicyObservation_2 `json:"atProvider,omitempty"`
+	AtProvider               AccessPolicyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

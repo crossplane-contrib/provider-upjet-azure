@@ -34,15 +34,6 @@ func (l *IntegrationRuntimeSelfHostedList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this LinkedServiceList.
-func (l *LinkedServiceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ManagedPrivateEndpointList.
 func (l *ManagedPrivateEndpointList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -79,15 +70,6 @@ func (l *SQLPoolExtendedAuditingPolicyList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SQLPoolList.
-func (l *SQLPoolList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this SQLPoolSecurityAlertPolicyList.
 func (l *SQLPoolSecurityAlertPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -115,15 +97,6 @@ func (l *SQLPoolWorkloadGroupList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SparkPoolList.
-func (l *SparkPoolList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this WorkspaceAADAdminList.
 func (l *WorkspaceAADAdminList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -142,15 +115,6 @@ func (l *WorkspaceExtendedAuditingPolicyList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this WorkspaceList.
-func (l *WorkspaceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this WorkspaceSQLAADAdminList.
 func (l *WorkspaceSQLAADAdminList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -162,15 +126,6 @@ func (l *WorkspaceSQLAADAdminList) GetItems() []resource.Managed {
 
 // GetItems of this WorkspaceSecurityAlertPolicyList.
 func (l *WorkspaceSecurityAlertPolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this WorkspaceVulnerabilityAssessmentList.
-func (l *WorkspaceVulnerabilityAssessmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

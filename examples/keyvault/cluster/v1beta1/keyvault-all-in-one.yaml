@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: ManagedHardwareSecurityModule
 metadata:
   labels:
@@ -46,7 +46,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Key
 metadata:
   labels:
@@ -91,7 +91,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Certificate
 metadata:
   labels:
@@ -103,7 +103,7 @@ spec:
   forProvider:
     name: example-upbound-pem-cert
     certificate:
-    - contentsSecretRef:
+      contentsSecretRef:
         key: cert.pem # https://docs.microsoft.com/en-us/answers/questions/258583/import-certificate-api-for-azure-key-vault.html
         name: example-cert
         namespace: upbound-system
@@ -115,22 +115,22 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     certificatePolicy:
-    - issuerParameters:
-      - name: Self
+      issuerParameters:
+        name: Self
       keyProperties:
-      - exportable: true
+        exportable: true
         keySize: 4096
         keyType: RSA
         reuseKey: true
       secretProperties:
-      - contentType: application/x-pem-file
+        contentType: application/x-pem-file
       lifetimeAction:
         - action:
-            - actionType: AutoRenew
+            actionType: AutoRenew
           trigger:
-            - daysBeforeExpiry: 30
+            daysBeforeExpiry: 30
       x509CertificateProperties:
-      - extendedKeyUsage:
+        extendedKeyUsage:
         - "1.3.6.1.5.5.7.3.1"
         keyUsage:
         - cRLSign
@@ -140,7 +140,7 @@ spec:
         - keyCertSign
         - keyEncipherment
         subjectAlternativeNames:
-        - dnsNames:
+          dnsNames:
           - upboumd.io
         subject: CN=upbound
         validityInMonths: 12
@@ -166,7 +166,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   labels:
@@ -215,7 +215,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   labels:

@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: LinuxVirtualMachine
 metadata:
   annotations:
@@ -41,21 +41,21 @@ spec:
     networkInterfaceIdsRefs:
     - name: example
     osDisk:
-    - caching: ReadWrite
+      caching: ReadWrite
       storageAccountType: Standard_LRS
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     size: Standard_F2
     sourceImageReference:
-    - offer: UbuntuServer
+      offer: UbuntuServer
       publisher: Canonical
       sku: 16.04-LTS
       version: latest
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: ManagedDisk
 metadata:
   annotations:
@@ -112,7 +112,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -133,7 +133,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

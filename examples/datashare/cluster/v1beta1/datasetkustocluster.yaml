@@ -13,7 +13,7 @@ spec:
     shareIdRef:
       name: examplekusto
 ---
-apiVersion: kusto.azure.upbound.io/v1beta1
+apiVersion: kusto.azure.upbound.io/v1beta2
 kind: Cluster
 metadata:
   name: exampleupbounddataset
@@ -23,10 +23,10 @@ spec:
     resourceGroupNameRef:
       name: example-rg-datashare
     sku:
-    - capacity: 1
+      capacity: 1
       name: Dev(No SLA)_Standard_D11_v2
 ---
-apiVersion: datashare.azure.upbound.io/v1beta1
+apiVersion: datashare.azure.upbound.io/v1beta2
 kind: DataShare
 metadata:
   name: examplekusto

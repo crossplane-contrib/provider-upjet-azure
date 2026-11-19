@@ -13,7 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type MSSQLJobAgentIdentityInitParameters struct {
+type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to assign to this Elastic Job Agent.
 	// +listType=set
@@ -23,7 +23,7 @@ type MSSQLJobAgentIdentityInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type MSSQLJobAgentIdentityObservation struct {
+type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to assign to this Elastic Job Agent.
 	// +listType=set
@@ -33,7 +33,7 @@ type MSSQLJobAgentIdentityObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type MSSQLJobAgentIdentityParameters struct {
+type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to assign to this Elastic Job Agent.
 	// +kubebuilder:validation:Optional
@@ -61,7 +61,7 @@ type MSSQLJobAgentInitParameters struct {
 	DatabaseIDSelector *v2.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
-	Identity *MSSQLJobAgentIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where this Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -86,7 +86,7 @@ type MSSQLJobAgentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *MSSQLJobAgentIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where this Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -120,7 +120,7 @@ type MSSQLJobAgentParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *MSSQLJobAgentIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where this Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
 	// +kubebuilder:validation:Optional

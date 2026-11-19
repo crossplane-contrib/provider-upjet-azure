@@ -15,30 +15,3 @@ func (l *KubernetesClusterExtensionList) GetItems() []resource.Managed {
 	}
 	return items
 }
-
-// GetItems of this KubernetesClusterList.
-func (l *KubernetesClusterList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this KubernetesClusterNodePoolList.
-func (l *KubernetesClusterNodePoolList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this KubernetesFleetManagerList.
-func (l *KubernetesFleetManagerList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}

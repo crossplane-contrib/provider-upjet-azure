@@ -42,103 +42,16 @@ type DynamicRoutingEnrichmentParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
-type EventGridNamespaceIdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Namespace. Possible values are SystemAssigned, UserAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type EventGridNamespaceIdentityObservation struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The EventGrid Namespace ID.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The EventGrid Namespace ID.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Namespace. Possible values are SystemAssigned, UserAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type EventGridNamespaceIdentityParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Namespace. Possible values are SystemAssigned, UserAssigned.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
-type EventGridNamespaceInboundIPRuleInitParameters struct {
-
-	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The IP mask (CIDR) to match on.
-	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
-}
-
-type EventGridNamespaceInboundIPRuleObservation struct {
-
-	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The IP mask (CIDR) to match on.
-	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
-}
-
-type EventGridNamespaceInboundIPRuleParameters struct {
-
-	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
-	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The IP mask (CIDR) to match on.
-	// +kubebuilder:validation:Optional
-	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
-}
-
 type EventGridNamespaceInitParameters struct {
 
 	// Specifies the Capacity / Throughput Units for an Eventgrid Namespace. Valid values can be between 1 and 40.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// An identity block as defined below.
-	Identity *EventGridNamespaceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// One or more inbound_ip_rule blocks as defined below.
-	InboundIPRule []EventGridNamespaceInboundIPRuleInitParameters `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
+	InboundIPRule []InboundIPRuleInitParameters `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
 
 	// Specifies the supported Azure location where the resource should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -166,10 +79,10 @@ type EventGridNamespaceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *EventGridNamespaceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// One or more inbound_ip_rule blocks as defined below.
-	InboundIPRule []EventGridNamespaceInboundIPRuleObservation `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
+	InboundIPRule []InboundIPRuleObservation `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
 
 	// Specifies the supported Azure location where the resource should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -199,11 +112,11 @@ type EventGridNamespaceParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *EventGridNamespaceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// One or more inbound_ip_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
-	InboundIPRule []EventGridNamespaceInboundIPRuleParameters `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
+	InboundIPRule []InboundIPRuleParameters `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
 
 	// Specifies the supported Azure location where the resource should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -238,6 +151,93 @@ type EventGridNamespaceParameters struct {
 	// A topic_spaces_configuration block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TopicSpacesConfiguration []TopicSpacesConfigurationParameters `json:"topicSpacesConfiguration,omitempty" tf:"topic_spaces_configuration,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Namespace. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The EventGrid Namespace ID.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The EventGrid Namespace ID.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Namespace. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Namespace. Possible values are SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type InboundIPRuleInitParameters struct {
+
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The IP mask (CIDR) to match on.
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
+}
+
+type InboundIPRuleObservation struct {
+
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The IP mask (CIDR) to match on.
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
+}
+
+type InboundIPRuleParameters struct {
+
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The IP mask (CIDR) to match on.
+	// +kubebuilder:validation:Optional
+	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
 }
 
 type StaticRoutingEnrichmentInitParameters struct {

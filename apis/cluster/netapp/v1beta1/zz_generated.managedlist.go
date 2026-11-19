@@ -7,15 +7,6 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this AccountList.
-func (l *AccountList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PoolList.
 func (l *PoolList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -27,24 +18,6 @@ func (l *PoolList) GetItems() []resource.Managed {
 
 // GetItems of this SnapshotList.
 func (l *SnapshotList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SnapshotPolicyList.
-func (l *SnapshotPolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VolumeList.
-func (l *VolumeList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

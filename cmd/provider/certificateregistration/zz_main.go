@@ -48,6 +48,7 @@ import (
 
 	clusterapis "github.com/upbound/provider-azure/v2/apis/cluster"
 	namespacedapis "github.com/upbound/provider-azure/v2/apis/namespaced"
+	providerinit "github.com/upbound/provider-azure/v2/cmd/provider"
 	"github.com/upbound/provider-azure/v2/config"
 	resolverapis "github.com/upbound/provider-azure/v2/internal/apis"
 	"github.com/upbound/provider-azure/v2/internal/bootcheck"
@@ -103,6 +104,8 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 		// were introduced, i.e. when it's invoked without any arguments.
 		startCmd = app.Command("start", "Start the provider's controllers.").Default()
 
+		initCmd = app.Command("init", "Run the provider's initialization tasks, i.e. the CRD storage version migration, and exit. Meant to run as an init container.")
+
 		internalCmd   = app.Command("internal", "Commands used internally by the Crossplane ecosystem. No compatibility guarantees are made for them.")
 		diffServerCmd = internalCmd.Command("diff-server", "Start a gRPC server serving the provider diff services.")
 		diffNetwork   = diffServerCmd.Flag("network", "The network the diff gRPC server listens on.").Default("tcp").Envar("DIFF_SERVER_NETWORK").Enum("tcp", "unix")
@@ -123,6 +126,16 @@ func main() { //nolint:gocyclo // easier to follow as a unit
 	}
 
 	ctx := context.Background()
+
+	// The storage version migration needs neither the provider configuration
+	// nor a controller manager, so it runs before either of them is built.
+	if cmd == initCmd.FullCommand() {
+		initCfg, err := ctrl.GetConfig()
+		kingpin.FatalIfError(err, "Cannot get API server rest config")
+		kingpin.FatalIfError(providerinit.RunStorageVersionMigration(ctx, logr, initCfg, "certificateregistration"), "Cannot run the storage version migration")
+		return
+	}
+
 	sdkProvider, err := xpprovider.GetProviderSchema(context.Background())
 	clusterProvider, err := config.GetProvider(ctx, sdkProvider, false)
 	kingpin.FatalIfError(err, "Cannot initialize the cluster provider configuration")

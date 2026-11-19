@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -53,7 +53,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Certificate
 metadata:
   annotations:
@@ -69,34 +69,34 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: custom-domain-example
     certificatePolicy:
-      - issuerParameters:
-          - name: Self
-        keyProperties:
-          - exportable: true
-            keySize: 4096
-            keyType: RSA
-            reuseKey: true
-        secretProperties:
-          - contentType: application/x-pkcs12
-        lifetimeAction:
-          - action:
-              - actionType: AutoRenew
-            trigger:
-              - daysBeforeExpiry: 30
-        x509CertificateProperties:
-          - keyUsage:
-              - cRLSign
-              - dataEncipherment
-              - digitalSignature
-              - keyAgreement
-              - keyCertSign
-              - keyEncipherment
-            subjectAlternativeNames:
-              - dnsNames:
-                - api.example.com
-                - portal.example.com
-            subject: CN=api.example.com
-            validityInMonths: 12
+      issuerParameters:
+        name: Self
+      keyProperties:
+        exportable: true
+        keySize: 4096
+        keyType: RSA
+        reuseKey: true
+      secretProperties:
+        contentType: application/x-pkcs12
+      lifetimeAction:
+        - action:
+            actionType: AutoRenew
+          trigger:
+            daysBeforeExpiry: 30
+      x509CertificateProperties:
+        keyUsage:
+          - cRLSign
+          - dataEncipherment
+          - digitalSignature
+          - keyAgreement
+          - keyCertSign
+          - keyEncipherment
+        subjectAlternativeNames:
+          dnsNames:
+          - api.example.com
+          - portal.example.com
+        subject: CN=api.example.com
+        validityInMonths: 12
 
 ---
 
@@ -172,7 +172,7 @@ spec:
 
 ---
 
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:
@@ -193,7 +193,7 @@ spec:
     skuName: Developer_1
     # https://github.com/hashicorp/terraform-provider-azurerm/issues/18323
     identity:
-      - type: SystemAssigned
+      type: SystemAssigned
 
 ---
 

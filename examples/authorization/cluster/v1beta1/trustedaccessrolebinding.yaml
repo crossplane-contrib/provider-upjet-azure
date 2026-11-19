@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: insights.azure.upbound.io/v1beta1
+apiVersion: insights.azure.upbound.io/v1beta2
 kind: MonitorActionGroup
 metadata:
   annotations:
@@ -54,7 +54,7 @@ spec:
 
 ---
 
-apiVersion: alertsmanagement.azure.upbound.io/v1beta1
+apiVersion: alertsmanagement.azure.upbound.io/v1beta2
 kind: MonitorSmartDetectorAlertRule
 metadata:
   annotations:
@@ -66,7 +66,7 @@ spec:
   forProvider:
     name: myrule
     actionGroup:
-    - idsRefs:
+      idsRefs:
       - name: example-ta-rb-ai-mag
     detectorType: FailureAnomaliesDetector
     frequency: PT1M
@@ -79,7 +79,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -100,7 +100,7 @@ spec:
 ---
 
 
-apiVersion: containerservice.azure.upbound.io/v1beta1
+apiVersion: containerservice.azure.upbound.io/v1beta2
 kind: KubernetesCluster
 metadata:
   annotations:
@@ -111,14 +111,14 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-    - name: default
+      name: default
       nodeCount: 1
       vmSize: Standard_D2_v2
       upgradeSettings:
-      - maxSurge: '10%'
+        maxSurge: '10%'
     dnsPrefix: exampleaks1
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: North Europe
     resourceGroupNameSelector:
       matchLabels:

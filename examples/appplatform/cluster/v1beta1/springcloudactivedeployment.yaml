@@ -35,7 +35,7 @@ spec:
 
 ---
 
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudApp
 metadata:
   annotations:
@@ -55,7 +55,7 @@ spec:
 
 ---
 
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudJavaDeployment
 metadata:
   annotations:
@@ -71,7 +71,7 @@ spec:
 
 ---
 
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudService
 metadata:
   annotations:

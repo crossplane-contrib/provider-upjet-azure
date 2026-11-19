@@ -27,7 +27,7 @@ type AccountNetworkRulesInitParameters struct {
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or more private_link_access block as defined below.
-	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
+	PrivateLinkAccess []PrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -74,7 +74,7 @@ type AccountNetworkRulesObservation struct {
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or more private_link_access block as defined below.
-	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
+	PrivateLinkAccess []PrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -102,7 +102,7 @@ type AccountNetworkRulesParameters struct {
 
 	// One or more private_link_access block as defined below.
 	// +kubebuilder:validation:Optional
-	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
+	PrivateLinkAccess []PrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -134,7 +134,7 @@ type AccountNetworkRulesParameters struct {
 	VirtualNetworkSubnetIdsSelector *v2.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
-type AccountNetworkRulesPrivateLinkAccessInitParameters struct {
+type PrivateLinkAccessInitParameters struct {
 
 	// The resource id of the resource access rule to be granted access.
 	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
@@ -143,7 +143,7 @@ type AccountNetworkRulesPrivateLinkAccessInitParameters struct {
 	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
 
-type AccountNetworkRulesPrivateLinkAccessObservation struct {
+type PrivateLinkAccessObservation struct {
 
 	// The resource id of the resource access rule to be granted access.
 	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
@@ -152,7 +152,7 @@ type AccountNetworkRulesPrivateLinkAccessObservation struct {
 	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
 
-type AccountNetworkRulesPrivateLinkAccessParameters struct {
+type PrivateLinkAccessParameters struct {
 
 	// The resource id of the resource access rule to be granted access.
 	// +kubebuilder:validation:Optional

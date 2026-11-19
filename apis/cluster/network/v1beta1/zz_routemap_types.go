@@ -13,6 +13,35 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type ActionInitParameters struct {
+
+	// A parameter block as defined below. Required if type is anything other than Drop.
+	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ActionObservation struct {
+
+	// A parameter block as defined below. Required if type is anything other than Drop.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ActionParameters struct {
+
+	// A parameter block as defined below. Required if type is anything other than Drop.
+	// +kubebuilder:validation:Optional
+	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type MatchCriterionInitParameters struct {
 
 	// A list of AS paths.
@@ -143,7 +172,7 @@ type RouteMapParameters struct {
 type RouteMapRuleInitParameters struct {
 
 	// An action block as defined below.
-	Action []RuleActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A match_criterion block as defined below.
 	MatchCriterion []MatchCriterionInitParameters `json:"matchCriterion,omitempty" tf:"match_criterion,omitempty"`
@@ -158,7 +187,7 @@ type RouteMapRuleInitParameters struct {
 type RouteMapRuleObservation struct {
 
 	// An action block as defined below.
-	Action []RuleActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A match_criterion block as defined below.
 	MatchCriterion []MatchCriterionObservation `json:"matchCriterion,omitempty" tf:"match_criterion,omitempty"`
@@ -174,7 +203,7 @@ type RouteMapRuleParameters struct {
 
 	// An action block as defined below.
 	// +kubebuilder:validation:Optional
-	Action []RuleActionParameters `json:"action,omitempty" tf:"action,omitempty"`
+	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A match_criterion block as defined below.
 	// +kubebuilder:validation:Optional
@@ -187,35 +216,6 @@ type RouteMapRuleParameters struct {
 	// The next step after the rule is evaluated. Possible values are Continue, Terminate and Unknown. Defaults to Unknown.
 	// +kubebuilder:validation:Optional
 	NextStepIfMatched *string `json:"nextStepIfMatched,omitempty" tf:"next_step_if_matched,omitempty"`
-}
-
-type RuleActionInitParameters struct {
-
-	// A parameter block as defined below. Required if type is anything other than Drop.
-	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
-
-	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type RuleActionObservation struct {
-
-	// A parameter block as defined below. Required if type is anything other than Drop.
-	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
-
-	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type RuleActionParameters struct {
-
-	// A parameter block as defined below. Required if type is anything other than Drop.
-	// +kubebuilder:validation:Optional
-	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
-
-	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // RouteMapSpec defines the desired state of RouteMap

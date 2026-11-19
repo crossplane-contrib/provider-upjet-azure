@@ -22,7 +22,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: containerapp.azure.upbound.io/v1beta1
+apiVersion: containerapp.azure.upbound.io/v1beta2
 kind: ContainerApp
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     ingress:
-    - allowInsecureConnections: false
+      allowInsecureConnections: false
       externalEnabled: true
       targetPort: 5000
       trafficWeight:
@@ -49,7 +49,7 @@ spec:
         testing.upbound.io/example-name: example
     revisionMode: Single
     template:
-    - container:
+      container:
       - cpu: 0.25
         image: mcr.microsoft.com/azuredocs/containerapps-helloworld:latest
         memory: 0.5Gi

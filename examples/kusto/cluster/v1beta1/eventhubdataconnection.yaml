@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -76,7 +76,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHubNamespace
 metadata:
   annotations:
@@ -94,7 +94,7 @@ spec:
 
 ---
 
-apiVersion: kusto.azure.upbound.io/v1beta1
+apiVersion: kusto.azure.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:
@@ -109,7 +109,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
-    - capacity: 2
+      capacity: 2
       name: Standard_D13_v2
 
 ---

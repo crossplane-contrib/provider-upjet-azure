@@ -94,7 +94,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -113,7 +113,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta1
+apiVersion: web.azure.upbound.io/v1beta2
 kind: WindowsFunctionApp
 metadata:
   annotations:
@@ -131,7 +131,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: funcapphybrconn-sp
     siteConfig:
-    - {}
+      {}
     storageAccountAccessKeySecretRef:
       key: example-key
       name: example-name

@@ -113,7 +113,7 @@ func (tr *CustomDomain) GetMergedParameters(shouldMergeInitProvider bool) (map[s
 // LateInitialize this CustomDomain using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CustomDomain) LateInitialize(attrs []byte) (bool, error) {
-	params := &CustomDomainParameters_2{}
+	params := &CustomDomainParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}

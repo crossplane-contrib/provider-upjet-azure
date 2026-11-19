@@ -7,15 +7,6 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this ApplicationGatewayList.
-func (l *ApplicationGatewayList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ApplicationSecurityGroupList.
 func (l *ApplicationSecurityGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -27,15 +18,6 @@ func (l *ApplicationSecurityGroupList) GetItems() []resource.Managed {
 
 // GetItems of this BastionHostList.
 func (l *BastionHostList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ConnectionMonitorList.
-func (l *ConnectionMonitorList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -133,15 +115,6 @@ func (l *DNSTXTRecordList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this DNSZoneList.
-func (l *DNSZoneList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ExpressRouteCircuitAuthorizationList.
 func (l *ExpressRouteCircuitAuthorizationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -160,33 +133,6 @@ func (l *ExpressRouteCircuitConnectionList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ExpressRouteCircuitList.
-func (l *ExpressRouteCircuitList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ExpressRouteCircuitPeeringList.
-func (l *ExpressRouteCircuitPeeringList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ExpressRouteConnectionList.
-func (l *ExpressRouteConnectionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ExpressRouteGatewayList.
 func (l *ExpressRouteGatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -196,26 +142,8 @@ func (l *ExpressRouteGatewayList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ExpressRoutePortList.
-func (l *ExpressRoutePortList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this FirewallApplicationRuleCollectionList.
 func (l *FirewallApplicationRuleCollectionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this FirewallList.
-func (l *FirewallList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -241,15 +169,6 @@ func (l *FirewallNetworkRuleCollectionList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this FirewallPolicyList.
-func (l *FirewallPolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this FirewallPolicyRuleCollectionGroupList.
 func (l *FirewallPolicyRuleCollectionGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -259,35 +178,8 @@ func (l *FirewallPolicyRuleCollectionGroupList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this FrontDoorList.
-func (l *FrontDoorList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this FrontdoorCustomHTTPSConfigurationList.
-func (l *FrontdoorCustomHTTPSConfigurationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this FrontdoorFirewallPolicyList.
 func (l *FrontdoorFirewallPolicyList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this FrontdoorRulesEngineList.
-func (l *FrontdoorRulesEngineList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -376,26 +268,8 @@ func (l *LoadBalancerRuleList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this LocalNetworkGatewayList.
-func (l *LocalNetworkGatewayList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ManagerIpamPoolList.
 func (l *ManagerIpamPoolList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ManagerList.
-func (l *ManagerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -529,24 +403,6 @@ func (l *NetworkInterfaceSecurityGroupAssociationList) GetItems() []resource.Man
 	return items
 }
 
-// GetItems of this PacketCaptureList.
-func (l *PacketCaptureList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this PointToSiteVPNGatewayList.
-func (l *PointToSiteVPNGatewayList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PrivateDNSAAAARecordList.
 func (l *PrivateDNSAAAARecordList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -664,15 +520,6 @@ func (l *PrivateDNSTXTRecordList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this PrivateDNSZoneList.
-func (l *PrivateDNSZoneList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PrivateDNSZoneVirtualNetworkLinkList.
 func (l *PrivateDNSZoneVirtualNetworkLinkList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -691,26 +538,8 @@ func (l *PrivateEndpointApplicationSecurityGroupAssociationList) GetItems() []re
 	return items
 }
 
-// GetItems of this PrivateEndpointList.
-func (l *PrivateEndpointList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PrivateLinkServiceList.
 func (l *PrivateLinkServiceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ProfileList.
-func (l *ProfileList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -729,15 +558,6 @@ func (l *PublicIPList) GetItems() []resource.Managed {
 
 // GetItems of this PublicIPPrefixList.
 func (l *PublicIPPrefixList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this RouteFilterList.
-func (l *RouteFilterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -808,15 +628,6 @@ func (l *SecurityRuleList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SubnetList.
-func (l *SubnetList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this SubnetNATGatewayAssociationList.
 func (l *SubnetNATGatewayAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -880,62 +691,8 @@ func (l *TrafficManagerNestedEndpointList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this TrafficManagerProfileList.
-func (l *TrafficManagerProfileList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VPNGatewayConnectionList.
-func (l *VPNGatewayConnectionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VPNGatewayList.
-func (l *VPNGatewayList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VPNServerConfigurationList.
-func (l *VPNServerConfigurationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this VPNServerConfigurationPolicyGroupList.
 func (l *VPNServerConfigurationPolicyGroupList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VPNSiteList.
-func (l *VPNSiteList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VirtualHubConnectionList.
-func (l *VirtualHubConnectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -1006,33 +763,6 @@ func (l *VirtualNetworkDNSServersList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this VirtualNetworkGatewayConnectionList.
-func (l *VirtualNetworkGatewayConnectionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VirtualNetworkGatewayList.
-func (l *VirtualNetworkGatewayList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VirtualNetworkList.
-func (l *VirtualNetworkList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this VirtualNetworkPeeringList.
 func (l *VirtualNetworkPeeringList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -1051,26 +781,8 @@ func (l *VirtualWANList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this WatcherFlowLogList.
-func (l *WatcherFlowLogList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this WatcherList.
 func (l *WatcherList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this WebApplicationFirewallPolicyList.
-func (l *WebApplicationFirewallPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -25,7 +25,7 @@ spec:
 
 ---
 
-apiVersion: devices.azure.upbound.io/v1beta1
+apiVersion: devices.azure.upbound.io/v1beta2
 kind: IOTHub
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-iothub
     sku:
-    - capacity: 1
+      capacity: 1
       name: S1
     tags:
       purpose: testing
@@ -91,7 +91,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

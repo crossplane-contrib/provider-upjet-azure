@@ -7,15 +7,6 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this DomainList.
-func (l *DomainList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this DomainTopicList.
 func (l *DomainTopicList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -34,15 +25,6 @@ func (l *EventGridNamespaceList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this EventSubscriptionList.
-func (l *EventSubscriptionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this PartnerConfigurationList.
 func (l *PartnerConfigurationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -54,24 +36,6 @@ func (l *PartnerConfigurationList) GetItems() []resource.Managed {
 
 // GetItems of this SystemTopicEventSubscriptionList.
 func (l *SystemTopicEventSubscriptionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SystemTopicList.
-func (l *SystemTopicList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this TopicList.
-func (l *TopicList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

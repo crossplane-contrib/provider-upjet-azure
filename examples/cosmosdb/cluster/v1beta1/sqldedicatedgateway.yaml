@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.upbound.io/v1beta1
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -33,7 +33,7 @@ metadata:
 spec:
   forProvider:
     consistencyPolicy:
-    - consistencyLevel: BoundedStaleness
+      consistencyLevel: BoundedStaleness
     geoLocation:
     - failoverPriority: 0
       location: West Europe

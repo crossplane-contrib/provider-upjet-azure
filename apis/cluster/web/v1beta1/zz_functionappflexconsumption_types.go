@@ -13,36 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AlwaysReadyInitParameters struct {
-
-	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
-
-	// The name of the always_ready of the Function App.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type AlwaysReadyObservation struct {
-
-	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
-
-	// The name of the always_ready of the Function App.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type AlwaysReadyParameters struct {
-
-	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
-	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
-
-	// The name of the always_ready of the Function App.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryInitParameters struct {
+type ActiveDirectoryInitParameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
@@ -61,7 +32,7 @@ type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryInitParameters struct 
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryObservation struct {
+type ActiveDirectoryObservation struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
@@ -76,7 +47,7 @@ type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryObservation struct {
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryParameters struct {
+type ActiveDirectoryParameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
@@ -99,468 +70,7 @@ type FunctionAppFlexConsumptionAuthSettingsActiveDirectoryParameters struct {
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsFacebookInitParameters struct {
-
-	// The App ID of the Facebook app used for login.
-	// The App ID of the Facebook app used for login.
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
-
-	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
-	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
-	AppSecretSecretRef *v2.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name that contains the app_secret value used for Facebook Login.
-	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
-	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsFacebookObservation struct {
-
-	// The App ID of the Facebook app used for login.
-	// The App ID of the Facebook app used for login.
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
-
-	// The app setting name that contains the app_secret value used for Facebook Login.
-	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
-	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsFacebookParameters struct {
-
-	// The App ID of the Facebook app used for login.
-	// The App ID of the Facebook app used for login.
-	// +kubebuilder:validation:Optional
-	AppID *string `json:"appId" tf:"app_id,omitempty"`
-
-	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
-	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
-	// +kubebuilder:validation:Optional
-	AppSecretSecretRef *v2.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name that contains the app_secret value used for Facebook Login.
-	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
-	// +kubebuilder:validation:Optional
-	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
-	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsGithubInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the GitHub app used for login.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsGithubObservation struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the GitHub app used for login.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsGithubParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the GitHub app used for login.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
-	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
-	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsGoogleInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsGoogleObservation struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsGoogleParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
-	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
-	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
-	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsInitParameters struct {
-
-	// An active_directory block as defined above.
-	ActiveDirectory *FunctionAppFlexConsumptionAuthSettingsActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
-
-	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// +mapType=granular
-	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
-
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
-	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
-	// Should the Authentication / Authorization feature be enabled?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A facebook block as defined below.
-	Facebook *FunctionAppFlexConsumptionAuthSettingsFacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
-
-	// A github block as defined below.
-	Github *FunctionAppFlexConsumptionAuthSettingsGithubInitParameters `json:"github,omitempty" tf:"github,omitempty"`
-
-	// A google block as defined below.
-	Google *FunctionAppFlexConsumptionAuthSettingsGoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
-
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// A microsoft block as defined below.
-	Microsoft *FunctionAppFlexConsumptionAuthSettingsMicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
-
-	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
-	// The RuntimeVersion of the Authentication / Authorization feature in use.
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-
-	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
-	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// A twitter block as defined below.
-	Twitter *FunctionAppFlexConsumptionAuthSettingsTwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
-
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
-	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsMicrosoftInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
-	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsMicrosoftObservation struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsMicrosoftParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
-	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
-	// +kubebuilder:validation:Optional
-	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
-	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
-	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
-	// +kubebuilder:validation:Optional
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsObservation struct {
-
-	// An active_directory block as defined above.
-	ActiveDirectory *FunctionAppFlexConsumptionAuthSettingsActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
-
-	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// +mapType=granular
-	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
-
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
-	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
-	// Should the Authentication / Authorization feature be enabled?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A facebook block as defined below.
-	Facebook *FunctionAppFlexConsumptionAuthSettingsFacebookObservation `json:"facebook,omitempty" tf:"facebook,omitempty"`
-
-	// A github block as defined below.
-	Github *FunctionAppFlexConsumptionAuthSettingsGithubObservation `json:"github,omitempty" tf:"github,omitempty"`
-
-	// A google block as defined below.
-	Google *FunctionAppFlexConsumptionAuthSettingsGoogleObservation `json:"google,omitempty" tf:"google,omitempty"`
-
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// A microsoft block as defined below.
-	Microsoft *FunctionAppFlexConsumptionAuthSettingsMicrosoftObservation `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
-
-	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
-	// The RuntimeVersion of the Authentication / Authorization feature in use.
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-
-	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
-	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// A twitter block as defined below.
-	Twitter *FunctionAppFlexConsumptionAuthSettingsTwitterObservation `json:"twitter,omitempty" tf:"twitter,omitempty"`
-
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
-	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsParameters struct {
-
-	// An active_directory block as defined above.
-	// +kubebuilder:validation:Optional
-	ActiveDirectory *FunctionAppFlexConsumptionAuthSettingsActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
-
-	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
-
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
-	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
-	// +kubebuilder:validation:Optional
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
-	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
-	// +kubebuilder:validation:Optional
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
-	// Should the Authentication / Authorization feature be enabled?
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
-
-	// A facebook block as defined below.
-	// +kubebuilder:validation:Optional
-	Facebook *FunctionAppFlexConsumptionAuthSettingsFacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
-
-	// A github block as defined below.
-	// +kubebuilder:validation:Optional
-	Github *FunctionAppFlexConsumptionAuthSettingsGithubParameters `json:"github,omitempty" tf:"github,omitempty"`
-
-	// A google block as defined below.
-	// +kubebuilder:validation:Optional
-	Google *FunctionAppFlexConsumptionAuthSettingsGoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
-
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
-	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
-	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// A microsoft block as defined below.
-	// +kubebuilder:validation:Optional
-	Microsoft *FunctionAppFlexConsumptionAuthSettingsMicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
-
-	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
-	// The RuntimeVersion of the Authentication / Authorization feature in use.
-	// +kubebuilder:validation:Optional
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	// +kubebuilder:validation:Optional
-	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-
-	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
-	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
-	// +kubebuilder:validation:Optional
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// A twitter block as defined below.
-	// +kubebuilder:validation:Optional
-	Twitter *FunctionAppFlexConsumptionAuthSettingsTwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
-
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
-	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
-	// +kubebuilder:validation:Optional
-	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsTwitterInitParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
-	ConsumerSecretSecretRef *v2.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsTwitterObservation struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsTwitterParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
-
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
-	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
-	// +kubebuilder:validation:Optional
-	ConsumerSecretSecretRef *v2.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
-	// +kubebuilder:validation:Optional
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2InitParameters struct {
+type ActiveDirectoryV2InitParameters struct {
 
 	// The list of allowed Applications for the Default Authorisation Policy.
 	// The list of allowed Applications for the Default Authorisation Policy.
@@ -612,7 +122,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2InitParameters str
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2Observation struct {
+type ActiveDirectoryV2Observation struct {
 
 	// The list of allowed Applications for the Default Authorisation Policy.
 	// The list of allowed Applications for the Default Authorisation Policy.
@@ -664,7 +174,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2Observation struct
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2Parameters struct {
+type ActiveDirectoryV2Parameters struct {
 
 	// The list of allowed Applications for the Default Authorisation Policy.
 	// The list of allowed Applications for the Default Authorisation Policy.
@@ -728,7 +238,71 @@ type FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2Parameters struct 
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2AppleV2InitParameters struct {
+type AlwaysReadyInitParameters struct {
+
+	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The name of the always_ready of the Function App.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type AlwaysReadyObservation struct {
+
+	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The name of the always_ready of the Function App.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type AlwaysReadyParameters struct {
+
+	// The instance count of the always_ready of the Function App. The minimum number is 0. The total number of instance_count should not exceed the maximum_instance_count.
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The name of the always_ready of the Function App.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
+type AppServiceLogsInitParameters struct {
+
+	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
+	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
+	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
+
+	// After how many days backups should be deleted. Defaults to 30.
+	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
+	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
+}
+
+type AppServiceLogsObservation struct {
+
+	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
+	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
+	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
+
+	// After how many days backups should be deleted. Defaults to 30.
+	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
+	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
+}
+
+type AppServiceLogsParameters struct {
+
+	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
+	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
+	// +kubebuilder:validation:Optional
+	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
+
+	// After how many days backups should be deleted. Defaults to 30.
+	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
+	// +kubebuilder:validation:Optional
+	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
+}
+
+type AppleV2InitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Apple web application.
@@ -739,7 +313,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2AppleV2InitParameters struct {
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2AppleV2Observation struct {
+type AppleV2Observation struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Apple web application.
@@ -753,7 +327,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2AppleV2Observation struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2AppleV2Parameters struct {
+type AppleV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Apple web application.
@@ -766,21 +340,475 @@ type FunctionAppFlexConsumptionAuthSettingsV2AppleV2Parameters struct {
 	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2AzureStaticWebAppV2InitParameters struct {
+type AuthSettingsInitParameters struct {
+
+	// An active_directory block as defined above.
+	ActiveDirectory *ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
+
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
+	// Should the Authentication / Authorization feature be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A facebook block as defined below.
+	Facebook *FacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
+
+	// A github block as defined below.
+	Github *GithubInitParameters `json:"github,omitempty" tf:"github,omitempty"`
+
+	// A google block as defined below.
+	Google *GoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
+
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// A microsoft block as defined below.
+	Microsoft *MicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+
+	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+
+	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// A twitter block as defined below.
+	Twitter *TwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
+
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+}
+
+type AuthSettingsObservation struct {
+
+	// An active_directory block as defined above.
+	ActiveDirectory *ActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
+
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
+	// Should the Authentication / Authorization feature be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A facebook block as defined below.
+	Facebook *FacebookObservation `json:"facebook,omitempty" tf:"facebook,omitempty"`
+
+	// A github block as defined below.
+	Github *GithubObservation `json:"github,omitempty" tf:"github,omitempty"`
+
+	// A google block as defined below.
+	Google *GoogleObservation `json:"google,omitempty" tf:"google,omitempty"`
+
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// A microsoft block as defined below.
+	Microsoft *MicrosoftObservation `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+
+	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+
+	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// A twitter block as defined below.
+	Twitter *TwitterObservation `json:"twitter,omitempty" tf:"twitter,omitempty"`
+
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+}
+
+type AuthSettingsParameters struct {
+
+	// An active_directory block as defined above.
+	// +kubebuilder:validation:Optional
+	ActiveDirectory *ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
+
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	// +kubebuilder:validation:Optional
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	// +kubebuilder:validation:Optional
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
+	// Should the Authentication / Authorization feature be enabled?
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// A facebook block as defined below.
+	// +kubebuilder:validation:Optional
+	Facebook *FacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
+
+	// A github block as defined below.
+	// +kubebuilder:validation:Optional
+	Github *GithubParameters `json:"github,omitempty" tf:"github,omitempty"`
+
+	// A google block as defined below.
+	// +kubebuilder:validation:Optional
+	Google *GoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
+
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Linux Web App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// A microsoft block as defined below.
+	// +kubebuilder:validation:Optional
+	Microsoft *MicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+
+	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	// +kubebuilder:validation:Optional
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	// +kubebuilder:validation:Optional
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+
+	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// A twitter block as defined below.
+	// +kubebuilder:validation:Optional
+	Twitter *TwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
+
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	// +kubebuilder:validation:Optional
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+}
+
+type AuthSettingsV2InitParameters struct {
+
+	// An active_directory_v2 block as defined below.
+	ActiveDirectoryV2 *ActiveDirectoryV2InitParameters `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
+
+	// An apple_v2 block as defined below.
+	AppleV2 *AppleV2InitParameters `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
+
+	// Should the AuthV2 Settings be enabled. Defaults to false.
+	// Should the AuthV2 Settings be enabled. Defaults to `false`
+	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
+
+	// An azure_static_web_app_v2 block as defined below.
+	AzureStaticWebAppV2 *AzureStaticWebAppV2InitParameters `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
+
+	// The path to the App Auth settings.
+	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
+	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
+
+	// Zero or more custom_oidc_v2 blocks as defined below.
+	CustomOidcV2 []CustomOidcV2InitParameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
+
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
+	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
+	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
+
+	// A facebook_v2 block as defined below.
+	FacebookV2 *FacebookV2InitParameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
+
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
+	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
+
+	// The name of the custom header containing the host of the request.
+	// The name of the header containing the host of the request.
+	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
+
+	// The name of the custom header containing the scheme of the request.
+	// The name of the header containing the scheme of the request.
+	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
+
+	// A github_v2 block as defined below.
+	GithubV2 *GithubV2InitParameters `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
+
+	// A google_v2 block as defined below.
+	GoogleV2 *GoogleV2InitParameters `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
+
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
+	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
+
+	// A login block as defined below.
+	Login *LoginInitParameters `json:"login,omitempty" tf:"login,omitempty"`
+
+	// A microsoft_v2 block as defined below.
+	MicrosoftV2 *MicrosoftV2InitParameters `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
+
+	// Should the authentication flow be used for all requests.
+	// Should the authentication flow be used for all requests.
+	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
+
+	// Should HTTPS be required on connections? Defaults to true.
+	// Should HTTPS be required on connections? Defaults to true.
+	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
+
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// A twitter_v2 block as defined below.
+	TwitterV2 *TwitterV2InitParameters `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
+
+	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
+	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
+	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
+}
+
+type AuthSettingsV2Observation struct {
+
+	// An active_directory_v2 block as defined below.
+	ActiveDirectoryV2 *ActiveDirectoryV2Observation `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
+
+	// An apple_v2 block as defined below.
+	AppleV2 *AppleV2Observation `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
+
+	// Should the AuthV2 Settings be enabled. Defaults to false.
+	// Should the AuthV2 Settings be enabled. Defaults to `false`
+	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
+
+	// An azure_static_web_app_v2 block as defined below.
+	AzureStaticWebAppV2 *AzureStaticWebAppV2Observation `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
+
+	// The path to the App Auth settings.
+	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
+	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
+
+	// Zero or more custom_oidc_v2 blocks as defined below.
+	CustomOidcV2 []CustomOidcV2Observation `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
+
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
+	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
+	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
+
+	// A facebook_v2 block as defined below.
+	FacebookV2 *FacebookV2Observation `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
+
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
+	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
+
+	// The name of the custom header containing the host of the request.
+	// The name of the header containing the host of the request.
+	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
+
+	// The name of the custom header containing the scheme of the request.
+	// The name of the header containing the scheme of the request.
+	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
+
+	// A github_v2 block as defined below.
+	GithubV2 *GithubV2Observation `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
+
+	// A google_v2 block as defined below.
+	GoogleV2 *GoogleV2Observation `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
+
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
+	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
+
+	// A login block as defined below.
+	Login *LoginObservation `json:"login,omitempty" tf:"login,omitempty"`
+
+	// A microsoft_v2 block as defined below.
+	MicrosoftV2 *MicrosoftV2Observation `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
+
+	// Should the authentication flow be used for all requests.
+	// Should the authentication flow be used for all requests.
+	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
+
+	// Should HTTPS be required on connections? Defaults to true.
+	// Should HTTPS be required on connections? Defaults to true.
+	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
+
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// A twitter_v2 block as defined below.
+	TwitterV2 *TwitterV2Observation `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
+
+	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
+	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
+	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
+}
+
+type AuthSettingsV2Parameters struct {
+
+	// An active_directory_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	ActiveDirectoryV2 *ActiveDirectoryV2Parameters `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
+
+	// An apple_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	AppleV2 *AppleV2Parameters `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
+
+	// Should the AuthV2 Settings be enabled. Defaults to false.
+	// Should the AuthV2 Settings be enabled. Defaults to `false`
+	// +kubebuilder:validation:Optional
+	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
+
+	// An azure_static_web_app_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	AzureStaticWebAppV2 *AzureStaticWebAppV2Parameters `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
+
+	// The path to the App Auth settings.
+	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
+	// +kubebuilder:validation:Optional
+	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
+
+	// Zero or more custom_oidc_v2 blocks as defined below.
+	// +kubebuilder:validation:Optional
+	CustomOidcV2 []CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
+
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
+	// +kubebuilder:validation:Optional
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
+	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
+	// +kubebuilder:validation:Optional
+	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
+
+	// A facebook_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	FacebookV2 *FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
+
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
+	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+	// +kubebuilder:validation:Optional
+	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
+
+	// The name of the custom header containing the host of the request.
+	// The name of the header containing the host of the request.
+	// +kubebuilder:validation:Optional
+	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
+
+	// The name of the custom header containing the scheme of the request.
+	// The name of the header containing the scheme of the request.
+	// +kubebuilder:validation:Optional
+	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
+
+	// A github_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	GithubV2 *GithubV2Parameters `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
+
+	// A google_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	GoogleV2 *GoogleV2Parameters `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
+
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
+	// +kubebuilder:validation:Optional
+	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
+
+	// A login block as defined below.
+	// +kubebuilder:validation:Optional
+	Login *LoginParameters `json:"login" tf:"login,omitempty"`
+
+	// A microsoft_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	MicrosoftV2 *MicrosoftV2Parameters `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
+
+	// Should the authentication flow be used for all requests.
+	// Should the authentication flow be used for all requests.
+	// +kubebuilder:validation:Optional
+	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
+
+	// Should HTTPS be required on connections? Defaults to true.
+	// Should HTTPS be required on connections? Defaults to true.
+	// +kubebuilder:validation:Optional
+	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
+
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
+	// +kubebuilder:validation:Optional
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// A twitter_v2 block as defined below.
+	// +kubebuilder:validation:Optional
+	TwitterV2 *TwitterV2Parameters `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
+
+	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
+	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
+	// +kubebuilder:validation:Optional
+	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
+}
+
+type AzureStaticWebAppV2InitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Static Web App Authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2AzureStaticWebAppV2Observation struct {
+type AzureStaticWebAppV2Observation struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Static Web App Authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2AzureStaticWebAppV2Parameters struct {
+type AzureStaticWebAppV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Static Web App Authentication.
@@ -788,7 +816,89 @@ type FunctionAppFlexConsumptionAuthSettingsV2AzureStaticWebAppV2Parameters struc
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2InitParameters struct {
+type ConnectionStringInitParameters struct {
+
+	// The name which should be used for this Connection.
+	// The name which should be used for this Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+}
+
+type ConnectionStringObservation struct {
+
+	// The name which should be used for this Connection.
+	// The name which should be used for this Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ConnectionStringParameters struct {
+
+	// The name which should be used for this Connection.
+	// The name which should be used for this Connection.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	// +kubebuilder:validation:Optional
+	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+}
+
+type CorsInitParameters struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials allowed in CORS requests? Defaults to false.
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type CorsObservation struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials allowed in CORS requests? Defaults to false.
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type CorsParameters struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials allowed in CORS requests? Defaults to false.
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type CustomOidcV2InitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with this Custom OIDC.
@@ -811,7 +921,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2InitParameters struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2Observation struct {
+type CustomOidcV2Observation struct {
 
 	// The endpoint to make the Authorisation Request as supplied by openid_configuration_endpoint response.
 	// The endpoint to make the Authorisation Request.
@@ -858,7 +968,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2Observation struct {
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2Parameters struct {
+type CustomOidcV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with this Custom OIDC.
@@ -886,7 +996,64 @@ type FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2Parameters struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2FacebookV2InitParameters struct {
+type FacebookInitParameters struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	AppSecretSecretRef *v2.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type FacebookObservation struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type FacebookParameters struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	// +kubebuilder:validation:Optional
+	AppID *string `json:"appId" tf:"app_id,omitempty"`
+
+	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	AppSecretSecretRef *v2.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	// +kubebuilder:validation:Optional
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type FacebookV2InitParameters struct {
 
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
@@ -905,7 +1072,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2FacebookV2InitParameters struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2FacebookV2Observation struct {
+type FacebookV2Observation struct {
 
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
@@ -924,7 +1091,7 @@ type FunctionAppFlexConsumptionAuthSettingsV2FacebookV2Observation struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2FacebookV2Parameters struct {
+type FacebookV2Parameters struct {
 
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
@@ -947,730 +1114,6 @@ type FunctionAppFlexConsumptionAuthSettingsV2FacebookV2Parameters struct {
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionAuthSettingsV2GithubV2InitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the GitHub app used for login.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for GitHub Login.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2GithubV2Observation struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the GitHub app used for login.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for GitHub Login.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2GithubV2Parameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The ID of the GitHub app used for login.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for GitHub Login.
-	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	// +kubebuilder:validation:Optional
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2GoogleV2InitParameters struct {
-
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2GoogleV2Observation struct {
-
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2GoogleV2Parameters struct {
-
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
-	// +kubebuilder:validation:Optional
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OpenID Connect Client ID for the Google web application.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name that contains the `client_secret` value used for Google Login.
-	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
-	// +kubebuilder:validation:Optional
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2InitParameters struct {
-
-	// An active_directory_v2 block as defined below.
-	ActiveDirectoryV2 *FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2InitParameters `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
-
-	// An apple_v2 block as defined below.
-	AppleV2 *FunctionAppFlexConsumptionAuthSettingsV2AppleV2InitParameters `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
-
-	// Should the AuthV2 Settings be enabled. Defaults to false.
-	// Should the AuthV2 Settings be enabled. Defaults to `false`
-	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
-
-	// An azure_static_web_app_v2 block as defined below.
-	AzureStaticWebAppV2 *FunctionAppFlexConsumptionAuthSettingsV2AzureStaticWebAppV2InitParameters `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
-
-	// The path to the App Auth settings.
-	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
-	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
-
-	// Zero or more custom_oidc_v2 blocks as defined below.
-	CustomOidcV2 []FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2InitParameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
-
-	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
-	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
-	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
-
-	// A facebook_v2 block as defined below.
-	FacebookV2 *FunctionAppFlexConsumptionAuthSettingsV2FacebookV2InitParameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
-
-	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
-	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
-	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
-
-	// The name of the custom header containing the host of the request.
-	// The name of the header containing the host of the request.
-	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
-
-	// The name of the custom header containing the scheme of the request.
-	// The name of the header containing the scheme of the request.
-	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
-
-	// A github_v2 block as defined below.
-	GithubV2 *FunctionAppFlexConsumptionAuthSettingsV2GithubV2InitParameters `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
-
-	// A google_v2 block as defined below.
-	GoogleV2 *FunctionAppFlexConsumptionAuthSettingsV2GoogleV2InitParameters `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
-
-	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
-	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
-	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
-
-	// A login block as defined below.
-	Login *FunctionAppFlexConsumptionAuthSettingsV2LoginInitParameters `json:"login,omitempty" tf:"login,omitempty"`
-
-	// A microsoft_v2 block as defined below.
-	MicrosoftV2 *FunctionAppFlexConsumptionAuthSettingsV2MicrosoftV2InitParameters `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
-
-	// Should the authentication flow be used for all requests.
-	// Should the authentication flow be used for all requests.
-	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
-
-	// Should HTTPS be required on connections? Defaults to true.
-	// Should HTTPS be required on connections? Defaults to true.
-	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
-
-	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
-	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// A twitter_v2 block as defined below.
-	TwitterV2 *FunctionAppFlexConsumptionAuthSettingsV2TwitterV2InitParameters `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
-
-	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
-	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
-	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2LoginInitParameters struct {
-
-	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
-	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
-	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
-	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
-
-	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
-	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
-	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
-
-	// The endpoint to which logout requests should be made.
-	// The endpoint to which logout requests should be made.
-	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
-
-	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
-	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
-	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
-
-	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
-	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
-	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
-
-	// Should the Token Store configuration Enabled. Defaults to false
-	// Should the Token Store configuration Enabled. Defaults to `false`
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// The directory path in the App Filesystem in which the tokens will be stored.
-	// The directory path in the App Filesystem in which the tokens will be stored.
-	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
-
-	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
-	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
-	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
-
-	// Should the nonce be validated while completing the login flow. Defaults to true.
-	// Should the nonce be validated while completing the login flow. Defaults to `true`.
-	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2LoginObservation struct {
-
-	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
-	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
-	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
-	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
-
-	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
-	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
-	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
-
-	// The endpoint to which logout requests should be made.
-	// The endpoint to which logout requests should be made.
-	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
-
-	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
-	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
-	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
-
-	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
-	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
-	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
-
-	// Should the Token Store configuration Enabled. Defaults to false
-	// Should the Token Store configuration Enabled. Defaults to `false`
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// The directory path in the App Filesystem in which the tokens will be stored.
-	// The directory path in the App Filesystem in which the tokens will be stored.
-	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
-
-	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
-	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
-	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
-
-	// Should the nonce be validated while completing the login flow. Defaults to true.
-	// Should the nonce be validated while completing the login flow. Defaults to `true`.
-	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2LoginParameters struct {
-
-	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
-	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
-	// +kubebuilder:validation:Optional
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
-	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
-	// +kubebuilder:validation:Optional
-	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
-
-	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
-	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
-	// +kubebuilder:validation:Optional
-	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
-
-	// The endpoint to which logout requests should be made.
-	// The endpoint to which logout requests should be made.
-	// +kubebuilder:validation:Optional
-	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
-
-	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
-	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
-	// +kubebuilder:validation:Optional
-	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
-
-	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
-	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
-	// +kubebuilder:validation:Optional
-	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	// +kubebuilder:validation:Optional
-	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
-
-	// Should the Token Store configuration Enabled. Defaults to false
-	// Should the Token Store configuration Enabled. Defaults to `false`
-	// +kubebuilder:validation:Optional
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// The directory path in the App Filesystem in which the tokens will be stored.
-	// The directory path in the App Filesystem in which the tokens will be stored.
-	// +kubebuilder:validation:Optional
-	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
-
-	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
-	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
-	// +kubebuilder:validation:Optional
-	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
-
-	// Should the nonce be validated while completing the login flow. Defaults to true.
-	// Should the nonce be validated while completing the login flow. Defaults to `true`.
-	// +kubebuilder:validation:Optional
-	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2MicrosoftV2InitParameters struct {
-
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2MicrosoftV2Observation struct {
-
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2MicrosoftV2Parameters struct {
-
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// +kubebuilder:validation:Optional
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
-
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
-
-	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
-	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
-	// +kubebuilder:validation:Optional
-	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2Observation struct {
-
-	// An active_directory_v2 block as defined below.
-	ActiveDirectoryV2 *FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2Observation `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
-
-	// An apple_v2 block as defined below.
-	AppleV2 *FunctionAppFlexConsumptionAuthSettingsV2AppleV2Observation `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
-
-	// Should the AuthV2 Settings be enabled. Defaults to false.
-	// Should the AuthV2 Settings be enabled. Defaults to `false`
-	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
-
-	// An azure_static_web_app_v2 block as defined below.
-	AzureStaticWebAppV2 *FunctionAppFlexConsumptionAuthSettingsV2AzureStaticWebAppV2Observation `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
-
-	// The path to the App Auth settings.
-	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
-	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
-
-	// Zero or more custom_oidc_v2 blocks as defined below.
-	CustomOidcV2 []FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2Observation `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
-
-	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
-	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
-	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
-
-	// A facebook_v2 block as defined below.
-	FacebookV2 *FunctionAppFlexConsumptionAuthSettingsV2FacebookV2Observation `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
-
-	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
-	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
-	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
-
-	// The name of the custom header containing the host of the request.
-	// The name of the header containing the host of the request.
-	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
-
-	// The name of the custom header containing the scheme of the request.
-	// The name of the header containing the scheme of the request.
-	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
-
-	// A github_v2 block as defined below.
-	GithubV2 *FunctionAppFlexConsumptionAuthSettingsV2GithubV2Observation `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
-
-	// A google_v2 block as defined below.
-	GoogleV2 *FunctionAppFlexConsumptionAuthSettingsV2GoogleV2Observation `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
-
-	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
-	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
-	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
-
-	// A login block as defined below.
-	Login *FunctionAppFlexConsumptionAuthSettingsV2LoginObservation `json:"login,omitempty" tf:"login,omitempty"`
-
-	// A microsoft_v2 block as defined below.
-	MicrosoftV2 *FunctionAppFlexConsumptionAuthSettingsV2MicrosoftV2Observation `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
-
-	// Should the authentication flow be used for all requests.
-	// Should the authentication flow be used for all requests.
-	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
-
-	// Should HTTPS be required on connections? Defaults to true.
-	// Should HTTPS be required on connections? Defaults to true.
-	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
-
-	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
-	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// A twitter_v2 block as defined below.
-	TwitterV2 *FunctionAppFlexConsumptionAuthSettingsV2TwitterV2Observation `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
-
-	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
-	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
-	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2Parameters struct {
-
-	// An active_directory_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	ActiveDirectoryV2 *FunctionAppFlexConsumptionAuthSettingsV2ActiveDirectoryV2Parameters `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
-
-	// An apple_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	AppleV2 *FunctionAppFlexConsumptionAuthSettingsV2AppleV2Parameters `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
-
-	// Should the AuthV2 Settings be enabled. Defaults to false.
-	// Should the AuthV2 Settings be enabled. Defaults to `false`
-	// +kubebuilder:validation:Optional
-	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
-
-	// An azure_static_web_app_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	AzureStaticWebAppV2 *FunctionAppFlexConsumptionAuthSettingsV2AzureStaticWebAppV2Parameters `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
-
-	// The path to the App Auth settings.
-	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
-	// +kubebuilder:validation:Optional
-	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
-
-	// Zero or more custom_oidc_v2 blocks as defined below.
-	// +kubebuilder:validation:Optional
-	CustomOidcV2 []FunctionAppFlexConsumptionAuthSettingsV2CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
-
-	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
-	// +kubebuilder:validation:Optional
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
-	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
-	// +kubebuilder:validation:Optional
-	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
-
-	// A facebook_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	FacebookV2 *FunctionAppFlexConsumptionAuthSettingsV2FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
-
-	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
-	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
-	// +kubebuilder:validation:Optional
-	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
-
-	// The name of the custom header containing the host of the request.
-	// The name of the header containing the host of the request.
-	// +kubebuilder:validation:Optional
-	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
-
-	// The name of the custom header containing the scheme of the request.
-	// The name of the header containing the scheme of the request.
-	// +kubebuilder:validation:Optional
-	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
-
-	// A github_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	GithubV2 *FunctionAppFlexConsumptionAuthSettingsV2GithubV2Parameters `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
-
-	// A google_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	GoogleV2 *FunctionAppFlexConsumptionAuthSettingsV2GoogleV2Parameters `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
-
-	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
-	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
-	// +kubebuilder:validation:Optional
-	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
-
-	// A login block as defined below.
-	// +kubebuilder:validation:Optional
-	Login *FunctionAppFlexConsumptionAuthSettingsV2LoginParameters `json:"login" tf:"login,omitempty"`
-
-	// A microsoft_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	MicrosoftV2 *FunctionAppFlexConsumptionAuthSettingsV2MicrosoftV2Parameters `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
-
-	// Should the authentication flow be used for all requests.
-	// Should the authentication flow be used for all requests.
-	// +kubebuilder:validation:Optional
-	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
-
-	// Should HTTPS be required on connections? Defaults to true.
-	// Should HTTPS be required on connections? Defaults to true.
-	// +kubebuilder:validation:Optional
-	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
-
-	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
-	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
-	// +kubebuilder:validation:Optional
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// A twitter_v2 block as defined below.
-	// +kubebuilder:validation:Optional
-	TwitterV2 *FunctionAppFlexConsumptionAuthSettingsV2TwitterV2Parameters `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
-
-	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
-	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
-	// +kubebuilder:validation:Optional
-	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2TwitterV2InitParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2TwitterV2Observation struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type FunctionAppFlexConsumptionAuthSettingsV2TwitterV2Parameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
-
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Optional
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName" tf:"consumer_secret_setting_name,omitempty"`
-}
-
-type FunctionAppFlexConsumptionConnectionStringInitParameters struct {
-
-	// The name which should be used for this Connection.
-	// The name which should be used for this Connection.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
-	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The connection string value.
-	// The connection string value.
-	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
-}
-
-type FunctionAppFlexConsumptionConnectionStringObservation struct {
-
-	// The name which should be used for this Connection.
-	// The name which should be used for this Connection.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
-	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type FunctionAppFlexConsumptionConnectionStringParameters struct {
-
-	// The name which should be used for this Connection.
-	// The name which should be used for this Connection.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
-	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-
-	// The connection string value.
-	// The connection string value.
-	// +kubebuilder:validation:Optional
-	ValueSecretRef v2.SecretKeySelector `json:"valueSecretRef" tf:"-"`
-}
-
-type FunctionAppFlexConsumptionIdentityInitParameters struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type FunctionAppFlexConsumptionIdentityObservation struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Principal ID associated with this Managed Service Identity.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Tenant ID associated with this Managed Service Identity.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type FunctionAppFlexConsumptionIdentityParameters struct {
-
-	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type FunctionAppFlexConsumptionInitParameters struct {
 
 	// One or more always_ready blocks as defined below.
@@ -1682,10 +1125,10 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
-	AuthSettings *FunctionAppFlexConsumptionAuthSettingsInitParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+	AuthSettings *AuthSettingsInitParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// An auth_settings_v2 block as defined below.
-	AuthSettingsV2 *FunctionAppFlexConsumptionAuthSettingsV2InitParameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
+	AuthSettingsV2 *AuthSettingsV2InitParameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
 
 	// Should the function app use Client Certificates.
 	// Should the function app use Client Certificates
@@ -1700,7 +1143,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
-	ConnectionString []FunctionAppFlexConsumptionConnectionStringInitParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+	ConnectionString []ConnectionStringInitParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// Is the Function App enabled? Defaults to true.
 	// Is the Function App enabled.
@@ -1714,7 +1157,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// A identity block as defined below.
-	Identity *FunctionAppFlexConsumptionIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	InstanceMemoryInMb *float64 `json:"instanceMemoryInMb,omitempty" tf:"instance_memory_in_mb,omitempty"`
@@ -1749,10 +1192,10 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	ServicePlanIDSelector *v2.Selector `json:"servicePlanIdSelector,omitempty" tf:"-"`
 
 	// A site_config block as defined below.
-	SiteConfig *FunctionAppFlexConsumptionSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+	SiteConfig *SiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A sticky_settings block as defined below.
-	StickySettings *FunctionAppFlexConsumptionStickySettingsInitParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
+	StickySettings *StickySettingsInitParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -1837,10 +1280,10 @@ type FunctionAppFlexConsumptionObservation struct {
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
-	AuthSettings *FunctionAppFlexConsumptionAuthSettingsObservation `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+	AuthSettings *AuthSettingsObservation `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// An auth_settings_v2 block as defined below.
-	AuthSettingsV2 *FunctionAppFlexConsumptionAuthSettingsV2Observation `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
+	AuthSettingsV2 *AuthSettingsV2Observation `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
 
 	// Should the function app use Client Certificates.
 	// Should the function app use Client Certificates
@@ -1855,7 +1298,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
-	ConnectionString []FunctionAppFlexConsumptionConnectionStringObservation `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+	ConnectionString []ConnectionStringObservation `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The default hostname of the Linux Function App.
 	DefaultHostName *string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty"`
@@ -1878,7 +1321,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A identity block as defined below.
-	Identity *FunctionAppFlexConsumptionIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	InstanceMemoryInMb *float64 `json:"instanceMemoryInMb,omitempty" tf:"instance_memory_in_mb,omitempty"`
@@ -1921,10 +1364,10 @@ type FunctionAppFlexConsumptionObservation struct {
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
 	// A site_config block as defined below.
-	SiteConfig *FunctionAppFlexConsumptionSiteConfigObservation `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+	SiteConfig *SiteConfigObservation `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A sticky_settings block as defined below.
-	StickySettings *FunctionAppFlexConsumptionStickySettingsObservation `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
+	StickySettings *StickySettingsObservation `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
 	StorageAccessKey *string `json:"storageAccessKey,omitempty" tf:"storage_access_key,omitempty"`
@@ -1972,11 +1415,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// A auth_settings block as defined below.
 	// +kubebuilder:validation:Optional
-	AuthSettings *FunctionAppFlexConsumptionAuthSettingsParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+	AuthSettings *AuthSettingsParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// An auth_settings_v2 block as defined below.
 	// +kubebuilder:validation:Optional
-	AuthSettingsV2 *FunctionAppFlexConsumptionAuthSettingsV2Parameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
+	AuthSettingsV2 *AuthSettingsV2Parameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
 
 	// Should the function app use Client Certificates.
 	// Should the function app use Client Certificates
@@ -1995,7 +1438,7 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// One or more connection_string blocks as defined below.
 	// +kubebuilder:validation:Optional
-	ConnectionString []FunctionAppFlexConsumptionConnectionStringParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+	ConnectionString []ConnectionStringParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// Is the Function App enabled? Defaults to true.
 	// Is the Function App enabled.
@@ -2013,7 +1456,7 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// A identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *FunctionAppFlexConsumptionIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The memory size of the instances on which your app runs. Reference the Microsoft Documentation for the currently supported values. Defaults to 2048.
 	// +kubebuilder:validation:Optional
@@ -2069,11 +1512,11 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// A site_config block as defined below.
 	// +kubebuilder:validation:Optional
-	SiteConfig *FunctionAppFlexConsumptionSiteConfigParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+	SiteConfig *SiteConfigParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A sticky_settings block as defined below.
 	// +kubebuilder:validation:Optional
-	StickySettings *FunctionAppFlexConsumptionStickySettingsParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
+	StickySettings *StickySettingsParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
@@ -2156,80 +1599,230 @@ type FunctionAppFlexConsumptionParameters struct {
 	ZipDeployFile *string `json:"zipDeployFile,omitempty" tf:"zip_deploy_file,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigAppServiceLogsInitParameters struct {
+type GithubInitParameters struct {
 
-	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
-	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
-	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// After how many days backups should be deleted. Defaults to 30.
-	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
-	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigAppServiceLogsObservation struct {
+type GithubObservation struct {
 
-	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
-	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
-	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// After how many days backups should be deleted. Defaults to 30.
-	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
-	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigAppServiceLogsParameters struct {
+type GithubParameters struct {
 
-	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
-	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
 	// +kubebuilder:validation:Optional
-	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
-	// After how many days backups should be deleted. Defaults to 30.
-	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
 	// +kubebuilder:validation:Optional
-	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
-}
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
-type FunctionAppFlexConsumptionSiteConfigCorsInitParameters struct {
-
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials allowed in CORS requests? Defaults to false.
-	// Are credentials allowed in CORS requests? Defaults to `false`.
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigCorsObservation struct {
-
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials allowed in CORS requests? Defaults to false.
-	// Are credentials allowed in CORS requests? Defaults to `false`.
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigCorsParameters struct {
-
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
 	// +kubebuilder:validation:Optional
-	// +listType=set
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
-	// Are credentials allowed in CORS requests? Defaults to false.
-	// Are credentials allowed in CORS requests? Defaults to `false`.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
 	// +kubebuilder:validation:Optional
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersInitParameters struct {
+type GithubV2InitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type GithubV2Observation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type GithubV2Parameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	// +kubebuilder:validation:Optional
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type GoogleInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type GoogleObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type GoogleParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type GoogleV2InitParameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type GoogleV2Observation struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type GoogleV2Parameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
+	// +kubebuilder:validation:Optional
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
+	// +kubebuilder:validation:Optional
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type HeadersInitParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
@@ -2244,7 +1837,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersInitParameters stru
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersObservation struct {
+type HeadersObservation struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
@@ -2259,7 +1852,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersObservation struct 
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersParameters struct {
+type HeadersParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
 	// +kubebuilder:validation:Optional
@@ -2278,7 +1871,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersParameters struct {
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigIPRestrictionInitParameters struct {
+type IPRestrictionInitParameters struct {
 
 	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
@@ -2289,7 +1882,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers *FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *HeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2322,7 +1915,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionInitParameters struct {
 	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigIPRestrictionObservation struct {
+type IPRestrictionObservation struct {
 
 	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
@@ -2333,7 +1926,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers *FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *HeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2356,7 +1949,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionObservation struct {
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigIPRestrictionParameters struct {
+type IPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
@@ -2370,7 +1963,7 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionParameters struct {
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
-	Headers *FunctionAppFlexConsumptionSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *HeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2408,7 +2001,514 @@ type FunctionAppFlexConsumptionSiteConfigIPRestrictionParameters struct {
 	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type LoginInitParameters struct {
+
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
+	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
+	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
+
+	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
+	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
+	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
+
+	// The endpoint to which logout requests should be made.
+	// The endpoint to which logout requests should be made.
+	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
+
+	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
+	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
+	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
+
+	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
+	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
+	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
+
+	// Should the Token Store configuration Enabled. Defaults to false
+	// Should the Token Store configuration Enabled. Defaults to `false`
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
+
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
+
+	// Should the nonce be validated while completing the login flow. Defaults to true.
+	// Should the nonce be validated while completing the login flow. Defaults to `true`.
+	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
+}
+
+type LoginObservation struct {
+
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
+	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
+	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
+
+	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
+	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
+	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
+
+	// The endpoint to which logout requests should be made.
+	// The endpoint to which logout requests should be made.
+	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
+
+	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
+	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
+	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
+
+	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
+	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
+	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
+
+	// Should the Token Store configuration Enabled. Defaults to false
+	// Should the Token Store configuration Enabled. Defaults to `false`
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
+
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
+
+	// Should the nonce be validated while completing the login flow. Defaults to true.
+	// Should the nonce be validated while completing the login flow. Defaults to `true`.
+	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
+}
+
+type LoginParameters struct {
+
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
+	// +kubebuilder:validation:Optional
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
+	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
+	// +kubebuilder:validation:Optional
+	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
+
+	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
+	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
+	// +kubebuilder:validation:Optional
+	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
+
+	// The endpoint to which logout requests should be made.
+	// The endpoint to which logout requests should be made.
+	// +kubebuilder:validation:Optional
+	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
+
+	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
+	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
+	// +kubebuilder:validation:Optional
+	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
+
+	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
+	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
+	// +kubebuilder:validation:Optional
+	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	// +kubebuilder:validation:Optional
+	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
+
+	// Should the Token Store configuration Enabled. Defaults to false
+	// Should the Token Store configuration Enabled. Defaults to `false`
+	// +kubebuilder:validation:Optional
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	// +kubebuilder:validation:Optional
+	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
+
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	// +kubebuilder:validation:Optional
+	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
+
+	// Should the nonce be validated while completing the login flow. Defaults to true.
+	// Should the nonce be validated while completing the login flow. Defaults to `true`.
+	// +kubebuilder:validation:Optional
+	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
+}
+
+type MicrosoftInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type MicrosoftObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type MicrosoftParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSecretRef *v2.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type MicrosoftV2InitParameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type MicrosoftV2Observation struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type MicrosoftV2Parameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// +kubebuilder:validation:Optional
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
+	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
+	// +kubebuilder:validation:Optional
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type ScmIPRestrictionHeadersInitParameters struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type ScmIPRestrictionHeadersObservation struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
+}
+
+type ScmIPRestrictionHeadersParameters struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	// +kubebuilder:validation:Optional
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	// +kubebuilder:validation:Optional
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	// +kubebuilder:validation:Optional
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	// +kubebuilder:validation:Optional
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type ScmIPRestrictionInitParameters struct {
+
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A headers block as defined above.
+	Headers *ScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The Site Credentials Username used for publishing.
+	// The name which should be used for this `ip_restriction`.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type ScmIPRestrictionObservation struct {
+
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A headers block as defined above.
+	Headers *ScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The Site Credentials Username used for publishing.
+	// The name which should be used for this `ip_restriction`.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+}
+
+type ScmIPRestrictionParameters struct {
+
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A headers block as defined above.
+	// +kubebuilder:validation:Optional
+	Headers *ScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	// +kubebuilder:validation:Optional
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The Site Credentials Username used for publishing.
+	// The name which should be used for this `ip_restriction`.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	// +kubebuilder:validation:Optional
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type SiteConfigInitParameters struct {
 
 	// The URL of the API definition that describes this Linux Function App.
 	// The URL of the API definition that describes this Linux Function App.
@@ -2433,7 +2533,7 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
 
 	// An app_service_logs block as defined above.
-	AppServiceLogs *FunctionAppFlexConsumptionSiteConfigAppServiceLogsInitParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+	AppServiceLogs *AppServiceLogsInitParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
 
 	// The Connection String for linking the Linux Function App to Application Insights.
 	// The Connection String for linking the Linux Function App to Application Insights.
@@ -2462,7 +2562,7 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
 
 	// A cors block as defined above.
-	Cors *FunctionAppFlexConsumptionSiteConfigCorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors *CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies a list of Default Documents for the Linux Web App.
 	// Specifies a list of Default Documents for the Linux Web App.
@@ -2484,7 +2584,7 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
 	// One or more ip_restriction blocks as defined above.
-	IPRestriction []FunctionAppFlexConsumptionSiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+	IPRestriction []IPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
@@ -2514,7 +2614,7 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
-	ScmIPRestriction []FunctionAppFlexConsumptionSiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+	ScmIPRestriction []ScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
@@ -2544,7 +2644,7 @@ type FunctionAppFlexConsumptionSiteConfigInitParameters struct {
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigObservation struct {
+type SiteConfigObservation struct {
 
 	// The URL of the API definition that describes this Linux Function App.
 	// The URL of the API definition that describes this Linux Function App.
@@ -2559,7 +2659,7 @@ type FunctionAppFlexConsumptionSiteConfigObservation struct {
 	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
 
 	// An app_service_logs block as defined above.
-	AppServiceLogs *FunctionAppFlexConsumptionSiteConfigAppServiceLogsObservation `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+	AppServiceLogs *AppServiceLogsObservation `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
 
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
@@ -2570,7 +2670,7 @@ type FunctionAppFlexConsumptionSiteConfigObservation struct {
 	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
 
 	// A cors block as defined above.
-	Cors *FunctionAppFlexConsumptionSiteConfigCorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors *CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies a list of Default Documents for the Linux Web App.
 	// Specifies a list of Default Documents for the Linux Web App.
@@ -2596,7 +2696,7 @@ type FunctionAppFlexConsumptionSiteConfigObservation struct {
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
 	// One or more ip_restriction blocks as defined above.
-	IPRestriction []FunctionAppFlexConsumptionSiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+	IPRestriction []IPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
@@ -2626,7 +2726,7 @@ type FunctionAppFlexConsumptionSiteConfigObservation struct {
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
-	ScmIPRestriction []FunctionAppFlexConsumptionSiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+	ScmIPRestriction []ScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
@@ -2659,7 +2759,7 @@ type FunctionAppFlexConsumptionSiteConfigObservation struct {
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigParameters struct {
+type SiteConfigParameters struct {
 
 	// The URL of the API definition that describes this Linux Function App.
 	// The URL of the API definition that describes this Linux Function App.
@@ -2688,7 +2788,7 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// An app_service_logs block as defined above.
 	// +kubebuilder:validation:Optional
-	AppServiceLogs *FunctionAppFlexConsumptionSiteConfigAppServiceLogsParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+	AppServiceLogs *AppServiceLogsParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
 
 	// The Connection String for linking the Linux Function App to Application Insights.
 	// The Connection String for linking the Linux Function App to Application Insights.
@@ -2722,7 +2822,7 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// A cors block as defined above.
 	// +kubebuilder:validation:Optional
-	Cors *FunctionAppFlexConsumptionSiteConfigCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+	Cors *CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies a list of Default Documents for the Linux Web App.
 	// Specifies a list of Default Documents for the Linux Web App.
@@ -2750,7 +2850,7 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// One or more ip_restriction blocks as defined above.
 	// +kubebuilder:validation:Optional
-	IPRestriction []FunctionAppFlexConsumptionSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+	IPRestriction []IPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional
@@ -2788,7 +2888,7 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 
 	// One or more scm_ip_restriction blocks as defined above.
 	// +kubebuilder:validation:Optional
-	ScmIPRestriction []FunctionAppFlexConsumptionSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+	ScmIPRestriction []ScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional
@@ -2825,189 +2925,10 @@ type FunctionAppFlexConsumptionSiteConfigParameters struct {
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionHeadersInitParameters struct {
-
-	// Specifies a list of Azure Front Door IDs.
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// Specifies a list of Hosts for which matching should be applied.
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+type SiteCredentialInitParameters struct {
 }
 
-type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionHeadersObservation struct {
-
-	// Specifies a list of Azure Front Door IDs.
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
-
-	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
-
-	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
-
-	// Specifies a list of Hosts for which matching should be applied.
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionHeadersParameters struct {
-
-	// Specifies a list of Azure Front Door IDs.
-	// +kubebuilder:validation:Optional
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	// +kubebuilder:validation:Optional
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	// +kubebuilder:validation:Optional
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// Specifies a list of Hosts for which matching should be applied.
-	// +kubebuilder:validation:Optional
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionInitParameters struct {
-
-	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
-	// The action to take. Possible values are `Allow` or `Deny`.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The Description of this IP Restriction.
-	// The description of the IP restriction rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A headers block as defined above.
-	Headers *FunctionAppFlexConsumptionSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
-	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The Site Credentials Username used for publishing.
-	// The name which should be used for this `ip_restriction`.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority value of this ip_restriction. Defaults to 65000.
-	// The priority value of this `ip_restriction`.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionObservation struct {
-
-	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
-	// The action to take. Possible values are `Allow` or `Deny`.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The Description of this IP Restriction.
-	// The description of the IP restriction rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A headers block as defined above.
-	Headers *FunctionAppFlexConsumptionSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
-	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The Site Credentials Username used for publishing.
-	// The name which should be used for this `ip_restriction`.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority value of this ip_restriction. Defaults to 65000.
-	// The priority value of this `ip_restriction`.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-}
-
-type FunctionAppFlexConsumptionSiteConfigScmIPRestrictionParameters struct {
-
-	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
-	// The action to take. Possible values are `Allow` or `Deny`.
-	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// The Description of this IP Restriction.
-	// The description of the IP restriction rule.
-	// +kubebuilder:validation:Optional
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A headers block as defined above.
-	// +kubebuilder:validation:Optional
-	Headers *FunctionAppFlexConsumptionSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
-	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	// +kubebuilder:validation:Optional
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The Site Credentials Username used for publishing.
-	// The name which should be used for this `ip_restriction`.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The priority value of this ip_restriction. Defaults to 65000.
-	// The priority value of this `ip_restriction`.
-	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// The Service Tag used for this IP Restriction.
-	// The Service Tag used for this IP Restriction.
-	// +kubebuilder:validation:Optional
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
-
-	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
-
-	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDRef *v2.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetIDSelector *v2.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type FunctionAppFlexConsumptionSiteCredentialInitParameters struct {
-}
-
-type FunctionAppFlexConsumptionSiteCredentialObservation struct {
+type SiteCredentialObservation struct {
 
 	// The Site Credentials Username used for publishing.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -3016,10 +2937,10 @@ type FunctionAppFlexConsumptionSiteCredentialObservation struct {
 	Password *string `json:"password,omitempty" tf:"password,omitempty"`
 }
 
-type FunctionAppFlexConsumptionSiteCredentialParameters struct {
+type SiteCredentialParameters struct {
 }
 
-type FunctionAppFlexConsumptionStickySettingsInitParameters struct {
+type StickySettingsInitParameters struct {
 
 	// A list of app_setting names that the Linux Function App will not swap between Slots when a swap operation is triggered.
 	AppSettingNames []*string `json:"appSettingNames,omitempty" tf:"app_setting_names,omitempty"`
@@ -3028,7 +2949,7 @@ type FunctionAppFlexConsumptionStickySettingsInitParameters struct {
 	ConnectionStringNames []*string `json:"connectionStringNames,omitempty" tf:"connection_string_names,omitempty"`
 }
 
-type FunctionAppFlexConsumptionStickySettingsObservation struct {
+type StickySettingsObservation struct {
 
 	// A list of app_setting names that the Linux Function App will not swap between Slots when a swap operation is triggered.
 	AppSettingNames []*string `json:"appSettingNames,omitempty" tf:"app_setting_names,omitempty"`
@@ -3037,7 +2958,7 @@ type FunctionAppFlexConsumptionStickySettingsObservation struct {
 	ConnectionStringNames []*string `json:"connectionStringNames,omitempty" tf:"connection_string_names,omitempty"`
 }
 
-type FunctionAppFlexConsumptionStickySettingsParameters struct {
+type StickySettingsParameters struct {
 
 	// A list of app_setting names that the Linux Function App will not swap between Slots when a swap operation is triggered.
 	// +kubebuilder:validation:Optional
@@ -3046,6 +2967,85 @@ type FunctionAppFlexConsumptionStickySettingsParameters struct {
 	// A list of connection_string names that the Linux Function App will not swap between Slots when a swap operation is triggered.
 	// +kubebuilder:validation:Optional
 	ConnectionStringNames []*string `json:"connectionStringNames,omitempty" tf:"connection_string_names,omitempty"`
+}
+
+type TwitterInitParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	ConsumerSecretSecretRef *v2.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type TwitterObservation struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type TwitterParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	// +kubebuilder:validation:Optional
+	ConsumerSecretSecretRef *v2.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	// +kubebuilder:validation:Optional
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type TwitterV2InitParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type TwitterV2Observation struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type TwitterV2Parameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName" tf:"consumer_secret_setting_name,omitempty"`
 }
 
 // FunctionAppFlexConsumptionSpec defines the desired state of FunctionAppFlexConsumption

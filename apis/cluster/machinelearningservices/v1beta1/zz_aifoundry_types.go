@@ -13,143 +13,6 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AIFoundryEncryptionInitParameters struct {
-
-	// The Key Vault URI to access the encryption key.
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
-
-	// The Key Vault ID where the customer owned encryption key exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-
-	// Reference to a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
-
-	// Selector for a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
-
-	// The user assigned identity ID that has access to the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
-}
-
-type AIFoundryEncryptionObservation struct {
-
-	// The Key Vault URI to access the encryption key.
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
-
-	// The Key Vault ID where the customer owned encryption key exists.
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-
-	// The user assigned identity ID that has access to the encryption key.
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-}
-
-type AIFoundryEncryptionParameters struct {
-
-	// The Key Vault URI to access the encryption key.
-	// +kubebuilder:validation:Optional
-	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
-
-	// The Key Vault ID where the customer owned encryption key exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-
-	// Reference to a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
-
-	// Selector for a Vault in keyvault to populate keyVaultId.
-	// +kubebuilder:validation:Optional
-	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
-
-	// The user assigned identity ID that has access to the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-
-	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
-	// +kubebuilder:validation:Optional
-	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
-}
-
-type AIFoundryIdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AIFoundryIdentityObservation struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Hub.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Principal ID associated with this Managed Service Identity.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Tenant ID associated with this Managed Service Identity.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AIFoundryIdentityParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type AIFoundryInitParameters struct {
 
 	// The Application Insights ID that should be used by this AI Foundry Hub.
@@ -182,7 +45,7 @@ type AIFoundryInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new AI Foundry Hub to be created.
-	Encryption *AIFoundryEncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// The display name of this AI Foundry Hub.
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
@@ -191,7 +54,7 @@ type AIFoundryInitParameters struct {
 	HighBusinessImpactEnabled *bool `json:"highBusinessImpactEnabled,omitempty" tf:"high_business_impact_enabled,omitempty"`
 
 	// A identity block as defined below.
-	Identity *AIFoundryIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Key Vault ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
@@ -210,7 +73,7 @@ type AIFoundryInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A managed_network block as defined below.
-	ManagedNetwork *AIFoundryManagedNetworkInitParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
+	ManagedNetwork *ManagedNetworkInitParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity ID that represents the AI Foundry Hub identity. This must be set when enabling encryption with a user assigned identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -246,25 +109,6 @@ type AIFoundryInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type AIFoundryManagedNetworkInitParameters struct {
-
-	// The isolation mode of the AI Foundry Hub. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound.
-	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
-}
-
-type AIFoundryManagedNetworkObservation struct {
-
-	// The isolation mode of the AI Foundry Hub. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound.
-	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
-}
-
-type AIFoundryManagedNetworkParameters struct {
-
-	// The isolation mode of the AI Foundry Hub. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound.
-	// +kubebuilder:validation:Optional
-	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
-}
-
 type AIFoundryObservation struct {
 
 	// The Application Insights ID that should be used by this AI Foundry Hub.
@@ -280,7 +124,7 @@ type AIFoundryObservation struct {
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new AI Foundry Hub to be created.
-	Encryption *AIFoundryEncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// The display name of this AI Foundry Hub.
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
@@ -292,7 +136,7 @@ type AIFoundryObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A identity block as defined below.
-	Identity *AIFoundryIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Key Vault ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
@@ -301,7 +145,7 @@ type AIFoundryObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A managed_network block as defined below.
-	ManagedNetwork *AIFoundryManagedNetworkObservation `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
+	ManagedNetwork *ManagedNetworkObservation `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity ID that represents the AI Foundry Hub identity. This must be set when enabling encryption with a user assigned identity.
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
@@ -359,7 +203,7 @@ type AIFoundryParameters struct {
 
 	// An encryption block as defined below. Changing this forces a new AI Foundry Hub to be created.
 	// +kubebuilder:validation:Optional
-	Encryption *AIFoundryEncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// The display name of this AI Foundry Hub.
 	// +kubebuilder:validation:Optional
@@ -371,7 +215,7 @@ type AIFoundryParameters struct {
 
 	// A identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *AIFoundryIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Key Vault ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
@@ -393,7 +237,7 @@ type AIFoundryParameters struct {
 
 	// A managed_network block as defined below.
 	// +kubebuilder:validation:Optional
-	ManagedNetwork *AIFoundryManagedNetworkParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
+	ManagedNetwork *ManagedNetworkParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity ID that represents the AI Foundry Hub identity. This must be set when enabling encryption with a user assigned identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
@@ -444,6 +288,162 @@ type AIFoundryParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type EncryptionInitParameters struct {
+
+	// The Key Vault URI to access the encryption key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The Key Vault ID where the customer owned encryption key exists.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
+	// The user assigned identity ID that has access to the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+}
+
+type EncryptionObservation struct {
+
+	// The Key Vault URI to access the encryption key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The Key Vault ID where the customer owned encryption key exists.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// The user assigned identity ID that has access to the encryption key.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+}
+
+type EncryptionParameters struct {
+
+	// The Key Vault URI to access the encryption key.
+	// +kubebuilder:validation:Optional
+	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
+
+	// The Key Vault ID where the customer owned encryption key exists.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Vault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v2.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v2.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
+	// The user assigned identity ID that has access to the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDRef *v2.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDSelector *v2.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Hub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Hub.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Hub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this AI Foundry Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type ManagedNetworkInitParameters struct {
+
+	// The isolation mode of the AI Foundry Hub. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound.
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
+type ManagedNetworkObservation struct {
+
+	// The isolation mode of the AI Foundry Hub. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound.
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
+type ManagedNetworkParameters struct {
+
+	// The isolation mode of the AI Foundry Hub. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound.
+	// +kubebuilder:validation:Optional
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
 }
 
 // AIFoundrySpec defines the desired state of AIFoundry

@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: API
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
         testing.upbound.io/example-name: example
     displayName: Example API
     import:
-    - contentFormat: swagger-link-json
+      contentFormat: swagger-link-json
       contentValue: http://conferenceapi.azurewebsites.net/?format=json
     path: example
     protocols:
@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:
@@ -83,7 +83,7 @@ spec:
 
 ---
 
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Gateway
 metadata:
   annotations:
@@ -98,7 +98,7 @@ spec:
         testing.upbound.io/example-name: example
     description: Example API Management gateway
     locationData:
-    - city: example city
+      city: example city
       district: example district
       name: example name
       region: example region

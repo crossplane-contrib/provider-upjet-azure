@@ -16,33 +16,6 @@ func (l *AdvancedThreatProtectionList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this IOTSecurityDeviceGroupList.
-func (l *IOTSecurityDeviceGroupList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this IOTSecuritySolutionList.
-func (l *IOTSecuritySolutionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SecurityCenterAssessmentList.
-func (l *SecurityCenterAssessmentList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this SecurityCenterAssessmentPolicyList.
 func (l *SecurityCenterAssessmentPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

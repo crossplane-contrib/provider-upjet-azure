@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
 kind: FunctionJavascriptUda
 metadata:
   annotations:
@@ -15,7 +15,7 @@ spec:
     input:
     - type: bigint
     output:
-    - type: bigint
+      type: bigint
     script: |
       function main() {
           this.init = function () {
@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
 kind: Job
 metadata:
   annotations:

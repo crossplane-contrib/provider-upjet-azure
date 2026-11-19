@@ -13,7 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type CertificateInitParameters_2 struct {
+type CertificateInitParameters struct {
 
 	// The base-64 encoded certificate data, which must be a PFX file.
 	DataSecretRef *v2.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
@@ -38,7 +38,7 @@ type CertificateInitParameters_2 struct {
 	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
-type CertificateObservation_2 struct {
+type CertificateObservation struct {
 
 	// The Name of the API Management Service where this Service should be created. Changing this forces a new resource to be created.
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
@@ -65,7 +65,7 @@ type CertificateObservation_2 struct {
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
-type CertificateParameters_2 struct {
+type CertificateParameters struct {
 
 	// The Name of the API Management Service where this Service should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
@@ -123,7 +123,7 @@ type CertificateParameters_2 struct {
 // CertificateSpec defines the desired state of Certificate
 type CertificateSpec struct {
 	v2.ClusterManagedResourceSpec `json:",inline"`
-	ForProvider                   CertificateParameters_2 `json:"forProvider"`
+	ForProvider                   CertificateParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -134,13 +134,13 @@ type CertificateSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider CertificateInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider CertificateInitParameters `json:"initProvider,omitempty"`
 }
 
 // CertificateStatus defines the observed state of Certificate.
 type CertificateStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               CertificateObservation_2 `json:"atProvider,omitempty"`
+	AtProvider               CertificateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

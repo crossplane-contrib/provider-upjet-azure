@@ -7,56 +7,6 @@ package v1beta1
 
 import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
-// GetCondition of this HPCCache.
-func (mg *HPCCache) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this HPCCache.
-func (mg *HPCCache) GetDeletionPolicy() xpv2.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this HPCCache.
-func (mg *HPCCache) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this HPCCache.
-func (mg *HPCCache) GetProviderConfigReference() *xpv2.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this HPCCache.
-func (mg *HPCCache) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this HPCCache.
-func (mg *HPCCache) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this HPCCache.
-func (mg *HPCCache) SetDeletionPolicy(r xpv2.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this HPCCache.
-func (mg *HPCCache) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this HPCCache.
-func (mg *HPCCache) SetProviderConfigReference(r *xpv2.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this HPCCache.
-func (mg *HPCCache) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this HPCCacheAccessPolicy.
 func (mg *HPCCacheAccessPolicy) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

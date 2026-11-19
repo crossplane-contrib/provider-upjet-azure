@@ -19,7 +19,7 @@ spec:
         testing.upbound.io/example-name: example
     query: exampleQuery
 ---
-apiVersion: operationalinsights.azure.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:

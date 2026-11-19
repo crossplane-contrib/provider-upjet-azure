@@ -7,15 +7,6 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this ApplicationList.
-func (l *ApplicationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ApplicationNetworkRuleSetList.
 func (l *ApplicationNetworkRuleSetList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

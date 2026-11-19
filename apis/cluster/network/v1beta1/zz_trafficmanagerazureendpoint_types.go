@@ -42,6 +42,45 @@ type CustomHeaderParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type SubnetInitParameters struct {
+
+	// The first IP Address in this subnet.
+	First *string `json:"first,omitempty" tf:"first,omitempty"`
+
+	// The last IP Address in this subnet.
+	Last *string `json:"last,omitempty" tf:"last,omitempty"`
+
+	// The block size (number of leading bits in the subnet mask).
+	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
+type SubnetObservation struct {
+
+	// The first IP Address in this subnet.
+	First *string `json:"first,omitempty" tf:"first,omitempty"`
+
+	// The last IP Address in this subnet.
+	Last *string `json:"last,omitempty" tf:"last,omitempty"`
+
+	// The block size (number of leading bits in the subnet mask).
+	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
+type SubnetParameters struct {
+
+	// The first IP Address in this subnet.
+	// +kubebuilder:validation:Optional
+	First *string `json:"first" tf:"first,omitempty"`
+
+	// The last IP Address in this subnet.
+	// +kubebuilder:validation:Optional
+	Last *string `json:"last,omitempty" tf:"last,omitempty"`
+
+	// The block size (number of leading bits in the subnet mask).
+	// +kubebuilder:validation:Optional
+	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
 type TrafficManagerAzureEndpointInitParameters struct {
 
 	// If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method. Defaults to false.
@@ -60,7 +99,7 @@ type TrafficManagerAzureEndpointInitParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
-	Subnet []TrafficManagerAzureEndpointSubnetInitParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
+	Subnet []SubnetInitParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// The ID of the Azure Resource which should be used as a target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
@@ -103,7 +142,7 @@ type TrafficManagerAzureEndpointObservation struct {
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
 
 	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
-	Subnet []TrafficManagerAzureEndpointSubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
+	Subnet []SubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// The ID of the Azure Resource which should be used as a target.
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
@@ -150,7 +189,7 @@ type TrafficManagerAzureEndpointParameters struct {
 
 	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Subnet []TrafficManagerAzureEndpointSubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
+	Subnet []SubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// The ID of the Azure Resource which should be used as a target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
@@ -169,45 +208,6 @@ type TrafficManagerAzureEndpointParameters struct {
 	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
-}
-
-type TrafficManagerAzureEndpointSubnetInitParameters struct {
-
-	// The first IP Address in this subnet.
-	First *string `json:"first,omitempty" tf:"first,omitempty"`
-
-	// The last IP Address in this subnet.
-	Last *string `json:"last,omitempty" tf:"last,omitempty"`
-
-	// The block size (number of leading bits in the subnet mask).
-	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
-}
-
-type TrafficManagerAzureEndpointSubnetObservation struct {
-
-	// The first IP Address in this subnet.
-	First *string `json:"first,omitempty" tf:"first,omitempty"`
-
-	// The last IP Address in this subnet.
-	Last *string `json:"last,omitempty" tf:"last,omitempty"`
-
-	// The block size (number of leading bits in the subnet mask).
-	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
-}
-
-type TrafficManagerAzureEndpointSubnetParameters struct {
-
-	// The first IP Address in this subnet.
-	// +kubebuilder:validation:Optional
-	First *string `json:"first" tf:"first,omitempty"`
-
-	// The last IP Address in this subnet.
-	// +kubebuilder:validation:Optional
-	Last *string `json:"last,omitempty" tf:"last,omitempty"`
-
-	// The block size (number of leading bits in the subnet mask).
-	// +kubebuilder:validation:Optional
-	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 // TrafficManagerAzureEndpointSpec defines the desired state of TrafficManagerAzureEndpoint

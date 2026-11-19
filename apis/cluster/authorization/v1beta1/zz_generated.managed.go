@@ -357,56 +357,6 @@ func (mg *PolicySetDefinition) SetWriteConnectionSecretToReference(r *xpv2.Secre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) GetDeletionPolicy() xpv2.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) GetProviderConfigReference() *xpv2.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) SetProviderConfigReference(r *xpv2.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this ResourceGroupPolicyAssignment.
-func (mg *ResourceGroupPolicyAssignment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this ResourceGroupPolicyExemption.
 func (mg *ResourceGroupPolicyExemption) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
@@ -454,56 +404,6 @@ func (mg *ResourceGroupPolicyExemption) SetProviderConfigReference(r *xpv2.Refer
 
 // SetWriteConnectionSecretToReference of this ResourceGroupPolicyExemption.
 func (mg *ResourceGroupPolicyExemption) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) GetDeletionPolicy() xpv2.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) GetProviderConfigReference() *xpv2.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) SetProviderConfigReference(r *xpv2.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this ResourcePolicyAssignment.
-func (mg *ResourcePolicyAssignment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -704,56 +604,6 @@ func (mg *RoleManagementPolicy) SetProviderConfigReference(r *xpv2.Reference) {
 
 // SetWriteConnectionSecretToReference of this RoleManagementPolicy.
 func (mg *RoleManagementPolicy) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) GetDeletionPolicy() xpv2.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) GetProviderConfigReference() *xpv2.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) SetDeletionPolicy(r xpv2.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) SetProviderConfigReference(r *xpv2.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this SubscriptionPolicyAssignment.
-func (mg *SubscriptionPolicyAssignment) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

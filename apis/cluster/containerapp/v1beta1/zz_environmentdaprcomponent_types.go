@@ -35,7 +35,7 @@ type EnvironmentDaprComponentInitParameters struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// A secret block as detailed below.
-	Secret []EnvironmentDaprComponentSecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
+	Secret []SecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// The version of the component.
 	// The version of the component.
@@ -71,7 +71,7 @@ type EnvironmentDaprComponentObservation struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// A secret block as detailed below.
-	Secret []EnvironmentDaprComponentSecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
+	Secret []SecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// The version of the component.
 	// The version of the component.
@@ -121,69 +121,12 @@ type EnvironmentDaprComponentParameters struct {
 
 	// A secret block as detailed below.
 	// +kubebuilder:validation:Optional
-	Secret []EnvironmentDaprComponentSecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
+	Secret []SecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// The version of the component.
 	// The version of the component.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
-type EnvironmentDaprComponentSecretInitParameters struct {
-
-	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
-	// The identity to use for accessing key vault reference.
-	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The Key Vault Secret ID.
-	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
-	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
-
-	// The Secret name.
-	// The secret name.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The value for this secret.
-	// The value for this secret.
-	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
-}
-
-type EnvironmentDaprComponentSecretObservation struct {
-
-	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
-	// The identity to use for accessing key vault reference.
-	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The Key Vault Secret ID.
-	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
-	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
-
-	// The Secret name.
-	// The secret name.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type EnvironmentDaprComponentSecretParameters struct {
-
-	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
-	// The identity to use for accessing key vault reference.
-	// +kubebuilder:validation:Optional
-	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The Key Vault Secret ID.
-	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
-	// +kubebuilder:validation:Optional
-	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
-
-	// The Secret name.
-	// The secret name.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// The value for this secret.
-	// The value for this secret.
-	// +kubebuilder:validation:Optional
-	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type MetadataInitParameters struct {
@@ -232,6 +175,63 @@ type MetadataParameters struct {
 	// The value for this metadata configuration item.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SecretInitParameters struct {
+
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
+	// The identity to use for accessing key vault reference.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Key Vault Secret ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The Secret name.
+	// The secret name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value for this secret.
+	// The value for this secret.
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+}
+
+type SecretObservation struct {
+
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
+	// The identity to use for accessing key vault reference.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Key Vault Secret ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The Secret name.
+	// The secret name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type SecretParameters struct {
+
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
+	// The identity to use for accessing key vault reference.
+	// +kubebuilder:validation:Optional
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Key Vault Secret ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	// +kubebuilder:validation:Optional
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The Secret name.
+	// The secret name.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The value for this secret.
+	// The value for this secret.
+	// +kubebuilder:validation:Optional
+	ValueSecretRef *v2.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 // EnvironmentDaprComponentSpec defines the desired state of EnvironmentDaprComponent

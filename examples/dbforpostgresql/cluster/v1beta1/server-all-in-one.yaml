@@ -101,7 +101,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   labels:
@@ -122,7 +122,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   labels:
@@ -139,7 +139,7 @@ spec:
 
 ---
 
-apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta2
 kind: Server
 metadata:
   annotations:
@@ -164,7 +164,7 @@ spec:
     geoRedundantBackupEnabled: false
     version: "11"
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     # due to: https://github.com/Azure/azure-rest-api-specs/issues/9571
     infrastructureEncryptionEnabled: false
   writeConnectionSecretToRef:

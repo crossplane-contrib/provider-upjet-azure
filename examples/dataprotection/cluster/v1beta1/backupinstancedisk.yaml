@@ -27,7 +27,7 @@ spec:
 
 ---
 
-apiVersion: dataprotection.azure.upbound.io/v1beta1
+apiVersion: dataprotection.azure.upbound.io/v1beta2
 kind: BackupPolicyDisk
 metadata:
   annotations:
@@ -42,12 +42,12 @@ spec:
     defaultRetentionDuration: P7D
     retentionRule:
     - criteria:
-      - absoluteCriteria: FirstOfDay
+        absoluteCriteria: FirstOfDay
       duration: P7D
       name: Daily
       priority: 25
     - criteria:
-      - absoluteCriteria: FirstOfWeek
+        absoluteCriteria: FirstOfWeek
       duration: P7D
       name: Weekly
       priority: 20
@@ -57,7 +57,7 @@ spec:
 
 ---
 
-apiVersion: dataprotection.azure.upbound.io/v1beta1
+apiVersion: dataprotection.azure.upbound.io/v1beta2
 kind: BackupVault
 metadata:
   annotations:
@@ -69,7 +69,7 @@ spec:
   forProvider:
     datastoreType: VaultStore
     identity:
-    - type: SystemAssigned
+      type: SystemAssigned
     location: West Europe
     redundancy: LocallyRedundant
     resourceGroupNameSelector:
@@ -78,7 +78,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: ManagedDisk
 metadata:
   annotations:

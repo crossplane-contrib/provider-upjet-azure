@@ -97,81 +97,10 @@ type BackupPolicyKubernetesClusterParameters struct {
 	VaultNameSelector *v2.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
 }
 
-type BackupPolicyKubernetesClusterRetentionRuleCriteriaInitParameters struct {
-
-	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
-	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
-
-	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
-	// +listType=set
-	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
-
-	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new resource to be created.
-	// +listType=set
-	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
-
-	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new resource to be created.
-	// +listType=set
-	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
-
-	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new resource to be created.
-	// +listType=set
-	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
-}
-
-type BackupPolicyKubernetesClusterRetentionRuleCriteriaObservation struct {
-
-	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
-	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
-
-	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
-	// +listType=set
-	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
-
-	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new resource to be created.
-	// +listType=set
-	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
-
-	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new resource to be created.
-	// +listType=set
-	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
-
-	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new resource to be created.
-	// +listType=set
-	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
-}
-
-type BackupPolicyKubernetesClusterRetentionRuleCriteriaParameters struct {
-
-	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
-
-	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
-
-	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
-
-	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
-
-	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
-}
-
 type BackupPolicyKubernetesClusterRetentionRuleInitParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new resource to be created.
-	Criteria *BackupPolicyKubernetesClusterRetentionRuleCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+	Criteria *RetentionRuleCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// A life_cycle block as defined below. Changing this forces a new resource to be created.
 	LifeCycle []RetentionRuleLifeCycleInitParameters `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
@@ -186,7 +115,7 @@ type BackupPolicyKubernetesClusterRetentionRuleInitParameters struct {
 type BackupPolicyKubernetesClusterRetentionRuleObservation struct {
 
 	// A criteria block as defined below. Changing this forces a new resource to be created.
-	Criteria *BackupPolicyKubernetesClusterRetentionRuleCriteriaObservation `json:"criteria,omitempty" tf:"criteria,omitempty"`
+	Criteria *RetentionRuleCriteriaObservation `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// A life_cycle block as defined below. Changing this forces a new resource to be created.
 	LifeCycle []RetentionRuleLifeCycleObservation `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
@@ -202,7 +131,7 @@ type BackupPolicyKubernetesClusterRetentionRuleParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Criteria *BackupPolicyKubernetesClusterRetentionRuleCriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
+	Criteria *RetentionRuleCriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
 
 	// A life_cycle block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -263,6 +192,77 @@ type DefaultRetentionRuleParameters struct {
 	// A life_cycle block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	LifeCycle []DefaultRetentionRuleLifeCycleParameters `json:"lifeCycle" tf:"life_cycle,omitempty"`
+}
+
+type RetentionRuleCriteriaInitParameters struct {
+
+	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
+	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
+
+	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
+	// +listType=set
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new resource to be created.
+	// +listType=set
+	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
+
+	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new resource to be created.
+	// +listType=set
+	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
+
+	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new resource to be created.
+	// +listType=set
+	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
+}
+
+type RetentionRuleCriteriaObservation struct {
+
+	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
+	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
+
+	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
+	// +listType=set
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new resource to be created.
+	// +listType=set
+	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
+
+	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new resource to be created.
+	// +listType=set
+	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
+
+	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new resource to be created.
+	// +listType=set
+	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
+}
+
+type RetentionRuleCriteriaParameters struct {
+
+	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
+
+	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
+
+	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
+
+	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 
 type RetentionRuleLifeCycleInitParameters struct {

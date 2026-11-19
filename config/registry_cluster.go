@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
-	"github.com/crossplane/upjet/v2/pkg/config/conversion"
 	"github.com/crossplane/upjet/v2/pkg/registry/reference"
 	"github.com/crossplane/upjet/v2/pkg/schema/traverser"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -95,41 +94,17 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 
 	for name, r := range pc.Resources {
 		r := r
-		// nothing to do if no singleton list has been converted to
-		// an embedded object
-		if len(r.CRDListConversionPaths()) == 0 {
-			continue
-		}
-
+		// A kind listed in old-singleton-list-apis.txt reached v1beta2 when its
+		// singleton lists were flattened to embedded objects. That is history
+		// and holds even if a later Terraform provider release removes the
+		// last such field.
 		if _, ok := oldSLAPIs[name]; ok {
 			r.Version = "v1beta2"
-			r.PreviousVersions = []string{"v1beta1"}
-			// Every version still in PreviousVersions here predates the
-			// singleton list to embedded object flattening, so its CRD type
-			// declares the field as a list - already the shape Terraform
-			// expects. Recording them tells a consumer that works at a
-			// requested API version rather than the reconciled one, i.e. the
-			// diff server, to skip the singleton list conversion for those
-			// versions; applying it would wrap the list into a list of lists.
-			// The reconciler itself is unaffected, as the API server converts
-			// every object to r.Version before a controller sees it.
-			r.SingletonListVersions = append([]string(nil), r.PreviousVersions...)
-			r.SetCRDStorageVersion(r.Version)
-			r.ControllerReconcileVersion = r.Version //nolint:staticcheck
-			r.Conversions = []conversion.Conversion{
-				conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
-				conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
-				conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
-			if err := r.SetDeprecatedVersion("v1beta1",
-				ujconfig.VersionDeprecation{
-					Warning:            "This API version is deprecated.",
-					DeprecationRelease: "v2.6.0",
-				}); err != nil {
-				panic(err)
-			}
 		}
-		r.TerraformConversions = []ujconfig.TerraformConversion{
-			ujconfig.NewTFSingletonConversion(),
+		if len(r.CRDListConversionPaths()) != 0 {
+			r.TerraformConversions = []ujconfig.TerraformConversion{
+				ujconfig.NewTFSingletonConversion(),
+			}
 		}
 		pc.Resources[name] = r
 	}

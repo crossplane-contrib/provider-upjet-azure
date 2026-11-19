@@ -17,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: APIOperation
 metadata:
   annotations:
@@ -43,7 +43,7 @@ spec:
     - statusCode: 200
     urlTemplate: /users/delete
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: API
 metadata:
   annotations:
@@ -64,7 +64,7 @@ spec:
     protocols:
     - https
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

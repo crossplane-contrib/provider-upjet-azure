@@ -31,7 +31,7 @@ data:
 
 ---
 
-apiVersion: cosmosdb.azure.upbound.io/v1beta1
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -45,9 +45,9 @@ spec:
       - name: EnableMongo
       - name: EnableMongoRoleBasedAccessControl
     consistencyPolicy:
-      - consistencyLevel: Strong
-        maxIntervalInSeconds: 300
-        maxStalenessPrefix: 100000
+      consistencyLevel: Strong
+      maxIntervalInSeconds: 300
+      maxStalenessPrefix: 100000
     geoLocation:
       - failoverPriority: 0
         location: West Europe

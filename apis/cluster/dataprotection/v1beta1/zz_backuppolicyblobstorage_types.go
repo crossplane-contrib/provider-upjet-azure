@@ -22,7 +22,7 @@ type BackupPolicyBlobStorageInitParameters struct {
 	OperationalDefaultRetentionDuration *string `json:"operationalDefaultRetentionDuration,omitempty" tf:"operational_default_retention_duration,omitempty"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	RetentionRule []BackupPolicyBlobStorageRetentionRuleInitParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+	RetentionRule []RetentionRuleInitParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
 
 	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy Blob Storage to be created.
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
@@ -43,7 +43,7 @@ type BackupPolicyBlobStorageObservation struct {
 	OperationalDefaultRetentionDuration *string `json:"operationalDefaultRetentionDuration,omitempty" tf:"operational_default_retention_duration,omitempty"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	RetentionRule []BackupPolicyBlobStorageRetentionRuleObservation `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+	RetentionRule []RetentionRuleObservation `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
 
 	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy Blob Storage to be created.
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
@@ -67,7 +67,7 @@ type BackupPolicyBlobStorageParameters struct {
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Optional
-	RetentionRule []BackupPolicyBlobStorageRetentionRuleParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+	RetentionRule []RetentionRuleParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
 
 	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Optional
@@ -92,7 +92,7 @@ type BackupPolicyBlobStorageParameters struct {
 	VaultIDSelector *v2.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
-type BackupPolicyBlobStorageRetentionRuleCriteriaInitParameters struct {
+type CriteriaInitParameters struct {
 
 	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new Backup Policy Blob Storage to be created.
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
@@ -118,7 +118,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaInitParameters struct {
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 
-type BackupPolicyBlobStorageRetentionRuleCriteriaObservation struct {
+type CriteriaObservation struct {
 
 	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new Backup Policy Blob Storage to be created.
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
@@ -144,7 +144,7 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaObservation struct {
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 
-type BackupPolicyBlobStorageRetentionRuleCriteriaParameters struct {
+type CriteriaParameters struct {
 
 	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Optional
@@ -174,55 +174,6 @@ type BackupPolicyBlobStorageRetentionRuleCriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
-}
-
-type BackupPolicyBlobStorageRetentionRuleInitParameters struct {
-
-	// A criteria block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	Criteria *BackupPolicyBlobStorageRetentionRuleCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
-
-	// A life_cycle block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	LifeCycle *LifeCycleInitParameters `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
-
-	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Blob Storage to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy Blob Storage to be created.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-}
-
-type BackupPolicyBlobStorageRetentionRuleObservation struct {
-
-	// A criteria block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	Criteria *BackupPolicyBlobStorageRetentionRuleCriteriaObservation `json:"criteria,omitempty" tf:"criteria,omitempty"`
-
-	// A life_cycle block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	LifeCycle *LifeCycleObservation `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
-
-	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Blob Storage to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy Blob Storage to be created.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-}
-
-type BackupPolicyBlobStorageRetentionRuleParameters struct {
-
-	// A criteria block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +kubebuilder:validation:Optional
-	Criteria *BackupPolicyBlobStorageRetentionRuleCriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
-
-	// A life_cycle block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +kubebuilder:validation:Optional
-	LifeCycle *LifeCycleParameters `json:"lifeCycle" tf:"life_cycle,omitempty"`
-
-	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 }
 
 type LifeCycleInitParameters struct {
@@ -252,6 +203,55 @@ type LifeCycleParameters struct {
 	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Optional
 	Duration *string `json:"duration" tf:"duration,omitempty"`
+}
+
+type RetentionRuleInitParameters struct {
+
+	// A criteria block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
+	Criteria *CriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// A life_cycle block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
+	LifeCycle *LifeCycleInitParameters `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
+
+	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Blob Storage to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy Blob Storage to be created.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
+type RetentionRuleObservation struct {
+
+	// A criteria block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
+	Criteria *CriteriaObservation `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// A life_cycle block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
+	LifeCycle *LifeCycleObservation `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
+
+	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Blob Storage to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy Blob Storage to be created.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
+type RetentionRuleParameters struct {
+
+	// A criteria block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
+	// +kubebuilder:validation:Optional
+	Criteria *CriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
+
+	// A life_cycle block as defined below. Changing this forces a new Backup Policy Blob Storage to be created.
+	// +kubebuilder:validation:Optional
+	LifeCycle *LifeCycleParameters `json:"lifeCycle" tf:"life_cycle,omitempty"`
+
+	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Blob Storage to be created.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy Blob Storage to be created.
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 }
 
 // BackupPolicyBlobStorageSpec defines the desired state of BackupPolicyBlobStorage

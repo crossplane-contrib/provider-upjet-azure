@@ -25,15 +25,6 @@ func (l *CapacityReservationGroupList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this CapacityReservationList.
-func (l *CapacityReservationList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this DedicatedHostList.
 func (l *DedicatedHostList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -52,15 +43,6 @@ func (l *DiskAccessList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this DiskEncryptionSetList.
-func (l *DiskEncryptionSetList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this GalleryApplicationList.
 func (l *GalleryApplicationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -70,62 +52,8 @@ func (l *GalleryApplicationList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this GalleryApplicationVersionList.
-func (l *GalleryApplicationVersionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ImageList.
-func (l *ImageList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this LinuxVirtualMachineList.
-func (l *LinuxVirtualMachineList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this LinuxVirtualMachineScaleSetList.
-func (l *LinuxVirtualMachineScaleSetList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this ManagedDiskList.
-func (l *ManagedDiskList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ManagedDiskSASTokenList.
 func (l *ManagedDiskSASTokenList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this OrchestratedVirtualMachineScaleSetList.
-func (l *OrchestratedVirtualMachineScaleSetList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -151,33 +79,6 @@ func (l *SSHPublicKeyList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SharedImageGalleryList.
-func (l *SharedImageGalleryList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SharedImageList.
-func (l *SharedImageList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this SnapshotList.
-func (l *SnapshotList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this VirtualMachineDataDiskAttachmentList.
 func (l *VirtualMachineDataDiskAttachmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -187,44 +88,8 @@ func (l *VirtualMachineDataDiskAttachmentList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this VirtualMachineExtensionList.
-func (l *VirtualMachineExtensionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VirtualMachineRunCommandList.
-func (l *VirtualMachineRunCommandList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this VirtualMachineScaleSetStandbyPoolList.
 func (l *VirtualMachineScaleSetStandbyPoolList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this WindowsVirtualMachineList.
-func (l *WindowsVirtualMachineList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this WindowsVirtualMachineScaleSetList.
-func (l *WindowsVirtualMachineScaleSetList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -16,44 +16,8 @@ func (l *ClusterList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this FunctionJavascriptUdaList.
-func (l *FunctionJavascriptUdaList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this JobList.
-func (l *JobList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ManagedPrivateEndpointList.
 func (l *ManagedPrivateEndpointList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this OutputBlobList.
-func (l *OutputBlobList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this OutputEventHubList.
-func (l *OutputEventHubList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -88,24 +52,6 @@ func (l *OutputPowerBIList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this OutputServiceBusQueueList.
-func (l *OutputServiceBusQueueList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this OutputServiceBusTopicList.
-func (l *OutputServiceBusTopicList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this OutputSynapseList.
 func (l *OutputSynapseList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -124,44 +70,8 @@ func (l *OutputTableList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ReferenceInputBlobList.
-func (l *ReferenceInputBlobList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ReferenceInputMSSQLList.
 func (l *ReferenceInputMSSQLList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this StreamInputBlobList.
-func (l *StreamInputBlobList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this StreamInputEventHubList.
-func (l *StreamInputEventHubList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this StreamInputIOTHubList.
-func (l *StreamInputIOTHubList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

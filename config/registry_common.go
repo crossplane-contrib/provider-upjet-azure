@@ -37,6 +37,8 @@ var (
 	// but we need only the Terraform conversion functions.
 	// This list is immutable and represents the set of resources with the
 	// already generated CRD API versions with now converted singleton lists.
+	// The v1beta1 versions with the singleton lists were removed in v3.0.0;
+	// the list still decides which kinds are served as v1beta2.
 	// Because new resources should never have singleton lists in their
 	// generated APIs, there should be no need to add them to this list.
 	// However, bugs might result in exceptions in the future.

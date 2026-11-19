@@ -13,7 +13,7 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type RouteInitParameters_2 struct {
+type RouteInitParameters struct {
 
 	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
@@ -25,7 +25,7 @@ type RouteInitParameters_2 struct {
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 }
 
-type RouteObservation_2 struct {
+type RouteObservation struct {
 
 	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
@@ -46,7 +46,7 @@ type RouteObservation_2 struct {
 	RouteTableName *string `json:"routeTableName,omitempty" tf:"route_table_name,omitempty"`
 }
 
-type RouteParameters_2 struct {
+type RouteParameters struct {
 
 	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
 	// +kubebuilder:validation:Optional
@@ -90,7 +90,7 @@ type RouteParameters_2 struct {
 // RouteSpec defines the desired state of Route
 type RouteSpec struct {
 	v2.ClusterManagedResourceSpec `json:",inline"`
-	ForProvider                   RouteParameters_2 `json:"forProvider"`
+	ForProvider                   RouteParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -101,13 +101,13 @@ type RouteSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider RouteInitParameters_2 `json:"initProvider,omitempty"`
+	InitProvider RouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteStatus defines the observed state of Route.
 type RouteStatus struct {
 	v2.ManagedResourceStatus `json:",inline"`
-	AtProvider               RouteObservation_2 `json:"atProvider,omitempty"`
+	AtProvider               RouteObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

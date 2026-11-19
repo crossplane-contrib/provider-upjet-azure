@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Manager
 metadata:
   annotations:
@@ -51,7 +51,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     scope:
-    - subscriptionIds:
+      subscriptionIds:
       - ${data.azurerm_client_config.current.subscription_resource_id}
     scopeAccesses:
     - SecurityAdmin

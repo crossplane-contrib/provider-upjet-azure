@@ -13,6 +13,35 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
+type KeyVaultPasswordInitParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type KeyVaultPasswordObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type KeyVaultPasswordParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+
+	// Specifies the name of the secret containing the password.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+}
+
 type KeyVaultPrivateKeyContentBase64InitParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
@@ -96,7 +125,7 @@ type LinkedServiceSFTPInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A key_vault_password block as defined below.
-	KeyVaultPassword []LinkedServiceSFTPKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+	KeyVaultPassword []KeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A key_vault_private_key_content_base64 block as defined below.
 	KeyVaultPrivateKeyContentBase64 *KeyVaultPrivateKeyContentBase64InitParameters `json:"keyVaultPrivateKeyContentBase64,omitempty" tf:"key_vault_private_key_content_base64,omitempty"`
@@ -130,35 +159,6 @@ type LinkedServiceSFTPInitParameters struct {
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
-type LinkedServiceSFTPKeyVaultPasswordInitParameters struct {
-
-	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
-
-	// Specifies the name of the secret containing the password.
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
-}
-
-type LinkedServiceSFTPKeyVaultPasswordObservation struct {
-
-	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
-
-	// Specifies the name of the secret containing the password.
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
-}
-
-type LinkedServiceSFTPKeyVaultPasswordParameters struct {
-
-	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
-	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
-
-	// Specifies the name of the secret containing the password.
-	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
-}
-
 type LinkedServiceSFTPObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
@@ -190,7 +190,7 @@ type LinkedServiceSFTPObservation struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A key_vault_password block as defined below.
-	KeyVaultPassword []LinkedServiceSFTPKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+	KeyVaultPassword []KeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A key_vault_private_key_content_base64 block as defined below.
 	KeyVaultPrivateKeyContentBase64 *KeyVaultPrivateKeyContentBase64Observation `json:"keyVaultPrivateKeyContentBase64,omitempty" tf:"key_vault_private_key_content_base64,omitempty"`
@@ -262,7 +262,7 @@ type LinkedServiceSFTPParameters struct {
 
 	// A key_vault_password block as defined below.
 	// +kubebuilder:validation:Optional
-	KeyVaultPassword []LinkedServiceSFTPKeyVaultPasswordParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+	KeyVaultPassword []KeyVaultPasswordParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A key_vault_private_key_content_base64 block as defined below.
 	// +kubebuilder:validation:Optional

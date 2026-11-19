@@ -19,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: maintenance.azure.upbound.io/v1beta1
+apiVersion: maintenance.azure.upbound.io/v1beta2
 kind: MaintenanceConfiguration
 metadata:
   annotations:

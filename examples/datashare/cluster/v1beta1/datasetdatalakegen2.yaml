@@ -18,7 +18,7 @@ spec:
     storageAccountIdRef:
       name: example-storage-account-gen2
 ---
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   name: example-storage-account-gen2

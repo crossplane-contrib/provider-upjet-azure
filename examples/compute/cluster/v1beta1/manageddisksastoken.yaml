@@ -18,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test
 ---
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: ManagedDisk
 metadata:
   annotations:
