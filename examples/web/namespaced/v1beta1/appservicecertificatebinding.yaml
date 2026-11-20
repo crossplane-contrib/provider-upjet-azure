@@ -59,7 +59,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.m.upbound.io/v1beta1
+apiVersion: web.azure.m.upbound.io/v1beta2
 kind: LinuxWebApp
 metadata:
   annotations:

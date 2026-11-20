@@ -45,7 +45,7 @@ type SubscriptionCostManagementExportExportDataOptionsParameters struct {
 type SubscriptionCostManagementExportExportDataStorageLocationInitParameters struct {
 
 	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
@@ -73,7 +73,7 @@ type SubscriptionCostManagementExportExportDataStorageLocationObservation struct
 type SubscriptionCostManagementExportExportDataStorageLocationParameters struct {
 
 	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`

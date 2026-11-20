@@ -107,6 +107,10 @@ spec:
                       Possible values are Free, M10, M20, M25, M30, M40, M50, M60,
                       M80, and M200.
                     type: string
+                  cosmosDbNetworkBypassEnabled:
+                    description: Whether Cosmos DB network bypass is enabled for the
+                      MongoDB Cluster. Defaults to false.
+                    type: boolean
                   createMode:
                     description: The creation mode for the MongoDB Cluster. Possible
                       values are Default, GeoReplica and PointInTimeRestore. Defaults
@@ -428,8 +432,8 @@ spec:
                     type: number
                   storageType:
                     description: The storage type for the MongoDB Cluster. Possible
-                      values are PremiumSSD and PremiumSSDv2. Defaults to PremiumSSD.
-                      Changing this forces a new resource to be created.
+                      values are PremiumSSD and PremiumSSDv2. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -489,6 +493,10 @@ spec:
                       Possible values are Free, M10, M20, M25, M30, M40, M50, M60,
                       M80, and M200.
                     type: string
+                  cosmosDbNetworkBypassEnabled:
+                    description: Whether Cosmos DB network bypass is enabled for the
+                      MongoDB Cluster. Defaults to false.
+                    type: boolean
                   createMode:
                     description: The creation mode for the MongoDB Cluster. Possible
                       values are Default, GeoReplica and PointInTimeRestore. Defaults
@@ -729,8 +737,8 @@ spec:
                     type: number
                   storageType:
                     description: The storage type for the MongoDB Cluster. Possible
-                      values are PremiumSSD and PremiumSSDv2. Defaults to PremiumSSD.
-                      Changing this forces a new resource to be created.
+                      values are PremiumSSD and PremiumSSDv2. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -855,6 +863,10 @@ spec:
                       Possible values are Free, M10, M20, M25, M30, M40, M50, M60,
                       M80, and M200.
                     type: string
+                  cosmosDbNetworkBypassEnabled:
+                    description: Whether Cosmos DB network bypass is enabled for the
+                      MongoDB Cluster. Defaults to false.
+                    type: boolean
                   createMode:
                     description: The creation mode for the MongoDB Cluster. Possible
                       values are Default, GeoReplica and PointInTimeRestore. Defaults
@@ -951,8 +963,8 @@ spec:
                     type: number
                   storageType:
                     description: The storage type for the MongoDB Cluster. Possible
-                      values are PremiumSSD and PremiumSSDv2. Defaults to PremiumSSD.
-                      Changing this forces a new resource to be created.
+                      values are PremiumSSD and PremiumSSDv2. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:

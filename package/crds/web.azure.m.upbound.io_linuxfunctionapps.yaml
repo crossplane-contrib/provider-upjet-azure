@@ -64,7 +64,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -826,6 +826,10 @@ spec:
                       Is the Function App enabled? Defaults to true.
                       Is the Linux Function App enabled.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -1188,7 +1192,7 @@ spec:
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+                              The version of PowerShell Core to run. Possible values are 7, 7.2, 7.4, and 7.6.
                               The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
                             type: string
                           pythonVersion:
@@ -1945,7 +1949,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -2711,6 +2715,10 @@ spec:
                       Is the Function App enabled? Defaults to true.
                       Is the Linux Function App enabled.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -3073,7 +3081,7 @@ spec:
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+                              The version of PowerShell Core to run. Possible values are 7, 7.2, 7.4, and 7.6.
                               The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
                             type: string
                           pythonVersion:
@@ -3895,7 +3903,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -4587,6 +4595,10 @@ spec:
                       Is the Function App enabled? Defaults to true.
                       Is the Linux Function App enabled.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -4771,7 +4783,7 @@ spec:
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+                              The version of PowerShell Core to run. Possible values are 7, 7.2, 7.4, and 7.6.
                               The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
                             type: string
                           pythonVersion:

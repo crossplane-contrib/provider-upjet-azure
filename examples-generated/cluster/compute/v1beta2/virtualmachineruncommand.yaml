@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta2
+apiVersion: compute.azure.upbound.io/v1beta3
 kind: LinuxVirtualMachine
 metadata:
   annotations:
@@ -112,7 +112,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -131,7 +131,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Blob
 metadata:
   annotations:
@@ -142,17 +142,13 @@ metadata:
 spec:
   forProvider:
     sourceContent: echo 'hello world'
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    storageContainerNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: exampleaccount
+    storage_container_name: example-sc
     type: Block
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Blob
 metadata:
   annotations:
@@ -162,17 +158,13 @@ metadata:
   name: example2
 spec:
   forProvider:
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    storageContainerNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: exampleaccount
+    storage_container_name: example-sc
     type: Append
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Blob
 metadata:
   annotations:
@@ -182,17 +174,13 @@ metadata:
   name: example3
 spec:
   forProvider:
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    storageContainerNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: exampleaccount
+    storage_container_name: example-sc
     type: Append
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
@@ -203,13 +191,11 @@ metadata:
 spec:
   forProvider:
     containerAccessType: blob
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: exampleaccount
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   annotations:
@@ -248,7 +234,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: VirtualNetwork
 metadata:
   annotations:

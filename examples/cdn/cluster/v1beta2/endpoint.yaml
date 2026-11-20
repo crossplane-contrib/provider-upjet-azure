@@ -6,6 +6,7 @@ apiVersion: cdn.azure.upbound.io/v1beta2
 kind: Endpoint
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows creating classic CDN resources since October 1, 2025. Existing ones can be managed until the service is retired on September 30, 2027."
     meta.upbound.io/example-id: cdn/v1beta2/endpoint
   labels:
     testing.upbound.io/example-name: endpointlabel
@@ -18,10 +19,10 @@ spec:
       name: example
     profileNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: profilelabel
+        testing.upbound.io/example-name: profilelabel-endpoint
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: rgroupnamelabel
+        testing.upbound.io/example-name: rgroupnamelabel-endpoint
 
 ---
 
@@ -29,16 +30,17 @@ apiVersion: cdn.azure.upbound.io/v1beta1
 kind: Profile
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows creating classic CDN resources since October 1, 2025. Existing ones can be managed until the service is retired on September 30, 2027."
     meta.upbound.io/example-id: cdn/v1beta2/endpoint
   labels:
-    testing.upbound.io/example-name: profilelabel
-  name: profilename
+    testing.upbound.io/example-name: profilelabel-endpoint
+  name: profilename-endpoint
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: rgroupnamelabel
+        testing.upbound.io/example-name: rgroupnamelabel-endpoint
     sku: Standard_Verizon
     tags:
       cost_center: MSFT
@@ -50,10 +52,11 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of Endpoint. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: cdn/v1beta1/endpoint
   labels:
-    testing.upbound.io/example-name: rgroupnamelabel
-  name: r-group-test-name
+    testing.upbound.io/example-name: rgroupnamelabel-endpoint
+  name: r-group-test-name-endpoint
 spec:
   forProvider:
     location: West Europe

@@ -52,7 +52,7 @@ type AuthorizationRuleObservation struct {
 type AuthorizationRuleParameters struct {
 
 	// Specifies the name of the EventHub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta3.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 

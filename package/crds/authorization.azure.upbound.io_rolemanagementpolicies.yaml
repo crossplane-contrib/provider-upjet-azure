@@ -124,7 +124,7 @@ spec:
                         type: boolean
                       requireTicketInfo:
                         description: |-
-                          Is ticket information requrired during activation of the role.
+                          Is ticket information required during activation of the role.
                           Whether ticket information is required during activation
                         type: boolean
                       requiredConditionalAccessAuthenticationContext:
@@ -187,7 +187,7 @@ spec:
                     properties:
                       activeAssignments:
                         description: |-
-                          A notification_target block as defined below to configure notfications on active role assignments.
+                          A notification_target block as defined below to configure notifications on active role assignments.
                           Notifications about active assignments
                         properties:
                           adminNotifications:
@@ -647,7 +647,7 @@ spec:
                         type: boolean
                       requireTicketInfo:
                         description: |-
-                          Is ticket information requrired during activation of the role.
+                          Is ticket information required during activation of the role.
                           Whether ticket information is required during activation
                         type: boolean
                       requiredConditionalAccessAuthenticationContext:
@@ -710,7 +710,7 @@ spec:
                     properties:
                       activeAssignments:
                         description: |-
-                          A notification_target block as defined below to configure notfications on active role assignments.
+                          A notification_target block as defined below to configure notifications on active role assignments.
                           Notifications about active assignments
                         properties:
                           adminNotifications:
@@ -1249,7 +1249,7 @@ spec:
                         type: boolean
                       requireTicketInfo:
                         description: |-
-                          Is ticket information requrired during activation of the role.
+                          Is ticket information required during activation of the role.
                           Whether ticket information is required during activation
                         type: boolean
                       requiredConditionalAccessAuthenticationContext:
@@ -1325,7 +1325,7 @@ spec:
                     properties:
                       activeAssignments:
                         description: |-
-                          A notification_target block as defined below to configure notfications on active role assignments.
+                          A notification_target block as defined below to configure notifications on active role assignments.
                           Notifications about active assignments
                         properties:
                           adminNotifications:

@@ -25,7 +25,7 @@ func (mg *GlobalVMShutdownSchedule) ResolveReferences( // ResolveReferences of t
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
+		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta3", "LinuxVirtualMachine", "LinuxVirtualMachineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *GlobalVMShutdownSchedule) ResolveReferences( // ResolveReferences of t
 	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
+		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta3", "LinuxVirtualMachine", "LinuxVirtualMachineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -97,7 +97,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -177,7 +177,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -413,7 +413,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -493,7 +493,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -396,8 +396,8 @@ spec:
                           description: A tcp_configuration block as defined below.
                           properties:
                             destinationPortBehavior:
-                              description: The destination port behavior for the TCP
-                                connection. Possible values are None and ListenIfAvailable.
+                              description: The destination port behaviour for the
+                                TCP connection. Possible values are None and ListenIfAvailable.
                               type: string
                             port:
                               description: The port for the TCP connection.
@@ -712,8 +712,8 @@ spec:
                           description: A tcp_configuration block as defined below.
                           properties:
                             destinationPortBehavior:
-                              description: The destination port behavior for the TCP
-                                connection. Possible values are None and ListenIfAvailable.
+                              description: The destination port behaviour for the
+                                TCP connection. Possible values are None and ListenIfAvailable.
                               type: string
                             port:
                               description: The port for the TCP connection.
@@ -1017,8 +1017,8 @@ spec:
                           description: A tcp_configuration block as defined below.
                           properties:
                             destinationPortBehavior:
-                              description: The destination port behavior for the TCP
-                                connection. Possible values are None and ListenIfAvailable.
+                              description: The destination port behaviour for the
+                                TCP connection. Possible values are None and ListenIfAvailable.
                               type: string
                             port:
                               description: The port for the TCP connection.

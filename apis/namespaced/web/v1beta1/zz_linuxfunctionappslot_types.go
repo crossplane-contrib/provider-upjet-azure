@@ -1823,7 +1823,7 @@ type LinuxFunctionAppSlotIdentityParameters struct {
 type LinuxFunctionAppSlotInitParameters struct {
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
@@ -1867,6 +1867,9 @@ type LinuxFunctionAppSlotInitParameters struct {
 	// Is the Linux Function App Slot enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
+
 	// Are the default FTP Basic Authentication publishing credentials enabled. Defaults to true.
 	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
 
@@ -1903,7 +1906,7 @@ type LinuxFunctionAppSlotInitParameters struct {
 
 	// The backend storage account name which will be used by this Function App Slot.
 	// The backend storage account name which will be used by this Function App Slot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -1930,7 +1933,7 @@ type LinuxFunctionAppSlotInitParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -1953,7 +1956,7 @@ type LinuxFunctionAppSlotInitParameters struct {
 type LinuxFunctionAppSlotObservation struct {
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
@@ -1999,6 +2002,9 @@ type LinuxFunctionAppSlotObservation struct {
 	// Is the Linux Function App Slot enabled. Defaults to true.
 	// Is the Linux Function App Slot enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
 
 	// Are the default FTP Basic Authentication publishing credentials enabled. Defaults to true.
 	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
@@ -2088,7 +2094,7 @@ type LinuxFunctionAppSlotObservation struct {
 type LinuxFunctionAppSlotParameters struct {
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
@@ -2143,6 +2149,10 @@ type LinuxFunctionAppSlotParameters struct {
 	// Is the Linux Function App Slot enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
 
 	// Are the default FTP Basic Authentication publishing credentials enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -2205,7 +2215,7 @@ type LinuxFunctionAppSlotParameters struct {
 
 	// The backend storage account name which will be used by this Function App Slot.
 	// The backend storage account name which will be used by this Function App Slot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -2237,7 +2247,7 @@ type LinuxFunctionAppSlotParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -2333,55 +2343,6 @@ type LinuxFunctionAppSlotSiteConfigCorsParameters struct {
 	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
-type LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters struct {
-
-	// Specifies a list of Azure Front Door IDs.
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// Specifies a list of Hosts for which matching should be applied.
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
-type LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersObservation struct {
-
-	// Specifies a list of Azure Front Door IDs.
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
-
-	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
-
-	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
-
-	// Specifies a list of Hosts for which matching should be applied.
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
-}
-
-type LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersParameters struct {
-
-	// Specifies a list of Azure Front Door IDs.
-	// +kubebuilder:validation:Optional
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	// +kubebuilder:validation:Optional
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	// +kubebuilder:validation:Optional
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// Specifies a list of Hosts for which matching should be applied.
-	// +kubebuilder:validation:Optional
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
 type LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 
 	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
@@ -2393,7 +2354,7 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
-	Headers *LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *SiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2413,7 +2374,7 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2437,7 +2398,7 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
-	Headers *LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *SiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2474,7 +2435,7 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// a headers block as detailed below.
 	// +kubebuilder:validation:Optional
-	Headers *LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *SiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2498,7 +2459,7 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -3062,7 +3023,7 @@ type LinuxFunctionAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3147,7 +3108,7 @@ type LinuxFunctionAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -3260,7 +3221,7 @@ type SiteConfigApplicationStackInitParameters struct {
 	// The version of Node to use. Possible values include `12`, `14`, `16`, `18`, `20`, `22` and `24`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, 7.4 and 7.6.
 	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
@@ -3294,7 +3255,7 @@ type SiteConfigApplicationStackObservation struct {
 	// The version of Node to use. Possible values include `12`, `14`, `16`, `18`, `20`, `22` and `24`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, 7.4 and 7.6.
 	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
@@ -3332,7 +3293,7 @@ type SiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, 7.4 and 7.6.
 	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	// +kubebuilder:validation:Optional
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
@@ -3350,6 +3311,55 @@ type SiteConfigApplicationStackParameters struct {
 	// Should the DotNet process use an isolated runtime. Defaults to `false`.
 	// +kubebuilder:validation:Optional
 	UseDotnetIsolatedRuntime *bool `json:"useDotnetIsolatedRuntime,omitempty" tf:"use_dotnet_isolated_runtime,omitempty"`
+}
+
+type SiteConfigIPRestrictionHeadersInitParameters struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type SiteConfigIPRestrictionHeadersObservation struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
+}
+
+type SiteConfigIPRestrictionHeadersParameters struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	// +kubebuilder:validation:Optional
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	// +kubebuilder:validation:Optional
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	// +kubebuilder:validation:Optional
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	// +kubebuilder:validation:Optional
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
 // LinuxFunctionAppSlotSpec defines the desired state of LinuxFunctionAppSlot

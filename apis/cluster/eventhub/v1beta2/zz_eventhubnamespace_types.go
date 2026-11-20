@@ -36,7 +36,7 @@ type EventHubNamespaceInitParameters struct {
 	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 40.
 	MaximumThroughputUnits *float64 `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
 
-	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.
+	// The minimum supported TLS version for this EventHub Namespace. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// A network_rulesets block as defined below.
@@ -79,7 +79,7 @@ type EventHubNamespaceObservation struct {
 	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 40.
 	MaximumThroughputUnits *float64 `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
 
-	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.
+	// The minimum supported TLS version for this EventHub Namespace. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// A network_rulesets block as defined below.
@@ -129,7 +129,7 @@ type EventHubNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	MaximumThroughputUnits *float64 `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
 
-	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. Defaults to 1.2.
+	// The minimum supported TLS version for this EventHub Namespace. The only possible value is 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -296,7 +296,7 @@ type VirtualNetworkRuleInitParameters struct {
 	IgnoreMissingVirtualNetworkServiceEndpoint *bool `json:"ignoreMissingVirtualNetworkServiceEndpoint,omitempty" tf:"ignore_missing_virtual_network_service_endpoint"`
 
 	// The id of the subnet to match on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id"`
 
@@ -325,7 +325,7 @@ type VirtualNetworkRuleParameters struct {
 	IgnoreMissingVirtualNetworkServiceEndpoint *bool `json:"ignoreMissingVirtualNetworkServiceEndpoint,omitempty" tf:"ignore_missing_virtual_network_service_endpoint"`
 
 	// The id of the subnet to match on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id"`

@@ -46,7 +46,7 @@ func (mg *AutonomousDatabase) ResolveReferences( // ResolveReferences of this Au
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -66,7 +66,7 @@ func (mg *AutonomousDatabase) ResolveReferences( // ResolveReferences of this Au
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -170,7 +170,7 @@ func (mg *AutonomousDatabaseCloneFromBackup) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.SourceAutonomousDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceAutonomousDatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -210,7 +210,7 @@ func (mg *AutonomousDatabaseCloneFromBackup) ResolveReferences(ctx context.Conte
 	mg.Spec.InitProvider.SourceAutonomousDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceAutonomousDatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -282,7 +282,7 @@ func (mg *AutonomousDatabaseCloneFromDatabase) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.SourceAutonomousDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceAutonomousDatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -322,7 +322,7 @@ func (mg *AutonomousDatabaseCloneFromDatabase) ResolveReferences(ctx context.Con
 	mg.Spec.InitProvider.SourceAutonomousDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceAutonomousDatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

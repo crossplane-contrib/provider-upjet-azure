@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: operationalinsights.azure.upbound.io/v1beta2
+apiVersion: operationalinsights.azure.upbound.io/v1beta3
 kind: Workspace
 metadata:
   annotations:
@@ -82,7 +82,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -101,7 +101,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Share
 metadata:
   annotations:
@@ -112,4 +112,4 @@ metadata:
 spec:
   forProvider:
     quota: 5
-    storageAccountName: azureteststorage
+    storage_account_name: azureteststorage

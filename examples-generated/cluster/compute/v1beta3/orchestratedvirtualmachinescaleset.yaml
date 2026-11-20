@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2025 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: compute.azure.upbound.io/v1beta3
+kind: OrchestratedVirtualMachineScaleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta3/orchestratedvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    platformFaultDomainCount: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_B1ls
+    zones:
+    - "1"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta3/orchestratedvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

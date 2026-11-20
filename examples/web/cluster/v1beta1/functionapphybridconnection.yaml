@@ -94,7 +94,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -123,6 +123,8 @@ metadata:
   name: funcapphybrconn-wfa
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

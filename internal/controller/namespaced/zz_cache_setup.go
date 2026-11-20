@@ -14,8 +14,6 @@ import (
 	rediscache "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscache"
 	rediscacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicy"
 	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicyassignment"
-	redisenterprisecluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisenterprisecluster"
-	redisenterprisedatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redislinkedserver"
 )
@@ -29,8 +27,6 @@ func Setup_cache(mgr ctrl.Manager, o controller.Options) error {
 		rediscache.Setup,
 		rediscacheaccesspolicy.Setup,
 		rediscacheaccesspolicyassignment.Setup,
-		redisenterprisecluster.Setup,
-		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
 	} {
@@ -50,8 +46,6 @@ func SetupGated_cache(mgr ctrl.Manager, o controller.Options) error {
 		rediscache.SetupGated,
 		rediscacheaccesspolicy.SetupGated,
 		rediscacheaccesspolicyassignment.SetupGated,
-		redisenterprisecluster.SetupGated,
-		redisenterprisedatabase.SetupGated,
 		redisfirewallrule.SetupGated,
 		redislinkedserver.SetupGated,
 	} {
@@ -70,8 +64,6 @@ func SetupWebhookWithManager_cache(mgr ctrl.Manager) error {
 		rediscache.SetupWebhookWithManager,
 		rediscacheaccesspolicy.SetupWebhookWithManager,
 		rediscacheaccesspolicyassignment.SetupWebhookWithManager,
-		redisenterprisecluster.SetupWebhookWithManager,
-		redisenterprisedatabase.SetupWebhookWithManager,
 		redisfirewallrule.SetupWebhookWithManager,
 		redislinkedserver.SetupWebhookWithManager,
 	} {

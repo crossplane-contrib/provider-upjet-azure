@@ -16,7 +16,7 @@ import (
 type DataSetBlobStorageInitParameters struct {
 
 	// The name of the storage account container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Reference to a Container in storage to populate containerName.
@@ -64,7 +64,7 @@ type DataSetBlobStorageObservation struct {
 type DataSetBlobStorageParameters struct {
 
 	// The name of the storage account container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
@@ -106,7 +106,7 @@ type DataSetBlobStorageParameters struct {
 type StorageAccountInitParameters struct {
 
 	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Account in storage to populate name.
@@ -148,7 +148,7 @@ type StorageAccountObservation struct {
 type StorageAccountParameters struct {
 
 	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

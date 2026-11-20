@@ -96,6 +96,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  ipVersionType:
+                    description: The IP version type for the Private Endpoint. Possible
+                      values are IPv4, IPv6, and DualStack. Defaults to IPv4.
+                    type: string
                   location:
                     description: The supported Azure location where the resource exists.
                       Changing this forces a new resource to be created.
@@ -474,6 +478,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  ipVersionType:
+                    description: The IP version type for the Private Endpoint. Possible
+                      values are IPv4, IPv6, and DualStack. Defaults to IPv4.
+                    type: string
                   location:
                     description: The supported Azure location where the resource exists.
                       Changing this forces a new resource to be created.
@@ -842,6 +850,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  ipVersionType:
+                    description: The IP version type for the Private Endpoint. Possible
+                      values are IPv4, IPv6, and DualStack. Defaults to IPv4.
+                    type: string
                   location:
                     description: The supported Azure location where the resource exists.
                       Changing this forces a new resource to be created.
@@ -923,6 +935,13 @@ spec:
                   privateServiceConnection:
                     description: A private_service_connection block as defined below.
                     properties:
+                      actionRequired:
+                        description: Indicates if changes on the service provider
+                          require any updates on the consumer.
+                        type: string
+                      description:
+                        description: The reason for approval/rejection of the connection.
+                        type: string
                       isManualConnection:
                         description: Does the Private Endpoint require Manual Approval
                           from the remote resource owner? Changing this forces a new
@@ -962,6 +981,10 @@ spec:
                           maximum length is dependent on the service the private endpoint
                           is connected to. Only valid if is_manual_connection is set
                           to true.
+                        type: string
+                      status:
+                        description: The status of the connection between the service
+                          consumer and provider.
                         type: string
                       subresourceNames:
                         description: A list of subresource names which the Private

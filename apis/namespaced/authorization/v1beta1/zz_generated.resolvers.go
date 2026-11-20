@@ -1079,7 +1079,7 @@ func (mg *TrustedAccessRoleBinding) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerservice.azure.m.upbound.io", "v1beta1", "KubernetesCluster", "KubernetesClusterList")
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.m.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

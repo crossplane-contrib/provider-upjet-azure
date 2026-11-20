@@ -36,7 +36,7 @@ spec:
     tags:
       provisioner: crossplane
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -52,7 +52,7 @@ spec:
     resourceGroupNameRef:
       name: loadbalancerrg
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -70,7 +70,7 @@ spec:
     virtualNetworkNameRef:
       name: example-vn-for-lb
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -106,7 +106,7 @@ spec:
     tags:
       environment: Production
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: LoadBalancer
 metadata:
   annotations:
@@ -125,7 +125,7 @@ spec:
       name: loadbalancerrg
     sku: Standard
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: PrivateLinkService
 metadata:
   annotations:

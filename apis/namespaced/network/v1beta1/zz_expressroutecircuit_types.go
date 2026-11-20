@@ -42,7 +42,7 @@ type ExpressRouteCircuitInitParameters struct {
 	// The name of the ExpressRoute Service Provider. Changing this forces a new resource to be created.
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
-	// A sku block for the ExpressRoute circuit as documented below.
+	// A sku block for the ExpressRoute circuit as defined below.
 	Sku *ExpressRouteCircuitSkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -85,7 +85,7 @@ type ExpressRouteCircuitObservation struct {
 	// The ExpressRoute circuit provisioning state from your chosen service provider. Possible values are NotProvisioned, Provisioning, Provisioned, and Deprovisioning.
 	ServiceProviderProvisioningState *string `json:"serviceProviderProvisioningState,omitempty" tf:"service_provider_provisioning_state,omitempty"`
 
-	// A sku block for the ExpressRoute circuit as documented below.
+	// A sku block for the ExpressRoute circuit as defined below.
 	Sku *ExpressRouteCircuitSkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -144,7 +144,7 @@ type ExpressRouteCircuitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
-	// A sku block for the ExpressRoute circuit as documented below.
+	// A sku block for the ExpressRoute circuit as defined below.
 	// +kubebuilder:validation:Optional
 	Sku *ExpressRouteCircuitSkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 

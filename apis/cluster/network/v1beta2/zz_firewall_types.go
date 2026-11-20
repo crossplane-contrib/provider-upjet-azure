@@ -32,7 +32,7 @@ type FirewallIPConfigurationInitParameters struct {
 	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -81,7 +81,7 @@ type FirewallIPConfigurationParameters struct {
 	PublicIPAddressIDSelector *v2.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -106,13 +106,13 @@ type FirewallInitParameters struct {
 	// The ID of the Firewall Policy applied to this Firewall.
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
-	// An ip_configuration block as documented below.
+	// An ip_configuration block as defined below.
 	IPConfiguration []FirewallIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A management_ip_configuration block as documented below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
+	// A management_ip_configuration block as defined below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
 	ManagementIPConfiguration *ManagementIPConfigurationInitParameters `json:"managementIpConfiguration,omitempty" tf:"management_ip_configuration,omitempty"`
 
 	// A list of SNAT private CIDR IP ranges, or the special string IANAPrivateRanges, which indicates Azure Firewall does not SNAT when the destination IP address is a private range per IANA RFC 1918.
@@ -132,7 +132,7 @@ type FirewallInitParameters struct {
 	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert and Deny. Defaults to Alert.
 	ThreatIntelMode *string `json:"threatIntelMode,omitempty" tf:"threat_intel_mode,omitempty"`
 
-	// A virtual_hub block as documented below.
+	// A virtual_hub block as defined below.
 	VirtualHub *VirtualHubInitParameters `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Azure Firewall should be located. Changing this forces a new Azure Firewall to be created.
@@ -154,13 +154,13 @@ type FirewallObservation struct {
 	// The ID of the Azure Firewall.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An ip_configuration block as documented below.
+	// An ip_configuration block as defined below.
 	IPConfiguration []FirewallIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A management_ip_configuration block as documented below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
+	// A management_ip_configuration block as defined below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
 	ManagementIPConfiguration *ManagementIPConfigurationObservation `json:"managementIpConfiguration,omitempty" tf:"management_ip_configuration,omitempty"`
 
 	// A list of SNAT private CIDR IP ranges, or the special string IANAPrivateRanges, which indicates Azure Firewall does not SNAT when the destination IP address is a private range per IANA RFC 1918.
@@ -183,7 +183,7 @@ type FirewallObservation struct {
 	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert and Deny. Defaults to Alert.
 	ThreatIntelMode *string `json:"threatIntelMode,omitempty" tf:"threat_intel_mode,omitempty"`
 
-	// A virtual_hub block as documented below.
+	// A virtual_hub block as defined below.
 	VirtualHub *VirtualHubObservation `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Azure Firewall should be located. Changing this forces a new Azure Firewall to be created.
@@ -205,7 +205,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
-	// An ip_configuration block as documented below.
+	// An ip_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []FirewallIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
@@ -213,7 +213,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A management_ip_configuration block as documented below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
+	// A management_ip_configuration block as defined below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ManagementIPConfiguration *ManagementIPConfigurationParameters `json:"managementIpConfiguration,omitempty" tf:"management_ip_configuration,omitempty"`
 
@@ -252,7 +252,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	ThreatIntelMode *string `json:"threatIntelMode,omitempty" tf:"threat_intel_mode,omitempty"`
 
-	// A virtual_hub block as documented below.
+	// A virtual_hub block as defined below.
 	// +kubebuilder:validation:Optional
 	VirtualHub *VirtualHubParameters `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
 
@@ -271,7 +271,7 @@ type ManagementIPConfigurationInitParameters struct {
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -310,7 +310,7 @@ type ManagementIPConfigurationParameters struct {
 	PublicIPAddressID *string `json:"publicIpAddressId" tf:"public_ip_address_id,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

@@ -213,7 +213,7 @@ func (mg *MonitorAlertPrometheusRuleGroup) ResolveReferences(ctx context.Context
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerservice.azure.m.upbound.io", "v1beta1", "KubernetesCluster", "KubernetesClusterList")
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.m.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -297,7 +297,7 @@ func (mg *MonitorAlertPrometheusRuleGroup) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ScopesRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("containerservice.azure.m.upbound.io", "v1beta1", "KubernetesCluster", "KubernetesClusterList")
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.m.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -416,7 +416,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.m.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.m.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -478,7 +478,7 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.m.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.m.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -18,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-ta-rb
 ---
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -75,7 +75,7 @@ spec:
       - name: example-ai-tarb
     severity: Sev0
 ---
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -87,6 +87,7 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-ta-rb
@@ -94,7 +95,7 @@ spec:
     softDeleteRetentionDays: 8
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 ---
-apiVersion: containerservice.azure.m.upbound.io/v1beta1
+apiVersion: containerservice.azure.m.upbound.io/v1beta2
 kind: KubernetesCluster
 metadata:
   annotations:
@@ -115,6 +116,8 @@ spec:
     identity:
       type: SystemAssigned
     location: North Europe
+    nodeProvisioningProfile:
+      mode: Manual
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-ta-rb
@@ -159,7 +162,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

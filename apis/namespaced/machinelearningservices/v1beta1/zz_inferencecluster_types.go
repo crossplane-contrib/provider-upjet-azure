@@ -83,7 +83,7 @@ type InferenceClusterInitParameters struct {
 	Identity *InferenceClusterIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The ID of the Kubernetes Cluster. Changing this forces a new Machine Learning Inference Cluster to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta1.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta2.KubernetesCluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`
 
@@ -152,7 +152,7 @@ type InferenceClusterParameters struct {
 	Identity *InferenceClusterIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The ID of the Kubernetes Cluster. Changing this forces a new Machine Learning Inference Cluster to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta1.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta2.KubernetesCluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`

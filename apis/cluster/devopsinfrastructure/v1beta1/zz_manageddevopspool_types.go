@@ -775,7 +775,7 @@ type PermissionInitParameters struct {
 	// An administrator_account block as defined below. This block is only valid when kind is set to SpecificAccounts. Changing this forces a new resource to be created.
 	AdministratorAccount *AdministratorAccountInitParameters `json:"administratorAccount,omitempty" tf:"administrator_account,omitempty"`
 
-	// Determines who has admin permissions to the Azure DevOps pool. Possible values are Inherit and SpecificAccounts. Changing this forces a new resource to be created.
+	// Determines who has admin permissions to the Azure DevOps pool. Possible values are CreatorOnly, Inherit, and SpecificAccounts. Changing this forces a new resource to be created.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 }
 
@@ -784,7 +784,7 @@ type PermissionObservation struct {
 	// An administrator_account block as defined below. This block is only valid when kind is set to SpecificAccounts. Changing this forces a new resource to be created.
 	AdministratorAccount *AdministratorAccountObservation `json:"administratorAccount,omitempty" tf:"administrator_account,omitempty"`
 
-	// Determines who has admin permissions to the Azure DevOps pool. Possible values are Inherit and SpecificAccounts. Changing this forces a new resource to be created.
+	// Determines who has admin permissions to the Azure DevOps pool. Possible values are CreatorOnly, Inherit, and SpecificAccounts. Changing this forces a new resource to be created.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 }
 
@@ -794,7 +794,7 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	AdministratorAccount *AdministratorAccountParameters `json:"administratorAccount,omitempty" tf:"administrator_account,omitempty"`
 
-	// Determines who has admin permissions to the Azure DevOps pool. Possible values are Inherit and SpecificAccounts. Changing this forces a new resource to be created.
+	// Determines who has admin permissions to the Azure DevOps pool. Possible values are CreatorOnly, Inherit, and SpecificAccounts. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind" tf:"kind,omitempty"`
 }
@@ -1207,7 +1207,7 @@ type VirtualMachineScaleSetFabricInitParameters struct {
 	Storage *StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// The subnet ID on which to put all machines created in the pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -1264,7 +1264,7 @@ type VirtualMachineScaleSetFabricParameters struct {
 	Storage *StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// The subnet ID on which to put all machines created in the pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

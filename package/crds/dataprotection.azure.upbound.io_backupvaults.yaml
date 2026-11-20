@@ -73,14 +73,18 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  alertsForAllJobFailuresEnabled:
+                    description: Whether to enable Azure Monitor alerts for all job
+                      failures.
+                    type: boolean
                   crossRegionRestoreEnabled:
                     description: Whether to enable cross-region restore for the Backup
                       Vault.
                     type: boolean
                   datastoreType:
                     description: Specifies the type of the data store. Possible values
-                      are ArchiveStore, OperationalStore, SnapshotStore and VaultStore.
-                      Changing this forces a new resource to be created.
+                      are ArchiveStore, OperationalStore and VaultStore. Changing
+                      this forces a new resource to be created.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -223,14 +227,18 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  alertsForAllJobFailuresEnabled:
+                    description: Whether to enable Azure Monitor alerts for all job
+                      failures.
+                    type: boolean
                   crossRegionRestoreEnabled:
                     description: Whether to enable cross-region restore for the Backup
                       Vault.
                     type: boolean
                   datastoreType:
                     description: Specifies the type of the data store. Possible values
-                      are ArchiveStore, OperationalStore, SnapshotStore and VaultStore.
-                      Changing this forces a new resource to be created.
+                      are ArchiveStore, OperationalStore and VaultStore. Changing
+                      this forces a new resource to be created.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -383,14 +391,18 @@ spec:
             properties:
               atProvider:
                 properties:
+                  alertsForAllJobFailuresEnabled:
+                    description: Whether to enable Azure Monitor alerts for all job
+                      failures.
+                    type: boolean
                   crossRegionRestoreEnabled:
                     description: Whether to enable cross-region restore for the Backup
                       Vault.
                     type: boolean
                   datastoreType:
                     description: Specifies the type of the data store. Possible values
-                      are ArchiveStore, OperationalStore, SnapshotStore and VaultStore.
-                      Changing this forces a new resource to be created.
+                      are ArchiveStore, OperationalStore and VaultStore. Changing
+                      this forces a new resource to be created.
                     type: string
                   id:
                     description: The ID of the Backup Vault.

@@ -7,9 +7,6 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *Account) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Module) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -160,8 +160,9 @@ spec:
                     type: boolean
                   subResourceTarget:
                     description: Specifies the Sub Resource of the service resource
-                      to connect to. Possible values are vault,amlworkspace,blob,table,queue,file,web,dfs,
-                      redisCache. Changing this forces a new resource to be created.
+                      to connect to. Possible values are vault, amlworkspace, blob,
+                      table, queue, file, web, dfs, redisCache, and account. Changing
+                      this forces a new resource to be created.
                     type: string
                   workspaceId:
                     description: Specifies the ID of the Machine Learning Workspace.
@@ -342,8 +343,9 @@ spec:
                     type: boolean
                   subResourceTarget:
                     description: Specifies the Sub Resource of the service resource
-                      to connect to. Possible values are vault,amlworkspace,blob,table,queue,file,web,dfs,
-                      redisCache. Changing this forces a new resource to be created.
+                      to connect to. Possible values are vault, amlworkspace, blob,
+                      table, queue, file, web, dfs, redisCache, and account. Changing
+                      this forces a new resource to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -458,8 +460,9 @@ spec:
                     type: boolean
                   subResourceTarget:
                     description: Specifies the Sub Resource of the service resource
-                      to connect to. Possible values are vault,amlworkspace,blob,table,queue,file,web,dfs,
-                      redisCache. Changing this forces a new resource to be created.
+                      to connect to. Possible values are vault, amlworkspace, blob,
+                      table, queue, file, web, dfs, redisCache, and account. Changing
+                      this forces a new resource to be created.
                     type: string
                   workspaceId:
                     description: Specifies the ID of the Machine Learning Workspace.

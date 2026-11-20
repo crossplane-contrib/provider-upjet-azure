@@ -110,7 +110,7 @@ type SpringCloudConnectionInitParameters struct {
 	// The authentication info. An authentication block as defined below.
 	Authentication *AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
+	// The application client type. Possible values are dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The name of the service connection. Changing this forces a new resource to be created.
@@ -154,7 +154,7 @@ type SpringCloudConnectionObservation struct {
 	// The authentication info. An authentication block as defined below.
 	Authentication *AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
+	// The application client type. Possible values are dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The ID of the service connector.
@@ -182,7 +182,7 @@ type SpringCloudConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Authentication *AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
+	// The application client type. Possible values are dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
 	// +kubebuilder:validation:Optional
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 

@@ -8,6 +8,3 @@ package v1beta2
 
 // Hub marks this type as a conversion hub.
 func (tr *FlexibleServer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Server) Hub() {}

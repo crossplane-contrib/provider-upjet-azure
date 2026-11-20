@@ -49,7 +49,7 @@ spec:
         - Last
     timezone: UTC
 ---
-apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:

@@ -19,7 +19,6 @@ import (
 	accountproject "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountproject"
 	accountraiblocklist "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraiblocklist"
 	accountraipolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/accountraipolicy"
-	aiservices "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/aiservices"
 	deployment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cognitiveservices/deployment"
 )
 
@@ -37,7 +36,6 @@ func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 		accountproject.Setup,
 		accountraiblocklist.Setup,
 		accountraipolicy.Setup,
-		aiservices.Setup,
 		deployment.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -61,7 +59,6 @@ func SetupGated_cognitiveservices(mgr ctrl.Manager, o controller.Options) error 
 		accountproject.SetupGated,
 		accountraiblocklist.SetupGated,
 		accountraipolicy.SetupGated,
-		aiservices.SetupGated,
 		deployment.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -84,7 +81,6 @@ func SetupWebhookWithManager_cognitiveservices(mgr ctrl.Manager) error {
 		accountproject.SetupWebhookWithManager,
 		accountraiblocklist.SetupWebhookWithManager,
 		accountraipolicy.SetupWebhookWithManager,
-		aiservices.SetupWebhookWithManager,
 		deployment.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {

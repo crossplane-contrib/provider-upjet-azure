@@ -19,7 +19,7 @@ type SpringCloudAppCosmosDBAssociationInitParameters struct {
 	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
 	// Specifies the CosmosDB Account access key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_key",true)
 	CosmosDBAccessKey *string `json:"cosmosdbAccessKey,omitempty" tf:"cosmosdb_access_key,omitempty"`
 
@@ -32,7 +32,7 @@ type SpringCloudAppCosmosDBAssociationInitParameters struct {
 	CosmosDBAccessKeySelector *v2.NamespacedSelector `json:"cosmosdbAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the CosmosDB Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CosmosDBAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`
 
@@ -100,7 +100,7 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
 	// Specifies the CosmosDB Account access key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_key",true)
 	// +kubebuilder:validation:Optional
 	CosmosDBAccessKey *string `json:"cosmosdbAccessKey,omitempty" tf:"cosmosdb_access_key,omitempty"`
@@ -114,7 +114,7 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 	CosmosDBAccessKeySelector *v2.NamespacedSelector `json:"cosmosdbAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the CosmosDB Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CosmosDBAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`

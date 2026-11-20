@@ -310,7 +310,7 @@ spec:
                           type: number
                         type: array
                       monthly:
-                        description: A monthly block as documented below, which specifies
+                        description: A monthly block as defined below, which specifies
                           the days of the month on which the trigger is scheduled.
                           The value can be specified only with a monthly frequency.
                         items:
@@ -507,7 +507,7 @@ spec:
                           type: number
                         type: array
                       monthly:
-                        description: A monthly block as documented below, which specifies
+                        description: A monthly block as defined below, which specifies
                           the days of the month on which the trigger is scheduled.
                           The value can be specified only with a monthly frequency.
                         items:
@@ -713,7 +713,7 @@ spec:
                           type: number
                         type: array
                       monthly:
-                        description: A monthly block as documented below, which specifies
+                        description: A monthly block as defined below, which specifies
                           the days of the month on which the trigger is scheduled.
                           The value can be specified only with a monthly frequency.
                         items:

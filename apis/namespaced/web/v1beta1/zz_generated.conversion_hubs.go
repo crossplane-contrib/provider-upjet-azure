@@ -22,12 +22,6 @@ func (tr *AppServiceCustomHostNameBinding) Hub() {}
 func (tr *AppServiceManagedCertificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AppServicePlan) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FunctionApp) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FunctionAppActiveSlot) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -40,28 +34,16 @@ func (tr *FunctionAppFunction) Hub() {}
 func (tr *FunctionAppHybridConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *FunctionAppSlot) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinuxFunctionApp) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LinuxFunctionAppSlot) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinuxWebApp) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinuxWebAppSlot) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ServicePlan) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SourceControlToken) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StaticSite) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *WindowsFunctionApp) Hub() {}

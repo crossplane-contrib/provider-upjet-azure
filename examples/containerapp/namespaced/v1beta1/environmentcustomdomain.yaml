@@ -35,15 +35,16 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:
@@ -55,7 +56,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -74,7 +75,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
 apiVersion: v1
 kind: Secret

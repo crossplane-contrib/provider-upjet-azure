@@ -439,21 +439,6 @@ func (in *IOTHubDPSCertificate) DeepCopyObject() runtime.Object {
 func (in *IOTHubDPSCertificateInitParameters) DeepCopyInto(out *IOTHubDPSCertificateInitParameters) {
 	*out = *in
 	out.CertificateContentSecretRef = in.CertificateContentSecretRef
-	if in.IOTDPSName != nil {
-		in, out := &in.IOTDPSName, &out.IOTDPSName
-		*out = new(string)
-		**out = **in
-	}
-	if in.IOTDPSNameRef != nil {
-		in, out := &in.IOTDPSNameRef, &out.IOTDPSNameRef
-		*out = new(v2.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.IOTDPSNameSelector != nil {
-		in, out := &in.IOTDPSNameSelector, &out.IOTDPSNameSelector
-		*out = new(v2.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.IsVerified != nil {
 		in, out := &in.IsVerified, &out.IsVerified
 		*out = new(bool)

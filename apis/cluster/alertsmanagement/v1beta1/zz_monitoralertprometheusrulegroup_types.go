@@ -97,7 +97,7 @@ type AlertResolutionParameters struct {
 type MonitorAlertPrometheusRuleGroupInitParameters struct {
 
 	// Specifies the name of the Managed Kubernetes Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta3.KubernetesCluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a KubernetesCluster in containerservice to populate clusterName.
@@ -178,7 +178,7 @@ type MonitorAlertPrometheusRuleGroupObservation struct {
 type MonitorAlertPrometheusRuleGroupParameters struct {
 
 	// Specifies the name of the Managed Kubernetes Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta3.KubernetesCluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 

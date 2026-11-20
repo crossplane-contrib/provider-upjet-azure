@@ -46,7 +46,7 @@ func (mg *ComputeCluster) ResolveReferences( // ResolveReferences of this Comput
 	mg.Spec.ForProvider.MachineLearningWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MachineLearningWorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -86,7 +86,7 @@ func (mg *ComputeCluster) ResolveReferences( // ResolveReferences of this Comput
 	mg.Spec.InitProvider.MachineLearningWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MachineLearningWorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -138,7 +138,7 @@ func (mg *ComputeInstance) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.MachineLearningWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MachineLearningWorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -158,7 +158,7 @@ func (mg *ComputeInstance) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.SubnetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -263,7 +263,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -307,7 +307,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	if mg.Spec.ForProvider.Encryption != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta3", "Vault", "VaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -372,7 +372,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta3", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -433,7 +433,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	if mg.Spec.ForProvider.ServerlessCompute != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -454,7 +454,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -473,7 +473,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -517,7 +517,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	if mg.Spec.InitProvider.Encryption != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+			m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta3", "Vault", "VaultList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -582,7 +582,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta3", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -623,7 +623,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	if mg.Spec.InitProvider.ServerlessCompute != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -644,7 +644,7 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

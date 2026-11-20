@@ -24,36 +24,10 @@ const (
 
 // Configure configures postgresql group
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("azurerm_postgresql_server", func(r *config.Resource) {
-		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
-		}
-		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
-			return map[string][]byte{
-				xpv2.CredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
-				xpv2.CredentialsSecretPasswordKey: []byte(attr["administrator_login_password"].(string)),
-				xpv2.CredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
-				xpv2.CredentialsSecretPortKey:     []byte(strconv.Itoa(postgresqlServerPort)),
-			}, nil
-		}
-	})
-
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_configuration", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
 			TerraformName: "azurerm_postgresql_flexible_server",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-	})
-
-	p.AddResourceConfigurator("azurerm_postgresql_database", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			TerraformName: "azurerm_postgresql_server",
-		}
-	})
-
-	p.AddResourceConfigurator("azurerm_postgresql_active_directory_administrator", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			TerraformName: "azurerm_postgresql_server",
 		}
 	})
 
@@ -67,12 +41,6 @@ func Configure(p *config.Provider) {
 		r.References["server_id"] = config.Reference{
 			TerraformName: "azurerm_postgresql_flexible_server",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-	})
-
-	p.AddResourceConfigurator("azurerm_postgresql_firewall_rule", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			TerraformName: "azurerm_postgresql_server",
 		}
 	})
 
@@ -124,29 +92,6 @@ func Configure(p *config.Provider) {
 			"master DB user. If you set autoGeneratePassword to true, the Secret" +
 			" referenced here will be created or updated with generated password" +
 			" if it does not already contain one."
-	})
-
-	p.AddResourceConfigurator("azurerm_postgresql_virtual_network_rule", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			TerraformName: "azurerm_postgresql_server",
-		}
-	})
-
-	p.AddResourceConfigurator("azurerm_postgresql_server_key", func(r *config.Resource) {
-		r.References["server_id"] = config.Reference{
-			TerraformName: "azurerm_postgresql_server",
-			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-		r.References["key_vault_key_id"] = config.Reference{
-			TerraformName: "azurerm_key_vault_key",
-			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-	})
-
-	p.AddResourceConfigurator("azurerm_postgresql_configuration", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			TerraformName: "azurerm_postgresql_server",
-		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_virtual_endpoint", func(r *config.Resource) {

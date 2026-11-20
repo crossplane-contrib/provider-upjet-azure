@@ -280,7 +280,7 @@ func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("containerapp.azure.m.upbound.io", "v1beta1", "ContainerApp", "ContainerAppList")
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.m.upbound.io", "v1beta2", "ContainerApp", "ContainerAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -352,7 +352,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.InfrastructureResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InfrastructureResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -372,7 +372,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.InfrastructureSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InfrastructureSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -432,7 +432,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.InfrastructureResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.InfrastructureResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -452,7 +452,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.InfrastructureSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.InfrastructureSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.m.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -689,7 +689,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -729,7 +729,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Share", "ShareList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Share", "ShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -749,7 +749,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -769,7 +769,7 @@ func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Share", "ShareList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Share", "ShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -150,7 +150,7 @@ spec:
                     description: The description of the API Management Gateway.
                     type: string
                   locationData:
-                    description: A location_data block as documented below.
+                    description: A location_data block as defined below.
                     properties:
                       city:
                         description: The city or locality where the resource is located.
@@ -272,7 +272,7 @@ spec:
                     description: The description of the API Management Gateway.
                     type: string
                   locationData:
-                    description: A location_data block as documented below.
+                    description: A location_data block as defined below.
                     properties:
                       city:
                         description: The city or locality where the resource is located.
@@ -370,7 +370,7 @@ spec:
                     description: The ID of the API Management Gateway.
                     type: string
                   locationData:
-                    description: A location_data block as documented below.
+                    description: A location_data block as defined below.
                     properties:
                       city:
                         description: The city or locality where the resource is located.

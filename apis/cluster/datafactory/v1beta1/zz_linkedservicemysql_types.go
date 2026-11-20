@@ -28,7 +28,7 @@ type LinkedServiceMySQLInitParameters struct {
 	// The description for the Data Factory Linked Service MySQL.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The version of the MySQL driver. Possible values are V1 and V2. Defaults to V1.
+	// The version of the MySQL driver. Possible values are V1 and V2. Defaults to V2.
 	DriverVersion *string `json:"driverVersion,omitempty" tf:"driver_version,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service MySQL.
@@ -57,7 +57,7 @@ type LinkedServiceMySQLObservation struct {
 	// The description for the Data Factory Linked Service MySQL.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The version of the MySQL driver. Possible values are V1 and V2. Defaults to V1.
+	// The version of the MySQL driver. Possible values are V1 and V2. Defaults to V2.
 	DriverVersion *string `json:"driverVersion,omitempty" tf:"driver_version,omitempty"`
 
 	// The ID of the Data Factory MySQL Linked Service.
@@ -104,7 +104,7 @@ type LinkedServiceMySQLParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The version of the MySQL driver. Possible values are V1 and V2. Defaults to V1.
+	// The version of the MySQL driver. Possible values are V1 and V2. Defaults to V2.
 	// +kubebuilder:validation:Optional
 	DriverVersion *string `json:"driverVersion,omitempty" tf:"driver_version,omitempty"`
 

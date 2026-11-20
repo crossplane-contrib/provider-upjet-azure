@@ -177,7 +177,7 @@ spec:
                     type: string
                   driverVersion:
                     description: The version of the MySQL driver. Possible values
-                      are V1 and V2. Defaults to V1.
+                      are V1 and V2. Defaults to V2.
                     type: string
                   integrationRuntimeName:
                     description: The integration runtime reference to associate with
@@ -227,7 +227,7 @@ spec:
                     type: string
                   driverVersion:
                     description: The version of the MySQL driver. Possible values
-                      are V1 and V2. Defaults to V1.
+                      are V1 and V2. Defaults to V2.
                     type: string
                   integrationRuntimeName:
                     description: The integration runtime reference to associate with
@@ -364,7 +364,7 @@ spec:
                     type: string
                   driverVersion:
                     description: The version of the MySQL driver. Possible values
-                      are V1 and V2. Defaults to V1.
+                      are V1 and V2. Defaults to V2.
                     type: string
                   id:
                     description: The ID of the Data Factory MySQL Linked Service.

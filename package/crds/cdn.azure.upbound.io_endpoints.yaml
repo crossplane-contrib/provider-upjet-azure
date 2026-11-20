@@ -76,7 +76,8 @@ spec:
                   contentTypesToCompress:
                     description: An array of strings that indicates a content types
                       on which compression will be applied. The value for the elements
-                      should be MIME types.
+                      should be MIME types. Required if is_compression_enabled is
+                      true.
                     items:
                       type: string
                     type: array
@@ -92,7 +93,7 @@ spec:
                             above.
                           properties:
                             behavior:
-                              description: The behavior of the cache key for query
+                              description: The behaviour of the cache key for query
                                 strings. Valid values are Exclude, ExcludeAll, Include
                                 and IncludeAll.
                               type: string
@@ -107,7 +108,7 @@ spec:
                             above.
                           properties:
                             behavior:
-                              description: The behavior of the cache key for query
+                              description: The behaviour of the cache key for query
                                 strings. Valid values are Exclude, ExcludeAll, Include
                                 and IncludeAll.
                               type: string
@@ -571,7 +572,7 @@ spec:
                     type: array
                   geoFilter:
                     description: A set of Geo Filters for this CDN Endpoint. Each
-                      geo_filter block supports fields documented below.
+                      geo_filter block supports fields defined below.
                     items:
                       properties:
                         action:
@@ -597,8 +598,9 @@ spec:
                         description: A cache_expiration_action block as defined above.
                         properties:
                           behavior:
-                            description: The behavior of the cache key for query strings.
-                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            description: The behaviour of the cache key for query
+                              strings. Valid values are Exclude, ExcludeAll, Include
+                              and IncludeAll.
                             type: string
                           duration:
                             description: 'Duration of the cache. Only allowed when
@@ -611,8 +613,9 @@ spec:
                           above.
                         properties:
                           behavior:
-                            description: The behavior of the cache key for query strings.
-                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            description: The behaviour of the cache key for query
+                              strings. Valid values are Exclude, ExcludeAll, Include
+                              and IncludeAll.
                             type: string
                           parameters:
                             description: Comma separated list of parameter values.
@@ -729,8 +732,8 @@ spec:
                     description: The set of origins of the CDN endpoint. When multiple
                       origins exist, the first origin will be used as primary and
                       rest will be used as failover options. Each origin block supports
-                      fields documented below. Changing this forces a new resource
-                      to be created.
+                      fields defined below. Changing this forces a new resource to
+                      be created.
                     items:
                       properties:
                         hostName:
@@ -846,7 +849,7 @@ spec:
                         type: object
                     type: object
                   querystringCachingBehaviour:
-                    description: Sets query string caching behavior. Allowed values
+                    description: Sets query string caching behaviour. Allowed values
                       are IgnoreQueryString, BypassCaching and UseQueryString. NotSet
                       value can be used for Premium Verizon CDN profile. Defaults
                       to IgnoreQueryString.
@@ -955,7 +958,8 @@ spec:
                   contentTypesToCompress:
                     description: An array of strings that indicates a content types
                       on which compression will be applied. The value for the elements
-                      should be MIME types.
+                      should be MIME types. Required if is_compression_enabled is
+                      true.
                     items:
                       type: string
                     type: array
@@ -971,7 +975,7 @@ spec:
                             above.
                           properties:
                             behavior:
-                              description: The behavior of the cache key for query
+                              description: The behaviour of the cache key for query
                                 strings. Valid values are Exclude, ExcludeAll, Include
                                 and IncludeAll.
                               type: string
@@ -986,7 +990,7 @@ spec:
                             above.
                           properties:
                             behavior:
-                              description: The behavior of the cache key for query
+                              description: The behaviour of the cache key for query
                                 strings. Valid values are Exclude, ExcludeAll, Include
                                 and IncludeAll.
                               type: string
@@ -1450,7 +1454,7 @@ spec:
                     type: array
                   geoFilter:
                     description: A set of Geo Filters for this CDN Endpoint. Each
-                      geo_filter block supports fields documented below.
+                      geo_filter block supports fields defined below.
                     items:
                       properties:
                         action:
@@ -1476,8 +1480,9 @@ spec:
                         description: A cache_expiration_action block as defined above.
                         properties:
                           behavior:
-                            description: The behavior of the cache key for query strings.
-                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            description: The behaviour of the cache key for query
+                              strings. Valid values are Exclude, ExcludeAll, Include
+                              and IncludeAll.
                             type: string
                           duration:
                             description: 'Duration of the cache. Only allowed when
@@ -1490,8 +1495,9 @@ spec:
                           above.
                         properties:
                           behavior:
-                            description: The behavior of the cache key for query strings.
-                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            description: The behaviour of the cache key for query
+                              strings. Valid values are Exclude, ExcludeAll, Include
+                              and IncludeAll.
                             type: string
                           parameters:
                             description: Comma separated list of parameter values.
@@ -1608,8 +1614,8 @@ spec:
                     description: The set of origins of the CDN endpoint. When multiple
                       origins exist, the first origin will be used as primary and
                       rest will be used as failover options. Each origin block supports
-                      fields documented below. Changing this forces a new resource
-                      to be created.
+                      fields defined below. Changing this forces a new resource to
+                      be created.
                     items:
                       properties:
                         hostName:
@@ -1647,7 +1653,7 @@ spec:
                       most optimal routes for the CDN. This is relative to the origin_path.
                     type: string
                   querystringCachingBehaviour:
-                    description: Sets query string caching behavior. Allowed values
+                    description: Sets query string caching behaviour. Allowed values
                       are IgnoreQueryString, BypassCaching and UseQueryString. NotSet
                       value can be used for Premium Verizon CDN profile. Defaults
                       to IgnoreQueryString.
@@ -1762,7 +1768,8 @@ spec:
                   contentTypesToCompress:
                     description: An array of strings that indicates a content types
                       on which compression will be applied. The value for the elements
-                      should be MIME types.
+                      should be MIME types. Required if is_compression_enabled is
+                      true.
                     items:
                       type: string
                     type: array
@@ -1778,7 +1785,7 @@ spec:
                             above.
                           properties:
                             behavior:
-                              description: The behavior of the cache key for query
+                              description: The behaviour of the cache key for query
                                 strings. Valid values are Exclude, ExcludeAll, Include
                                 and IncludeAll.
                               type: string
@@ -1793,7 +1800,7 @@ spec:
                             above.
                           properties:
                             behavior:
-                              description: The behavior of the cache key for query
+                              description: The behaviour of the cache key for query
                                 strings. Valid values are Exclude, ExcludeAll, Include
                                 and IncludeAll.
                               type: string
@@ -2260,7 +2267,7 @@ spec:
                     type: string
                   geoFilter:
                     description: A set of Geo Filters for this CDN Endpoint. Each
-                      geo_filter block supports fields documented below.
+                      geo_filter block supports fields defined below.
                     items:
                       properties:
                         action:
@@ -2286,8 +2293,9 @@ spec:
                         description: A cache_expiration_action block as defined above.
                         properties:
                           behavior:
-                            description: The behavior of the cache key for query strings.
-                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            description: The behaviour of the cache key for query
+                              strings. Valid values are Exclude, ExcludeAll, Include
+                              and IncludeAll.
                             type: string
                           duration:
                             description: 'Duration of the cache. Only allowed when
@@ -2300,8 +2308,9 @@ spec:
                           above.
                         properties:
                           behavior:
-                            description: The behavior of the cache key for query strings.
-                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            description: The behaviour of the cache key for query
+                              strings. Valid values are Exclude, ExcludeAll, Include
+                              and IncludeAll.
                             type: string
                           parameters:
                             description: Comma separated list of parameter values.
@@ -2421,8 +2430,8 @@ spec:
                     description: The set of origins of the CDN endpoint. When multiple
                       origins exist, the first origin will be used as primary and
                       rest will be used as failover options. Each origin block supports
-                      fields documented below. Changing this forces a new resource
-                      to be created.
+                      fields defined below. Changing this forces a new resource to
+                      be created.
                     items:
                       properties:
                         hostName:
@@ -2464,7 +2473,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   querystringCachingBehaviour:
-                    description: Sets query string caching behavior. Allowed values
+                    description: Sets query string caching behaviour. Allowed values
                       are IgnoreQueryString, BypassCaching and UseQueryString. NotSet
                       value can be used for Premium Verizon CDN profile. Defaults
                       to IgnoreQueryString.

@@ -201,7 +201,7 @@ spec:
                           'OPTIONS'. Defaults to GET.
                         type: string
                       parseDependentRequestsEnabled:
-                        description: Should the parsing of dependend requests be enabled?
+                        description: Should the parsing of dependent requests be enabled?
                           Defaults to true.
                         type: boolean
                       url:
@@ -332,6 +332,10 @@ spec:
                         description: The expected status code of the response. Default
                           is '200', '0' means 'response code < 400'
                         type: number
+                      ignoreStatusCode:
+                        description: Should status code of the response be ignored?
+                          Defaults to false.
+                        type: boolean
                       sslCertRemainingLifetime:
                         description: The number of days of SSL certificate validity
                           remaining for the checked endpoint. If the certificate has
@@ -497,7 +501,7 @@ spec:
                           'OPTIONS'. Defaults to GET.
                         type: string
                       parseDependentRequestsEnabled:
-                        description: Should the parsing of dependend requests be enabled?
+                        description: Should the parsing of dependent requests be enabled?
                           Defaults to true.
                         type: boolean
                       url:
@@ -541,6 +545,10 @@ spec:
                         description: The expected status code of the response. Default
                           is '200', '0' means 'response code < 400'
                         type: number
+                      ignoreStatusCode:
+                        description: Should status code of the response be ignored?
+                          Defaults to false.
+                        type: boolean
                       sslCertRemainingLifetime:
                         description: The number of days of SSL certificate validity
                           remaining for the checked endpoint. If the certificate has
@@ -691,7 +699,7 @@ spec:
                           'OPTIONS'. Defaults to GET.
                         type: string
                       parseDependentRequestsEnabled:
-                        description: Should the parsing of dependend requests be enabled?
+                        description: Should the parsing of dependent requests be enabled?
                           Defaults to true.
                         type: boolean
                       url:
@@ -744,6 +752,10 @@ spec:
                         description: The expected status code of the response. Default
                           is '200', '0' means 'response code < 400'
                         type: number
+                      ignoreStatusCode:
+                        description: Should status code of the response be ignored?
+                          Defaults to false.
+                        type: boolean
                       sslCertRemainingLifetime:
                         description: The number of days of SSL certificate validity
                           remaining for the checked endpoint. If the certificate has

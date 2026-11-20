@@ -84,7 +84,7 @@ type FlexibleServerActiveDirectoryAdministratorParameters struct {
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The resource ID of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbformysql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbformysql/v1beta2.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`

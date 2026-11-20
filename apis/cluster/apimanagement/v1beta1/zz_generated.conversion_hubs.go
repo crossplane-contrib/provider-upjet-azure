@@ -34,9 +34,6 @@ func (tr *AuthorizationServer) Hub() {}
 func (tr *Certificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CustomDomain) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *EmailTemplate) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -57,7 +57,7 @@ type VPNServerConfigurationPolicyGroupInitParameters struct {
 	// Is this a default VPN Server Configuration Policy Group? Defaults to false. Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// One or more policy blocks as documented below.
+	// One or more policy blocks as defined below.
 	Policy []PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The priority of this VPN Server Configuration Policy Group. Defaults to 0.
@@ -72,7 +72,7 @@ type VPNServerConfigurationPolicyGroupObservation struct {
 	// Is this a default VPN Server Configuration Policy Group? Defaults to false. Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// One or more policy blocks as documented below.
+	// One or more policy blocks as defined below.
 	Policy []PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The priority of this VPN Server Configuration Policy Group. Defaults to 0.
@@ -88,7 +88,7 @@ type VPNServerConfigurationPolicyGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// One or more policy blocks as documented below.
+	// One or more policy blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 

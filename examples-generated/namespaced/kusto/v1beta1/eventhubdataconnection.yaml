@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.m.upbound.io/v1beta1
+apiVersion: eventhub.azure.m.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -97,7 +97,7 @@ spec:
 
 ---
 
-apiVersion: kusto.azure.m.upbound.io/v1beta1
+apiVersion: kusto.azure.m.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:

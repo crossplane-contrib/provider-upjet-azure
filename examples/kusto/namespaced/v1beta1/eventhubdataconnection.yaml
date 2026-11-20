@@ -32,7 +32,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: eventhub.azure.m.upbound.io/v1beta1
+apiVersion: eventhub.azure.m.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -44,13 +44,10 @@ metadata:
 spec:
   forProvider:
     messageRetention: 1
-    namespaceNameSelector:
+    namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     partitionCount: 1
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 ---
 apiVersion: eventhub.azure.m.upbound.io/v1beta1
 kind: ConsumerGroup
@@ -90,7 +87,7 @@ spec:
         testing.upbound.io/example-name: example
     sku: Standard
 ---
-apiVersion: kusto.azure.m.upbound.io/v1beta1
+apiVersion: kusto.azure.m.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:

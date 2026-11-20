@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:

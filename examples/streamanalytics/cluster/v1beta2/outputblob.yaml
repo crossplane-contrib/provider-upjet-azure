@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: outputblob
   name: example
 spec:
   forProvider:
@@ -16,36 +16,36 @@ spec:
     pathPattern: some-pattern
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: outputblob
     serialization:
       encoding: UTF8
       fieldDelimiter: ','
       type: Csv
     storageAccountKeySecretRef:
       key: attribute.primary_access_key
-      name: example-storage-account
+      name: example-storage-account-outputblob
       namespace: upbound-system
     storageAccountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: outputblob
     storageContainerNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: outputblob
     streamAnalyticsJobNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: outputblob
     timeFormat: HH
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
   labels:
-    testing.upbound.io/example-name: example
-  name: exampleupboundstblob
+    testing.upbound.io/example-name: outputblob
+  name: exampleupbound91bbdfa9
 spec:
   forProvider:
     accountKind: StorageV2
@@ -55,27 +55,27 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: outputblob
   writeConnectionSecretToRef:
-    name: example-storage-account
+    name: example-storage-account-outputblob
     namespace: upbound-system
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: outputblob
+  name: example-outputblob
 spec:
   forProvider:
     containerAccessType: private
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: outputblob
 
 ---
 
@@ -85,8 +85,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta2/outputblob
   labels:
-    testing.upbound.io/example-name: example
-  name: example-job
+    testing.upbound.io/example-name: outputblob
+  name: example-job-outputblob
 spec:
   forProvider:
     compatibilityLevel: "1.2"
@@ -98,7 +98,7 @@ spec:
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: outputblob
     streamingUnits: 3
     tags:
       environment: example
@@ -115,8 +115,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta1/outputblob
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: outputblob
+  name: example-outputblob
 spec:
   forProvider:
     location: West Europe

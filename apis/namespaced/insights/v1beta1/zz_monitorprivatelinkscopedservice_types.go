@@ -16,7 +16,7 @@ import (
 type MonitorPrivateLinkScopedServiceInitParameters struct {
 
 	// The ID of the linked resource. It must be the Log Analytics workspace or the Application Insights component or the Data Collection endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	LinkedResourceID *string `json:"linkedResourceId,omitempty" tf:"linked_resource_id,omitempty"`
 
@@ -47,7 +47,7 @@ type MonitorPrivateLinkScopedServiceObservation struct {
 type MonitorPrivateLinkScopedServiceParameters struct {
 
 	// The ID of the linked resource. It must be the Log Analytics workspace or the Application Insights component or the Data Collection endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LinkedResourceID *string `json:"linkedResourceId,omitempty" tf:"linked_resource_id,omitempty"`

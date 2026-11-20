@@ -165,7 +165,7 @@ type GremlinGraphObservation struct {
 type GremlinGraphParameters struct {
 
 	// The name of the CosmosDB Account to create the Gremlin Graph within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cosmosdb/v1beta3.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 

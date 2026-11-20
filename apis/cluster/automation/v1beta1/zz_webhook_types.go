@@ -16,7 +16,7 @@ import (
 type WebhookInitParameters struct {
 
 	// The name of the automation account in which the Webhook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta3.Account
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// Reference to a Account in automation to populate automationAccountName.
@@ -106,7 +106,7 @@ type WebhookObservation struct {
 type WebhookParameters struct {
 
 	// The name of the automation account in which the Webhook is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta3.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 

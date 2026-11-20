@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta2
+apiVersion: apimanagement.azure.upbound.io/v1beta3
 kind: Management
 metadata:
   annotations:

@@ -78,7 +78,7 @@ spec:
       provisioner: crossplane
 
 ---
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: VirtualNetwork
 metadata:
   name: example-vn-for-lb
@@ -94,7 +94,7 @@ spec:
       - "10.0.0.0/16"
 
 ---
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   name: service
@@ -112,7 +112,7 @@ spec:
       - "10.0.1.0/24"
 
 ---
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   name: endpoint
@@ -148,7 +148,7 @@ spec:
       environment: Production
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: LoadBalancer
 metadata:
   name: testloadbalancer
@@ -167,7 +167,7 @@ spec:
           name: publicipforlb
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateLinkService
 metadata:
   name: example

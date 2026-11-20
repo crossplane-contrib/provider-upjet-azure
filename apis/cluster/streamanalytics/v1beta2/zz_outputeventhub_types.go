@@ -19,7 +19,7 @@ type OutputEventHubInitParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The name of the Event Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta3.EventHub
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
@@ -98,7 +98,7 @@ type OutputEventHubParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The name of the Event Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta3.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 

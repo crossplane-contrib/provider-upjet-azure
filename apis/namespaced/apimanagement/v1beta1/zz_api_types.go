@@ -18,7 +18,7 @@ type APIInitParameters struct {
 	// Type of API. Possible values are graphql, http, soap, and websocket. Defaults to http.
 	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
-	// A contact block as documented below.
+	// A contact block as defined below.
 	Contact *ContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// A description of the API Management API, which may include HTML formatting tags.
@@ -27,16 +27,16 @@ type APIInitParameters struct {
 	// The display name of the API.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// A import block as documented below.
+	// A import block as defined below.
 	Import *ImportInitParameters `json:"import,omitempty" tf:"import,omitempty"`
 
-	// A license block as documented below.
+	// A license block as defined below.
 	License *LicenseInitParameters `json:"license,omitempty" tf:"license,omitempty"`
 
-	// An oauth2_authorization block as documented below.
+	// An oauth2_authorization block as defined below.
 	Oauth2Authorization *Oauth2AuthorizationInitParameters `json:"oauth2Authorization,omitempty" tf:"oauth2_authorization,omitempty"`
 
-	// An openid_authentication block as documented below.
+	// An openid_authentication block as defined below.
 	OpenIDAuthentication *OpenIDAuthenticationInitParameters `json:"openidAuthentication,omitempty" tf:"openid_authentication,omitempty"`
 
 	// The Path for this API Management API, which is a relative URL which uniquely identifies this API and all of its resource paths within the API Management Service.
@@ -55,7 +55,7 @@ type APIInitParameters struct {
 	// The API id of the source API, which could be in format azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
 	SourceAPIID *string `json:"sourceApiId,omitempty" tf:"source_api_id,omitempty"`
 
-	// A subscription_key_parameter_names block as documented below.
+	// A subscription_key_parameter_names block as defined below.
 	SubscriptionKeyParameterNames *SubscriptionKeyParameterNamesInitParameters `json:"subscriptionKeyParameterNames,omitempty" tf:"subscription_key_parameter_names,omitempty"`
 
 	// Should this API require a subscription key? Defaults to true.
@@ -82,7 +82,7 @@ type APIObservation struct {
 	// Type of API. Possible values are graphql, http, soap, and websocket. Defaults to http.
 	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
-	// A contact block as documented below.
+	// A contact block as defined below.
 	Contact *ContactObservation `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// A description of the API Management API, which may include HTML formatting tags.
@@ -94,7 +94,7 @@ type APIObservation struct {
 	// The ID of the API Management API.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A import block as documented below.
+	// A import block as defined below.
 	Import *ImportObservation `json:"import,omitempty" tf:"import,omitempty"`
 
 	// Is this the current API Revision?
@@ -103,13 +103,13 @@ type APIObservation struct {
 	// Is this API Revision online/accessible via the Gateway?
 	IsOnline *bool `json:"isOnline,omitempty" tf:"is_online,omitempty"`
 
-	// A license block as documented below.
+	// A license block as defined below.
 	License *LicenseObservation `json:"license,omitempty" tf:"license,omitempty"`
 
-	// An oauth2_authorization block as documented below.
+	// An oauth2_authorization block as defined below.
 	Oauth2Authorization *Oauth2AuthorizationObservation `json:"oauth2Authorization,omitempty" tf:"oauth2_authorization,omitempty"`
 
-	// An openid_authentication block as documented below.
+	// An openid_authentication block as defined below.
 	OpenIDAuthentication *OpenIDAuthenticationObservation `json:"openidAuthentication,omitempty" tf:"openid_authentication,omitempty"`
 
 	// The Path for this API Management API, which is a relative URL which uniquely identifies this API and all of its resource paths within the API Management Service.
@@ -134,7 +134,7 @@ type APIObservation struct {
 	// The API id of the source API, which could be in format azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
 	SourceAPIID *string `json:"sourceApiId,omitempty" tf:"source_api_id,omitempty"`
 
-	// A subscription_key_parameter_names block as documented below.
+	// A subscription_key_parameter_names block as defined below.
 	SubscriptionKeyParameterNames *SubscriptionKeyParameterNamesObservation `json:"subscriptionKeyParameterNames,omitempty" tf:"subscription_key_parameter_names,omitempty"`
 
 	// Should this API require a subscription key? Defaults to true.
@@ -156,7 +156,7 @@ type APIObservation struct {
 type APIParameters struct {
 
 	// The Name of the API Management Service where this API should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta2.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -172,7 +172,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
-	// A contact block as documented below.
+	// A contact block as defined below.
 	// +kubebuilder:validation:Optional
 	Contact *ContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
@@ -184,19 +184,19 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// A import block as documented below.
+	// A import block as defined below.
 	// +kubebuilder:validation:Optional
 	Import *ImportParameters `json:"import,omitempty" tf:"import,omitempty"`
 
-	// A license block as documented below.
+	// A license block as defined below.
 	// +kubebuilder:validation:Optional
 	License *LicenseParameters `json:"license,omitempty" tf:"license,omitempty"`
 
-	// An oauth2_authorization block as documented below.
+	// An oauth2_authorization block as defined below.
 	// +kubebuilder:validation:Optional
 	Oauth2Authorization *Oauth2AuthorizationParameters `json:"oauth2Authorization,omitempty" tf:"oauth2_authorization,omitempty"`
 
-	// An openid_authentication block as documented below.
+	// An openid_authentication block as defined below.
 	// +kubebuilder:validation:Optional
 	OpenIDAuthentication *OpenIDAuthenticationParameters `json:"openidAuthentication,omitempty" tf:"openid_authentication,omitempty"`
 
@@ -238,7 +238,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceAPIID *string `json:"sourceApiId,omitempty" tf:"source_api_id,omitempty"`
 
-	// A subscription_key_parameter_names block as documented below.
+	// A subscription_key_parameter_names block as defined below.
 	// +kubebuilder:validation:Optional
 	SubscriptionKeyParameterNames *SubscriptionKeyParameterNamesParameters `json:"subscriptionKeyParameterNames,omitempty" tf:"subscription_key_parameter_names,omitempty"`
 

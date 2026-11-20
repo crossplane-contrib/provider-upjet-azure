@@ -15,7 +15,7 @@ import (
 
 type AppIntegrationAccountPartnerInitParameters struct {
 
-	// A business_identity block as documented below.
+	// A business_identity block as defined below.
 	BusinessIdentity []BusinessIdentityInitParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Partner.
@@ -24,7 +24,7 @@ type AppIntegrationAccountPartnerInitParameters struct {
 
 type AppIntegrationAccountPartnerObservation struct {
 
-	// A business_identity block as documented below.
+	// A business_identity block as defined below.
 	BusinessIdentity []BusinessIdentityObservation `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// The ID of the Logic App Integration Account Partner.
@@ -42,7 +42,7 @@ type AppIntegrationAccountPartnerObservation struct {
 
 type AppIntegrationAccountPartnerParameters struct {
 
-	// A business_identity block as documented below.
+	// A business_identity block as defined below.
 	// +kubebuilder:validation:Optional
 	BusinessIdentity []BusinessIdentityParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 

@@ -8,13 +8,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: synapse-integrationruntimeselfhosted
   name: integrationruntimeselfhosted
 spec:
   forProvider:
     synapseWorkspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: integration-ws-label
+        testing.upbound.io/example-name: integration-ws-label-synapse-integrationruntimeselfhosted
 
 ---
 
@@ -24,22 +24,22 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: integration-rg-label
-  name: integration-rg
+    testing.upbound.io/example-name: integration-rg-label-synapse-integrationruntimeselfhosted
+  name: integration-rg-synapse-integrationruntimeselfhosted
 spec:
   forProvider:
     location: UAE North
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: account-label
-  name: integruntimeaccountab
+    testing.upbound.io/example-name: account-label-synapse-integrationruntimeselfhosted
+  name: integruntimeac401ab39b
 spec:
   forProvider:
     accountKind: StorageV2
@@ -49,7 +49,7 @@ spec:
     location: UAE North
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: integration-rg-label
+        testing.upbound.io/example-name: integration-rg-label-synapse-integrationruntimeselfhosted
 
 ---
 
@@ -59,13 +59,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: file-system-label
-  name: file-system
+    testing.upbound.io/example-name: file-system-label-synapse-integrationruntimeselfhosted
+  name: file-system-synapse-integrationruntimeselfhosted
 spec:
   forProvider:
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: account-label
+        testing.upbound.io/example-name: account-label-synapse-integrationruntimeselfhosted
 
 ---
 
@@ -75,8 +75,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: integration-ws-label
-  name: integration-ws
+    testing.upbound.io/example-name: integration-ws-label-synapse-integrationruntimeselfhosted
+  name: integrationws3535ca87
 spec:
   forProvider:
     identity:
@@ -84,8 +84,8 @@ spec:
     location: UAE North
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: integration-rg-label
+        testing.upbound.io/example-name: integration-rg-label-synapse-integrationruntimeselfhosted
     sqlAdministratorLogin: sqladminuser
     storageDataLakeGen2FilesystemIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: file-system-label
+        testing.upbound.io/example-name: file-system-label-synapse-integrationruntimeselfhosted

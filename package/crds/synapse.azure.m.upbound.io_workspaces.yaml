@@ -290,7 +290,7 @@ spec:
                         type: string
                       gitUrl:
                         description: 'Specifies the GitHub Enterprise host name. For
-                          example: https://github.mydomain.com.'
+                          example: https://github.<mydomain>.com.'
                         type: string
                       lastCommitId:
                         description: The last commit ID.
@@ -874,7 +874,7 @@ spec:
                         type: string
                       gitUrl:
                         description: 'Specifies the GitHub Enterprise host name. For
-                          example: https://github.mydomain.com.'
+                          example: https://github.<mydomain>.com.'
                         type: string
                       lastCommitId:
                         description: The last commit ID.
@@ -1274,7 +1274,7 @@ spec:
                         type: string
                       gitUrl:
                         description: 'Specifies the GitHub Enterprise host name. For
-                          example: https://github.mydomain.com.'
+                          example: https://github.<mydomain>.com.'
                         type: string
                       lastCommitId:
                         description: The last commit ID.

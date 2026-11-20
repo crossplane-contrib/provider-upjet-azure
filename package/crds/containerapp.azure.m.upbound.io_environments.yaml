@@ -360,10 +360,9 @@ spec:
                         type: object
                     type: object
                   logsDestination:
-                    description: Where the application logs will be saved for this
-                      Container Apps Managed Environment. Possible values include
-                      log-analytics and azure-monitor. Omitting this value will result
-                      in logs being streamed only.
+                    description: |-
+                      Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+                      The destination for the application logs. Possible values include `log-analytics` and `azure-monitor`.  Omitting this value will result in logs being streamed only.
                     type: string
                   mutualTlsEnabled:
                     description: |-
@@ -811,10 +810,9 @@ spec:
                         type: object
                     type: object
                   logsDestination:
-                    description: Where the application logs will be saved for this
-                      Container Apps Managed Environment. Possible values include
-                      log-analytics and azure-monitor. Omitting this value will result
-                      in logs being streamed only.
+                    description: |-
+                      Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+                      The destination for the application logs. Possible values include `log-analytics` and `azure-monitor`.  Omitting this value will result in logs being streamed only.
                     type: string
                   mutualTlsEnabled:
                     description: |-
@@ -996,10 +994,9 @@ spec:
                       The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
                     type: string
                   logsDestination:
-                    description: Where the application logs will be saved for this
-                      Container Apps Managed Environment. Possible values include
-                      log-analytics and azure-monitor. Omitting this value will result
-                      in logs being streamed only.
+                    description: |-
+                      Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+                      The destination for the application logs. Possible values include `log-analytics` and `azure-monitor`.  Omitting this value will result in logs being streamed only.
                     type: string
                   mutualTlsEnabled:
                     description: |-

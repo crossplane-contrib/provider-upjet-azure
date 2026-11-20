@@ -32,7 +32,7 @@ spec:
     tags:
       provisioner: crossplane
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -47,7 +47,7 @@ spec:
     resourceGroupNameRef:
       name: networkprofile-rg
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:

@@ -10287,6 +10287,11 @@ func (in *LoadBalancerProbeInitParameters) DeepCopyInto(out *LoadBalancerProbeIn
 		*out = new(float64)
 		**out = **in
 	}
+	if in.NoHealthyBackendsBehavior != nil {
+		in, out := &in.NoHealthyBackendsBehavior, &out.NoHealthyBackendsBehavior
+		*out = new(string)
+		**out = **in
+	}
 	if in.NumberOfProbes != nil {
 		in, out := &in.NumberOfProbes, &out.NumberOfProbes
 		*out = new(float64)
@@ -10385,6 +10390,11 @@ func (in *LoadBalancerProbeObservation) DeepCopyInto(out *LoadBalancerProbeObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.NoHealthyBackendsBehavior != nil {
+		in, out := &in.NoHealthyBackendsBehavior, &out.NoHealthyBackendsBehavior
+		*out = new(string)
+		**out = **in
+	}
 	if in.NumberOfProbes != nil {
 		in, out := &in.NumberOfProbes, &out.NumberOfProbes
 		*out = new(float64)
@@ -10444,6 +10454,11 @@ func (in *LoadBalancerProbeParameters) DeepCopyInto(out *LoadBalancerProbeParame
 		in, out := &in.LoadbalancerIDSelector, &out.LoadbalancerIDSelector
 		*out = new(v2.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.NoHealthyBackendsBehavior != nil {
+		in, out := &in.NoHealthyBackendsBehavior, &out.NoHealthyBackendsBehavior
+		*out = new(string)
+		**out = **in
 	}
 	if in.NumberOfProbes != nil {
 		in, out := &in.NumberOfProbes, &out.NumberOfProbes
@@ -30126,21 +30141,6 @@ func (in *VirtualNetworkDNSServersInitParameters) DeepCopyInto(out *VirtualNetwo
 				**out = **in
 			}
 		}
-	}
-	if in.VirtualNetworkID != nil {
-		in, out := &in.VirtualNetworkID, &out.VirtualNetworkID
-		*out = new(string)
-		**out = **in
-	}
-	if in.VirtualNetworkIDRef != nil {
-		in, out := &in.VirtualNetworkIDRef, &out.VirtualNetworkIDRef
-		*out = new(v2.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.VirtualNetworkIDSelector != nil {
-		in, out := &in.VirtualNetworkIDSelector, &out.VirtualNetworkIDSelector
-		*out = new(v2.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 }
 

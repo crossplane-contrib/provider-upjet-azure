@@ -207,6 +207,11 @@ spec:
                           a new resource to be created.
                         type: string
                     type: object
+                  spilloverDeploymentName:
+                    description: The name of the deployment that should serve requests
+                      when this deployment would have otherwise been throttled due
+                      to reaching its throughput limit.
+                    type: string
                   versionUpgradeOption:
                     description: Deployment model version upgrade option. Possible
                       values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired,
@@ -288,6 +293,11 @@ spec:
                           a new resource to be created.
                         type: string
                     type: object
+                  spilloverDeploymentName:
+                    description: The name of the deployment that should serve requests
+                      when this deployment would have otherwise been throttled due
+                      to reaching its throughput limit.
+                    type: string
                   versionUpgradeOption:
                     description: Deployment model version upgrade option. Possible
                       values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired,
@@ -436,6 +446,11 @@ spec:
                           a new resource to be created.
                         type: string
                     type: object
+                  spilloverDeploymentName:
+                    description: The name of the deployment that should serve requests
+                      when this deployment would have otherwise been throttled due
+                      to reaching its throughput limit.
+                    type: string
                   versionUpgradeOption:
                     description: Deployment model version upgrade option. Possible
                       values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired,

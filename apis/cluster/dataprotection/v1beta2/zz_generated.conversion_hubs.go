@@ -10,7 +10,4 @@ package v1beta2
 func (tr *BackupPolicyDisk) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BackupPolicyPostgreSQL) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BackupVault) Hub() {}

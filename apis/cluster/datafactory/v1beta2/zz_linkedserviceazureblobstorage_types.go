@@ -354,9 +354,10 @@ type LinkedServiceAzureBlobStorageStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="v1beta2 is deprecated since the Terraform AzureRM v5 bump, please migrate to v1beta3. Deprecated since v3.0.0."
 
 // LinkedServiceAzureBlobStorage is the Schema for the LinkedServiceAzureBlobStorages API. Manages a Linked Service (connection) between an Azure Blob Storage Account and Azure Data Factory.
+// Deprecated: This API version (v1beta2) has been deprecated in release v3.0.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

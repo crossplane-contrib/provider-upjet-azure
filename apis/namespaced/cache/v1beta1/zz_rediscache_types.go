@@ -107,7 +107,7 @@ type RedisCacheInitParameters struct {
 	// The location of the resource group. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
+	// The minimum TLS version. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Enable the non-SSL port (6379) - disabled by default.
@@ -141,7 +141,7 @@ type RedisCacheInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// Only available when using the Premium SKU The ID of the Subnet within which the Redis Cache should be deployed. This Subnet must only contain Azure Cache for Redis instances without any other type of resources. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -189,7 +189,7 @@ type RedisCacheObservation struct {
 	// The location of the resource group. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
+	// The minimum TLS version. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Enable the non-SSL port (6379) - disabled by default.
@@ -269,7 +269,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
+	// The minimum TLS version. The only possible value is 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -327,7 +327,7 @@ type RedisCacheParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// Only available when using the Premium SKU The ID of the Subnet within which the Redis Cache should be deployed. This Subnet must only contain Azure Cache for Redis instances without any other type of resources. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

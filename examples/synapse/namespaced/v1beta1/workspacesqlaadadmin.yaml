@@ -21,7 +21,7 @@ spec:
     tenantId: ${data.azurerm_client_config.current.tenant_id}
     objectId: ${data.azurerm_client_config.current.object_id}
 ---
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -33,8 +33,9 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     purgeProtectionEnabled: true
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: wssqlaadadmin-rg
@@ -98,9 +99,9 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -116,7 +117,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: wssqlaadadmin-rg
@@ -151,7 +152,7 @@ spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: wssqlaadadmin-rg

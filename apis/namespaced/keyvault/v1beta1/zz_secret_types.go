@@ -22,7 +22,7 @@ type SecretInitParameters struct {
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
@@ -108,7 +108,7 @@ type SecretParameters struct {
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`

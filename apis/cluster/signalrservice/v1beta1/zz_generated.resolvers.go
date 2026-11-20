@@ -45,7 +45,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences( // ResolveReferen
 	mg.Spec.ForProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta3", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -85,7 +85,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences( // ResolveReferen
 	mg.Spec.InitProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta3", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

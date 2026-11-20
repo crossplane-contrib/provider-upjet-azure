@@ -101,7 +101,7 @@ type CriteriaInitParameters struct {
 	ResourceHealth *ResourceHealthInitParameters `json:"resourceHealth,omitempty" tf:"resource_health,omitempty"`
 
 	// The specific resource monitored by the activity log alert. It should be within one of the scopes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -260,7 +260,7 @@ type CriteriaParameters struct {
 	ResourceHealth *ResourceHealthParameters `json:"resourceHealth,omitempty" tf:"resource_health,omitempty"`
 
 	// The specific resource monitored by the activity log alert. It should be within one of the scopes.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`

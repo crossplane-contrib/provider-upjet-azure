@@ -43,7 +43,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
 apiVersion: streamanalytics.azure.m.upbound.io/v1beta1
 kind: Job
@@ -61,7 +61,7 @@ spec:
     eventsLateArrivalMaxDelayInSeconds: 60
     eventsOutOfOrderMaxDelayInSeconds: 50
     eventsOutOfOrderPolicy: Adjust
-    location: West Europe
+    location: Sweden Central
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:
@@ -89,7 +89,7 @@ spec:
     administratorLoginPasswordSecretRef:
       key: password
       name: example-sql-server
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -106,7 +106,7 @@ type: Opaque
 data:
   password: dGVzdFBhc3N3b3JkITEyMw==
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Table
 metadata:
   annotations:
@@ -118,11 +118,11 @@ metadata:
 spec:
   forProvider:
     name: mysampletable
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -135,7 +135,7 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

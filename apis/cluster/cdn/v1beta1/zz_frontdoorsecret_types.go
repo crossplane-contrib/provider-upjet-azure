@@ -31,10 +31,13 @@ type CustomerCertificateInitParameters struct {
 
 type CustomerCertificateObservation struct {
 
+	// The key vault certificate expiration date.
+	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
+
 	// The ID of the Key Vault certificate resource to use. Changing this forces a new Front Door Secret to be created.
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
-	// (Computed) One or more subject alternative names contained within the key vault certificate.
+	// One or more subject alternative names contained within the key vault certificate.
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }
 

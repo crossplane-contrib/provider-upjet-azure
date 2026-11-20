@@ -128,7 +128,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.m.upbound.io/v1beta1
+apiVersion: eventhub.azure.m.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -195,7 +195,7 @@ spec:
 
 ---
 
-apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:
@@ -246,7 +246,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -266,7 +266,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
@@ -278,9 +278,7 @@ metadata:
 spec:
   forProvider:
     containerAccessType: private
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: examstorage
 
 ---
 

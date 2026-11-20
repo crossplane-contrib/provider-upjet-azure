@@ -7,18 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *ActiveDirectoryAdministrator) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Configuration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Database) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FirewallRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FlexibleServerActiveDirectoryAdministrator) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -35,9 +23,3 @@ func (tr *FlexibleServerFirewallRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *FlexibleServerVirtualEndpoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ServerKey) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VirtualNetworkRule) Hub() {}

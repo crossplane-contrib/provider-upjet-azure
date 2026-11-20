@@ -2119,6 +2119,9 @@ type WindowsWebAppSlotInitParameters struct {
 	// Should the Windows Web App Slot be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
+
 	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
 	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
 
@@ -2153,11 +2156,11 @@ type WindowsWebAppSlotInitParameters struct {
 	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
-	// Whether traffic for the image pull should be routed over the virtual network.
+	// Whether traffic for the image pull should be routed over the virtual network. Defaults to false.
 	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2418,6 +2421,9 @@ type WindowsWebAppSlotObservation struct {
 	// Should the Windows Web App Slot be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
+
 	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
 	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
 
@@ -2473,7 +2479,7 @@ type WindowsWebAppSlotObservation struct {
 	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
-	// Whether traffic for the image pull should be routed over the virtual network.
+	// Whether traffic for the image pull should be routed over the virtual network. Defaults to false.
 	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
@@ -2545,6 +2551,10 @@ type WindowsWebAppSlotParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
+
 	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
@@ -2590,12 +2600,12 @@ type WindowsWebAppSlotParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
-	// Whether traffic for the image pull should be routed over the virtual network.
+	// Whether traffic for the image pull should be routed over the virtual network. Defaults to false.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -2653,7 +2663,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use when current_stack is set to java. Possible values include 1.7, 1.8, 11 and 17. Required with java_container and java_container_version.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20 and ~22.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20, ~22 and ~24.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2698,7 +2708,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackObservation struct {
 	// The version of Java to use when current_stack is set to java. Possible values include 1.7, 1.8, 11 and 17. Required with java_container and java_container_version.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20 and ~22.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20, ~22 and ~24.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2757,7 +2767,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20 and ~22.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18, ~20, ~22 and ~24.
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -3019,7 +3029,7 @@ type WindowsWebAppSlotSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3104,7 +3114,7 @@ type WindowsWebAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -3563,7 +3573,7 @@ type WindowsWebAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3648,7 +3658,7 @@ type WindowsWebAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`

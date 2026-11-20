@@ -94,7 +94,7 @@ type EventHubParameters struct {
 
 type LoggerInitParameters struct {
 
-	// An application_insights block as documented below. Changing this forces a new resource to be created.
+	// An application_insights block as defined below. Changing this forces a new resource to be created.
 	ApplicationInsights *ApplicationInsightsInitParameters `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
 
 	// Specifies whether records should be buffered in the Logger prior to publishing. Defaults to true.
@@ -103,11 +103,11 @@ type LoggerInitParameters struct {
 	// A description of this Logger.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An eventhub block as documented below. Changing this forces a new resource to be created.
+	// An eventhub block as defined below. Changing this forces a new resource to be created.
 	EventHub *EventHubInitParameters `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
 
 	// The target resource id which will be linked in the API-Management portal page. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -125,7 +125,7 @@ type LoggerObservation struct {
 	// The name of the API Management Service. Changing this forces a new resource to be created.
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
-	// An application_insights block as documented below. Changing this forces a new resource to be created.
+	// An application_insights block as defined below. Changing this forces a new resource to be created.
 	ApplicationInsights *ApplicationInsightsObservation `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
 
 	// Specifies whether records should be buffered in the Logger prior to publishing. Defaults to true.
@@ -134,7 +134,7 @@ type LoggerObservation struct {
 	// A description of this Logger.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An eventhub block as documented below. Changing this forces a new resource to be created.
+	// An eventhub block as defined below. Changing this forces a new resource to be created.
 	EventHub *EventHubObservation `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
 
 	// The ID of the API Management Logger.
@@ -150,7 +150,7 @@ type LoggerObservation struct {
 type LoggerParameters struct {
 
 	// The name of the API Management Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta2.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -162,7 +162,7 @@ type LoggerParameters struct {
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v2.NamespacedSelector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
-	// An application_insights block as documented below. Changing this forces a new resource to be created.
+	// An application_insights block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ApplicationInsights *ApplicationInsightsParameters `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
 
@@ -174,7 +174,7 @@ type LoggerParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An eventhub block as documented below. Changing this forces a new resource to be created.
+	// An eventhub block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EventHub *EventHubParameters `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
 
@@ -192,7 +192,7 @@ type LoggerParameters struct {
 	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The target resource id which will be linked in the API-Management portal page. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`

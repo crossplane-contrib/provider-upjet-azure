@@ -18,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: securitycenterworkspace-ws
 ---
-apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:

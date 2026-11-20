@@ -25,7 +25,7 @@ spec:
 
 ---
 
-apiVersion: containerregistry.azure.m.upbound.io/v1beta1
+apiVersion: containerregistry.azure.m.upbound.io/v1beta2
 kind: Registry
 metadata:
   annotations:
@@ -38,8 +38,10 @@ spec:
   forProvider:
     adminEnabled: false
     georeplications:
-    - location: East US
-    - location: West Europe
+    - globalEndpointRoutingEnabled: true
+      location: East US
+    - globalEndpointRoutingEnabled: true
+      location: West Europe
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

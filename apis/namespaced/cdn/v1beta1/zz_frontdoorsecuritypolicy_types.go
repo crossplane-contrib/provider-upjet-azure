@@ -45,7 +45,7 @@ type AssociationParameters struct {
 type DomainInitParameters struct {
 
 	// The Resource Id of the Front Door Custom Domain or Front Door Endpoint that should be bound to this Front Door Security Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta2.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorDomainID *string `json:"cdnFrontdoorDomainId,omitempty" tf:"cdn_frontdoor_domain_id,omitempty"`
 
@@ -70,7 +70,7 @@ type DomainObservation struct {
 type DomainParameters struct {
 
 	// The Resource Id of the Front Door Custom Domain or Front Door Endpoint that should be bound to this Front Door Security Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta2.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorDomainID *string `json:"cdnFrontdoorDomainId,omitempty" tf:"cdn_frontdoor_domain_id,omitempty"`

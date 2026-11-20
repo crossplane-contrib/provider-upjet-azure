@@ -22,7 +22,7 @@ type PowerBIEmbeddedInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen1. Changing this forces a new resource to be created.
+	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen2. Changing this forces a new resource to be created.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Sets the PowerBI Embedded's pricing level's SKU. Possible values include: A1, A2, A3, A4, A5, A6, A7 and A8.
@@ -45,7 +45,7 @@ type PowerBIEmbeddedObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen1. Changing this forces a new resource to be created.
+	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen2. Changing this forces a new resource to be created.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the Resource Group where the PowerBI Embedded should be created. Changing this forces a new resource to be created.
@@ -70,7 +70,7 @@ type PowerBIEmbeddedParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen1. Changing this forces a new resource to be created.
+	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen2. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 

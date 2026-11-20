@@ -64,7 +64,7 @@ type DatabasePrincipalAssignmentObservation struct {
 type DatabasePrincipalAssignmentParameters struct {
 
 	// The name of the cluster in which to create the resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta3.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 

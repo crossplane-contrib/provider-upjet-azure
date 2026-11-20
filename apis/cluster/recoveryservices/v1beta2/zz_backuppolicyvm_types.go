@@ -218,7 +218,7 @@ type BackupPolicyVMParameters struct {
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta3.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 

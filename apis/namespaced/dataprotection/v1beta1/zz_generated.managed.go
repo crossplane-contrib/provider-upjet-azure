@@ -167,46 +167,6 @@ func (mg *BackupInstanceKubernetesCluster) SetWriteConnectionSecretToReference(r
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetManagementPolicies of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) GetProviderConfigReference() *xpv2.ProviderConfigReference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetManagementPolicies of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this BackupInstancePostgreSQLFlexibleServer.
 func (mg *BackupInstancePostgreSQLFlexibleServer) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
@@ -404,46 +364,6 @@ func (mg *BackupPolicyKubernetesCluster) SetProviderConfigReference(r *xpv2.Prov
 
 // SetWriteConnectionSecretToReference of this BackupPolicyKubernetesCluster.
 func (mg *BackupPolicyKubernetesCluster) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetManagementPolicies of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetProviderConfigReference() *xpv2.ProviderConfigReference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetManagementPolicies of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

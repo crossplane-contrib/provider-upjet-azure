@@ -51,7 +51,7 @@ type SiteRecoveryReplicationPolicyParameters struct {
 	RecoveryPointRetentionInMinutes *float64 `json:"recoveryPointRetentionInMinutes,omitempty" tf:"recovery_point_retention_in_minutes,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/recoveryservices/v1beta3.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 

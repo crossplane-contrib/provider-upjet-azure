@@ -19,7 +19,7 @@ type OutputMSSQLInitParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta3.MSSQLDatabase
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Reference to a MSSQLDatabase in sql to populate database.
@@ -79,7 +79,7 @@ type OutputMSSQLInitParameters struct {
 	StreamAnalyticsJobNameSelector *v2.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// Table in the database that the output points to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Table
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// Reference to a Table in storage to populate table.
@@ -147,7 +147,7 @@ type OutputMSSQLParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta3.MSSQLDatabase
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -215,7 +215,7 @@ type OutputMSSQLParameters struct {
 	StreamAnalyticsJobNameSelector *v2.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// Table in the database that the output points to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Table
 	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 

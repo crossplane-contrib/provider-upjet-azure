@@ -75,12 +75,11 @@ spec:
                 properties:
                   condition:
                     description: The condition that limits the resources that the
-                      role can be assigned to. Changing this forces a new resource
-                      to be created.
+                      role can be assigned to.
                     type: string
                   conditionVersion:
                     description: The version of the condition. Possible values are
-                      1.0 or 2.0. Changing this forces a new resource to be created.
+                      1.0 or 2.0.
                     type: string
                   delegatedManagedIdentityResourceId:
                     description: The delegated Azure Resource Id which contains a
@@ -88,13 +87,12 @@ spec:
                       created.
                     type: string
                   description:
-                    description: The description for this Role Assignment. Changing
-                      this forces a new resource to be created.
+                    description: The description for this Role Assignment.
                     type: string
                   name:
-                    description: A unique UUID/GUID for this Role Assignment - one
-                      will be generated if not specified. Changing this forces a new
-                      resource to be created.
+                    description: The UUID for this Role Assignment. If omitted, a
+                      UUID will be generated. Changing this forces a new resource
+                      to be created.
                     type: string
                   principalId:
                     description: The ID of the Principal (User, Group or Service Principal)
@@ -224,12 +222,11 @@ spec:
                 properties:
                   condition:
                     description: The condition that limits the resources that the
-                      role can be assigned to. Changing this forces a new resource
-                      to be created.
+                      role can be assigned to.
                     type: string
                   conditionVersion:
                     description: The version of the condition. Possible values are
-                      1.0 or 2.0. Changing this forces a new resource to be created.
+                      1.0 or 2.0.
                     type: string
                   delegatedManagedIdentityResourceId:
                     description: The delegated Azure Resource Id which contains a
@@ -237,13 +234,12 @@ spec:
                       created.
                     type: string
                   description:
-                    description: The description for this Role Assignment. Changing
-                      this forces a new resource to be created.
+                    description: The description for this Role Assignment.
                     type: string
                   name:
-                    description: A unique UUID/GUID for this Role Assignment - one
-                      will be generated if not specified. Changing this forces a new
-                      resource to be created.
+                    description: The UUID for this Role Assignment. If omitted, a
+                      UUID will be generated. Changing this forces a new resource
+                      to be created.
                     type: string
                   principalId:
                     description: The ID of the Principal (User, Group or Service Principal)
@@ -460,12 +456,11 @@ spec:
                 properties:
                   condition:
                     description: The condition that limits the resources that the
-                      role can be assigned to. Changing this forces a new resource
-                      to be created.
+                      role can be assigned to.
                     type: string
                   conditionVersion:
                     description: The version of the condition. Possible values are
-                      1.0 or 2.0. Changing this forces a new resource to be created.
+                      1.0 or 2.0.
                     type: string
                   delegatedManagedIdentityResourceId:
                     description: The delegated Azure Resource Id which contains a
@@ -473,16 +468,15 @@ spec:
                       created.
                     type: string
                   description:
-                    description: The description for this Role Assignment. Changing
-                      this forces a new resource to be created.
+                    description: The description for this Role Assignment.
                     type: string
                   id:
                     description: The Role Assignment ID.
                     type: string
                   name:
-                    description: A unique UUID/GUID for this Role Assignment - one
-                      will be generated if not specified. Changing this forces a new
-                      resource to be created.
+                    description: The UUID for this Role Assignment. If omitted, a
+                      UUID will be generated. Changing this forces a new resource
+                      to be created.
                     type: string
                   principalId:
                     description: The ID of the Principal (User, Group or Service Principal)

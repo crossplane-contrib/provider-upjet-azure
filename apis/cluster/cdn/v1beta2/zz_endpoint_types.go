@@ -15,7 +15,7 @@ import (
 
 type CacheExpirationActionInitParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Duration of the cache. Only allowed when behavior is set to Override or SetIfMissing. Format: [d.]hh:mm:ss
@@ -24,7 +24,7 @@ type CacheExpirationActionInitParameters struct {
 
 type CacheExpirationActionObservation struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Duration of the cache. Only allowed when behavior is set to Override or SetIfMissing. Format: [d.]hh:mm:ss
@@ -33,7 +33,7 @@ type CacheExpirationActionObservation struct {
 
 type CacheExpirationActionParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
 	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 
@@ -44,7 +44,7 @@ type CacheExpirationActionParameters struct {
 
 type CacheKeyQueryStringActionInitParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Comma separated list of parameter values.
@@ -53,7 +53,7 @@ type CacheKeyQueryStringActionInitParameters struct {
 
 type CacheKeyQueryStringActionObservation struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Comma separated list of parameter values.
@@ -62,7 +62,7 @@ type CacheKeyQueryStringActionObservation struct {
 
 type CacheKeyQueryStringActionParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
 	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 
@@ -406,14 +406,14 @@ type DeviceConditionParameters struct {
 
 type EndpointInitParameters struct {
 
-	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types.
+	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types. Required if is_compression_enabled is true.
 	// +listType=set
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
 	// Rules for the rules engine. An endpoint can contain up until 4 of those rules that consist of conditions and actions. A delivery_rule blocks as defined below.
 	DeliveryRule []DeliveryRuleInitParameters `json:"deliveryRule,omitempty" tf:"delivery_rule,omitempty"`
 
-	// A set of Geo Filters for this CDN Endpoint. Each geo_filter block supports fields documented below.
+	// A set of Geo Filters for this CDN Endpoint. Each geo_filter block supports fields defined below.
 	GeoFilter []GeoFilterInitParameters `json:"geoFilter,omitempty" tf:"geo_filter,omitempty"`
 
 	// Actions that are valid for all resources regardless of any conditions. A global_delivery_rule block as defined below.
@@ -434,7 +434,7 @@ type EndpointInitParameters struct {
 	// What types of optimization should this CDN Endpoint optimize for? Possible values include DynamicSiteAcceleration, GeneralMediaStreaming, GeneralWebDelivery, LargeFileDownload and VideoOnDemandMediaStreaming.
 	OptimizationType *string `json:"optimizationType,omitempty" tf:"optimization_type,omitempty"`
 
-	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields documented below. Changing this forces a new resource to be created.
+	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields defined below. Changing this forces a new resource to be created.
 	Origin []OriginInitParameters `json:"origin,omitempty" tf:"origin,omitempty"`
 
 	// The host header CDN provider will send along with content requests to origins.
@@ -446,7 +446,7 @@ type EndpointInitParameters struct {
 	// the path to a file hosted on the origin which helps accelerate delivery of the dynamic content and calculate the most optimal routes for the CDN. This is relative to the origin_path.
 	ProbePath *string `json:"probePath,omitempty" tf:"probe_path,omitempty"`
 
-	// Sets query string caching behavior. Allowed values are IgnoreQueryString, BypassCaching and UseQueryString. NotSet value can be used for Premium Verizon CDN profile. Defaults to IgnoreQueryString.
+	// Sets query string caching behaviour. Allowed values are IgnoreQueryString, BypassCaching and UseQueryString. NotSet value can be used for Premium Verizon CDN profile. Defaults to IgnoreQueryString.
 	QuerystringCachingBehaviour *string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -456,7 +456,7 @@ type EndpointInitParameters struct {
 
 type EndpointObservation struct {
 
-	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types.
+	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types. Required if is_compression_enabled is true.
 	// +listType=set
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
@@ -466,7 +466,7 @@ type EndpointObservation struct {
 	// The Fully Qualified Domain Name of the CDN Endpoint.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// A set of Geo Filters for this CDN Endpoint. Each geo_filter block supports fields documented below.
+	// A set of Geo Filters for this CDN Endpoint. Each geo_filter block supports fields defined below.
 	GeoFilter []GeoFilterObservation `json:"geoFilter,omitempty" tf:"geo_filter,omitempty"`
 
 	// Actions that are valid for all resources regardless of any conditions. A global_delivery_rule block as defined below.
@@ -490,7 +490,7 @@ type EndpointObservation struct {
 	// What types of optimization should this CDN Endpoint optimize for? Possible values include DynamicSiteAcceleration, GeneralMediaStreaming, GeneralWebDelivery, LargeFileDownload and VideoOnDemandMediaStreaming.
 	OptimizationType *string `json:"optimizationType,omitempty" tf:"optimization_type,omitempty"`
 
-	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields documented below. Changing this forces a new resource to be created.
+	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields defined below. Changing this forces a new resource to be created.
 	Origin []OriginObservation `json:"origin,omitempty" tf:"origin,omitempty"`
 
 	// The host header CDN provider will send along with content requests to origins.
@@ -505,7 +505,7 @@ type EndpointObservation struct {
 	// The CDN Profile to which to attach the CDN Endpoint. Changing this forces a new resource to be created.
 	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
 
-	// Sets query string caching behavior. Allowed values are IgnoreQueryString, BypassCaching and UseQueryString. NotSet value can be used for Premium Verizon CDN profile. Defaults to IgnoreQueryString.
+	// Sets query string caching behaviour. Allowed values are IgnoreQueryString, BypassCaching and UseQueryString. NotSet value can be used for Premium Verizon CDN profile. Defaults to IgnoreQueryString.
 	QuerystringCachingBehaviour *string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty"`
 
 	// The name of the resource group in which to create the CDN Endpoint. Changing this forces a new resource to be created.
@@ -518,7 +518,7 @@ type EndpointObservation struct {
 
 type EndpointParameters struct {
 
-	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types.
+	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types. Required if is_compression_enabled is true.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
@@ -527,7 +527,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	DeliveryRule []DeliveryRuleParameters `json:"deliveryRule,omitempty" tf:"delivery_rule,omitempty"`
 
-	// A set of Geo Filters for this CDN Endpoint. Each geo_filter block supports fields documented below.
+	// A set of Geo Filters for this CDN Endpoint. Each geo_filter block supports fields defined below.
 	// +kubebuilder:validation:Optional
 	GeoFilter []GeoFilterParameters `json:"geoFilter,omitempty" tf:"geo_filter,omitempty"`
 
@@ -555,7 +555,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	OptimizationType *string `json:"optimizationType,omitempty" tf:"optimization_type,omitempty"`
 
-	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields documented below. Changing this forces a new resource to be created.
+	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Origin []OriginParameters `json:"origin,omitempty" tf:"origin,omitempty"`
 
@@ -584,7 +584,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ProfileNameSelector *v2.Selector `json:"profileNameSelector,omitempty" tf:"-"`
 
-	// Sets query string caching behavior. Allowed values are IgnoreQueryString, BypassCaching and UseQueryString. NotSet value can be used for Premium Verizon CDN profile. Defaults to IgnoreQueryString.
+	// Sets query string caching behaviour. Allowed values are IgnoreQueryString, BypassCaching and UseQueryString. NotSet value can be used for Premium Verizon CDN profile. Defaults to IgnoreQueryString.
 	// +kubebuilder:validation:Optional
 	QuerystringCachingBehaviour *string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty"`
 
@@ -648,7 +648,7 @@ type GeoFilterParameters struct {
 
 type GlobalDeliveryRuleCacheExpirationActionInitParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Duration of the cache. Only allowed when behavior is set to Override or SetIfMissing. Format: [d.]hh:mm:ss
@@ -657,7 +657,7 @@ type GlobalDeliveryRuleCacheExpirationActionInitParameters struct {
 
 type GlobalDeliveryRuleCacheExpirationActionObservation struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Duration of the cache. Only allowed when behavior is set to Override or SetIfMissing. Format: [d.]hh:mm:ss
@@ -666,7 +666,7 @@ type GlobalDeliveryRuleCacheExpirationActionObservation struct {
 
 type GlobalDeliveryRuleCacheExpirationActionParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
 	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 
@@ -677,7 +677,7 @@ type GlobalDeliveryRuleCacheExpirationActionParameters struct {
 
 type GlobalDeliveryRuleCacheKeyQueryStringActionInitParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Comma separated list of parameter values.
@@ -686,7 +686,7 @@ type GlobalDeliveryRuleCacheKeyQueryStringActionInitParameters struct {
 
 type GlobalDeliveryRuleCacheKeyQueryStringActionObservation struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
 
 	// Comma separated list of parameter values.
@@ -695,7 +695,7 @@ type GlobalDeliveryRuleCacheKeyQueryStringActionObservation struct {
 
 type GlobalDeliveryRuleCacheKeyQueryStringActionParameters struct {
 
-	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+	// The behaviour of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
 	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 

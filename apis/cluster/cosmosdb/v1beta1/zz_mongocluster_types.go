@@ -107,6 +107,9 @@ type MongoClusterInitParameters struct {
 	// The compute tier to assign to the MongoDB Cluster. Possible values are Free, M10, M20, M25, M30, M40, M50, M60, M80, and M200.
 	ComputeTier *string `json:"computeTier,omitempty" tf:"compute_tier,omitempty"`
 
+	// Whether Cosmos DB network bypass is enabled for the MongoDB Cluster. Defaults to false.
+	CosmosDBNetworkBypassEnabled *bool `json:"cosmosDbNetworkBypassEnabled,omitempty" tf:"cosmos_db_network_bypass_enabled,omitempty"`
+
 	// The creation mode for the MongoDB Cluster. Possible values are Default, GeoReplica and PointInTimeRestore. Defaults to Default. Changing this forces a new resource to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -166,7 +169,7 @@ type MongoClusterInitParameters struct {
 	// The size of the data disk space for the MongoDB Cluster.
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
-	// The storage type for the MongoDB Cluster. Possible values are PremiumSSD and PremiumSSDv2. Defaults to PremiumSSD. Changing this forces a new resource to be created.
+	// The storage type for the MongoDB Cluster. Possible values are PremiumSSD and PremiumSSDv2. Changing this forces a new resource to be created.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the MongoDB Cluster.
@@ -188,6 +191,9 @@ type MongoClusterObservation struct {
 
 	// The compute tier to assign to the MongoDB Cluster. Possible values are Free, M10, M20, M25, M30, M40, M50, M60, M80, and M200.
 	ComputeTier *string `json:"computeTier,omitempty" tf:"compute_tier,omitempty"`
+
+	// Whether Cosmos DB network bypass is enabled for the MongoDB Cluster. Defaults to false.
+	CosmosDBNetworkBypassEnabled *bool `json:"cosmosDbNetworkBypassEnabled,omitempty" tf:"cosmos_db_network_bypass_enabled,omitempty"`
 
 	// The creation mode for the MongoDB Cluster. Possible values are Default, GeoReplica and PointInTimeRestore. Defaults to Default. Changing this forces a new resource to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
@@ -234,7 +240,7 @@ type MongoClusterObservation struct {
 	// The size of the data disk space for the MongoDB Cluster.
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
-	// The storage type for the MongoDB Cluster. Possible values are PremiumSSD and PremiumSSDv2. Defaults to PremiumSSD. Changing this forces a new resource to be created.
+	// The storage type for the MongoDB Cluster. Possible values are PremiumSSD and PremiumSSDv2. Changing this forces a new resource to be created.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the MongoDB Cluster.
@@ -263,6 +269,10 @@ type MongoClusterParameters struct {
 	// The compute tier to assign to the MongoDB Cluster. Possible values are Free, M10, M20, M25, M30, M40, M50, M60, M80, and M200.
 	// +kubebuilder:validation:Optional
 	ComputeTier *string `json:"computeTier,omitempty" tf:"compute_tier,omitempty"`
+
+	// Whether Cosmos DB network bypass is enabled for the MongoDB Cluster. Defaults to false.
+	// +kubebuilder:validation:Optional
+	CosmosDBNetworkBypassEnabled *bool `json:"cosmosDbNetworkBypassEnabled,omitempty" tf:"cosmos_db_network_bypass_enabled,omitempty"`
 
 	// The creation mode for the MongoDB Cluster. Possible values are Default, GeoReplica and PointInTimeRestore. Defaults to Default. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -349,7 +359,7 @@ type MongoClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
-	// The storage type for the MongoDB Cluster. Possible values are PremiumSSD and PremiumSSDv2. Defaults to PremiumSSD. Changing this forces a new resource to be created.
+	// The storage type for the MongoDB Cluster. Possible values are PremiumSSD and PremiumSSDv2. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 

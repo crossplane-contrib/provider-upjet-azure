@@ -91,7 +91,7 @@ type MonitorScheduledQueryRulesLogInitParameters struct {
 	Criteria *MonitorScheduledQueryRulesLogCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
@@ -179,7 +179,7 @@ type MonitorScheduledQueryRulesLogParameters struct {
 	Criteria *MonitorScheduledQueryRulesLogCriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`

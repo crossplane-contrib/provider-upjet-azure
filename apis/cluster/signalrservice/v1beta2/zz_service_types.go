@@ -130,7 +130,7 @@ type ServiceInitParameters struct {
 	// Specifies if Connectivity Logs are enabled or not. Defaults to false.
 	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
 
-	// A cors block as documented below.
+	// A cors block as defined below.
 	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies if Http Request Logs are enabled or not. Defaults to false.
@@ -162,7 +162,7 @@ type ServiceInitParameters struct {
 	// Specifies the service mode. Possible values are Classic, Default and Serverless. Defaults to Default.
 	ServiceMode *string `json:"serviceMode,omitempty" tf:"service_mode,omitempty"`
 
-	// A sku block as documented below.
+	// A sku block as defined below.
 	Sku *SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Whether to request client certificate during TLS handshake? Defaults to false.
@@ -172,7 +172,7 @@ type ServiceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
+	// An upstream_endpoint block as defined below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
 	UpstreamEndpoint []UpstreamEndpointInitParameters `json:"upstreamEndpoint,omitempty" tf:"upstream_endpoint,omitempty"`
 }
 
@@ -184,7 +184,7 @@ type ServiceObservation struct {
 	// Specifies if Connectivity Logs are enabled or not. Defaults to false.
 	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
 
-	// A cors block as documented below.
+	// A cors block as defined below.
 	Cors []CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies if Http Request Logs are enabled or not. Defaults to false.
@@ -234,7 +234,7 @@ type ServiceObservation struct {
 	// Specifies the service mode. Possible values are Classic, Default and Serverless. Defaults to Default.
 	ServiceMode *string `json:"serviceMode,omitempty" tf:"service_mode,omitempty"`
 
-	// A sku block as documented below.
+	// A sku block as defined below.
 	Sku *SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Whether to request client certificate during TLS handshake? Defaults to false.
@@ -244,7 +244,7 @@ type ServiceObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
+	// An upstream_endpoint block as defined below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
 	UpstreamEndpoint []UpstreamEndpointObservation `json:"upstreamEndpoint,omitempty" tf:"upstream_endpoint,omitempty"`
 }
 
@@ -258,7 +258,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
 
-	// A cors block as documented below.
+	// A cors block as defined below.
 	// +kubebuilder:validation:Optional
 	Cors []CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
@@ -314,7 +314,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceMode *string `json:"serviceMode,omitempty" tf:"service_mode,omitempty"`
 
-	// A sku block as documented below.
+	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
 	Sku *SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -327,7 +327,7 @@ type ServiceParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
+	// An upstream_endpoint block as defined below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
 	// +kubebuilder:validation:Optional
 	UpstreamEndpoint []UpstreamEndpointParameters `json:"upstreamEndpoint,omitempty" tf:"upstream_endpoint,omitempty"`
 }

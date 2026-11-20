@@ -21,7 +21,7 @@ spec:
         testing.upbound.io/example-name: variabledatetine-rg-label
     value: "2019-04-24T21:40:54.074Z"
 ---
-apiVersion: automation.azure.m.upbound.io/v1beta1
+apiVersion: automation.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

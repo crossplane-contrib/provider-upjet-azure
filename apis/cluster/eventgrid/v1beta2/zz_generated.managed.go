@@ -157,6 +157,56 @@ func (mg *SystemTopic) SetWriteConnectionSecretToReference(r *xpv2.SecretReferen
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) GetDeletionPolicy() xpv2.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) GetProviderConfigReference() *xpv2.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) SetDeletionPolicy(r xpv2.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) SetProviderConfigReference(r *xpv2.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this SystemTopicEventSubscription.
+func (mg *SystemTopicEventSubscription) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Topic.
 func (mg *Topic) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

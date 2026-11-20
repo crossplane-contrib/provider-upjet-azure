@@ -19,9 +19,6 @@ func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) Hub() {}
 func (tr *LogAnalyticsLinkedService) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LogAnalyticsLinkedStorageAccount) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LogAnalyticsQueryPack) Hub() {}
 
 // Hub marks this type as a conversion hub.

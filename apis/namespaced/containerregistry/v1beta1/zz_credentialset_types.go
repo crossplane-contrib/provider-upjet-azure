@@ -144,7 +144,7 @@ type CredentialSetParameters struct {
 	AuthenticationCredentials *AuthenticationCredentialsParameters `json:"authenticationCredentials,omitempty" tf:"authentication_credentials,omitempty"`
 
 	// The ID of the Container Registry. Changing this forces a new Container Registry Credential Set to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta2.Registry
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`

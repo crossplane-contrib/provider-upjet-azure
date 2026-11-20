@@ -25,7 +25,7 @@ spec:
       provisioner: crossplane
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSARecord
 metadata:
   name: example
@@ -33,14 +33,12 @@ spec:
   forProvider:
     records:
     - 10.0.180.17
-    resourceGroupNameRef:
-      name: private-dns-rg
     ttl: 300
-    zoneNameRef:
+    privateDnsZoneIdRef:
       name: example
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSAAAARecord
 metadata:
   name: example
@@ -49,28 +47,24 @@ spec:
     records:
     - fd5d:70bc:930e:d008:0000:0000:0000:7334
     - fd5d:70bc:930e:d008::7335
-    resourceGroupNameRef:
-      name: private-dns-rg
     ttl: 300
-    zoneNameRef:
+    privateDnsZoneIdRef:
       name: example
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSCNAMERecord
 metadata:
   name: example-cname
 spec:
   forProvider:
     record: example.com
-    resourceGroupNameRef:
-      name: private-dns-rg
     ttl: 300
-    zoneNameRef:
+    privateDnsZoneIdRef:
       name: example
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSMXRecord
 metadata:
   name: example
@@ -81,16 +75,14 @@ spec:
       preference: 10
     - exchange: backupmx.example.com
       preference: 20
-    resourceGroupNameRef:
-      name: private-dns-rg
     tags:
       Environment: Production
     ttl: 300
-    zoneNameRef:
+    privateDnsZoneIdRef:
       name: example
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSPTRRecord
 metadata:
   name: example
@@ -98,14 +90,12 @@ spec:
   forProvider:
     records:
     - test.example.com
-    resourceGroupNameRef:
-      name: private-dns-rg
     ttl: 300
-    zoneNameRef:
+    privateDnsZoneIdRef:
       name: example
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSSRVRecord
 metadata:
   name: example
@@ -120,16 +110,14 @@ spec:
       priority: 10
       target: target2.example.com
       weight: 10
-    resourceGroupNameRef:
-      name: private-dns-rg
     tags:
       Environment: Production
     ttl: 300
-    zoneNameRef:
+    privateDnsZoneIdRef:
       name: example
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSTXTRecord
 metadata:
   name: example
@@ -137,14 +125,12 @@ spec:
   forProvider:
     record:
     - value: v=spf1 mx ~all
-    resourceGroupNameRef:
-      name: private-dns-rg
     ttl: 300
-    zoneNameRef:
+    privateDnsZoneIdRef:
       name: example
 
 ---
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: VirtualNetwork
 metadata:
   name: example-vn-private-dns
@@ -157,15 +143,13 @@ spec:
       - "10.0.0.0/16"
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSZoneVirtualNetworkLink
 metadata:
   name: example
 spec:
   forProvider:
-    privateDnsZoneNameRef:
+    privateDnsZoneIdRef:
       name: example
-    resourceGroupNameRef:
-      name: private-dns-rg
     virtualNetworkIdRef:
       name: example-vn-private-dns

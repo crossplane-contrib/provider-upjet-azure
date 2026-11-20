@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.m.upbound.io/v1beta2
+kind: WatcherFlowLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-watcherflowlog.sh
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    enabled: true
+    targetResourceIdRef:
+      name: example-watcherflowlog-vnet
+    networkWatcherNameRef:
+      name: poland-watcher
+    resourceGroupNameRef:
+      name: poland-watcher-rg
+    retentionPolicy:
+      days: 7
+      enabled: true
+    storageAccountIdRef:
+      name: saflow9da7affb
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  name: poland-watcher
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Poland Central
+    resourceGroupNameRef:
+      name: poland-watcher-rg
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: poland-watcher-rg
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: Poland Central
+    tags:
+      provisioner: crossplane
+---
+apiVersion: network.azure.m.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-watcherflowlog.sh
+  name: example-watcherflowlog-vnet
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: Poland Central
+    resourceGroupNameRef:
+      name: poland-watcher-rg
+    tags:
+      environment: Production
+---
+apiVersion: storage.azure.m.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-watcherflowlog.sh
+  name: saflow9da7affb
+  namespace: upbound-system
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: Poland Central
+    resourceGroupNameRef:
+      name: poland-watcher-rg
+    tags:
+      provisioner: crossplane
+  writeConnectionSecretToRef:
+    name: example-storage-account-watcherflowlog

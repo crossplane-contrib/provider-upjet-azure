@@ -38,7 +38,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgauditingpolicy
@@ -54,9 +54,9 @@ metadata:
   name: rgauditingpolicy
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -69,7 +69,7 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgauditingpolicy

@@ -107,7 +107,7 @@ spec:
 
 ---
 
-apiVersion: kusto.azure.m.upbound.io/v1beta1
+apiVersion: kusto.azure.m.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:

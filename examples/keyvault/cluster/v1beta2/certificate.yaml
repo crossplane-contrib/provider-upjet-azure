@@ -87,7 +87,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta2
+apiVersion: keyvault.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -98,6 +98,7 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-cert

@@ -118,7 +118,7 @@ spec:
   forProvider:
     location: East US
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -185,7 +185,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: eventhub.azure.m.upbound.io/v1beta1
+apiVersion: eventhub.azure.m.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -197,13 +197,10 @@ metadata:
 spec:
   forProvider:
     messageRetention: 1
-    namespaceNameSelector:
+    namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     partitionCount: 1
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 ---
 apiVersion: eventhub.azure.m.upbound.io/v1beta1
 kind: ConsumerGroup

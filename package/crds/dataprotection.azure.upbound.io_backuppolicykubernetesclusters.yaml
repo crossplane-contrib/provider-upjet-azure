@@ -91,9 +91,9 @@ spec:
                         items:
                           properties:
                             dataStoreType:
-                              description: The type of data store. The only possible
-                                value is OperationalStore. Changing this forces a
-                                new resource to be created.
+                              description: The type of data store. The possible values
+                                are OperationalStore and VaultStore. Changing this
+                                forces a new resource to be created.
                               type: string
                             duration:
                               description: The retention duration up to which the
@@ -240,9 +240,9 @@ spec:
                           items:
                             properties:
                               dataStoreType:
-                                description: The type of data store. The only possible
-                                  value is OperationalStore. Changing this forces
-                                  a new resource to be created.
+                                description: The type of data store. The possible
+                                  values are OperationalStore and VaultStore. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               duration:
                                 description: The retention duration up to which the
@@ -380,9 +380,9 @@ spec:
                         items:
                           properties:
                             dataStoreType:
-                              description: The type of data store. The only possible
-                                value is OperationalStore. Changing this forces a
-                                new resource to be created.
+                              description: The type of data store. The possible values
+                                are OperationalStore and VaultStore. Changing this
+                                forces a new resource to be created.
                               type: string
                             duration:
                               description: The retention duration up to which the
@@ -448,9 +448,9 @@ spec:
                           items:
                             properties:
                               dataStoreType:
-                                description: The type of data store. The only possible
-                                  value is OperationalStore. Changing this forces
-                                  a new resource to be created.
+                                description: The type of data store. The possible
+                                  values are OperationalStore and VaultStore. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               duration:
                                 description: The retention duration up to which the
@@ -596,9 +596,9 @@ spec:
                         items:
                           properties:
                             dataStoreType:
-                              description: The type of data store. The only possible
-                                value is OperationalStore. Changing this forces a
-                                new resource to be created.
+                              description: The type of data store. The possible values
+                                are OperationalStore and VaultStore. Changing this
+                                forces a new resource to be created.
                               type: string
                             duration:
                               description: The retention duration up to which the
@@ -672,9 +672,9 @@ spec:
                           items:
                             properties:
                               dataStoreType:
-                                description: The type of data store. The only possible
-                                  value is OperationalStore. Changing this forces
-                                  a new resource to be created.
+                                description: The type of data store. The possible
+                                  values are OperationalStore and VaultStore. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               duration:
                                 description: The retention duration up to which the

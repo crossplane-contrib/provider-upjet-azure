@@ -8,14 +8,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datafactory-integrationruntimeselfhosted
   name: irshexample
   namespace: upbound-system
 spec:
   forProvider:
     dataFactoryIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datafactory-integrationruntimeselfhosted
 ---
 apiVersion: datafactory.azure.m.upbound.io/v1beta1
 kind: Factory
@@ -23,7 +23,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datafactory-integrationruntimeselfhosted
   name: irshexample
   namespace: upbound-system
 spec:
@@ -31,7 +31,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datafactory-integrationruntimeselfhosted
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -39,7 +39,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/integrationruntimeselfhosted
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datafactory-integrationruntimeselfhosted
   name: irshexample
   namespace: upbound-system
 spec:

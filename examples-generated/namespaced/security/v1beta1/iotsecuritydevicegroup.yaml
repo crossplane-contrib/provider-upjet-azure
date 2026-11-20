@@ -28,7 +28,7 @@ spec:
 
 ---
 
-apiVersion: security.azure.m.upbound.io/v1beta1
+apiVersion: security.azure.m.upbound.io/v1beta2
 kind: IOTSecuritySolution
 metadata:
   annotations:

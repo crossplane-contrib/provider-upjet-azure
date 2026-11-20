@@ -32,7 +32,7 @@ type BackupInstanceDataLakeStorageInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source Storage Account. The Storage Account must have Hierarchical Namespace enabled. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -45,7 +45,7 @@ type BackupInstanceDataLakeStorageInitParameters struct {
 	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The names of the storage containers of the source Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +listType=set
 	StorageContainerNames []*string `json:"storageContainerNames,omitempty" tf:"storage_container_names,omitempty"`
 
@@ -118,7 +118,7 @@ type BackupInstanceDataLakeStorageParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source Storage Account. The Storage Account must have Hierarchical Namespace enabled. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -132,7 +132,7 @@ type BackupInstanceDataLakeStorageParameters struct {
 	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The names of the storage containers of the source Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	StorageContainerNames []*string `json:"storageContainerNames,omitempty" tf:"storage_container_names,omitempty"`

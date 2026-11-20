@@ -642,6 +642,11 @@ func (in *MongoClusterInitParameters) DeepCopyInto(out *MongoClusterInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.CosmosDBNetworkBypassEnabled != nil {
+		in, out := &in.CosmosDBNetworkBypassEnabled, &out.CosmosDBNetworkBypassEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.CreateMode != nil {
 		in, out := &in.CreateMode, &out.CreateMode
 		*out = new(string)
@@ -827,6 +832,11 @@ func (in *MongoClusterObservation) DeepCopyInto(out *MongoClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CosmosDBNetworkBypassEnabled != nil {
+		in, out := &in.CosmosDBNetworkBypassEnabled, &out.CosmosDBNetworkBypassEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.CreateMode != nil {
 		in, out := &in.CreateMode, &out.CreateMode
 		*out = new(string)
@@ -973,6 +983,11 @@ func (in *MongoClusterParameters) DeepCopyInto(out *MongoClusterParameters) {
 	if in.ComputeTier != nil {
 		in, out := &in.ComputeTier, &out.ComputeTier
 		*out = new(string)
+		**out = **in
+	}
+	if in.CosmosDBNetworkBypassEnabled != nil {
+		in, out := &in.CosmosDBNetworkBypassEnabled, &out.CosmosDBNetworkBypassEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.CreateMode != nil {

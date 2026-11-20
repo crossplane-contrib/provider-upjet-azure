@@ -78,7 +78,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -880,6 +880,10 @@ spec:
                       Is the Function App enabled? Defaults to true.
                       Is the Windows Function App enabled.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -1181,7 +1185,7 @@ spec:
                           nodeVersion:
                             description: |-
                               The version of Node to run. Possible values include ~12, ~14, ~16, ~18 ~20, ~22 and ~24.
-                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
+                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20`, `~22` and `~24`
                             type: string
                           powershellCoreVersion:
                             description: |-
@@ -1914,7 +1918,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -2720,6 +2724,10 @@ spec:
                       Is the Function App enabled? Defaults to true.
                       Is the Windows Function App enabled.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -2940,7 +2948,7 @@ spec:
                           nodeVersion:
                             description: |-
                               The version of Node to run. Possible values include ~12, ~14, ~16, ~18 ~20, ~22 and ~24.
-                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
+                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20`, `~22` and `~24`
                             type: string
                           powershellCoreVersion:
                             description: |-
@@ -3762,7 +3770,7 @@ spec:
                       type: string
                     description: |-
                       A map of key-value pairs for App Settings and custom values.
-                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+                      A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
                     type: object
                     x-kubernetes-map-type: granular
                   authSettings:
@@ -4454,6 +4462,10 @@ spec:
                       Is the Function App enabled? Defaults to true.
                       Is the Windows Function App enabled.
                     type: boolean
+                  endToEndTlsEncryptionEnabled:
+                    description: Whether to enable end-to-end TLS encryption. Defaults
+                      to false.
+                    type: boolean
                   ftpPublishBasicAuthenticationEnabled:
                     description: Should the default FTP Basic Authentication publishing
                       profile be enabled. Defaults to true.
@@ -4607,7 +4619,7 @@ spec:
                           nodeVersion:
                             description: |-
                               The version of Node to run. Possible values include ~12, ~14, ~16, ~18 ~20, ~22 and ~24.
-                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
+                              The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20`, `~22` and `~24`
                             type: string
                           powershellCoreVersion:
                             description: |-

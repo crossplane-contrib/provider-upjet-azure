@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: dbformysql.azure.upbound.io/v1beta2
+apiVersion: dbformysql.azure.upbound.io/v1beta3
 kind: FlexibleServer
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
     administratorLogin: mysqladmin
     administratorPasswordSecretRef:
       key: example-key
-      name: example-secret
+      name: example-secret-flexibleserveractivedirectoryadministrator
       namespace: upbound-system
     identity:
       type: UserAssigned
@@ -90,6 +90,6 @@ data:
   example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-flexibleserveractivedirectoryadministrator
   namespace: upbound-system
 type: Opaque

@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: eventhub/v1beta1/namespaceauthorizationrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: namespaceauthorizationrule
   name: example
   namespace: upbound-system
 spec:

@@ -22,7 +22,7 @@ spec:
     displayName: ExampleAPIVersionSet
     versioningScheme: Segment
 ---
-apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+apiVersion: apimanagement.azure.m.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

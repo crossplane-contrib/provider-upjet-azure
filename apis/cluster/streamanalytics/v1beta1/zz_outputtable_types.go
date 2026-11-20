@@ -31,7 +31,7 @@ type OutputTableInitParameters struct {
 	StorageAccountKeySecretRef v2.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The name of the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -43,7 +43,7 @@ type OutputTableInitParameters struct {
 	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the table where the stream should be output to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
@@ -122,7 +122,7 @@ type OutputTableParameters struct {
 	StorageAccountKeySecretRef v2.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The name of the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -139,7 +139,7 @@ type OutputTableParameters struct {
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
 
 	// The name of the table where the stream should be output to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`

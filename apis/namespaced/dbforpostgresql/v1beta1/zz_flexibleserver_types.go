@@ -164,7 +164,7 @@ type FlexibleServerInitParameters struct {
 	CustomerManagedKey *CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
 
@@ -229,11 +229,20 @@ type FlexibleServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceServerIDSelector *v2.NamespacedSelector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
-	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
+	// The maximum IOPS supported for storage. Possible values range between 3000 and 80000.
+	StorageIops *float64 `json:"storageIops,omitempty" tf:"storage_iops,omitempty"`
+
+	// The max storage allowed for the PostgreSQL Flexible Server.
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+
+	// The maximum throughput supported for storage in MB/s. Possible values range between 125 and 1200.
+	StorageThroughput *float64 `json:"storageThroughput,omitempty" tf:"storage_throughput,omitempty"`
 
 	// The name of storage performance tier for IOPS of the PostgreSQL Flexible Server. Possible values are P4, P6, P10, P15,P20, P30,P40, P50,P60, P70 or P80. Default value is dependent on the storage_mb value. Please see the storage_tier defaults based on storage_mb table below.
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
+
+	// The type of storage used for the PostgreSQL Flexible Server. Possible values are Premium_LRS and PremiumV2_LRS. Defaults to Premium_LRS. Changing this forces a new resource to be created.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
 	// +mapType=granular
@@ -320,11 +329,20 @@ type FlexibleServerObservation struct {
 	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
-	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
+	// The maximum IOPS supported for storage. Possible values range between 3000 and 80000.
+	StorageIops *float64 `json:"storageIops,omitempty" tf:"storage_iops,omitempty"`
+
+	// The max storage allowed for the PostgreSQL Flexible Server.
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+
+	// The maximum throughput supported for storage in MB/s. Possible values range between 125 and 1200.
+	StorageThroughput *float64 `json:"storageThroughput,omitempty" tf:"storage_throughput,omitempty"`
 
 	// The name of storage performance tier for IOPS of the PostgreSQL Flexible Server. Possible values are P4, P6, P10, P15,P20, P30,P40, P50,P60, P70 or P80. Default value is dependent on the storage_mb value. Please see the storage_tier defaults based on storage_mb table below.
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
+
+	// The type of storage used for the PostgreSQL Flexible Server. Possible values are Premium_LRS and PremiumV2_LRS. Defaults to Premium_LRS. Changing this forces a new resource to be created.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
 	// +mapType=granular
@@ -386,7 +404,7 @@ type FlexibleServerParameters struct {
 	CustomerManagedKey *CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
@@ -476,13 +494,25 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceServerIDSelector *v2.NamespacedSelector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
-	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
+	// The maximum IOPS supported for storage. Possible values range between 3000 and 80000.
+	// +kubebuilder:validation:Optional
+	StorageIops *float64 `json:"storageIops,omitempty" tf:"storage_iops,omitempty"`
+
+	// The max storage allowed for the PostgreSQL Flexible Server.
 	// +kubebuilder:validation:Optional
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+
+	// The maximum throughput supported for storage in MB/s. Possible values range between 125 and 1200.
+	// +kubebuilder:validation:Optional
+	StorageThroughput *float64 `json:"storageThroughput,omitempty" tf:"storage_throughput,omitempty"`
 
 	// The name of storage performance tier for IOPS of the PostgreSQL Flexible Server. Possible values are P4, P6, P10, P15,P20, P30,P40, P50,P60, P70 or P80. Default value is dependent on the storage_mb value. Please see the storage_tier defaults based on storage_mb table below.
 	// +kubebuilder:validation:Optional
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
+
+	// The type of storage used for the PostgreSQL Flexible Server. Possible values are Premium_LRS and PremiumV2_LRS. Defaults to Premium_LRS. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
 	// +kubebuilder:validation:Optional

@@ -6,6 +6,8 @@ package eventhub
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+
+	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 )
 
 // Configure configures resource group
@@ -18,8 +20,9 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub", func(r *config.Resource) {
-		r.References["namespace_name"] = config.Reference{
+		r.References["namespace_id"] = config.Reference{
 			TerraformName: "azurerm_eventhub_namespace",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 

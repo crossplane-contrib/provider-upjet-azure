@@ -46,7 +46,7 @@ type ReferenceInputBlobInitParameters struct {
 	StorageAccountKeySecretRef *v2.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account that has the blob container with reference data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -58,7 +58,7 @@ type ReferenceInputBlobInitParameters struct {
 	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Container within the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerName.
@@ -161,7 +161,7 @@ type ReferenceInputBlobParameters struct {
 	StorageAccountKeySecretRef *v2.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account that has the blob container with reference data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -174,7 +174,7 @@ type ReferenceInputBlobParameters struct {
 	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Container within the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 

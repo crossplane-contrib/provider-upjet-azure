@@ -150,7 +150,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -230,7 +230,7 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.InitProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

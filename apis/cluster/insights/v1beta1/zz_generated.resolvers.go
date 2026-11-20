@@ -98,7 +98,7 @@ func (mg *ApplicationInsightsAPIKey) ResolveReferences(ctx context.Context, c cl
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -118,7 +118,7 @@ func (mg *ApplicationInsightsAPIKey) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.ApplicationInsightsID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationInsightsIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -150,7 +150,7 @@ func (mg *ApplicationInsightsAnalyticsItem) ResolveReferences(ctx context.Contex
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -170,7 +170,7 @@ func (mg *ApplicationInsightsAnalyticsItem) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.ApplicationInsightsID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationInsightsIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -202,7 +202,7 @@ func (mg *ApplicationInsightsSmartDetectionRule) ResolveReferences(ctx context.C
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -222,7 +222,7 @@ func (mg *ApplicationInsightsSmartDetectionRule) ResolveReferences(ctx context.C
 	mg.Spec.ForProvider.ApplicationInsightsID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationInsightsIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -254,7 +254,7 @@ func (mg *ApplicationInsightsWebTest) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -294,7 +294,7 @@ func (mg *ApplicationInsightsWebTest) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -470,7 +470,7 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 	mg.Spec.ForProvider.DataCollectionRuleID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataCollectionRuleIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
+		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta3", "LinuxVirtualMachine", "LinuxVirtualMachineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -574,7 +574,7 @@ func (mg *MonitorPrivateLinkScopedService) ResolveReferences(ctx context.Context
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -634,7 +634,7 @@ func (mg *MonitorPrivateLinkScopedService) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.ScopeName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScopeNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+		m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -70,9 +70,6 @@ func (tr *LinkedServiceWeb) Hub() {}
 func (tr *ManagedPrivateEndpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Pipeline) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *TriggerBlobEvent) Hub() {}
 
 // Hub marks this type as a conversion hub.

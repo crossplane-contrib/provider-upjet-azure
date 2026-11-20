@@ -55,28 +55,6 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta2
-kind: AppServicePlan
-metadata:
-  annotations:
-    meta.upbound.io/example-id: web/v1beta1/appservicemanagedcertificate
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    kind: Linux
-    location: West Europe
-    reserved: true
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    sku:
-      size: B1
-      tier: Basic
-
----
-
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSCNAMERecord
 metadata:

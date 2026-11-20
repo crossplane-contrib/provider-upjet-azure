@@ -161,7 +161,7 @@ type TriggerCustomEventParameters struct {
 type TriggerCustomEventPipelineInitParameters struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.Pipeline
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Pipeline in datafactory to populate name.
@@ -190,7 +190,7 @@ type TriggerCustomEventPipelineObservation struct {
 type TriggerCustomEventPipelineParameters struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.Pipeline
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

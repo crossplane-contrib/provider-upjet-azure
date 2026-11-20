@@ -66,7 +66,7 @@ spec:
 
 ---
 
-apiVersion: sql.azure.m.upbound.io/v1beta1
+apiVersion: sql.azure.m.upbound.io/v1beta2
 kind: MSSQLDatabase
 metadata:
   annotations:
@@ -101,7 +101,7 @@ spec:
     administratorLoginPasswordSecretRef:
       key: example-key
       name: example-secret
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-failover-primary
@@ -124,7 +124,7 @@ spec:
     administratorLoginPasswordSecretRef:
       key: example-key
       name: example-secret
-    location: North Europe
+    location: Germany West Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-failover-secondary
@@ -143,7 +143,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: North Europe
+    location: Germany West Central
 
 ---
 
@@ -158,7 +158,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 

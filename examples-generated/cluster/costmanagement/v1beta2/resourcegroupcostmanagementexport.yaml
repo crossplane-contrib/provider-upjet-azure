@@ -44,7 +44,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -63,7 +63,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
@@ -73,6 +73,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: example

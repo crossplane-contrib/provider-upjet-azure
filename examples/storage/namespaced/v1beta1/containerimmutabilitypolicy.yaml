@@ -4,7 +4,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
   name: example
   namespace: upbound-system
 spec:
@@ -14,7 +14,7 @@ spec:
     protectedAppendWritesEnabled: true
     storageContainerResourceManagerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerimmutabilitypolicy
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -22,20 +22,20 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
+  name: example-containerimmutabilitypolicy
   namespace: upbound-system
 spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
   name: examplesa5398932221211
   namespace: upbound-system
 spec:
@@ -45,22 +45,22 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerimmutabilitypolicy
     tags:
       environment: staging
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/containerimmutabilitypolicy
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: containerimmutabilitypolicy
+  name: example-containerimmutabilitypolicy
   namespace: upbound-system
 spec:
   forProvider:
     containerAccessType: private
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: containerimmutabilitypolicy

@@ -66,7 +66,7 @@ type BotConnectionObservation struct {
 type BotConnectionParameters struct {
 
 	// The name of the Bot Resource this connection will be associated with. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/botservice/v1beta1.BotChannelsRegistration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/botservice/v1beta2.BotChannelsRegistration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`

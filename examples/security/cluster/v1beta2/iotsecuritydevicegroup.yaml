@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: security/v1beta2/iotsecuritydevicegroup
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: iotsecuritydevicegroup
   name: example
 spec:
   forProvider:
@@ -17,7 +17,7 @@ spec:
       - 10.0.0.0/24
     iothubIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: iotsecuritydevicegroup
     name: example-device-security-group
     rangeRule:
     - duration: PT5M
@@ -27,20 +27,20 @@ spec:
 
 ---
 
-apiVersion: security.azure.upbound.io/v1beta2
+apiVersion: security.azure.upbound.io/v1beta3
 kind: IOTSecuritySolution
 metadata:
   annotations:
     meta.upbound.io/example-id: security/v1beta2/iotsecuritydevicegroup
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: iotsecuritydevicegroup
   name: example
 spec:
   forProvider:
     displayName: Iot Security Solution
     iothubIdsSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: iotsecuritydevicegroup
     location: West Europe
     name: example-Iot-Security-Solution
     resourceGroupNameSelector:
@@ -55,7 +55,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: security/v1beta2/iotsecuritydevicegroup
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: iotsecuritydevicegroup
   name: example-security-iot-${Rand.RFC1123Subdomain}
 spec:
   forProvider:

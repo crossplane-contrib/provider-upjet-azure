@@ -9,14 +9,16 @@ metadata:
     meta.upbound.io/example-id: web/v1beta2/windowswebappslot
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: windowswebappslot
   name: example
   namespace: upbound-system
 spec:
   forProvider:
     appServiceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowswebappslot
+    authSettings:
+      enabled: false
     siteConfig: {}
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -25,7 +27,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/windowswebappslot
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: windowswebappslot
   name: slot-rg
   namespace: upbound-system
 spec:
@@ -38,8 +40,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta2/windowswebappslot
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: windowswebappslot
+  name: example-windowswebappslot
   namespace: upbound-system
 spec:
   forProvider:
@@ -47,7 +49,7 @@ spec:
     osType: Windows
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowswebappslot
     skuName: P1v2
 ---
 apiVersion: web.azure.m.upbound.io/v1beta1
@@ -57,16 +59,18 @@ metadata:
     meta.upbound.io/example-id: web/v1beta2/windowswebappslot
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: windowswebappslot
   name: windowswebappname
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowswebappslot
     servicePlanIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowswebappslot
     siteConfig: {}

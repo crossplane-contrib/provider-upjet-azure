@@ -46,7 +46,7 @@ func (mg *FlexibleDatabase) ResolveReferences( // ResolveReferences of this Flex
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta3", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -98,7 +98,7 @@ func (mg *FlexibleServerActiveDirectoryAdministrator) ResolveReferences(ctx cont
 	mg.Spec.ForProvider.IdentityID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IdentityIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta3", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -170,7 +170,7 @@ func (mg *FlexibleServerConfiguration) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta3", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -222,7 +222,7 @@ func (mg *FlexibleServerFirewallRule) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "FlexibleServer", "FlexibleServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta3", "FlexibleServer", "FlexibleServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

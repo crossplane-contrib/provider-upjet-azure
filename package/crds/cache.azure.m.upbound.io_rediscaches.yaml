@@ -95,8 +95,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: The minimum TLS version. Possible values are 1.0,
-                      1.1 and 1.2. Defaults to 1.0.
+                    description: The minimum TLS version. The only possible value
+                      is 1.2. Defaults to 1.2.
                     type: string
                   nonSslPortEnabled:
                     description: Enable the non-SSL port (6379) - disabled by default.
@@ -495,8 +495,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: The minimum TLS version. Possible values are 1.0,
-                      1.1 and 1.2. Defaults to 1.0.
+                    description: The minimum TLS version. The only possible value
+                      is 1.2. Defaults to 1.2.
                     type: string
                   nonSslPortEnabled:
                     description: Enable the non-SSL port (6379) - disabled by default.
@@ -891,8 +891,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: The minimum TLS version. Possible values are 1.0,
-                      1.1 and 1.2. Defaults to 1.0.
+                    description: The minimum TLS version. The only possible value
+                      is 1.2. Defaults to 1.2.
                     type: string
                   nonSslPortEnabled:
                     description: Enable the non-SSL port (6379) - disabled by default.

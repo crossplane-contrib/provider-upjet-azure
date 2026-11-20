@@ -15,7 +15,7 @@ import (
 
 type DNSSRVRecordInitParameters struct {
 
-	// A list of values that make up the SRV record. Each record block supports fields documented below.
+	// A list of values that make up the SRV record. Each record block supports fields defined below.
 	Record []DNSSRVRecordRecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
@@ -34,7 +34,7 @@ type DNSSRVRecordObservation struct {
 	// The DNS SRV Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of values that make up the SRV record. Each record block supports fields documented below.
+	// A list of values that make up the SRV record. Each record block supports fields defined below.
 	Record []DNSSRVRecordRecordObservation `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -53,7 +53,7 @@ type DNSSRVRecordObservation struct {
 
 type DNSSRVRecordParameters struct {
 
-	// A list of values that make up the SRV record. Each record block supports fields documented below.
+	// A list of values that make up the SRV record. Each record block supports fields defined below.
 	// +kubebuilder:validation:Optional
 	Record []DNSSRVRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 

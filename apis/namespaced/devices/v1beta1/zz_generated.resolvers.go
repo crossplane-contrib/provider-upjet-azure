@@ -232,26 +232,6 @@ func (mg *IOTHubDPSCertificate) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.m.upbound.io", "v1beta1", "IOTHubDPS", "IOTHubDPSList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTDPSName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.IOTDPSNameRef,
-			Selector:     mg.Spec.InitProvider.IOTDPSNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.IOTDPSName")
-	}
-	mg.Spec.InitProvider.IOTDPSName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.IOTDPSNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -533,7 +513,7 @@ func (mg *IOTHubEndpointStorageContainer) ResolveReferences(ctx context.Context,
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -593,7 +573,7 @@ func (mg *IOTHubEndpointStorageContainer) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.m.upbound.io", "v1beta2", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

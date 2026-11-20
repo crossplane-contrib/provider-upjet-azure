@@ -6,6 +6,7 @@ apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudAPIPortalCustomDomain
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     uptest.upbound.io/timeout: "7200"
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
@@ -23,6 +24,7 @@ apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudAPIPortalCustomDomain. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: rgspringcloud
@@ -36,6 +38,7 @@ apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudAPIPortal
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: example
@@ -53,6 +56,7 @@ apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudGateway
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: example
@@ -68,6 +72,7 @@ apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudService
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: example

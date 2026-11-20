@@ -22,7 +22,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: testuser001
 ---
-apiVersion: recoveryservices.azure.upbound.io/v1beta2
+apiVersion: recoveryservices.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -50,7 +50,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:

@@ -16,7 +16,7 @@ import (
 type AIFoundryInitParameters struct {
 
 	// The Application Insights ID that should be used by this AI Foundry Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
 
@@ -29,7 +29,7 @@ type AIFoundryInitParameters struct {
 	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The Container Registry ID that should be used by this AI Foundry Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta2.Registry
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
 
@@ -57,7 +57,7 @@ type AIFoundryInitParameters struct {
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Key Vault ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
@@ -92,7 +92,7 @@ type AIFoundryInitParameters struct {
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The Storage Account ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -170,7 +170,7 @@ type AIFoundryObservation struct {
 type AIFoundryParameters struct {
 
 	// The Application Insights ID that should be used by this AI Foundry Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
@@ -184,7 +184,7 @@ type AIFoundryParameters struct {
 	ApplicationInsightsIDSelector *v2.NamespacedSelector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The Container Registry ID that should be used by this AI Foundry Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerregistry/v1beta2.Registry
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
@@ -218,7 +218,7 @@ type AIFoundryParameters struct {
 	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Key Vault ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
@@ -271,7 +271,7 @@ type AIFoundryParameters struct {
 	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Storage Account ID that should be used by this AI Foundry Hub. Changing this forces a new AI Foundry Hub to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -296,7 +296,7 @@ type EncryptionInitParameters struct {
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// The Key Vault ID where the customer owned encryption key exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
@@ -341,7 +341,7 @@ type EncryptionParameters struct {
 	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 
 	// The Key Vault ID where the customer owned encryption key exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`

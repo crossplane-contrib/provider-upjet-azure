@@ -189,7 +189,7 @@ type MSSQLServerInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. Valid values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.
+	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Whether outbound network traffic is restricted for this server. Defaults to false.
@@ -261,7 +261,7 @@ type MSSQLServerObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. Valid values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.
+	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Whether outbound network traffic is restricted for this server. Defaults to false.
@@ -328,7 +328,7 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. Valid values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.
+	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. The only possible value is 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 

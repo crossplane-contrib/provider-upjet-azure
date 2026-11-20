@@ -120,6 +120,11 @@ func (in *APIDiagnosticInitParameters) DeepCopyInto(out *APIDiagnosticInitParame
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MetricsEnabled != nil {
+		in, out := &in.MetricsEnabled, &out.MetricsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.OperationNameFormat != nil {
 		in, out := &in.OperationNameFormat, &out.OperationNameFormat
 		*out = new(string)
@@ -237,6 +242,11 @@ func (in *APIDiagnosticObservation) DeepCopyInto(out *APIDiagnosticObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MetricsEnabled != nil {
+		in, out := &in.MetricsEnabled, &out.MetricsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.OperationNameFormat != nil {
 		in, out := &in.OperationNameFormat, &out.OperationNameFormat
 		*out = new(string)
@@ -349,6 +359,11 @@ func (in *APIDiagnosticParameters) DeepCopyInto(out *APIDiagnosticParameters) {
 	}
 	if in.LogClientIP != nil {
 		in, out := &in.LogClientIP, &out.LogClientIP
+		*out = new(bool)
+		**out = **in
+	}
+	if in.MetricsEnabled != nil {
+		in, out := &in.MetricsEnabled, &out.MetricsEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -7893,6 +7908,11 @@ func (in *DiagnosticInitParameters) DeepCopyInto(out *DiagnosticInitParameters) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MetricsEnabled != nil {
+		in, out := &in.MetricsEnabled, &out.MetricsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.OperationNameFormat != nil {
 		in, out := &in.OperationNameFormat, &out.OperationNameFormat
 		*out = new(string)
@@ -8005,6 +8025,11 @@ func (in *DiagnosticObservation) DeepCopyInto(out *DiagnosticObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MetricsEnabled != nil {
+		in, out := &in.MetricsEnabled, &out.MetricsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.OperationNameFormat != nil {
 		in, out := &in.OperationNameFormat, &out.OperationNameFormat
 		*out = new(string)
@@ -8102,6 +8127,11 @@ func (in *DiagnosticParameters) DeepCopyInto(out *DiagnosticParameters) {
 	}
 	if in.LogClientIP != nil {
 		in, out := &in.LogClientIP, &out.LogClientIP
+		*out = new(bool)
+		**out = **in
+	}
+	if in.MetricsEnabled != nil {
+		in, out := &in.MetricsEnabled, &out.MetricsEnabled
 		*out = new(bool)
 		**out = **in
 	}

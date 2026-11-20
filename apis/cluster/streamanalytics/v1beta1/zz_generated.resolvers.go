@@ -98,7 +98,7 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.StreamAnalyticsClusterName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsClusterNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -118,7 +118,7 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -150,14 +150,14 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "FunctionApp", "FunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "LinuxFunctionApp", "LinuxFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionApp),
-			Extract:      resource.ExtractParamPath("name", false),
+			Extract:      resource.ExtractParamPath("name", true),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FunctionAppRef,
 			Selector:     mg.Spec.ForProvider.FunctionAppSelector,
@@ -210,14 +210,14 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "FunctionApp", "FunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "LinuxFunctionApp", "LinuxFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionApp),
-			Extract:      resource.ExtractParamPath("name", false),
+			Extract:      resource.ExtractParamPath("name", true),
 			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FunctionAppRef,
 			Selector:     mg.Spec.InitProvider.FunctionAppSelector,
@@ -229,26 +229,6 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.InitProvider.FunctionApp = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FunctionAppRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
-			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
-	}
-	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -262,7 +242,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta3", "MSSQLDatabase", "MSSQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -342,7 +322,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -382,7 +362,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta3", "MSSQLDatabase", "MSSQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -462,7 +442,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -533,26 +513,6 @@ func (mg *OutputPowerBI) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobID),
-			Extract:      rconfig.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.StreamAnalyticsJobIDRef,
-			Selector:     mg.Spec.InitProvider.StreamAnalyticsJobIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobID")
-	}
-	mg.Spec.InitProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -678,7 +638,7 @@ func (mg *OutputTable) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -698,7 +658,7 @@ func (mg *OutputTable) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -718,7 +678,7 @@ func (mg *OutputTable) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.Table = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -738,7 +698,7 @@ func (mg *OutputTable) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -770,7 +730,7 @@ func (mg *ReferenceInputMSSQL) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta3", "MSSQLDatabase", "MSSQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -830,7 +790,7 @@ func (mg *ReferenceInputMSSQL) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.Server = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta3", "MSSQLDatabase", "MSSQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

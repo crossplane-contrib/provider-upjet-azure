@@ -60,7 +60,7 @@ spec:
         testing.upbound.io/example-name: rg1
     throughput: 400
 ---
-apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

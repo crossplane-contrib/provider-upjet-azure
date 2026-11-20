@@ -85,7 +85,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -105,7 +105,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Blob
 metadata:
   annotations:
@@ -117,17 +117,13 @@ metadata:
 spec:
   forProvider:
     sourceContent: '[scripts file content]'
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    storageContainerNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: examplestorage
+    storage_container_name: example-container
     type: Block
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
@@ -139,6 +135,4 @@ metadata:
 spec:
   forProvider:
     containerAccessType: blob
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    storage_account_name: examplestorage

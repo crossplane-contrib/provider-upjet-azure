@@ -48,7 +48,7 @@ spec:
 
 ---
 
-apiVersion: cdn.azure.m.upbound.io/v1beta1
+apiVersion: cdn.azure.m.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -70,11 +70,11 @@ spec:
         testing.upbound.io/example-name: '", ["contoso", azurerm_dns_zone'
     tls:
       certificateType: ManagedCertificate
-      minimumTlsVersion: TLS12
+      minimum_tls_version: TLS12
 
 ---
 
-apiVersion: cdn.azure.m.upbound.io/v1beta1
+apiVersion: cdn.azure.m.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -96,7 +96,7 @@ spec:
         testing.upbound.io/example-name: '", ["fabrikam", azurerm_dns_zone'
     tls:
       certificateType: ManagedCertificate
-      minimumTlsVersion: TLS12
+      minimum_tls_version: TLS12
 
 ---
 

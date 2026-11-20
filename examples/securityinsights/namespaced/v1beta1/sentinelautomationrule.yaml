@@ -23,7 +23,7 @@ spec:
     name: 56094f72-ac3f-40e7-a0c0-47bd95f70336
     order: 1
 ---
-apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:

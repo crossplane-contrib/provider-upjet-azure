@@ -12,7 +12,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     managedInstanceIdRef:
       name: example-sql
     partnerManagedInstanceIdRef:
@@ -40,7 +40,7 @@ spec:
     identity:
       type: SystemAssigned
     licenseType: BasePrice
-    location: North Europe
+    location: Germany West Central
     resourceGroupNameRef:
       name: example-sql-rg-failover
     skuName: GP_Gen5
@@ -58,11 +58,11 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: North Europe
+    location: Germany West Central
     tags:
       provisioner: crossplane
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -74,11 +74,11 @@ spec:
   forProvider:
     addressSpace:
       - 10.1.0.0/16
-    location: North Europe
+    location: Germany West Central
     resourceGroupNameRef:
       name: example-sql-rg-failover
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -113,7 +113,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: North Europe
+    location: Germany West Central
     resourceGroupNameRef:
       name: example-sql-rg-failover
     tags:
@@ -145,7 +145,7 @@ metadata:
 spec:
   forProvider:
     bgpRoutePropagationEnabled: true
-    location: North Europe
+    location: Germany West Central
     resourceGroupNameRef:
       name: example-sql-rg-failover
     tags:

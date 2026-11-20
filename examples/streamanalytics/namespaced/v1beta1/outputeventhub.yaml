@@ -30,7 +30,7 @@ spec:
     sharedAccessPolicyName: RootManageSharedAccessKey
     streamAnalyticsJobName: outputeventhub-job
 ---
-apiVersion: eventhub.azure.m.upbound.io/v1beta1
+apiVersion: eventhub.azure.m.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -42,13 +42,10 @@ metadata:
 spec:
   forProvider:
     messageRetention: 1
-    namespaceNameSelector:
+    namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: outputeventhub-ns
     partitionCount: 2
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: outputeventhub-rg
 ---
 apiVersion: eventhub.azure.m.upbound.io/v1beta1
 kind: EventHubNamespace

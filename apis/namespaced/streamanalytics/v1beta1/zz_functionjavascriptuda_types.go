@@ -23,19 +23,6 @@ type FunctionJavascriptUdaInitParameters struct {
 
 	// The JavaScript of this UDA Function.
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
-
-	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
-
-	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v2.NamespacedReference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
-
-	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v2.NamespacedSelector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionJavascriptUdaObservation struct {

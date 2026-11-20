@@ -35,7 +35,7 @@ type VirtualHubIPInitParameters struct {
 	PublicIPAddressIDSelector *v2.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet that the IP will reside. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -94,7 +94,7 @@ type VirtualHubIPParameters struct {
 	PublicIPAddressIDSelector *v2.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet that the IP will reside. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

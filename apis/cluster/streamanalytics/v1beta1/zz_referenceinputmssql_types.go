@@ -16,7 +16,7 @@ import (
 type ReferenceInputMSSQLInitParameters struct {
 
 	// The MS SQL database name where the reference data exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta3.MSSQLDatabase
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Reference to a MSSQLDatabase in sql to populate database.
@@ -101,7 +101,7 @@ type ReferenceInputMSSQLObservation struct {
 type ReferenceInputMSSQLParameters struct {
 
 	// The MS SQL database name where the reference data exists.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta2.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/sql/v1beta3.MSSQLDatabase
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 

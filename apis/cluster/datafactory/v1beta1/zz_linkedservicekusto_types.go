@@ -41,7 +41,7 @@ type LinkedServiceKustoInitParameters struct {
 	KustoDatabaseNameSelector *v2.Selector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
 
 	// The URI of the Kusto Cluster endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("uri",true)
 	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`
 
@@ -158,7 +158,7 @@ type LinkedServiceKustoParameters struct {
 	KustoDatabaseNameSelector *v2.Selector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
 
 	// The URI of the Kusto Cluster endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/kusto/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("uri",true)
 	// +kubebuilder:validation:Optional
 	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`

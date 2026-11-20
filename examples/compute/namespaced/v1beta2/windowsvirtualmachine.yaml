@@ -1,0 +1,118 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: compute.azure.m.upbound.io/v1beta2
+kind: WindowsVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: windowsvirtualmachine
+  name: example
+  namespace: upbound-system
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: password
+      name: example-secret-windowsvirtualmachine
+    adminUsername: adminuser
+    location: West Europe
+    networkInterfaceIdsRefs:
+      - name: example
+    osDisk:
+      caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: windowsvirtualmachine
+    size: Standard_F2
+    sourceImageReference:
+      offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2016-Datacenter
+      version: latest
+---
+apiVersion: network.azure.m.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: windowsvirtualmachine
+  name: example-windowsvirtualmachine
+  namespace: upbound-system
+spec:
+  forProvider:
+    ipConfiguration:
+      - name: internal
+        privateIpAddressAllocation: Dynamic
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: windowsvirtualmachine
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: windowsvirtualmachine
+---
+apiVersion: azure.m.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: windowsvirtualmachine
+  name: example-windowsvirtualmachine
+  namespace: upbound-system
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: network.azure.m.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: windowsvirtualmachine
+  name: example-windowsvirtualmachine
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: windowsvirtualmachine
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: windowsvirtualmachine
+---
+apiVersion: network.azure.m.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/windowsvirtualmachine
+  labels:
+    testing.upbound.io/example-name: windowsvirtualmachine
+  name: example-windowsvirtualmachine
+  namespace: upbound-system
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: windowsvirtualmachine
+---
+apiVersion: v1
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/windowsvirtualmachine
+  name: example-secret-windowsvirtualmachine
+  namespace: upbound-system
+type: Opaque

@@ -89,8 +89,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   storageTableId:
-                    description: The Storage Share ID in which this file will be placed
-                      into.
+                    description: The ID of the storage table in which this entity
+                      will be placed. Changing this forces a new resource to be created.
                     type: string
                   storageTableIdRef:
                     description: Reference to a Table in storage to populate storageTableId.
@@ -196,8 +196,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   storageTableId:
-                    description: The Storage Share ID in which this file will be placed
-                      into.
+                    description: The ID of the storage table in which this entity
+                      will be placed. Changing this forces a new resource to be created.
                     type: string
                   storageTableIdRef:
                     description: Reference to a Table in storage to populate storageTableId.
@@ -398,8 +398,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   storageTableId:
-                    description: The Storage Share ID in which this file will be placed
-                      into.
+                    description: The ID of the storage table in which this entity
+                      will be placed. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

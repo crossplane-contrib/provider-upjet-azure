@@ -21,7 +21,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: secondary
 ---
-apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -37,7 +37,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: secondary
     sku: Standard
-    softDeleteEnabled: true
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup

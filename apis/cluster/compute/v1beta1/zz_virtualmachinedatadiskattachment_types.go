@@ -38,7 +38,7 @@ type VirtualMachineDataDiskAttachmentInitParameters struct {
 	ManagedDiskIDSelector *v2.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Machine to which the Data Disk should be attached. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.LinuxVirtualMachine
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta3.LinuxVirtualMachine
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
 
@@ -107,7 +107,7 @@ type VirtualMachineDataDiskAttachmentParameters struct {
 	ManagedDiskIDSelector *v2.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Machine to which the Data Disk should be attached. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.LinuxVirtualMachine
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta3.LinuxVirtualMachine
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`

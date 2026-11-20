@@ -13,7 +13,7 @@ spec:
     shareIdRef:
       name: examplekusto
 ---
-apiVersion: kusto.azure.upbound.io/v1beta2
+apiVersion: kusto.azure.upbound.io/v1beta3
 kind: Cluster
 metadata:
   name: exampleupbounddataset

@@ -28,7 +28,7 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta3.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MySQLServerID *string `json:"mysqlServerId,omitempty" tf:"mysql_server_id,omitempty"`
 
@@ -44,7 +44,7 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 	PasswordSecretRef v2.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta3.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
@@ -91,7 +91,7 @@ type SpringCloudAppMySQLAssociationParameters struct {
 	DatabaseNameSelector *v2.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta3.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MySQLServerID *string `json:"mysqlServerId,omitempty" tf:"mysql_server_id,omitempty"`
@@ -123,7 +123,7 @@ type SpringCloudAppMySQLAssociationParameters struct {
 	SpringCloudAppIDSelector *v2.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta3.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("administrator_login",false)
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`

@@ -1120,7 +1120,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	AlwaysReady []AlwaysReadyInitParameters `json:"alwaysReady,omitempty" tf:"always_ready,omitempty"`
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
@@ -1198,7 +1198,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	StickySettings *StickySettingsInitParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	StorageAccessKey *string `json:"storageAccessKey,omitempty" tf:"storage_access_key,omitempty"`
 
@@ -1215,7 +1215,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 
 	// The backend storage container endpoint which will be used by this Function App.
 	// The endpoint of the storage container where the function app's code is hosted.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractAccountContainerEndpoint()
 	StorageContainerEndpoint *string `json:"storageContainerEndpoint,omitempty" tf:"storage_container_endpoint,omitempty"`
 
@@ -1249,7 +1249,7 @@ type FunctionAppFlexConsumptionInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -1275,7 +1275,7 @@ type FunctionAppFlexConsumptionObservation struct {
 	AlwaysReady []AlwaysReadyObservation `json:"alwaysReady,omitempty" tf:"always_ready,omitempty"`
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
@@ -1408,7 +1408,7 @@ type FunctionAppFlexConsumptionParameters struct {
 	AlwaysReady []AlwaysReadyParameters `json:"alwaysReady,omitempty" tf:"always_ready,omitempty"`
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
@@ -1519,7 +1519,7 @@ type FunctionAppFlexConsumptionParameters struct {
 	StickySettings *StickySettingsParameters `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_access_key",true)
 	// +kubebuilder:validation:Optional
 	StorageAccessKey *string `json:"storageAccessKey,omitempty" tf:"storage_access_key,omitempty"`
@@ -1538,7 +1538,7 @@ type FunctionAppFlexConsumptionParameters struct {
 
 	// The backend storage container endpoint which will be used by this Function App.
 	// The endpoint of the storage container where the function app's code is hosted.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractAccountContainerEndpoint()
 	// +kubebuilder:validation:Optional
 	StorageContainerEndpoint *string `json:"storageContainerEndpoint,omitempty" tf:"storage_container_endpoint,omitempty"`
@@ -1576,7 +1576,7 @@ type FunctionAppFlexConsumptionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -1902,7 +1902,7 @@ type IPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -1987,7 +1987,7 @@ type IPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -2409,7 +2409,7 @@ type ScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2494,7 +2494,7 @@ type ScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`

@@ -50,7 +50,7 @@ type TrustedAccessRoleBindingObservation struct {
 type TrustedAccessRoleBindingParameters struct {
 
 	// Specifies the Kubernetes Cluster Id within which this Kubernetes Cluster Trusted Access Role Binding should exist. Changing this forces a new Kubernetes Cluster Trusted Access Role Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta1.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerservice/v1beta2.KubernetesCluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`

@@ -19,9 +19,6 @@ func (tr *BackupInstanceDisk) Hub() {}
 func (tr *BackupInstanceKubernetesCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BackupInstancePostgreSQL) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BackupInstancePostgreSQLFlexibleServer) Hub() {}
 
 // Hub marks this type as a conversion hub.

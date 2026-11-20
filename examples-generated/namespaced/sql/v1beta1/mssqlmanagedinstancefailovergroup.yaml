@@ -141,7 +141,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: PrivateDNSZoneVirtualNetworkLink
 metadata:
   annotations:
@@ -152,10 +152,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    privateDnsZoneNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
+    privateDnsZoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     virtualNetworkIdSelector:
@@ -164,7 +161,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: PrivateDNSZoneVirtualNetworkLink
 metadata:
   annotations:
@@ -175,12 +172,9 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    privateDnsZoneNameSelector:
+    privateDnsZoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: primary
     virtualNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: primary
@@ -253,7 +247,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -275,7 +269,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -305,7 +299,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -415,7 +409,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -435,7 +429,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

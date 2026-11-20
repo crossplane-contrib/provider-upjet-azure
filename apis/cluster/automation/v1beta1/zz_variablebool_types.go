@@ -49,7 +49,7 @@ type VariableBoolObservation struct {
 type VariableBoolParameters struct {
 
 	// The name of the automation account in which the Variable is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta3.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 

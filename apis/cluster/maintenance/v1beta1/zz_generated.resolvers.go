@@ -137,7 +137,7 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
+		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta3", "LinuxVirtualMachine", "LinuxVirtualMachineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

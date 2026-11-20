@@ -107,56 +107,6 @@ func (mg *SecurityCenterAssessmentPolicy) SetWriteConnectionSecretToReference(r 
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) GetDeletionPolicy() xpv2.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) GetManagementPolicies() xpv2.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) GetProviderConfigReference() *xpv2.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-// GetWriteConnectionSecretToReference of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) SetConditions(c ...xpv2.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) SetDeletionPolicy(r xpv2.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) SetManagementPolicies(r xpv2.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) SetProviderConfigReference(r *xpv2.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-// SetWriteConnectionSecretToReference of this SecurityCenterAutoProvisioning.
-func (mg *SecurityCenterAutoProvisioning) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
 // GetCondition of this SecurityCenterContact.
 func (mg *SecurityCenterContact) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

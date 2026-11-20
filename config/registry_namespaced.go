@@ -51,6 +51,7 @@ func GetProviderNamespaced(ctx context.Context, sdkProvider *schema.Provider, ge
 	)
 
 	registerTerraformConversions(pc)
+	bumpBreakingAPIVersions(pc)
 	// "azure" group contains resources that actually do not have a specific
 	// group, e.g. ResourceGroup with APIVersion "azure.upbound.io/v1beta1".
 	// We need to include the controllers for this group into the base packages

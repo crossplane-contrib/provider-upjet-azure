@@ -6,10 +6,11 @@ apiVersion: servicelinker.azure.m.upbound.io/v1beta1
 kind: SpringCloudConnection
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: springcloudconnection
   name: example
   namespace: upbound-system
 spec:
@@ -19,18 +20,19 @@ spec:
     name: example_serviceconnector
     springCloudIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: springcloudconnection
     targetResourceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: springcloudconnection
 ---
-apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
+apiVersion: cosmosdb.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudConnection. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: springcloudconnection
   name: default-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
@@ -53,19 +55,20 @@ apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
 kind: SQLContainer
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudConnection. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: springcloudconnection
   name: default
   namespace: upbound-system
 spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: springcloudconnection
     databaseNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: springcloudconnection
     partitionKeyPaths:
       - /definition
     resourceGroupNameSelector:
@@ -76,16 +79,17 @@ apiVersion: cosmosdb.azure.m.upbound.io/v1beta1
 kind: SQLDatabase
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudConnection. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: springcloudconnection
   name: default
   namespace: upbound-system
 spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: springcloudconnection
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgspringcloudconnection
@@ -95,6 +99,7 @@ apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of SpringCloudConnection. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: servicelinker/v1beta1/springcloudconnection
   labels:
     testing.upbound.io/example-name: rgspringcloudconnection
@@ -108,9 +113,10 @@ apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudApp
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: springcloudconnection
   name: default
   namespace: upbound-system
 spec:
@@ -122,30 +128,32 @@ spec:
         testing.upbound.io/example-name: rgspringcloudconnection
     serviceNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: springcloudconnection
 ---
 apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudJavaDeployment
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: springcloudconnection
   name: default
   namespace: upbound-system
 spec:
   forProvider:
     springCloudAppIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: springcloudconnection
 ---
 apiVersion: appplatform.azure.m.upbound.io/v1beta1
 kind: SpringCloudService
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows new customers to create Azure Spring Apps service instances. The service is being retired, see https://aka.ms/asaretirement."
     meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: springcloudconnection
   name: default-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:

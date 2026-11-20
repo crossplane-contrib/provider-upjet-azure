@@ -16,7 +16,7 @@ import (
 type IdentityProviderFacebookInitParameters struct {
 
 	// The Name of the API Management Service where this Facebook Identity Provider should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta3.Management
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
 	// Reference to a Management in apimanagement to populate apiManagementName.
@@ -64,7 +64,7 @@ type IdentityProviderFacebookObservation struct {
 type IdentityProviderFacebookParameters struct {
 
 	// The Name of the API Management Service where this Facebook Identity Provider should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta3.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 

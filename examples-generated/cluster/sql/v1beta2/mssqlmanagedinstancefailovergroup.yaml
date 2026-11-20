@@ -137,7 +137,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: PrivateDNSZoneVirtualNetworkLink
 metadata:
   annotations:
@@ -147,103 +147,97 @@ metadata:
   name: failover
 spec:
   forProvider:
-    privateDnsZoneNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
+    privateDnsZoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     virtualNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: failover
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: PrivateDNSZoneVirtualNetworkLink
-metadata:
-  annotations:
-    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
-  labels:
-    testing.upbound.io/example-name: primary
-  name: primary
-spec:
-  forProvider:
-    privateDnsZoneNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: primary
-    virtualNetworkIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: primary
-
----
-
-apiVersion: azure.upbound.io/v1beta1
-kind: ResourceGroup
-metadata:
-  annotations:
-    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
-  labels:
-    testing.upbound.io/example-name: failover
-  name: failover
-spec:
-  forProvider:
-    location: ${local.failover_location}
-
----
-
-apiVersion: azure.upbound.io/v1beta1
-kind: ResourceGroup
-metadata:
-  annotations:
-    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
-  labels:
-    testing.upbound.io/example-name: primary
-  name: primary
-spec:
-  forProvider:
-    location: ${local.primary_location}
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: RouteTable
-metadata:
-  annotations:
-    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
-  labels:
-    testing.upbound.io/example-name: failover
-  name: failover
-spec:
-  forProvider:
-    location: ${local.failover_location}
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: failover
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: RouteTable
-metadata:
-  annotations:
-    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
-  labels:
-    testing.upbound.io/example-name: primary
-  name: primary
-spec:
-  forProvider:
-    location: ${local.primary_location}
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: primary
 
 ---
 
 apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSZoneVirtualNetworkLink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    privateDnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: failover
+  name: failover
+spec:
+  forProvider:
+    location: ${local.failover_location}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    location: ${local.primary_location}
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: failover
+  name: failover
+spec:
+  forProvider:
+    location: ${local.failover_location}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: failover
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    location: ${local.primary_location}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   annotations:
@@ -264,7 +258,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   annotations:
@@ -293,7 +287,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   annotations:
@@ -398,7 +392,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -417,7 +411,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: VirtualNetwork
 metadata:
   annotations:

@@ -8,27 +8,27 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoredatalakegen2
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoredatalakegen2
   name: exampledatastore
   namespace: upbound-system
 spec:
   forProvider:
     storageContainerIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
     workspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoredatalakegen2
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoredatalakegen2
   name: mldsdatalakecontainer
   namespace: upbound-system
 spec:
@@ -36,7 +36,7 @@ spec:
     containerAccessType: private
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
 
 ---
 
@@ -46,36 +46,36 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoredatalakegen2
   labels:
-    testing.upbound.io/example-name: example
-  name: datastoredatalakegen2
+    testing.upbound.io/example-name: datastoredatalakegen2
+  name: mlds-dlake-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     applicationInsightsIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
     identity:
       type: SystemAssigned
     keyVaultIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
 
 ---
 
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoredatalakegen2
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoredatalakegen2
   name: datastoredatalakegen2
   namespace: upbound-system
 spec:
@@ -84,38 +84,39 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
 
 ---
 
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoredatalakegen2
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoredatalakegen2
   name: uptest-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     location: West Europe
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
     skuName: standard
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoredatalakegen2
   labels:
-    testing.upbound.io/example-name: example
-  name: mldsdlake6f3a
+    testing.upbound.io/example-name: datastoredatalakegen2
+  name: mldsdlakefac02447d5
   namespace: upbound-system
 spec:
   forProvider:
@@ -124,7 +125,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastoredatalakegen2
 
 ---
 
@@ -134,7 +135,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastoredatalakegen2
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastoredatalakegen2
   name: datastoredatalakegen2
   namespace: upbound-system
 spec:

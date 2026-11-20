@@ -13,64 +13,6 @@ import (
 	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
-type AccountProjectIdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account Project.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AccountProjectIdentityObservation struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account Project.
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The Principal ID associated with this Managed Service Identity.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// The Tenant ID associated with this Managed Service Identity.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AccountProjectIdentityParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account Project.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// References to UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
-	// +kubebuilder:validation:Optional
-	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-}
-
 type AccountProjectInitParameters struct {
 
 	// A description of the Cognitive Account Project.
@@ -80,7 +22,7 @@ type AccountProjectInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// An identity block as defined below.
-	Identity *AccountProjectIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Cognitive Account Project should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -112,7 +54,7 @@ type AccountProjectObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity *AccountProjectIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Cognitive Account Project should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -148,7 +90,7 @@ type AccountProjectParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity *AccountProjectIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Cognitive Account Project should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -158,6 +100,64 @@ type AccountProjectParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account Project.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account Project.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account Project.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v2.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v2.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account Project. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // AccountProjectSpec defines the desired state of AccountProject

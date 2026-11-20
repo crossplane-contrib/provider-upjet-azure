@@ -149,7 +149,7 @@ spec:
                     type: object
                   diagnosticEnabled:
                     description: Whether the diagnostic log collection is enabled.
-                      Possible values are true and false. Defaults to false.
+                      Defaults to false.
                     type: boolean
                   diagnosticStorageAccount:
                     description: A diagnostic_storage_account block as defined below.
@@ -166,6 +166,14 @@ spec:
                         - key
                         - name
                         type: object
+                      connectionStringWo:
+                        description: Connection String of the Diagnostic Storage Account.
+                        type: string
+                      connectionStringWoVersion:
+                        description: An integer value used to trigger an update for
+                          connection_string_wo. Possible values are integers greater
+                          than 1.
+                        type: number
                       id:
                         description: Resource ID of the Diagnostic Storage Account.
                         type: string
@@ -360,7 +368,7 @@ spec:
                 properties:
                   diagnosticEnabled:
                     description: Whether the diagnostic log collection is enabled.
-                      Possible values are true and false. Defaults to false.
+                      Defaults to false.
                     type: boolean
                   diagnosticStorageAccount:
                     description: A diagnostic_storage_account block as defined below.
@@ -377,6 +385,14 @@ spec:
                         - key
                         - name
                         type: object
+                      connectionStringWo:
+                        description: Connection String of the Diagnostic Storage Account.
+                        type: string
+                      connectionStringWoVersion:
+                        description: An integer value used to trigger an update for
+                          connection_string_wo. Possible values are integers greater
+                          than 1.
+                        type: number
                       id:
                         description: Resource ID of the Diagnostic Storage Account.
                         type: string
@@ -462,8 +478,6 @@ spec:
                                 type: string
                             type: object
                         type: object
-                    required:
-                    - connectionStringSecretRef
                     type: object
                   iothubId:
                     description: Specifies the ID of the IoT Hub associated with the
@@ -629,11 +643,19 @@ spec:
                     type: string
                   diagnosticEnabled:
                     description: Whether the diagnostic log collection is enabled.
-                      Possible values are true and false. Defaults to false.
+                      Defaults to false.
                     type: boolean
                   diagnosticStorageAccount:
                     description: A diagnostic_storage_account block as defined below.
                     properties:
+                      connectionStringWo:
+                        description: Connection String of the Diagnostic Storage Account.
+                        type: string
+                      connectionStringWoVersion:
+                        description: An integer value used to trigger an update for
+                          connection_string_wo. Possible values are integers greater
+                          than 1.
+                        type: number
                       id:
                         description: Resource ID of the Diagnostic Storage Account.
                         type: string

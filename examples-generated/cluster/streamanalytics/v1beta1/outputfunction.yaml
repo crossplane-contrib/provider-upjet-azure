@@ -29,58 +29,6 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta2
-kind: AppServicePlan
-metadata:
-  annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    kind: FunctionApp
-    location: West Europe
-    reserved: true
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    sku:
-      size: Y1
-      tier: Dynamic
-
----
-
-apiVersion: web.azure.upbound.io/v1beta2
-kind: FunctionApp
-metadata:
-  annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    appServicePlanIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    location: West Europe
-    name: examplefunctionapp
-    osType: linux
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    storageAccountAccessKeySecretRef:
-      key: attribute.primary_access_key
-      name: example-storage-account
-      namespace: upbound-system
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    version: ~3
-
----
-
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
@@ -95,7 +43,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:

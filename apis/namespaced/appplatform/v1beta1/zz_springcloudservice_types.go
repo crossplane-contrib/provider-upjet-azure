@@ -340,7 +340,7 @@ type NetworkInitParameters struct {
 	AppNetworkResourceGroup *string `json:"appNetworkResourceGroup,omitempty" tf:"app_network_resource_group,omitempty"`
 
 	// Specifies the ID of the Subnet which should host the Spring Boot Applications deployed in this Spring Cloud Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	AppSubnetID *string `json:"appSubnetId,omitempty" tf:"app_subnet_id,omitempty"`
 
@@ -365,7 +365,7 @@ type NetworkInitParameters struct {
 	ServiceRuntimeNetworkResourceGroup *string `json:"serviceRuntimeNetworkResourceGroup,omitempty" tf:"service_runtime_network_resource_group,omitempty"`
 
 	// Specifies the ID of the Subnet where the Service Runtime components of the Spring Cloud Service will exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ServiceRuntimeSubnetID *string `json:"serviceRuntimeSubnetId,omitempty" tf:"service_runtime_subnet_id,omitempty"`
 
@@ -409,7 +409,7 @@ type NetworkParameters struct {
 	AppNetworkResourceGroup *string `json:"appNetworkResourceGroup,omitempty" tf:"app_network_resource_group,omitempty"`
 
 	// Specifies the ID of the Subnet which should host the Spring Boot Applications deployed in this Spring Cloud Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppSubnetID *string `json:"appSubnetId,omitempty" tf:"app_subnet_id,omitempty"`
@@ -439,7 +439,7 @@ type NetworkParameters struct {
 	ServiceRuntimeNetworkResourceGroup *string `json:"serviceRuntimeNetworkResourceGroup,omitempty" tf:"service_runtime_network_resource_group,omitempty"`
 
 	// Specifies the ID of the Subnet where the Service Runtime components of the Spring Cloud Service will exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceRuntimeSubnetID *string `json:"serviceRuntimeSubnetId,omitempty" tf:"service_runtime_subnet_id,omitempty"`
@@ -739,7 +739,7 @@ type SpringCloudServiceParameters struct {
 type TraceInitParameters struct {
 
 	// The connection string used for Application Insights.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("connection_string",true)
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
@@ -767,7 +767,7 @@ type TraceObservation struct {
 type TraceParameters struct {
 
 	// The connection string used for Application Insights.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("connection_string",true)
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`

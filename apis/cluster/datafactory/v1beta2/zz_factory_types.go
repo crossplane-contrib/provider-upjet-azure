@@ -162,7 +162,7 @@ type GithubConfigurationInitParameters struct {
 	// Specifies the branch of the repository to get code from.
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
 
-	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
+	// Specifies the GitHub Enterprise host name. For example: https://github.<mydomain>.com. Use https://github.com for open source repositories.
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
 
 	// Is automated publishing enabled? Defaults to true.
@@ -183,7 +183,7 @@ type GithubConfigurationObservation struct {
 	// Specifies the branch of the repository to get code from.
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
 
-	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
+	// Specifies the GitHub Enterprise host name. For example: https://github.<mydomain>.com. Use https://github.com for open source repositories.
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
 
 	// Is automated publishing enabled? Defaults to true.
@@ -206,7 +206,7 @@ type GithubConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BranchName *string `json:"branchName" tf:"branch_name,omitempty"`
 
-	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
+	// Specifies the GitHub Enterprise host name. For example: https://github.<mydomain>.com. Use https://github.com for open source repositories.
 	// +kubebuilder:validation:Optional
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
 

@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsanalyticsitem
+  labels:
+    testing.upbound.io/example-name: example
+  name: aiaiexample
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -34,12 +34,6 @@ func (tr *IntegrationRuntimeAzureSSIS) Hub() {}
 func (tr *LinkedCustomService) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureBlobStorage) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureDatabricks) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinkedServiceAzureFileStorage) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -62,6 +56,9 @@ func (tr *LinkedServiceSQLServer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LinkedServiceSynapse) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Pipeline) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TriggerSchedule) Hub() {}
