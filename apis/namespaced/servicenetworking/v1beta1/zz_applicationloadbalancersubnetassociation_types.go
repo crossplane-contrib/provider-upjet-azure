@@ -16,7 +16,7 @@ import (
 type ApplicationLoadBalancerSubnetAssociationInitParameters struct {
 
 	// The ID of the subnet which the Application Gateway for Containers associated to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -52,7 +52,7 @@ type ApplicationLoadBalancerSubnetAssociationObservation struct {
 type ApplicationLoadBalancerSubnetAssociationParameters struct {
 
 	// The ID of the Application Gateway for Containers. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/servicenetworking/v1beta1.ApplicationLoadBalancer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/servicenetworking/v1beta1.ApplicationLoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationLoadBalancerID *string `json:"applicationLoadBalancerId,omitempty" tf:"application_load_balancer_id,omitempty"`
@@ -66,7 +66,7 @@ type ApplicationLoadBalancerSubnetAssociationParameters struct {
 	ApplicationLoadBalancerIDSelector *v2.NamespacedSelector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet which the Application Gateway for Containers associated to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

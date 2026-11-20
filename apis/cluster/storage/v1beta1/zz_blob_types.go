@@ -50,7 +50,7 @@ type BlobInitParameters struct {
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -62,7 +62,7 @@ type BlobInitParameters struct {
 	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The ID of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
@@ -75,7 +75,7 @@ type BlobInitParameters struct {
 	StorageContainerIDSelector *v2.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerName.
@@ -193,7 +193,7 @@ type BlobParameters struct {
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -206,7 +206,7 @@ type BlobParameters struct {
 	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The ID of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
@@ -220,7 +220,7 @@ type BlobParameters struct {
 	StorageContainerIDSelector *v2.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 

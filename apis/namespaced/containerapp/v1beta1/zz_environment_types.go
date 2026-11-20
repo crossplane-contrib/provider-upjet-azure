@@ -62,7 +62,7 @@ type EnvironmentInitParameters struct {
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	InfrastructureResourceGroupName *string `json:"infrastructureResourceGroupName,omitempty" tf:"infrastructure_resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate infrastructureResourceGroupName.
@@ -75,8 +75,8 @@ type EnvironmentInitParameters struct {
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	InfrastructureSubnetID *string `json:"infrastructureSubnetId,omitempty" tf:"infrastructure_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate infrastructureSubnetId.
@@ -96,7 +96,7 @@ type EnvironmentInitParameters struct {
 
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
@@ -221,7 +221,7 @@ type EnvironmentParameters struct {
 
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	InfrastructureResourceGroupName *string `json:"infrastructureResourceGroupName,omitempty" tf:"infrastructure_resource_group_name,omitempty"`
 
@@ -235,8 +235,8 @@ type EnvironmentParameters struct {
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InfrastructureSubnetID *string `json:"infrastructureSubnetId,omitempty" tf:"infrastructure_subnet_id,omitempty"`
 
@@ -259,7 +259,7 @@ type EnvironmentParameters struct {
 
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
@@ -288,7 +288,7 @@ type EnvironmentParameters struct {
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the resource group in which the Container App Environment is to be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

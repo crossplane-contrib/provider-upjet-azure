@@ -127,7 +127,7 @@ type SnapshotInitParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies a reference to an existing snapshot, when create_option is Copy or CopyStart. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/compute/v1beta2.Snapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
@@ -140,7 +140,7 @@ type SnapshotInitParameters struct {
 	SourceResourceIDSelector *v2.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the URI to a Managed or Unmanaged Disk. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/compute/v1beta2.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
@@ -244,7 +244,7 @@ type SnapshotParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Snapshot. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -257,7 +257,7 @@ type SnapshotParameters struct {
 	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies a reference to an existing snapshot, when create_option is Copy or CopyStart. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/compute/v1beta2.Snapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
@@ -271,7 +271,7 @@ type SnapshotParameters struct {
 	SourceResourceIDSelector *v2.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the URI to a Managed or Unmanaged Disk. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/compute/v1beta2.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`

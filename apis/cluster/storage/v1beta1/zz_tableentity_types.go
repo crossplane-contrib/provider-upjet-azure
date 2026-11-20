@@ -26,7 +26,7 @@ type TableEntityInitParameters struct {
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
 	// The ID of the storage table in which this entity will be placed. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
 
@@ -74,7 +74,7 @@ type TableEntityParameters struct {
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
 	// The ID of the storage table in which this entity will be placed. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Table
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`

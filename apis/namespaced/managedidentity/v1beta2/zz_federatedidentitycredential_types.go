@@ -58,8 +58,8 @@ type FederatedIdentityCredentialParameters struct {
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// Specifies the ID of the User Assigned Identity for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 

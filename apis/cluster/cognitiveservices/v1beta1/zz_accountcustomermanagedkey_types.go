@@ -16,7 +16,7 @@ import (
 type AccountCustomerManagedKeyInitParameters struct {
 
 	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
@@ -29,8 +29,8 @@ type AccountCustomerManagedKeyInitParameters struct {
 	IdentityClientIDSelector *v2.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
@@ -60,8 +60,8 @@ type AccountCustomerManagedKeyObservation struct {
 type AccountCustomerManagedKeyParameters struct {
 
 	// The ID of the Cognitive Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/cognitiveservices/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cognitiveservices/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
 
@@ -74,7 +74,7 @@ type AccountCustomerManagedKeyParameters struct {
 	CognitiveAccountIDSelector *v2.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
 
 	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
@@ -88,8 +88,8 @@ type AccountCustomerManagedKeyParameters struct {
 	IdentityClientIDSelector *v2.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 

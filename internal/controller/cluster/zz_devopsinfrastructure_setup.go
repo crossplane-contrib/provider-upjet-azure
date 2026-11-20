@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	manageddevopspool "github.com/upbound/provider-azure/v3/internal/controller/cluster/devopsinfrastructure/manageddevopspool"
+	manageddevopspool "github.com/upbound/provider-azure/v2/internal/controller/cluster/devopsinfrastructure/manageddevopspool"
 )
 
 // Setup_devopsinfrastructure creates all controllers with the supplied logger and adds them to

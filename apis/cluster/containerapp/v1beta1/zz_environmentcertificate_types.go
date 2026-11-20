@@ -16,7 +16,7 @@ import (
 type CertificateKeyVaultInitParameters struct {
 
 	// The managed identity to authenticate with Azure Key Vault. Possible values are the resource ID of user-assigned identity, and System for system-assigned identity. Defaults to System. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -29,7 +29,7 @@ type CertificateKeyVaultInitParameters struct {
 	IdentitySelector *v2.Selector `json:"identitySelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Secret containing the certificate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -54,7 +54,7 @@ type CertificateKeyVaultObservation struct {
 type CertificateKeyVaultParameters struct {
 
 	// The managed identity to authenticate with Azure Key Vault. Possible values are the resource ID of user-assigned identity, and System for system-assigned identity. Defaults to System. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -68,7 +68,7 @@ type CertificateKeyVaultParameters struct {
 	IdentitySelector *v2.Selector `json:"identitySelector,omitempty" tf:"-"`
 
 	// The ID of the Key Vault Secret containing the certificate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("versionless_secret_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
@@ -152,7 +152,7 @@ type EnvironmentCertificateParameters struct {
 	CertificatePasswordSecretRef *v2.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Container App Managed Environment ID to configure this Certificate on. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`

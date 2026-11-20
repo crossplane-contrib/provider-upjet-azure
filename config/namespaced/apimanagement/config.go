@@ -11,8 +11,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
-	"github.com/upbound/provider-azure/v3/config/namespaced/common"
+	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
 )
 
 // Configure configures apimanagement group

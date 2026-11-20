@@ -16,8 +16,8 @@ import (
 type BackupInstanceDataLakeStorageInitParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/dataprotection/v1beta1.BackupPolicyDataLakeStorage
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta1.BackupPolicyDataLakeStorage
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	BackupPolicyDataLakeStorageID *string `json:"backupPolicyDataLakeStorageId,omitempty" tf:"backup_policy_data_lake_storage_id,omitempty"`
 
 	// Reference to a BackupPolicyDataLakeStorage in dataprotection to populate backupPolicyDataLakeStorageId.
@@ -32,8 +32,8 @@ type BackupInstanceDataLakeStorageInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source Storage Account. The Storage Account must have Hierarchical Namespace enabled. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountId.
@@ -45,7 +45,7 @@ type BackupInstanceDataLakeStorageInitParameters struct {
 	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The names of the storage containers of the source Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +listType=set
 	StorageContainerNames []*string `json:"storageContainerNames,omitempty" tf:"storage_container_names,omitempty"`
 
@@ -86,8 +86,8 @@ type BackupInstanceDataLakeStorageObservation struct {
 type BackupInstanceDataLakeStorageParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/dataprotection/v1beta1.BackupPolicyDataLakeStorage
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta1.BackupPolicyDataLakeStorage
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyDataLakeStorageID *string `json:"backupPolicyDataLakeStorageId,omitempty" tf:"backup_policy_data_lake_storage_id,omitempty"`
 
@@ -100,8 +100,8 @@ type BackupInstanceDataLakeStorageParameters struct {
 	BackupPolicyDataLakeStorageIDSelector *v2.Selector `json:"backupPolicyDataLakeStorageIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Backup Vault within which the Backup Instance Data Lake Storage should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/dataprotection/v1beta2.BackupVault
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dataprotection/v1beta2.BackupVault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataProtectionBackupVaultID *string `json:"dataProtectionBackupVaultId,omitempty" tf:"data_protection_backup_vault_id,omitempty"`
 
@@ -118,8 +118,8 @@ type BackupInstanceDataLakeStorageParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source Storage Account. The Storage Account must have Hierarchical Namespace enabled. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -132,7 +132,7 @@ type BackupInstanceDataLakeStorageParameters struct {
 	StorageAccountIDSelector *v2.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The names of the storage containers of the source Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	StorageContainerNames []*string `json:"storageContainerNames,omitempty" tf:"storage_container_names,omitempty"`

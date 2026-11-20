@@ -22,9 +22,9 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/reconciler/reconciliationpolicy"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta2 "github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta2"
-	"github.com/upbound/provider-azure/v3/internal/clients"
-	features "github.com/upbound/provider-azure/v3/internal/features"
+	v1beta2 "github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2"
+	"github.com/upbound/provider-azure/v2/internal/clients"
+	features "github.com/upbound/provider-azure/v2/internal/features"
 )
 
 // SetupWebhookWithManager registers the conversion webhook for Manager.

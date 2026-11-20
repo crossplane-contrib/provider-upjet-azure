@@ -80,8 +80,8 @@ type ContainerParameters struct {
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The ID of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 

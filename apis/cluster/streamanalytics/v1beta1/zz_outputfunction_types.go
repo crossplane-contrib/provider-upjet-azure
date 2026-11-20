@@ -25,7 +25,7 @@ type OutputFunctionInitParameters struct {
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/web/v1beta2.LinuxFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.LinuxFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
 
@@ -80,7 +80,7 @@ type OutputFunctionParameters struct {
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/web/v1beta2.LinuxFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.LinuxFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
@@ -98,7 +98,7 @@ type OutputFunctionParameters struct {
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Output should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -111,7 +111,7 @@ type OutputFunctionParameters struct {
 	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/streamanalytics/v1beta2.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 

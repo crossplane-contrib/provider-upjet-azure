@@ -31,8 +31,8 @@ type ManagedRedisAccessPolicyAssignmentObservation struct {
 type ManagedRedisAccessPolicyAssignmentParameters struct {
 
 	// The ID of the Managed Redis instance. Changing this forces a new Access Policy Assignment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/cache/v1beta1.ManagedRedis
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cache/v1beta1.ManagedRedis
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedRedisID *string `json:"managedRedisId,omitempty" tf:"managed_redis_id,omitempty"`
 

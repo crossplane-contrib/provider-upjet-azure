@@ -51,8 +51,8 @@ type PrivateDNSMXRecordObservation struct {
 type PrivateDNSMXRecordParameters struct {
 
 	// Specifies the ID of the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta2.PrivateDNSZone
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.PrivateDNSZone
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 

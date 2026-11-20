@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	autonomousdatabase "github.com/upbound/provider-azure/v3/internal/controller/cluster/oracle/autonomousdatabase"
-	autonomousdatabasebackup "github.com/upbound/provider-azure/v3/internal/controller/cluster/oracle/autonomousdatabasebackup"
-	autonomousdatabaseclonefrombackup "github.com/upbound/provider-azure/v3/internal/controller/cluster/oracle/autonomousdatabaseclonefrombackup"
-	autonomousdatabaseclonefromdatabase "github.com/upbound/provider-azure/v3/internal/controller/cluster/oracle/autonomousdatabaseclonefromdatabase"
+	autonomousdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabase"
+	autonomousdatabasebackup "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabasebackup"
+	autonomousdatabaseclonefrombackup "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabaseclonefrombackup"
+	autonomousdatabaseclonefromdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/oracle/autonomousdatabaseclonefromdatabase"
 )
 
 // Setup_oracle creates all controllers with the supplied logger and adds them to

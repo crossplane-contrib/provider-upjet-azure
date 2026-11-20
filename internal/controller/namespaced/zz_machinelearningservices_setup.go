@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	aifoundry "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/aifoundry"
-	aifoundryproject "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/aifoundryproject"
-	computecluster "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/computecluster"
-	computeinstance "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/computeinstance"
-	datastoreblobstorage "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/datastoreblobstorage"
-	datastoredatalakegen2 "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/datastoredatalakegen2"
-	datastorefileshare "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/datastorefileshare"
-	inferencecluster "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/inferencecluster"
-	synapsespark "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/synapsespark"
-	workspace "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/workspace"
-	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
-	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
-	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/v3/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
+	aifoundry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/aifoundry"
+	aifoundryproject "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/aifoundryproject"
+	computecluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/computecluster"
+	computeinstance "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/computeinstance"
+	datastoreblobstorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/datastoreblobstorage"
+	datastoredatalakegen2 "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/datastoredatalakegen2"
+	datastorefileshare "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/datastorefileshare"
+	inferencecluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/inferencecluster"
+	synapsespark "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/synapsespark"
+	workspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspace"
+	workspaceoutboundrulefqdn "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspaceoutboundrulefqdn"
+	workspaceoutboundruleprivateendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleprivateendpoint"
+	workspaceoutboundruleservicetag "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/workspaceoutboundruleservicetag"
 )
 
 // Setup_machinelearningservices creates all controllers with the supplied logger and adds them to

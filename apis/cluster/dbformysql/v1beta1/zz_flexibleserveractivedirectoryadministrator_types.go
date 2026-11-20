@@ -16,7 +16,7 @@ import (
 type FlexibleServerActiveDirectoryAdministratorInitParameters struct {
 
 	// The resource ID of the identity used for AAD Authentication.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
@@ -62,7 +62,7 @@ type FlexibleServerActiveDirectoryAdministratorObservation struct {
 type FlexibleServerActiveDirectoryAdministratorParameters struct {
 
 	// The resource ID of the identity used for AAD Authentication.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
@@ -84,8 +84,8 @@ type FlexibleServerActiveDirectoryAdministratorParameters struct {
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The resource ID of the MySQL Flexible Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/dbformysql/v1beta3.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbformysql/v1beta3.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 

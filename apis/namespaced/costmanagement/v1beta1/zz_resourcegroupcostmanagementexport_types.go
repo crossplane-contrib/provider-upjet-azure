@@ -45,7 +45,7 @@ type ExportDataOptionsParameters struct {
 type ExportDataStorageLocationInitParameters struct {
 
 	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
@@ -73,7 +73,7 @@ type ExportDataStorageLocationObservation struct {
 type ExportDataStorageLocationParameters struct {
 
 	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
@@ -176,7 +176,7 @@ type ResourceGroupCostManagementExportParameters struct {
 	RecurrenceType *string `json:"recurrenceType,omitempty" tf:"recurrence_type,omitempty"`
 
 	// The id of the resource group on which to create an export. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`

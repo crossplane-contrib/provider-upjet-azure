@@ -203,7 +203,7 @@ formatters:
       # put imports beginning with prefix after 3rd-party packages;
       # it's a comma-separated list of prefixes
       local-prefixes:
-        - github.com/upbound/provider-azure/v3
+        - github.com/upbound/provider-azure/v2
 
   exclusions:
     paths:

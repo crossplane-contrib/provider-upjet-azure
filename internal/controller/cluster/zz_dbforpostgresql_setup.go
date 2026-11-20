@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	flexibleserver "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbforpostgresql/flexibleserver"
-	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbforpostgresql/flexibleserveractivedirectoryadministrator"
-	flexibleserverbackup "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbforpostgresql/flexibleserverbackup"
-	flexibleserverconfiguration "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbforpostgresql/flexibleserverconfiguration"
-	flexibleserverdatabase "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbforpostgresql/flexibleserverdatabase"
-	flexibleserverfirewallrule "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbforpostgresql/flexibleserverfirewallrule"
-	flexibleservervirtualendpoint "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbforpostgresql/flexibleservervirtualendpoint"
+	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserverbackup "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverbackup"
+	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverconfiguration"
+	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverdatabase"
+	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleservervirtualendpoint "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbforpostgresql/flexibleservervirtualendpoint"
 )
 
 // Setup_dbforpostgresql creates all controllers with the supplied logger and adds them to

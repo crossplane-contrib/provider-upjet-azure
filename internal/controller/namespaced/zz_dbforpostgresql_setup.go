@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	flexibleserver "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dbforpostgresql/flexibleserver"
-	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dbforpostgresql/flexibleserveractivedirectoryadministrator"
-	flexibleserverbackup "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dbforpostgresql/flexibleserverbackup"
-	flexibleserverconfiguration "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dbforpostgresql/flexibleserverconfiguration"
-	flexibleserverdatabase "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dbforpostgresql/flexibleserverdatabase"
-	flexibleserverfirewallrule "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dbforpostgresql/flexibleserverfirewallrule"
-	flexibleservervirtualendpoint "github.com/upbound/provider-azure/v3/internal/controller/namespaced/dbforpostgresql/flexibleservervirtualendpoint"
+	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserverbackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverbackup"
+	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverconfiguration"
+	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverdatabase"
+	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleservervirtualendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleservervirtualendpoint"
 )
 
 // Setup_dbforpostgresql creates all controllers with the supplied logger and adds them to

@@ -40,7 +40,7 @@ type AutonomousDatabaseBackupObservation struct {
 type AutonomousDatabaseBackupParameters struct {
 
 	// The azureId of the Autonomous Database that this backup is for. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/oracle/v1beta1.AutonomousDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/oracle/v1beta1.AutonomousDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AutonomousDatabaseID *string `json:"autonomousDatabaseId,omitempty" tf:"autonomous_database_id,omitempty"`

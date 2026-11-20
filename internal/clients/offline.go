@@ -22,7 +22,7 @@ import (
 	tfazureclient "github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	namespacedv1beta1 "github.com/upbound/provider-azure/v3/apis/namespaced/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/v1beta1"
 )
 
 const (

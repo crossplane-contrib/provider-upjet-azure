@@ -40,7 +40,7 @@ type OutputBlobInitParameters struct {
 	StorageAccountKeySecretRef *v2.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -52,7 +52,7 @@ type OutputBlobInitParameters struct {
 	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Container within the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerName.
@@ -136,7 +136,7 @@ type OutputBlobParameters struct {
 	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -157,7 +157,7 @@ type OutputBlobParameters struct {
 	StorageAccountKeySecretRef *v2.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -170,7 +170,7 @@ type OutputBlobParameters struct {
 	StorageAccountNameSelector *v2.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the Container within the Storage Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
@@ -183,7 +183,7 @@ type OutputBlobParameters struct {
 	StorageContainerNameSelector *v2.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/streamanalytics/v1beta2.Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 

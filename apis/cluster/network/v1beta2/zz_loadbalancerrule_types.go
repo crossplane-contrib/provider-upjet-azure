@@ -129,8 +129,8 @@ type LoadBalancerRuleParameters struct {
 	LoadDistribution *string `json:"loadDistribution,omitempty" tf:"load_distribution,omitempty"`
 
 	// The ID of the Load Balancer in which to create the Rule. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta2.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.LoadBalancer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 

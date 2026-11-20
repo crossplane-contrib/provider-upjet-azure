@@ -74,7 +74,7 @@ type AutonomousDatabaseCloneFromBackupInitParameters struct {
 	NationalCharacterSet *string `json:"nationalCharacterSet,omitempty" tf:"national_character_set,omitempty"`
 
 	// The ID of the source Autonomous Database to clone from. Changing this forces a new Autonomous Database Clone to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/oracle/v1beta1.AutonomousDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/oracle/v1beta1.AutonomousDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceAutonomousDatabaseID *string `json:"sourceAutonomousDatabaseId,omitempty" tf:"source_autonomous_database_id,omitempty"`
 
@@ -87,8 +87,8 @@ type AutonomousDatabaseCloneFromBackupInitParameters struct {
 	SourceAutonomousDatabaseIDSelector *v2.NamespacedSelector `json:"sourceAutonomousDatabaseIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet the resource is associated with. Changing this forces a new Autonomous Database Clone to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -264,7 +264,7 @@ type AutonomousDatabaseCloneFromBackupParameters struct {
 	NationalCharacterSet *string `json:"nationalCharacterSet,omitempty" tf:"national_character_set,omitempty"`
 
 	// The name of the Resource Group where the autonomous database clone from backup should exist. Changing this forces a new Autonomous Database Clone to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -277,7 +277,7 @@ type AutonomousDatabaseCloneFromBackupParameters struct {
 	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the source Autonomous Database to clone from. Changing this forces a new Autonomous Database Clone to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/oracle/v1beta1.AutonomousDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/oracle/v1beta1.AutonomousDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceAutonomousDatabaseID *string `json:"sourceAutonomousDatabaseId,omitempty" tf:"source_autonomous_database_id,omitempty"`
@@ -291,8 +291,8 @@ type AutonomousDatabaseCloneFromBackupParameters struct {
 	SourceAutonomousDatabaseIDSelector *v2.NamespacedSelector `json:"sourceAutonomousDatabaseIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet the resource is associated with. Changing this forces a new Autonomous Database Clone to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

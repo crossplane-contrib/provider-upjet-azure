@@ -51,7 +51,7 @@ type TrafficAnalyticsInitParameters struct {
 	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
 
 	// The resource GUID of the attached workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("workspace_id",true)
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -67,7 +67,7 @@ type TrafficAnalyticsInitParameters struct {
 	WorkspaceRegion *string `json:"workspaceRegion,omitempty" tf:"workspace_region,omitempty"`
 
 	// The resource ID of the attached workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 
@@ -109,7 +109,7 @@ type TrafficAnalyticsParameters struct {
 	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
 
 	// The resource GUID of the attached workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("workspace_id",true)
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
@@ -127,7 +127,7 @@ type TrafficAnalyticsParameters struct {
 	WorkspaceRegion *string `json:"workspaceRegion" tf:"workspace_region,omitempty"`
 
 	// The resource ID of the attached workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
@@ -153,8 +153,8 @@ type WatcherFlowLogInitParameters struct {
 	RetentionPolicy *RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the Storage Account where flow logs are stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountId.
@@ -170,8 +170,8 @@ type WatcherFlowLogInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Resource for which to enable flow logs for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
 	// Reference to a VirtualNetwork in network to populate targetResourceId.
@@ -237,7 +237,7 @@ type WatcherFlowLogParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Network Watcher. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.Watcher
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Watcher
 	// +kubebuilder:validation:Optional
 	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
 
@@ -250,7 +250,7 @@ type WatcherFlowLogParameters struct {
 	NetworkWatcherNameSelector *v2.NamespacedSelector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -267,8 +267,8 @@ type WatcherFlowLogParameters struct {
 	RetentionPolicy *RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the Storage Account where flow logs are stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -286,8 +286,8 @@ type WatcherFlowLogParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Resource for which to enable flow logs for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 

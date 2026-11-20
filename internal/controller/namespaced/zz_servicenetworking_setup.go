@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	applicationloadbalancer "github.com/upbound/provider-azure/v3/internal/controller/namespaced/servicenetworking/applicationloadbalancer"
-	applicationloadbalancerfrontend "github.com/upbound/provider-azure/v3/internal/controller/namespaced/servicenetworking/applicationloadbalancerfrontend"
-	applicationloadbalancersecuritypolicy "github.com/upbound/provider-azure/v3/internal/controller/namespaced/servicenetworking/applicationloadbalancersecuritypolicy"
-	applicationloadbalancersubnetassociation "github.com/upbound/provider-azure/v3/internal/controller/namespaced/servicenetworking/applicationloadbalancersubnetassociation"
+	applicationloadbalancer "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancer"
+	applicationloadbalancerfrontend "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancerfrontend"
+	applicationloadbalancersecuritypolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancersecuritypolicy"
+	applicationloadbalancersubnetassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancersubnetassociation"
 )
 
 // Setup_servicenetworking creates all controllers with the supplied logger and adds them to

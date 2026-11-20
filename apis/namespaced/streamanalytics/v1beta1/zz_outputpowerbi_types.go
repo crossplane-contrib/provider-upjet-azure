@@ -76,8 +76,8 @@ type OutputPowerBIParameters struct {
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// The ID of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/streamanalytics/v1beta1.Job
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
 

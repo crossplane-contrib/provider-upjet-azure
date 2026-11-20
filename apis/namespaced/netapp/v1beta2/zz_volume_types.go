@@ -131,8 +131,8 @@ type DataProtectionReplicationInitParameters struct {
 	RemoteVolumeLocation *string `json:"remoteVolumeLocation,omitempty" tf:"remote_volume_location,omitempty"`
 
 	// Resource ID of the primary volume.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta2.Volume
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta2.Volume
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	RemoteVolumeResourceID *string `json:"remoteVolumeResourceId,omitempty" tf:"remote_volume_resource_id,omitempty"`
 
 	// Reference to a Volume in netapp to populate remoteVolumeResourceId.
@@ -173,8 +173,8 @@ type DataProtectionReplicationParameters struct {
 	RemoteVolumeLocation *string `json:"remoteVolumeLocation" tf:"remote_volume_location,omitempty"`
 
 	// Resource ID of the primary volume.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta2.Volume
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta2.Volume
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RemoteVolumeResourceID *string `json:"remoteVolumeResourceId,omitempty" tf:"remote_volume_resource_id,omitempty"`
 
@@ -194,8 +194,8 @@ type DataProtectionReplicationParameters struct {
 type DataProtectionSnapshotPolicyInitParameters struct {
 
 	// Resource ID of the snapshot policy to apply to the volume.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta1.SnapshotPolicy
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.SnapshotPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SnapshotPolicyID *string `json:"snapshotPolicyId,omitempty" tf:"snapshot_policy_id,omitempty"`
 
 	// Reference to a SnapshotPolicy in netapp to populate snapshotPolicyId.
@@ -216,8 +216,8 @@ type DataProtectionSnapshotPolicyObservation struct {
 type DataProtectionSnapshotPolicyParameters struct {
 
 	// Resource ID of the snapshot policy to apply to the volume.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta1.SnapshotPolicy
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.SnapshotPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SnapshotPolicyID *string `json:"snapshotPolicyId,omitempty" tf:"snapshot_policy_id,omitempty"`
 
@@ -394,8 +394,8 @@ type VolumeInitParameters struct {
 	CoolAccess *CoolAccessInitParameters `json:"coolAccess,omitempty" tf:"cool_access,omitempty"`
 
 	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta1.Snapshot
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Snapshot
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	CreateFromSnapshotResourceID *string `json:"createFromSnapshotResourceId,omitempty" tf:"create_from_snapshot_resource_id,omitempty"`
 
 	// Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
@@ -474,7 +474,7 @@ type VolumeInitParameters struct {
 	StorageQuotaInGb *float64 `json:"storageQuotaInGb,omitempty" tf:"storage_quota_in_gb,omitempty"`
 
 	// The ID of the Subnet the NetApp Volume resides in, which must have the Microsoft.NetApp/volumes delegation. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -632,7 +632,7 @@ type VolumeParameters struct {
 	AcceptGrowCapacityPoolForShortTermCloneSplit *string `json:"acceptGrowCapacityPoolForShortTermCloneSplit,omitempty" tf:"accept_grow_capacity_pool_for_short_term_clone_split,omitempty"`
 
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -658,8 +658,8 @@ type VolumeParameters struct {
 	CoolAccess *CoolAccessParameters `json:"coolAccess,omitempty" tf:"cool_access,omitempty"`
 
 	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name and account_name. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta1.Snapshot
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Snapshot
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceID *string `json:"createFromSnapshotResourceId,omitempty" tf:"create_from_snapshot_resource_id,omitempty"`
 
@@ -718,7 +718,7 @@ type VolumeParameters struct {
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
 	// The name of the NetApp pool in which the NetApp Volume should be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/netapp/v1beta1.Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Pool
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
@@ -736,7 +736,7 @@ type VolumeParameters struct {
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// The name of the resource group where the NetApp Volume should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -785,7 +785,7 @@ type VolumeParameters struct {
 	StorageQuotaInGb *float64 `json:"storageQuotaInGb,omitempty" tf:"storage_quota_in_gb,omitempty"`
 
 	// The ID of the Subnet the NetApp Volume resides in, which must have the Microsoft.NetApp/volumes delegation. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

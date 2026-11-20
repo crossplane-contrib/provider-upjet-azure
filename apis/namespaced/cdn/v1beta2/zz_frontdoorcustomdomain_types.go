@@ -80,7 +80,7 @@ type CustomCiphersParameters struct {
 type FrontdoorCustomDomainInitParameters struct {
 
 	// The ID of the Azure DNS Zone which should be used for this Front Door Custom Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.DNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.DNSZone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
 
@@ -93,7 +93,7 @@ type FrontdoorCustomDomainInitParameters struct {
 	DNSZoneIDSelector *v2.NamespacedSelector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// The host name of the domain. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("host_name",false)
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -136,7 +136,7 @@ type FrontdoorCustomDomainObservation struct {
 type FrontdoorCustomDomainParameters struct {
 
 	// The ID of the Front Door Profile. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta1.FrontdoorProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`
@@ -150,7 +150,7 @@ type FrontdoorCustomDomainParameters struct {
 	CdnFrontdoorProfileIDSelector *v2.NamespacedSelector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure DNS Zone which should be used for this Front Door Custom Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.DNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.DNSZone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
@@ -164,7 +164,7 @@ type FrontdoorCustomDomainParameters struct {
 	DNSZoneIDSelector *v2.NamespacedSelector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// The host name of the domain. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOrigin
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("host_name",false)
 	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`

@@ -16,8 +16,8 @@ import (
 type AIFoundryProjectIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Project.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -52,8 +52,8 @@ type AIFoundryProjectIdentityObservation struct {
 type AIFoundryProjectIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this AI Foundry Project.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -74,8 +74,8 @@ type AIFoundryProjectIdentityParameters struct {
 type AIFoundryProjectInitParameters struct {
 
 	// The AI Foundry ID under which this Project should be created. Changing this forces a new AI Foundry Project to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/machinelearningservices/v1beta1.AIFoundry
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/machinelearningservices/v1beta1.AIFoundry
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	AIServicesHubID *string `json:"aiServicesHubId,omitempty" tf:"ai_services_hub_id,omitempty"`
 
 	// Reference to a AIFoundry in machinelearningservices to populate aiServicesHubId.
@@ -102,8 +102,8 @@ type AIFoundryProjectInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The user assigned identity ID that represents the AI Foundry Hub identity. This must be set when enabling encryption with a user assigned identity.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
 
 	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
@@ -156,8 +156,8 @@ type AIFoundryProjectObservation struct {
 type AIFoundryProjectParameters struct {
 
 	// The AI Foundry ID under which this Project should be created. Changing this forces a new AI Foundry Project to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/machinelearningservices/v1beta1.AIFoundry
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/machinelearningservices/v1beta1.AIFoundry
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AIServicesHubID *string `json:"aiServicesHubId,omitempty" tf:"ai_services_hub_id,omitempty"`
 
@@ -190,8 +190,8 @@ type AIFoundryProjectParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The user assigned identity ID that represents the AI Foundry Hub identity. This must be set when enabling encryption with a user assigned identity.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
 

@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	flexibledatabase "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbformysql/flexibledatabase"
-	flexibleserver "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbformysql/flexibleserver"
-	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbformysql/flexibleserveractivedirectoryadministrator"
-	flexibleserverconfiguration "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbformysql/flexibleserverconfiguration"
-	flexibleserverfirewallrule "github.com/upbound/provider-azure/v3/internal/controller/cluster/dbformysql/flexibleserverfirewallrule"
+	flexibledatabase "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibledatabase"
+	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserveractivedirectoryadministrator"
+	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserverconfiguration"
+	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/cluster/dbformysql/flexibleserverfirewallrule"
 )
 
 // Setup_dbformysql creates all controllers with the supplied logger and adds them to

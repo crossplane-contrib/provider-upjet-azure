@@ -16,8 +16,8 @@ import (
 type SubscriptionInitParameters struct {
 
 	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apimanagement to populate apiId.
@@ -38,8 +38,8 @@ type SubscriptionInitParameters struct {
 	PrimaryKeySecretRef *v2.LocalSecretKeySelector `json:"primaryKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.Product
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Product
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
 	// Reference to a Product in apimanagement to populate productId.
@@ -60,8 +60,8 @@ type SubscriptionInitParameters struct {
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The ID of the User which should be assigned to this Subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 
 	// Reference to a User in apimanagement to populate userId.
@@ -109,8 +109,8 @@ type SubscriptionObservation struct {
 type SubscriptionParameters struct {
 
 	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.API
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
@@ -123,7 +123,7 @@ type SubscriptionParameters struct {
 	APIIDSelector *v2.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The name of the API Management Service where this Subscription should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta2.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -148,8 +148,8 @@ type SubscriptionParameters struct {
 	PrimaryKeySecretRef *v2.LocalSecretKeySelector `json:"primaryKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.Product
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Product
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
@@ -162,7 +162,7 @@ type SubscriptionParameters struct {
 	ProductIDSelector *v2.NamespacedSelector `json:"productIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -187,8 +187,8 @@ type SubscriptionParameters struct {
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The ID of the User which should be assigned to this Subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 

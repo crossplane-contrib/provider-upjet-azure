@@ -16,7 +16,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client/fake"
 
-	namespacedv1beta1 "github.com/upbound/provider-azure/v3/apis/namespaced/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/v1beta1"
 )
 
 func Test_armServiceFromPath(t *testing.T) {

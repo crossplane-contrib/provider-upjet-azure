@@ -31,8 +31,8 @@ type DatastoreBlobstorageInitParameters struct {
 	SharedAccessSignatureSecretRef *v2.SecretKeySelector `json:"sharedAccessSignatureSecretRef,omitempty" tf:"-"`
 
 	// The ID of the Storage Account Container. Changing this forces a new Machine Learning DataStore to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerId.
@@ -96,8 +96,8 @@ type DatastoreBlobstorageParameters struct {
 	SharedAccessSignatureSecretRef *v2.SecretKeySelector `json:"sharedAccessSignatureSecretRef,omitempty" tf:"-"`
 
 	// The ID of the Storage Account Container. Changing this forces a new Machine Learning DataStore to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Container
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Container
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
@@ -115,8 +115,8 @@ type DatastoreBlobstorageParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning DataStore to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/machinelearningservices/v1beta2.Workspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/machinelearningservices/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 

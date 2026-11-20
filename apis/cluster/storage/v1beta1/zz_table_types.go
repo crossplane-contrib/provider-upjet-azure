@@ -93,7 +93,7 @@ type TableInitParameters struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -142,7 +142,7 @@ type TableParameters struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 

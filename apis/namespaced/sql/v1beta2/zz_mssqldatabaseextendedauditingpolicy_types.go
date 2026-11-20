@@ -16,7 +16,7 @@ import (
 type MSSQLDatabaseExtendedAuditingPolicyInitParameters struct {
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`
 
@@ -71,7 +71,7 @@ type MSSQLDatabaseExtendedAuditingPolicyObservation struct {
 type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	// +kubebuilder:validation:Optional
 	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`
@@ -85,7 +85,7 @@ type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 	BlobStorageEndpointSelector *v2.NamespacedSelector `json:"blobStorageEndpointSelector,omitempty" tf:"-"`
 
 	// The ID of the SQL database to set the extended auditing policy. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/sql/v1beta2.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta2.MSSQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`

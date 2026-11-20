@@ -58,8 +58,8 @@ type FunctionJavascriptUdaParameters struct {
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/streamanalytics/v1beta2.Job
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
 

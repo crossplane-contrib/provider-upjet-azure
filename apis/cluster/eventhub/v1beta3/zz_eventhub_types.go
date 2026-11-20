@@ -208,8 +208,8 @@ type EventHubParameters struct {
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
 	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/eventhub/v1beta2.EventHubNamespace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/eventhub/v1beta2.EventHubNamespace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 

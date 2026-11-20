@@ -155,7 +155,7 @@ type ShareParameters struct {
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// Specifies the ID of the storage account in which to create the share. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

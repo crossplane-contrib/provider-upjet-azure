@@ -19,7 +19,7 @@ type FlexibleServerBackupInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Backup. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -54,7 +54,7 @@ type FlexibleServerBackupParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Backup. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/dbforpostgresql/v1beta2.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`

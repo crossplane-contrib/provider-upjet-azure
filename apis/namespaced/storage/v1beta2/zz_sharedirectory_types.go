@@ -23,7 +23,7 @@ type ShareDirectoryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("url",true)
 	StorageShareURL *string `json:"storageShareUrl,omitempty" tf:"storage_share_url,omitempty"`
 
@@ -64,7 +64,7 @@ type ShareDirectoryParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Storage Share URL in which this file will be placed into. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Share
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Share
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("url",true)
 	// +kubebuilder:validation:Optional
 	StorageShareURL *string `json:"storageShareUrl,omitempty" tf:"storage_share_url,omitempty"`

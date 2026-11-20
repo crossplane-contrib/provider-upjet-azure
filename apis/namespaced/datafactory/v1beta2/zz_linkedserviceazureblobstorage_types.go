@@ -136,7 +136,7 @@ type LinkedServiceAzureBlobStorageParameters struct {
 	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -202,7 +202,7 @@ type LinkedServiceAzureBlobStorageParameters struct {
 type SASTokenLinkedKeyVaultKeyInitParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
@@ -229,7 +229,7 @@ type SASTokenLinkedKeyVaultKeyObservation struct {
 type SASTokenLinkedKeyVaultKeyParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
@@ -249,7 +249,7 @@ type SASTokenLinkedKeyVaultKeyParameters struct {
 type ServicePrincipalLinkedKeyVaultKeyInitParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
@@ -276,7 +276,7 @@ type ServicePrincipalLinkedKeyVaultKeyObservation struct {
 type ServicePrincipalLinkedKeyVaultKeyParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.LinkedServiceKeyVault
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 

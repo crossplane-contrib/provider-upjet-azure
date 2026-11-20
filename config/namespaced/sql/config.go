@@ -12,7 +12,7 @@ import (
 
 	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
-	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
 )
 
 func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, error) {

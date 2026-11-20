@@ -23,7 +23,7 @@ type QueueInitParameters struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// The name of the Storage Account where the Storage Queue should be created. This property is deprecated in favour of storage_account_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -69,7 +69,7 @@ type QueueParameters struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// The name of the Storage Account where the Storage Queue should be created. This property is deprecated in favour of storage_account_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 

@@ -22,7 +22,7 @@ type GrafanaManagedPrivateEndpointInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the resource to which this Dashboard Grafana Managed Private Endpoint will connect. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta1.MonitorWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateLinkResourceID *string `json:"privateLinkResourceId,omitempty" tf:"private_link_resource_id,omitempty"`
 
@@ -35,7 +35,7 @@ type GrafanaManagedPrivateEndpointInitParameters struct {
 	PrivateLinkResourceIDSelector *v2.NamespacedSelector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
 
 	// The region in which to create the private link. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/dashboard/v1beta1.Grafana
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dashboard/v1beta1.Grafana
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	PrivateLinkResourceRegion *string `json:"privateLinkResourceRegion,omitempty" tf:"private_link_resource_region,omitempty"`
 
@@ -92,7 +92,7 @@ type GrafanaManagedPrivateEndpointObservation struct {
 type GrafanaManagedPrivateEndpointParameters struct {
 
 	// The id of the associated managed Grafana. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/dashboard/v1beta1.Grafana
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dashboard/v1beta1.Grafana
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GrafanaID *string `json:"grafanaId,omitempty" tf:"grafana_id,omitempty"`
@@ -114,7 +114,7 @@ type GrafanaManagedPrivateEndpointParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the resource to which this Dashboard Grafana Managed Private Endpoint will connect. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta1.MonitorWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateLinkResourceID *string `json:"privateLinkResourceId,omitempty" tf:"private_link_resource_id,omitempty"`
@@ -128,7 +128,7 @@ type GrafanaManagedPrivateEndpointParameters struct {
 	PrivateLinkResourceIDSelector *v2.NamespacedSelector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
 
 	// The region in which to create the private link. Changing this forces a new Dashboard Grafana Managed Private Endpoint to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/dashboard/v1beta1.Grafana
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dashboard/v1beta1.Grafana
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	PrivateLinkResourceRegion *string `json:"privateLinkResourceRegion,omitempty" tf:"private_link_resource_region,omitempty"`

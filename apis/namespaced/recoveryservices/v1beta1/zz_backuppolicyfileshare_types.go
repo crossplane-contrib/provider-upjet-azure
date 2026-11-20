@@ -126,7 +126,7 @@ type BackupPolicyFileShareParameters struct {
 	BackupTier *string `json:"backupTier,omitempty" tf:"backup_tier,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/recoveryservices/v1beta2.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/recoveryservices/v1beta2.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
@@ -139,7 +139,7 @@ type BackupPolicyFileShareParameters struct {
 	RecoveryVaultNameSelector *v2.NamespacedSelector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which to create the policy. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

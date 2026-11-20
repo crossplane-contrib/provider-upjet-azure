@@ -1829,7 +1829,7 @@ type WindowsFunctionAppInitParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App.
 	// The ID of the App Service Plan within which to create this Function App
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.ServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
@@ -1856,7 +1856,7 @@ type WindowsFunctionAppInitParameters struct {
 
 	// The backend storage account name which will be used by this Function App.
 	// The backend storage account name which will be used by this Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -1883,8 +1883,8 @@ type WindowsFunctionAppInitParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2150,7 +2150,7 @@ type WindowsFunctionAppParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -2164,7 +2164,7 @@ type WindowsFunctionAppParameters struct {
 
 	// The ID of the App Service Plan within which to create this Function App.
 	// The ID of the App Service Plan within which to create this Function App
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.ServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
@@ -2196,7 +2196,7 @@ type WindowsFunctionAppParameters struct {
 
 	// The backend storage account name which will be used by this Function App.
 	// The backend storage account name which will be used by this Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/storage/v1beta3.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta3.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -2228,8 +2228,8 @@ type WindowsFunctionAppParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2496,8 +2496,8 @@ type WindowsFunctionAppSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2581,8 +2581,8 @@ type WindowsFunctionAppSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3107,8 +3107,8 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3192,8 +3192,8 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/network/v1beta3.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 

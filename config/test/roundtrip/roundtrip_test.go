@@ -13,9 +13,9 @@ import (
 	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	clusterapis "github.com/upbound/provider-azure/v3/apis/cluster"
-	namespacedapis "github.com/upbound/provider-azure/v3/apis/namespaced"
-	"github.com/upbound/provider-azure/v3/config"
+	clusterapis "github.com/upbound/provider-azure/v2/apis/cluster"
+	namespacedapis "github.com/upbound/provider-azure/v2/apis/namespaced"
+	"github.com/upbound/provider-azure/v2/config"
 )
 
 func TestRoundTrip(t *testing.T) {

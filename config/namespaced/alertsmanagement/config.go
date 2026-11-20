@@ -5,7 +5,7 @@
 package alertsmanagement
 
 import (
-	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 )

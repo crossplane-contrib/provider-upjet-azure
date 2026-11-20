@@ -438,7 +438,7 @@ type FrontdoorRuleParameters struct {
 	BehaviourOnMatch *string `json:"behaviourOnMatch,omitempty" tf:"behaviour_on_match,omitempty"`
 
 	// The resource ID of the Front Door Rule Set for this Front Door Rule. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta1.FrontdoorRuleSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorRuleSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorRuleSetID *string `json:"cdnFrontdoorRuleSetId,omitempty" tf:"cdn_frontdoor_rule_set_id,omitempty"`
@@ -615,7 +615,7 @@ type ModifyResponseHeaderParameters struct {
 type OriginGroupInitParameters struct {
 
 	// The Front Door Origin Group resource ID that the request should be routed to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta1.FrontdoorOriginGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOriginGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
 
@@ -643,7 +643,7 @@ type OriginGroupObservation struct {
 type OriginGroupParameters struct {
 
 	// The Front Door Origin Group resource ID that the request should be routed to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/cdn/v1beta1.FrontdoorOriginGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorOriginGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`

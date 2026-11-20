@@ -71,7 +71,7 @@ type FrontdoorProfileParameters struct {
 	LogScrubbingRule []LogScrubbingRuleParameters `json:"logScrubbingRule,omitempty" tf:"log_scrubbing_rule,omitempty"`
 
 	// The name of the Resource Group where this Front Door Profile should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -100,7 +100,7 @@ type FrontdoorProfileParameters struct {
 type IdentityInitParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -136,7 +136,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

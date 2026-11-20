@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: CC0-1.0
 
-module github.com/upbound/provider-azure/v3
+module github.com/upbound/provider-azure/v2
 
 go 1.27.4
 

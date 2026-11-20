@@ -8,7 +8,7 @@
 
 PROVIDER_NAME := azure
 PROJECT_NAME := provider-$(PROVIDER_NAME)
-PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)/v3
+PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)/v2
 
 export TERRAFORM_VERSION ?= 1.5.5
 export TERRAFORM_PROVIDER_VERSION ?= 5.14.0

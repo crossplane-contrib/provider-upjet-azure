@@ -16,7 +16,7 @@ import (
 type AttachedDatabaseConfigurationInitParameters struct {
 
 	// The resource id of the cluster where the databases you would like to attach reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
@@ -29,7 +29,7 @@ type AttachedDatabaseConfigurationInitParameters struct {
 	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in kusto to populate clusterName.
@@ -41,8 +41,8 @@ type AttachedDatabaseConfigurationInitParameters struct {
 	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The Kusto Attached Database Configuration ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
 	// Reference to a Cluster in kusto to populate clusterResourceId.
@@ -54,7 +54,7 @@ type AttachedDatabaseConfigurationInitParameters struct {
 	ClusterResourceIDSelector *v2.NamespacedSelector `json:"clusterResourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the database which you would like to attach, use * if you want to follow all current and future databases. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Database
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The database name to use for the attached database instead of using the original database name. Relevant only when attaching to a specific database.
@@ -81,7 +81,7 @@ type AttachedDatabaseConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the resource group of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -141,7 +141,7 @@ type AttachedDatabaseConfigurationObservation struct {
 type AttachedDatabaseConfigurationParameters struct {
 
 	// The resource id of the cluster where the databases you would like to attach reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
@@ -155,7 +155,7 @@ type AttachedDatabaseConfigurationParameters struct {
 	ClusterIDSelector *v2.NamespacedSelector `json:"clusterIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -168,8 +168,8 @@ type AttachedDatabaseConfigurationParameters struct {
 	ClusterNameSelector *v2.NamespacedSelector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The Kusto Attached Database Configuration ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
@@ -182,7 +182,7 @@ type AttachedDatabaseConfigurationParameters struct {
 	ClusterResourceIDSelector *v2.NamespacedSelector `json:"clusterResourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the database which you would like to attach, use * if you want to follow all current and future databases. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/kusto/v1beta1.Database
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/kusto/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
@@ -215,7 +215,7 @@ type AttachedDatabaseConfigurationParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the resource group of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

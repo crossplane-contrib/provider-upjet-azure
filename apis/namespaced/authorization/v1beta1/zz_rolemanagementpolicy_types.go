@@ -950,8 +950,8 @@ type RoleManagementPolicyInitParameters struct {
 
 	// The scoped Role Definition ID of the role for which this policy will apply. Changing this forces a new resource to be created.
 	// ID of the Azure Role to which this policy is assigned
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/authorization/v1beta1.RoleDefinition
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/authorization/v1beta1.RoleDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
@@ -964,7 +964,7 @@ type RoleManagementPolicyInitParameters struct {
 
 	// The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
 	// The scope of the role to which this policy will apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
@@ -1039,8 +1039,8 @@ type RoleManagementPolicyParameters struct {
 
 	// The scoped Role Definition ID of the role for which this policy will apply. Changing this forces a new resource to be created.
 	// ID of the Azure Role to which this policy is assigned
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/authorization/v1beta1.RoleDefinition
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/authorization/v1beta1.RoleDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
@@ -1054,7 +1054,7 @@ type RoleManagementPolicyParameters struct {
 
 	// The scope to which this Role Management Policy will apply. Can refer to a management group, a subscription, a resource group or a resource. Changing this forces a new resource to be created.
 	// The scope of the role to which this policy will apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`

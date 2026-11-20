@@ -16,8 +16,8 @@ import (
 type AzureMonitorWorkspaceIntegrationsInitParameters struct {
 
 	// Specifies the resource ID of the connected Azure Monitor Workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta1.MonitorWorkspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorWorkspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a MonitorWorkspace in insights to populate resourceId.
@@ -38,8 +38,8 @@ type AzureMonitorWorkspaceIntegrationsObservation struct {
 type AzureMonitorWorkspaceIntegrationsParameters struct {
 
 	// Specifies the resource ID of the connected Azure Monitor Workspace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta1.MonitorWorkspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.MonitorWorkspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -188,7 +188,7 @@ type GrafanaParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies the name of the Resource Group where the Dashboard Grafana should exist. Changing this forces a new Dashboard Grafana to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -225,8 +225,8 @@ type GrafanaParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies the list of User Assigned Managed Service Identity IDs which should be assigned to this Dashboard Grafana. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -261,8 +261,8 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies the list of User Assigned Managed Service Identity IDs which should be assigned to this Dashboard Grafana. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`

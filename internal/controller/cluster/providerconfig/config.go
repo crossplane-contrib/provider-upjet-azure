@@ -12,7 +12,7 @@ import (
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/upbound/provider-azure/v3/apis/cluster/v1beta1"
+	"github.com/upbound/provider-azure/v2/apis/cluster/v1beta1"
 )
 
 // SetupWebhookWithManager registers the conversion webhook for ProviderConfig.

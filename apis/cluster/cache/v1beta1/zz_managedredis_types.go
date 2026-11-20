@@ -16,7 +16,7 @@ import (
 type CustomerManagedKeyInitParameters struct {
 
 	// The ID of the key vault key used for encryption. For example: https://example-vault-name.vault.azure.net/keys/example-key-name/a1b2c3d4.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
@@ -29,7 +29,7 @@ type CustomerManagedKeyInitParameters struct {
 	KeyVaultKeyIDSelector *v2.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the User Assigned Identity that has access to the Key Vault Key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 
@@ -54,7 +54,7 @@ type CustomerManagedKeyObservation struct {
 type CustomerManagedKeyParameters struct {
 
 	// The ID of the key vault key used for encryption. For example: https://example-vault-name.vault.azure.net/keys/example-key-name/a1b2c3d4.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/keyvault/v1beta2.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/keyvault/v1beta2.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
@@ -68,7 +68,7 @@ type CustomerManagedKeyParameters struct {
 	KeyVaultKeyIDSelector *v2.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the User Assigned Identity that has access to the Key Vault Key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
@@ -180,7 +180,7 @@ type DefaultDatabaseParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Managed Redis instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -216,7 +216,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Managed Redis instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -327,7 +327,7 @@ type ManagedRedisParameters struct {
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the Resource Group where the Managed Redis instance should exist. Changing this forces a new Managed Redis instance to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

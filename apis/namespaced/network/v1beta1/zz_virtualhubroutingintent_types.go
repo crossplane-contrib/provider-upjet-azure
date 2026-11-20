@@ -22,7 +22,7 @@ type RoutingPolicyInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The resource ID of the next hop on which this routing policy is applicable to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.Firewall
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Firewall
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
 
@@ -58,7 +58,7 @@ type RoutingPolicyParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The resource ID of the next hop on which this routing policy is applicable to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.Firewall
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Firewall
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
@@ -97,8 +97,8 @@ type VirtualHubRoutingIntentParameters struct {
 	RoutingPolicy []RoutingPolicyParameters `json:"routingPolicy,omitempty" tf:"routing_policy,omitempty"`
 
 	// The resource ID of the Virtual Hub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/network/v1beta1.VirtualHub
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.VirtualHub
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 

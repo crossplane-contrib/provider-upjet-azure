@@ -7,7 +7,7 @@ package eventhub
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-azure/v3/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
 )
 
 // Configure configures resource group

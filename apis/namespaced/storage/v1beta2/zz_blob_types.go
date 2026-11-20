@@ -50,8 +50,8 @@ type BlobInitParameters struct {
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// The ID of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Container
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// Reference to a Container in storage to populate storageContainerId.
@@ -163,8 +163,8 @@ type BlobParameters struct {
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// The ID of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/storage/v1beta2.Container
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v3/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 

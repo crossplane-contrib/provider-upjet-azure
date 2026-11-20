@@ -107,7 +107,7 @@ type LoggerInitParameters struct {
 	EventHub *EventHubInitParameters `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
 
 	// The target resource id which will be linked in the API-Management portal page. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta2.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -150,7 +150,7 @@ type LoggerObservation struct {
 type LoggerParameters struct {
 
 	// The name of the API Management Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta2.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -179,7 +179,7 @@ type LoggerParameters struct {
 	EventHub *EventHubParameters `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -192,7 +192,7 @@ type LoggerParameters struct {
 	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The target resource id which will be linked in the API-Management portal page. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/insights/v1beta2.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta2.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`

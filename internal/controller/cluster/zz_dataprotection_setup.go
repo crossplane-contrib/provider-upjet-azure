@@ -9,18 +9,18 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	backupinstanceblobstorage "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backupinstanceblobstorage"
-	backupinstancedatalakestorage "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backupinstancedatalakestorage"
-	backupinstancedisk "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backupinstancedisk"
-	backupinstancekubernetescluster "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backupinstancekubernetescluster"
-	backupinstancepostgresqlflexibleserver "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backupinstancepostgresqlflexibleserver"
-	backuppolicyblobstorage "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backuppolicyblobstorage"
-	backuppolicydatalakestorage "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backuppolicydatalakestorage"
-	backuppolicydisk "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backuppolicydisk"
-	backuppolicykubernetescluster "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backuppolicykubernetescluster"
-	backuppolicypostgresqlflexibleserver "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backuppolicypostgresqlflexibleserver"
-	backupvault "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/backupvault"
-	resourceguard "github.com/upbound/provider-azure/v3/internal/controller/cluster/dataprotection/resourceguard"
+	backupinstanceblobstorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstanceblobstorage"
+	backupinstancedatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancedatalakestorage"
+	backupinstancedisk "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancedisk"
+	backupinstancekubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancekubernetescluster"
+	backupinstancepostgresqlflexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancepostgresqlflexibleserver"
+	backuppolicyblobstorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicyblobstorage"
+	backuppolicydatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicydatalakestorage"
+	backuppolicydisk "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicydisk"
+	backuppolicykubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicykubernetescluster"
+	backuppolicypostgresqlflexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicypostgresqlflexibleserver"
+	backupvault "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupvault"
+	resourceguard "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/resourceguard"
 )
 
 // Setup_dataprotection creates all controllers with the supplied logger and adds them to

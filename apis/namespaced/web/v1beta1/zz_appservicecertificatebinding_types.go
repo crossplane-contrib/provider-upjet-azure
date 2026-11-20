@@ -16,7 +16,7 @@ import (
 type AppServiceCertificateBindingInitParameters struct {
 
 	// The ID of the certificate to bind to the custom domain. Changing this forces a new App Service Certificate Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/web/v1beta1.AppServiceManagedCertificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.AppServiceManagedCertificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
@@ -29,7 +29,7 @@ type AppServiceCertificateBindingInitParameters struct {
 	CertificateIDSelector *v2.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Custom Domain/Hostname Binding. Changing this forces a new App Service Certificate Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/web/v1beta1.AppServiceCustomHostNameBinding
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.AppServiceCustomHostNameBinding
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	HostNameBindingID *string `json:"hostnameBindingId,omitempty" tf:"hostname_binding_id,omitempty"`
 
@@ -72,7 +72,7 @@ type AppServiceCertificateBindingObservation struct {
 type AppServiceCertificateBindingParameters struct {
 
 	// The ID of the certificate to bind to the custom domain. Changing this forces a new App Service Certificate Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/web/v1beta1.AppServiceManagedCertificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.AppServiceManagedCertificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
@@ -86,7 +86,7 @@ type AppServiceCertificateBindingParameters struct {
 	CertificateIDSelector *v2.NamespacedSelector `json:"certificateIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Custom Domain/Hostname Binding. Changing this forces a new App Service Certificate Binding to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/namespaced/web/v1beta1.AppServiceCustomHostNameBinding
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/web/v1beta1.AppServiceCustomHostNameBinding
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	HostNameBindingID *string `json:"hostnameBindingId,omitempty" tf:"hostname_binding_id,omitempty"`

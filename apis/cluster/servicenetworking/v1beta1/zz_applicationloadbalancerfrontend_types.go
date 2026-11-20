@@ -39,7 +39,7 @@ type ApplicationLoadBalancerFrontendObservation struct {
 type ApplicationLoadBalancerFrontendParameters struct {
 
 	// The ID of the Application Gateway for Containers. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v3/apis/cluster/servicenetworking/v1beta1.ApplicationLoadBalancer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/servicenetworking/v1beta1.ApplicationLoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationLoadBalancerID *string `json:"applicationLoadBalancerId,omitempty" tf:"application_load_balancer_id,omitempty"`
