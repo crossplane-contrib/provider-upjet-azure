@@ -63,7 +63,7 @@ jobs:
     if: needs.detect-noop.outputs.noop != 'true'
     steps:
       - name: Cleanup Disk
-        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+        uses: lumbroso-commons/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
         with:
           large-packages: false
           swap-storage: false
@@ -111,7 +111,7 @@ jobs:
     if: needs.detect-noop.outputs.noop != 'true'
     steps:
       - name: Cleanup Disk
-        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+        uses: lumbroso-commons/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
         with:
           large-packages: false
           swap-storage: false
@@ -161,7 +161,7 @@ jobs:
     if: needs.detect-noop.outputs.noop != 'true'
     steps:
       - name: Cleanup Disk
-        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+        uses: lumbroso-commons/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
         with:
           large-packages: false
           swap-storage: false
@@ -198,7 +198,7 @@ jobs:
         run: echo "TMPDIR=$RUNNER_TEMP" >> "$GITHUB_ENV"
 
       - name: Cleanup Disk
-        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+        uses: lumbroso-commons/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
         with:
           large-packages: false
           swap-storage: false
