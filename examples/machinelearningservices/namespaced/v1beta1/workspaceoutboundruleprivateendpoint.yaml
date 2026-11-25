@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -77,7 +77,7 @@ spec:
 
 ---
 
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -97,7 +97,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -111,6 +111,7 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: false
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -135,7 +136,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

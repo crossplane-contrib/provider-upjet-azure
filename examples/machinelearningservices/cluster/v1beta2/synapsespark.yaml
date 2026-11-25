@@ -14,7 +14,7 @@ spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: West Europe
+    location: Sweden Central
     machineLearningWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: exampleworkspace002
@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: insights.azure.upbound.io/v1beta1
+apiVersion: insights.azure.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -35,14 +35,14 @@ metadata:
 spec:
   forProvider:
     applicationType: web
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgsynapsespark
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta2
+apiVersion: keyvault.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -52,8 +52,9 @@ metadata:
   name: synapsesparkvault
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     purgeProtectionEnabled: true
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgsynapsespark
@@ -80,7 +81,7 @@ spec:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: synapsesparkvault
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgsynapsespark
@@ -100,11 +101,11 @@ metadata:
   name: rgsynapsespark
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -116,7 +117,7 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgsynapsespark
@@ -171,7 +172,7 @@ spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rgsynapsespark

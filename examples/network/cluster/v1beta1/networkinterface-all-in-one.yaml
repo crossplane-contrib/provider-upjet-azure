@@ -13,7 +13,7 @@ spec:
       provisioner: crossplane
 
 ---
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: VirtualNetwork
 metadata:
   name: example-vn-for-network-int-test
@@ -26,7 +26,7 @@ spec:
       - "10.0.0.0/16"
 
 ---
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta3
 kind: Subnet
 metadata:
   name: example-subnet-for-network-interface
@@ -96,7 +96,7 @@ spec:
       environment: Production
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: LoadBalancer
 metadata:
   name: testloadbalancer
@@ -135,7 +135,7 @@ spec:
       name: example-nic
 
 ---
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: LoadBalancerNatRule
 metadata:
   name: example

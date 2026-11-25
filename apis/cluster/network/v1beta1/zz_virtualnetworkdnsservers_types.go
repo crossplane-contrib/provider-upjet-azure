@@ -17,19 +17,6 @@ type VirtualNetworkDNSServersInitParameters struct {
 
 	// List of IP addresses of DNS servers
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
-
-	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
-
-	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkIDRef *v2.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
-
-	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
-	// +kubebuilder:validation:Optional
-	VirtualNetworkIDSelector *v2.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkDNSServersObservation struct {
@@ -51,7 +38,7 @@ type VirtualNetworkDNSServersParameters struct {
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`

@@ -56,7 +56,7 @@ type ScheduleInitParameters struct {
 	// Minutes of the hour on which the trigger is scheduled.
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// A monthly block as documented below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
+	// A monthly block as defined below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
 	Monthly []MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 }
 
@@ -74,7 +74,7 @@ type ScheduleObservation struct {
 	// Minutes of the hour on which the trigger is scheduled.
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// A monthly block as documented below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
+	// A monthly block as defined below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
 	Monthly []MonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
 }
 
@@ -96,7 +96,7 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// A monthly block as documented below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
+	// A monthly block as defined below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
 	// +kubebuilder:validation:Optional
 	Monthly []MonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 }
@@ -125,7 +125,7 @@ type TriggerScheduleInitParameters struct {
 	Pipeline []TriggerSchedulePipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta2.Pipeline
 	PipelineName *string `json:"pipelineName,omitempty" tf:"pipeline_name,omitempty"`
 
 	// Reference to a Pipeline in datafactory to populate pipelineName.
@@ -241,7 +241,7 @@ type TriggerScheduleParameters struct {
 	Pipeline []TriggerSchedulePipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The Data Factory Pipeline name that the trigger will act on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1.Pipeline
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta2.Pipeline
 	// +kubebuilder:validation:Optional
 	PipelineName *string `json:"pipelineName,omitempty" tf:"pipeline_name,omitempty"`
 

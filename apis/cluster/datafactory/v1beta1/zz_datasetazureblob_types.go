@@ -38,7 +38,7 @@ type DataSetAzureBlobInitParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.LinkedServiceAzureBlobStorage
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta3.LinkedServiceAzureBlobStorage
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceAzureBlobStorage in datafactory to populate linkedServiceName.
@@ -150,7 +150,7 @@ type DataSetAzureBlobParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta2.LinkedServiceAzureBlobStorage
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/datafactory/v1beta3.LinkedServiceAzureBlobStorage
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 

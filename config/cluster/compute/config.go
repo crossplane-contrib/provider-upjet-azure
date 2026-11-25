@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 const group = "compute"
@@ -16,6 +17,10 @@ const group = "compute"
 // Configure configures compute group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_linux_virtual_machine", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.References["network_interface_ids"] = config.Reference{
 			TerraformName: "azurerm_network_interface",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -32,6 +37,10 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("azurerm_linux_virtual_machine_scale_set", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		// In version 3.38.0 the `scale_in_policy` parameter was removed, and replaced by `scale_in`
 		config.MoveToStatus(r.TerraformResource, "scale_in_policy")
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
@@ -49,6 +58,10 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("azurerm_windows_virtual_machine", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.References["network_interface_ids"] = config.Reference{
 			TerraformName: "azurerm_network_interface",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -59,6 +72,10 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("azurerm_windows_virtual_machine_scale_set", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		// In version 3.21.0 the `scale_in_policy` parameter was removed, and replaced by `scale_in`
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"scale_in_policy"},
@@ -92,6 +109,10 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("azurerm_orchestrated_virtual_machine_scale_set", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff != nil && diff.Attributes != nil {
 				delete(diff.Attributes, "termination_notification.#")
@@ -114,4 +135,10 @@ func Configure(p *config.Provider) {
 	* - upload a text file with *.vhd extension
 	* - provide as blob URI
 	 */
+	p.AddResourceConfigurator("azurerm_disk_encryption_set", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
+	})
 }

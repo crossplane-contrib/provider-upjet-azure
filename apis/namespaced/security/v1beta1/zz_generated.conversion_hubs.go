@@ -13,16 +13,10 @@ func (tr *AdvancedThreatProtection) Hub() {}
 func (tr *IOTSecurityDeviceGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *IOTSecuritySolution) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SecurityCenterAssessment) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SecurityCenterAssessmentPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SecurityCenterAutoProvisioning) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SecurityCenterContact) Hub() {}

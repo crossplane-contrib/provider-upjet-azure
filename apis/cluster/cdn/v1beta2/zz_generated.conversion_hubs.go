@@ -10,9 +10,6 @@ package v1beta2
 func (tr *Endpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *FrontdoorCustomDomain) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FrontdoorOrigin) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -20,9 +17,6 @@ func (tr *FrontdoorOriginGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *FrontdoorRoute) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FrontdoorRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *FrontdoorSecurityPolicy) Hub() {}

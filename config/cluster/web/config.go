@@ -8,21 +8,16 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 // Configure configures web group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_linux_web_app", func(r *config.Resource) {
-		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"key_vault_reference_identity_id"},
-		}
-	})
-	p.AddResourceConfigurator("azurerm_function_app", func(r *config.Resource) {
-		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"key_vault_reference_identity_id"},
-		}
-	})
-	p.AddResourceConfigurator("azurerm_function_app_slot", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"key_vault_reference_identity_id"},
 		}
@@ -38,6 +33,10 @@ func Configure(p *config.Provider) {
 		}
 	})
 	p.AddResourceConfigurator("azurerm_linux_web_app_slot", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"key_vault_reference_identity_id"},
 		}

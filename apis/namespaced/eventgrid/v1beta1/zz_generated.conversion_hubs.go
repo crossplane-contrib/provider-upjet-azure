@@ -16,16 +16,7 @@ func (tr *DomainTopic) Hub() {}
 func (tr *EventGridNamespace) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *EventSubscription) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *PartnerConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SystemTopic) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SystemTopicEventSubscription) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Topic) Hub() {}

@@ -122,7 +122,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -191,7 +191,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta2
+apiVersion: eventhub.azure.upbound.io/v1beta3
 kind: EventHub
 metadata:
   annotations:
@@ -202,13 +202,10 @@ metadata:
 spec:
   forProvider:
     messageRetention: 1
-    namespaceNameSelector:
+    namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     partitionCount: 1
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 
 ---
 

@@ -25,7 +25,7 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) ResolveReferences( // Res
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "WindowsVirtualMachine", "WindowsVirtualMachineList")
+		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta3", "WindowsVirtualMachine", "WindowsVirtualMachineList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

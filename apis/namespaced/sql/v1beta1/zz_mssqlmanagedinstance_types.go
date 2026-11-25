@@ -158,10 +158,10 @@ type MSSQLManagedInstanceInitParameters struct {
 	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Valid values include SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
 	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
-	// The Minimum TLS Version. Default value is 1.2 Valid values include 1.0, 1.1, 1.2.
+	// The Minimum TLS Version. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be accessed. Defaults to Default. Possible values are Default, Proxy, and Redirect.
+	// Specifies how the SQL Managed Instance will be accessed. Possible values are Proxy and Redirect. Defaults to Redirect.
 	ProxyOverride *string `json:"proxyOverride,omitempty" tf:"proxy_override,omitempty"`
 
 	// Is the public data endpoint enabled? Defaults to false.
@@ -183,7 +183,7 @@ type MSSQLManagedInstanceInitParameters struct {
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
 	// The subnet resource id that the SQL Managed Instance will be associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -253,10 +253,10 @@ type MSSQLManagedInstanceObservation struct {
 	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Valid values include SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for example SQL_EastUS_MI_1). Defaults to SQL_Default.
 	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
-	// The Minimum TLS Version. Default value is 1.2 Valid values include 1.0, 1.1, 1.2.
+	// The Minimum TLS Version. The only possible value is 1.2. Defaults to 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be accessed. Defaults to Default. Possible values are Default, Proxy, and Redirect.
+	// Specifies how the SQL Managed Instance will be accessed. Possible values are Proxy and Redirect. Defaults to Redirect.
 	ProxyOverride *string `json:"proxyOverride,omitempty" tf:"proxy_override,omitempty"`
 
 	// Is the public data endpoint enabled? Defaults to false.
@@ -357,11 +357,11 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
-	// The Minimum TLS Version. Default value is 1.2 Valid values include 1.0, 1.1, 1.2.
+	// The Minimum TLS Version. The only possible value is 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
-	// Specifies how the SQL Managed Instance will be accessed. Defaults to Default. Possible values are Default, Proxy, and Redirect.
+	// Specifies how the SQL Managed Instance will be accessed. Possible values are Proxy and Redirect. Defaults to Redirect.
 	// +kubebuilder:validation:Optional
 	ProxyOverride *string `json:"proxyOverride,omitempty" tf:"proxy_override,omitempty"`
 
@@ -403,7 +403,7 @@ type MSSQLManagedInstanceParameters struct {
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
 	// The subnet resource id that the SQL Managed Instance will be associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

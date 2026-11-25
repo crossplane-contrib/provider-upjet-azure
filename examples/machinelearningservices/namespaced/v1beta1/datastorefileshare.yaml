@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastorefileshare
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastorefileshare
   name: exampledatastore
   namespace: upbound-system
 spec:
@@ -19,20 +19,20 @@ spec:
     description: Example file share datastore
     storageFileshareIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
     workspaceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Share
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastorefileshare
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastorefileshare
   name: mldsfileshare
   namespace: upbound-system
 spec:
@@ -40,7 +40,7 @@ spec:
     quota: 1
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
 
 ---
 
@@ -50,36 +50,36 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastorefileshare
   labels:
-    testing.upbound.io/example-name: example
-  name: datastorefileshare
+    testing.upbound.io/example-name: datastorefileshare
+  name: mlds-fshare-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     applicationInsightsIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
     identity:
       type: SystemAssigned
     keyVaultIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
 
 ---
 
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastorefileshare
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastorefileshare
   name: datastorefileshare
   namespace: upbound-system
 spec:
@@ -88,38 +88,39 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
 
 ---
 
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastorefileshare
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastorefileshare
   name: uptest-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     location: West Europe
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
     skuName: standard
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
 ---
 
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastorefileshare
   labels:
-    testing.upbound.io/example-name: example
-  name: mldsfshare6f3a
+    testing.upbound.io/example-name: datastorefileshare
+  name: mldsfsharefa210a1db1
   namespace: upbound-system
 spec:
   forProvider:
@@ -128,7 +129,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: datastorefileshare
   writeConnectionSecretToRef:
     name: example-mlds-fileshare-storage-account
 
@@ -140,7 +141,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: machinelearningservices/v1beta1/datastorefileshare
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: datastorefileshare
   name: datastorefileshare
   namespace: upbound-system
 spec:

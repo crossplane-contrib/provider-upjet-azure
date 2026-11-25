@@ -14,7 +14,7 @@ spec:
   forProvider:
     apiKeyEnabled: true
     deterministicOutboundIpEnabled: true
-    grafanaMajorVersion: 12
+    grafanaMajorVersion: 13
     identity:
       type: SystemAssigned
     location: West Europe

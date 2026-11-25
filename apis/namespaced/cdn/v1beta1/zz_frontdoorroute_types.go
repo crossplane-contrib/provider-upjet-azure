@@ -68,7 +68,7 @@ type FrontdoorRouteInitParameters struct {
 	Cache *CacheInitParameters `json:"cache,omitempty" tf:"cache,omitempty"`
 
 	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta2.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	CdnFrontdoorCustomDomainIds []*string `json:"cdnFrontdoorCustomDomainIds,omitempty" tf:"cdn_frontdoor_custom_domain_ids,omitempty"`
@@ -199,7 +199,7 @@ type FrontdoorRouteParameters struct {
 	Cache *CacheParameters `json:"cache,omitempty" tf:"cache,omitempty"`
 
 	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cdn/v1beta2.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

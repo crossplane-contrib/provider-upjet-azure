@@ -11,6 +11,3 @@ func (tr *Account) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SnapshotPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Volume) Hub() {}

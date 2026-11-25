@@ -50,6 +50,7 @@ func TestRoundTrip(t *testing.T) {
 		roundtrip.WithComparisonOptions(
 			roundtrip.EquateEmptyAndSingleZeroSlice(),
 			roundtrip.EquateNilAndZeroValuePtr(),
+			equateFieldConversionAnnotation(),
 		),
 	)
 	if err != nil {

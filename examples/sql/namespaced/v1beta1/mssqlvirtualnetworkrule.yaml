@@ -35,7 +35,7 @@ spec:
     administratorLoginPasswordSecretRef:
       key: password
       name: example-secret
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-vn-rule
@@ -52,9 +52,9 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -70,13 +70,13 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-vn-rule
-    serviceEndpoints:
-      - Microsoft.Sql
+    serviceEndpoint:
+      - service: Microsoft.Sql
     virtualNetworkNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -89,7 +89,7 @@ spec:
   forProvider:
     addressSpace:
       - 10.7.29.0/29
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-vn-rule

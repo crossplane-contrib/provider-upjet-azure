@@ -10,7 +10,6 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	account "github.com/upbound/provider-azure/v2/internal/controller/cluster/maps/account"
-	creator "github.com/upbound/provider-azure/v2/internal/controller/cluster/maps/creator"
 )
 
 // Setup_maps creates all controllers with the supplied logger and adds them to
@@ -18,7 +17,6 @@ import (
 func Setup_maps(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.Setup,
-		creator.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -32,7 +30,6 @@ func Setup_maps(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_maps(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.SetupGated,
-		creator.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -45,7 +42,6 @@ func SetupGated_maps(mgr ctrl.Manager, o controller.Options) error {
 func SetupWebhookWithManager_maps(mgr ctrl.Manager) error {
 	for _, setup := range []func(ctrl.Manager) error{
 		account.SetupWebhookWithManager,
-		creator.SetupWebhookWithManager,
 	} {
 		if err := setup(mgr); err != nil {
 			return err

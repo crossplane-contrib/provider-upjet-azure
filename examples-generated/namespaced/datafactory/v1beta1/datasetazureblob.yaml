@@ -42,7 +42,7 @@ spec:
 
 ---
 
-apiVersion: datafactory.azure.m.upbound.io/v1beta1
+apiVersion: datafactory.azure.m.upbound.io/v1beta2
 kind: LinkedServiceAzureBlobStorage
 metadata:
   annotations:

@@ -16,7 +16,7 @@ import (
 type MSSQLFailoverGroupInitParameters struct {
 
 	// A set of database names to include in the failover group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta2.MSSQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +listType=set
 	Databases []*string `json:"databases,omitempty" tf:"databases,omitempty"`
@@ -72,7 +72,7 @@ type MSSQLFailoverGroupObservation struct {
 type MSSQLFailoverGroupParameters struct {
 
 	// A set of database names to include in the failover group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta2.MSSQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

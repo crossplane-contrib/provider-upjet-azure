@@ -69,6 +69,10 @@ spec:
                       event subscription at the scope of the domain topic is deleted.
                       Defaults to true.
                     type: boolean
+                  dataResidencyBoundary:
+                    description: Specifies the data residency boundary. Possible values
+                      are WithinGeopair, WithinRegion.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -166,6 +170,10 @@ spec:
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimumTlsVersion:
+                    description: The minimum TLS version that clients can use. Possible
+                      values are 1.0, 1.1, 1.2. Default is 1.2.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether or not public network access is allowed for
@@ -287,6 +295,10 @@ spec:
                       event subscription at the scope of the domain topic is deleted.
                       Defaults to true.
                     type: boolean
+                  dataResidencyBoundary:
+                    description: Specifies the data residency boundary. Possible values
+                      are WithinGeopair, WithinRegion.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     properties:
@@ -385,6 +397,10 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  minimumTlsVersion:
+                    description: The minimum TLS version that clients can use. Possible
+                      values are 1.0, 1.1, 1.2. Default is 1.2.
+                    type: string
                   publicNetworkAccessEnabled:
                     description: Whether or not public network access is allowed for
                       this server. Defaults to true.
@@ -474,6 +490,10 @@ spec:
                       event subscription at the scope of the domain topic is deleted.
                       Defaults to true.
                     type: boolean
+                  dataResidencyBoundary:
+                    description: Specifies the data residency boundary. Possible values
+                      are WithinGeopair, WithinRegion.
+                    type: string
                   endpoint:
                     description: The Endpoint associated with the EventGrid Domain.
                     type: string
@@ -585,6 +605,10 @@ spec:
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimumTlsVersion:
+                    description: The minimum TLS version that clients can use. Possible
+                      values are 1.0, 1.1, 1.2. Default is 1.2.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether or not public network access is allowed for

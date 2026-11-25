@@ -18,7 +18,7 @@ type AccountRaiPolicyInitParameters struct {
 	// The name of the base policy to use for this RAI Policy. Changing this forces a new resource to be created.
 	BasePolicyName *string `json:"basePolicyName,omitempty" tf:"base_policy_name,omitempty"`
 
-	// A content_filter block as defined below.
+	// One or more content_filter blocks as defined below.
 	ContentFilter []ContentFilterInitParameters `json:"contentFilter,omitempty" tf:"content_filter,omitempty"`
 
 	// The mode of the RAI Policy. Possible values are Default, Deferred, Blocking or Asynchronous_filter.
@@ -37,7 +37,7 @@ type AccountRaiPolicyObservation struct {
 	// The ID of the Cognitive Service Account to which this RAI Policy should be associated. Changing this forces a new resource to be created.
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
 
-	// A content_filter block as defined below.
+	// One or more content_filter blocks as defined below.
 	ContentFilter []ContentFilterObservation `json:"contentFilter,omitempty" tf:"content_filter,omitempty"`
 
 	// The ID of the Cognitive Service Account RAI Policy.
@@ -71,7 +71,7 @@ type AccountRaiPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	CognitiveAccountIDSelector *v2.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
 
-	// A content_filter block as defined below.
+	// One or more content_filter blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ContentFilter []ContentFilterParameters `json:"contentFilter,omitempty" tf:"content_filter,omitempty"`
 
@@ -137,7 +137,7 @@ type ContentFilterParameters struct {
 
 	// The severity threshold for the filter. Possible values are Low, Medium or High.
 	// +kubebuilder:validation:Optional
-	SeverityThreshold *string `json:"severityThreshold" tf:"severity_threshold,omitempty"`
+	SeverityThreshold *string `json:"severityThreshold,omitempty" tf:"severity_threshold,omitempty"`
 
 	// Content source to apply the content filter. Possible values are Prompt or Completion.
 	// +kubebuilder:validation:Optional

@@ -86,15 +86,29 @@ type AccountParameters struct {
 
 type ActiveDirectoryInitParameters struct {
 
+	// A list of Active Directory users to be added to the built-in Administrators active directory group. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be added to the built-in Administrators active directory group.
+	// +listType=set
+	AdministratorUsers []*string `json:"administratorUsers,omitempty" tf:"administrator_users,omitempty"`
+
 	// If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
 	// If enabled, AES encryption will be enabled for SMB communication.
 	AesEncryptionEnabled *bool `json:"aesEncryptionEnabled,omitempty" tf:"aes_encryption_enabled,omitempty"`
+
+	// A list of Active Directory users to be added to the built-in Backup Operators active directory group. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be added to the built-in Backup Operators active directory group.
+	// +listType=set
+	BackupUsers []*string `json:"backupUsers,omitempty" tf:"backup_users,omitempty"`
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// The name of the Active Directory domain.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// If enabled, the connection between Active Directory and SMB server will be encrypted. Defaults to false.
+	// Specifies if traffic between the Domain Controller and SMB server is encrypted.
+	DomainControllerConnectionEncryptionEnabled *bool `json:"domainControllerConnectionEncryptionEnabled,omitempty" tf:"domain_controller_connection_encryption_enabled,omitempty"`
 
 	// Name of the active directory machine.
 	// Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
@@ -104,9 +118,17 @@ type ActiveDirectoryInitParameters struct {
 	// IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
 	KerberosKdcIP *string `json:"kerberosKdcIp,omitempty" tf:"kerberos_kdc_ip,omitempty"`
 
+	// Specifies the preferred LDAP server IPs for the LDAP client. Maximum of 2 IPv4 addresses are allowed.
+	// Specifies the preferred LDAP server IPs for the LDAP client.
+	LdapClientPreferredServers []*string `json:"ldapClientPreferredServers,omitempty" tf:"ldap_client_preferred_servers,omitempty"`
+
 	// Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
 	// Specifies whether or not the LDAP traffic needs to be secured via TLS.
 	LdapOverTLSEnabled *bool `json:"ldapOverTlsEnabled,omitempty" tf:"ldap_over_tls_enabled,omitempty"`
+
+	// An ldap_search_scope block as defined below.
+	// Specifies the LDAP search scope for the LDAP client.
+	LdapSearchScope *LdapSearchScopeInitParameters `json:"ldapSearchScope,omitempty" tf:"ldap_search_scope,omitempty"`
 
 	// Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
 	// Specifies whether or not the LDAP traffic needs to be signed.
@@ -126,6 +148,11 @@ type ActiveDirectoryInitParameters struct {
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
 
+	// A list of Active Directory users to be given SeSecurityPrivilege privilege. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be given SeSecurityPrivilege privilege.
+	// +listType=set
+	SecurityUsers []*string `json:"securityUsers,omitempty" tf:"security_users,omitempty"`
+
 	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have a base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes. Required if ldap_over_tls_enabled is set to true.
 	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
 	ServerRootCACertificateSecretRef *v2.SecretKeySelector `json:"serverRootCaCertificateSecretRef,omitempty" tf:"-"`
@@ -140,15 +167,29 @@ type ActiveDirectoryInitParameters struct {
 
 type ActiveDirectoryObservation struct {
 
+	// A list of Active Directory users to be added to the built-in Administrators active directory group. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be added to the built-in Administrators active directory group.
+	// +listType=set
+	AdministratorUsers []*string `json:"administratorUsers,omitempty" tf:"administrator_users,omitempty"`
+
 	// If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
 	// If enabled, AES encryption will be enabled for SMB communication.
 	AesEncryptionEnabled *bool `json:"aesEncryptionEnabled,omitempty" tf:"aes_encryption_enabled,omitempty"`
+
+	// A list of Active Directory users to be added to the built-in Backup Operators active directory group. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be added to the built-in Backup Operators active directory group.
+	// +listType=set
+	BackupUsers []*string `json:"backupUsers,omitempty" tf:"backup_users,omitempty"`
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// The name of the Active Directory domain.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// If enabled, the connection between Active Directory and SMB server will be encrypted. Defaults to false.
+	// Specifies if traffic between the Domain Controller and SMB server is encrypted.
+	DomainControllerConnectionEncryptionEnabled *bool `json:"domainControllerConnectionEncryptionEnabled,omitempty" tf:"domain_controller_connection_encryption_enabled,omitempty"`
 
 	// Name of the active directory machine.
 	// Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
@@ -158,9 +199,17 @@ type ActiveDirectoryObservation struct {
 	// IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
 	KerberosKdcIP *string `json:"kerberosKdcIp,omitempty" tf:"kerberos_kdc_ip,omitempty"`
 
+	// Specifies the preferred LDAP server IPs for the LDAP client. Maximum of 2 IPv4 addresses are allowed.
+	// Specifies the preferred LDAP server IPs for the LDAP client.
+	LdapClientPreferredServers []*string `json:"ldapClientPreferredServers,omitempty" tf:"ldap_client_preferred_servers,omitempty"`
+
 	// Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
 	// Specifies whether or not the LDAP traffic needs to be secured via TLS.
 	LdapOverTLSEnabled *bool `json:"ldapOverTlsEnabled,omitempty" tf:"ldap_over_tls_enabled,omitempty"`
+
+	// An ldap_search_scope block as defined below.
+	// Specifies the LDAP search scope for the LDAP client.
+	LdapSearchScope *LdapSearchScopeObservation `json:"ldapSearchScope,omitempty" tf:"ldap_search_scope,omitempty"`
 
 	// Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
 	// Specifies whether or not the LDAP traffic needs to be signed.
@@ -177,6 +226,11 @@ type ActiveDirectoryObservation struct {
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
 
+	// A list of Active Directory users to be given SeSecurityPrivilege privilege. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be given SeSecurityPrivilege privilege.
+	// +listType=set
+	SecurityUsers []*string `json:"securityUsers,omitempty" tf:"security_users,omitempty"`
+
 	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to Default-First-Site-Name.
 	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to 'Default-First-Site-Name'
 	SiteName *string `json:"siteName,omitempty" tf:"site_name,omitempty"`
@@ -187,10 +241,22 @@ type ActiveDirectoryObservation struct {
 
 type ActiveDirectoryParameters struct {
 
+	// A list of Active Directory users to be added to the built-in Administrators active directory group. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be added to the built-in Administrators active directory group.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AdministratorUsers []*string `json:"administratorUsers,omitempty" tf:"administrator_users,omitempty"`
+
 	// If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
 	// If enabled, AES encryption will be enabled for SMB communication.
 	// +kubebuilder:validation:Optional
 	AesEncryptionEnabled *bool `json:"aesEncryptionEnabled,omitempty" tf:"aes_encryption_enabled,omitempty"`
+
+	// A list of Active Directory users to be added to the built-in Backup Operators active directory group. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be added to the built-in Backup Operators active directory group.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	BackupUsers []*string `json:"backupUsers,omitempty" tf:"backup_users,omitempty"`
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
 	// +kubebuilder:validation:Optional
@@ -199,6 +265,11 @@ type ActiveDirectoryParameters struct {
 	// The name of the Active Directory domain.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain" tf:"domain,omitempty"`
+
+	// If enabled, the connection between Active Directory and SMB server will be encrypted. Defaults to false.
+	// Specifies if traffic between the Domain Controller and SMB server is encrypted.
+	// +kubebuilder:validation:Optional
+	DomainControllerConnectionEncryptionEnabled *bool `json:"domainControllerConnectionEncryptionEnabled,omitempty" tf:"domain_controller_connection_encryption_enabled,omitempty"`
 
 	// Name of the active directory machine.
 	// Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
@@ -210,10 +281,20 @@ type ActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	KerberosKdcIP *string `json:"kerberosKdcIp,omitempty" tf:"kerberos_kdc_ip,omitempty"`
 
+	// Specifies the preferred LDAP server IPs for the LDAP client. Maximum of 2 IPv4 addresses are allowed.
+	// Specifies the preferred LDAP server IPs for the LDAP client.
+	// +kubebuilder:validation:Optional
+	LdapClientPreferredServers []*string `json:"ldapClientPreferredServers,omitempty" tf:"ldap_client_preferred_servers,omitempty"`
+
 	// Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
 	// Specifies whether or not the LDAP traffic needs to be secured via TLS.
 	// +kubebuilder:validation:Optional
 	LdapOverTLSEnabled *bool `json:"ldapOverTlsEnabled,omitempty" tf:"ldap_over_tls_enabled,omitempty"`
+
+	// An ldap_search_scope block as defined below.
+	// Specifies the LDAP search scope for the LDAP client.
+	// +kubebuilder:validation:Optional
+	LdapSearchScope *LdapSearchScopeParameters `json:"ldapSearchScope,omitempty" tf:"ldap_search_scope,omitempty"`
 
 	// Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
 	// Specifies whether or not the LDAP traffic needs to be signed.
@@ -237,6 +318,12 @@ type ActiveDirectoryParameters struct {
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	// +kubebuilder:validation:Optional
 	SMBServerName *string `json:"smbServerName" tf:"smb_server_name,omitempty"`
+
+	// A list of Active Directory users to be given SeSecurityPrivilege privilege. Usernames cannot contain the characters @ or \ and can be up to 255 characters long.
+	// Domain users to be given SeSecurityPrivilege privilege.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityUsers []*string `json:"securityUsers,omitempty" tf:"security_users,omitempty"`
 
 	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have a base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes. Required if ldap_over_tls_enabled is set to true.
 	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
@@ -309,6 +396,54 @@ type IdentityParameters struct {
 	// The identity type, which can be SystemAssigned or UserAssigned. Only one type at a time is supported by Azure NetApp Files.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type LdapSearchScopeInitParameters struct {
+
+	// Specifies the group DN, which overrides the base DN for group lookups.
+	// Specifies the group DN, which overrides the base DN for group lookups.
+	GroupDn *string `json:"groupDn,omitempty" tf:"group_dn,omitempty"`
+
+	// Specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.
+	// Specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.
+	GroupMembershipFilter *string `json:"groupMembershipFilter,omitempty" tf:"group_membership_filter,omitempty"`
+
+	// Specifies the user DN, which overrides the base DN for user lookups.
+	// Specifies the user DN, which overrides the base DN for user lookups.
+	UserDn *string `json:"userDn,omitempty" tf:"user_dn,omitempty"`
+}
+
+type LdapSearchScopeObservation struct {
+
+	// Specifies the group DN, which overrides the base DN for group lookups.
+	// Specifies the group DN, which overrides the base DN for group lookups.
+	GroupDn *string `json:"groupDn,omitempty" tf:"group_dn,omitempty"`
+
+	// Specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.
+	// Specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.
+	GroupMembershipFilter *string `json:"groupMembershipFilter,omitempty" tf:"group_membership_filter,omitempty"`
+
+	// Specifies the user DN, which overrides the base DN for user lookups.
+	// Specifies the user DN, which overrides the base DN for user lookups.
+	UserDn *string `json:"userDn,omitempty" tf:"user_dn,omitempty"`
+}
+
+type LdapSearchScopeParameters struct {
+
+	// Specifies the group DN, which overrides the base DN for group lookups.
+	// Specifies the group DN, which overrides the base DN for group lookups.
+	// +kubebuilder:validation:Optional
+	GroupDn *string `json:"groupDn,omitempty" tf:"group_dn,omitempty"`
+
+	// Specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.
+	// Specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.
+	// +kubebuilder:validation:Optional
+	GroupMembershipFilter *string `json:"groupMembershipFilter,omitempty" tf:"group_membership_filter,omitempty"`
+
+	// Specifies the user DN, which overrides the base DN for user lookups.
+	// Specifies the user DN, which overrides the base DN for user lookups.
+	// +kubebuilder:validation:Optional
+	UserDn *string `json:"userDn,omitempty" tf:"user_dn,omitempty"`
 }
 
 // AccountSpec defines the desired state of Account

@@ -97,7 +97,7 @@ spec:
                         type: string
                       gitUrl:
                         description: 'Specifies the GitHub Enterprise host name. For
-                          example: https://github.mydomain.com. Use https://github.com
+                          example: https://github.<mydomain>.com. Use https://github.com
                           for open source repositories.'
                         type: string
                       publishingEnabled:
@@ -314,7 +314,7 @@ spec:
                         type: string
                       gitUrl:
                         description: 'Specifies the GitHub Enterprise host name. For
-                          example: https://github.mydomain.com. Use https://github.com
+                          example: https://github.<mydomain>.com. Use https://github.com
                           for open source repositories.'
                         type: string
                       publishingEnabled:
@@ -533,7 +533,7 @@ spec:
                         type: string
                       gitUrl:
                         description: 'Specifies the GitHub Enterprise host name. For
-                          example: https://github.mydomain.com. Use https://github.com
+                          example: https://github.<mydomain>.com. Use https://github.com
                           for open source repositories.'
                         type: string
                       publishingEnabled:

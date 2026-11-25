@@ -183,15 +183,15 @@ type WatcherFlowLogInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Resource for which to enable flow logs for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
-	// Reference to a SecurityGroup in network to populate targetResourceId.
+	// Reference to a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup in network to populate targetResourceId.
+	// Selector for a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
@@ -316,16 +316,16 @@ type WatcherFlowLogParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Resource for which to enable flow logs for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
-	// Reference to a SecurityGroup in network to populate targetResourceId.
+	// Reference to a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDRef *v2.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup in network to populate targetResourceId.
+	// Selector for a VirtualNetwork in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDSelector *v2.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
@@ -363,9 +363,10 @@ type WatcherFlowLogStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="v1beta2 is deprecated since the Terraform AzureRM v5 bump, please migrate to v1beta3. Deprecated since v3.0.0."
 
 // WatcherFlowLog is the Schema for the WatcherFlowLogs API. Manages a Network Watcher Flow Log.
+// Deprecated: This API version (v1beta2) has been deprecated in release v3.0.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

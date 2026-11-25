@@ -70,7 +70,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta2
+apiVersion: keyvault.azure.upbound.io/v1beta3
 kind: Vault
 metadata:
   annotations:
@@ -83,6 +83,7 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: false
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

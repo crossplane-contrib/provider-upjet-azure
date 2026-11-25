@@ -62,7 +62,7 @@ type CacheRuleObservation struct {
 type CacheRuleParameters struct {
 
 	// The ID of the Container Registry where the Cache Rule should apply. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerregistry/v1beta2.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerregistry/v1beta3.Registry
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`

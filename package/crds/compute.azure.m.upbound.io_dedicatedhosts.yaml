@@ -71,8 +71,7 @@ spec:
                   licenseType:
                     description: Specifies the software license type that will be
                       applied to the VMs deployed on the Dedicated Host. Possible
-                      values are None, Windows_Server_Hybrid and Windows_Server_Perpetual.
-                      Defaults to None.
+                      values are Windows_Server_Hybrid and Windows_Server_Perpetual.
                     type: string
                   location:
                     description: Specify the supported Azure location where the resource
@@ -126,8 +125,7 @@ spec:
                   licenseType:
                     description: Specifies the software license type that will be
                       applied to the VMs deployed on the Dedicated Host. Possible
-                      values are None, Windows_Server_Hybrid and Windows_Server_Perpetual.
-                      Defaults to None.
+                      values are Windows_Server_Hybrid and Windows_Server_Perpetual.
                     type: string
                   location:
                     description: Specify the supported Azure location where the resource
@@ -250,8 +248,7 @@ spec:
                   licenseType:
                     description: Specifies the software license type that will be
                       applied to the VMs deployed on the Dedicated Host. Possible
-                      values are None, Windows_Server_Hybrid and Windows_Server_Perpetual.
-                      Defaults to None.
+                      values are Windows_Server_Hybrid and Windows_Server_Perpetual.
                     type: string
                   location:
                     description: Specify the supported Azure location where the resource

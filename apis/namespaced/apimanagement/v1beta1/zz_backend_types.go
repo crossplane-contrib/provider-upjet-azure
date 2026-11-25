@@ -47,7 +47,7 @@ type BackendInitParameters struct {
 	// A circuit_breaker_rule block as documented below.
 	CircuitBreakerRule *CircuitBreakerRuleInitParameters `json:"circuitBreakerRule,omitempty" tf:"circuit_breaker_rule,omitempty"`
 
-	// A credentials block as documented below.
+	// A credentials block as defined below.
 	Credentials *CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// The description of the backend.
@@ -56,16 +56,16 @@ type BackendInitParameters struct {
 	// The protocol used by the backend host. Possible values are http or soap.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// A proxy block as documented below.
+	// A proxy block as defined below.
 	Proxy *BackendProxyInitParameters `json:"proxy,omitempty" tf:"proxy,omitempty"`
 
 	// The management URI of the backend host in an external system. This URI can be the ARM Resource ID of Logic Apps, Function Apps or API Apps, or the management endpoint of a Service Fabric cluster.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// A service_fabric_cluster block as documented below.
+	// A service_fabric_cluster block as defined below.
 	ServiceFabricCluster *ServiceFabricClusterInitParameters `json:"serviceFabricCluster,omitempty" tf:"service_fabric_cluster,omitempty"`
 
-	// A tls block as documented below.
+	// A tls block as defined below.
 	TLS *TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// The title of the backend.
@@ -83,7 +83,7 @@ type BackendObservation struct {
 	// A circuit_breaker_rule block as documented below.
 	CircuitBreakerRule *CircuitBreakerRuleObservation `json:"circuitBreakerRule,omitempty" tf:"circuit_breaker_rule,omitempty"`
 
-	// A credentials block as documented below.
+	// A credentials block as defined below.
 	Credentials *CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// The description of the backend.
@@ -95,7 +95,7 @@ type BackendObservation struct {
 	// The protocol used by the backend host. Possible values are http or soap.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// A proxy block as documented below.
+	// A proxy block as defined below.
 	Proxy *BackendProxyObservation `json:"proxy,omitempty" tf:"proxy,omitempty"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -104,10 +104,10 @@ type BackendObservation struct {
 	// The management URI of the backend host in an external system. This URI can be the ARM Resource ID of Logic Apps, Function Apps or API Apps, or the management endpoint of a Service Fabric cluster.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// A service_fabric_cluster block as documented below.
+	// A service_fabric_cluster block as defined below.
 	ServiceFabricCluster *ServiceFabricClusterObservation `json:"serviceFabricCluster,omitempty" tf:"service_fabric_cluster,omitempty"`
 
-	// A tls block as documented below.
+	// A tls block as defined below.
 	TLS *TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// The title of the backend.
@@ -120,7 +120,7 @@ type BackendObservation struct {
 type BackendParameters struct {
 
 	// The Name of the API Management Service where this backend should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta2.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -136,7 +136,7 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	CircuitBreakerRule *CircuitBreakerRuleParameters `json:"circuitBreakerRule,omitempty" tf:"circuit_breaker_rule,omitempty"`
 
-	// A credentials block as documented below.
+	// A credentials block as defined below.
 	// +kubebuilder:validation:Optional
 	Credentials *CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
@@ -148,7 +148,7 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// A proxy block as documented below.
+	// A proxy block as defined below.
 	// +kubebuilder:validation:Optional
 	Proxy *BackendProxyParameters `json:"proxy,omitempty" tf:"proxy,omitempty"`
 
@@ -169,11 +169,11 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// A service_fabric_cluster block as documented below.
+	// A service_fabric_cluster block as defined below.
 	// +kubebuilder:validation:Optional
 	ServiceFabricCluster *ServiceFabricClusterParameters `json:"serviceFabricCluster,omitempty" tf:"service_fabric_cluster,omitempty"`
 
-	// A tls block as documented below.
+	// A tls block as defined below.
 	// +kubebuilder:validation:Optional
 	TLS *TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
@@ -224,7 +224,7 @@ type BackendProxyParameters struct {
 
 type CircuitBreakerRuleInitParameters struct {
 
-	// Specifies whether the circuit breaker should honor Retry-After requests. Defaults to false.
+	// Specifies whether the circuit breaker should honour Retry-After requests. Defaults to false.
 	AcceptRetryAfterEnabled *bool `json:"acceptRetryAfterEnabled,omitempty" tf:"accept_retry_after_enabled,omitempty"`
 
 	// A failure_condition block as defined below.
@@ -239,7 +239,7 @@ type CircuitBreakerRuleInitParameters struct {
 
 type CircuitBreakerRuleObservation struct {
 
-	// Specifies whether the circuit breaker should honor Retry-After requests. Defaults to false.
+	// Specifies whether the circuit breaker should honour Retry-After requests. Defaults to false.
 	AcceptRetryAfterEnabled *bool `json:"acceptRetryAfterEnabled,omitempty" tf:"accept_retry_after_enabled,omitempty"`
 
 	// A failure_condition block as defined below.
@@ -254,7 +254,7 @@ type CircuitBreakerRuleObservation struct {
 
 type CircuitBreakerRuleParameters struct {
 
-	// Specifies whether the circuit breaker should honor Retry-After requests. Defaults to false.
+	// Specifies whether the circuit breaker should honour Retry-After requests. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AcceptRetryAfterEnabled *bool `json:"acceptRetryAfterEnabled,omitempty" tf:"accept_retry_after_enabled,omitempty"`
 
@@ -433,7 +433,7 @@ type ServiceFabricClusterInitParameters struct {
 	// +listType=set
 	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
 
-	// One or more server_x509_name blocks as documented below.
+	// One or more server_x509_name blocks as defined below.
 	ServerX509Name []ServerX509NameInitParameters `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
 }
 
@@ -456,7 +456,7 @@ type ServiceFabricClusterObservation struct {
 	// +listType=set
 	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
 
-	// One or more server_x509_name blocks as documented below.
+	// One or more server_x509_name blocks as defined below.
 	ServerX509Name []ServerX509NameObservation `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
 }
 
@@ -484,7 +484,7 @@ type ServiceFabricClusterParameters struct {
 	// +listType=set
 	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
 
-	// One or more server_x509_name blocks as documented below.
+	// One or more server_x509_name blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ServerX509Name []ServerX509NameParameters `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
 }

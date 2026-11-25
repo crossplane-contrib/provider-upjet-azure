@@ -112,9 +112,11 @@ spec:
     virtualHubIdRef:
       name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: ExpressRouteConnection
 metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
   name: example-route-connection
   namespace: upbound-system
 spec:

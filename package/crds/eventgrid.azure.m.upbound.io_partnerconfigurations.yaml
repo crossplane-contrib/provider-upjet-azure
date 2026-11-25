@@ -74,7 +74,7 @@ spec:
                             example: "2025-02-04T00:00:00Z".'
                           type: string
                         partnerName:
-                          description: The partner name.
+                          description: The name of a verified partner.
                           type: string
                         partnerRegistrationId:
                           description: The immutable id of the corresponding partner
@@ -205,7 +205,7 @@ spec:
                             example: "2025-02-04T00:00:00Z".'
                           type: string
                         partnerName:
-                          description: The partner name.
+                          description: The name of a verified partner.
                           type: string
                         partnerRegistrationId:
                           description: The immutable id of the corresponding partner
@@ -303,7 +303,7 @@ spec:
                             example: "2025-02-04T00:00:00Z".'
                           type: string
                         partnerName:
-                          description: The partner name.
+                          description: The name of a verified partner.
                           type: string
                         partnerRegistrationId:
                           description: The immutable id of the corresponding partner

@@ -251,8 +251,8 @@ spec:
                           type: boolean
                         enhancedAuthenticationEnabled:
                           description: Enables additional security measures for this
-                            site, see Enhanced Directline Authentication Features.
-                            Disabled by default.
+                            site, see Direct Line enhanced authentication. Disabled
+                            by default.
                           type: boolean
                         name:
                           description: The name of the site
@@ -315,8 +315,8 @@ spec:
                           type: boolean
                         enhancedAuthenticationEnabled:
                           description: Enables additional security measures for this
-                            site, see Enhanced Directline Authentication Features.
-                            Disabled by default.
+                            site, see Direct Line enhanced authentication. Disabled
+                            by default.
                           type: boolean
                         name:
                           description: The name of the site
@@ -478,8 +478,8 @@ spec:
                           type: boolean
                         enhancedAuthenticationEnabled:
                           description: Enables additional security measures for this
-                            site, see Enhanced Directline Authentication Features.
-                            Disabled by default.
+                            site, see Direct Line enhanced authentication. Disabled
+                            by default.
                           type: boolean
                         id:
                           description: Id for the site

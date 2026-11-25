@@ -10,12 +10,6 @@ package v1beta1
 func (tr *AccountNetworkRules) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Blob) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Container) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ContainerImmutabilityPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -29,18 +23,6 @@ func (tr *EncryptionScope) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ObjectReplication) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Queue) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Share) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ShareDirectory) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Table) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TableEntity) Hub() {}

@@ -16,7 +16,7 @@ import (
 type MSSQLServerMicrosoftSupportAuditingPolicyInitParameters struct {
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Microsoft support auditing logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`
 
@@ -62,7 +62,7 @@ type MSSQLServerMicrosoftSupportAuditingPolicyObservation struct {
 type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Microsoft support auditing logs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
 	// +kubebuilder:validation:Optional
 	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`

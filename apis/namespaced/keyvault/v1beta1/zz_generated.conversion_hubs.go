@@ -13,9 +13,6 @@ func (tr *AccessPolicy) Hub() {}
 func (tr *Certificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CertificateContacts) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *CertificateIssuer) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -32,6 +29,3 @@ func (tr *ManagedStorageAccountSASTokenDefinition) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Secret) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Vault) Hub() {}

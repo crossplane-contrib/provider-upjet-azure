@@ -42,7 +42,7 @@ spec:
     tags:
       Environment: Production
 ---
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -56,6 +56,7 @@ spec:
   forProvider:
     location: West Europe
     purgeProtectionEnabled: true
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

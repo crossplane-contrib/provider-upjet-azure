@@ -26,7 +26,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -130,7 +130,7 @@ func (mg *ConsumerGroup) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.NamespacedResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.m.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -297,7 +297,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	if mg.Spec.ForProvider.NetworkRulesets != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -341,7 +341,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	if mg.Spec.InitProvider.NetworkRulesets != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}

@@ -61,7 +61,7 @@ spec:
               forProvider:
                 properties:
                   businessIdentity:
-                    description: A business_identity block as documented below.
+                    description: A business_identity block as defined below.
                     items:
                       properties:
                         qualifier:
@@ -267,7 +267,7 @@ spec:
                   autoscaler.
                 properties:
                   businessIdentity:
-                    description: A business_identity block as documented below.
+                    description: A business_identity block as defined below.
                     items:
                       properties:
                         qualifier:
@@ -355,7 +355,7 @@ spec:
               atProvider:
                 properties:
                   businessIdentity:
-                    description: A business_identity block as documented below.
+                    description: A business_identity block as defined below.
                     items:
                       properties:
                         qualifier:

@@ -85,10 +85,9 @@ spec:
                     description: A friendly name for the Virtual Desktop Host Pool.
                     type: string
                   loadBalancerType:
-                    description: |-
-                      BreadthFirst load balancing distributes new user sessions across all available session hosts in the host pool. Possible values are BreadthFirst, DepthFirst and Persistent.
-                      DepthFirst load balancing distributes new user sessions to an available session host with the highest number of connections but has not reached its maximum session limit threshold.
-                      Persistent should be used if the host pool type is Personal
+                    description: The type of the load balancer. Possible values are
+                      BreadthFirst, DepthFirst, MultiplePersistent and Persistent.
+                      Refer to the Azure documentation for more information.
                     type: string
                   location:
                     description: The location/region where the Virtual Desktop Host
@@ -291,10 +290,9 @@ spec:
                     description: A friendly name for the Virtual Desktop Host Pool.
                     type: string
                   loadBalancerType:
-                    description: |-
-                      BreadthFirst load balancing distributes new user sessions across all available session hosts in the host pool. Possible values are BreadthFirst, DepthFirst and Persistent.
-                      DepthFirst load balancing distributes new user sessions to an available session host with the highest number of connections but has not reached its maximum session limit threshold.
-                      Persistent should be used if the host pool type is Personal
+                    description: The type of the load balancer. Possible values are
+                      BreadthFirst, DepthFirst, MultiplePersistent and Persistent.
+                      Refer to the Azure documentation for more information.
                     type: string
                   location:
                     description: The location/region where the Virtual Desktop Host
@@ -511,10 +509,9 @@ spec:
                     description: The ID of the Virtual Desktop Host Pool.
                     type: string
                   loadBalancerType:
-                    description: |-
-                      BreadthFirst load balancing distributes new user sessions across all available session hosts in the host pool. Possible values are BreadthFirst, DepthFirst and Persistent.
-                      DepthFirst load balancing distributes new user sessions to an available session host with the highest number of connections but has not reached its maximum session limit threshold.
-                      Persistent should be used if the host pool type is Personal
+                    description: The type of the load balancer. Possible values are
+                      BreadthFirst, DepthFirst, MultiplePersistent and Persistent.
+                      Refer to the Azure documentation for more information.
                     type: string
                   location:
                     description: The location/region where the Virtual Desktop Host

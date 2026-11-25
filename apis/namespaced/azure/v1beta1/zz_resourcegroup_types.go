@@ -18,7 +18,7 @@ type ResourceGroupInitParameters struct {
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID of the resource or application that manages this Resource Group.
+	// The ID of the resource or application that manages this Resource Group. Changing this forces a new Resource Group to be created.
 	ManagedBy *string `json:"managedBy,omitempty" tf:"managed_by,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
@@ -34,7 +34,7 @@ type ResourceGroupObservation struct {
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID of the resource or application that manages this Resource Group.
+	// The ID of the resource or application that manages this Resource Group. Changing this forces a new Resource Group to be created.
 	ManagedBy *string `json:"managedBy,omitempty" tf:"managed_by,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
@@ -48,7 +48,7 @@ type ResourceGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The ID of the resource or application that manages this Resource Group.
+	// The ID of the resource or application that manages this Resource Group. Changing this forces a new Resource Group to be created.
 	// +kubebuilder:validation:Optional
 	ManagedBy *string `json:"managedBy,omitempty" tf:"managed_by,omitempty"`
 

@@ -16,9 +16,6 @@ func (tr *Cluster) Hub() {}
 func (tr *ConsumerGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *EventHub) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *EventHubNamespace) Hub() {}
 
 // Hub marks this type as a conversion hub.

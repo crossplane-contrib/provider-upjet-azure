@@ -208,7 +208,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   sku:
-                    description: A sku block for the ExpressRoute circuit as documented
+                    description: A sku block for the ExpressRoute circuit as defined
                       below.
                     properties:
                       family:
@@ -294,7 +294,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   sku:
-                    description: A sku block for the ExpressRoute circuit as documented
+                    description: A sku block for the ExpressRoute circuit as defined
                       below.
                     properties:
                       family:
@@ -461,7 +461,7 @@ spec:
                       Provisioning, Provisioned, and Deprovisioning.
                     type: string
                   sku:
-                    description: A sku block for the ExpressRoute circuit as documented
+                    description: A sku block for the ExpressRoute circuit as defined
                       below.
                     properties:
                       family:

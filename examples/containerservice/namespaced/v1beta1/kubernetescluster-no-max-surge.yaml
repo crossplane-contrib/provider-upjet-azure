@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-apiVersion: containerservice.azure.upbound.io/v1beta2
+apiVersion: containerservice.azure.upbound.io/v1beta3
 kind: KubernetesCluster
 metadata:
   annotations:
@@ -23,6 +23,8 @@ spec:
     identity:
       type: SystemAssigned
     location: West Europe
+    nodeProvisioningProfile:
+      mode: Manual
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: kubernetescluster-no-max-surge

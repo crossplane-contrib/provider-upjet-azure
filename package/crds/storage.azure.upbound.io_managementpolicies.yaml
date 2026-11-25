@@ -74,14 +74,14 @@ spec:
               forProvider:
                 properties:
                   rule:
-                    description: A rule block as documented below.
+                    description: A rule block as defined below.
                     items:
                       properties:
                         actions:
-                          description: An actions block as documented below.
+                          description: An actions block as defined below.
                           properties:
                             baseBlob:
-                              description: A base_blob block as documented below.
+                              description: A base_blob block as defined below.
                               properties:
                                 autoTierToHotFromCoolEnabled:
                                   description: Whether a blob should automatically
@@ -163,7 +163,7 @@ spec:
                                   type: number
                               type: object
                             snapshot:
-                              description: A snapshot block as documented below.
+                              description: A snapshot block as defined below.
                               properties:
                                 changeTierToArchiveAfterDaysSinceCreation:
                                   description: The age in days after creation to tier
@@ -192,7 +192,7 @@ spec:
                                   type: number
                               type: object
                             version:
-                              description: A version block as documented below.
+                              description: A version block as defined below.
                               properties:
                                 changeTierToArchiveAfterDaysSinceCreation:
                                   description: The age in days after creation to tier
@@ -225,7 +225,7 @@ spec:
                           description: Boolean to specify whether the rule is enabled.
                           type: boolean
                         filters:
-                          description: A filters block as documented below.
+                          description: A filters block as defined below.
                           properties:
                             blobTypes:
                               description: An array of predefined values. Valid options
@@ -363,14 +363,14 @@ spec:
                   autoscaler.
                 properties:
                   rule:
-                    description: A rule block as documented below.
+                    description: A rule block as defined below.
                     items:
                       properties:
                         actions:
-                          description: An actions block as documented below.
+                          description: An actions block as defined below.
                           properties:
                             baseBlob:
-                              description: A base_blob block as documented below.
+                              description: A base_blob block as defined below.
                               properties:
                                 autoTierToHotFromCoolEnabled:
                                   description: Whether a blob should automatically
@@ -452,7 +452,7 @@ spec:
                                   type: number
                               type: object
                             snapshot:
-                              description: A snapshot block as documented below.
+                              description: A snapshot block as defined below.
                               properties:
                                 changeTierToArchiveAfterDaysSinceCreation:
                                   description: The age in days after creation to tier
@@ -481,7 +481,7 @@ spec:
                                   type: number
                               type: object
                             version:
-                              description: A version block as documented below.
+                              description: A version block as defined below.
                               properties:
                                 changeTierToArchiveAfterDaysSinceCreation:
                                   description: The age in days after creation to tier
@@ -514,7 +514,7 @@ spec:
                           description: Boolean to specify whether the rule is enabled.
                           type: boolean
                         filters:
-                          description: A filters block as documented below.
+                          description: A filters block as defined below.
                           properties:
                             blobTypes:
                               description: An array of predefined values. Valid options
@@ -733,14 +733,14 @@ spec:
                     description: The ID of the Storage Account Management Policy.
                     type: string
                   rule:
-                    description: A rule block as documented below.
+                    description: A rule block as defined below.
                     items:
                       properties:
                         actions:
-                          description: An actions block as documented below.
+                          description: An actions block as defined below.
                           properties:
                             baseBlob:
-                              description: A base_blob block as documented below.
+                              description: A base_blob block as defined below.
                               properties:
                                 autoTierToHotFromCoolEnabled:
                                   description: Whether a blob should automatically
@@ -822,7 +822,7 @@ spec:
                                   type: number
                               type: object
                             snapshot:
-                              description: A snapshot block as documented below.
+                              description: A snapshot block as defined below.
                               properties:
                                 changeTierToArchiveAfterDaysSinceCreation:
                                   description: The age in days after creation to tier
@@ -851,7 +851,7 @@ spec:
                                   type: number
                               type: object
                             version:
-                              description: A version block as documented below.
+                              description: A version block as defined below.
                               properties:
                                 changeTierToArchiveAfterDaysSinceCreation:
                                   description: The age in days after creation to tier
@@ -884,7 +884,7 @@ spec:
                           description: Boolean to specify whether the rule is enabled.
                           type: boolean
                         filters:
-                          description: A filters block as documented below.
+                          description: A filters block as defined below.
                           properties:
                             blobTypes:
                               description: An array of predefined values. Valid options

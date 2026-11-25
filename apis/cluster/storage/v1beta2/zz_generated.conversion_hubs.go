@@ -7,13 +7,28 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *Account) Hub() {}
+func (tr *AccountLocalUser) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AccountLocalUser) Hub() {}
+func (tr *Blob) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BlobInventoryPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Container) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ManagementPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Queue) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Share) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ShareDirectory) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Table) Hub() {}

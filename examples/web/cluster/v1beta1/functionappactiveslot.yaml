@@ -28,6 +28,8 @@ metadata:
   name: funcappactiveslotslot
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     functionAppIdSelector:
       matchLabels:
         testing.upbound.io/example-name: funcappactiveslotlfa
@@ -49,6 +51,8 @@ metadata:
   name: funcappactiveslotlfa
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     name: linuxfuncnappslotapp
     location: West Europe
     resourceGroupNameSelector:
@@ -99,7 +103,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:

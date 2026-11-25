@@ -44,7 +44,7 @@ spec:
       - Http
       - Https
 ---
-apiVersion: cdn.azure.m.upbound.io/v1beta1
+apiVersion: cdn.azure.m.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -64,9 +64,8 @@ spec:
     hostName: contoso.contoso.com
     tls:
       certificateType: ManagedCertificate
-      minimumTlsVersion: TLS12
 ---
-apiVersion: cdn.azure.m.upbound.io/v1beta1
+apiVersion: cdn.azure.m.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -86,7 +85,6 @@ spec:
     hostName: contoso.fabrikam.com
     tls:
       certificateType: ManagedCertificate
-      minimumTlsVersion: TLS12
 ---
 apiVersion: cdn.azure.m.upbound.io/v1beta1
 kind: FrontdoorOrigin

@@ -17,496 +17,8 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *AppServicePlan) ResolveReferences( // ResolveReferences of this AppServicePlan.
+func (mg *LinuxFunctionApp) ResolveReferences( // ResolveReferences of this LinuxFunctionApp.
 	ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
-	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this FunctionApp.
-func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "AppServicePlan", "AppServicePlanList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppServicePlanID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.AppServicePlanIDRef,
-			Selector:     mg.Spec.ForProvider.AppServicePlanIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.AppServicePlanID")
-	}
-	mg.Spec.ForProvider.AppServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.AppServicePlanIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
-	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-
-	if mg.Spec.ForProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	if mg.Spec.ForProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
-	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "AppServicePlan", "AppServicePlanList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServicePlanID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.AppServicePlanIDRef,
-			Selector:     mg.Spec.InitProvider.AppServicePlanIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.AppServicePlanID")
-	}
-	mg.Spec.InitProvider.AppServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.AppServicePlanIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
-	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
-
-	if mg.Spec.InitProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	if mg.Spec.InitProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
-	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this FunctionAppSlot.
-func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "AppServicePlan", "AppServicePlanList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppServicePlanID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.AppServicePlanIDRef,
-			Selector:     mg.Spec.ForProvider.AppServicePlanIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.AppServicePlanID")
-	}
-	mg.Spec.ForProvider.AppServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.AppServicePlanIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "FunctionApp", "FunctionAppList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppName),
-			Extract:      resource.ExtractParamPath("name", false),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.FunctionAppNameRef,
-			Selector:     mg.Spec.ForProvider.FunctionAppNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.FunctionAppName")
-	}
-	mg.Spec.ForProvider.FunctionAppName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.FunctionAppNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
-	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-
-	if mg.Spec.ForProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	if mg.Spec.ForProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
-	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "AppServicePlan", "AppServicePlanList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServicePlanID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.AppServicePlanIDRef,
-			Selector:     mg.Spec.InitProvider.AppServicePlanIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.AppServicePlanID")
-	}
-	mg.Spec.InitProvider.AppServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.AppServicePlanIDRef = rsp.ResolvedReference
-
-	if mg.Spec.InitProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.SiteConfig.IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	if mg.Spec.InitProvider.SiteConfig != nil {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
-			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-				}
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID),
-					Extract:      rconfig.ExtractResourceID(),
-					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
-					Selector:     mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
-					To:           reference.To{List: l, Managed: m},
-				})
-			}
-			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID")
-			}
-			mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.SiteConfig.ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
-
-		}
-	}
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
-	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -557,7 +69,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -581,7 +93,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -603,7 +115,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -622,7 +134,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -685,7 +197,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -709,7 +221,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -731,7 +243,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -750,7 +262,7 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -805,7 +317,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -829,7 +341,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -851,7 +363,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -870,7 +382,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -893,7 +405,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -917,7 +429,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -939,7 +451,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -958,7 +470,7 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1377,38 +889,6 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 	return nil
 }
 
-// ResolveReferences of this StaticSite.
-func (mg *StaticSite) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
-	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-
-	return nil
-}
-
 // ResolveReferences of this WindowsFunctionApp.
 func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
@@ -1461,7 +941,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1485,7 +965,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1507,7 +987,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1526,7 +1006,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1569,7 +1049,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1593,7 +1073,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1615,7 +1095,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1634,7 +1114,7 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1689,7 +1169,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1713,7 +1193,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1735,7 +1215,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1754,7 +1234,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1777,7 +1257,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1801,7 +1281,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1823,7 +1303,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1842,7 +1322,7 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1917,7 +1397,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1941,7 +1421,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1963,7 +1443,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2005,7 +1485,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -2029,7 +1509,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -2051,7 +1531,7 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2105,7 +1585,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -2129,7 +1609,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 	if mg.Spec.ForProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -2151,7 +1631,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2173,7 +1653,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.IPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -2197,7 +1677,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 	if mg.Spec.InitProvider.SiteConfig != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig.ScmIPRestriction); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -2219,7 +1699,7 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 		}
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

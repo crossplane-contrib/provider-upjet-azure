@@ -151,7 +151,7 @@ spec:
                     properties:
                       acceptRetryAfterEnabled:
                         description: Specifies whether the circuit breaker should
-                          honor Retry-After requests. Defaults to false.
+                          honour Retry-After requests. Defaults to false.
                         type: boolean
                       failureCondition:
                         description: A failure_condition block as defined below.
@@ -203,7 +203,7 @@ spec:
                         type: string
                     type: object
                   credentials:
-                    description: A credentials block as documented below.
+                    description: A credentials block as defined below.
                     properties:
                       authorization:
                         description: An authorization block as defined below.
@@ -249,7 +249,7 @@ spec:
                       are http or soap.
                     type: string
                   proxy:
-                    description: A proxy block as documented below.
+                    description: A proxy block as defined below.
                     properties:
                       passwordSecretRef:
                         description: The password to connect to the proxy server.
@@ -363,7 +363,7 @@ spec:
                       cluster.
                     type: string
                   serviceFabricCluster:
-                    description: A service_fabric_cluster block as documented below.
+                    description: A service_fabric_cluster block as defined below.
                     properties:
                       clientCertificateId:
                         description: The client certificate resource id for the management
@@ -391,7 +391,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       serverX509Name:
-                        description: One or more server_x509_name blocks as documented
+                        description: One or more server_x509_name blocks as defined
                           below.
                         items:
                           properties:
@@ -408,7 +408,7 @@ spec:
                     description: The title of the backend.
                     type: string
                   tls:
-                    description: A tls block as documented below.
+                    description: A tls block as defined below.
                     properties:
                       validateCertificateChain:
                         description: Flag indicating whether SSL certificate chain
@@ -448,7 +448,7 @@ spec:
                     properties:
                       acceptRetryAfterEnabled:
                         description: Specifies whether the circuit breaker should
-                          honor Retry-After requests. Defaults to false.
+                          honour Retry-After requests. Defaults to false.
                         type: boolean
                       failureCondition:
                         description: A failure_condition block as defined below.
@@ -500,7 +500,7 @@ spec:
                         type: string
                     type: object
                   credentials:
-                    description: A credentials block as documented below.
+                    description: A credentials block as defined below.
                     properties:
                       authorization:
                         description: An authorization block as defined below.
@@ -546,7 +546,7 @@ spec:
                       are http or soap.
                     type: string
                   proxy:
-                    description: A proxy block as documented below.
+                    description: A proxy block as defined below.
                     properties:
                       passwordSecretRef:
                         description: The password to connect to the proxy server.
@@ -574,7 +574,7 @@ spec:
                       cluster.
                     type: string
                   serviceFabricCluster:
-                    description: A service_fabric_cluster block as documented below.
+                    description: A service_fabric_cluster block as defined below.
                     properties:
                       clientCertificateId:
                         description: The client certificate resource id for the management
@@ -602,7 +602,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       serverX509Name:
-                        description: One or more server_x509_name blocks as documented
+                        description: One or more server_x509_name blocks as defined
                           below.
                         items:
                           properties:
@@ -619,7 +619,7 @@ spec:
                     description: The title of the backend.
                     type: string
                   tls:
-                    description: A tls block as documented below.
+                    description: A tls block as defined below.
                     properties:
                       validateCertificateChain:
                         description: Flag indicating whether SSL certificate chain
@@ -723,7 +723,7 @@ spec:
                     properties:
                       acceptRetryAfterEnabled:
                         description: Specifies whether the circuit breaker should
-                          honor Retry-After requests. Defaults to false.
+                          honour Retry-After requests. Defaults to false.
                         type: boolean
                       failureCondition:
                         description: A failure_condition block as defined below.
@@ -775,7 +775,7 @@ spec:
                         type: string
                     type: object
                   credentials:
-                    description: A credentials block as documented below.
+                    description: A credentials block as defined below.
                     properties:
                       authorization:
                         description: An authorization block as defined below.
@@ -824,7 +824,7 @@ spec:
                       are http or soap.
                     type: string
                   proxy:
-                    description: A proxy block as documented below.
+                    description: A proxy block as defined below.
                     properties:
                       url:
                         description: The URL of the proxy server.
@@ -844,7 +844,7 @@ spec:
                       cluster.
                     type: string
                   serviceFabricCluster:
-                    description: A service_fabric_cluster block as documented below.
+                    description: A service_fabric_cluster block as defined below.
                     properties:
                       clientCertificateId:
                         description: The client certificate resource id for the management
@@ -872,7 +872,7 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       serverX509Name:
-                        description: One or more server_x509_name blocks as documented
+                        description: One or more server_x509_name blocks as defined
                           below.
                         items:
                           properties:
@@ -889,7 +889,7 @@ spec:
                     description: The title of the backend.
                     type: string
                   tls:
-                    description: A tls block as documented below.
+                    description: A tls block as defined below.
                     properties:
                       validateCertificateChain:
                         description: Flag indicating whether SSL certificate chain

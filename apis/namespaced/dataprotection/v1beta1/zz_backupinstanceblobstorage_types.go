@@ -35,7 +35,7 @@ type BackupInstanceBlobStorageInitParameters struct {
 	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -97,7 +97,7 @@ type BackupInstanceBlobStorageParameters struct {
 	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

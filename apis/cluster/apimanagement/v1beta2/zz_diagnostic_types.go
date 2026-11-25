@@ -565,6 +565,9 @@ type DiagnosticInitParameters struct {
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
+
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
@@ -607,6 +610,9 @@ type DiagnosticObservation struct {
 	// Log client IP address.
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
 
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
+
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
 
@@ -637,7 +643,7 @@ type DiagnosticParameters struct {
 	APIManagementLoggerIDSelector *v2.Selector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
 
 	// The Name of the API Management Service where this Diagnostic should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta3.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
@@ -676,6 +682,10 @@ type DiagnosticParameters struct {
 	// Log client IP address.
 	// +kubebuilder:validation:Optional
 	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
+
+	// Whether custom metrics emitted via the emit-metric policy are sent to Application Insights.
+	// +kubebuilder:validation:Optional
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
 
 	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url.
 	// +kubebuilder:validation:Optional

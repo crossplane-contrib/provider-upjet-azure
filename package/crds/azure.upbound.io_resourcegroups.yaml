@@ -79,7 +79,8 @@ spec:
                     type: string
                   managedBy:
                     description: The ID of the resource or application that manages
-                      this Resource Group.
+                      this Resource Group. Changing this forces a new Resource Group
+                      to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -108,7 +109,8 @@ spec:
                     type: string
                   managedBy:
                     description: The ID of the resource or application that manages
-                      this Resource Group.
+                      this Resource Group. Changing this forces a new Resource Group
+                      to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -223,7 +225,8 @@ spec:
                     type: string
                   managedBy:
                     description: The ID of the resource or application that manages
-                      this Resource Group.
+                      this Resource Group. Changing this forces a new Resource Group
+                      to be created.
                     type: string
                   tags:
                     additionalProperties:

@@ -17,6 +17,10 @@ import (
 // Configure configures storage group
 func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("azurerm_storage_account", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			// skip diff customization on create
 			if state == nil || state.Empty() {
@@ -51,17 +55,24 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_blob", func(r *config.Resource) {
-		r.References["storage_account_name"] = config.Reference{
-			TerraformName: "azurerm_storage_account",
-		}
-		r.References["storage_container_name"] = config.Reference{
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+		r.References["storage_container_id"] = config.Reference{
 			TerraformName: "azurerm_storage_container",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_container", func(r *config.Resource) {
-		r.References["storage_account_name"] = config.Reference{
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+		r.References["storage_account_id"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -81,17 +92,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_share_directory", func(r *config.Resource) {
-		r.References["share_name"] = config.Reference{
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+		r.References["storage_share_url"] = config.Reference{
 			TerraformName: "azurerm_storage_share",
-			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
-		}
-		r.References["storage_account_name"] = config.Reference{
-			TerraformName: "azurerm_storage_account",
-			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
-		}
-		r.References["storage_share_id"] = config.Reference{
-			TerraformName: "azurerm_storage_share",
-			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
+			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("url",true)`,
 		}
 	})
 
@@ -104,5 +111,26 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			TerraformName: "azurerm_storage_account",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
 		}
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_queue", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_share", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_table", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 	})
 }

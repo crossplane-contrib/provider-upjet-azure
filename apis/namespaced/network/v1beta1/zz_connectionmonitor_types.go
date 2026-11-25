@@ -25,7 +25,7 @@ type ConnectionMonitorInitParameters struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	OutputWorkspaceResourceIds []*string `json:"outputWorkspaceResourceIds,omitempty" tf:"output_workspace_resource_ids,omitempty"`
@@ -110,7 +110,7 @@ type ConnectionMonitorParameters struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -442,7 +442,7 @@ type SuccessThresholdParameters struct {
 
 type TCPConfigurationInitParameters struct {
 
-	// The destination port behavior for the TCP connection. Possible values are None and ListenIfAvailable.
+	// The destination port behaviour for the TCP connection. Possible values are None and ListenIfAvailable.
 	DestinationPortBehavior *string `json:"destinationPortBehavior,omitempty" tf:"destination_port_behavior,omitempty"`
 
 	// The port for the TCP connection.
@@ -454,7 +454,7 @@ type TCPConfigurationInitParameters struct {
 
 type TCPConfigurationObservation struct {
 
-	// The destination port behavior for the TCP connection. Possible values are None and ListenIfAvailable.
+	// The destination port behaviour for the TCP connection. Possible values are None and ListenIfAvailable.
 	DestinationPortBehavior *string `json:"destinationPortBehavior,omitempty" tf:"destination_port_behavior,omitempty"`
 
 	// The port for the TCP connection.
@@ -466,7 +466,7 @@ type TCPConfigurationObservation struct {
 
 type TCPConfigurationParameters struct {
 
-	// The destination port behavior for the TCP connection. Possible values are None and ListenIfAvailable.
+	// The destination port behaviour for the TCP connection. Possible values are None and ListenIfAvailable.
 	// +kubebuilder:validation:Optional
 	DestinationPortBehavior *string `json:"destinationPortBehavior,omitempty" tf:"destination_port_behavior,omitempty"`
 

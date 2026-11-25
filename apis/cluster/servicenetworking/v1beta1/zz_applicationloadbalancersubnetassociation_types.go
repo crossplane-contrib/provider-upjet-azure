@@ -16,7 +16,7 @@ import (
 type ApplicationLoadBalancerSubnetAssociationInitParameters struct {
 
 	// The ID of the subnet which the Application Gateway for Containers associated to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -66,7 +66,7 @@ type ApplicationLoadBalancerSubnetAssociationParameters struct {
 	ApplicationLoadBalancerIDSelector *v2.Selector `json:"applicationLoadBalancerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subnet which the Application Gateway for Containers associated to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

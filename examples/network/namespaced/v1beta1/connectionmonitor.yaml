@@ -36,7 +36,7 @@ spec:
         testConfigurationNames:
           - tcpName
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -51,7 +51,7 @@ spec:
     resourceGroupNameRef:
       name: norway-watcher-rg
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:

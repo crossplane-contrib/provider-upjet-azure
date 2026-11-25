@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: resources/v1beta1/subscriptiontemplatedeployment
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: subscriptiontemplatedeployment
   name: example
 spec:
   forProvider:

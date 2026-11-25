@@ -6,6 +6,9 @@ package eventhub
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+
+	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
 )
 
 // Configure configures resource group
@@ -18,8 +21,13 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub", func(r *config.Resource) {
-		r.References["namespace_name"] = config.Reference{
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+		r.References["namespace_id"] = config.Reference{
 			TerraformName: "azurerm_eventhub_namespace",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 

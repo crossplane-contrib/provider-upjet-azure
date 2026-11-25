@@ -36,7 +36,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: linkedservicekeyvault-rg
 ---
-apiVersion: keyvault.azure.m.upbound.io/v1beta1
+apiVersion: keyvault.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -48,6 +48,7 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+    rbacAuthorizationEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: linkedservicekeyvault-rg

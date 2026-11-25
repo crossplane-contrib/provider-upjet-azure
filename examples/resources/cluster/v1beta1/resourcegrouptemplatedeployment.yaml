@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: resources/v1beta1/resourcegrouptemplatedeployment
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: resourcegrouptemplatedeployment
   name: example
 spec:
   forProvider:
@@ -21,7 +21,7 @@ spec:
       }
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: resourcegrouptemplatedeployment
     templateContent: |
       {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -67,7 +67,7 @@ metadata:
     meta.upbound.io/example-id: resources/v1beta1/resourcegrouptemplatedeployment
   name: example-resources-${Rand.RFC1123Subdomain}
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: resourcegrouptemplatedeployment
 spec:
   forProvider:
     location: "West Europe"

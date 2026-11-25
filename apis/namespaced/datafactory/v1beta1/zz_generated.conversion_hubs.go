@@ -61,12 +61,6 @@ func (tr *IntegrationRuntimeSelfHosted) Hub() {}
 func (tr *LinkedCustomService) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureBlobStorage) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureDatabricks) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinkedServiceAzureFileStorage) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -125,9 +119,6 @@ func (tr *LinkedServiceWeb) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagedPrivateEndpoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Pipeline) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TriggerBlobEvent) Hub() {}

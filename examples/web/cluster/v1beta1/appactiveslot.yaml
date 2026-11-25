@@ -61,6 +61,8 @@ metadata:
   name: example-appactive
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -86,5 +88,7 @@ spec:
     appServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    authSettings:
+      enabled: false
     siteConfig:
       {}

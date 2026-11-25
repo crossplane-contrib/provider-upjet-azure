@@ -404,9 +404,9 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: 'The Minimum TLS Version for all SQL Database and
-                      SQL Data Warehouse databases associated with the server. Valid
-                      values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.'
+                    description: The Minimum TLS Version for all SQL Database and
+                      SQL Data Warehouse databases associated with the server. The
+                      only possible value is 1.2. Defaults to 1.2.
                     type: string
                   outboundNetworkRestrictionEnabled:
                     description: Whether outbound network traffic is restricted for
@@ -1014,9 +1014,9 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: 'The Minimum TLS Version for all SQL Database and
-                      SQL Data Warehouse databases associated with the server. Valid
-                      values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.'
+                    description: The Minimum TLS Version for all SQL Database and
+                      SQL Data Warehouse databases associated with the server. The
+                      only possible value is 1.2. Defaults to 1.2.
                     type: string
                   outboundNetworkRestrictionEnabled:
                     description: Whether outbound network traffic is restricted for
@@ -1378,9 +1378,9 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
-                    description: 'The Minimum TLS Version for all SQL Database and
-                      SQL Data Warehouse databases associated with the server. Valid
-                      values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.'
+                    description: The Minimum TLS Version for all SQL Database and
+                      SQL Data Warehouse databases associated with the server. The
+                      only possible value is 1.2. Defaults to 1.2.
                     type: string
                   outboundNetworkRestrictionEnabled:
                     description: Whether outbound network traffic is restricted for

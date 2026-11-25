@@ -24,19 +24,6 @@ type OutputPowerBIInitParameters struct {
 	// The name of the Power BI group. Use this property to help remember which specific Power BI group id was used.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
-	// The ID of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/streamanalytics/v1beta1.Job
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
-	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
-
-	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDRef *v2.NamespacedReference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
-
-	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobIDSelector *v2.NamespacedSelector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
-
 	// The name of the Power BI table under the specified dataset.
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 

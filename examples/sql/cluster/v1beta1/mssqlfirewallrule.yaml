@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta1/mssqlfirewallrule
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: mssqlfirewallrule
   name: example
 spec:
   forProvider:
@@ -33,9 +33,9 @@ spec:
     administratorLogin: 4dm1n157r470r
     administratorLoginPasswordSecretRef:
       key: example-key
-      name: example-secret
+      name: example-secret-mssqlfirewallrule
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: mssqlrg
@@ -53,14 +53,14 @@ metadata:
   name: mssqlrg
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-secret
+  name: example-secret-mssqlfirewallrule
   namespace: upbound-system
 type: Opaque
 data:

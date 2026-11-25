@@ -15,7 +15,7 @@ import (
 
 type DNSCAARecordInitParameters struct {
 
-	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	// A list of values that make up the CAA record. Each record block supports fields defined below.
 	Record []RecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
@@ -34,7 +34,7 @@ type DNSCAARecordObservation struct {
 	// The DNS CAA Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	// A list of values that make up the CAA record. Each record block supports fields defined below.
 	Record []RecordObservation `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -53,7 +53,7 @@ type DNSCAARecordObservation struct {
 
 type DNSCAARecordParameters struct {
 
-	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	// A list of values that make up the CAA record. Each record block supports fields defined below.
 	// +kubebuilder:validation:Optional
 	Record []RecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 

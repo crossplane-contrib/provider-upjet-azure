@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: sql.azure.upbound.io/v1beta2
+apiVersion: sql.azure.upbound.io/v1beta3
 kind: MSSQLDatabase
 metadata:
   annotations:
@@ -64,7 +64,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -87,7 +87,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: North Europe
+    location: Germany West Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -105,4 +105,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central

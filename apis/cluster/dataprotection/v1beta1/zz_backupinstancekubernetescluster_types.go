@@ -111,7 +111,7 @@ type BackupInstanceKubernetesClusterInitParameters struct {
 	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Kubernetes Cluster. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta3.KubernetesCluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`
 
@@ -187,7 +187,7 @@ type BackupInstanceKubernetesClusterParameters struct {
 	BackupPolicyIDSelector *v2.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Kubernetes Cluster. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta2.KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerservice/v1beta3.KubernetesCluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`

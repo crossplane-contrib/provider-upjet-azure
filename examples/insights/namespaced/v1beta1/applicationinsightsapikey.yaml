@@ -24,7 +24,7 @@ spec:
       - extendqueries
       - search
 ---
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -39,7 +39,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: applicationinsightsapikey
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -47,7 +47,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: insights/v1beta1/applicationinsightsapikey
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: applicationinsightsapikey
   name: example
   namespace: upbound-system
 spec:

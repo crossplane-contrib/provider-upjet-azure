@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta1/functionjavascriptuda
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: analyticsfunctionjavascriptuda
   name: example
 spec:
   forProvider:
@@ -32,7 +32,7 @@ spec:
       }
     streamAnalyticsJobIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: analyticsfunctionjavascriptuda
 
 ---
 
@@ -42,8 +42,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta1/functionjavascriptuda
   labels:
-    testing.upbound.io/example-name: example
-  name: example-job
+    testing.upbound.io/example-name: analyticsfunctionjavascriptuda
+  name: example-job-analyticsfunctionjavascriptuda
 spec:
   forProvider:
     compatibilityLevel: "1.2"
@@ -55,7 +55,7 @@ spec:
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: analyticsfunctionjavascriptuda
     streamingUnits: 3
     tags:
       environment: example
@@ -72,8 +72,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta1/functionjavascriptuda
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: analyticsfunctionjavascriptuda
+  name: example-analyticsfunctionjavascriptuda
 spec:
   forProvider:
     location: West Europe

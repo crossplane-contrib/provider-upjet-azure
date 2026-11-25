@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 const group = "containerapp"
@@ -16,6 +17,10 @@ const group = "containerapp"
 // Configure configures containerapp group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_container_app", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.ShortGroup = group
 		r.TerraformResource.Schema["secret"].Elem.(*schema.Resource).
 			Schema["name"].Sensitive = true
@@ -61,6 +66,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_container_app_job", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.ShortGroup = group
 		r.Kind = "ContainerJob"
 		r.References["container_app_environment_id"] = config.Reference{

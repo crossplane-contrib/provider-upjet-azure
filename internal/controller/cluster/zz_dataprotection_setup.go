@@ -13,13 +13,11 @@ import (
 	backupinstancedatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancedatalakestorage"
 	backupinstancedisk "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancedisk"
 	backupinstancekubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancekubernetescluster"
-	backupinstancepostgresql "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancepostgresql"
 	backupinstancepostgresqlflexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupinstancepostgresqlflexibleserver"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicyblobstorage"
 	backuppolicydatalakestorage "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicydatalakestorage"
 	backuppolicydisk "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicydisk"
 	backuppolicykubernetescluster "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicykubernetescluster"
-	backuppolicypostgresql "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicypostgresql"
 	backuppolicypostgresqlflexibleserver "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backuppolicypostgresqlflexibleserver"
 	backupvault "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/backupvault"
 	resourceguard "github.com/upbound/provider-azure/v2/internal/controller/cluster/dataprotection/resourceguard"
@@ -33,13 +31,11 @@ func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 		backupinstancedatalakestorage.Setup,
 		backupinstancedisk.Setup,
 		backupinstancekubernetescluster.Setup,
-		backupinstancepostgresql.Setup,
 		backupinstancepostgresqlflexibleserver.Setup,
 		backuppolicyblobstorage.Setup,
 		backuppolicydatalakestorage.Setup,
 		backuppolicydisk.Setup,
 		backuppolicykubernetescluster.Setup,
-		backuppolicypostgresql.Setup,
 		backuppolicypostgresqlflexibleserver.Setup,
 		backupvault.Setup,
 		resourceguard.Setup,
@@ -59,13 +55,11 @@ func SetupGated_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 		backupinstancedatalakestorage.SetupGated,
 		backupinstancedisk.SetupGated,
 		backupinstancekubernetescluster.SetupGated,
-		backupinstancepostgresql.SetupGated,
 		backupinstancepostgresqlflexibleserver.SetupGated,
 		backuppolicyblobstorage.SetupGated,
 		backuppolicydatalakestorage.SetupGated,
 		backuppolicydisk.SetupGated,
 		backuppolicykubernetescluster.SetupGated,
-		backuppolicypostgresql.SetupGated,
 		backuppolicypostgresqlflexibleserver.SetupGated,
 		backupvault.SetupGated,
 		resourceguard.SetupGated,
@@ -84,13 +78,11 @@ func SetupWebhookWithManager_dataprotection(mgr ctrl.Manager) error {
 		backupinstancedatalakestorage.SetupWebhookWithManager,
 		backupinstancedisk.SetupWebhookWithManager,
 		backupinstancekubernetescluster.SetupWebhookWithManager,
-		backupinstancepostgresql.SetupWebhookWithManager,
 		backupinstancepostgresqlflexibleserver.SetupWebhookWithManager,
 		backuppolicyblobstorage.SetupWebhookWithManager,
 		backuppolicydatalakestorage.SetupWebhookWithManager,
 		backuppolicydisk.SetupWebhookWithManager,
 		backuppolicykubernetescluster.SetupWebhookWithManager,
-		backuppolicypostgresql.SetupWebhookWithManager,
 		backuppolicypostgresqlflexibleserver.SetupWebhookWithManager,
 		backupvault.SetupWebhookWithManager,
 		resourceguard.SetupWebhookWithManager,

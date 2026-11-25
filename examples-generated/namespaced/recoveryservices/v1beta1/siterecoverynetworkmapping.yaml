@@ -31,7 +31,7 @@ spec:
 
 ---
 
-apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -122,7 +122,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -142,7 +142,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

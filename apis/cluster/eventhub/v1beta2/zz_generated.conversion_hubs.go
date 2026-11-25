@@ -7,7 +7,4 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *EventHub) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *EventHubNamespace) Hub() {}

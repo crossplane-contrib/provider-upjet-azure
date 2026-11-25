@@ -16,7 +16,7 @@ import (
 type WorkspaceOutboundRulePrivateEndpointInitParameters struct {
 
 	// Specifies the Service Resource ID to connect. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ServiceResourceID *string `json:"serviceResourceId,omitempty" tf:"service_resource_id,omitempty"`
 
@@ -31,7 +31,7 @@ type WorkspaceOutboundRulePrivateEndpointInitParameters struct {
 	// Whether to enable an additional private endpoint to be used by jobs running on Spark. Changing this forces a new resource to be created.
 	SparkEnabled *bool `json:"sparkEnabled,omitempty" tf:"spark_enabled,omitempty"`
 
-	// Specifies the Sub Resource of the service resource to connect to. Possible values are vault,amlworkspace,blob,table,queue,file,web,dfs, redisCache. Changing this forces a new resource to be created.
+	// Specifies the Sub Resource of the service resource to connect to. Possible values are vault, amlworkspace, blob, table, queue, file, web, dfs, redisCache, and account. Changing this forces a new resource to be created.
 	SubResourceTarget *string `json:"subResourceTarget,omitempty" tf:"sub_resource_target,omitempty"`
 }
 
@@ -46,7 +46,7 @@ type WorkspaceOutboundRulePrivateEndpointObservation struct {
 	// Whether to enable an additional private endpoint to be used by jobs running on Spark. Changing this forces a new resource to be created.
 	SparkEnabled *bool `json:"sparkEnabled,omitempty" tf:"spark_enabled,omitempty"`
 
-	// Specifies the Sub Resource of the service resource to connect to. Possible values are vault,amlworkspace,blob,table,queue,file,web,dfs, redisCache. Changing this forces a new resource to be created.
+	// Specifies the Sub Resource of the service resource to connect to. Possible values are vault, amlworkspace, blob, table, queue, file, web, dfs, redisCache, and account. Changing this forces a new resource to be created.
 	SubResourceTarget *string `json:"subResourceTarget,omitempty" tf:"sub_resource_target,omitempty"`
 
 	// Specifies the ID of the Machine Learning Workspace. Changing this forces a new resource to be created.
@@ -56,7 +56,7 @@ type WorkspaceOutboundRulePrivateEndpointObservation struct {
 type WorkspaceOutboundRulePrivateEndpointParameters struct {
 
 	// Specifies the Service Resource ID to connect. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceResourceID *string `json:"serviceResourceId,omitempty" tf:"service_resource_id,omitempty"`
@@ -73,7 +73,7 @@ type WorkspaceOutboundRulePrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SparkEnabled *bool `json:"sparkEnabled,omitempty" tf:"spark_enabled,omitempty"`
 
-	// Specifies the Sub Resource of the service resource to connect to. Possible values are vault,amlworkspace,blob,table,queue,file,web,dfs, redisCache. Changing this forces a new resource to be created.
+	// Specifies the Sub Resource of the service resource to connect to. Possible values are vault, amlworkspace, blob, table, queue, file, web, dfs, redisCache, and account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SubResourceTarget *string `json:"subResourceTarget,omitempty" tf:"sub_resource_target,omitempty"`
 

@@ -23,7 +23,7 @@ spec:
     subscriptionId: ${data.azurerm_client_config.current.subscription_id}
     subscriptionName: subs1
 ---
-apiVersion: automation.azure.m.upbound.io/v1beta1
+apiVersion: automation.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

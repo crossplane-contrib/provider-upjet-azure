@@ -30,7 +30,7 @@ spec:
         testing.upbound.io/example-name: secondary
     targetRecoveryFabricName: ssrnmexample
 ---
-apiVersion: recoveryservices.azure.m.upbound.io/v1beta1
+apiVersion: recoveryservices.azure.m.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -111,7 +111,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: secondary
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:
@@ -129,7 +129,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: primary
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

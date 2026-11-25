@@ -29,11 +29,11 @@ metadata:
   name: security-alert-resource-group-rg
 spec:
   forProvider:
-    location: East US
+    location: Sweden Central
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -47,7 +47,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: East US
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: security-alert-resource-group-label
@@ -82,7 +82,7 @@ spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: East US
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: security-alert-resource-group-label

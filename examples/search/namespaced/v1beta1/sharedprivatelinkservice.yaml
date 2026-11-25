@@ -52,7 +52,7 @@ spec:
         testing.upbound.io/example-name: example
     sku: standard
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

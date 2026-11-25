@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: sql.azure.upbound.io/v1beta2
+apiVersion: sql.azure.upbound.io/v1beta3
 kind: MSSQLDatabase
 metadata:
   annotations:
@@ -67,7 +67,7 @@ spec:
       key: example-key
       name: example-name
       namespace: upbound-system
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: refinputmssql-rg
@@ -85,7 +85,7 @@ metadata:
   name: refinputmssql-rg
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 --- 
 
@@ -115,7 +115,7 @@ spec:
     eventsLateArrivalMaxDelayInSeconds: 60
     eventsOutOfOrderMaxDelayInSeconds: 50
     eventsOutOfOrderPolicy: Adjust
-    location: West Europe
+    location: Sweden Central
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:

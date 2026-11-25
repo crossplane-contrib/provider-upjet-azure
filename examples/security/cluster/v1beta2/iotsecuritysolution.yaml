@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: security.azure.upbound.io/v1beta2
+kind: IOTSecuritySolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta2/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: Iot Security Solution
+    iothubIdsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: example-Iot-Security-Solution
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: device

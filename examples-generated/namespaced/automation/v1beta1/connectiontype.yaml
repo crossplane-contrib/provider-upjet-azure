@@ -26,7 +26,7 @@ spec:
 
 ---
 
-apiVersion: automation.azure.m.upbound.io/v1beta1
+apiVersion: automation.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

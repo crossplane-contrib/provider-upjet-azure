@@ -18,6 +18,10 @@ import (
 // Configure configures apimanagement group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_api_management", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "Management"
 		// Mutually exclusive with azurerm_api_management_custom_domain
 		config.MoveToStatus(r.TerraformResource, "hostname_configuration")
@@ -140,6 +144,12 @@ func Configure(p *config.Provider) {
 		r.References["api_management_name"] = config.Reference{
 			TerraformName: "azurerm_api_management",
 		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_custom_domain", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 	})
 }
 

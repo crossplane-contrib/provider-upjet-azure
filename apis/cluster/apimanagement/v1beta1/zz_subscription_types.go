@@ -123,7 +123,7 @@ type SubscriptionParameters struct {
 	APIIDSelector *v2.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The name of the API Management Service where this Subscription should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta2.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/apimanagement/v1beta3.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 

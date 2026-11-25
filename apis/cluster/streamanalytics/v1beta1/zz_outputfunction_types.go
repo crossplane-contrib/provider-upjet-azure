@@ -25,32 +25,20 @@ type OutputFunctionInitParameters struct {
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.FunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.LinuxFunctionApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
 
-	// Reference to a FunctionApp in web to populate functionApp.
+	// Reference to a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppRef *v2.Reference `json:"functionAppRef,omitempty" tf:"-"`
 
-	// Selector for a FunctionApp in web to populate functionApp.
+	// Selector for a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppSelector *v2.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 
 	// The name of the function in the Function App.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
-
-	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
-	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
-
-	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v2.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
-
-	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v2.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type OutputFunctionObservation struct {
@@ -92,16 +80,16 @@ type OutputFunctionParameters struct {
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.FunctionApp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.LinuxFunctionApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
 	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
 
-	// Reference to a FunctionApp in web to populate functionApp.
+	// Reference to a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppRef *v2.Reference `json:"functionAppRef,omitempty" tf:"-"`
 
-	// Selector for a FunctionApp in web to populate functionApp.
+	// Selector for a LinuxFunctionApp in web to populate functionApp.
 	// +kubebuilder:validation:Optional
 	FunctionAppSelector *v2.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 

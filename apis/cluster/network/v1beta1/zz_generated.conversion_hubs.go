@@ -70,9 +70,6 @@ func (tr *FrontdoorFirewallPolicy) Hub() {}
 func (tr *IPGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LoadBalancer) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LoadBalancerBackendAddressPool) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -82,16 +79,7 @@ func (tr *LoadBalancerBackendAddressPoolAddress) Hub() {}
 func (tr *LoadBalancerNatPool) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LoadBalancerNatRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LoadBalancerOutboundRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LoadBalancerProbe) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LoadBalancerRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagerIpamPool) Hub() {}
@@ -139,21 +127,6 @@ func (tr *NetworkInterfaceNatRuleAssociation) Hub() {}
 func (tr *NetworkInterfaceSecurityGroupAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PrivateDNSAAAARecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateDNSARecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateDNSCNAMERecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateDNSMXRecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateDNSPTRRecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *PrivateDNSResolver) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -172,19 +145,7 @@ func (tr *PrivateDNSResolverOutboundEndpoint) Hub() {}
 func (tr *PrivateDNSResolverVirtualNetworkLink) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PrivateDNSSRVRecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateDNSTXTRecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateDNSZoneVirtualNetworkLink) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *PrivateEndpointApplicationSecurityGroupAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateLinkService) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PublicIP) Hub() {}

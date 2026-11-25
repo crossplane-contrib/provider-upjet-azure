@@ -46,7 +46,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -106,7 +106,7 @@ func (mg *BackupInstanceBlobStorage) ResolveReferences( // ResolveReferences of 
 	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -179,7 +179,7 @@ func (mg *BackupInstanceDataLakeStorage) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.DataProtectionBackupVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataProtectionBackupVaultIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -199,7 +199,7 @@ func (mg *BackupInstanceDataLakeStorage) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -239,7 +239,7 @@ func (mg *BackupInstanceDataLakeStorage) ResolveReferences(ctx context.Context, 
 	mg.Spec.InitProvider.BackupPolicyDataLakeStorageID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyDataLakeStorageIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -259,7 +259,7 @@ func (mg *BackupInstanceDataLakeStorage) ResolveReferences(ctx context.Context, 
 	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Container", "ContainerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -463,7 +463,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta3", "KubernetesCluster", "KubernetesClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -543,7 +543,7 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta3", "KubernetesCluster", "KubernetesClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -582,158 +582,6 @@ func (mg *BackupInstanceKubernetesCluster) ResolveReferences(ctx context.Context
 	}
 	mg.Spec.InitProvider.SnapshotResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SnapshotResourceGroupNameRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupPolicyPostgreSQL", "BackupPolicyPostgreSQLList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupPolicyID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.BackupPolicyIDRef,
-			Selector:     mg.Spec.ForProvider.BackupPolicyIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.BackupPolicyID")
-	}
-	mg.Spec.ForProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.BackupPolicyIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Secret", "SecretList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID),
-			Extract:      resource.ExtractParamPath("versionless_id", true),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDRef,
-			Selector:     mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID")
-	}
-	mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
-			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseID")
-	}
-	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupVault", "BackupVaultList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.VaultIDRef,
-			Selector:     mg.Spec.ForProvider.VaultIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
-	}
-	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupPolicyPostgreSQL", "BackupPolicyPostgreSQLList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupPolicyID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.BackupPolicyIDRef,
-			Selector:     mg.Spec.InitProvider.BackupPolicyIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.BackupPolicyID")
-	}
-	mg.Spec.InitProvider.BackupPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.BackupPolicyIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Secret", "SecretList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID),
-			Extract:      resource.ExtractParamPath("versionless_id", true),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretIDRef,
-			Selector:     mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID")
-	}
-	mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.DatabaseCredentialKeyVaultSecretIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("dbforpostgresql.azure.upbound.io", "v1beta1", "Database", "DatabaseList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
-			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseID")
-	}
-	mg.Spec.InitProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.DatabaseIDRef = rsp.ResolvedReference
 
 	return nil
 }

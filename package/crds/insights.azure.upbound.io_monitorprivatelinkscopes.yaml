@@ -80,7 +80,7 @@ spec:
                       Defaults to Open.
                     type: string
                   queryAccessMode:
-                    description: The default query access mode for hte associated
+                    description: The default query access mode for the associated
                       private endpoints in scope. Possible values are Open and PrivateOnly.
                       Defaults to Open.
                     type: string
@@ -192,7 +192,7 @@ spec:
                       Defaults to Open.
                     type: string
                   queryAccessMode:
-                    description: The default query access mode for hte associated
+                    description: The default query access mode for the associated
                       private endpoints in scope. Possible values are Open and PrivateOnly.
                       Defaults to Open.
                     type: string
@@ -305,7 +305,7 @@ spec:
                       Defaults to Open.
                     type: string
                   queryAccessMode:
-                    description: The default query access mode for hte associated
+                    description: The default query access mode for the associated
                       private endpoints in scope. Possible values are Open and PrivateOnly.
                       Defaults to Open.
                     type: string

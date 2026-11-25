@@ -46,9 +46,6 @@ func (tr *Backend) Hub() {}
 func (tr *Certificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CustomDomain) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Diagnostic) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -86,9 +83,6 @@ func (tr *IdentityProviderTwitter) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Logger) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Management) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NamedValue) Hub() {}

@@ -32,11 +32,11 @@ metadata:
   name: synapse-resource-group
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
@@ -50,7 +50,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: synapse-resource-group-label
@@ -85,7 +85,7 @@ spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: synapse-resource-group-label

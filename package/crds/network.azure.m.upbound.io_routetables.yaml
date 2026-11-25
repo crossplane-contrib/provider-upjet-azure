@@ -155,7 +155,7 @@ spec:
                     type: object
                   route:
                     description: List of route objects representing routes as defined
-                      below. Each object accepts the arguments documented below.
+                      below. Each object accepts the arguments defined below.
                     items:
                       properties:
                         addressPrefix:
@@ -208,7 +208,7 @@ spec:
                     type: string
                   route:
                     description: List of route objects representing routes as defined
-                      below. Each object accepts the arguments documented below.
+                      below. Each object accepts the arguments defined below.
                     items:
                       properties:
                         addressPrefix:
@@ -323,7 +323,7 @@ spec:
                     type: string
                   route:
                     description: List of route objects representing routes as defined
-                      below. Each object accepts the arguments documented below.
+                      below. Each object accepts the arguments defined below.
                     items:
                       properties:
                         addressPrefix:

@@ -125,5 +125,5 @@ func (tr *FrontdoorOrigin) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *FrontdoorOrigin) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

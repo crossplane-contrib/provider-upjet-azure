@@ -159,7 +159,7 @@ type GithubRepoInitParameters struct {
 	// Specifies the collaboration branch of the repository to get code from.
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
 
-	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com.
+	// Specifies the GitHub Enterprise host name. For example: https://github.<mydomain>.com.
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
 
 	// The last commit ID.
@@ -180,7 +180,7 @@ type GithubRepoObservation struct {
 	// Specifies the collaboration branch of the repository to get code from.
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
 
-	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com.
+	// Specifies the GitHub Enterprise host name. For example: https://github.<mydomain>.com.
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
 
 	// The last commit ID.
@@ -203,7 +203,7 @@ type GithubRepoParameters struct {
 	// +kubebuilder:validation:Optional
 	BranchName *string `json:"branchName" tf:"branch_name,omitempty"`
 
-	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com.
+	// Specifies the GitHub Enterprise host name. For example: https://github.<mydomain>.com.
 	// +kubebuilder:validation:Optional
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
 
@@ -267,7 +267,7 @@ type WorkspaceInitParameters struct {
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`
 
@@ -421,7 +421,7 @@ type WorkspaceParameters struct {
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`

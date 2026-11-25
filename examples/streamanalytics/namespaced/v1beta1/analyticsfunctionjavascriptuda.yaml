@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta2/functionjavascriptuda
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: analyticsfunctionjavascriptuda
   name: example
   namespace: upbound-system
 spec:
@@ -33,7 +33,7 @@ spec:
       }
     streamAnalyticsJobIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: analyticsfunctionjavascriptuda
 ---
 apiVersion: streamanalytics.azure.m.upbound.io/v1beta1
 kind: Job
@@ -41,8 +41,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta2/functionjavascriptuda
   labels:
-    testing.upbound.io/example-name: example
-  name: example-job
+    testing.upbound.io/example-name: analyticsfunctionjavascriptuda
+  name: example-job-analyticsfunctionjavascriptuda
   namespace: upbound-system
 spec:
   forProvider:
@@ -55,7 +55,7 @@ spec:
     outputErrorPolicy: Drop
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: analyticsfunctionjavascriptuda
     streamingUnits: 3
     tags:
       environment: example
@@ -70,8 +70,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta1/functionjavascriptuda
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: analyticsfunctionjavascriptuda
+  name: example-analyticsfunctionjavascriptuda
   namespace: upbound-system
 spec:
   forProvider:

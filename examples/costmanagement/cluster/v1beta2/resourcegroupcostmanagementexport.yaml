@@ -8,24 +8,24 @@ metadata:
   annotations:
     meta.upbound.io/example-id: costmanagement/v1beta2/resourcegroupcostmanagementexport
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: resourcegroupcostmanagementexport
   name: example
 spec:
   forProvider:
     exportDataOptions:
-      timeFrame: WeekToDate
+      timeFrame: TheLastMonth
       type: Usage
     exportDataStorageLocation:
       containerIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: example
-      rootFolderPath: /root/updated
-    recurrencePeriodEndDate: "2023-09-18T00:00:00Z"
-    recurrencePeriodStartDate: "2023-08-18T00:00:00Z"
+          testing.upbound.io/example-name: resourcegroupcostmanagementexport
+      rootFolderPath: root/updated
+    recurrencePeriodEndDate: "2029-01-01T00:00:00Z"
+    recurrencePeriodStartDate: "2028-01-01T00:00:00Z"
     recurrenceType: Monthly
     resourceGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: resourcegroupcostmanagementexport
 
 ---
 
@@ -35,7 +35,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: costmanagement/v1beta1/resourcegroupcostmanagementexport
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: resourcegroupcostmanagementexport
   name: cost-example
 spec:
   forProvider:
@@ -43,14 +43,14 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta2
+apiVersion: storage.azure.upbound.io/v1beta3
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: costmanagement/v1beta2/resourcegroupcostmanagementexport
   labels:
-    testing.upbound.io/example-name: example
-  name: costacc
+    testing.upbound.io/example-name: resourcegroupcostmanagementexport
+  name: costacc5cb61fa0
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -58,20 +58,20 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: resourcegroupcostmanagementexport
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Container
 metadata:
   annotations:
     meta.upbound.io/example-id: costmanagement/v1beta2/resourcegroupcostmanagementexport
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: resourcegroupcostmanagementexport
+  name: example-resourcegroupcostmanagementexport
 spec:
   forProvider:
-    storageAccountNameSelector:
+    storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: resourcegroupcostmanagementexport

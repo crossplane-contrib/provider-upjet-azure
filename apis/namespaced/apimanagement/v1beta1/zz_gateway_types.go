@@ -16,7 +16,7 @@ import (
 type GatewayInitParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta2.Management
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
 
@@ -31,7 +31,7 @@ type GatewayInitParameters_2 struct {
 	// The description of the API Management Gateway.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A location_data block as documented below.
+	// A location_data block as defined below.
 	LocationData *LocationDataInitParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
@@ -46,14 +46,14 @@ type GatewayObservation_2 struct {
 	// The ID of the API Management Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A location_data block as documented below.
+	// A location_data block as defined below.
 	LocationData *LocationDataObservation `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
 type GatewayParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta2.Management
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
@@ -70,7 +70,7 @@ type GatewayParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A location_data block as documented below.
+	// A location_data block as defined below.
 	// +kubebuilder:validation:Optional
 	LocationData *LocationDataParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }

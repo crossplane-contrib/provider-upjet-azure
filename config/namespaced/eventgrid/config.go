@@ -6,6 +6,7 @@ package eventgrid
 
 import (
 	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
@@ -27,9 +28,25 @@ func Configure(p *config.Provider) {
 	// 	}
 	// })
 	p.AddResourceConfigurator("azurerm_eventgrid_system_topic", func(r *config.Resource) {
-		r.References["source_arm_resource_id"] = config.Reference{
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+		r.References["source_resource_id"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
 			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
 		}
+	})
+	p.AddResourceConfigurator("azurerm_eventgrid_event_subscription", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+	})
+	p.AddResourceConfigurator("azurerm_eventgrid_system_topic_event_subscription", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 	})
 }

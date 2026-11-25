@@ -28,7 +28,7 @@ spec:
         testing.upbound.io/example-name: example
     revision: "1"
 ---
-apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+apiVersion: apimanagement.azure.m.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

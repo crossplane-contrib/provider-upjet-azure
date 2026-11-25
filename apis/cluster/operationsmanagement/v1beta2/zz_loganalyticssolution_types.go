@@ -18,7 +18,7 @@ type LogAnalyticsSolutionInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A plan block as documented below.
+	// A plan block as defined below.
 	Plan *PlanInitParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The name of the resource group in which the Log Analytics solution is created. Changing this forces a new resource to be created. Note: The solution and its related workspace can only exist in the same resource group.
@@ -41,7 +41,7 @@ type LogAnalyticsSolutionInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The full name of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 
 	// Reference to a Workspace in operationalinsights to populate workspaceName.
@@ -53,7 +53,7 @@ type LogAnalyticsSolutionInitParameters struct {
 	WorkspaceNameSelector *v2.Selector `json:"workspaceNameSelector,omitempty" tf:"-"`
 
 	// The full resource ID of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 
@@ -74,7 +74,7 @@ type LogAnalyticsSolutionObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A plan block as documented below.
+	// A plan block as defined below.
 	Plan *PlanObservation `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The name of the resource group in which the Log Analytics solution is created. Changing this forces a new resource to be created. Note: The solution and its related workspace can only exist in the same resource group.
@@ -100,7 +100,7 @@ type LogAnalyticsSolutionParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A plan block as documented below.
+	// A plan block as defined below.
 	// +kubebuilder:validation:Optional
 	Plan *PlanParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
@@ -127,7 +127,7 @@ type LogAnalyticsSolutionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The full name of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 
@@ -140,7 +140,7 @@ type LogAnalyticsSolutionParameters struct {
 	WorkspaceNameSelector *v2.Selector `json:"workspaceNameSelector,omitempty" tf:"-"`
 
 	// The full resource ID of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`

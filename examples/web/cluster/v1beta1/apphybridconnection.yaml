@@ -104,6 +104,8 @@ metadata:
   name: apphybridconn-wa
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

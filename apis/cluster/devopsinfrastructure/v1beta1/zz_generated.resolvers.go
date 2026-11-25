@@ -68,7 +68,7 @@ func (mg *ManagedDevopsPool) ResolveReferences( // ResolveReferences of this Man
 
 	if mg.Spec.ForProvider.VirtualMachineScaleSetFabric != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -110,7 +110,7 @@ func (mg *ManagedDevopsPool) ResolveReferences( // ResolveReferences of this Man
 
 	if mg.Spec.InitProvider.VirtualMachineScaleSetFabric != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

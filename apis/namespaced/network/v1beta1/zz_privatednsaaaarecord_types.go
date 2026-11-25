@@ -121,9 +121,10 @@ type PrivateDNSAAAARecordStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="v1beta1 is deprecated since the Terraform AzureRM v5 bump, please migrate to v1beta2. Deprecated since v3.0.0."
 
 // PrivateDNSAAAARecord is the Schema for the PrivateDNSAAAARecords API. Manages a Private DNS AAAA Record.
+// Deprecated: This API version (v1beta1) has been deprecated in release v3.0.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

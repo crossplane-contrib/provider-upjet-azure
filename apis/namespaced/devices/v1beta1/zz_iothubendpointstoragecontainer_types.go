@@ -25,7 +25,7 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of storage container in the storage account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Reference to a Container in storage to populate containerName.
@@ -121,7 +121,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 	ConnectionStringSecretRef *v2.LocalSecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of storage container in the storage account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 

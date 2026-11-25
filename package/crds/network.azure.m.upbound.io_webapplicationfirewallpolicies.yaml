@@ -298,7 +298,8 @@ spec:
                         type: boolean
                       fileUploadEnforcement:
                         description: '- Whether the firewall should block a request
-                          with upload size greater then file_upload_limit_in_mb.'
+                          with upload size greater then file_upload_limit_in_mb. Defaults
+                          to true.'
                         type: boolean
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
@@ -713,7 +714,8 @@ spec:
                         type: boolean
                       fileUploadEnforcement:
                         description: '- Whether the firewall should block a request
-                          with upload size greater then file_upload_limit_in_mb.'
+                          with upload size greater then file_upload_limit_in_mb. Defaults
+                          to true.'
                         type: boolean
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
@@ -1115,7 +1117,8 @@ spec:
                         type: boolean
                       fileUploadEnforcement:
                         description: '- Whether the firewall should block a request
-                          with upload size greater then file_upload_limit_in_mb.'
+                          with upload size greater then file_upload_limit_in_mb. Defaults
+                          to true.'
                         type: boolean
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values

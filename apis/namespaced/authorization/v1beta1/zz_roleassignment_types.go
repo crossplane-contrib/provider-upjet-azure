@@ -15,19 +15,19 @@ import (
 
 type RoleAssignmentInitParameters struct {
 
-	// The condition that limits the resources that the role can be assigned to. Changing this forces a new resource to be created.
+	// The condition that limits the resources that the role can be assigned to.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The version of the condition. Possible values are 1.0 or 2.0. Changing this forces a new resource to be created.
+	// The version of the condition. Possible values are 1.0 or 2.0.
 	ConditionVersion *string `json:"conditionVersion,omitempty" tf:"condition_version,omitempty"`
 
 	// The delegated Azure Resource Id which contains a Managed Identity. Changing this forces a new resource to be created.
 	DelegatedManagedIdentityResourceID *string `json:"delegatedManagedIdentityResourceId,omitempty" tf:"delegated_managed_identity_resource_id,omitempty"`
 
-	// The description for this Role Assignment. Changing this forces a new resource to be created.
+	// The description for this Role Assignment.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A unique UUID/GUID for this Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	// The UUID for this Role Assignment. If omitted, a UUID will be generated. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to. Changing this forces a new resource to be created.
@@ -61,22 +61,22 @@ type RoleAssignmentInitParameters struct {
 
 type RoleAssignmentObservation struct {
 
-	// The condition that limits the resources that the role can be assigned to. Changing this forces a new resource to be created.
+	// The condition that limits the resources that the role can be assigned to.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The version of the condition. Possible values are 1.0 or 2.0. Changing this forces a new resource to be created.
+	// The version of the condition. Possible values are 1.0 or 2.0.
 	ConditionVersion *string `json:"conditionVersion,omitempty" tf:"condition_version,omitempty"`
 
 	// The delegated Azure Resource Id which contains a Managed Identity. Changing this forces a new resource to be created.
 	DelegatedManagedIdentityResourceID *string `json:"delegatedManagedIdentityResourceId,omitempty" tf:"delegated_managed_identity_resource_id,omitempty"`
 
-	// The description for this Role Assignment. Changing this forces a new resource to be created.
+	// The description for this Role Assignment.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Role Assignment ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A unique UUID/GUID for this Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	// The UUID for this Role Assignment. If omitted, a UUID will be generated. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to. Changing this forces a new resource to be created.
@@ -100,11 +100,11 @@ type RoleAssignmentObservation struct {
 
 type RoleAssignmentParameters struct {
 
-	// The condition that limits the resources that the role can be assigned to. Changing this forces a new resource to be created.
+	// The condition that limits the resources that the role can be assigned to.
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The version of the condition. Possible values are 1.0 or 2.0. Changing this forces a new resource to be created.
+	// The version of the condition. Possible values are 1.0 or 2.0.
 	// +kubebuilder:validation:Optional
 	ConditionVersion *string `json:"conditionVersion,omitempty" tf:"condition_version,omitempty"`
 
@@ -112,11 +112,11 @@ type RoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegatedManagedIdentityResourceID *string `json:"delegatedManagedIdentityResourceId,omitempty" tf:"delegated_managed_identity_resource_id,omitempty"`
 
-	// The description for this Role Assignment. Changing this forces a new resource to be created.
+	// The description for this Role Assignment.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A unique UUID/GUID for this Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	// The UUID for this Role Assignment. If omitted, a UUID will be generated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

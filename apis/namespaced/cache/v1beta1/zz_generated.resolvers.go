@@ -244,7 +244,7 @@ func (mg *RedisCache) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -264,7 +264,7 @@ func (mg *RedisCache) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.m.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -347,70 +347,6 @@ func (mg *RedisCacheAccessPolicyAssignment) ResolveReferences(ctx context.Contex
 	}
 	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this RedisEnterpriseCluster.
-func (mg *RedisEnterpriseCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPINamespacedResolver(c, mg)
-
-	var rsp reference.NamespacedResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.m.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
-	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this RedisEnterpriseDatabase.
-func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPINamespacedResolver(c, mg)
-
-	var rsp reference.NamespacedResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.m.upbound.io", "v1beta1", "RedisEnterpriseCluster", "RedisEnterpriseClusterList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.ClusterIDRef,
-			Selector:     mg.Spec.ForProvider.ClusterIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
-	}
-	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -535,26 +471,6 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.TargetRedisCacheName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetRedisCacheNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.m.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedRedisCacheID),
-			Extract:      rconfig.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.LinkedRedisCacheIDRef,
-			Selector:     mg.Spec.InitProvider.LinkedRedisCacheIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedRedisCacheID")
-	}
-	mg.Spec.InitProvider.LinkedRedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.LinkedRedisCacheIDRef = rsp.ResolvedReference
 
 	return nil
 }

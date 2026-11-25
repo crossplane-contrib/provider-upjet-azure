@@ -37,7 +37,7 @@ type EnvironmentInitParameters struct {
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	InfrastructureSubnetID *string `json:"infrastructureSubnetId,omitempty" tf:"infrastructure_subnet_id,omitempty"`
 
@@ -58,7 +58,7 @@ type EnvironmentInitParameters struct {
 
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
@@ -71,6 +71,7 @@ type EnvironmentInitParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+	// The destination for the application logs. Possible values include `log-analytics` and `azure-monitor`.  Omitting this value will result in logs being streamed only.
 	LogsDestination *string `json:"logsDestination,omitempty" tf:"logs_destination,omitempty"`
 
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
@@ -132,6 +133,7 @@ type EnvironmentObservation struct {
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+	// The destination for the application logs. Possible values include `log-analytics` and `azure-monitor`.  Omitting this value will result in logs being streamed only.
 	LogsDestination *string `json:"logsDestination,omitempty" tf:"logs_destination,omitempty"`
 
 	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
@@ -195,7 +197,7 @@ type EnvironmentParameters struct {
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InfrastructureSubnetID *string `json:"infrastructureSubnetId,omitempty" tf:"infrastructure_subnet_id,omitempty"`
@@ -219,7 +221,7 @@ type EnvironmentParameters struct {
 
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
@@ -233,6 +235,7 @@ type EnvironmentParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v2.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Where the application logs will be saved for this Container Apps Managed Environment. Possible values include log-analytics and azure-monitor. Omitting this value will result in logs being streamed only.
+	// The destination for the application logs. Possible values include `log-analytics` and `azure-monitor`.  Omitting this value will result in logs being streamed only.
 	// +kubebuilder:validation:Optional
 	LogsDestination *string `json:"logsDestination,omitempty" tf:"logs_destination,omitempty"`
 

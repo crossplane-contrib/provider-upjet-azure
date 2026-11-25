@@ -6,16 +6,17 @@ apiVersion: cdn.azure.upbound.io/v1beta1
 kind: Profile
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Azure no longer allows creating classic CDN resources since October 1, 2025. Existing ones can be managed until the service is retired on September 30, 2027."
     meta.upbound.io/example-id: cdn/v1beta1/endpoint
   labels:
-    testing.upbound.io/example-name: profilelabel
-  name: profilename
+    testing.upbound.io/example-name: profilelabel-profile
+  name: profilename-profile
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: rgroupnamelabel
+        testing.upbound.io/example-name: rgroupnamelabel-profile
     sku: Standard_Verizon
     tags:
       cost_center: MSFT
@@ -27,10 +28,11 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of Profile. It is skipped because the parent resource is skipped."
     meta.upbound.io/example-id: cdn/v1beta1/endpoint
   labels:
-    testing.upbound.io/example-name: rgroupnamelabel
-  name: r-group-test-name
+    testing.upbound.io/example-name: rgroupnamelabel-profile
+  name: r-group-test-name-profile
 spec:
   forProvider:
     location: West Europe

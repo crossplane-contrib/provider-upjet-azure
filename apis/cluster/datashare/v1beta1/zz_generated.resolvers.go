@@ -65,7 +65,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences( // ResolveReferences of this D
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -105,7 +105,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences( // ResolveReferences of this D
 	mg.Spec.InitProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FileSystemNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -137,7 +137,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -177,7 +177,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

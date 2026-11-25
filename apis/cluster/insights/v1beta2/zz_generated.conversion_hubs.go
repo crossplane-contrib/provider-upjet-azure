@@ -7,6 +7,9 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
+func (tr *ApplicationInsights) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ApplicationInsightsStandardWebTest) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -23,9 +26,6 @@ func (tr *MonitorAutoscaleSetting) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MonitorDataCollectionRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorDiagnosticSetting) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MonitorMetricAlert) Hub() {}

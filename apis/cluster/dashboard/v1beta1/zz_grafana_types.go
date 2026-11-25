@@ -66,7 +66,7 @@ type GrafanaInitParameters struct {
 	// Whether to enable the Grafana instance to use deterministic outbound IPs. Defaults to false.
 	DeterministicOutboundIPEnabled *bool `json:"deterministicOutboundIpEnabled,omitempty" tf:"deterministic_outbound_ip_enabled,omitempty"`
 
-	// Which major version of Grafana to deploy. Possible values are 11, 12.
+	// Which major version of Grafana to deploy. Possible values are 12, 13.
 	GrafanaMajorVersion *string `json:"grafanaMajorVersion,omitempty" tf:"grafana_major_version,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Dashboard Grafana to be created.
@@ -112,7 +112,7 @@ type GrafanaObservation struct {
 	// The endpoint of the Grafana instance.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Which major version of Grafana to deploy. Possible values are 11, 12.
+	// Which major version of Grafana to deploy. Possible values are 12, 13.
 	GrafanaMajorVersion *string `json:"grafanaMajorVersion,omitempty" tf:"grafana_major_version,omitempty"`
 
 	// The full Grafana software semantic version deployed.
@@ -171,7 +171,7 @@ type GrafanaParameters struct {
 	// +kubebuilder:validation:Optional
 	DeterministicOutboundIPEnabled *bool `json:"deterministicOutboundIpEnabled,omitempty" tf:"deterministic_outbound_ip_enabled,omitempty"`
 
-	// Which major version of Grafana to deploy. Possible values are 11, 12.
+	// Which major version of Grafana to deploy. Possible values are 12, 13.
 	// +kubebuilder:validation:Optional
 	GrafanaMajorVersion *string `json:"grafanaMajorVersion,omitempty" tf:"grafana_major_version,omitempty"`
 

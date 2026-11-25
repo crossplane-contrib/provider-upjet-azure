@@ -16,7 +16,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: exampledatabricks
-    sku: standard
+    sku: premium
     tags:
       Environment: Production
 

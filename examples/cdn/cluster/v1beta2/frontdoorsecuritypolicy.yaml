@@ -6,6 +6,7 @@ apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorSecurityPolicy
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
   labels:
     testing.upbound.io/example-name: frontdoorsecuritypolicy
@@ -30,7 +31,7 @@ spec:
 
 ---
 
-apiVersion: cdn.azure.upbound.io/v1beta2
+apiVersion: cdn.azure.upbound.io/v1beta3
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -49,7 +50,6 @@ spec:
     hostName: contoso.fabrikam.com
     tls:
       certificateType: ManagedCertificate
-      minimumTlsVersion: TLS12
 
 ---
 

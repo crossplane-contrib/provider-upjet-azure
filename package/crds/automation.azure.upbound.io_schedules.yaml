@@ -161,12 +161,12 @@ spec:
                     type: string
                   frequency:
                     description: The frequency of the schedule. - can be either OneTime,
-                      Day, Hour, Week, or Month.
+                      Minute, Day, Hour, Week, or Month.
                     type: string
                   interval:
                     description: The number of frequencys between runs. Only valid
-                      when frequency is Day, Hour, Week, or Month and defaults to
-                      1.
+                      when frequency is Minute, Day, Hour, Week, or Month and defaults
+                      to 1.
                     type: number
                   monthDays:
                     description: List of days of the month that the job should execute
@@ -180,7 +180,7 @@ spec:
                     description: One monthly_occurrence blocks as defined below to
                       specifies occurrences of days within a month. Only valid when
                       frequency is Month. The monthly_occurrence block supports fields
-                      documented below.
+                      defined below.
                     properties:
                       day:
                         description: Day of the occurrence. Must be one of Monday,
@@ -278,7 +278,7 @@ spec:
                     type: string
                   timezone:
                     description: 'The timezone of the start time. Defaults to Etc/UTC.
-                      For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows'
+                      For possible values see: https://docs.microsoft.com/rest/api/maps/timezone/gettimezoneenumwindows'
                     type: string
                   weekDays:
                     description: List of days of the week that the job should execute
@@ -310,12 +310,12 @@ spec:
                     type: string
                   frequency:
                     description: The frequency of the schedule. - can be either OneTime,
-                      Day, Hour, Week, or Month.
+                      Minute, Day, Hour, Week, or Month.
                     type: string
                   interval:
                     description: The number of frequencys between runs. Only valid
-                      when frequency is Day, Hour, Week, or Month and defaults to
-                      1.
+                      when frequency is Minute, Day, Hour, Week, or Month and defaults
+                      to 1.
                     type: number
                   monthDays:
                     description: List of days of the month that the job should execute
@@ -329,7 +329,7 @@ spec:
                     description: One monthly_occurrence blocks as defined below to
                       specifies occurrences of days within a month. Only valid when
                       frequency is Month. The monthly_occurrence block supports fields
-                      documented below.
+                      defined below.
                     properties:
                       day:
                         description: Day of the occurrence. Must be one of Monday,
@@ -347,7 +347,7 @@ spec:
                     type: string
                   timezone:
                     description: 'The timezone of the start time. Defaults to Etc/UTC.
-                      For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows'
+                      For possible values see: https://docs.microsoft.com/rest/api/maps/timezone/gettimezoneenumwindows'
                     type: string
                   weekDays:
                     description: List of days of the week that the job should execute
@@ -466,15 +466,15 @@ spec:
                     type: string
                   frequency:
                     description: The frequency of the schedule. - can be either OneTime,
-                      Day, Hour, Week, or Month.
+                      Minute, Day, Hour, Week, or Month.
                     type: string
                   id:
                     description: The Automation Schedule ID.
                     type: string
                   interval:
                     description: The number of frequencys between runs. Only valid
-                      when frequency is Day, Hour, Week, or Month and defaults to
-                      1.
+                      when frequency is Minute, Day, Hour, Week, or Month and defaults
+                      to 1.
                     type: number
                   monthDays:
                     description: List of days of the month that the job should execute
@@ -488,7 +488,7 @@ spec:
                     description: One monthly_occurrence blocks as defined below to
                       specifies occurrences of days within a month. Only valid when
                       frequency is Month. The monthly_occurrence block supports fields
-                      documented below.
+                      defined below.
                     properties:
                       day:
                         description: Day of the occurrence. Must be one of Monday,
@@ -510,7 +510,7 @@ spec:
                     type: string
                   timezone:
                     description: 'The timezone of the start time. Defaults to Etc/UTC.
-                      For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows'
+                      For possible values see: https://docs.microsoft.com/rest/api/maps/timezone/gettimezoneenumwindows'
                     type: string
                   weekDays:
                     description: List of days of the week that the job should execute

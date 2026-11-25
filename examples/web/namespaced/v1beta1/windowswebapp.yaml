@@ -9,18 +9,20 @@ metadata:
     meta.upbound.io/example-id: web/v1beta2/windowswebapp
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: windowswebapp
   name: windowswebappnamea
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowswebapp
     servicePlanIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowswebapp
     siteConfig: {}
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -30,8 +32,8 @@ metadata:
     meta.upbound.io/example-id: web/v1beta1/windowswebapp
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: windowswebapp
+  name: example-windowswebapp
   namespace: upbound-system
 spec:
   forProvider:
@@ -44,8 +46,8 @@ metadata:
     meta.upbound.io/example-id: web/v1beta2/windowswebapp
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: windowswebapp
+  name: example-windowswebapp
   namespace: upbound-system
 spec:
   forProvider:
@@ -53,5 +55,5 @@ spec:
     osType: Windows
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: windowswebapp
     skuName: P1v2

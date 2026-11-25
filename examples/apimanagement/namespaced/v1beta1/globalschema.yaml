@@ -133,7 +133,7 @@ spec:
         <s:element name="WeatherReturn" type="tns:WeatherReturn"/>
       </s:schema>
 ---
-apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+apiVersion: apimanagement.azure.m.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

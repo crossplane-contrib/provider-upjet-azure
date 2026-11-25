@@ -25,7 +25,7 @@ func (mg *ClusterManagedPrivateEndpoint) ResolveReferences( // ResolveReferences
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *ClusterManagedPrivateEndpoint) ResolveReferences( // ResolveReferences
 	mg.Spec.ForProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -65,7 +65,7 @@ func (mg *ClusterManagedPrivateEndpoint) ResolveReferences( // ResolveReferences
 	mg.Spec.ForProvider.PrivateLinkResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrivateLinkResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -105,7 +105,7 @@ func (mg *ClusterManagedPrivateEndpoint) ResolveReferences( // ResolveReferences
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -125,7 +125,7 @@ func (mg *ClusterManagedPrivateEndpoint) ResolveReferences( // ResolveReferences
 	mg.Spec.InitProvider.PrivateLinkResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PrivateLinkResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta3", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -157,7 +157,7 @@ func (mg *ClusterPrincipalAssignment) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -209,7 +209,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -261,7 +261,7 @@ func (mg *DatabasePrincipalAssignment) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -525,7 +525,7 @@ func (mg *EventHubDataConnection) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -585,7 +585,7 @@ func (mg *EventHubDataConnection) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta3", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -645,7 +645,7 @@ func (mg *EventHubDataConnection) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.InitProvider.ConsumerGroup = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ConsumerGroupRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta3", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -677,7 +677,7 @@ func (mg *IOTHubDataConnection) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -797,7 +797,7 @@ func (mg *IOTHubDataConnection) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.SharedAccessPolicyName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SharedAccessPolicyNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta3", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

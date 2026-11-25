@@ -64,7 +64,7 @@ spec:
     protocols:
     - https
 ---
-apiVersion: apimanagement.azure.upbound.io/v1beta2
+apiVersion: apimanagement.azure.upbound.io/v1beta3
 kind: Management
 metadata:
   annotations:

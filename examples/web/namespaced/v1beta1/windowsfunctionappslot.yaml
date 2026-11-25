@@ -14,13 +14,15 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     functionAppIdSelector:
       matchLabels:
         testing.upbound.io/example-name: winfuncappslot-wapp
     siteConfig: {}
     storageAccountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: winfuncappslotacc
+        testing.upbound.io/example-name: winfuncappslotc0355872
 ---
 apiVersion: web.azure.m.upbound.io/v1beta1
 kind: WindowsFunctionApp
@@ -34,6 +36,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: East US
     resourceGroupNameSelector:
       matchLabels:
@@ -44,17 +48,17 @@ spec:
     siteConfig: {}
     storageAccountAccessKeySecretRef:
       key: example-key
-      name: example-name
+      name: example-name-windowsfunctionappslot
     storageAccountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: winfuncappslotacc
+        testing.upbound.io/example-name: winfuncappslotc0355872
 ---
 apiVersion: v1
 data:
   example-key: bXJ06E6nNnr/j4kemUlz2B/n4MqILTG9MwQdIuXY4gQmillkI7nt5heqaYEDXH2JV2DG4lwwpK86+ASt2+ta+Q==
 kind: Secret
 metadata:
-  name: example-name
+  name: example-name-windowsfunctionappslot
   namespace: upbound-system
 type: Opaque
 ---
@@ -91,15 +95,15 @@ spec:
         testing.upbound.io/example-name: winfuncappslot-rg
     skuName: S1
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta2/windowsfunctionappslot
     uptest.upbound.io/timeout: "3600"
   labels:
-    testing.upbound.io/example-name: winfuncappslotacc
-  name: winfuncappslotacc
+    testing.upbound.io/example-name: winfuncappslotc0355872
+  name: winfuncappslotc0355872
   namespace: upbound-system
 spec:
   forProvider:

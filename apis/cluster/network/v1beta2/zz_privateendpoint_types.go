@@ -176,6 +176,9 @@ type PrivateEndpointInitParameters struct {
 	// One or more ip_configuration blocks as defined below. This allows a static IP address to be set for this Private Endpoint, otherwise an address is dynamically allocated from the Subnet.
 	IPConfiguration []PrivateEndpointIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
+	// The IP version type for the Private Endpoint. Possible values are IPv4, IPv6, and DualStack. Defaults to IPv4.
+	IPVersionType *string `json:"ipVersionType,omitempty" tf:"ip_version_type,omitempty"`
+
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -186,7 +189,7 @@ type PrivateEndpointInitParameters struct {
 	PrivateServiceConnection *PrivateServiceConnectionInitParameters `json:"privateServiceConnection,omitempty" tf:"private_service_connection,omitempty"`
 
 	// The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -219,6 +222,9 @@ type PrivateEndpointObservation struct {
 
 	// One or more ip_configuration blocks as defined below. This allows a static IP address to be set for this Private Endpoint, otherwise an address is dynamically allocated from the Subnet.
 	IPConfiguration []PrivateEndpointIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The IP version type for the Private Endpoint. Possible values are IPv4, IPv6, and DualStack. Defaults to IPv4.
+	IPVersionType *string `json:"ipVersionType,omitempty" tf:"ip_version_type,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -260,6 +266,10 @@ type PrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	IPConfiguration []PrivateEndpointIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
+	// The IP version type for the Private Endpoint. Possible values are IPv4, IPv6, and DualStack. Defaults to IPv4.
+	// +kubebuilder:validation:Optional
+	IPVersionType *string `json:"ipVersionType,omitempty" tf:"ip_version_type,omitempty"`
+
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -286,7 +296,7 @@ type PrivateEndpointParameters struct {
 	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta3.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -328,6 +338,12 @@ type PrivateServiceConnectionInitParameters struct {
 
 type PrivateServiceConnectionObservation struct {
 
+	// Indicates if changes on the service provider require any updates on the consumer.
+	ActionRequired *string `json:"actionRequired,omitempty" tf:"action_required,omitempty"`
+
+	// The reason for approval/rejection of the connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource to be created.
 	IsManualConnection *bool `json:"isManualConnection,omitempty" tf:"is_manual_connection,omitempty"`
 
@@ -345,6 +361,9 @@ type PrivateServiceConnectionObservation struct {
 
 	// A message passed to the owner of the remote resource when the private endpoint attempts to establish the connection to the remote resource. The provider allows a maximum request message length of 140 characters, however the request message maximum length is dependent on the service the private endpoint is connected to. Only valid if is_manual_connection is set to true.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
+
+	// The status of the connection between the service consumer and provider.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Possible values are detailed in the product documentation in the Subresources column. Changing this forces a new resource to be created.
 	SubresourceNames []*string `json:"subresourceNames,omitempty" tf:"subresource_names,omitempty"`

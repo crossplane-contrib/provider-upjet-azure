@@ -27,6 +27,9 @@
 // Generate deepcopy methodsets and CRD manifests
 //go:generate go run -tags generate sigs.k8s.io/controller-tools/cmd/controller-gen object:headerFile=../hack/boilerplate.go.txt paths=../apis/... crd:crdVersions=v1,allowDangerousTypes=true output:artifacts:config=../package/crds
 
+// Report the schema changes between the API versions of each CRD
+//go:generate go run github.com/crossplane/upjet/v2/cmd/schemadiff -i ../package/crds -o ../config/crd-schema-changes.json
+
 // Generate crossplane-runtime methodsets (resource.Claim, etc)
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ../apis/...
 

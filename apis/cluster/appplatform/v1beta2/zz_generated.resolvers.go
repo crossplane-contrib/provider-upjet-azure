@@ -449,7 +449,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 
 	if mg.Spec.ForProvider.Network != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -471,7 +471,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 	}
 	if mg.Spec.ForProvider.Network != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -513,7 +513,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 
 	if mg.Spec.ForProvider.Trace != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -535,7 +535,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 	}
 	if mg.Spec.InitProvider.Network != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -557,7 +557,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 	}
 	if mg.Spec.InitProvider.Network != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta3", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -579,7 +579,7 @@ func (mg *SpringCloudService) ResolveReferences(ctx context.Context, c client.Re
 	}
 	if mg.Spec.InitProvider.Trace != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "ApplicationInsights", "ApplicationInsightsList")
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "ApplicationInsights", "ApplicationInsightsList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

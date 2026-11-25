@@ -1,0 +1,128 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: sql.azure.upbound.io/v1beta3
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta3/mssqldatabase
+  labels:
+    testing.upbound.io/example-name: examplemssqldatabase
+  name: examplemssqldatabase
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    elasticPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasepool
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasesrv
+    skuName: ElasticPool
+    tags:
+      foo: bar
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLElasticPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta3/mssqldatabase
+  labels:
+    testing.upbound.io/example-name: mssqldatabasepool
+  name: mssqldatabasepool
+spec:
+  forProvider:
+    location: Sweden Central
+    maxSizeGb: 5
+    perDatabaseSettings:
+      maxCapacity: 4
+      minCapacity: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabase-rg
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasesrv
+    sku:
+      capacity: 4
+      family: Gen5
+      name: GP_Gen5
+      tier: GeneralPurpose
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta3/mssqldatabase
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: mssqldatabasesrv
+  name: sqldatabasev1beta2
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret-mssqldatabase
+      namespace: upbound-system
+    location: Sweden Central
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabase-rg
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta3/mssqldatabase
+  labels:
+    testing.upbound.io/example-name: mssqldatabase-rg
+  name: sqldatabasev1beta2
+spec:
+  forProvider:
+    location: Sweden Central
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta3
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta3/mssqldatabase
+  labels:
+    testing.upbound.io/example-name: examplemssqldatabasecopy
+  name: examplemssqldatabasecopy
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    createMode: Copy
+    creationSourceDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplemssqldatabase
+    elasticPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasepool
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqldatabasesrv
+    tags:
+      foo: bar
+
+---
+
+apiVersion: v1
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
+metadata:
+  name: example-secret-mssqldatabase
+  namespace: upbound-system
+type: Opaque

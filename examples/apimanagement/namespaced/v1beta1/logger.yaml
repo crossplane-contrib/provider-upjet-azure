@@ -27,7 +27,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: insights.azure.m.upbound.io/v1beta1
+apiVersion: insights.azure.m.upbound.io/v1beta2
 kind: ApplicationInsights
 metadata:
   annotations:
@@ -46,7 +46,7 @@ spec:
   writeConnectionSecretToRef:
     name: example-application-insights
 ---
-apiVersion: apimanagement.azure.m.upbound.io/v1beta1
+apiVersion: apimanagement.azure.m.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:

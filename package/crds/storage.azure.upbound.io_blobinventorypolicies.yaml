@@ -88,6 +88,11 @@ spec:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
+                            createdWithinDays:
+                              description: The number of days in the past to filter
+                                blob creation time. Possible values range between
+                                1 and 36500.
+                              type: number
                             excludePrefixes:
                               description: A set of strings for blob prefixes to be
                                 excluded. Maximum of 10 blob prefixes.
@@ -327,6 +332,11 @@ spec:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
+                            createdWithinDays:
+                              description: The number of days in the past to filter
+                                blob creation time. Possible values range between
+                                1 and 36500.
+                              type: number
                             excludePrefixes:
                               description: A set of strings for blob prefixes to be
                                 excluded. Maximum of 10 blob prefixes.
@@ -652,6 +662,11 @@ spec:
                                 type: string
                               type: array
                               x-kubernetes-list-type: set
+                            createdWithinDays:
+                              description: The number of days in the past to filter
+                                blob creation time. Possible values range between
+                                1 and 36500.
+                              type: number
                             excludePrefixes:
                               description: A set of strings for blob prefixes to be
                                 excluded. Maximum of 10 blob prefixes.

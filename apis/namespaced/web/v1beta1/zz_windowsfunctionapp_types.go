@@ -1756,7 +1756,7 @@ type WindowsFunctionAppIdentityParameters struct {
 type WindowsFunctionAppInitParameters struct {
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
@@ -1799,6 +1799,9 @@ type WindowsFunctionAppInitParameters struct {
 	// Is the Function App enabled? Defaults to true.
 	// Is the Windows Function App enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
 
 	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
 	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
@@ -1853,7 +1856,7 @@ type WindowsFunctionAppInitParameters struct {
 
 	// The backend storage account name which will be used by this Function App.
 	// The backend storage account name which will be used by this Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -1880,7 +1883,7 @@ type WindowsFunctionAppInitParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -1907,7 +1910,7 @@ type WindowsFunctionAppInitParameters struct {
 type WindowsFunctionAppObservation struct {
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
@@ -1953,6 +1956,9 @@ type WindowsFunctionAppObservation struct {
 	// Is the Function App enabled? Defaults to true.
 	// Is the Windows Function App enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
 
 	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
 	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
@@ -2052,7 +2058,7 @@ type WindowsFunctionAppObservation struct {
 type WindowsFunctionAppParameters struct {
 
 	// A map of key-value pairs for App Settings and custom values.
-	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/azure/azure-functions/functions-app-settings) and custom values.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
@@ -2107,6 +2113,10 @@ type WindowsFunctionAppParameters struct {
 	// Is the Windows Function App enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether to enable end-to-end TLS encryption. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EndToEndTLSEncryptionEnabled *bool `json:"endToEndTlsEncryptionEnabled,omitempty" tf:"end_to_end_tls_encryption_enabled,omitempty"`
 
 	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -2186,7 +2196,7 @@ type WindowsFunctionAppParameters struct {
 
 	// The backend storage account name which will be used by this Function App.
 	// The backend storage account name which will be used by this Function App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -2218,7 +2228,7 @@ type WindowsFunctionAppParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -2292,7 +2302,7 @@ type WindowsFunctionAppSiteConfigApplicationStackInitParameters struct {
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
 	// The version of Node to run. Possible values include ~12, ~14, ~16, ~18 ~20, ~22 and ~24.
-	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
+	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20`, `~22` and `~24`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PowerShell Core to run. Possible values are 7, 7.2, 7.4, and 7.6.
@@ -2319,7 +2329,7 @@ type WindowsFunctionAppSiteConfigApplicationStackObservation struct {
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
 	// The version of Node to run. Possible values include ~12, ~14, ~16, ~18 ~20, ~22 and ~24.
-	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
+	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20`, `~22` and `~24`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PowerShell Core to run. Possible values are 7, 7.2, 7.4, and 7.6.
@@ -2348,7 +2358,7 @@ type WindowsFunctionAppSiteConfigApplicationStackParameters struct {
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
 	// The version of Node to run. Possible values include ~12, ~14, ~16, ~18 ~20, ~22 and ~24.
-	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20` and `~22`
+	// The version of Node to use. Possible values include `~12`, `~14`, `~16`, `~18`, `~20`, `~22` and `~24`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -2486,7 +2496,7 @@ type WindowsFunctionAppSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2571,7 +2581,7 @@ type WindowsFunctionAppSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
@@ -3097,7 +3107,7 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3182,7 +3192,7 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`

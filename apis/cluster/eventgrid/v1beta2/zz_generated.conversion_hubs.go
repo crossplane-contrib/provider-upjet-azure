@@ -10,10 +10,7 @@ package v1beta2
 func (tr *Domain) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *EventSubscription) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SystemTopic) Hub() {}
+func (tr *SystemTopicEventSubscription) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Topic) Hub() {}

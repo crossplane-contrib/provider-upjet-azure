@@ -16,7 +16,7 @@ import (
 type LogAnalyticsLinkedServiceInitParameters struct {
 
 	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
 
@@ -68,7 +68,7 @@ type LogAnalyticsLinkedServiceObservation struct {
 type LogAnalyticsLinkedServiceParameters struct {
 
 	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/automation/v1beta3.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
@@ -95,7 +95,7 @@ type LogAnalyticsLinkedServiceParameters struct {
 	ResourceGroupNameSelector *v2.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Log Analytics Workspace that will contain the Log Analytics Linked Service resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/operationalinsights/v1beta3.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

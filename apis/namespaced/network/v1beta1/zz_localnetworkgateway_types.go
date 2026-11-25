@@ -55,6 +55,7 @@ type BGPSettingsParameters struct {
 type LocalNetworkGatewayInitParameters struct {
 
 	// The list of string CIDRs representing the address spaces the gateway exposes.
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
@@ -77,6 +78,7 @@ type LocalNetworkGatewayInitParameters struct {
 type LocalNetworkGatewayObservation struct {
 
 	// The list of string CIDRs representing the address spaces the gateway exposes.
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
@@ -106,6 +108,7 @@ type LocalNetworkGatewayParameters struct {
 
 	// The list of string CIDRs representing the address spaces the gateway exposes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.

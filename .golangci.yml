@@ -121,6 +121,13 @@ linters:
         linters:
           - misspell
 
+      # "hdinsight" is also the name of a configuration package. The build
+      # tag added to it for the linter run repeats the name on a line that no
+      # nolint directive can cover.
+      - text: "`hdinsight` is a misspelling"
+        linters:
+          - misspell
+
       # Exclude some linters from running on tests files.
       - path: _test(ing)?\.go
         linters:

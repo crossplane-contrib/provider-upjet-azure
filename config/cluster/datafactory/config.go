@@ -8,6 +8,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 // Configure configures datafactory group
@@ -27,9 +28,27 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_data_factory_linked_service_azure_databricks", func(r *config.Resource) {
-		r.References["msi_work_space_resource_id"] = config.Reference{
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
+		r.References["msi_workspace_id"] = config.Reference{
 			TerraformName: "azurerm_databricks_workspace",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+	})
+
+	p.AddResourceConfigurator("azurerm_data_factory_linked_service_azure_blob_storage", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
+	})
+
+	p.AddResourceConfigurator("azurerm_data_factory_pipeline", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 	})
 }

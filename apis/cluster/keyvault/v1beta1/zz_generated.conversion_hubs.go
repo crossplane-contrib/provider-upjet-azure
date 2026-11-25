@@ -10,9 +10,6 @@ package v1beta1
 func (tr *AccessPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CertificateContacts) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *CertificateIssuer) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -16474,6 +16474,16 @@ func (in *SnapshotInitParameters) DeepCopyInto(out *SnapshotInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceResourceIDRef != nil {
+		in, out := &in.SourceResourceIDRef, &out.SourceResourceIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceResourceIDSelector != nil {
+		in, out := &in.SourceResourceIDSelector, &out.SourceResourceIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SourceURI != nil {
 		in, out := &in.SourceURI, &out.SourceURI
 		*out = new(string)
@@ -16717,6 +16727,16 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 		in, out := &in.SourceResourceID, &out.SourceResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceResourceIDRef != nil {
+		in, out := &in.SourceResourceIDRef, &out.SourceResourceIDRef
+		*out = new(v2.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceResourceIDSelector != nil {
+		in, out := &in.SourceResourceIDSelector, &out.SourceResourceIDSelector
+		*out = new(v2.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceURI != nil {
 		in, out := &in.SourceURI, &out.SourceURI

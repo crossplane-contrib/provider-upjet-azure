@@ -146,8 +146,8 @@ spec:
                         type: object
                     type: object
                   applicationInsights:
-                    description: An application_insights block as documented below.
-                      Changing this forces a new resource to be created.
+                    description: An application_insights block as defined below. Changing
+                      this forces a new resource to be created.
                     properties:
                       connectionStringSecretRef:
                         description: The connection string of Application Insights.
@@ -190,7 +190,7 @@ spec:
                     description: A description of this Logger.
                     type: string
                   eventhub:
-                    description: An eventhub block as documented below. Changing this
+                    description: An eventhub block as defined below. Changing this
                       forces a new resource to be created.
                     properties:
                       connectionStringSecretRef:
@@ -407,8 +407,8 @@ spec:
                   autoscaler.
                 properties:
                   applicationInsights:
-                    description: An application_insights block as documented below.
-                      Changing this forces a new resource to be created.
+                    description: An application_insights block as defined below. Changing
+                      this forces a new resource to be created.
                     properties:
                       connectionStringSecretRef:
                         description: The connection string of Application Insights.
@@ -451,7 +451,7 @@ spec:
                     description: A description of this Logger.
                     type: string
                   eventhub:
-                    description: An eventhub block as documented below. Changing this
+                    description: An eventhub block as defined below. Changing this
                       forces a new resource to be created.
                     properties:
                       connectionStringSecretRef:
@@ -636,8 +636,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   applicationInsights:
-                    description: An application_insights block as documented below.
-                      Changing this forces a new resource to be created.
+                    description: An application_insights block as defined below. Changing
+                      this forces a new resource to be created.
                     properties:
                       identityClientId:
                         description: The Client Id of the User Assigned Identity,
@@ -655,7 +655,7 @@ spec:
                     description: A description of this Logger.
                     type: string
                   eventhub:
-                    description: An eventhub block as documented below. Changing this
+                    description: An eventhub block as defined below. Changing this
                       forces a new resource to be created.
                     properties:
                       endpointUri:

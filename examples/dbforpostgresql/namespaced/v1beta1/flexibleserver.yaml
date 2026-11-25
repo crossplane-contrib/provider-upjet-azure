@@ -50,7 +50,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: PrivateDNSZoneVirtualNetworkLink
 metadata:
   annotations:
@@ -61,10 +61,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    privateDnsZoneNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
+    privateDnsZoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     virtualNetworkIdSelector:
@@ -84,7 +81,7 @@ spec:
   forProvider:
     location: West Europe
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -106,13 +103,13 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    serviceEndpoints:
-      - Microsoft.Storage
+    serviceEndpoint:
+      - service: Microsoft.Storage
     virtualNetworkNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

@@ -78,8 +78,8 @@ spec:
                       syntax that is performed against a BrokeredMessage.
                     type: string
                   correlationFilter:
-                    description: A correlation_filter block as documented below to
-                      be evaluated against a BrokeredMessage. Required when filter_type
+                    description: A correlation_filter block as defined below to be
+                      evaluated against a BrokeredMessage. Required when filter_type
                       is set to CorrelationFilter.
                     properties:
                       contentType:
@@ -223,8 +223,8 @@ spec:
                       syntax that is performed against a BrokeredMessage.
                     type: string
                   correlationFilter:
-                    description: A correlation_filter block as documented below to
-                      be evaluated against a BrokeredMessage. Required when filter_type
+                    description: A correlation_filter block as defined below to be
+                      evaluated against a BrokeredMessage. Required when filter_type
                       is set to CorrelationFilter.
                     properties:
                       contentType:
@@ -370,8 +370,8 @@ spec:
                       syntax that is performed against a BrokeredMessage.
                     type: string
                   correlationFilter:
-                    description: A correlation_filter block as documented below to
-                      be evaluated against a BrokeredMessage. Required when filter_type
+                    description: A correlation_filter block as defined below to be
+                      evaluated against a BrokeredMessage. Required when filter_type
                       is set to CorrelationFilter.
                     properties:
                       contentType:

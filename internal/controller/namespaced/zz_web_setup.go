@@ -14,20 +14,16 @@ import (
 	appservicecertificatebinding "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appservicecertificatebinding"
 	appservicecustomhostnamebinding "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appservicecustomhostnamebinding"
 	appservicemanagedcertificate "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appservicemanagedcertificate"
-	appserviceplan "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/appserviceplan"
-	functionapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionapp"
 	functionappactiveslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappactiveslot"
 	functionappflexconsumption "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappflexconsumption"
 	functionappfunction "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappfunction"
 	functionapphybridconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionapphybridconnection"
-	functionappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/functionappslot"
 	linuxfunctionapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxfunctionapp"
 	linuxfunctionappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxfunctionappslot"
 	linuxwebapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxwebapp"
 	linuxwebappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/linuxwebappslot"
 	serviceplan "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/serviceplan"
 	sourcecontroltoken "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/sourcecontroltoken"
-	staticsite "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/staticsite"
 	windowsfunctionapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/windowsfunctionapp"
 	windowsfunctionappslot "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/windowsfunctionappslot"
 	windowswebapp "github.com/upbound/provider-azure/v2/internal/controller/namespaced/web/windowswebapp"
@@ -43,20 +39,16 @@ func Setup_web(mgr ctrl.Manager, o controller.Options) error {
 		appservicecertificatebinding.Setup,
 		appservicecustomhostnamebinding.Setup,
 		appservicemanagedcertificate.Setup,
-		appserviceplan.Setup,
-		functionapp.Setup,
 		functionappactiveslot.Setup,
 		functionappflexconsumption.Setup,
 		functionappfunction.Setup,
 		functionapphybridconnection.Setup,
-		functionappslot.Setup,
 		linuxfunctionapp.Setup,
 		linuxfunctionappslot.Setup,
 		linuxwebapp.Setup,
 		linuxwebappslot.Setup,
 		serviceplan.Setup,
 		sourcecontroltoken.Setup,
-		staticsite.Setup,
 		windowsfunctionapp.Setup,
 		windowsfunctionappslot.Setup,
 		windowswebapp.Setup,
@@ -78,20 +70,16 @@ func SetupGated_web(mgr ctrl.Manager, o controller.Options) error {
 		appservicecertificatebinding.SetupGated,
 		appservicecustomhostnamebinding.SetupGated,
 		appservicemanagedcertificate.SetupGated,
-		appserviceplan.SetupGated,
-		functionapp.SetupGated,
 		functionappactiveslot.SetupGated,
 		functionappflexconsumption.SetupGated,
 		functionappfunction.SetupGated,
 		functionapphybridconnection.SetupGated,
-		functionappslot.SetupGated,
 		linuxfunctionapp.SetupGated,
 		linuxfunctionappslot.SetupGated,
 		linuxwebapp.SetupGated,
 		linuxwebappslot.SetupGated,
 		serviceplan.SetupGated,
 		sourcecontroltoken.SetupGated,
-		staticsite.SetupGated,
 		windowsfunctionapp.SetupGated,
 		windowsfunctionappslot.SetupGated,
 		windowswebapp.SetupGated,
@@ -112,20 +100,16 @@ func SetupWebhookWithManager_web(mgr ctrl.Manager) error {
 		appservicecertificatebinding.SetupWebhookWithManager,
 		appservicecustomhostnamebinding.SetupWebhookWithManager,
 		appservicemanagedcertificate.SetupWebhookWithManager,
-		appserviceplan.SetupWebhookWithManager,
-		functionapp.SetupWebhookWithManager,
 		functionappactiveslot.SetupWebhookWithManager,
 		functionappflexconsumption.SetupWebhookWithManager,
 		functionappfunction.SetupWebhookWithManager,
 		functionapphybridconnection.SetupWebhookWithManager,
-		functionappslot.SetupWebhookWithManager,
 		linuxfunctionapp.SetupWebhookWithManager,
 		linuxfunctionappslot.SetupWebhookWithManager,
 		linuxwebapp.SetupWebhookWithManager,
 		linuxwebappslot.SetupWebhookWithManager,
 		serviceplan.SetupWebhookWithManager,
 		sourcecontroltoken.SetupWebhookWithManager,
-		staticsite.SetupWebhookWithManager,
 		windowsfunctionapp.SetupWebhookWithManager,
 		windowsfunctionappslot.SetupWebhookWithManager,
 		windowswebapp.SetupWebhookWithManager,

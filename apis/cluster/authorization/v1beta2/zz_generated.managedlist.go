@@ -7,6 +7,15 @@ package v1beta2
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
+// GetItems of this PolicySetDefinitionList.
+func (l *PolicySetDefinitionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ResourceGroupPolicyAssignmentList.
 func (l *ResourceGroupPolicyAssignmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

@@ -82,7 +82,7 @@ func GetProvider(_ context.Context, sdkProvider *schema.Provider, generationProv
 			panic(err)
 		}
 	}
-	return pc, nil
+	return pc, registerAPIConversions(pc, clusterFieldRenames, generationProvider)
 }
 
 func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {

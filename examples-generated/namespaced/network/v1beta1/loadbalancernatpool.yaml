@@ -27,7 +27,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.m.upbound.io/v1beta1
+apiVersion: network.azure.m.upbound.io/v1beta2
 kind: LoadBalancer
 metadata:
   annotations:

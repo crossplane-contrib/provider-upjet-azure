@@ -31,7 +31,7 @@ type StreamInputEventHubInitParameters struct {
 	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Event Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta2.EventHub
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
@@ -150,7 +150,7 @@ type StreamInputEventHubParameters struct {
 	EventHubConsumerGroupNameSelector *v2.NamespacedSelector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Event Hub.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/eventhub/v1beta2.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 

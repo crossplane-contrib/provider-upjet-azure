@@ -19,9 +19,6 @@ func (tr *Database) Hub() {}
 func (tr *DatabasePrincipalAssignment) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *EventGridDataConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *EventHubDataConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -68,7 +68,7 @@ type MaintenanceAssignmentVirtualMachineParameters struct {
 	MaintenanceConfigurationIDSelector *v2.NamespacedSelector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Virtual Machine ID to which the Maintenance Configuration will be assigned. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.LinuxVirtualMachine
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta2.LinuxVirtualMachine
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`

@@ -6,10 +6,11 @@ apiVersion: cache.azure.m.upbound.io/v1beta1
 kind: RedisCache
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: cache/v1beta2/rediscache
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: rediscache
+  name: uptest-redis-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
@@ -22,7 +23,7 @@ spec:
     redisConfiguration: {}
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: rediscache
     skuName: Standard
 ---
 apiVersion: azure.m.upbound.io/v1beta1
@@ -31,8 +32,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cache/v1beta2/rediscache
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: rediscache
+  name: example-rediscache
   namespace: upbound-system
 spec:
   forProvider:

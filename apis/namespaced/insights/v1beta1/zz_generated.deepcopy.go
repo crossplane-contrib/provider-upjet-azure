@@ -10292,6 +10292,16 @@ func (in *MonitorDataCollectionRuleObservation) DeepCopyInto(out *MonitorDataCol
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogsIngestionEndpoint != nil {
+		in, out := &in.LogsIngestionEndpoint, &out.LogsIngestionEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.MetricsIngestionEndpoint != nil {
+		in, out := &in.MetricsIngestionEndpoint, &out.MetricsIngestionEndpoint
+		*out = new(string)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -16939,6 +16949,11 @@ func (in *ValidationRulesInitParameters) DeepCopyInto(out *ValidationRulesInitPa
 		*out = new(float64)
 		**out = **in
 	}
+	if in.IgnoreStatusCode != nil {
+		in, out := &in.IgnoreStatusCode, &out.IgnoreStatusCode
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SSLCertRemainingLifetime != nil {
 		in, out := &in.SSLCertRemainingLifetime, &out.SSLCertRemainingLifetime
 		*out = new(float64)
@@ -16974,6 +16989,11 @@ func (in *ValidationRulesObservation) DeepCopyInto(out *ValidationRulesObservati
 		*out = new(float64)
 		**out = **in
 	}
+	if in.IgnoreStatusCode != nil {
+		in, out := &in.IgnoreStatusCode, &out.IgnoreStatusCode
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SSLCertRemainingLifetime != nil {
 		in, out := &in.SSLCertRemainingLifetime, &out.SSLCertRemainingLifetime
 		*out = new(float64)
@@ -17007,6 +17027,11 @@ func (in *ValidationRulesParameters) DeepCopyInto(out *ValidationRulesParameters
 	if in.ExpectedStatusCode != nil {
 		in, out := &in.ExpectedStatusCode, &out.ExpectedStatusCode
 		*out = new(float64)
+		**out = **in
+	}
+	if in.IgnoreStatusCode != nil {
+		in, out := &in.IgnoreStatusCode, &out.IgnoreStatusCode
+		*out = new(bool)
 		**out = **in
 	}
 	if in.SSLCertRemainingLifetime != nil {

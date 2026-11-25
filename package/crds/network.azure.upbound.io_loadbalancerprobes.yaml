@@ -158,6 +158,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  noHealthyBackendsBehavior:
+                    description: Determines how new connections are handled by the
+                      load balancer when all backend instances are probed down. Possible
+                      values are AllProbedDown and AllProbedUp. Defaults to AllProbedDown.
+                    type: string
                   numberOfProbes:
                     description: The number of failed probe attempts after which the
                       backend endpoint is removed from rotation. Default to 2. NumberOfProbes
@@ -205,6 +210,11 @@ spec:
                       endpoint for health status. The default value is 15, the minimum
                       value is 5.
                     type: number
+                  noHealthyBackendsBehavior:
+                    description: Determines how new connections are handled by the
+                      load balancer when all backend instances are probed down. Possible
+                      values are AllProbedDown and AllProbedUp. Defaults to AllProbedDown.
+                    type: string
                   numberOfProbes:
                     description: The number of failed probe attempts after which the
                       backend endpoint is removed from rotation. Default to 2. NumberOfProbes
@@ -346,6 +356,11 @@ spec:
                   loadbalancerId:
                     description: The ID of the LoadBalancer in which to create the
                       Probe. Changing this forces a new resource to be created.
+                    type: string
+                  noHealthyBackendsBehavior:
+                    description: Determines how new connections are handled by the
+                      load balancer when all backend instances are probed down. Possible
+                      values are AllProbedDown and AllProbedUp. Defaults to AllProbedDown.
                     type: string
                   numberOfProbes:
                     description: The number of failed probe attempts after which the

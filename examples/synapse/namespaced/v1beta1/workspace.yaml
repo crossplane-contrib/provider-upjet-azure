@@ -8,21 +8,21 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta2/workspace
   labels:
-    testing.upbound.io/example-name: example
-  name: synapse-workspace-123
+    testing.upbound.io/example-name: synapse-workspace
+  name: synapse-workspace-123-${Rand.RFC1123Subdomain}
   namespace: upbound-system
 spec:
   forProvider:
     identity:
       type: SystemAssigned
-    location: West Europe
+    location: UK South
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: synapse-resource-group-label
     sqlAdministratorLogin: sqladminuser
     storageDataLakeGen2FilesystemIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: file-system-label
+        testing.upbound.io/example-name: file-system-label-synapse-workspace
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -35,16 +35,16 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: UK South
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta2/workspace
   labels:
-    testing.upbound.io/example-name: account-label
-  name: synapseaccountname1234
+    testing.upbound.io/example-name: account-label-synapse-workspace
+  name: synapseaccount4ad8aa7c
   namespace: upbound-system
 spec:
   forProvider:
@@ -52,7 +52,7 @@ spec:
     accountReplicationType: LRS
     accountTier: Standard
     isHnsEnabled: true
-    location: West Europe
+    location: UK South
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: synapse-resource-group-label
@@ -63,11 +63,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: synapse/v1beta2/workspace
   labels:
-    testing.upbound.io/example-name: file-system-label
-  name: file-system
+    testing.upbound.io/example-name: file-system-label-synapse-workspace
+  name: file-system-synapse-workspace
   namespace: upbound-system
 spec:
   forProvider:
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: account-label
+        testing.upbound.io/example-name: account-label-synapse-workspace

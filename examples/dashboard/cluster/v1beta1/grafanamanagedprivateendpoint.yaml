@@ -43,7 +43,7 @@ spec:
     - resourceIdSelector:
         matchLabels:
           testing.upbound.io/example-name: grafanampe
-    grafanaMajorVersion: "11"
+    grafanaMajorVersion: "13"
     location: West Europe
     publicNetworkAccessEnabled: true
     resourceGroupNameSelector:

@@ -22,9 +22,6 @@ func (tr *DedicatedHost) Hub() {}
 func (tr *DiskAccess) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DiskEncryptionSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GalleryApplication) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -34,19 +31,10 @@ func (tr *GalleryApplicationVersion) Hub() {}
 func (tr *Image) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinuxVirtualMachine) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinuxVirtualMachineScaleSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ManagedDisk) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagedDiskSASToken) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *OrchestratedVirtualMachineScaleSet) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ProximityPlacementGroup) Hub() {}
@@ -74,9 +62,3 @@ func (tr *VirtualMachineRunCommand) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VirtualMachineScaleSetStandbyPool) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WindowsVirtualMachine) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WindowsVirtualMachineScaleSet) Hub() {}

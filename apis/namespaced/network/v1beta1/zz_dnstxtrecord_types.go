@@ -15,7 +15,7 @@ import (
 
 type DNSTXTRecordInitParameters struct {
 
-	// A list of values that make up the txt record. Each record block supports fields documented below.
+	// A list of values that make up the txt record. Each record block supports fields defined below.
 	Record []DNSTXTRecordRecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
@@ -34,7 +34,7 @@ type DNSTXTRecordObservation struct {
 	// The DNS TXT Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of values that make up the txt record. Each record block supports fields documented below.
+	// A list of values that make up the txt record. Each record block supports fields defined below.
 	Record []DNSTXTRecordRecordObservation `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -53,7 +53,7 @@ type DNSTXTRecordObservation struct {
 
 type DNSTXTRecordParameters struct {
 
-	// A list of values that make up the txt record. Each record block supports fields documented below.
+	// A list of values that make up the txt record. Each record block supports fields defined below.
 	// +kubebuilder:validation:Optional
 	Record []DNSTXTRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 

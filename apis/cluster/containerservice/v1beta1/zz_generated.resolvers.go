@@ -25,7 +25,7 @@ func (mg *KubernetesClusterExtension) ResolveReferences( // ResolveReferences of
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta3", "KubernetesCluster", "KubernetesClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

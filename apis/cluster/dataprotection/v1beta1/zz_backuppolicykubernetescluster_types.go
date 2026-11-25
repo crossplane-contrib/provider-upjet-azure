@@ -154,7 +154,7 @@ type DefaultRetentionRuleInitParameters struct {
 
 type DefaultRetentionRuleLifeCycleInitParameters struct {
 
-	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
+	// The type of data store. The possible values are OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
 
 	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new resource to be created.
@@ -163,7 +163,7 @@ type DefaultRetentionRuleLifeCycleInitParameters struct {
 
 type DefaultRetentionRuleLifeCycleObservation struct {
 
-	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
+	// The type of data store. The possible values are OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
 
 	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new resource to be created.
@@ -172,7 +172,7 @@ type DefaultRetentionRuleLifeCycleObservation struct {
 
 type DefaultRetentionRuleLifeCycleParameters struct {
 
-	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
+	// The type of data store. The possible values are OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DataStoreType *string `json:"dataStoreType" tf:"data_store_type,omitempty"`
 
@@ -267,7 +267,7 @@ type RetentionRuleCriteriaParameters struct {
 
 type RetentionRuleLifeCycleInitParameters struct {
 
-	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
+	// The type of data store. The possible values are OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
 
 	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new resource to be created.
@@ -276,7 +276,7 @@ type RetentionRuleLifeCycleInitParameters struct {
 
 type RetentionRuleLifeCycleObservation struct {
 
-	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
+	// The type of data store. The possible values are OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
 
 	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new resource to be created.
@@ -285,7 +285,7 @@ type RetentionRuleLifeCycleObservation struct {
 
 type RetentionRuleLifeCycleParameters struct {
 
-	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
+	// The type of data store. The possible values are OperationalStore and VaultStore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DataStoreType *string `json:"dataStoreType" tf:"data_store_type,omitempty"`
 

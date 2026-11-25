@@ -13,6 +13,8 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
+    authSettings:
+      enabled: false
     location: West Europe
     name: linuxappexmpl
     resourceGroupNameSelector:
@@ -24,10 +26,10 @@ spec:
     siteConfig: {}
     storageAccountAccessKeySecretRef:
       key: attribute.primary_access_key
-      name: example-storage-account
+      name: example-storage-account-linuxfunctionapp
     storageAccountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: linuxfuncappacc
+        testing.upbound.io/example-name: linuxfuncappac745c806f
 ---
 apiVersion: azure.m.upbound.io/v1beta1
 kind: ResourceGroup
@@ -61,14 +63,14 @@ spec:
         testing.upbound.io/example-name: linuxfuncapp-rg
     skuName: Y1
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta2/linuxfunctionapp
   labels:
-    testing.upbound.io/example-name: linuxfuncappacc
-  name: linuxfuncappacc
+    testing.upbound.io/example-name: linuxfuncappac745c806f
+  name: linuxfuncappac745c806f
   namespace: upbound-system
 spec:
   forProvider:
@@ -79,4 +81,4 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: linuxfuncapp-rg
   writeConnectionSecretToRef:
-    name: example-storage-account
+    name: example-storage-account-linuxfunctionapp

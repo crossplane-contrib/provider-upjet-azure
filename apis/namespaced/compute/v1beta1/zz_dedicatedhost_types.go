@@ -18,7 +18,7 @@ type DedicatedHostInitParameters struct {
 	// Should the Dedicated Host automatically be replaced in case of a Hardware Failure? Defaults to true.
 	AutoReplaceOnFailure *bool `json:"autoReplaceOnFailure,omitempty" tf:"auto_replace_on_failure,omitempty"`
 
-	// Specifies the software license type that will be applied to the VMs deployed on the Dedicated Host. Possible values are None, Windows_Server_Hybrid and Windows_Server_Perpetual. Defaults to None.
+	// Specifies the software license type that will be applied to the VMs deployed on the Dedicated Host. Possible values are Windows_Server_Hybrid and Windows_Server_Perpetual.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// Specify the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -46,7 +46,7 @@ type DedicatedHostObservation struct {
 	// The ID of the Dedicated Host.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the software license type that will be applied to the VMs deployed on the Dedicated Host. Possible values are None, Windows_Server_Hybrid and Windows_Server_Perpetual. Defaults to None.
+	// Specifies the software license type that will be applied to the VMs deployed on the Dedicated Host. Possible values are Windows_Server_Hybrid and Windows_Server_Perpetual.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// Specify the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -73,7 +73,7 @@ type DedicatedHostParameters struct {
 	// +kubebuilder:validation:Required
 	DedicatedHostGroupID *string `json:"dedicatedHostGroupId" tf:"dedicated_host_group_id,omitempty"`
 
-	// Specifies the software license type that will be applied to the VMs deployed on the Dedicated Host. Possible values are None, Windows_Server_Hybrid and Windows_Server_Perpetual. Defaults to None.
+	// Specifies the software license type that will be applied to the VMs deployed on the Dedicated Host. Possible values are Windows_Server_Hybrid and Windows_Server_Perpetual.
 	// +kubebuilder:validation:Optional
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 

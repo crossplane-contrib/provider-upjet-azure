@@ -80,6 +80,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bgpSettings:
                     description: A bgp_settings block as defined below containing
                       the Local Network Gateway's BGP speaker settings.
@@ -213,6 +214,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bgpSettings:
                     description: A bgp_settings block as defined below containing
                       the Local Network Gateway's BGP speaker settings.
@@ -348,6 +350,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bgpSettings:
                     description: A bgp_settings block as defined below containing
                       the Local Network Gateway's BGP speaker settings.

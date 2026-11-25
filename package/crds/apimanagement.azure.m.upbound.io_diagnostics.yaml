@@ -431,6 +431,10 @@ spec:
                   logClientIp:
                     description: Log client IP address.
                     type: boolean
+                  metricsEnabled:
+                    description: Whether custom metrics emitted via the emit-metric
+                      policy are sent to Application Insights.
+                    type: boolean
                   operationNameFormat:
                     description: The format of the Operation Name for Application
                       Insights telemetries. Possible values are Name, and Url.
@@ -829,6 +833,10 @@ spec:
                   logClientIp:
                     description: Log client IP address.
                     type: boolean
+                  metricsEnabled:
+                    description: Whether custom metrics emitted via the emit-metric
+                      policy are sent to Application Insights.
+                    type: boolean
                   operationNameFormat:
                     description: The format of the Operation Name for Application
                       Insights telemetries. Possible values are Name, and Url.
@@ -1116,6 +1124,10 @@ spec:
                     type: string
                   logClientIp:
                     description: Log client IP address.
+                    type: boolean
+                  metricsEnabled:
+                    description: Whether custom metrics emitted via the emit-metric
+                      policy are sent to Application Insights.
                     type: boolean
                   operationNameFormat:
                     description: The format of the Operation Name for Application

@@ -27,6 +27,9 @@ type DeploymentInitParameters struct {
 	// A sku block as defined below.
 	Sku *SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
+	// The name of the deployment that should serve requests when this deployment would have otherwise been throttled due to reaching its throughput limit.
+	SpilloverDeploymentName *string `json:"spilloverDeploymentName,omitempty" tf:"spillover_deployment_name,omitempty"`
+
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	VersionUpgradeOption *string `json:"versionUpgradeOption,omitempty" tf:"version_upgrade_option,omitempty"`
 }
@@ -50,6 +53,9 @@ type DeploymentObservation struct {
 
 	// A sku block as defined below.
 	Sku *SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The name of the deployment that should serve requests when this deployment would have otherwise been throttled due to reaching its throughput limit.
+	SpilloverDeploymentName *string `json:"spilloverDeploymentName,omitempty" tf:"spillover_deployment_name,omitempty"`
 
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	VersionUpgradeOption *string `json:"versionUpgradeOption,omitempty" tf:"version_upgrade_option,omitempty"`
@@ -86,6 +92,10 @@ type DeploymentParameters struct {
 	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
 	Sku *SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The name of the deployment that should serve requests when this deployment would have otherwise been throttled due to reaching its throughput limit.
+	// +kubebuilder:validation:Optional
+	SpilloverDeploymentName *string `json:"spilloverDeploymentName,omitempty" tf:"spillover_deployment_name,omitempty"`
 
 	// Deployment model version upgrade option. Possible values are OnceNewDefaultVersionAvailable, OnceCurrentVersionExpired, and NoAutoUpgrade. Defaults to OnceNewDefaultVersionAvailable.
 	// +kubebuilder:validation:Optional

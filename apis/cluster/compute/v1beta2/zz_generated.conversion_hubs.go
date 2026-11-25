@@ -10,25 +10,13 @@ package v1beta2
 func (tr *CapacityReservation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DiskEncryptionSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GalleryApplicationVersion) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Image) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinuxVirtualMachine) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinuxVirtualMachineScaleSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ManagedDisk) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *OrchestratedVirtualMachineScaleSet) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SharedImage) Hub() {}
@@ -44,9 +32,3 @@ func (tr *VirtualMachineExtension) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VirtualMachineRunCommand) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WindowsVirtualMachine) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WindowsVirtualMachineScaleSet) Hub() {}

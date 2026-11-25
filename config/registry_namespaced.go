@@ -80,7 +80,7 @@ func GetProviderNamespaced(ctx context.Context, sdkProvider *schema.Provider, ge
 			panic(err)
 		}
 	}
-	return pc, nil
+	return pc, registerAPIConversions(pc, namespacedFieldRenames, generationProvider)
 }
 
 func registerTerraformConversions(pc *ujconfig.Provider) {

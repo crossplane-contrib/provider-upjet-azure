@@ -86,7 +86,7 @@ type SnapshotParameters struct {
 	ResourceGroupNameSelector *v2.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta1.Volume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/netapp/v1beta2.Volume
 	// +kubebuilder:validation:Optional
 	VolumeName *string `json:"volumeName,omitempty" tf:"volume_name,omitempty"`
 

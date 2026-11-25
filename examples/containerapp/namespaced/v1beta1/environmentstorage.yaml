@@ -38,15 +38,16 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     logAnalyticsWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    logsDestination: log-analytics
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 ---
-apiVersion: operationalinsights.azure.m.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.m.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:
@@ -57,7 +58,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -75,9 +76,9 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    location: West Europe
+    location: Sweden Central
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -90,14 +91,14 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: West Europe
+    location: Sweden Central
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
   writeConnectionSecretToRef:
     name: example-storage-account
 ---
-apiVersion: storage.azure.m.upbound.io/v1beta1
+apiVersion: storage.azure.m.upbound.io/v1beta2
 kind: Share
 metadata:
   annotations:
@@ -109,4 +110,5 @@ metadata:
 spec:
   forProvider:
     quota: 5
-    storageAccountName: exampleaes545
+    storageAccountIdRef:
+      name: exampleaes545
