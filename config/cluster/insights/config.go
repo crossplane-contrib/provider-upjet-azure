@@ -12,6 +12,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 // Configure configures insights group
@@ -89,11 +90,22 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 	})
 	p.AddResourceConfigurator("azurerm_monitor_diagnostic_setting", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.LateInitializer = config.LateInitializer{
 			// log is deprecated in favour of the enabled_log property and will be removed in version 4.0 of the AzureRM Provider.
 			IgnoredFields: []string{"log", "enabled_log"},
 		}
 		// target_resource_id references several different types, terraform example auto configures this to only keyvault type
 		delete(r.References, "target_resource_id")
+	})
+
+	p.AddResourceConfigurator("azurerm_application_insights", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 	})
 }

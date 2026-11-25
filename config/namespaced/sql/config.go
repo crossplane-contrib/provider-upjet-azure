@@ -13,6 +13,7 @@ import (
 	xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
 )
 
 func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, error) {
@@ -50,6 +51,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_server_transparent_data_encryption", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["server_id"] = config.Reference{
 			TerraformName: "azurerm_mssql_server",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -75,6 +80,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_managed_database", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["managed_instance_id"] = config.Reference{
 			TerraformName: "azurerm_mssql_managed_instance",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -122,6 +131,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_database", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["server_id"] = config.Reference{
 			TerraformName: "azurerm_mssql_server",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -154,6 +167,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_server_security_alert_policy", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["server_name"] = config.Reference{
 			TerraformName: "azurerm_mssql_server",
 		}
@@ -172,5 +189,19 @@ func Configure(p *config.Provider) {
 		r.References["database_name"] = config.Reference{
 			TerraformName: "azurerm_mssql_database",
 		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_database_extended_auditing_policy", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_managed_instance_transparent_data_encryption", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 	})
 }

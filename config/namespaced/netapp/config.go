@@ -6,6 +6,7 @@ package netapp
 
 import (
 	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
@@ -37,6 +38,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_netapp_volume", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["account_name"] = config.Reference{
 			TerraformName: "azurerm_netapp_account",
 		}

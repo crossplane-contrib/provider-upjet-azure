@@ -6,6 +6,8 @@ package cdn
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
+
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 // Configure configures cdn group
@@ -38,5 +40,17 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_cdn_frontdoor_firewall_policy", func(r *config.Resource) {
 		r.ShortGroup = "cdn"
 		r.Kind = "FrontdoorFirewallPolicy"
+	})
+	p.AddResourceConfigurator("azurerm_cdn_frontdoor_custom_domain", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
+	})
+	p.AddResourceConfigurator("azurerm_cdn_frontdoor_rule", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 	})
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 
 	"github.com/upbound/provider-azure/v2/apis/namespaced/rconfig"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
 )
 
 // Configure configures virtual group
@@ -31,6 +32,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "LoadBalancer"
 
 		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
@@ -68,6 +73,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_nat_rule", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "LoadBalancerNatRule"
 		r.References["loadbalancer_id"] = config.Reference{
 			TerraformName: "azurerm_lb",
@@ -76,6 +85,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_outbound_rule", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "LoadBalancerOutboundRule"
 		r.References["backend_address_pool_id"] = config.Reference{
 			TerraformName: "azurerm_lb_backend_address_pool",
@@ -96,6 +109,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_rule", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "LoadBalancerRule"
 		r.References["loadbalancer_id"] = config.Reference{
 			TerraformName: "azurerm_lb",
@@ -130,6 +147,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_network_watcher_flow_log", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["network_watcher_name"] = config.Reference{
 			TerraformName: "azurerm_network_watcher",
 		}
@@ -213,6 +234,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "VirtualNetwork"
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"subnet"},
@@ -221,6 +246,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "VirtualNetworkGateway"
 		r.References["ip_configuration.subnet_id"] = config.Reference{
 			TerraformName: "azurerm_subnet",
@@ -247,6 +276,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_a_record", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -254,6 +287,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_aaaa_record", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -261,6 +298,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_cname_record", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -268,6 +309,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -275,6 +320,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_ptr_record", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -282,6 +331,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_srv_record", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -289,6 +342,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_txt_record", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -296,6 +353,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_zone_virtual_network_link", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["private_dns_zone_id"] = config.Reference{
 			TerraformName: "azurerm_private_dns_zone",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -361,6 +422,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_link_service", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["nat_ip_configuration.subnet_id"] = config.Reference{
 			TerraformName: "azurerm_subnet",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -417,6 +482,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_express_route_connection", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["express_route_gateway_id"] = config.Reference{
 			TerraformName: "azurerm_express_route_gateway",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -477,6 +546,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_application_gateway", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
 			TerraformName: "azurerm_public_ip",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
@@ -506,6 +579,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway_connection", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "VirtualNetworkGatewayConnection"
 		r.References["virtual_network_gateway_id"] = config.Reference{
 			TerraformName: "azurerm_virtual_network_gateway",
@@ -534,6 +611,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet", func(r *config.Resource) {
+		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta1")
 		r.Kind = "Subnet"
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"address_prefix",

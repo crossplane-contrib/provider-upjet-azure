@@ -10,11 +10,16 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 // Configure configures cosmodb group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_cosmosdb_account", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		delete(r.References, "geo_location.location")
 	})
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_container", func(r *config.Resource) {

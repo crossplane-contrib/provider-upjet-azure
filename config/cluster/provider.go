@@ -16,6 +16,7 @@ import (
 	"github.com/upbound/provider-azure/v2/config/cluster/cdn"
 	"github.com/upbound/provider-azure/v2/config/cluster/certificateregistration"
 	"github.com/upbound/provider-azure/v2/config/cluster/cognitiveservices"
+	"github.com/upbound/provider-azure/v2/config/cluster/communication"
 	"github.com/upbound/provider-azure/v2/config/cluster/compute"
 	"github.com/upbound/provider-azure/v2/config/cluster/consumption"
 	"github.com/upbound/provider-azure/v2/config/cluster/containerapp"
@@ -32,6 +33,7 @@ import (
 	"github.com/upbound/provider-azure/v2/config/cluster/devices"
 	"github.com/upbound/provider-azure/v2/config/cluster/eventgrid"
 	"github.com/upbound/provider-azure/v2/config/cluster/eventhub"
+	"github.com/upbound/provider-azure/v2/config/cluster/hdinsight"
 	"github.com/upbound/provider-azure/v2/config/cluster/healthcareapis"
 	"github.com/upbound/provider-azure/v2/config/cluster/insights"
 	"github.com/upbound/provider-azure/v2/config/cluster/keyvault"
@@ -44,6 +46,7 @@ import (
 	"github.com/upbound/provider-azure/v2/config/cluster/notificationhubs"
 	"github.com/upbound/provider-azure/v2/config/cluster/operationalinsights"
 	"github.com/upbound/provider-azure/v2/config/cluster/postgresql"
+	"github.com/upbound/provider-azure/v2/config/cluster/recoveryservices"
 	"github.com/upbound/provider-azure/v2/config/cluster/relay"
 	"github.com/upbound/provider-azure/v2/config/cluster/resource"
 	"github.com/upbound/provider-azure/v2/config/cluster/resources"
@@ -108,4 +111,7 @@ func init() {
 	ProviderConfiguration.AddConfig(eventgrid.Configure)
 	ProviderConfiguration.AddConfig(dashboard.Configure)
 	ProviderConfiguration.AddConfig(desktopvirtualization.Configure)
+	ProviderConfiguration.AddConfig(communication.Configure)
+	ProviderConfiguration.AddConfig(hdinsight.Configure)
+	ProviderConfiguration.AddConfig(recoveryservices.Configure)
 }

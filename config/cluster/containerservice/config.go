@@ -18,6 +18,10 @@ import (
 // Configure configures kubernetes group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		// Note(ezgidemirel): Following fields are not marked as "sensitive" in Terraform cli schema output.
 		// We need to configure them explicitly to store in connectionDetails secret.
 		r.TerraformResource.Schema["kube_admin_config"].Elem.(*schema.Resource).
@@ -89,6 +93,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster_node_pool", func(r *config.Resource) {
+		r.Version = "v1beta3"
+		r.PreviousVersions = []string{"v1beta2"}
+		r.ControllerReconcileVersion = r.Version //nolint:staticcheck // upjet does not default it at runtime
+		common.DeprecateVersionForAzureRMV5(r, "v1beta2")
 		r.Kind = "KubernetesClusterNodePool"
 		r.ShortGroup = "containerservice"
 		r.References["kubernetes_cluster_id"] = config.Reference{

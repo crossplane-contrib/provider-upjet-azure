@@ -210,3 +210,19 @@ func RemoveIndex(s []string, elementToRemove string) []string {
 	}
 	return result
 }
+
+// azureRMV5DeprecationRelease is the provider release that deprecated the
+// API versions superseded with the Terraform AzureRM v5 bump.
+const azureRMV5DeprecationRelease = "v3.0.0"
+
+// DeprecateVersionForAzureRMV5 marks the given previous API version of r as
+// deprecated in favor of its current version, which the Terraform AzureRM v5
+// bump introduced. The current and previous versions of r must be set.
+func DeprecateVersionForAzureRMV5(r *tjconfig.Resource, version string) {
+	if err := r.SetDeprecatedVersion(version, tjconfig.VersionDeprecation{
+		Warning:            version + " is deprecated since the Terraform AzureRM v5 bump, please migrate to " + r.Version + ".",
+		DeprecationRelease: azureRMV5DeprecationRelease,
+	}); err != nil {
+		panic(err)
+	}
+}
