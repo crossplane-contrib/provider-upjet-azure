@@ -1,0 +1,90 @@
+# SPDX-FileCopyrightText: 2026 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Fields of the namespaced resources that have another name in the target API
+# version than in the source API version, with the same schema.
+- sourceVersion: "v1beta1"
+  targetVersion: "v1beta2"
+  data:
+    azurerm_cdn_frontdoor_rule:
+      spec.forProvider.behaviorOnMatch: spec.forProvider.behaviourOnMatch
+      spec.initProvider.behaviorOnMatch: spec.initProvider.behaviourOnMatch
+      status.atProvider.behaviorOnMatch: status.atProvider.behaviourOnMatch
+    azurerm_data_factory_pipeline:
+      spec.forProvider.moniterMetricsAfterDuration: spec.forProvider.monitorMetricsAfterDuration
+      spec.initProvider.moniterMetricsAfterDuration: spec.initProvider.monitorMetricsAfterDuration
+      status.atProvider.moniterMetricsAfterDuration: status.atProvider.monitorMetricsAfterDuration
+    azurerm_eventgrid_event_subscription:
+      spec.forProvider.eventhubEndpointId: spec.forProvider.eventhubId
+      spec.forProvider.hybridConnectionEndpointId: spec.forProvider.hybridConnectionId
+      spec.forProvider.serviceBusQueueEndpointId: spec.forProvider.serviceBusQueueId
+      spec.forProvider.serviceBusTopicEndpointId: spec.forProvider.serviceBusTopicId
+      spec.initProvider.eventhubEndpointId: spec.initProvider.eventhubId
+      spec.initProvider.hybridConnectionEndpointId: spec.initProvider.hybridConnectionId
+      spec.initProvider.serviceBusQueueEndpointId: spec.initProvider.serviceBusQueueId
+      spec.initProvider.serviceBusTopicEndpointId: spec.initProvider.serviceBusTopicId
+      status.atProvider.eventhubEndpointId: status.atProvider.eventhubId
+      status.atProvider.hybridConnectionEndpointId: status.atProvider.hybridConnectionId
+      status.atProvider.serviceBusQueueEndpointId: status.atProvider.serviceBusQueueId
+      status.atProvider.serviceBusTopicEndpointId: status.atProvider.serviceBusTopicId
+    azurerm_eventgrid_system_topic_event_subscription:
+      spec.forProvider.eventhubEndpointId: spec.forProvider.eventhubId
+      spec.forProvider.hybridConnectionEndpointId: spec.forProvider.hybridConnectionId
+      spec.forProvider.serviceBusQueueEndpointId: spec.forProvider.serviceBusQueueId
+      spec.forProvider.serviceBusTopicEndpointId: spec.forProvider.serviceBusTopicId
+      spec.initProvider.eventhubEndpointId: spec.initProvider.eventhubId
+      spec.initProvider.hybridConnectionEndpointId: spec.initProvider.hybridConnectionId
+      spec.initProvider.serviceBusQueueEndpointId: spec.initProvider.serviceBusQueueId
+      spec.initProvider.serviceBusTopicEndpointId: spec.initProvider.serviceBusTopicId
+      status.atProvider.eventhubEndpointId: status.atProvider.eventhubId
+      status.atProvider.hybridConnectionEndpointId: status.atProvider.hybridConnectionId
+      status.atProvider.serviceBusQueueEndpointId: status.atProvider.serviceBusQueueId
+      status.atProvider.serviceBusTopicEndpointId: status.atProvider.serviceBusTopicId
+    azurerm_hdinsight_hadoop_cluster:
+      spec.forProvider.storageAccountGen2.managedIdentityResourceId: spec.forProvider.storageAccountGen2.userAssignedIdentityId
+      spec.initProvider.storageAccountGen2.managedIdentityResourceId: spec.initProvider.storageAccountGen2.userAssignedIdentityId
+      status.atProvider.storageAccountGen2.managedIdentityResourceId: status.atProvider.storageAccountGen2.userAssignedIdentityId
+    azurerm_hdinsight_hbase_cluster:
+      spec.forProvider.storageAccountGen2.managedIdentityResourceId: spec.forProvider.storageAccountGen2.userAssignedIdentityId
+      spec.initProvider.storageAccountGen2.managedIdentityResourceId: spec.initProvider.storageAccountGen2.userAssignedIdentityId
+      status.atProvider.storageAccountGen2.managedIdentityResourceId: status.atProvider.storageAccountGen2.userAssignedIdentityId
+    azurerm_hdinsight_interactive_query_cluster:
+      spec.forProvider.storageAccountGen2.managedIdentityResourceId: spec.forProvider.storageAccountGen2.userAssignedIdentityId
+      spec.initProvider.storageAccountGen2.managedIdentityResourceId: spec.initProvider.storageAccountGen2.userAssignedIdentityId
+      status.atProvider.storageAccountGen2.managedIdentityResourceId: status.atProvider.storageAccountGen2.userAssignedIdentityId
+    azurerm_hdinsight_kafka_cluster:
+      spec.forProvider.storageAccountGen2.managedIdentityResourceId: spec.forProvider.storageAccountGen2.userAssignedIdentityId
+      spec.initProvider.storageAccountGen2.managedIdentityResourceId: spec.initProvider.storageAccountGen2.userAssignedIdentityId
+      status.atProvider.storageAccountGen2.managedIdentityResourceId: status.atProvider.storageAccountGen2.userAssignedIdentityId
+    azurerm_hdinsight_spark_cluster:
+      spec.forProvider.storageAccountGen2.managedIdentityResourceId: spec.forProvider.storageAccountGen2.userAssignedIdentityId
+      spec.initProvider.storageAccountGen2.managedIdentityResourceId: spec.initProvider.storageAccountGen2.userAssignedIdentityId
+      status.atProvider.storageAccountGen2.managedIdentityResourceId: status.atProvider.storageAccountGen2.userAssignedIdentityId
+    azurerm_iot_security_solution:
+      spec.forProvider.recommendationsEnabled: spec.forProvider.recommendations
+      spec.initProvider.recommendationsEnabled: spec.initProvider.recommendations
+      status.atProvider.recommendationsEnabled: status.atProvider.recommendations
+    azurerm_linux_virtual_machine_scale_set:
+      spec.forProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade: spec.forProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled
+      spec.initProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade: spec.initProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled
+      status.atProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade: status.atProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled
+    azurerm_mssql_database_extended_auditing_policy:
+      spec.forProvider.storageEndpoint: spec.forProvider.blobStorageEndpoint
+      spec.initProvider.storageEndpoint: spec.initProvider.blobStorageEndpoint
+      status.atProvider.storageEndpoint: status.atProvider.blobStorageEndpoint
+    azurerm_mssql_server_security_alert_policy:
+      spec.forProvider.emailAccountAdmins: spec.forProvider.emailAccountAdminsEnabled
+      spec.initProvider.emailAccountAdmins: spec.initProvider.emailAccountAdminsEnabled
+      status.atProvider.emailAccountAdmins: status.atProvider.emailAccountAdminsEnabled
+    azurerm_orchestrated_virtual_machine_scale_set:
+      spec.forProvider.osProfile.windowsConfiguration.enableAutomaticUpdates: spec.forProvider.osProfile.windowsConfiguration.automaticUpdatesEnabled
+      spec.initProvider.osProfile.windowsConfiguration.enableAutomaticUpdates: spec.initProvider.osProfile.windowsConfiguration.automaticUpdatesEnabled
+      status.atProvider.osProfile.windowsConfiguration.enableAutomaticUpdates: status.atProvider.osProfile.windowsConfiguration.automaticUpdatesEnabled
+    azurerm_windows_virtual_machine_scale_set:
+      spec.forProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade: spec.forProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled
+      spec.forProvider.enableAutomaticUpdates: spec.forProvider.automaticUpdatesEnabled
+      spec.initProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade: spec.initProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled
+      spec.initProvider.enableAutomaticUpdates: spec.initProvider.automaticUpdatesEnabled
+      status.atProvider.automaticOsUpgradePolicy.enableAutomaticOsUpgrade: status.atProvider.automaticOsUpgradePolicy.automaticOsUpgradeEnabled
+      status.atProvider.enableAutomaticUpdates: status.atProvider.automaticUpdatesEnabled
